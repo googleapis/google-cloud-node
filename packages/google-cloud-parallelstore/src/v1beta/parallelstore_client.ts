@@ -238,6 +238,9 @@ export class ParallelstoreClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      serviceAccountPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/serviceAccounts/{service_account}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1110,6 +1113,12 @@ export class ParallelstoreClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {string} [request.serviceAccount]
+   *   Optional. User-specified Service Account (SA) credentials to be used when
+   *   performing the transfer.
+   *   Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *   If unspecified, the Parallelstore service agent is used:
+   *   service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1264,6 +1273,12 @@ export class ParallelstoreClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {string} [request.serviceAccount]
+   *   Optional. User-specified Service Account (SA) credentials to be used when
+   *   performing the transfer.
+   *   Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *   If unspecified, the Parallelstore service agent is used:
+   *   service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2057,6 +2072,46 @@ export class ParallelstoreClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified serviceAccount resource name string.
+   *
+   * @param {string} project
+   * @param {string} service_account
+   * @returns {string} Resource name string.
+   */
+  serviceAccountPath(project: string, serviceAccount: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.render({
+      project: project,
+      service_account: serviceAccount,
+    });
+  }
+
+  /**
+   * Parse the project from ServiceAccount resource.
+   *
+   * @param {string} serviceAccountName
+   *   A fully-qualified path representing ServiceAccount resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromServiceAccountName(serviceAccountName: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.match(
+      serviceAccountName
+    ).project;
+  }
+
+  /**
+   * Parse the service_account from ServiceAccount resource.
+   *
+   * @param {string} serviceAccountName
+   *   A fully-qualified path representing ServiceAccount resource.
+   * @returns {string} A string representing the service_account.
+   */
+  matchServiceAccountFromServiceAccountName(serviceAccountName: string) {
+    return this.pathTemplates.serviceAccountPathTemplate.match(
+      serviceAccountName
+    ).service_account;
   }
 
   /**

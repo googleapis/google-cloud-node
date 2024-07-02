@@ -2537,5 +2537,58 @@ describe('v1beta.ParallelstoreClient', () => {
         );
       });
     });
+
+    describe('serviceAccount', () => {
+      const fakePath = '/rendered/path/serviceAccount';
+      const expectedParameters = {
+        project: 'projectValue',
+        service_account: 'serviceAccountValue',
+      };
+      const client = new parallelstoreModule.v1beta.ParallelstoreClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.serviceAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.serviceAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('serviceAccountPath', () => {
+        const result = client.serviceAccountPath(
+          'projectValue',
+          'serviceAccountValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.serviceAccountPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromServiceAccountName', () => {
+        const result = client.matchProjectFromServiceAccountName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServiceAccountFromServiceAccountName', () => {
+        const result =
+          client.matchServiceAccountFromServiceAccountName(fakePath);
+        assert.strictEqual(result, 'serviceAccountValue');
+        assert(
+          (client.pathTemplates.serviceAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });
