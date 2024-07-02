@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.parallelstore.v1beta",
                     "php_namespace": "Google\\Cloud\\Parallelstore\\V1beta",
                     "ruby_package": "Google::Cloud::Parallelstore::V1beta",
-                    "(google.api.resource_definition).type": "compute.googleapis.com/Address",
-                    "(google.api.resource_definition).pattern": "projects/{project}/regions/{region}/addresses/{address}"
+                    "(google.api.resource_definition).type": "iam.googleapis.com/ServiceAccount",
+                    "(google.api.resource_definition).pattern": "projects/{project}/serviceAccounts/{service_account}"
                   },
                   "nested": {
                     "Parallelstore": {
@@ -591,6 +591,14 @@
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
                         }
                       }
                     },
@@ -630,6 +638,14 @@
                           "options": {
                             "(google.api.field_info).format": "UUID4",
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
                           }
                         }
                       }

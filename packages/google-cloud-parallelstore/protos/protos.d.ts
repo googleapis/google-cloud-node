@@ -1568,6 +1568,9 @@ export namespace google {
 
                     /** ImportDataRequest requestId */
                     requestId?: (string|null);
+
+                    /** ImportDataRequest serviceAccount */
+                    serviceAccount?: (string|null);
                 }
 
                 /** Represents an ImportDataRequest. */
@@ -1590,6 +1593,9 @@ export namespace google {
 
                     /** ImportDataRequest requestId. */
                     public requestId: string;
+
+                    /** ImportDataRequest serviceAccount. */
+                    public serviceAccount: string;
 
                     /** ImportDataRequest source. */
                     public source?: "sourceGcsBucket";
@@ -1689,6 +1695,9 @@ export namespace google {
 
                     /** ExportDataRequest requestId */
                     requestId?: (string|null);
+
+                    /** ExportDataRequest serviceAccount */
+                    serviceAccount?: (string|null);
                 }
 
                 /** Represents an ExportDataRequest. */
@@ -1711,6 +1720,9 @@ export namespace google {
 
                     /** ExportDataRequest requestId. */
                     public requestId: string;
+
+                    /** ExportDataRequest serviceAccount. */
+                    public serviceAccount: string;
 
                     /** ExportDataRequest source. */
                     public source?: "sourceParallelstore";
