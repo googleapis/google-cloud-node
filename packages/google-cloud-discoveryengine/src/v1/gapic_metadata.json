@@ -24,6 +24,16 @@
               "methods": [
                 "purgeSuggestionDenyListEntries"
               ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
+              ]
             }
           }
         },
@@ -43,6 +53,16 @@
             "PurgeSuggestionDenyListEntries": {
               "methods": [
                 "purgeSuggestionDenyListEntries"
+              ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
               ]
             }
           }
