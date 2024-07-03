@@ -7094,7 +7094,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 61,
+          "end": 70,
           "type": "FULL"
         }
       ],
@@ -7109,6 +7109,14 @@
           },
           {
             "name": "instances",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "contents",
             "type": "TYPE_MESSAGE[]"
           }
         ],
