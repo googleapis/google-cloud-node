@@ -28,6 +28,7 @@ guides.
   * [Create Push Subscription](#create-push-subscription)
   * [Create Push Subscription With No Wrapper](#create-push-subscription-with-no-wrapper)
   * [Create Subscription](#create-subscription)
+  * [Create a Cloud Storage subscription](#create-a-cloud-storage-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
   * [Create an exactly-once delivery subscription](#create-an-exactly-once-delivery-subscription)
   * [Create Subscription With Filtering](#create-subscription-with-filtering)
@@ -246,6 +247,25 @@ __Usage:__
 
 
 `node createSubscription.js <topic-name-or-id> <subscription-name-or-id>`
+
+
+-----
+
+
+
+
+### Create a Cloud Storage subscription
+
+Demonstrates how to create a subscription with Cloud Storage.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createSubscriptionWithCloudStorage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithCloudStorage.js,samples/README.md)
+
+__Usage:__
+
+
+`node createSubscriptionWithCloudStorage.js <topic-name> <subscription-name> <bucket> <filename-prefix> <filename-suffix> <max-duration>`
 
 
 -----

@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {BigQuery} from '@google-cloud/bigquery';
+import {Bucket, Storage} from '@google-cloud/storage';
 import {
   CreateSubscriptionOptions,
   PubSub,
@@ -74,7 +75,7 @@ describe('subscriptions', () => {
 
   async function createBigQueryTable(datasetId: string, tableId: string) {
     const bigquery = new BigQuery({
-      projectId: projectId,
+      projectId,
     });
 
     const datasetOptions = {
@@ -106,6 +107,17 @@ describe('subscriptions', () => {
     };
 
     await bigquery.dataset(datasetId).delete(deleteOptions);
+  }
+
+  async function createStorageBucket(testName: string): Promise<Bucket> {
+    const storage = new Storage({
+      projectId,
+    });
+
+    const name = resources.generateStorageName(testName);
+
+    const [bucket] = await storage.createBucket(name);
+    return bucket;
   }
 
   async function cleanSubs() {
@@ -426,6 +438,24 @@ describe('subscriptions', () => {
       .subscription(sub.name)
       .detached();
     assert(subscriptionDetached === true);
+  });
+
+  it('should create a subscription with a cloud storage config', async () => {
+    const testId = 'sub_storage';
+    const topic = await createTopic(testId);
+    const subName = reserveSub(testId);
+    const bucket = await createStorageBucket(testId);
+    const bucketName = bucket.name;
+    try {
+      const output = execSync(
+        `${commandFor('createSubscriptionWithCloudStorage')} ${
+          topic.name
+        } projects/${projectId}/subscriptions/${subName} ${bucketName} 'prefix' 'suffix' 60`
+      );
+      assert.include(output, 'Created subscription');
+    } finally {
+      bucket.delete();
+    }
   });
 
   it('should create a subscription with dead letter policy.', async () => {
