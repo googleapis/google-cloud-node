@@ -48,9 +48,23 @@ export interface GetServiceAccountCallback {
 }
 
 export interface CreateBucketQuery {
-  project: string;
-  userProject: string;
   enableObjectRetention: boolean;
+  predefinedAcl?:
+    | 'authenticatedRead'
+    | 'private'
+    | 'projectPrivate'
+    | 'publicRead'
+    | 'publicReadWrite';
+  predefinedDefaultObjectAcl?:
+    | 'authenticatedRead'
+    | 'bucketOwnerFullControl'
+    | 'bucketOwnerRead'
+    | 'private'
+    | 'projectPrivate'
+    | 'publicRead';
+  project: string;
+  projection?: 'full' | 'noAcl';
+  userProject: string;
 }
 
 export enum IdempotencyStrategy {
@@ -117,30 +131,30 @@ export interface AutoclassConfig {
   terminalStorageClass?: 'NEARLINE' | 'ARCHIVE';
 }
 
-export interface CreateBucketRequest {
+export interface CreateBucketRequest extends BucketMetadata {
   archive?: boolean;
-  autoclass?: AutoclassConfig;
   coldline?: boolean;
-  cors?: Cors[];
-  customPlacementConfig?: CustomPlacementConfig;
+  dataLocations?: string[];
   dra?: boolean;
   enableObjectRetention?: boolean;
-  hierarchicalNamespace?: {
-    enabled?: boolean;
-  };
-  iamConfiguration?: {
-    publicAccessPrevention?: string;
-    uniformBucketLevelAccess?: {
-      enabled?: boolean;
-      lockedTime?: string;
-    };
-  };
-  location?: string;
   multiRegional?: boolean;
   nearline?: boolean;
+  predefinedAcl?:
+    | 'authenticatedRead'
+    | 'private'
+    | 'projectPrivate'
+    | 'publicRead'
+    | 'publicReadWrite';
+  predefinedDefaultObjectAcl?:
+    | 'authenticatedRead'
+    | 'bucketOwnerFullControl'
+    | 'bucketOwnerRead'
+    | 'private'
+    | 'projectPrivate'
+    | 'publicRead';
+  projection?: 'full' | 'noAcl';
   regional?: boolean;
   requesterPays?: boolean;
-  retentionPolicy?: object;
   rpo?: string;
   standard?: boolean;
   storageClass?: string;
@@ -887,8 +901,7 @@ export class Storage extends Service {
    *     Multi-Regional.
    * @property {boolean} [nearline=false] Specify the storage class as Nearline.
    * @property {boolean} [regional=false] Specify the storage class as Regional.
-   * @property {boolean} [requesterPays=false] **Early Access Testers Only**
-   *     Force the use of the User Project metadata field to assign operational
+   * @property {boolean} [requesterPays=false] Force the use of the User Project metadata field to assign operational
    *     costs when an operation is made on a Bucket and its objects.
    * @property {string} [rpo] For dual-region buckets, controls whether turbo
    *      replication is enabled (`ASYNC_TURBO`) or disabled (`DEFAULT`).
@@ -995,7 +1008,7 @@ export class Storage extends Service {
       metadata = metadataOrCallback as CreateBucketRequest;
     }
 
-    const body: CreateBucketRequest & {[index: string]: string | {}} = {
+    const body: CreateBucketRequest & {[index: string]: string | {} | null} = {
       ...metadata,
       name,
     };
@@ -1044,6 +1057,21 @@ export class Storage extends Service {
     if (body.enableObjectRetention) {
       query.enableObjectRetention = body.enableObjectRetention;
       delete body.enableObjectRetention;
+    }
+
+    if (body.predefinedAcl) {
+      query.predefinedAcl = body.predefinedAcl;
+      delete body.predefinedAcl;
+    }
+
+    if (body.predefinedDefaultObjectAcl) {
+      query.predefinedDefaultObjectAcl = body.predefinedDefaultObjectAcl;
+      delete body.predefinedDefaultObjectAcl;
+    }
+
+    if (body.projection) {
+      query.projection = body.projection;
+      delete body.projection;
     }
 
     this.request(
