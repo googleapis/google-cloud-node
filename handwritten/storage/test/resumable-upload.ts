@@ -1874,7 +1874,7 @@ describe('resumable-upload', () => {
         up.destroy = (err: Error) => {
           assert.strictEqual(
             err.message,
-            `Retry limit exceeded - ${RESP.data}`
+            `Retry limit exceeded - ${JSON.stringify(RESP.data)}`
           );
           done();
         };
@@ -1915,7 +1915,7 @@ describe('resumable-upload', () => {
             assert.strictEqual(up.numRetries, 3);
             assert.strictEqual(
               err.message,
-              `Retry limit exceeded - ${RESP.data}`
+              `Retry limit exceeded - ${JSON.stringify(RESP.data)}`
             );
             done();
           });

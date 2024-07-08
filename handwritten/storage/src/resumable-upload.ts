@@ -1231,7 +1231,9 @@ export class Upload extends Writable {
 
         if (retryDelay <= 0) {
           this.destroy(
-            new Error(`Retry total time limit exceeded - ${resp.data}`)
+            new Error(
+              `Retry total time limit exceeded - ${JSON.stringify(resp.data)}`
+            )
           );
           return;
         }
@@ -1252,7 +1254,9 @@ export class Upload extends Writable {
       }
       this.numRetries++;
     } else {
-      this.destroy(new Error('Retry limit exceeded - ' + resp.data));
+      this.destroy(
+        new Error(`Retry limit exceeded - ${JSON.stringify(resp.data)}`)
+      );
     }
   }
 
