@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.11.3](https://github.com/googleapis/nodejs-storage/compare/v7.11.2...v7.11.3) (2024-07-09)
+
+
+### Bug Fixes
+
+* Error serialization in resumable-upload.ts ([#2493](https://github.com/googleapis/nodejs-storage/issues/2493)) ([c2e555c](https://github.com/googleapis/nodejs-storage/commit/c2e555c95f7a8e3e231e57e2fa3967caeb860772))
+* Handle unhandled error in `startResumableUpload_` ([#2495](https://github.com/googleapis/nodejs-storage/issues/2495)) ([d5257ba](https://github.com/googleapis/nodejs-storage/commit/d5257ba4aa9efc1dd70c303286782d23a95e8568))
+* Make CreateBucketRequest extend from BucketMetadata to allow all… ([#2489](https://github.com/googleapis/nodejs-storage/issues/2489)) ([013a5a4](https://github.com/googleapis/nodejs-storage/commit/013a5a45aed8734f797837deb0e805f0ca43a9a6))
+
 ## [7.11.2](https://github.com/googleapis/nodejs-storage/compare/v7.11.1...v7.11.2) (2024-06-07)
 
 
