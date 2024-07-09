@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(endpoint, instances) {
+function main(endpoint) {
   // [START aiplatform_v1_generated_LlmUtilityService_ComputeTokens_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -34,11 +34,21 @@ function main(endpoint, instances) {
    */
   // const endpoint = 'abc123'
   /**
-   *  Required. The instances that are the input to token computing API call.
+   *  Optional. The instances that are the input to token computing API call.
    *  Schema is identical to the prediction schema of the text model, even for
    *  the non-text models, like chat models, or Codey models.
    */
   // const instances = [1,2,3,4]
+  /**
+   *  Optional. The name of the publisher model requested to serve the
+   *  prediction. Format:
+   *  projects/{project}/locations/{location}/publishers/* /models/*
+   */
+  // const model = 'abc123'
+  /**
+   *  Optional. Input content.
+   */
+  // const contents = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {LlmUtilityServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -50,7 +60,6 @@ function main(endpoint, instances) {
     // Construct request
     const request = {
       endpoint,
-      instances,
     };
 
     // Run request
