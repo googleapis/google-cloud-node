@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the space, in the form "spaces/*".
+   *  Required. Resource name of the space, in the form `spaces/{space}`.
    *  Format: `spaces/{space}`
    */
   // const name = 'abc123'
