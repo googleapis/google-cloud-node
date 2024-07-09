@@ -29,21 +29,19 @@ export GOOGLE_APPLICATION_CREDENTIALS="${SERVICE_KEY}"
 # Run test.
 cd "system-test"
 
+# Pull in newer version of Go than provided by Kokoro image
 go version
-
-# Ensure a newer version of Go is used so it is compatible with newer libraries.
-# The current Go version in the VM is 1.18.4, however we explicitly set it to
-# pin the Go dependency to v1.18.4 for consistency.
-retry curl -LO https://go.dev/dl/go1.18.4.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.4.linux-amd64.tar.gz
+GO_VERSION="1.22.4"
+retry curl -LO https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
+go version
 
 # Initializing go modules allows our dependencies to install versions of their
 # dependencies specified by their go.mod files. This reduces the likelihood of
 # dependencies breaking this test.
-go version
 go mod init e2e
-retry go get cloud.google.com/go/profiler/proftest@HEAD
+retry go get cloud.google.com/go/profiler/proftest@main
 retry go test -c -tags=integration .
 
 if [ "$KOKORO_GITHUB_PULL_REQUEST_NUMBER" = "" ]; then
