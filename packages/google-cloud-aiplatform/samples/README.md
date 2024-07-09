@@ -328,6 +328,7 @@
   * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
   * [Deployment_resource_pool_service.list_deployment_resource_pools](#deployment_resource_pool_service.list_deployment_resource_pools)
   * [Deployment_resource_pool_service.query_deployed_models](#deployment_resource_pool_service.query_deployed_models)
+  * [Deployment_resource_pool_service.update_deployment_resource_pool](#deployment_resource_pool_service.update_deployment_resource_pool)
   * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
   * [Endpoint_service.delete_endpoint](#endpoint_service.delete_endpoint)
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
@@ -6025,6 +6026,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.query_deployed_models.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.update_deployment_resource_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js`
 
 
 -----

@@ -15875,7 +15875,22 @@
                           "type": "google.protobuf.Value",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -15891,6 +15906,13 @@
                           "rule": "repeated",
                           "type": "int64",
                           "id": 2
+                        },
+                        "role": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -30194,6 +30216,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 51,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 52,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -34054,6 +34090,34 @@
                             }
                           ]
                         },
+                        "UpdateDeploymentResourcePool": {
+                          "requestType": "UpdateDeploymentResourcePoolRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{deployment_resource_pool.name=projects/*/locations/*/deploymentResourcePools/*}",
+                            "(google.api.http).body": "deployment_resource_pool",
+                            "(google.api.method_signature)": "deployment_resource_pool,update_mask",
+                            "(google.longrunning.operation_info).response_type": "DeploymentResourcePool",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateDeploymentResourcePoolOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{deployment_resource_pool.name=projects/*/locations/*/deploymentResourcePools/*}",
+                                "body": "deployment_resource_pool"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "deployment_resource_pool,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeploymentResourcePool",
+                                "metadata_type": "UpdateDeploymentResourcePoolOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteDeploymentResourcePool": {
                           "requestType": "DeleteDeploymentResourcePoolRequest",
                           "responseType": "google.longrunning.Operation",
@@ -34176,6 +34240,24 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "UpdateDeploymentResourcePoolRequest": {
+                      "fields": {
+                        "deploymentResourcePool": {
+                          "type": "DeploymentResourcePool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -35644,7 +35726,15 @@
                       }
                     },
                     "BleuSpec": {
-                      "fields": {}
+                      "fields": {
+                        "useEffectiveOrder": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
                     },
                     "BleuResults": {
                       "fields": {
@@ -47948,7 +48038,22 @@
                           "type": "google.protobuf.Value",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "Content",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -47964,6 +48069,13 @@
                           "rule": "repeated",
                           "type": "int64",
                           "id": 2
+                        },
+                        "role": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -51018,6 +51130,11 @@
                                   "oneof": [
                                     "deployTaskName"
                                   ]
+                                },
+                                "_deployMetadata": {
+                                  "oneof": [
+                                    "deployMetadata"
+                                  ]
                                 }
                               },
                               "fields": {
@@ -51069,6 +51186,14 @@
                                     "proto3_optional": true
                                   }
                                 },
+                                "deployMetadata": {
+                                  "type": "DeployMetadata",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
                                 "title": {
                                   "type": "string",
                                   "id": 8,
@@ -51081,6 +51206,20 @@
                                   "id": 9,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "DeployMetadata": {
+                                  "fields": {
+                                    "labels": {
+                                      "keyType": "string",
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
                                   }
                                 }
                               }
@@ -60558,6 +60697,20 @@
                         "isDefault": {
                           "type": "bool",
                           "id": 12
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
