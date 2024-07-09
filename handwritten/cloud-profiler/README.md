@@ -400,7 +400,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/cloud-profiler-nodejs/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/profiler/latest
-[product-docs]: https://cloud.google.com/profiler
+[product-docs]: https://cloud.google.com/profiler/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
