@@ -493,10 +493,24 @@
                             }
                           }
                         },
+                        "DiscoveryType": {
+                          "values": {
+                            "DISCOVERY_TYPE_UNSPECIFIED": 0,
+                            "DISCOVERY_TYPE_PRIVATE": 1,
+                            "DISCOVERY_TYPE_PUBLIC": 2
+                          }
+                        },
                         "DataExchange": {
                           "options": {
                             "(google.api.resource).type": "analyticshub.googleapis.com/DataExchange",
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/dataExchanges/{data_exchange}"
+                          },
+                          "oneofs": {
+                            "_discoveryType": {
+                              "oneof": [
+                                "discoveryType"
+                              ]
+                            }
                           },
                           "fields": {
                             "name": {
@@ -553,6 +567,14 @@
                               "id": 8,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "discoveryType": {
+                              "type": "DiscoveryType",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -718,6 +740,11 @@
                               "oneof": [
                                 "bigqueryDataset"
                               ]
+                            },
+                            "_discoveryType": {
+                              "oneof": [
+                                "discoveryType"
+                              ]
                             }
                           },
                           "fields": {
@@ -812,6 +839,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "discoveryType": {
+                              "type": "DiscoveryType",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -828,6 +863,13 @@
                                   "rule": "repeated",
                                   "type": "SelectedResource",
                                   "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "restrictedExportPolicy": {
+                                  "type": "RestrictedExportPolicy",
+                                  "id": 3,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -849,6 +891,31 @@
                                       "options": {
                                         "(google.api.field_behavior)": "OPTIONAL",
                                         "(google.api.resource_reference).type": "bigquery.googleapis.com/Table"
+                                      }
+                                    }
+                                  }
+                                },
+                                "RestrictedExportPolicy": {
+                                  "fields": {
+                                    "enabled": {
+                                      "type": "google.protobuf.BoolValue",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "restrictDirectTableAccess": {
+                                      "type": "google.protobuf.BoolValue",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "restrictQueryResult": {
+                                      "type": "google.protobuf.BoolValue",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     }
                                   }
@@ -1272,7 +1339,10 @@
                           "fields": {
                             "destinationDataset": {
                               "type": "DestinationDataset",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "INPUT_ONLY"
+                              }
                             },
                             "name": {
                               "type": "string",

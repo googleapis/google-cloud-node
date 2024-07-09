@@ -11888,6 +11888,11 @@
                   },
                   "nested": {
                     "Channel": {
+                      "valuesOptions": {
+                        "CHANNEL_EXPERIMENTAL": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "CHANNEL_UNSPECIFIED": 0,
                         "CHANNEL_DISABLED": 1,
