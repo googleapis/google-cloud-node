@@ -30,7 +30,7 @@ function main(parent, source) {
    */
   /**
    *  Required. Resource name of the new source's parent. Its format should be
-   *  "organizations/[organization_id]".
+   *  `organizations/[organization_id]`.
    */
   // const parent = 'abc123'
   /**

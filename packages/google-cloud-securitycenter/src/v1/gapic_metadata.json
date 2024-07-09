@@ -50,6 +50,16 @@
                 "deleteSecurityHealthAnalyticsCustomModule"
               ]
             },
+            "GetSimulation": {
+              "methods": [
+                "getSimulation"
+              ]
+            },
+            "GetValuedResource": {
+              "methods": [
+                "getValuedResource"
+              ]
+            },
             "GetBigQueryExport": {
               "methods": [
                 "getBigQueryExport"
@@ -170,6 +180,56 @@
                 "updateBigQueryExport"
               ]
             },
+            "CreateEventThreatDetectionCustomModule": {
+              "methods": [
+                "createEventThreatDetectionCustomModule"
+              ]
+            },
+            "DeleteEventThreatDetectionCustomModule": {
+              "methods": [
+                "deleteEventThreatDetectionCustomModule"
+              ]
+            },
+            "GetEventThreatDetectionCustomModule": {
+              "methods": [
+                "getEventThreatDetectionCustomModule"
+              ]
+            },
+            "UpdateEventThreatDetectionCustomModule": {
+              "methods": [
+                "updateEventThreatDetectionCustomModule"
+              ]
+            },
+            "ValidateEventThreatDetectionCustomModule": {
+              "methods": [
+                "validateEventThreatDetectionCustomModule"
+              ]
+            },
+            "GetEffectiveEventThreatDetectionCustomModule": {
+              "methods": [
+                "getEffectiveEventThreatDetectionCustomModule"
+              ]
+            },
+            "BatchCreateResourceValueConfigs": {
+              "methods": [
+                "batchCreateResourceValueConfigs"
+              ]
+            },
+            "DeleteResourceValueConfig": {
+              "methods": [
+                "deleteResourceValueConfig"
+              ]
+            },
+            "GetResourceValueConfig": {
+              "methods": [
+                "getResourceValueConfig"
+              ]
+            },
+            "UpdateResourceValueConfig": {
+              "methods": [
+                "updateResourceValueConfig"
+              ]
+            },
             "BulkMuteFindings": {
               "methods": [
                 "bulkMuteFindings"
@@ -255,6 +315,48 @@
                 "listBigQueryExports",
                 "listBigQueryExportsStream",
                 "listBigQueryExportsAsync"
+              ]
+            },
+            "ListDescendantEventThreatDetectionCustomModules": {
+              "methods": [
+                "listDescendantEventThreatDetectionCustomModules",
+                "listDescendantEventThreatDetectionCustomModulesStream",
+                "listDescendantEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListEventThreatDetectionCustomModules": {
+              "methods": [
+                "listEventThreatDetectionCustomModules",
+                "listEventThreatDetectionCustomModulesStream",
+                "listEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListEffectiveEventThreatDetectionCustomModules": {
+              "methods": [
+                "listEffectiveEventThreatDetectionCustomModules",
+                "listEffectiveEventThreatDetectionCustomModulesStream",
+                "listEffectiveEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListResourceValueConfigs": {
+              "methods": [
+                "listResourceValueConfigs",
+                "listResourceValueConfigsStream",
+                "listResourceValueConfigsAsync"
+              ]
+            },
+            "ListValuedResources": {
+              "methods": [
+                "listValuedResources",
+                "listValuedResourcesStream",
+                "listValuedResourcesAsync"
+              ]
+            },
+            "ListAttackPaths": {
+              "methods": [
+                "listAttackPaths",
+                "listAttackPathsStream",
+                "listAttackPathsAsync"
               ]
             }
           }
@@ -302,6 +404,16 @@
                 "deleteSecurityHealthAnalyticsCustomModule"
               ]
             },
+            "GetSimulation": {
+              "methods": [
+                "getSimulation"
+              ]
+            },
+            "GetValuedResource": {
+              "methods": [
+                "getValuedResource"
+              ]
+            },
             "GetBigQueryExport": {
               "methods": [
                 "getBigQueryExport"
@@ -422,6 +534,56 @@
                 "updateBigQueryExport"
               ]
             },
+            "CreateEventThreatDetectionCustomModule": {
+              "methods": [
+                "createEventThreatDetectionCustomModule"
+              ]
+            },
+            "DeleteEventThreatDetectionCustomModule": {
+              "methods": [
+                "deleteEventThreatDetectionCustomModule"
+              ]
+            },
+            "GetEventThreatDetectionCustomModule": {
+              "methods": [
+                "getEventThreatDetectionCustomModule"
+              ]
+            },
+            "UpdateEventThreatDetectionCustomModule": {
+              "methods": [
+                "updateEventThreatDetectionCustomModule"
+              ]
+            },
+            "ValidateEventThreatDetectionCustomModule": {
+              "methods": [
+                "validateEventThreatDetectionCustomModule"
+              ]
+            },
+            "GetEffectiveEventThreatDetectionCustomModule": {
+              "methods": [
+                "getEffectiveEventThreatDetectionCustomModule"
+              ]
+            },
+            "BatchCreateResourceValueConfigs": {
+              "methods": [
+                "batchCreateResourceValueConfigs"
+              ]
+            },
+            "DeleteResourceValueConfig": {
+              "methods": [
+                "deleteResourceValueConfig"
+              ]
+            },
+            "GetResourceValueConfig": {
+              "methods": [
+                "getResourceValueConfig"
+              ]
+            },
+            "UpdateResourceValueConfig": {
+              "methods": [
+                "updateResourceValueConfig"
+              ]
+            },
             "BulkMuteFindings": {
               "methods": [
                 "bulkMuteFindings"
@@ -507,6 +669,48 @@
                 "listBigQueryExports",
                 "listBigQueryExportsStream",
                 "listBigQueryExportsAsync"
+              ]
+            },
+            "ListDescendantEventThreatDetectionCustomModules": {
+              "methods": [
+                "listDescendantEventThreatDetectionCustomModules",
+                "listDescendantEventThreatDetectionCustomModulesStream",
+                "listDescendantEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListEventThreatDetectionCustomModules": {
+              "methods": [
+                "listEventThreatDetectionCustomModules",
+                "listEventThreatDetectionCustomModulesStream",
+                "listEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListEffectiveEventThreatDetectionCustomModules": {
+              "methods": [
+                "listEffectiveEventThreatDetectionCustomModules",
+                "listEffectiveEventThreatDetectionCustomModulesStream",
+                "listEffectiveEventThreatDetectionCustomModulesAsync"
+              ]
+            },
+            "ListResourceValueConfigs": {
+              "methods": [
+                "listResourceValueConfigs",
+                "listResourceValueConfigsStream",
+                "listResourceValueConfigsAsync"
+              ]
+            },
+            "ListValuedResources": {
+              "methods": [
+                "listValuedResources",
+                "listValuedResourcesStream",
+                "listValuedResourcesAsync"
+              ]
+            },
+            "ListAttackPaths": {
+              "methods": [
+                "listAttackPaths",
+                "listAttackPathsStream",
+                "listAttackPathsAsync"
               ]
             }
           }
