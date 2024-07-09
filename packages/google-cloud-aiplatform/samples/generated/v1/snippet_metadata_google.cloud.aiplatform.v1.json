@@ -1092,6 +1092,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async",
+            "title": "DatasetService updateDeploymentResourcePool Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a DeploymentResourcePool.",
+            "canonical": true,
+            "file": "deployment_resource_pool_service.update_deployment_resource_pool.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDeploymentResourcePool",
+                "fullName": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.UpdateDeploymentResourcePool",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "deployment_resource_pool",
+                        "type": ".google.cloud.aiplatform.v1.DeploymentResourcePool"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DeploymentResourcePoolServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.DeploymentResourcePoolServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDeploymentResourcePool",
+                    "fullName": "google.cloud.aiplatform.v1.DeploymentResourcePoolService.UpdateDeploymentResourcePool",
+                    "service": {
+                        "shortName": "DeploymentResourcePoolService",
+                        "fullName": "google.cloud.aiplatform.v1.DeploymentResourcePoolService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_DeploymentResourcePoolService_DeleteDeploymentResourcePool_async",
             "title": "DatasetService deleteDeploymentResourcePool Sample",
             "origin": "API_DEFINITION",
@@ -6390,7 +6434,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -6405,6 +6449,14 @@
                     },
                     {
                         "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contents",
                         "type": "TYPE_MESSAGE[]"
                     }
                 ],

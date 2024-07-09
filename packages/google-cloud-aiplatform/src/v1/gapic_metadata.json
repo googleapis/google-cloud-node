@@ -248,6 +248,11 @@
                 "createDeploymentResourcePool"
               ]
             },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "updateDeploymentResourcePool"
+              ]
+            },
             "DeleteDeploymentResourcePool": {
               "methods": [
                 "deleteDeploymentResourcePool"
@@ -280,6 +285,11 @@
             "CreateDeploymentResourcePool": {
               "methods": [
                 "createDeploymentResourcePool"
+              ]
+            },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "updateDeploymentResourcePool"
               ]
             },
             "DeleteDeploymentResourcePool": {
