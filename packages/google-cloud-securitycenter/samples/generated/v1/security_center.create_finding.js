@@ -30,7 +30,7 @@ function main(parent, findingId, finding) {
    */
   /**
    *  Required. Resource name of the new finding's parent. Its format should be
-   *  "organizations/[organization_id]/sources/[source_id]".
+   *  `organizations/[organization_id]/sources/[source_id]`.
    */
   // const parent = 'abc123'
   /**

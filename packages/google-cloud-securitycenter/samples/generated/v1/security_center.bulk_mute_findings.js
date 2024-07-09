@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The parent, at which bulk action needs to be applied. Its format
-   *  is "organizations/[organization_id]", "folders/[folder_id]",
-   *  "projects/[project_id]".
+   *  is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**
