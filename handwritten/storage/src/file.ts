@@ -4141,8 +4141,7 @@ class File extends ServiceObject<File, FileMetadata> {
     ) {
       retryOptions.autoRetry = false;
     }
-
-    const uploadStream = resumableUpload.upload({
+    const cfg = {
       authClient: this.storage.authClient,
       apiEndpoint: this.storage.apiEndpoint,
       bucket: this.bucket.name,
@@ -4168,7 +4167,17 @@ class File extends ServiceObject<File, FileMetadata> {
       highWaterMark: options?.highWaterMark,
       universeDomain: this.bucket.storage.universeDomain,
       [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
-    });
+    };
+
+    let uploadStream: resumableUpload.Upload;
+
+    try {
+      uploadStream = resumableUpload.upload(cfg);
+    } catch (error) {
+      dup.destroy(error as Error);
+      this.storage.retryOptions.autoRetry = this.instanceRetryValue;
+      return;
+    }
 
     uploadStream
       .on('response', resp => {

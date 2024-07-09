@@ -1991,6 +1991,25 @@ describe('File', () => {
       writable.write('data');
     });
 
+    it('should emit RangeError', done => {
+      const error = new RangeError(
+        'Cannot provide an `offset` without providing a `uri`'
+      );
+
+      const opitons = {
+        offset: 1,
+        isPartialUpload: true,
+      };
+      const writable = file.createWriteStream(opitons);
+
+      writable.on('error', (err: RangeError) => {
+        assert.deepEqual(err, error);
+        done();
+      });
+
+      writable.write('data');
+    });
+
     it('should emit progress via resumable upload', done => {
       const progress = {};
 
