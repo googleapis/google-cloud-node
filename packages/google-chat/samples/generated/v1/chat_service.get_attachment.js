@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Resource name of the attachment, in the form
-   *  `spaces/* /messages/* /attachments/*`.
+   *  `spaces/{space}/messages/{message}/attachments/{attachment}`.
    */
   // const name = 'abc123'
 

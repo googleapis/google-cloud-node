@@ -30,9 +30,9 @@ function main(parent, securityHealthAnalyticsCustomModule) {
    */
   /**
    *  Required. Resource name of the new custom module's parent. Its format is
-   *  "organizations/{organization}/securityHealthAnalyticsSettings",
-   *  "folders/{folder}/securityHealthAnalyticsSettings", or
-   *  "projects/{project}/securityHealthAnalyticsSettings"
+   *  `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *  `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *  `projects/{project}/securityHealthAnalyticsSettings`
    */
   // const parent = 'abc123'
   /**

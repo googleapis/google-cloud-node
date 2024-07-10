@@ -13,7 +13,9 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Completion_service.complete_query](#completion_service.complete_query)
+  * [Completion_service.import_completion_suggestions](#completion_service.import_completion_suggestions)
   * [Completion_service.import_suggestion_deny_list_entries](#completion_service.import_suggestion_deny_list_entries)
+  * [Completion_service.purge_completion_suggestions](#completion_service.purge_completion_suggestions)
   * [Completion_service.purge_suggestion_deny_list_entries](#completion_service.purge_suggestion_deny_list_entries)
   * [Control_service.create_control](#control_service.create_control)
   * [Control_service.delete_control](#control_service.delete_control)
@@ -262,6 +264,23 @@ __Usage:__
 
 
 
+### Completion_service.import_completion_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_completion_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_completion_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_completion_suggestions.js`
+
+
+-----
+
+
+
+
 ### Completion_service.import_suggestion_deny_list_entries
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_suggestion_deny_list_entries.js).
@@ -272,6 +291,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.import_suggestion_deny_list_entries.js`
+
+
+-----
+
+
+
+
+### Completion_service.purge_completion_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_completion_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_completion_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/completion_service.purge_completion_suggestions.js`
 
 
 -----
