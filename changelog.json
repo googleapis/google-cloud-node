@@ -5,6 +5,158 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "9a80089d974280420e269f24aba563f4adceb4c3",
+          "message": "[chat] Add doc for Discoverable Space support for GA launch",
+          "issues": [
+            "5525"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "200b6aab-7102-4e28-ade4-9d531d4b4e37",
+      "createTime": "2024-07-10T13:39:29.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c1a0a8a52866dee658ad34479b3ae62ae4b21bb5",
+          "message": "[parallelstore] add iam.googleapis.com/ServiceAccount resource definition",
+          "issues": [
+            "5520"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "024116eb-8dc1-40bc-be88-010ba35ec954",
+      "createTime": "2024-07-10T13:39:29.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "88382897c1c0ba6f5f80ba72ab775808de301962",
+          "message": "[container] Deprecate \"EXPERIMENTAL\" option for Gateway API (this value has never been supported)",
+          "issues": [
+            "5519"
+          ]
+        }
+      ],
+      "version": "5.15.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "a1e7a682-230f-4de1-a1a9-df976fd6e121",
+      "createTime": "2024-07-10T13:39:29.893Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "347ea87f938abbf9abe37df7ffb32625ec142e1a",
+          "message": "[sql] add Dataplex integration opt-in field",
+          "issues": [
+            "5527"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6d8a33d6caf2b9dbe4aa043d083cb76e989ed5a3",
+          "message": "[sql] add Dataplex integration opt-in field",
+          "issues": [
+            "5518"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "bfc0b2b4-0a03-41e3-9b38-2c092121dd5c",
+      "createTime": "2024-07-10T13:39:29.878Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "63f8e88a7cd2f64bfc39aa26a1bfe24963285e1b",
+          "message": "[securitycenter] added cloud provider field to list findings response",
+          "issues": [
+            "5529"
+          ]
+        }
+      ],
+      "version": "8.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "63c47a71-64f1-4edd-8954-4c113253dc3d",
+      "createTime": "2024-07-10T13:39:29.831Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b0dc1b2ef66334394613c6e92a4c5b0ebb8e0faf",
+          "message": "[discoveryengine] add Chunk resource in the search response",
+          "issues": [
+            "5526"
+          ]
+        }
+      ],
+      "version": "1.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "efa0432f-de37-4f44-b8f7-4afe87dd4468",
+      "createTime": "2024-07-10T13:39:29.806Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e85b5752ea97e102b8cd729d1e9b18aadfd8f045",
+          "message": "[bigquery-analyticshub] support public directory self service for Listings/Exchanges",
+          "issues": [
+            "5523"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "369f4b54-d89c-4ed2-9f54-4d3fa65e0fa6",
+      "createTime": "2024-07-10T13:39:29.773Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2359c347ca89df4aee706b0c6798560d686a15cc",
+          "message": "Enable rest_numeric_enums for aiplatform v1 and v1beta1",
+          "issues": [
+            "5531"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "89832091d214555b274df86d817866a33b559e05",
+          "message": "Add model and contents fields to ComputeTokensRequest v1",
+          "issues": [
+            "5517"
+          ]
+        }
+      ],
+      "version": "3.25.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "0463772e-c740-47ce-896b-66c0cb6aa421",
+      "createTime": "2024-07-10T13:39:29.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "9e8416fe9c4c401119910fb5867b5b445e8224e7",
           "message": "Added http configuration rule to ResourceValueConfig and ValuedResource API methods",
           "issues": []
@@ -34953,5 +35105,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-06-27T09:25:51.635Z"
+  "updateTime": "2024-07-10T13:39:29.924Z"
 }

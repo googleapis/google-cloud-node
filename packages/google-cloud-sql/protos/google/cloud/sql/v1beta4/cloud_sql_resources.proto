@@ -1436,6 +1436,12 @@ message SqlExternalSyncSettingError {
     // The error message indicates that pg_cron flags are enabled on the
     // destination which is not supported during the migration.
     PG_CRON_FLAG_ENABLED_IN_REPLICA = 47;
+
+    // This error message indicates that the specified extensions are not
+    // enabled on destination instance. For example, before you can migrate
+    // data to the destination instance, you must enable the PGAudit extension
+    // on the instance.
+    EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48;
   }
 
   // Can be `sql#externalSyncSettingError` or
@@ -2328,6 +2334,12 @@ message Settings {
   // insights to the AI. The default value is false. This applies only to Cloud
   // SQL for PostgreSQL instances.
   google.protobuf.BoolValue enable_google_ml_integration = 40
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. By default, Cloud SQL instances have schema extraction disabled
+  // for Dataplex. When this parameter is set to true, schema extraction for
+  // Dataplex on Cloud SQL instances is activated.
+  google.protobuf.BoolValue enable_dataplex_integration = 41
       [(google.api.field_behavior) = OPTIONAL];
 }
 

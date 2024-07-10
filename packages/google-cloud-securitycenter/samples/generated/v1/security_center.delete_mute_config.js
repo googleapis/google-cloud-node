@@ -30,9 +30,12 @@ function main(name) {
    */
   /**
    *  Required. Name of the mute config to delete. Its format is
-   *  organizations/{organization}/muteConfigs/{config_id},
-   *  folders/{folder}/muteConfigs/{config_id}, or
-   *  projects/{project}/muteConfigs/{config_id}
+   *  `organizations/{organization}/muteConfigs/{config_id}`,
+   *  `folders/{folder}/muteConfigs/{config_id}`,
+   *  `projects/{project}/muteConfigs/{config_id}`,
+   *  `organizations/{organization}/locations/global/muteConfigs/{config_id}`,
+   *  `folders/{folder}/locations/global/muteConfigs/{config_id}`, or
+   *  `projects/{project}/locations/global/muteConfigs/{config_id}`.
    */
   // const name = 'abc123'
 

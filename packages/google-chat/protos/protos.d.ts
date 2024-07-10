@@ -17563,6 +17563,12 @@ export namespace google {
 
                 /** Space adminInstalled */
                 adminInstalled?: (boolean|null);
+
+                /** Space accessSettings */
+                accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
+
+                /** Space spaceUri */
+                spaceUri?: (string|null);
             }
 
             /** Represents a Space. */
@@ -17612,6 +17618,12 @@ export namespace google {
 
                 /** Space adminInstalled. */
                 public adminInstalled: boolean;
+
+                /** Space accessSettings. */
+                public accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
+
+                /** Space spaceUri. */
+                public spaceUri: string;
 
                 /**
                  * Creates a new Space instance using the specified properties.
@@ -17817,6 +17829,119 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessSettings. */
+                interface IAccessSettings {
+
+                    /** AccessSettings accessState */
+                    accessState?: (google.chat.v1.Space.AccessSettings.AccessState|keyof typeof google.chat.v1.Space.AccessSettings.AccessState|null);
+
+                    /** AccessSettings audience */
+                    audience?: (string|null);
+                }
+
+                /** Represents an AccessSettings. */
+                class AccessSettings implements IAccessSettings {
+
+                    /**
+                     * Constructs a new AccessSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IAccessSettings);
+
+                    /** AccessSettings accessState. */
+                    public accessState: (google.chat.v1.Space.AccessSettings.AccessState|keyof typeof google.chat.v1.Space.AccessSettings.AccessState);
+
+                    /** AccessSettings audience. */
+                    public audience: string;
+
+                    /**
+                     * Creates a new AccessSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessSettings instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IAccessSettings): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Encodes the specified AccessSettings message. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                     * @param message AccessSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IAccessSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                     * @param message AccessSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IAccessSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Decodes an AccessSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Verifies an AccessSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Creates a plain object from an AccessSettings message. Also converts values to other types if specified.
+                     * @param message AccessSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.AccessSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AccessSettings {
+
+                    /** AccessState enum. */
+                    enum AccessState {
+                        ACCESS_STATE_UNSPECIFIED = 0,
+                        PRIVATE = 1,
+                        DISCOVERABLE = 2
+                    }
                 }
             }
 

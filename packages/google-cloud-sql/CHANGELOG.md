@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.15.0...sql-v0.16.0) (2024-07-10)
+
+
+### Features
+
+* [sql] add Dataplex integration opt-in field ([#5518](https://github.com/googleapis/google-cloud-node/issues/5518)) ([6d8a33d](https://github.com/googleapis/google-cloud-node/commit/6d8a33d6caf2b9dbe4aa043d083cb76e989ed5a3))
+* [sql] add Dataplex integration opt-in field ([#5527](https://github.com/googleapis/google-cloud-node/issues/5527)) ([347ea87](https://github.com/googleapis/google-cloud-node/commit/347ea87f938abbf9abe37df7ffb32625ec142e1a))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.14.0...sql-v0.15.0) (2024-06-26)
 
 

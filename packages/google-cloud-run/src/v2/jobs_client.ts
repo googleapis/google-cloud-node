@@ -1032,10 +1032,10 @@ export class JobsClient {
    * @param {boolean} request.validateOnly
    *   Indicates that the request should be validated and default values
    *   populated, without persisting the request or updating any resources.
-   * @param {boolean} request.allowMissing
-   *   If set to true, and if the Job does not exist, it will create a new
-   *   one. Caller must have both create and update permissions for this call if
-   *   this is set to true.
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and if the Job does not exist, it will create a
+   *   new one. Caller must have both create and update permissions for this call
+   *   if this is set to true.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1484,7 +1484,7 @@ export class JobsClient {
     >;
   }
   /**
-   * Lists Jobs.
+   * Lists Jobs. Results are sorted by creation time, descending.
    *
    * @param {Object} request
    *   The request object that will be sent.

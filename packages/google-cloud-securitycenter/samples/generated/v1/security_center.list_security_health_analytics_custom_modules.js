@@ -30,9 +30,9 @@ function main(parent) {
    */
   /**
    *  Required. Name of parent to list custom modules. Its format is
-   *  "organizations/{organization}/securityHealthAnalyticsSettings",
-   *  "folders/{folder}/securityHealthAnalyticsSettings", or
-   *  "projects/{project}/securityHealthAnalyticsSettings"
+   *  `organizations/{organization}/securityHealthAnalyticsSettings`,
+   *  `folders/{folder}/securityHealthAnalyticsSettings`, or
+   *  `projects/{project}/securityHealthAnalyticsSettings`
    */
   // const parent = 'abc123'
   /**
