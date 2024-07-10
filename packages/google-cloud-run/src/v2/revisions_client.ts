@@ -716,7 +716,8 @@ export class RevisionsClient {
     >;
   }
   /**
-   * Lists Revisions from a given Service, or from a given location.
+   * Lists Revisions from a given Service, or from a given location.  Results
+   * are sorted by creation time, descending.
    *
    * @param {Object} request
    *   The request object that will be sent.

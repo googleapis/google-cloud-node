@@ -45215,6 +45215,8 @@
                      * @property {boolean|null} [importMode] Space importMode
                      * @property {google.protobuf.ITimestamp|null} [createTime] Space createTime
                      * @property {boolean|null} [adminInstalled] Space adminInstalled
+                     * @property {google.chat.v1.Space.IAccessSettings|null} [accessSettings] Space accessSettings
+                     * @property {string|null} [spaceUri] Space spaceUri
                      */
     
                     /**
@@ -45337,6 +45339,22 @@
                     Space.prototype.adminInstalled = false;
     
                     /**
+                     * Space accessSettings.
+                     * @member {google.chat.v1.Space.IAccessSettings|null|undefined} accessSettings
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.accessSettings = null;
+    
+                    /**
+                     * Space spaceUri.
+                     * @member {string} spaceUri
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.spaceUri = "";
+    
+                    /**
                      * Creates a new Space instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.Space
@@ -45386,6 +45404,10 @@
                             $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                         if (message.adminInstalled != null && Object.hasOwnProperty.call(message, "adminInstalled"))
                             writer.uint32(/* id 19, wireType 0 =*/152).bool(message.adminInstalled);
+                        if (message.accessSettings != null && Object.hasOwnProperty.call(message, "accessSettings"))
+                            $root.google.chat.v1.Space.AccessSettings.encode(message.accessSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        if (message.spaceUri != null && Object.hasOwnProperty.call(message, "spaceUri"))
+                            writer.uint32(/* id 25, wireType 2 =*/202).string(message.spaceUri);
                         return writer;
                     };
     
@@ -45470,6 +45492,14 @@
                                 }
                             case 19: {
                                     message.adminInstalled = reader.bool();
+                                    break;
+                                }
+                            case 23: {
+                                    message.accessSettings = $root.google.chat.v1.Space.AccessSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 25: {
+                                    message.spaceUri = reader.string();
                                     break;
                                 }
                             default:
@@ -45576,6 +45606,14 @@
                         if (message.adminInstalled != null && message.hasOwnProperty("adminInstalled"))
                             if (typeof message.adminInstalled !== "boolean")
                                 return "adminInstalled: boolean expected";
+                        if (message.accessSettings != null && message.hasOwnProperty("accessSettings")) {
+                            var error = $root.google.chat.v1.Space.AccessSettings.verify(message.accessSettings);
+                            if (error)
+                                return "accessSettings." + error;
+                        }
+                        if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
+                            if (!$util.isString(message.spaceUri))
+                                return "spaceUri: string expected";
                         return null;
                     };
     
@@ -45703,6 +45741,13 @@
                         }
                         if (object.adminInstalled != null)
                             message.adminInstalled = Boolean(object.adminInstalled);
+                        if (object.accessSettings != null) {
+                            if (typeof object.accessSettings !== "object")
+                                throw TypeError(".google.chat.v1.Space.accessSettings: object expected");
+                            message.accessSettings = $root.google.chat.v1.Space.AccessSettings.fromObject(object.accessSettings);
+                        }
+                        if (object.spaceUri != null)
+                            message.spaceUri = String(object.spaceUri);
                         return message;
                     };
     
@@ -45733,6 +45778,8 @@
                             object.importMode = false;
                             object.createTime = null;
                             object.adminInstalled = false;
+                            object.accessSettings = null;
+                            object.spaceUri = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -45760,6 +45807,10 @@
                             object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                         if (message.adminInstalled != null && message.hasOwnProperty("adminInstalled"))
                             object.adminInstalled = message.adminInstalled;
+                        if (message.accessSettings != null && message.hasOwnProperty("accessSettings"))
+                            object.accessSettings = $root.google.chat.v1.Space.AccessSettings.toObject(message.accessSettings, options);
+                        if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
+                            object.spaceUri = message.spaceUri;
                         return object;
                     };
     
@@ -46066,6 +46117,273 @@
                         };
     
                         return SpaceDetails;
+                    })();
+    
+                    Space.AccessSettings = (function() {
+    
+                        /**
+                         * Properties of an AccessSettings.
+                         * @memberof google.chat.v1.Space
+                         * @interface IAccessSettings
+                         * @property {google.chat.v1.Space.AccessSettings.AccessState|null} [accessState] AccessSettings accessState
+                         * @property {string|null} [audience] AccessSettings audience
+                         */
+    
+                        /**
+                         * Constructs a new AccessSettings.
+                         * @memberof google.chat.v1.Space
+                         * @classdesc Represents an AccessSettings.
+                         * @implements IAccessSettings
+                         * @constructor
+                         * @param {google.chat.v1.Space.IAccessSettings=} [properties] Properties to set
+                         */
+                        function AccessSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessSettings accessState.
+                         * @member {google.chat.v1.Space.AccessSettings.AccessState} accessState
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @instance
+                         */
+                        AccessSettings.prototype.accessState = 0;
+    
+                        /**
+                         * AccessSettings audience.
+                         * @member {string} audience
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @instance
+                         */
+                        AccessSettings.prototype.audience = "";
+    
+                        /**
+                         * Creates a new AccessSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IAccessSettings=} [properties] Properties to set
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings instance
+                         */
+                        AccessSettings.create = function create(properties) {
+                            return new AccessSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSettings message. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IAccessSettings} message AccessSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accessState != null && Object.hasOwnProperty.call(message, "accessState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.accessState);
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.audience);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IAccessSettings} message AccessSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.AccessSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.accessState = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessSettings message.
+                         * @function verify
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accessState != null && message.hasOwnProperty("accessState"))
+                                switch (message.accessState) {
+                                default:
+                                    return "accessState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings
+                         */
+                        AccessSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.chat.v1.Space.AccessSettings)
+                                return object;
+                            var message = new $root.google.chat.v1.Space.AccessSettings();
+                            switch (object.accessState) {
+                            default:
+                                if (typeof object.accessState === "number") {
+                                    message.accessState = object.accessState;
+                                    break;
+                                }
+                                break;
+                            case "ACCESS_STATE_UNSPECIFIED":
+                            case 0:
+                                message.accessState = 0;
+                                break;
+                            case "PRIVATE":
+                            case 1:
+                                message.accessState = 1;
+                                break;
+                            case "DISCOVERABLE":
+                            case 2:
+                                message.accessState = 2;
+                                break;
+                            }
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.AccessSettings} message AccessSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.accessState = options.enums === String ? "ACCESS_STATE_UNSPECIFIED" : 0;
+                                object.audience = "";
+                            }
+                            if (message.accessState != null && message.hasOwnProperty("accessState"))
+                                object.accessState = options.enums === String ? $root.google.chat.v1.Space.AccessSettings.AccessState[message.accessState] === undefined ? message.accessState : $root.google.chat.v1.Space.AccessSettings.AccessState[message.accessState] : message.accessState;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessSettings
+                         * @function getTypeUrl
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.chat.v1.Space.AccessSettings";
+                        };
+    
+                        /**
+                         * AccessState enum.
+                         * @name google.chat.v1.Space.AccessSettings.AccessState
+                         * @enum {number}
+                         * @property {number} ACCESS_STATE_UNSPECIFIED=0 ACCESS_STATE_UNSPECIFIED value
+                         * @property {number} PRIVATE=1 PRIVATE value
+                         * @property {number} DISCOVERABLE=2 DISCOVERABLE value
+                         */
+                        AccessSettings.AccessState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACCESS_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRIVATE"] = 1;
+                            values[valuesById[2] = "DISCOVERABLE"] = 2;
+                            return values;
+                        })();
+    
+                        return AccessSettings;
                     })();
     
                     return Space;

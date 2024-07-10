@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.25.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.24.0...aiplatform-v3.25.0) (2024-07-10)
+
+
+### Features
+
+* Add model and contents fields to ComputeTokensRequest v1 ([#5517](https://github.com/googleapis/google-cloud-node/issues/5517)) ([8983209](https://github.com/googleapis/google-cloud-node/commit/89832091d214555b274df86d817866a33b559e05))
+* Enable rest_numeric_enums for aiplatform v1 and v1beta1 ([#5531](https://github.com/googleapis/google-cloud-node/issues/5531)) ([2359c34](https://github.com/googleapis/google-cloud-node/commit/2359c347ca89df4aee706b0c6798560d686a15cc))
+
 ## [3.24.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.23.0...aiplatform-v3.24.0) (2024-06-26)
 
 

@@ -145,6 +145,9 @@ export class LlmUtilityServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -555,10 +558,16 @@ export class LlmUtilityServiceClient {
    * @param {string} request.endpoint
    *   Required. The name of the Endpoint requested to get lists of tokens and
    *   token ids.
-   * @param {number[]} request.instances
-   *   Required. The instances that are the input to token computing API call.
+   * @param {number[]} [request.instances]
+   *   Optional. The instances that are the input to token computing API call.
    *   Schema is identical to the prediction schema of the text model, even for
    *   the non-text models, like chat models, or Codey models.
+   * @param {string} [request.model]
+   *   Optional. The name of the publisher model requested to serve the
+   *   prediction. Format:
+   *   projects/{project}/locations/{location}/publishers/* /models/*
+   * @param {number[]} [request.contents]
+   *   Optional. Input content.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
