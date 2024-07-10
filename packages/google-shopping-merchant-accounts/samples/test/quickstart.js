@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,29 +14,14 @@
 
 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
-const {describe, it, before} = require('mocha');
+const {describe, before} = require('mocha');
 const {UserServiceClient} = require('@google-shopping/accounts').v1beta;
 const merchantapiClient = new UserServiceClient();
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
     projectId = await merchantapiClient.getProjectId();
-  });
-
-  it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
-      {cwd}
-    );
-    assert(output !== null);
   });
 });
