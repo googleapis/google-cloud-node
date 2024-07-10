@@ -850,7 +850,8 @@ export class ExecutionsClient {
     >;
   }
   /**
-   * Lists Executions from a Job.
+   * Lists Executions from a Job. Results are sorted by creation time,
+   * descending.
    *
    * @param {Object} request
    *   The request object that will be sent.
