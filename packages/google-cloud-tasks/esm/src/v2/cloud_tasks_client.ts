@@ -203,7 +203,7 @@ export class CloudTasksClient {
     );
 
     // Determine the client header string.
-    
+
     // Add ESM headers
     const isEsm = true;
     const isEsmString = isEsm ? '-esm' : '';
