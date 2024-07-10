@@ -5,7 +5,7 @@ body:
     attributes:
       value: >
         Please use this issue type to log documentation requests against the library itself.
-        These requests should involve documentation on Github, and should relate to the library
+        These requests should involve documentation on Github (`.md` files), and should relate to the library
         itself, not to any APIs. If you have questions or documentation requests for an API, please
         reach out to the API tracker itself.
 
