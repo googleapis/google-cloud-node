@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,6 +27,8 @@ option java_multiple_files = true;
 option java_outer_classname = "Common";
 option java_package = "google.maps.fleetengine.delivery.v1";
 option objc_class_prefix = "CFED";
+option php_namespace = "Google\\Maps\\FleetEngine\\Delivery\\V1";
+option ruby_package = "Google::Maps::FleetEngine::Delivery::V1";
 
 // Describes a vehicle attribute as a key-value pair. The "key:value" string
 // length cannot exceed 256 characters.

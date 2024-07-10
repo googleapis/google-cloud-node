@@ -11,10 +11,15 @@
                 "java_multiple_files": true,
                 "java_outer_classname": "Vehicles",
                 "java_package": "google.maps.fleetengine.v1",
-                "objc_class_prefix": "CFE"
+                "objc_class_prefix": "CFE",
+                "php_namespace": "Google\\Maps\\FleetEngine\\V1",
+                "ruby_package": "Google::Maps::FleetEngine::V1"
               },
               "nested": {
                 "TerminalPointId": {
+                  "options": {
+                    "deprecated": true
+                  },
                   "oneofs": {
                     "Id": {
                       "oneof": [
@@ -40,7 +45,10 @@
                     },
                     "value": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "deprecated": true
+                      }
                     }
                   }
                 },
@@ -55,7 +63,10 @@
                     },
                     "terminalPointId": {
                       "type": "TerminalPointId",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "deprecated": true
+                      }
                     },
                     "accessPointId": {
                       "type": "string",
@@ -1126,36 +1137,6 @@
                         }
                       ]
                     },
-                    "UpdateVehicleLocation": {
-                      "requestType": "UpdateVehicleLocationRequest",
-                      "responseType": "VehicleLocation",
-                      "options": {
-                        "deprecated": true,
-                        "(google.api.http).put": "/v1/{name=providers/*/vehicles/*}:updateLocation",
-                        "(google.api.http).body": "*",
-                        "(google.api.routing).routing_parameters.field": "name",
-                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
-                      },
-                      "parsedOptions": [
-                        {
-                          "deprecated": true
-                        },
-                        {
-                          "(google.api.http)": {
-                            "put": "/v1/{name=providers/*/vehicles/*}:updateLocation",
-                            "body": "*"
-                          }
-                        },
-                        {
-                          "(google.api.routing)": {
-                            "routing_parameters": {
-                              "field": "name",
-                              "path_template": "{provider_id=providers/*}"
-                            }
-                          }
-                        }
-                      ]
-                    },
                     "UpdateVehicleAttributes": {
                       "requestType": "UpdateVehicleAttributesRequest",
                       "responseType": "UpdateVehicleAttributesResponse",
@@ -1219,36 +1200,6 @@
                         {
                           "(google.api.http)": {
                             "post": "/v1/{parent=providers/*}/vehicles:search",
-                            "body": "*"
-                          }
-                        },
-                        {
-                          "(google.api.routing)": {
-                            "routing_parameters": {
-                              "field": "parent",
-                              "path_template": "{provider_id=providers/*}"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    "SearchFuzzedVehicles": {
-                      "requestType": "SearchVehiclesRequest",
-                      "responseType": "SearchVehiclesResponse",
-                      "options": {
-                        "deprecated": true,
-                        "(google.api.http).post": "/v1/{parent=providers/*}/vehicles:searchFuzzed",
-                        "(google.api.http).body": "*",
-                        "(google.api.routing).routing_parameters.field": "parent",
-                        "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}"
-                      },
-                      "parsedOptions": [
-                        {
-                          "deprecated": true
-                        },
-                        {
-                          "(google.api.http)": {
-                            "post": "/v1/{parent=providers/*}/vehicles:searchFuzzed",
                             "body": "*"
                           }
                         },
@@ -1343,35 +1294,6 @@
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
                       }
-                    }
-                  }
-                },
-                "UpdateVehicleLocationRequest": {
-                  "options": {
-                    "deprecated": true
-                  },
-                  "fields": {
-                    "header": {
-                      "type": "RequestHeader",
-                      "id": 1
-                    },
-                    "name": {
-                      "type": "string",
-                      "id": 3,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    },
-                    "currentLocation": {
-                      "type": "VehicleLocation",
-                      "id": 4,
-                      "options": {
-                        "(google.api.field_behavior)": "REQUIRED"
-                      }
-                    },
-                    "currentState": {
-                      "type": "VehicleState",
-                      "id": 5
                     }
                   }
                 },

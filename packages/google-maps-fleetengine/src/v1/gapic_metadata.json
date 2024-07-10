@@ -93,11 +93,6 @@
                 "updateVehicle"
               ]
             },
-            "UpdateVehicleLocation": {
-              "methods": [
-                "updateVehicleLocation"
-              ]
-            },
             "UpdateVehicleAttributes": {
               "methods": [
                 "updateVehicleAttributes"
@@ -106,11 +101,6 @@
             "SearchVehicles": {
               "methods": [
                 "searchVehicles"
-              ]
-            },
-            "SearchFuzzedVehicles": {
-              "methods": [
-                "searchFuzzedVehicles"
               ]
             },
             "ListVehicles": {
@@ -140,11 +130,6 @@
                 "updateVehicle"
               ]
             },
-            "UpdateVehicleLocation": {
-              "methods": [
-                "updateVehicleLocation"
-              ]
-            },
             "UpdateVehicleAttributes": {
               "methods": [
                 "updateVehicleAttributes"
@@ -153,11 +138,6 @@
             "SearchVehicles": {
               "methods": [
                 "searchVehicles"
-              ]
-            },
-            "SearchFuzzedVehicles": {
-              "methods": [
-                "searchFuzzedVehicles"
               ]
             },
             "ListVehicles": {
