@@ -17054,7 +17054,8 @@ export namespace google {
                         INSUFFICIENT_MACHINE_TIER = 44,
                         UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
                         EXTENSIONS_NOT_MIGRATED = 46,
-                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48
                     }
                 }
 
@@ -34908,7 +34909,8 @@ export namespace google {
                         INSUFFICIENT_MACHINE_TIER = 44,
                         UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
                         EXTENSIONS_NOT_MIGRATED = 46,
-                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48
                     }
                 }
 
