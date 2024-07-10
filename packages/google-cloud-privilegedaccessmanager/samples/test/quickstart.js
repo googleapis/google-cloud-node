@@ -18,7 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {PrivilegedAccessManagerClient} = require('@google-cloud/privilegedaccessmanager').v1;
+const {PrivilegedAccessManagerClient} =
+  require('@google-cloud/privilegedaccessmanager').v1;
 const privilegedaccessmanagerClient = new PrivilegedAccessManagerClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
