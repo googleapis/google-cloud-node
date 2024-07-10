@@ -30,8 +30,8 @@ function main(parent, bigQueryExport, bigQueryExportId) {
    */
   /**
    *  Required. The name of the parent resource of the new BigQuery export. Its
-   *  format is "organizations/[organization_id]", "folders/[folder_id]", or
-   *  "projects/[project_id]".
+   *  format is `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**

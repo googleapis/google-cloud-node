@@ -33,7 +33,9 @@ function main(securityHealthAnalyticsCustomModule) {
    */
   // const securityHealthAnalyticsCustomModule = {}
   /**
-   *  The list of fields to update.
+   *  The list of fields to be updated. The only fields that can be updated are
+   *  `enablement_state` and `custom_config`. If empty or set to the wildcard
+   *  value `*`, both `enablement_state` and `custom_config` are updated.
    */
   // const updateMask = {}
 

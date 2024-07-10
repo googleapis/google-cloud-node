@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.10.0...security-center-v8.11.0) (2024-07-10)
+
+
+### Features
+
+* [securitycenter] added cloud provider field to list findings response ([#5529](https://github.com/googleapis/google-cloud-node/issues/5529)) ([63f8e88](https://github.com/googleapis/google-cloud-node/commit/63f8e88a7cd2f64bfc39aa26a1bfe24963285e1b))
+
 ## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.9.0...security-center-v8.10.0) (2024-06-27)
 
 

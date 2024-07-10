@@ -30,8 +30,8 @@ function main(parent, configId, notificationConfig) {
    */
   /**
    *  Required. Resource name of the new notification config's parent. Its format
-   *  is "organizations/[organization_id]", "folders/[folder_id]", or
-   *  "projects/[project_id]".
+   *  is `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**

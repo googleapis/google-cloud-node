@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. Name of the organization to run asset discovery for. Its format
-   *  is "organizations/[organization_id]".
+   *  is `organizations/[organization_id]`.
    */
   // const parent = 'abc123'
 

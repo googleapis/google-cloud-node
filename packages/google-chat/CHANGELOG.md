@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.5.0...chat-v0.6.0) (2024-07-10)
+
+
+### Features
+
+* [chat] Add doc for Discoverable Space support for GA launch ([#5525](https://github.com/googleapis/google-cloud-node/issues/5525)) ([9a80089](https://github.com/googleapis/google-cloud-node/commit/9a80089d974280420e269f24aba563f4adceb4c3))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.4.0...chat-v0.5.0) (2024-05-21)
 
 

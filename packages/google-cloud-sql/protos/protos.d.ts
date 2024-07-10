@@ -5774,6 +5774,9 @@ export namespace google {
 
                     /** Settings enableGoogleMlIntegration */
                     enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration */
+                    enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a Settings. */
@@ -5883,6 +5886,9 @@ export namespace google {
 
                     /** Settings enableGoogleMlIntegration. */
                     public enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration. */
+                    public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
@@ -17048,7 +17054,8 @@ export namespace google {
                         INSUFFICIENT_MACHINE_TIER = 44,
                         UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
                         EXTENSIONS_NOT_MIGRATED = 46,
-                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48
                     }
                 }
 
@@ -34902,7 +34909,8 @@ export namespace google {
                         INSUFFICIENT_MACHINE_TIER = 44,
                         UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
                         EXTENSIONS_NOT_MIGRATED = 46,
-                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47
+                        PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48
                     }
                 }
 
@@ -37495,6 +37503,9 @@ export namespace google {
 
                     /** Settings enableGoogleMlIntegration */
                     enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration */
+                    enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a Settings. */
@@ -37604,6 +37615,9 @@ export namespace google {
 
                     /** Settings enableGoogleMlIntegration. */
                     public enableGoogleMlIntegration?: (google.protobuf.IBoolValue|null);
+
+                    /** Settings enableDataplexIntegration. */
+                    public enableDataplexIntegration?: (google.protobuf.IBoolValue|null);
 
                     /**
                      * Creates a new Settings instance using the specified properties.
