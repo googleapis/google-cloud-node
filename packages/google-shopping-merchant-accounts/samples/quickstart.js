@@ -30,7 +30,7 @@ function main(parent) {
    *  Required. The account to list regions for.
    *  Format: `accounts/{account}`
    */
-  // const parent = 'abc123'
+  // const parent = 'accounts/abc123'
   /**
    *  Optional. The maximum number of regions to return. The service may return
    *  fewer than this value.
