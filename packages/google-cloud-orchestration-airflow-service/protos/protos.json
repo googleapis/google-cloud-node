@@ -4189,9 +4189,24 @@
                             },
                             "DataRetentionConfig": {
                               "fields": {
+                                "airflowDatabaseRetentionDays": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "deprecated": true,
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
                                 "taskLogsRetentionConfig": {
                                   "type": "TaskLogsRetentionConfig",
                                   "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "airflowMetadataRetentionConfig": {
+                                  "type": "AirflowMetadataRetentionPolicyConfig",
+                                  "id": 5,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
@@ -4214,6 +4229,33 @@
                                     "TASK_LOGS_STORAGE_MODE_UNSPECIFIED": 0,
                                     "CLOUD_LOGGING_AND_CLOUD_STORAGE": 1,
                                     "CLOUD_LOGGING_ONLY": 2
+                                  }
+                                }
+                              }
+                            },
+                            "AirflowMetadataRetentionPolicyConfig": {
+                              "fields": {
+                                "retentionMode": {
+                                  "type": "RetentionMode",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "retentionDays": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "RetentionMode": {
+                                  "values": {
+                                    "RETENTION_MODE_UNSPECIFIED": 0,
+                                    "RETENTION_MODE_ENABLED": 1,
+                                    "RETENTION_MODE_DISABLED": 2
                                   }
                                 }
                               }
