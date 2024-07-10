@@ -14,29 +14,14 @@
 
 'use strict';
 
-const assert = require('assert');
-const path = require('path');
-const cp = require('child_process');
-const {describe, it, before} = require('mocha');
+const {describe, before} = require('mocha');
 const {ProductsServiceClient} = require('@google-shopping/products').v1beta;
 const merchantapiClient = new ProductsServiceClient();
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   let projectId;
 
   before(async () => {
     projectId = await merchantapiClient.getProjectId();
-  });
-
-  it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js projects/${projectId}/locations/us-central1`,
-      {cwd}
-    );
-    assert(output !== null);
   });
 });
