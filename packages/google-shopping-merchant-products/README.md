@@ -67,7 +67,7 @@ npm install @google-shopping/products
  *  Required. The account to list processed products for.
  *  Format: accounts/{account}
  */
-// const parent = 'abc123'
+// const parent = 'accounts/abc123'
 /**
  *  The maximum number of products to return. The service may return fewer than
  *  this value.
