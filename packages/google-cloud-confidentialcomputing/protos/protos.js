@@ -747,6 +747,8 @@
                          * Properties of a VerifyAttestationRequest.
                          * @memberof google.cloud.confidentialcomputing.v1
                          * @interface IVerifyAttestationRequest
+                         * @property {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation|null} [tdCcel] VerifyAttestationRequest tdCcel
+                         * @property {google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null} [sevSnpAttestation] VerifyAttestationRequest sevSnpAttestation
                          * @property {string|null} [challenge] VerifyAttestationRequest challenge
                          * @property {google.cloud.confidentialcomputing.v1.IGcpCredentials|null} [gcpCredentials] VerifyAttestationRequest gcpCredentials
                          * @property {google.cloud.confidentialcomputing.v1.ITpmAttestation|null} [tpmAttestation] VerifyAttestationRequest tpmAttestation
@@ -768,6 +770,22 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * VerifyAttestationRequest tdCcel.
+                         * @member {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation|null|undefined} tdCcel
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.tdCcel = null;
+    
+                        /**
+                         * VerifyAttestationRequest sevSnpAttestation.
+                         * @member {google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null|undefined} sevSnpAttestation
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        VerifyAttestationRequest.prototype.sevSnpAttestation = null;
     
                         /**
                          * VerifyAttestationRequest challenge.
@@ -809,6 +827,20 @@
                          */
                         VerifyAttestationRequest.prototype.tokenOptions = null;
     
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * VerifyAttestationRequest teeAttestation.
+                         * @member {"tdCcel"|"sevSnpAttestation"|undefined} teeAttestation
+                         * @memberof google.cloud.confidentialcomputing.v1.VerifyAttestationRequest
+                         * @instance
+                         */
+                        Object.defineProperty(VerifyAttestationRequest.prototype, "teeAttestation", {
+                            get: $util.oneOfGetter($oneOfFields = ["tdCcel", "sevSnpAttestation"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new VerifyAttestationRequest instance using the specified properties.
                          * @function create
@@ -843,6 +875,10 @@
                                 $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.encode(message.confidentialSpaceInfo, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.tokenOptions != null && Object.hasOwnProperty.call(message, "tokenOptions"))
                                 $root.google.cloud.confidentialcomputing.v1.TokenOptions.encode(message.tokenOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.tdCcel != null && Object.hasOwnProperty.call(message, "tdCcel"))
+                                $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation.encode(message.tdCcel, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.sevSnpAttestation != null && Object.hasOwnProperty.call(message, "sevSnpAttestation"))
+                                $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.encode(message.sevSnpAttestation, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -877,6 +913,14 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 6: {
+                                        message.tdCcel = $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.sevSnpAttestation = $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 case 1: {
                                         message.challenge = reader.string();
                                         break;
@@ -932,6 +976,25 @@
                         VerifyAttestationRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.tdCcel != null && message.hasOwnProperty("tdCcel")) {
+                                properties.teeAttestation = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation.verify(message.tdCcel);
+                                    if (error)
+                                        return "tdCcel." + error;
+                                }
+                            }
+                            if (message.sevSnpAttestation != null && message.hasOwnProperty("sevSnpAttestation")) {
+                                if (properties.teeAttestation === 1)
+                                    return "teeAttestation: multiple values";
+                                properties.teeAttestation = 1;
+                                {
+                                    var error = $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.verify(message.sevSnpAttestation);
+                                    if (error)
+                                        return "sevSnpAttestation." + error;
+                                }
+                            }
                             if (message.challenge != null && message.hasOwnProperty("challenge"))
                                 if (!$util.isString(message.challenge))
                                     return "challenge: string expected";
@@ -970,6 +1033,16 @@
                             if (object instanceof $root.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest)
                                 return object;
                             var message = new $root.google.cloud.confidentialcomputing.v1.VerifyAttestationRequest();
+                            if (object.tdCcel != null) {
+                                if (typeof object.tdCcel !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.tdCcel: object expected");
+                                message.tdCcel = $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation.fromObject(object.tdCcel);
+                            }
+                            if (object.sevSnpAttestation != null) {
+                                if (typeof object.sevSnpAttestation !== "object")
+                                    throw TypeError(".google.cloud.confidentialcomputing.v1.VerifyAttestationRequest.sevSnpAttestation: object expected");
+                                message.sevSnpAttestation = $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.fromObject(object.sevSnpAttestation);
+                            }
                             if (object.challenge != null)
                                 message.challenge = String(object.challenge);
                             if (object.gcpCredentials != null) {
@@ -1025,6 +1098,16 @@
                                 object.confidentialSpaceInfo = $root.google.cloud.confidentialcomputing.v1.ConfidentialSpaceInfo.toObject(message.confidentialSpaceInfo, options);
                             if (message.tokenOptions != null && message.hasOwnProperty("tokenOptions"))
                                 object.tokenOptions = $root.google.cloud.confidentialcomputing.v1.TokenOptions.toObject(message.tokenOptions, options);
+                            if (message.tdCcel != null && message.hasOwnProperty("tdCcel")) {
+                                object.tdCcel = $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation.toObject(message.tdCcel, options);
+                                if (options.oneofs)
+                                    object.teeAttestation = "tdCcel";
+                            }
+                            if (message.sevSnpAttestation != null && message.hasOwnProperty("sevSnpAttestation")) {
+                                object.sevSnpAttestation = $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation.toObject(message.sevSnpAttestation, options);
+                                if (options.oneofs)
+                                    object.teeAttestation = "sevSnpAttestation";
+                            }
                             return object;
                         };
     
@@ -1055,6 +1138,560 @@
                         };
     
                         return VerifyAttestationRequest;
+                    })();
+    
+                    v1.TdxCcelAttestation = (function() {
+    
+                        /**
+                         * Properties of a TdxCcelAttestation.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface ITdxCcelAttestation
+                         * @property {Uint8Array|null} [ccelAcpiTable] TdxCcelAttestation ccelAcpiTable
+                         * @property {Uint8Array|null} [ccelData] TdxCcelAttestation ccelData
+                         * @property {Uint8Array|null} [canonicalEventLog] TdxCcelAttestation canonicalEventLog
+                         * @property {Uint8Array|null} [tdQuote] TdxCcelAttestation tdQuote
+                         */
+    
+                        /**
+                         * Constructs a new TdxCcelAttestation.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a TdxCcelAttestation.
+                         * @implements ITdxCcelAttestation
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation=} [properties] Properties to set
+                         */
+                        function TdxCcelAttestation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TdxCcelAttestation ccelAcpiTable.
+                         * @member {Uint8Array} ccelAcpiTable
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @instance
+                         */
+                        TdxCcelAttestation.prototype.ccelAcpiTable = $util.newBuffer([]);
+    
+                        /**
+                         * TdxCcelAttestation ccelData.
+                         * @member {Uint8Array} ccelData
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @instance
+                         */
+                        TdxCcelAttestation.prototype.ccelData = $util.newBuffer([]);
+    
+                        /**
+                         * TdxCcelAttestation canonicalEventLog.
+                         * @member {Uint8Array} canonicalEventLog
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @instance
+                         */
+                        TdxCcelAttestation.prototype.canonicalEventLog = $util.newBuffer([]);
+    
+                        /**
+                         * TdxCcelAttestation tdQuote.
+                         * @member {Uint8Array} tdQuote
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @instance
+                         */
+                        TdxCcelAttestation.prototype.tdQuote = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new TdxCcelAttestation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} TdxCcelAttestation instance
+                         */
+                        TdxCcelAttestation.create = function create(properties) {
+                            return new TdxCcelAttestation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TdxCcelAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TdxCcelAttestation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation} message TdxCcelAttestation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TdxCcelAttestation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ccelAcpiTable != null && Object.hasOwnProperty.call(message, "ccelAcpiTable"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.ccelAcpiTable);
+                            if (message.ccelData != null && Object.hasOwnProperty.call(message, "ccelData"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.ccelData);
+                            if (message.canonicalEventLog != null && Object.hasOwnProperty.call(message, "canonicalEventLog"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.canonicalEventLog);
+                            if (message.tdQuote != null && Object.hasOwnProperty.call(message, "tdQuote"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.tdQuote);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TdxCcelAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TdxCcelAttestation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ITdxCcelAttestation} message TdxCcelAttestation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TdxCcelAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TdxCcelAttestation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} TdxCcelAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TdxCcelAttestation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.ccelAcpiTable = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ccelData = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.canonicalEventLog = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.tdQuote = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TdxCcelAttestation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} TdxCcelAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TdxCcelAttestation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TdxCcelAttestation message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TdxCcelAttestation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ccelAcpiTable != null && message.hasOwnProperty("ccelAcpiTable"))
+                                if (!(message.ccelAcpiTable && typeof message.ccelAcpiTable.length === "number" || $util.isString(message.ccelAcpiTable)))
+                                    return "ccelAcpiTable: buffer expected";
+                            if (message.ccelData != null && message.hasOwnProperty("ccelData"))
+                                if (!(message.ccelData && typeof message.ccelData.length === "number" || $util.isString(message.ccelData)))
+                                    return "ccelData: buffer expected";
+                            if (message.canonicalEventLog != null && message.hasOwnProperty("canonicalEventLog"))
+                                if (!(message.canonicalEventLog && typeof message.canonicalEventLog.length === "number" || $util.isString(message.canonicalEventLog)))
+                                    return "canonicalEventLog: buffer expected";
+                            if (message.tdQuote != null && message.hasOwnProperty("tdQuote"))
+                                if (!(message.tdQuote && typeof message.tdQuote.length === "number" || $util.isString(message.tdQuote)))
+                                    return "tdQuote: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TdxCcelAttestation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} TdxCcelAttestation
+                         */
+                        TdxCcelAttestation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.TdxCcelAttestation();
+                            if (object.ccelAcpiTable != null)
+                                if (typeof object.ccelAcpiTable === "string")
+                                    $util.base64.decode(object.ccelAcpiTable, message.ccelAcpiTable = $util.newBuffer($util.base64.length(object.ccelAcpiTable)), 0);
+                                else if (object.ccelAcpiTable.length >= 0)
+                                    message.ccelAcpiTable = object.ccelAcpiTable;
+                            if (object.ccelData != null)
+                                if (typeof object.ccelData === "string")
+                                    $util.base64.decode(object.ccelData, message.ccelData = $util.newBuffer($util.base64.length(object.ccelData)), 0);
+                                else if (object.ccelData.length >= 0)
+                                    message.ccelData = object.ccelData;
+                            if (object.canonicalEventLog != null)
+                                if (typeof object.canonicalEventLog === "string")
+                                    $util.base64.decode(object.canonicalEventLog, message.canonicalEventLog = $util.newBuffer($util.base64.length(object.canonicalEventLog)), 0);
+                                else if (object.canonicalEventLog.length >= 0)
+                                    message.canonicalEventLog = object.canonicalEventLog;
+                            if (object.tdQuote != null)
+                                if (typeof object.tdQuote === "string")
+                                    $util.base64.decode(object.tdQuote, message.tdQuote = $util.newBuffer($util.base64.length(object.tdQuote)), 0);
+                                else if (object.tdQuote.length >= 0)
+                                    message.tdQuote = object.tdQuote;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TdxCcelAttestation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} message TdxCcelAttestation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TdxCcelAttestation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.ccelAcpiTable = "";
+                                else {
+                                    object.ccelAcpiTable = [];
+                                    if (options.bytes !== Array)
+                                        object.ccelAcpiTable = $util.newBuffer(object.ccelAcpiTable);
+                                }
+                                if (options.bytes === String)
+                                    object.ccelData = "";
+                                else {
+                                    object.ccelData = [];
+                                    if (options.bytes !== Array)
+                                        object.ccelData = $util.newBuffer(object.ccelData);
+                                }
+                                if (options.bytes === String)
+                                    object.canonicalEventLog = "";
+                                else {
+                                    object.canonicalEventLog = [];
+                                    if (options.bytes !== Array)
+                                        object.canonicalEventLog = $util.newBuffer(object.canonicalEventLog);
+                                }
+                                if (options.bytes === String)
+                                    object.tdQuote = "";
+                                else {
+                                    object.tdQuote = [];
+                                    if (options.bytes !== Array)
+                                        object.tdQuote = $util.newBuffer(object.tdQuote);
+                                }
+                            }
+                            if (message.ccelAcpiTable != null && message.hasOwnProperty("ccelAcpiTable"))
+                                object.ccelAcpiTable = options.bytes === String ? $util.base64.encode(message.ccelAcpiTable, 0, message.ccelAcpiTable.length) : options.bytes === Array ? Array.prototype.slice.call(message.ccelAcpiTable) : message.ccelAcpiTable;
+                            if (message.ccelData != null && message.hasOwnProperty("ccelData"))
+                                object.ccelData = options.bytes === String ? $util.base64.encode(message.ccelData, 0, message.ccelData.length) : options.bytes === Array ? Array.prototype.slice.call(message.ccelData) : message.ccelData;
+                            if (message.canonicalEventLog != null && message.hasOwnProperty("canonicalEventLog"))
+                                object.canonicalEventLog = options.bytes === String ? $util.base64.encode(message.canonicalEventLog, 0, message.canonicalEventLog.length) : options.bytes === Array ? Array.prototype.slice.call(message.canonicalEventLog) : message.canonicalEventLog;
+                            if (message.tdQuote != null && message.hasOwnProperty("tdQuote"))
+                                object.tdQuote = options.bytes === String ? $util.base64.encode(message.tdQuote, 0, message.tdQuote.length) : options.bytes === Array ? Array.prototype.slice.call(message.tdQuote) : message.tdQuote;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TdxCcelAttestation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TdxCcelAttestation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TdxCcelAttestation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.TdxCcelAttestation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TdxCcelAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.TdxCcelAttestation";
+                        };
+    
+                        return TdxCcelAttestation;
+                    })();
+    
+                    v1.SevSnpAttestation = (function() {
+    
+                        /**
+                         * Properties of a SevSnpAttestation.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @interface ISevSnpAttestation
+                         * @property {Uint8Array|null} [report] SevSnpAttestation report
+                         * @property {Uint8Array|null} [auxBlob] SevSnpAttestation auxBlob
+                         */
+    
+                        /**
+                         * Constructs a new SevSnpAttestation.
+                         * @memberof google.cloud.confidentialcomputing.v1
+                         * @classdesc Represents a SevSnpAttestation.
+                         * @implements ISevSnpAttestation
+                         * @constructor
+                         * @param {google.cloud.confidentialcomputing.v1.ISevSnpAttestation=} [properties] Properties to set
+                         */
+                        function SevSnpAttestation(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SevSnpAttestation report.
+                         * @member {Uint8Array} report
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @instance
+                         */
+                        SevSnpAttestation.prototype.report = $util.newBuffer([]);
+    
+                        /**
+                         * SevSnpAttestation auxBlob.
+                         * @member {Uint8Array} auxBlob
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @instance
+                         */
+                        SevSnpAttestation.prototype.auxBlob = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new SevSnpAttestation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ISevSnpAttestation=} [properties] Properties to set
+                         * @returns {google.cloud.confidentialcomputing.v1.SevSnpAttestation} SevSnpAttestation instance
+                         */
+                        SevSnpAttestation.create = function create(properties) {
+                            return new SevSnpAttestation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SevSnpAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.SevSnpAttestation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ISevSnpAttestation} message SevSnpAttestation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SevSnpAttestation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.report != null && Object.hasOwnProperty.call(message, "report"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.report);
+                            if (message.auxBlob != null && Object.hasOwnProperty.call(message, "auxBlob"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.auxBlob);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SevSnpAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.SevSnpAttestation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.ISevSnpAttestation} message SevSnpAttestation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SevSnpAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SevSnpAttestation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.confidentialcomputing.v1.SevSnpAttestation} SevSnpAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SevSnpAttestation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.report = reader.bytes();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.auxBlob = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SevSnpAttestation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.confidentialcomputing.v1.SevSnpAttestation} SevSnpAttestation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SevSnpAttestation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SevSnpAttestation message.
+                         * @function verify
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SevSnpAttestation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.report != null && message.hasOwnProperty("report"))
+                                if (!(message.report && typeof message.report.length === "number" || $util.isString(message.report)))
+                                    return "report: buffer expected";
+                            if (message.auxBlob != null && message.hasOwnProperty("auxBlob"))
+                                if (!(message.auxBlob && typeof message.auxBlob.length === "number" || $util.isString(message.auxBlob)))
+                                    return "auxBlob: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SevSnpAttestation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.confidentialcomputing.v1.SevSnpAttestation} SevSnpAttestation
+                         */
+                        SevSnpAttestation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation)
+                                return object;
+                            var message = new $root.google.cloud.confidentialcomputing.v1.SevSnpAttestation();
+                            if (object.report != null)
+                                if (typeof object.report === "string")
+                                    $util.base64.decode(object.report, message.report = $util.newBuffer($util.base64.length(object.report)), 0);
+                                else if (object.report.length >= 0)
+                                    message.report = object.report;
+                            if (object.auxBlob != null)
+                                if (typeof object.auxBlob === "string")
+                                    $util.base64.decode(object.auxBlob, message.auxBlob = $util.newBuffer($util.base64.length(object.auxBlob)), 0);
+                                else if (object.auxBlob.length >= 0)
+                                    message.auxBlob = object.auxBlob;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SevSnpAttestation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {google.cloud.confidentialcomputing.v1.SevSnpAttestation} message SevSnpAttestation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SevSnpAttestation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.report = "";
+                                else {
+                                    object.report = [];
+                                    if (options.bytes !== Array)
+                                        object.report = $util.newBuffer(object.report);
+                                }
+                                if (options.bytes === String)
+                                    object.auxBlob = "";
+                                else {
+                                    object.auxBlob = [];
+                                    if (options.bytes !== Array)
+                                        object.auxBlob = $util.newBuffer(object.auxBlob);
+                                }
+                            }
+                            if (message.report != null && message.hasOwnProperty("report"))
+                                object.report = options.bytes === String ? $util.base64.encode(message.report, 0, message.report.length) : options.bytes === Array ? Array.prototype.slice.call(message.report) : message.report;
+                            if (message.auxBlob != null && message.hasOwnProperty("auxBlob"))
+                                object.auxBlob = options.bytes === String ? $util.base64.encode(message.auxBlob, 0, message.auxBlob.length) : options.bytes === Array ? Array.prototype.slice.call(message.auxBlob) : message.auxBlob;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SevSnpAttestation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SevSnpAttestation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SevSnpAttestation
+                         * @function getTypeUrl
+                         * @memberof google.cloud.confidentialcomputing.v1.SevSnpAttestation
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SevSnpAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.confidentialcomputing.v1.SevSnpAttestation";
+                        };
+    
+                        return SevSnpAttestation;
                     })();
     
                     v1.VerifyAttestationResponse = (function() {

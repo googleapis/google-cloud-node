@@ -140,7 +140,29 @@
                       }
                     },
                     "VerifyAttestationRequest": {
+                      "oneofs": {
+                        "teeAttestation": {
+                          "oneof": [
+                            "tdCcel",
+                            "sevSnpAttestation"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "tdCcel": {
+                          "type": "TdxCcelAttestation",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sevSnpAttestation": {
+                          "type": "SevSnpAttestation",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "challenge": {
                           "type": "string",
                           "id": 1,
@@ -173,6 +195,56 @@
                         "tokenOptions": {
                           "type": "TokenOptions",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TdxCcelAttestation": {
+                      "fields": {
+                        "ccelAcpiTable": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ccelData": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "canonicalEventLog": {
+                          "type": "bytes",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tdQuote": {
+                          "type": "bytes",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SevSnpAttestation": {
+                      "fields": {
+                        "report": {
+                          "type": "bytes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "auxBlob": {
+                          "type": "bytes",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

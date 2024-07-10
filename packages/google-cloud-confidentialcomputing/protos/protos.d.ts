@@ -335,6 +335,12 @@ export namespace google {
                 /** Properties of a VerifyAttestationRequest. */
                 interface IVerifyAttestationRequest {
 
+                    /** VerifyAttestationRequest tdCcel */
+                    tdCcel?: (google.cloud.confidentialcomputing.v1.ITdxCcelAttestation|null);
+
+                    /** VerifyAttestationRequest sevSnpAttestation */
+                    sevSnpAttestation?: (google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null);
+
                     /** VerifyAttestationRequest challenge */
                     challenge?: (string|null);
 
@@ -360,6 +366,12 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.confidentialcomputing.v1.IVerifyAttestationRequest);
 
+                    /** VerifyAttestationRequest tdCcel. */
+                    public tdCcel?: (google.cloud.confidentialcomputing.v1.ITdxCcelAttestation|null);
+
+                    /** VerifyAttestationRequest sevSnpAttestation. */
+                    public sevSnpAttestation?: (google.cloud.confidentialcomputing.v1.ISevSnpAttestation|null);
+
                     /** VerifyAttestationRequest challenge. */
                     public challenge: string;
 
@@ -374,6 +386,9 @@ export namespace google {
 
                     /** VerifyAttestationRequest tokenOptions. */
                     public tokenOptions?: (google.cloud.confidentialcomputing.v1.ITokenOptions|null);
+
+                    /** VerifyAttestationRequest teeAttestation. */
+                    public teeAttestation?: ("tdCcel"|"sevSnpAttestation");
 
                     /**
                      * Creates a new VerifyAttestationRequest instance using the specified properties.
@@ -447,6 +462,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for VerifyAttestationRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TdxCcelAttestation. */
+                interface ITdxCcelAttestation {
+
+                    /** TdxCcelAttestation ccelAcpiTable */
+                    ccelAcpiTable?: (Uint8Array|string|null);
+
+                    /** TdxCcelAttestation ccelData */
+                    ccelData?: (Uint8Array|string|null);
+
+                    /** TdxCcelAttestation canonicalEventLog */
+                    canonicalEventLog?: (Uint8Array|string|null);
+
+                    /** TdxCcelAttestation tdQuote */
+                    tdQuote?: (Uint8Array|string|null);
+                }
+
+                /** Represents a TdxCcelAttestation. */
+                class TdxCcelAttestation implements ITdxCcelAttestation {
+
+                    /**
+                     * Constructs a new TdxCcelAttestation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.confidentialcomputing.v1.ITdxCcelAttestation);
+
+                    /** TdxCcelAttestation ccelAcpiTable. */
+                    public ccelAcpiTable: (Uint8Array|string);
+
+                    /** TdxCcelAttestation ccelData. */
+                    public ccelData: (Uint8Array|string);
+
+                    /** TdxCcelAttestation canonicalEventLog. */
+                    public canonicalEventLog: (Uint8Array|string);
+
+                    /** TdxCcelAttestation tdQuote. */
+                    public tdQuote: (Uint8Array|string);
+
+                    /**
+                     * Creates a new TdxCcelAttestation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TdxCcelAttestation instance
+                     */
+                    public static create(properties?: google.cloud.confidentialcomputing.v1.ITdxCcelAttestation): google.cloud.confidentialcomputing.v1.TdxCcelAttestation;
+
+                    /**
+                     * Encodes the specified TdxCcelAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TdxCcelAttestation.verify|verify} messages.
+                     * @param message TdxCcelAttestation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.confidentialcomputing.v1.ITdxCcelAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TdxCcelAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.TdxCcelAttestation.verify|verify} messages.
+                     * @param message TdxCcelAttestation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.ITdxCcelAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TdxCcelAttestation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TdxCcelAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.TdxCcelAttestation;
+
+                    /**
+                     * Decodes a TdxCcelAttestation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TdxCcelAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.TdxCcelAttestation;
+
+                    /**
+                     * Verifies a TdxCcelAttestation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TdxCcelAttestation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TdxCcelAttestation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.TdxCcelAttestation;
+
+                    /**
+                     * Creates a plain object from a TdxCcelAttestation message. Also converts values to other types if specified.
+                     * @param message TdxCcelAttestation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.confidentialcomputing.v1.TdxCcelAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TdxCcelAttestation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TdxCcelAttestation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SevSnpAttestation. */
+                interface ISevSnpAttestation {
+
+                    /** SevSnpAttestation report */
+                    report?: (Uint8Array|string|null);
+
+                    /** SevSnpAttestation auxBlob */
+                    auxBlob?: (Uint8Array|string|null);
+                }
+
+                /** Represents a SevSnpAttestation. */
+                class SevSnpAttestation implements ISevSnpAttestation {
+
+                    /**
+                     * Constructs a new SevSnpAttestation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.confidentialcomputing.v1.ISevSnpAttestation);
+
+                    /** SevSnpAttestation report. */
+                    public report: (Uint8Array|string);
+
+                    /** SevSnpAttestation auxBlob. */
+                    public auxBlob: (Uint8Array|string);
+
+                    /**
+                     * Creates a new SevSnpAttestation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SevSnpAttestation instance
+                     */
+                    public static create(properties?: google.cloud.confidentialcomputing.v1.ISevSnpAttestation): google.cloud.confidentialcomputing.v1.SevSnpAttestation;
+
+                    /**
+                     * Encodes the specified SevSnpAttestation message. Does not implicitly {@link google.cloud.confidentialcomputing.v1.SevSnpAttestation.verify|verify} messages.
+                     * @param message SevSnpAttestation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.confidentialcomputing.v1.ISevSnpAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SevSnpAttestation message, length delimited. Does not implicitly {@link google.cloud.confidentialcomputing.v1.SevSnpAttestation.verify|verify} messages.
+                     * @param message SevSnpAttestation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.confidentialcomputing.v1.ISevSnpAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SevSnpAttestation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SevSnpAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.confidentialcomputing.v1.SevSnpAttestation;
+
+                    /**
+                     * Decodes a SevSnpAttestation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SevSnpAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.confidentialcomputing.v1.SevSnpAttestation;
+
+                    /**
+                     * Verifies a SevSnpAttestation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SevSnpAttestation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SevSnpAttestation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.confidentialcomputing.v1.SevSnpAttestation;
+
+                    /**
+                     * Creates a plain object from a SevSnpAttestation message. Also converts values to other types if specified.
+                     * @param message SevSnpAttestation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.confidentialcomputing.v1.SevSnpAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SevSnpAttestation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SevSnpAttestation
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
