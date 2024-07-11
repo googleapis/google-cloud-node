@@ -66,7 +66,7 @@ npm install @google-cloud/privilegedaccessmanager
 /**
  *  Required. The parent which owns the entitlement resources.
  */
-// const parent = 'projects/${projectId}'
+// const parent = 'projects/${projectId}/locations/global'
 /**
  *  Optional. Requested page size. Server may return fewer items than
  *  requested. If unspecified, the server picks an appropriate default.
