@@ -247,6 +247,10 @@ export class DlpServiceClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/deidentifyTemplates/{deidentify_template}'
         ),
+      organizationLocationFileStoreDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}'
+        ),
       organizationLocationInspectTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/inspectTemplates/{inspect_template}'
@@ -295,6 +299,10 @@ export class DlpServiceClient {
       projectLocationDlpJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/dlpJobs/{dlp_job}'
       ),
+      projectLocationFileStoreDataProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}'
+        ),
       projectLocationInspectTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/inspectTemplates/{inspect_template}'
@@ -367,6 +375,11 @@ export class DlpServiceClient {
         'pageToken',
         'nextPageToken',
         'columnDataProfiles'
+      ),
+      listFileStoreDataProfiles: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'fileStoreDataProfiles'
       ),
       listConnections: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -471,6 +484,9 @@ export class DlpServiceClient {
       'listTableDataProfiles',
       'listColumnDataProfiles',
       'getProjectDataProfile',
+      'listFileStoreDataProfiles',
+      'getFileStoreDataProfile',
+      'deleteFileStoreDataProfile',
       'getTableDataProfile',
       'getColumnDataProfile',
       'deleteTableDataProfile',
@@ -618,9 +634,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -738,9 +754,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -854,9 +870,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -987,9 +1003,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -1219,13 +1235,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -1630,13 +1646,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -2055,9 +2071,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -2616,8 +2632,13 @@ export class DlpServiceClient {
    * @param {string} request.parent
    *   Required. Parent resource name.
    *
-   *   The format of this value is as follows:
-   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization):
+   *
+   *   + Projects scope:
+   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   + Organizations scope:
+   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -3012,9 +3033,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -3389,13 +3410,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -3871,6 +3892,202 @@ export class DlpServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getProjectDataProfile(request, options, callback);
+  }
+  /**
+   * Gets a file store data profile.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name, for example
+   *   `organizations/12345/locations/us/fileStoreDataProfiles/53234423`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.get_file_store_data_profile.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_GetFileStoreDataProfile_async
+   */
+  getFileStoreDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+      protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getFileStoreDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+      | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFileStoreDataProfile(
+    request: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+    callback: Callback<
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+      | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getFileStoreDataProfile(
+    request?: protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+          | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+      | protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile,
+      protos.google.privacy.dlp.v2.IGetFileStoreDataProfileRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getFileStoreDataProfile(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Delete a FileStoreDataProfile. Will not prevent the profile from being
+   * regenerated if the resource is still included in a discovery configuration.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the file store data profile.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.delete_file_store_data_profile.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_DeleteFileStoreDataProfile_async
+   */
+  deleteFileStoreDataProfile(
+    request?: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteFileStoreDataProfile(
+    request: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFileStoreDataProfile(
+    request: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteFileStoreDataProfile(
+    request?: protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.privacy.dlp.v2.IDeleteFileStoreDataProfileRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteFileStoreDataProfile(
+      request,
+      options,
+      callback
+    );
   }
   /**
    * Gets a table data profile.
@@ -4687,13 +4904,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -4708,7 +4925,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -4821,13 +5038,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -4842,7 +5059,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -4903,13 +5120,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -4924,7 +5141,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -4987,13 +5204,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5008,7 +5225,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5125,13 +5342,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5146,7 +5363,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5207,13 +5424,13 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
-   *   + Organizations scope, location specified:<br/>
+   *   + Organizations scope, location specified:
    *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Organizations scope, no location specified (defaults to global):<br/>
+   *   + Organizations scope, no location specified (defaults to global):
    *     `organizations/`<var>ORG_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5228,7 +5445,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5291,9 +5508,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5308,7 +5525,7 @@ export class DlpServiceClient {
    * @param {number} request.pageSize
    *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
-   *   Comma separated list of triggeredJob fields to order by,
+   *   Comma-separated list of triggeredJob fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5444,9 +5661,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5461,7 +5678,7 @@ export class DlpServiceClient {
    * @param {number} request.pageSize
    *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
-   *   Comma separated list of triggeredJob fields to order by,
+   *   Comma-separated list of triggeredJob fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5551,9 +5768,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5568,7 +5785,7 @@ export class DlpServiceClient {
    * @param {number} request.pageSize
    *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
-   *   Comma separated list of triggeredJob fields to order by,
+   *   Comma-separated list of triggeredJob fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5668,7 +5885,7 @@ export class DlpServiceClient {
    * @param {number} request.pageSize
    *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
-   *   Comma separated list of config fields to order by,
+   *   Comma-separated list of config fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5789,7 +6006,7 @@ export class DlpServiceClient {
    * @param {number} request.pageSize
    *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
-   *   Comma separated list of config fields to order by,
+   *   Comma-separated list of config fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5858,7 +6075,7 @@ export class DlpServiceClient {
    * @param {number} request.pageSize
    *   Size of the page. This value can be limited by a server.
    * @param {string} request.orderBy
-   *   Comma separated list of config fields to order by,
+   *   Comma-separated list of config fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -5920,9 +6137,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -5966,7 +6183,7 @@ export class DlpServiceClient {
    * @param {google.privacy.dlp.v2.DlpJobType} request.type
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -6071,9 +6288,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -6117,7 +6334,7 @@ export class DlpServiceClient {
    * @param {google.privacy.dlp.v2.DlpJobType} request.type
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -6178,9 +6395,9 @@ export class DlpServiceClient {
    *   processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -6224,7 +6441,7 @@ export class DlpServiceClient {
    * @param {google.privacy.dlp.v2.DlpJobType} request.type
    *   The type of job. Defaults to `DlpJobType.INSPECT`
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -6287,9 +6504,9 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -6304,7 +6521,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -6418,9 +6635,9 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -6435,7 +6652,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -6497,9 +6714,9 @@ export class DlpServiceClient {
    *   (project or organization) and whether you have [specified a processing
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
-   *   + Projects scope, location specified:<br/>
+   *   + Projects scope, location specified:
    *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *   + Projects scope, no location specified (defaults to global):<br/>
+   *   + Projects scope, no location specified (defaults to global):
    *     `projects/`<var>PROJECT_ID</var>
    *
    *   The following example `parent` string specifies a parent project with the
@@ -6514,7 +6731,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by,
+   *   Comma-separated list of fields to order by,
    *   followed by `asc` or `desc` postfix. This list is case insensitive. The
    *   default sorting order is ascending. Redundant space characters are
    *   insignificant.
@@ -6576,7 +6793,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
@@ -6717,7 +6934,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
@@ -6802,7 +7019,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
@@ -6888,7 +7105,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
@@ -7038,7 +7255,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
@@ -7136,7 +7353,7 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
@@ -7233,12 +7450,13 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
    *
    *   Examples:
+   *
    *   * `project_id asc`
    *   * `table_id`
    *   * `sensitivity_level desc`
@@ -7388,12 +7606,13 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
    *
    *   Examples:
+   *
    *   * `project_id asc`
    *   * `table_id`
    *   * `sensitivity_level desc`
@@ -7487,12 +7706,13 @@ export class DlpServiceClient {
    *   Size of the page. This value can be limited by the server. If zero, server
    *   returns a page of max size 100.
    * @param {string} request.orderBy
-   *   Comma separated list of fields to order by, followed by `asc` or `desc`
+   *   Comma-separated list of fields to order by, followed by `asc` or `desc`
    *   postfix. This list is case insensitive. The default sorting order is
    *   ascending. Redundant space characters are insignificant. Only one order
    *   field at a time is allowed.
    *
    *   Examples:
+   *
    *   * `project_id asc`
    *   * `table_id`
    *   * `sensitivity_level desc`
@@ -7569,6 +7789,355 @@ export class DlpServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IColumnDataProfile>;
+  }
+  /**
+   * Lists file store data profiles for an organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token to continue retrieval.
+   * @param {number} [request.pageSize]
+   *   Optional. Size of the page. This value can be limited by the server. If
+   *   zero, server returns a page of max size 100.
+   * @param {string} [request.orderBy]
+   *   Optional. Comma-separated list of fields to order by, followed by `asc` or
+   *   `desc` postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *
+   *   * `project_id asc`
+   *   * `name`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The Google Cloud project ID.
+   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   *   - `last_modified`: The last time the resource was modified.
+   *   - `resource_visibility`: Visibility restriction for this resource.
+   *   - `name`: The name of the profile.
+   *   - `create_time`: The time the file store was first created.
+   * @param {string} [request.filter]
+   *   Optional. Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `project_id` - The Google Cloud project ID.
+   *       - `file_store_path` - The path like "gs://bucket".
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `resource_visibility`: PUBLIC|RESTRICTED
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+   *   * `file_store_path = "gs://mybucket"`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listFileStoreDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFileStoreDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse,
+    ]
+  >;
+  listFileStoreDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile
+    >
+  ): void;
+  listFileStoreDataProfiles(
+    request: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+    callback: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile
+    >
+  ): void;
+  listFileStoreDataProfiles(
+    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+          | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+          | null
+          | undefined,
+          protos.google.privacy.dlp.v2.IFileStoreDataProfile
+        >,
+    callback?: PaginationCallback<
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+      | protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse
+      | null
+      | undefined,
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile
+    >
+  ): Promise<
+    [
+      protos.google.privacy.dlp.v2.IFileStoreDataProfile[],
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest | null,
+      protos.google.privacy.dlp.v2.IListFileStoreDataProfilesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listFileStoreDataProfiles(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token to continue retrieval.
+   * @param {number} [request.pageSize]
+   *   Optional. Size of the page. This value can be limited by the server. If
+   *   zero, server returns a page of max size 100.
+   * @param {string} [request.orderBy]
+   *   Optional. Comma-separated list of fields to order by, followed by `asc` or
+   *   `desc` postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *
+   *   * `project_id asc`
+   *   * `name`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The Google Cloud project ID.
+   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   *   - `last_modified`: The last time the resource was modified.
+   *   - `resource_visibility`: Visibility restriction for this resource.
+   *   - `name`: The name of the profile.
+   *   - `create_time`: The time the file store was first created.
+   * @param {string} [request.filter]
+   *   Optional. Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `project_id` - The Google Cloud project ID.
+   *       - `file_store_path` - The path like "gs://bucket".
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `resource_visibility`: PUBLIC|RESTRICTED
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+   *   * `file_store_path = "gs://mybucket"`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listFileStoreDataProfilesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listFileStoreDataProfilesStream(
+    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFileStoreDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFileStoreDataProfiles.createStream(
+      this.innerApiCalls.listFileStoreDataProfiles as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listFileStoreDataProfiles`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the organization or project, for
+   *   example `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token to continue retrieval.
+   * @param {number} [request.pageSize]
+   *   Optional. Size of the page. This value can be limited by the server. If
+   *   zero, server returns a page of max size 100.
+   * @param {string} [request.orderBy]
+   *   Optional. Comma-separated list of fields to order by, followed by `asc` or
+   *   `desc` postfix. This list is case insensitive. The default sorting order is
+   *   ascending. Redundant space characters are insignificant. Only one order
+   *   field at a time is allowed.
+   *
+   *   Examples:
+   *
+   *   * `project_id asc`
+   *   * `name`
+   *   * `sensitivity_level desc`
+   *
+   *   Supported fields are:
+   *
+   *   - `project_id`: The Google Cloud project ID.
+   *   - `sensitivity_level`: How sensitive the data in a table is, at most.
+   *   - `data_risk_level`: How much risk is associated with this data.
+   *   - `profile_last_generated`: When the profile was last updated in epoch
+   *   seconds.
+   *   - `last_modified`: The last time the resource was modified.
+   *   - `resource_visibility`: Visibility restriction for this resource.
+   *   - `name`: The name of the profile.
+   *   - `create_time`: The time the file store was first created.
+   * @param {string} [request.filter]
+   *   Optional. Allows filtering.
+   *
+   *   Supported syntax:
+   *
+   *   * Filter expressions are made up of one or more restrictions.
+   *   * Restrictions can be combined by `AND` or `OR` logical operators. A
+   *   sequence of restrictions implicitly uses `AND`.
+   *   * A restriction has the form of `{field} {operator} {value}`.
+   *   * Supported fields/values:
+   *       - `project_id` - The Google Cloud project ID.
+   *       - `file_store_path` - The path like "gs://bucket".
+   *       - `sensitivity_level` - HIGH|MODERATE|LOW
+   *       - `data_risk_level` - HIGH|MODERATE|LOW
+   *       - `resource_visibility`: PUBLIC|RESTRICTED
+   *       - `status_code` - an RPC status code as defined in
+   *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *   * The operator must be `=` or `!=`.
+   *
+   *   Examples:
+   *
+   *   * `project_id = 12345 AND status_code = 1`
+   *   * `project_id = 12345 AND sensitivity_level = HIGH`
+   *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+   *   * `file_store_path = "gs://mybucket"`
+   *
+   *   The length of this field should be no more than 500 characters.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.privacy.dlp.v2.FileStoreDataProfile|FileStoreDataProfile}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/dlp_service.list_file_store_data_profiles.js</caption>
+   * region_tag:dlp_v2_generated_DlpService_ListFileStoreDataProfiles_async
+   */
+  listFileStoreDataProfilesAsync(
+    request?: protos.google.privacy.dlp.v2.IListFileStoreDataProfilesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.privacy.dlp.v2.IFileStoreDataProfile> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listFileStoreDataProfiles'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listFileStoreDataProfiles.asyncIterate(
+      this.innerApiCalls['listFileStoreDataProfiles'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.privacy.dlp.v2.IFileStoreDataProfile>;
   }
   /**
    * Lists Connections in a parent.
@@ -8535,6 +9104,73 @@ export class DlpServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationFileStoreDataProfile resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} file_store_data_profile
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFileStoreDataProfilePath(
+    organization: string,
+    location: string,
+    fileStoreDataProfile: string
+  ) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        file_store_data_profile: fileStoreDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFileStoreDataProfile resource.
+   *
+   * @param {string} organizationLocationFileStoreDataProfileName
+   *   A fully-qualified path representing organization_location_file_store_data_profile resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFileStoreDataProfileName(
+    organizationLocationFileStoreDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(
+      organizationLocationFileStoreDataProfileName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFileStoreDataProfile resource.
+   *
+   * @param {string} organizationLocationFileStoreDataProfileName
+   *   A fully-qualified path representing organization_location_file_store_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFileStoreDataProfileName(
+    organizationLocationFileStoreDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(
+      organizationLocationFileStoreDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the file_store_data_profile from OrganizationLocationFileStoreDataProfile resource.
+   *
+   * @param {string} organizationLocationFileStoreDataProfileName
+   *   A fully-qualified path representing organization_location_file_store_data_profile resource.
+   * @returns {string} A string representing the file_store_data_profile.
+   */
+  matchFileStoreDataProfileFromOrganizationLocationFileStoreDataProfileName(
+    organizationLocationFileStoreDataProfileName: string
+  ) {
+    return this.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match(
+      organizationLocationFileStoreDataProfileName
+    ).file_store_data_profile;
+  }
+
+  /**
    * Return a fully-qualified organizationLocationInspectTemplate resource name string.
    *
    * @param {string} organization
@@ -9249,6 +9885,73 @@ export class DlpServiceClient {
     return this.pathTemplates.projectLocationDlpJobPathTemplate.match(
       projectLocationDlpJobName
     ).dlp_job;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFileStoreDataProfile resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} file_store_data_profile
+   * @returns {string} Resource name string.
+   */
+  projectLocationFileStoreDataProfilePath(
+    project: string,
+    location: string,
+    fileStoreDataProfile: string
+  ) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        file_store_data_profile: fileStoreDataProfile,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationFileStoreDataProfile resource.
+   *
+   * @param {string} projectLocationFileStoreDataProfileName
+   *   A fully-qualified path representing project_location_file_store_data_profile resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFileStoreDataProfileName(
+    projectLocationFileStoreDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(
+      projectLocationFileStoreDataProfileName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFileStoreDataProfile resource.
+   *
+   * @param {string} projectLocationFileStoreDataProfileName
+   *   A fully-qualified path representing project_location_file_store_data_profile resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFileStoreDataProfileName(
+    projectLocationFileStoreDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(
+      projectLocationFileStoreDataProfileName
+    ).location;
+  }
+
+  /**
+   * Parse the file_store_data_profile from ProjectLocationFileStoreDataProfile resource.
+   *
+   * @param {string} projectLocationFileStoreDataProfileName
+   *   A fully-qualified path representing project_location_file_store_data_profile resource.
+   * @returns {string} A string representing the file_store_data_profile.
+   */
+  matchFileStoreDataProfileFromProjectLocationFileStoreDataProfileName(
+    projectLocationFileStoreDataProfileName: string
+  ) {
+    return this.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match(
+      projectLocationFileStoreDataProfileName
+    ).file_store_data_profile;
   }
 
   /**

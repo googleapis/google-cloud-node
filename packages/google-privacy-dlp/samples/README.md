@@ -26,6 +26,7 @@
   * [Dlp_service.delete_deidentify_template](#dlp_service.delete_deidentify_template)
   * [Dlp_service.delete_discovery_config](#dlp_service.delete_discovery_config)
   * [Dlp_service.delete_dlp_job](#dlp_service.delete_dlp_job)
+  * [Dlp_service.delete_file_store_data_profile](#dlp_service.delete_file_store_data_profile)
   * [Dlp_service.delete_inspect_template](#dlp_service.delete_inspect_template)
   * [Dlp_service.delete_job_trigger](#dlp_service.delete_job_trigger)
   * [Dlp_service.delete_stored_info_type](#dlp_service.delete_stored_info_type)
@@ -36,6 +37,7 @@
   * [Dlp_service.get_deidentify_template](#dlp_service.get_deidentify_template)
   * [Dlp_service.get_discovery_config](#dlp_service.get_discovery_config)
   * [Dlp_service.get_dlp_job](#dlp_service.get_dlp_job)
+  * [Dlp_service.get_file_store_data_profile](#dlp_service.get_file_store_data_profile)
   * [Dlp_service.get_inspect_template](#dlp_service.get_inspect_template)
   * [Dlp_service.get_job_trigger](#dlp_service.get_job_trigger)
   * [Dlp_service.get_project_data_profile](#dlp_service.get_project_data_profile)
@@ -49,6 +51,7 @@
   * [Dlp_service.list_deidentify_templates](#dlp_service.list_deidentify_templates)
   * [Dlp_service.list_discovery_configs](#dlp_service.list_discovery_configs)
   * [Dlp_service.list_dlp_jobs](#dlp_service.list_dlp_jobs)
+  * [Dlp_service.list_file_store_data_profiles](#dlp_service.list_file_store_data_profiles)
   * [Dlp_service.list_info_types](#dlp_service.list_info_types)
   * [Dlp_service.list_inspect_templates](#dlp_service.list_inspect_templates)
   * [Dlp_service.list_job_triggers](#dlp_service.list_job_triggers)
@@ -319,6 +322,23 @@ __Usage:__
 
 
 
+### Dlp_service.delete_file_store_data_profile
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_file_store_data_profile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_file_store_data_profile.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_file_store_data_profile.js`
+
+
+-----
+
+
+
+
 ### Dlp_service.delete_inspect_template
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js).
@@ -482,6 +502,23 @@ __Usage:__
 
 
 `node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js`
+
+
+-----
+
+
+
+
+### Dlp_service.get_file_store_data_profile
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_file_store_data_profile.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_file_store_data_profile.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_file_store_data_profile.js`
 
 
 -----
@@ -703,6 +740,23 @@ __Usage:__
 
 
 `node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js`
+
+
+-----
+
+
+
+
+### Dlp_service.list_file_store_data_profiles
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_file_store_data_profiles.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_file_store_data_profiles.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_file_store_data_profiles.js`
 
 
 -----
