@@ -220,11 +220,6 @@ export class CloudTasksClient {
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
-    // Add ESM headers
-    const isEsm = true;
-    if ((opts.libVersion || version) && isEsm) {
-      clientHeader.push(`${opts.libVersion ?? version}-esm`);
-    }
 
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(
