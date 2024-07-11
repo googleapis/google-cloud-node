@@ -474,6 +474,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Instance createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Instance updateTime
                          * @property {Object.<string,string>|null} [labels] Instance labels
+                         * @property {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig|null} [privateConfig] Instance privateConfig
                          * @property {google.cloud.securesourcemanager.v1.Instance.State|null} [state] Instance state
                          * @property {google.cloud.securesourcemanager.v1.Instance.StateNote|null} [stateNote] Instance stateNote
                          * @property {string|null} [kmsKey] Instance kmsKey
@@ -527,6 +528,14 @@
                          * @instance
                          */
                         Instance.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Instance privateConfig.
+                         * @member {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig|null|undefined} privateConfig
+                         * @memberof google.cloud.securesourcemanager.v1.Instance
+                         * @instance
+                         */
+                        Instance.prototype.privateConfig = null;
     
                         /**
                          * Instance state.
@@ -601,6 +610,8 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.stateNote);
                             if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.kmsKey);
+                            if (message.privateConfig != null && Object.hasOwnProperty.call(message, "privateConfig"))
+                                $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.encode(message.privateConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -668,6 +679,10 @@
                                             }
                                         }
                                         message.labels[key] = value;
+                                        break;
+                                    }
+                                case 13: {
+                                        message.privateConfig = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 5: {
@@ -742,6 +757,11 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.privateConfig != null && message.hasOwnProperty("privateConfig")) {
+                                var error = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.verify(message.privateConfig);
+                                if (error)
+                                    return "privateConfig." + error;
+                            }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 switch (message.state) {
                                 default:
@@ -751,6 +771,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 6:
                                     break;
                                 }
                             if (message.stateNote != null && message.hasOwnProperty("stateNote"))
@@ -804,6 +825,11 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.privateConfig != null) {
+                                if (typeof object.privateConfig !== "object")
+                                    throw TypeError(".google.cloud.securesourcemanager.v1.Instance.privateConfig: object expected");
+                                message.privateConfig = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.fromObject(object.privateConfig);
+                            }
                             switch (object.state) {
                             default:
                                 if (typeof object.state === "number") {
@@ -830,6 +856,10 @@
                             case "PAUSED":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "UNKNOWN":
+                            case 6:
+                                message.state = 6;
                                 break;
                             }
                             switch (object.stateNote) {
@@ -885,6 +915,7 @@
                                 object.hostConfig = null;
                                 object.stateNote = options.enums === String ? "STATE_NOTE_UNSPECIFIED" : 0;
                                 object.kmsKey = "";
+                                object.privateConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -906,6 +937,8 @@
                                 object.stateNote = options.enums === String ? $root.google.cloud.securesourcemanager.v1.Instance.StateNote[message.stateNote] === undefined ? message.stateNote : $root.google.cloud.securesourcemanager.v1.Instance.StateNote[message.stateNote] : message.stateNote;
                             if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
                                 object.kmsKey = message.kmsKey;
+                            if (message.privateConfig != null && message.hasOwnProperty("privateConfig"))
+                                object.privateConfig = $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig.toObject(message.privateConfig, options);
                             return object;
                         };
     
@@ -944,6 +977,7 @@
                          * @property {number} ACTIVE=2 ACTIVE value
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} PAUSED=4 PAUSED value
+                         * @property {number} UNKNOWN=6 UNKNOWN value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -952,6 +986,7 @@
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "PAUSED"] = 4;
+                            values[valuesById[6] = "UNKNOWN"] = 6;
                             return values;
                         })();
     
@@ -1242,6 +1277,279 @@
                             };
     
                             return HostConfig;
+                        })();
+    
+                        Instance.PrivateConfig = (function() {
+    
+                            /**
+                             * Properties of a PrivateConfig.
+                             * @memberof google.cloud.securesourcemanager.v1.Instance
+                             * @interface IPrivateConfig
+                             * @property {boolean|null} [isPrivate] PrivateConfig isPrivate
+                             * @property {string|null} [caPool] PrivateConfig caPool
+                             * @property {string|null} [httpServiceAttachment] PrivateConfig httpServiceAttachment
+                             * @property {string|null} [sshServiceAttachment] PrivateConfig sshServiceAttachment
+                             */
+    
+                            /**
+                             * Constructs a new PrivateConfig.
+                             * @memberof google.cloud.securesourcemanager.v1.Instance
+                             * @classdesc Represents a PrivateConfig.
+                             * @implements IPrivateConfig
+                             * @constructor
+                             * @param {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig=} [properties] Properties to set
+                             */
+                            function PrivateConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * PrivateConfig isPrivate.
+                             * @member {boolean} isPrivate
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             */
+                            PrivateConfig.prototype.isPrivate = false;
+    
+                            /**
+                             * PrivateConfig caPool.
+                             * @member {string} caPool
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             */
+                            PrivateConfig.prototype.caPool = "";
+    
+                            /**
+                             * PrivateConfig httpServiceAttachment.
+                             * @member {string} httpServiceAttachment
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             */
+                            PrivateConfig.prototype.httpServiceAttachment = "";
+    
+                            /**
+                             * PrivateConfig sshServiceAttachment.
+                             * @member {string} sshServiceAttachment
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             */
+                            PrivateConfig.prototype.sshServiceAttachment = "";
+    
+                            /**
+                             * Creates a new PrivateConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig=} [properties] Properties to set
+                             * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig} PrivateConfig instance
+                             */
+                            PrivateConfig.create = function create(properties) {
+                                return new PrivateConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified PrivateConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig} message PrivateConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrivateConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.isPrivate != null && Object.hasOwnProperty.call(message, "isPrivate"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.isPrivate);
+                                if (message.caPool != null && Object.hasOwnProperty.call(message, "caPool"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.caPool);
+                                if (message.httpServiceAttachment != null && Object.hasOwnProperty.call(message, "httpServiceAttachment"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.httpServiceAttachment);
+                                if (message.sshServiceAttachment != null && Object.hasOwnProperty.call(message, "sshServiceAttachment"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.sshServiceAttachment);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified PrivateConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Instance.IPrivateConfig} message PrivateConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            PrivateConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a PrivateConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig} PrivateConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrivateConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.isPrivate = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.caPool = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.httpServiceAttachment = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.sshServiceAttachment = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a PrivateConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig} PrivateConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            PrivateConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a PrivateConfig message.
+                             * @function verify
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            PrivateConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.isPrivate != null && message.hasOwnProperty("isPrivate"))
+                                    if (typeof message.isPrivate !== "boolean")
+                                        return "isPrivate: boolean expected";
+                                if (message.caPool != null && message.hasOwnProperty("caPool"))
+                                    if (!$util.isString(message.caPool))
+                                        return "caPool: string expected";
+                                if (message.httpServiceAttachment != null && message.hasOwnProperty("httpServiceAttachment"))
+                                    if (!$util.isString(message.httpServiceAttachment))
+                                        return "httpServiceAttachment: string expected";
+                                if (message.sshServiceAttachment != null && message.hasOwnProperty("sshServiceAttachment"))
+                                    if (!$util.isString(message.sshServiceAttachment))
+                                        return "sshServiceAttachment: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a PrivateConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.securesourcemanager.v1.Instance.PrivateConfig} PrivateConfig
+                             */
+                            PrivateConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig)
+                                    return object;
+                                var message = new $root.google.cloud.securesourcemanager.v1.Instance.PrivateConfig();
+                                if (object.isPrivate != null)
+                                    message.isPrivate = Boolean(object.isPrivate);
+                                if (object.caPool != null)
+                                    message.caPool = String(object.caPool);
+                                if (object.httpServiceAttachment != null)
+                                    message.httpServiceAttachment = String(object.httpServiceAttachment);
+                                if (object.sshServiceAttachment != null)
+                                    message.sshServiceAttachment = String(object.sshServiceAttachment);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a PrivateConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {google.cloud.securesourcemanager.v1.Instance.PrivateConfig} message PrivateConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            PrivateConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.isPrivate = false;
+                                    object.caPool = "";
+                                    object.httpServiceAttachment = "";
+                                    object.sshServiceAttachment = "";
+                                }
+                                if (message.isPrivate != null && message.hasOwnProperty("isPrivate"))
+                                    object.isPrivate = message.isPrivate;
+                                if (message.caPool != null && message.hasOwnProperty("caPool"))
+                                    object.caPool = message.caPool;
+                                if (message.httpServiceAttachment != null && message.hasOwnProperty("httpServiceAttachment"))
+                                    object.httpServiceAttachment = message.httpServiceAttachment;
+                                if (message.sshServiceAttachment != null && message.hasOwnProperty("sshServiceAttachment"))
+                                    object.sshServiceAttachment = message.sshServiceAttachment;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this PrivateConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            PrivateConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for PrivateConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.securesourcemanager.v1.Instance.PrivateConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            PrivateConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.securesourcemanager.v1.Instance.PrivateConfig";
+                            };
+    
+                            return PrivateConfig;
                         })();
     
                         return Instance;
