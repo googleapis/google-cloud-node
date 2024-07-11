@@ -107,6 +107,13 @@
                             "useTimecodeAsTimeline": {
                               "type": "bool",
                               "id": 6
+                            },
+                            "key": {
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -637,6 +644,21 @@
                             "inputConfig": {
                               "type": "InputConfig",
                               "id": 25
+                            },
+                            "retentionConfig": {
+                              "type": "RetentionConfig",
+                              "id": 26,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "staticOverlays": {
+                              "rule": "repeated",
+                              "type": "StaticOverlay",
+                              "id": 27,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -658,6 +680,75 @@
                                 "STOPPED": 6,
                                 "STARTING": 7,
                                 "STOPPING": 8
+                              }
+                            }
+                          }
+                        },
+                        "NormalizedCoordinate": {
+                          "fields": {
+                            "x": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "y": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "NormalizedResolution": {
+                          "fields": {
+                            "w": {
+                              "type": "double",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "h": {
+                              "type": "double",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "StaticOverlay": {
+                          "fields": {
+                            "asset": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "livestream.googleapis.com/Asset"
+                              }
+                            },
+                            "resolution": {
+                              "type": "NormalizedResolution",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "position": {
+                              "type": "NormalizedCoordinate",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "opacity": {
+                              "type": "double",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -696,6 +787,14 @@
                                 "WARNING": 400,
                                 "ERROR": 500
                               }
+                            }
+                          }
+                        },
+                        "RetentionConfig": {
+                          "fields": {
+                            "retentionWindowDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
                             }
                           }
                         },
@@ -951,6 +1050,131 @@
                                 "FAILED": 4,
                                 "PENDING": 5,
                                 "STOPPED": 6
+                              }
+                            }
+                          }
+                        },
+                        "Clip": {
+                          "options": {
+                            "(google.api.resource).type": "livestream.googleapis.com/Clip",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/channels/{channel}/clips/{clip}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "labels": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 5
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "outputUri": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "slices": {
+                              "rule": "repeated",
+                              "type": "Slice",
+                              "id": 10
+                            },
+                            "clipManifests": {
+                              "rule": "repeated",
+                              "type": "ClipManifest",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "PENDING": 1,
+                                "CREATING": 2,
+                                "SUCCEEDED": 3,
+                                "FAILED": 4
+                              }
+                            },
+                            "TimeSlice": {
+                              "fields": {
+                                "markinTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 1
+                                },
+                                "markoutTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Slice": {
+                              "oneofs": {
+                                "kind": {
+                                  "oneof": [
+                                    "timeSlice"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "timeSlice": {
+                                  "type": "TimeSlice",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "ClipManifest": {
+                              "fields": {
+                                "manifestKey": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "outputUri": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
                               }
                             }
                           }
@@ -1575,6 +1799,96 @@
                                 },
                                 {
                                   "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListClips": {
+                              "requestType": "ListClipsRequest",
+                              "responseType": "ListClipsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*/channels/*}/clips",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/channels/*}/clips"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetClip": {
+                              "requestType": "GetClipRequest",
+                              "responseType": "Clip",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/channels/*/clips/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/channels/*/clips/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "CreateClip": {
+                              "requestType": "CreateClipRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*/channels/*}/clips",
+                                "(google.api.http).body": "clip",
+                                "(google.api.method_signature)": "parent,clip,clip_id",
+                                "(google.longrunning.operation_info).response_type": "Clip",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*/channels/*}/clips",
+                                    "body": "clip"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,clip,clip_id"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "Clip",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "DeleteClip": {
+                              "requestType": "DeleteClipRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/channels/*/clips/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/channels/*/clips/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
                                 }
                               ]
                             },
@@ -2209,6 +2523,117 @@
                         "ChannelOperationResponse": {
                           "fields": {}
                         },
+                        "ListClipsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "livestream.googleapis.com/Clip"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "ListClipsResponse": {
+                          "fields": {
+                            "clips": {
+                              "rule": "repeated",
+                              "type": "Clip",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "GetClipRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "livestream.googleapis.com/Clip"
+                              }
+                            }
+                          }
+                        },
+                        "CreateClipRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "livestream.googleapis.com/Clip"
+                              }
+                            },
+                            "clipId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "clip": {
+                              "type": "Clip",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteClipRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "livestream.googleapis.com/Clip"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "OperationMetadata": {
                           "fields": {
                             "createTime": {
@@ -2296,9 +2721,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -2780,6 +3205,30 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
               }
             }
           }

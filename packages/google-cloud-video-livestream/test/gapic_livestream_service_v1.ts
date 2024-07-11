@@ -987,6 +987,133 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('getClip', () => {
+    it('invokes getClip without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.Clip()
+      );
+      client.innerApiCalls.getClip = stubSimpleCall(expectedResponse);
+      const [response] = await client.getClip(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getClip as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getClip without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.Clip()
+      );
+      client.innerApiCalls.getClip =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getClip(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.video.livestream.v1.IClip | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (client.innerApiCalls.getClip as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getClip with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getClip = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getClip(request), expectedError);
+      const actualRequest = (client.innerApiCalls.getClip as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getClip with closed client', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.GetClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.GetClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getClip(request), expectedError);
+    });
+  });
+
   describe('getAsset', () => {
     it('invokes getAsset without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -2781,6 +2908,386 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('createClip', () => {
+    it('invokes createClip without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateClipRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createClip = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createClip(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createClip without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateClipRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createClip =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createClip(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.video.livestream.v1.IClip,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.video.livestream.v1.IClip,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createClip with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateClipRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createClip = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createClip(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createClip with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.CreateClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.CreateClipRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createClip = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createClip(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateClipProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateClipProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateClipProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCreateClipProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteClip', () => {
+    it('invokes deleteClip without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteClip = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteClip(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteClip without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteClip =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteClip(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.video.livestream.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.video.livestream.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteClip with call error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteClip = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteClip(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteClip with LRO error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.DeleteClipRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.DeleteClipRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteClip = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteClip(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClip as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteClipProgress without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteClipProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteClipProgress with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeleteClipProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createAsset', () => {
     it('invokes createAsset without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -4341,6 +4848,330 @@ describe('v1.LivestreamServiceClient', () => {
     });
   });
 
+  describe('listClips', () => {
+    it('invokes listClips without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+      ];
+      client.innerApiCalls.listClips = stubSimpleCall(expectedResponse);
+      const [response] = await client.listClips(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listClips as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClips as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listClips without error using callback', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+      ];
+      client.innerApiCalls.listClips =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listClips(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.video.livestream.v1.IClip[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listClips as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClips as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listClips with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listClips = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.listClips(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listClips as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClips as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listClipsStream without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+      ];
+      client.descriptors.page.listClips.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listClipsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.video.livestream.v1.Clip[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.video.livestream.v1.Clip) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listClips.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listClips, request)
+      );
+      assert(
+        (client.descriptors.page.listClips.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listClipsStream with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listClips.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listClipsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.video.livestream.v1.Clip[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.video.livestream.v1.Clip) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listClips.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listClips, request)
+      );
+      assert(
+        (client.descriptors.page.listClips.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listClips without error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.video.livestream.v1.Clip()
+        ),
+      ];
+      client.descriptors.page.listClips.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.video.livestream.v1.IClip[] = [];
+      const iterable = client.listClipsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listClips.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listClips.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listClips with error', async () => {
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.video.livestream.v1.ListClipsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.livestream.v1.ListClipsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listClips.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listClipsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.video.livestream.v1.IClip[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listClips.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listClips.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new livestreamserviceModule.v1.LivestreamServiceClient({
@@ -5296,6 +6127,82 @@ describe('v1.LivestreamServiceClient', () => {
         assert.strictEqual(result, 'channelValue');
         assert(
           (client.pathTemplates.channelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('clip', () => {
+      const fakePath = '/rendered/path/clip';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        channel: 'channelValue',
+        clip: 'clipValue',
+      };
+      const client = new livestreamserviceModule.v1.LivestreamServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.clipPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.clipPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('clipPath', () => {
+        const result = client.clipPath(
+          'projectValue',
+          'locationValue',
+          'channelValue',
+          'clipValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.clipPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromClipName', () => {
+        const result = client.matchProjectFromClipName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.clipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromClipName', () => {
+        const result = client.matchLocationFromClipName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.clipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchChannelFromClipName', () => {
+        const result = client.matchChannelFromClipName(fakePath);
+        assert.strictEqual(result, 'channelValue');
+        assert(
+          (client.pathTemplates.clipPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchClipFromClipName', () => {
+        const result = client.matchClipFromClipName(fakePath);
+        assert.strictEqual(result, 'clipValue');
+        assert(
+          (client.pathTemplates.clipPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
