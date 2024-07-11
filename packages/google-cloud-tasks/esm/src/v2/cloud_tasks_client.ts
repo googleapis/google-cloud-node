@@ -206,7 +206,7 @@ export class CloudTasksClient {
 
     // Add ESM headers
     const isEsm = true;
-    const isEsmString = isEsm ? '-esm' : '';
+    const isEsmString = isEsm ? '-esm' : '-cjs';
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}${isEsmString}`);
