@@ -1136,6 +1136,72 @@
                             }
                           ]
                         },
+                        "ListFileStoreDataProfiles": {
+                          "requestType": "ListFileStoreDataProfilesRequest",
+                          "responseType": "ListFileStoreDataProfilesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=organizations/*/locations/*}/fileStoreDataProfiles",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/fileStoreDataProfiles",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=organizations/*/locations/*}/fileStoreDataProfiles",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=projects/*/locations/*}/fileStoreDataProfiles"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFileStoreDataProfile": {
+                          "requestType": "GetFileStoreDataProfileRequest",
+                          "responseType": "FileStoreDataProfile",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=organizations/*/locations/*/fileStoreDataProfiles/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/fileStoreDataProfiles/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=organizations/*/locations/*/fileStoreDataProfiles/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=projects/*/locations/*/fileStoreDataProfiles/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteFileStoreDataProfile": {
+                          "requestType": "DeleteFileStoreDataProfileRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v2/{name=organizations/*/locations/*/fileStoreDataProfiles/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/fileStoreDataProfiles/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v2/{name=organizations/*/locations/*/fileStoreDataProfiles/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=projects/*/locations/*/fileStoreDataProfiles/*}"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GetTableDataProfile": {
                           "requestType": "GetTableDataProfileRequest",
                           "responseType": "TableDataProfile",
@@ -1562,7 +1628,10 @@
                             "EXCEL_DOCUMENT": 10,
                             "AVRO": 11,
                             "CSV": 12,
-                            "TSV": 13
+                            "TSV": 13,
+                            "AUDIO": 15,
+                            "VIDEO": 16,
+                            "EXECUTABLE": 17
                           }
                         }
                       }
@@ -2214,7 +2283,8 @@
                         "dataProfile": {
                           "oneof": [
                             "tableProfile",
-                            "columnProfile"
+                            "columnProfile",
+                            "fileStoreProfile"
                           ]
                         }
                       },
@@ -2226,6 +2296,10 @@
                         "columnProfile": {
                           "type": "ColumnDataProfile",
                           "id": 2
+                        },
+                        "fileStoreProfile": {
+                          "type": "FileStoreDataProfile",
+                          "id": 3
                         }
                       }
                     },
@@ -2371,8 +2445,10 @@
                             "LOCATION_UNSPECIFIED": 0,
                             "GLOBAL": 1,
                             "ARGENTINA": 2,
+                            "ARMENIA": 51,
                             "AUSTRALIA": 3,
                             "AZERBAIJAN": 48,
+                            "BELARUS": 50,
                             "BELGIUM": 4,
                             "BRAZIL": 5,
                             "CANADA": 6,
@@ -4202,6 +4278,19 @@
                           "rule": "repeated",
                           "type": "google.protobuf.Timestamp",
                           "id": 2
+                        },
+                        "extraInfo": {
+                          "type": "ErrorExtraInfo",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ErrorExtraInfo": {
+                          "values": {
+                            "ERROR_INFO_UNSPECIFIED": 0,
+                            "IMAGE_SCAN_UNAVAILABLE_IN_REGION": 1,
+                            "FILE_STORE_CLUSTER_UNSUPPORTED": 2
+                          }
                         }
                       }
                     },
@@ -4889,7 +4978,8 @@
                               "values": {
                                 "DETAIL_LEVEL_UNSPECIFIED": 0,
                                 "TABLE_PROFILE": 1,
-                                "RESOURCE_NAME": 2
+                                "RESOURCE_NAME": 2,
+                                "FILE_STORE_PROFILE": 3
                               }
                             }
                           }
@@ -5104,7 +5194,8 @@
                           "oneof": [
                             "bigQueryTarget",
                             "cloudSqlTarget",
-                            "secretsTarget"
+                            "secretsTarget",
+                            "cloudStorageTarget"
                           ]
                         }
                       },
@@ -5120,6 +5211,10 @@
                         "secretsTarget": {
                           "type": "SecretsDiscoveryTarget",
                           "id": 3
+                        },
+                        "cloudStorageTarget": {
+                          "type": "CloudStorageDiscoveryTarget",
+                          "id": 4
                         }
                       }
                     },
@@ -5250,6 +5345,10 @@
                         "tableModifiedCadence": {
                           "type": "DiscoveryTableModifiedCadence",
                           "id": 2
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 3
                         }
                       }
                     },
@@ -5290,6 +5389,14 @@
                         "SCHEMA_MODIFICATION_UNSPECIFIED": 0,
                         "SCHEMA_NEW_COLUMNS": 1,
                         "SCHEMA_REMOVED_COLUMNS": 2
+                      }
+                    },
+                    "DiscoveryInspectTemplateModifiedCadence": {
+                      "fields": {
+                        "frequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 1
+                        }
                       }
                     },
                     "CloudSqlDiscoveryTarget": {
@@ -5500,6 +5607,257 @@
                     "SecretsDiscoveryTarget": {
                       "fields": {}
                     },
+                    "CloudStorageDiscoveryTarget": {
+                      "oneofs": {
+                        "cadence": {
+                          "oneof": [
+                            "generationCadence",
+                            "disabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "DiscoveryCloudStorageFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conditions": {
+                          "type": "DiscoveryFileStoreConditions",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationCadence": {
+                          "type": "DiscoveryCloudStorageGenerationCadence",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "disabled": {
+                          "type": "Disabled",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryCloudStorageFilter": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "collection",
+                            "cloudStorageResourceReference",
+                            "others"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "collection": {
+                          "type": "FileStoreCollection",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cloudStorageResourceReference": {
+                          "type": "CloudStorageResourceReference",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "others": {
+                          "type": "AllOtherResources",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FileStoreCollection": {
+                      "oneofs": {
+                        "pattern": {
+                          "oneof": [
+                            "includeRegexes"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "includeRegexes": {
+                          "type": "FileStoreRegexes",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FileStoreRegexes": {
+                      "fields": {
+                        "patterns": {
+                          "rule": "repeated",
+                          "type": "FileStoreRegex",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FileStoreRegex": {
+                      "oneofs": {
+                        "resourceRegex": {
+                          "oneof": [
+                            "cloudStorageRegex"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cloudStorageRegex": {
+                          "type": "CloudStorageRegex",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CloudStorageRegex": {
+                      "fields": {
+                        "projectIdRegex": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bucketNameRegex": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CloudStorageResourceReference": {
+                      "fields": {
+                        "bucketName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryCloudStorageGenerationCadence": {
+                      "fields": {
+                        "refreshFrequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryCloudStorageConditions": {
+                      "fields": {
+                        "includedObjectAttributes": {
+                          "rule": "repeated",
+                          "type": "CloudStorageObjectAttribute",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "includedBucketAttributes": {
+                          "rule": "repeated",
+                          "type": "CloudStorageBucketAttribute",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CloudStorageObjectAttribute": {
+                          "values": {
+                            "CLOUD_STORAGE_OBJECT_ATTRIBUTE_UNSPECIFIED": 0,
+                            "ALL_SUPPORTED_OBJECTS": 1,
+                            "STANDARD": 2,
+                            "NEARLINE": 3,
+                            "COLDLINE": 4,
+                            "ARCHIVE": 5,
+                            "REGIONAL": 6,
+                            "MULTI_REGIONAL": 7,
+                            "DURABLE_REDUCED_AVAILABILITY": 8
+                          }
+                        },
+                        "CloudStorageBucketAttribute": {
+                          "values": {
+                            "CLOUD_STORAGE_BUCKET_ATTRIBUTE_UNSPECIFIED": 0,
+                            "ALL_SUPPORTED_BUCKETS": 1,
+                            "AUTOCLASS_DISABLED": 2,
+                            "AUTOCLASS_ENABLED": 3
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryFileStoreConditions": {
+                      "oneofs": {
+                        "conditions": {
+                          "oneof": [
+                            "cloudStorageConditions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "createdAfter": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cloudStorageConditions": {
+                          "type": "DiscoveryCloudStorageConditions",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "DiscoveryStartingLocation": {
                       "oneofs": {
                         "location": {
@@ -5519,6 +5877,9 @@
                           "id": 2
                         }
                       }
+                    },
+                    "AllOtherResources": {
+                      "fields": {}
                     },
                     "DlpJob": {
                       "options": {
@@ -6309,6 +6670,7 @@
                           "values": {
                             "RISK_SCORE_UNSPECIFIED": 0,
                             "RISK_LOW": 10,
+                            "RISK_UNKNOWN": 12,
                             "RISK_MODERATE": 20,
                             "RISK_HIGH": 30
                           }
@@ -6344,6 +6706,14 @@
                         "profileStatus": {
                           "type": "ProfileStatus",
                           "id": 7
+                        },
+                        "tableDataProfileCount": {
+                          "type": "int64",
+                          "id": 9
+                        },
+                        "fileStoreDataProfileCount": {
+                          "type": "int64",
+                          "id": 10
                         }
                       }
                     },
@@ -6700,6 +7070,176 @@
                         }
                       }
                     },
+                    "FileStoreDataProfile": {
+                      "options": {
+                        "(google.api.resource).type": "dlp.googleapis.com/FileStoreDataProfile",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/fileStoreDataProfiles/{file_store_data_profile}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 2
+                        },
+                        "projectDataProfile": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "fileStoreLocation": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "dataStorageLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 19
+                        },
+                        "locationType": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "fileStorePath": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "fullResource": {
+                          "type": "string",
+                          "id": 24
+                        },
+                        "configSnapshot": {
+                          "type": "DataProfileConfigSnapshot",
+                          "id": 7
+                        },
+                        "profileStatus": {
+                          "type": "ProfileStatus",
+                          "id": 8
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 9
+                        },
+                        "profileLastGenerated": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        },
+                        "resourceVisibility": {
+                          "type": "ResourceVisibility",
+                          "id": 11
+                        },
+                        "sensitivityScore": {
+                          "type": "SensitivityScore",
+                          "id": 12
+                        },
+                        "dataRiskLevel": {
+                          "type": "DataRiskLevel",
+                          "id": 13
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 14
+                        },
+                        "lastModifiedTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 15
+                        },
+                        "fileClusterSummaries": {
+                          "rule": "repeated",
+                          "type": "FileClusterSummary",
+                          "id": 16
+                        },
+                        "resourceAttributes": {
+                          "keyType": "string",
+                          "type": "Value",
+                          "id": 17
+                        },
+                        "resourceLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 18
+                        },
+                        "fileStoreInfoTypeSummaries": {
+                          "rule": "repeated",
+                          "type": "FileStoreInfoTypeSummary",
+                          "id": 21
+                        },
+                        "fileStoreIsEmpty": {
+                          "type": "bool",
+                          "id": 23
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "DONE": 2
+                          }
+                        }
+                      }
+                    },
+                    "FileStoreInfoTypeSummary": {
+                      "fields": {
+                        "infoType": {
+                          "type": "InfoType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FileExtensionInfo": {
+                      "fields": {
+                        "fileExtension": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FileClusterSummary": {
+                      "fields": {
+                        "fileClusterType": {
+                          "type": "FileClusterType",
+                          "id": 1
+                        },
+                        "fileStoreInfoTypeSummaries": {
+                          "rule": "repeated",
+                          "type": "FileStoreInfoTypeSummary",
+                          "id": 2
+                        },
+                        "sensitivityScore": {
+                          "type": "SensitivityScore",
+                          "id": 3
+                        },
+                        "dataRiskLevel": {
+                          "type": "DataRiskLevel",
+                          "id": 4
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "Error",
+                          "id": 6
+                        },
+                        "fileExtensionsScanned": {
+                          "rule": "repeated",
+                          "type": "FileExtensionInfo",
+                          "id": 7
+                        },
+                        "fileExtensionsSeen": {
+                          "rule": "repeated",
+                          "type": "FileExtensionInfo",
+                          "id": 8
+                        },
+                        "noFilesExist": {
+                          "type": "bool",
+                          "id": 9
+                        }
+                      }
+                    },
                     "GetProjectDataProfileRequest": {
                       "fields": {
                         "name": {
@@ -6708,6 +7248,83 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "dlp.googleapis.com/ProjectDataProfile"
+                          }
+                        }
+                      }
+                    },
+                    "GetFileStoreDataProfileRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/ProjectDataProfile"
+                          }
+                        }
+                      }
+                    },
+                    "ListFileStoreDataProfilesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "dlp.googleapis.com/FileStoreDataProfile"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFileStoreDataProfilesResponse": {
+                      "fields": {
+                        "fileStoreDataProfiles": {
+                          "rule": "repeated",
+                          "type": "FileStoreDataProfile",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteFileStoreDataProfileRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "dlp.googleapis.com/FileStoreDataProfile"
                           }
                         }
                       }
@@ -6800,6 +7417,10 @@
                         "profile": {
                           "type": "TableDataProfile",
                           "id": 1
+                        },
+                        "fileStoreProfile": {
+                          "type": "FileStoreDataProfile",
+                          "id": 3
                         },
                         "event": {
                           "type": "DataProfileAction.EventType",
@@ -7111,6 +7732,37 @@
                         }
                       }
                     },
+                    "FileClusterType": {
+                      "oneofs": {
+                        "fileClusterType": {
+                          "oneof": [
+                            "cluster"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "cluster": {
+                          "type": "Cluster",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Cluster": {
+                          "values": {
+                            "CLUSTER_UNSPECIFIED": 0,
+                            "CLUSTER_UNKNOWN": 1,
+                            "CLUSTER_TEXT": 2,
+                            "CLUSTER_STRUCTURED_DATA": 3,
+                            "CLUSTER_SOURCE_CODE": 4,
+                            "CLUSTER_RICH_DOCUMENT": 5,
+                            "CLUSTER_IMAGE": 6,
+                            "CLUSTER_ARCHIVE": 7,
+                            "CLUSTER_MULTIMEDIA": 8,
+                            "CLUSTER_EXECUTABLE": 9
+                          }
+                        }
+                      }
+                    },
                     "InfoType": {
                       "fields": {
                         "name": {
@@ -7139,6 +7791,7 @@
                           "values": {
                             "SENSITIVITY_SCORE_UNSPECIFIED": 0,
                             "SENSITIVITY_LOW": 10,
+                            "SENSITIVITY_UNKNOWN": 12,
                             "SENSITIVITY_MODERATE": 20,
                             "SENSITIVITY_HIGH": 30
                           }
