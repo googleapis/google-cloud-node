@@ -186,6 +186,7 @@
     "packages/google-maps-fleetengine": {},
     "packages/google-shopping-merchant-datasources": {},
     "packages/google-shopping-merchant-promotions": {},
+    "packages/google-cloud-privilegedaccessmanager": {},
     "packages/google-shopping-merchant-products": {},
     "packages/google-shopping-merchant-accounts": {}
   },
