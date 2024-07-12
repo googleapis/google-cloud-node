@@ -1055,6 +1055,218 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FetchDatasetErrorsRequest. */
+                interface IFetchDatasetErrorsRequest {
+
+                    /** FetchDatasetErrorsRequest dataset */
+                    dataset?: (string|null);
+
+                    /** FetchDatasetErrorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchDatasetErrorsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a FetchDatasetErrorsRequest. */
+                class FetchDatasetErrorsRequest implements IFetchDatasetErrorsRequest {
+
+                    /**
+                     * Constructs a new FetchDatasetErrorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest);
+
+                    /** FetchDatasetErrorsRequest dataset. */
+                    public dataset: string;
+
+                    /** FetchDatasetErrorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchDatasetErrorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new FetchDatasetErrorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchDatasetErrorsRequest instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest;
+
+                    /**
+                     * Encodes the specified FetchDatasetErrorsRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest.verify|verify} messages.
+                     * @param message FetchDatasetErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchDatasetErrorsRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest.verify|verify} messages.
+                     * @param message FetchDatasetErrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchDatasetErrorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchDatasetErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest;
+
+                    /**
+                     * Decodes a FetchDatasetErrorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchDatasetErrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest;
+
+                    /**
+                     * Verifies a FetchDatasetErrorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchDatasetErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchDatasetErrorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest;
+
+                    /**
+                     * Creates a plain object from a FetchDatasetErrorsRequest message. Also converts values to other types if specified.
+                     * @param message FetchDatasetErrorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchDatasetErrorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchDatasetErrorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchDatasetErrorsResponse. */
+                interface IFetchDatasetErrorsResponse {
+
+                    /** FetchDatasetErrorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** FetchDatasetErrorsResponse errors */
+                    errors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents a FetchDatasetErrorsResponse. */
+                class FetchDatasetErrorsResponse implements IFetchDatasetErrorsResponse {
+
+                    /**
+                     * Constructs a new FetchDatasetErrorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse);
+
+                    /** FetchDatasetErrorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** FetchDatasetErrorsResponse errors. */
+                    public errors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new FetchDatasetErrorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchDatasetErrorsResponse instance
+                     */
+                    public static create(properties?: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse;
+
+                    /**
+                     * Encodes the specified FetchDatasetErrorsResponse message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse.verify|verify} messages.
+                     * @param message FetchDatasetErrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchDatasetErrorsResponse message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse.verify|verify} messages.
+                     * @param message FetchDatasetErrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchDatasetErrorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchDatasetErrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse;
+
+                    /**
+                     * Decodes a FetchDatasetErrorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchDatasetErrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse;
+
+                    /**
+                     * Verifies a FetchDatasetErrorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchDatasetErrorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchDatasetErrorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse;
+
+                    /**
+                     * Creates a plain object from a FetchDatasetErrorsResponse message. Also converts values to other types if specified.
+                     * @param message FetchDatasetErrorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchDatasetErrorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchDatasetErrorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteDatasetRequest. */
                 interface IDeleteDatasetRequest {
 
@@ -1215,6 +1427,20 @@ export namespace google {
                     public getDataset(request: google.maps.mapsplatformdatasets.v1.IGetDatasetRequest): Promise<google.maps.mapsplatformdatasets.v1.Dataset>;
 
                     /**
+                     * Calls FetchDatasetErrors.
+                     * @param request FetchDatasetErrorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchDatasetErrorsResponse
+                     */
+                    public fetchDatasetErrors(request: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest, callback: google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.FetchDatasetErrorsCallback): void;
+
+                    /**
+                     * Calls FetchDatasetErrors.
+                     * @param request FetchDatasetErrorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchDatasetErrors(request: google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest): Promise<google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse>;
+
+                    /**
                      * Calls ListDatasets.
                      * @param request ListDatasetsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListDatasetsResponse
@@ -1265,6 +1491,13 @@ export namespace google {
                      * @param [response] Dataset
                      */
                     type GetDatasetCallback = (error: (Error|null), response?: google.maps.mapsplatformdatasets.v1.Dataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|fetchDatasetErrors}.
+                     * @param error Error, if any
+                     * @param [response] FetchDatasetErrorsResponse
+                     */
+                    type FetchDatasetErrorsCallback = (error: (Error|null), response?: google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|listDatasets}.
@@ -9211,6 +9444,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -9399,6 +9735,119 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
