@@ -15922,8 +15922,14 @@ export namespace google {
                         /** Properties of a DataRetentionConfig. */
                         interface IDataRetentionConfig {
 
+                            /** DataRetentionConfig airflowDatabaseRetentionDays */
+                            airflowDatabaseRetentionDays?: (number|null);
+
                             /** DataRetentionConfig taskLogsRetentionConfig */
                             taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig|null);
+
+                            /** DataRetentionConfig airflowMetadataRetentionConfig */
+                            airflowMetadataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IAirflowMetadataRetentionPolicyConfig|null);
                         }
 
                         /** Represents a DataRetentionConfig. */
@@ -15935,8 +15941,14 @@ export namespace google {
                              */
                             constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IDataRetentionConfig);
 
+                            /** DataRetentionConfig airflowDatabaseRetentionDays. */
+                            public airflowDatabaseRetentionDays: number;
+
                             /** DataRetentionConfig taskLogsRetentionConfig. */
                             public taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.ITaskLogsRetentionConfig|null);
+
+                            /** DataRetentionConfig airflowMetadataRetentionConfig. */
+                            public airflowMetadataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IAirflowMetadataRetentionPolicyConfig|null);
 
                             /**
                              * Creates a new DataRetentionConfig instance using the specified properties.
@@ -16120,6 +16132,119 @@ export namespace google {
                                 TASK_LOGS_STORAGE_MODE_UNSPECIFIED = 0,
                                 CLOUD_LOGGING_AND_CLOUD_STORAGE = 1,
                                 CLOUD_LOGGING_ONLY = 2
+                            }
+                        }
+
+                        /** Properties of an AirflowMetadataRetentionPolicyConfig. */
+                        interface IAirflowMetadataRetentionPolicyConfig {
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionMode */
+                            retentionMode?: (google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig.RetentionMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig.RetentionMode|null);
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionDays */
+                            retentionDays?: (number|null);
+                        }
+
+                        /** Represents an AirflowMetadataRetentionPolicyConfig. */
+                        class AirflowMetadataRetentionPolicyConfig implements IAirflowMetadataRetentionPolicyConfig {
+
+                            /**
+                             * Constructs a new AirflowMetadataRetentionPolicyConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1beta1.IAirflowMetadataRetentionPolicyConfig);
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionMode. */
+                            public retentionMode: (google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig.RetentionMode|keyof typeof google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig.RetentionMode);
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionDays. */
+                            public retentionDays: number;
+
+                            /**
+                             * Creates a new AirflowMetadataRetentionPolicyConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AirflowMetadataRetentionPolicyConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1beta1.IAirflowMetadataRetentionPolicyConfig): google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Encodes the specified AirflowMetadataRetentionPolicyConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig.verify|verify} messages.
+                             * @param message AirflowMetadataRetentionPolicyConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1beta1.IAirflowMetadataRetentionPolicyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AirflowMetadataRetentionPolicyConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig.verify|verify} messages.
+                             * @param message AirflowMetadataRetentionPolicyConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1beta1.IAirflowMetadataRetentionPolicyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AirflowMetadataRetentionPolicyConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AirflowMetadataRetentionPolicyConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Decodes an AirflowMetadataRetentionPolicyConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AirflowMetadataRetentionPolicyConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Verifies an AirflowMetadataRetentionPolicyConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AirflowMetadataRetentionPolicyConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AirflowMetadataRetentionPolicyConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Creates a plain object from an AirflowMetadataRetentionPolicyConfig message. Also converts values to other types if specified.
+                             * @param message AirflowMetadataRetentionPolicyConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1beta1.AirflowMetadataRetentionPolicyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AirflowMetadataRetentionPolicyConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AirflowMetadataRetentionPolicyConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace AirflowMetadataRetentionPolicyConfig {
+
+                            /** RetentionMode enum. */
+                            enum RetentionMode {
+                                RETENTION_MODE_UNSPECIFIED = 0,
+                                RETENTION_MODE_ENABLED = 1,
+                                RETENTION_MODE_DISABLED = 2
                             }
                         }
 
