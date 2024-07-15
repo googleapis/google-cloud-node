@@ -301,6 +301,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "privateConfig": {
+                          "type": "PrivateConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "state": {
                           "type": "State",
                           "id": 5,
@@ -338,7 +345,8 @@
                             "CREATING": 1,
                             "ACTIVE": 2,
                             "DELETING": 3,
-                            "PAUSED": 4
+                            "PAUSED": 4,
+                            "UNKNOWN": 6
                           }
                         },
                         "StateNote": {
@@ -384,6 +392,41 @@
                               }
                             }
                           }
+                        },
+                        "PrivateConfig": {
+                          "fields": {
+                            "isPrivate": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "caPool": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "privateca.googleapis.com/CaPool"
+                              }
+                            },
+                            "httpServiceAttachment": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/ServiceAttachment"
+                              }
+                            },
+                            "sshServiceAttachment": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/ServiceAttachment"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -411,7 +454,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "uid": {

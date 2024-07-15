@@ -296,6 +296,9 @@ export namespace google {
                     /** Instance labels */
                     labels?: ({ [k: string]: string }|null);
 
+                    /** Instance privateConfig */
+                    privateConfig?: (google.cloud.securesourcemanager.v1.Instance.IPrivateConfig|null);
+
                     /** Instance state */
                     state?: (google.cloud.securesourcemanager.v1.Instance.State|keyof typeof google.cloud.securesourcemanager.v1.Instance.State|null);
 
@@ -329,6 +332,9 @@ export namespace google {
 
                     /** Instance labels. */
                     public labels: { [k: string]: string };
+
+                    /** Instance privateConfig. */
+                    public privateConfig?: (google.cloud.securesourcemanager.v1.Instance.IPrivateConfig|null);
 
                     /** Instance state. */
                     public state: (google.cloud.securesourcemanager.v1.Instance.State|keyof typeof google.cloud.securesourcemanager.v1.Instance.State);
@@ -428,7 +434,8 @@ export namespace google {
                         CREATING = 1,
                         ACTIVE = 2,
                         DELETING = 3,
-                        PAUSED = 4
+                        PAUSED = 4,
+                        UNKNOWN = 6
                     }
 
                     /** StateNote enum. */
@@ -547,6 +554,121 @@ export namespace google {
 
                         /**
                          * Gets the default type url for HostConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PrivateConfig. */
+                    interface IPrivateConfig {
+
+                        /** PrivateConfig isPrivate */
+                        isPrivate?: (boolean|null);
+
+                        /** PrivateConfig caPool */
+                        caPool?: (string|null);
+
+                        /** PrivateConfig httpServiceAttachment */
+                        httpServiceAttachment?: (string|null);
+
+                        /** PrivateConfig sshServiceAttachment */
+                        sshServiceAttachment?: (string|null);
+                    }
+
+                    /** Represents a PrivateConfig. */
+                    class PrivateConfig implements IPrivateConfig {
+
+                        /**
+                         * Constructs a new PrivateConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securesourcemanager.v1.Instance.IPrivateConfig);
+
+                        /** PrivateConfig isPrivate. */
+                        public isPrivate: boolean;
+
+                        /** PrivateConfig caPool. */
+                        public caPool: string;
+
+                        /** PrivateConfig httpServiceAttachment. */
+                        public httpServiceAttachment: string;
+
+                        /** PrivateConfig sshServiceAttachment. */
+                        public sshServiceAttachment: string;
+
+                        /**
+                         * Creates a new PrivateConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrivateConfig instance
+                         */
+                        public static create(properties?: google.cloud.securesourcemanager.v1.Instance.IPrivateConfig): google.cloud.securesourcemanager.v1.Instance.PrivateConfig;
+
+                        /**
+                         * Encodes the specified PrivateConfig message. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.verify|verify} messages.
+                         * @param message PrivateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securesourcemanager.v1.Instance.IPrivateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrivateConfig message, length delimited. Does not implicitly {@link google.cloud.securesourcemanager.v1.Instance.PrivateConfig.verify|verify} messages.
+                         * @param message PrivateConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securesourcemanager.v1.Instance.IPrivateConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrivateConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrivateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securesourcemanager.v1.Instance.PrivateConfig;
+
+                        /**
+                         * Decodes a PrivateConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrivateConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securesourcemanager.v1.Instance.PrivateConfig;
+
+                        /**
+                         * Verifies a PrivateConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrivateConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrivateConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securesourcemanager.v1.Instance.PrivateConfig;
+
+                        /**
+                         * Creates a plain object from a PrivateConfig message. Also converts values to other types if specified.
+                         * @param message PrivateConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securesourcemanager.v1.Instance.PrivateConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrivateConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrivateConfig
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

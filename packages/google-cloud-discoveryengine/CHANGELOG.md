@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.9.0...discoveryengine-v1.10.0) (2024-07-10)
+
+
+### Features
+
+* [discoveryengine] add Chunk resource in the search response ([#5526](https://github.com/googleapis/google-cloud-node/issues/5526)) ([b0dc1b2](https://github.com/googleapis/google-cloud-node/commit/b0dc1b2ef66334394613c6e92a4c5b0ebb8e0faf))
+
 ## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.8.0...discoveryengine-v1.9.0) (2024-06-03)
 
 

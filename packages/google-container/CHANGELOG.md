@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.15.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.0...container-v5.15.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* [container] Deprecate "EXPERIMENTAL" option for Gateway API (this value has never been supported) ([#5519](https://github.com/googleapis/google-cloud-node/issues/5519)) ([8838289](https://github.com/googleapis/google-cloud-node/commit/88382897c1c0ba6f5f80ba72ab775808de301962))
+
 ## [5.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.14.0...container-v5.15.0) (2024-06-12)
 
 
