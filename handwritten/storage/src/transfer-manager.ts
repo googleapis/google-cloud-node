@@ -94,6 +94,10 @@ const GCCL_GCS_CMD_FEATURE = {
 
 export interface UploadManyFilesOptions {
   concurrencyLimit?: number;
+  customDestinationBuilder?(
+    path: string,
+    options: UploadManyFilesOptions
+  ): string;
   skipIfExists?: boolean;
   prefix?: string;
   passthroughOptions?: Omit<UploadOptions, 'destination'>;
@@ -411,6 +415,8 @@ export class TransferManager {
    * @typedef {object} UploadManyFilesOptions
    * @property {number} [concurrencyLimit] The number of concurrently executing promises
    * to use when uploading the files.
+   * @property {Function} [customDestinationBuilder] A fuction that will take the current path of a local file
+   * and return a string representing a custom path to be used to upload the file to GCS.
    * @property {boolean} [skipIfExists] Do not upload the file if it already exists in
    * the bucket. This will set the precondition ifGenerationMatch = 0.
    * @property {string} [prefix] A prefix to append to all of the uploaded files.
@@ -490,9 +496,9 @@ export class TransferManager {
         [GCCL_GCS_CMD_KEY]: GCCL_GCS_CMD_FEATURE.UPLOAD_MANY,
       };
 
-      passThroughOptionsCopy.destination = filePath
-        .split(path.sep)
-        .join(path.posix.sep);
+      passThroughOptionsCopy.destination = options.customDestinationBuilder
+        ? options.customDestinationBuilder(filePath, options)
+        : filePath.split(path.sep).join(path.posix.sep);
       if (options.prefix) {
         passThroughOptionsCopy.destination = path.posix.join(
           ...options.prefix.split(path.sep),

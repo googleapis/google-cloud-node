@@ -26,6 +26,7 @@ import {
   MultiPartUploadError,
   MultiPartUploadHelper,
   UploadOptions,
+  UploadManyFilesOptions,
   TransferManager,
   Storage,
   DownloadResponse,
@@ -172,6 +173,24 @@ describe('Transfer Manager', () => {
       });
 
       await transferManager.uploadManyFiles([filePath]);
+    });
+
+    it('allows the user to apply a custom destination transformation when supplied a custom function', async () => {
+      const paths = ['a', 'b', 'foo/bar', 'bar.txt'];
+      const expected = ['foo/a', 'b/bar', 'foo/foo/bar', 'bar.txt/bar'];
+      sandbox.stub(bucket, 'upload').callsFake((path, options) => {
+        const uploadOpts = options as UploadOptions;
+        assert(expected.includes(uploadOpts.destination as string));
+      });
+
+      let callCount = 0;
+      const transformationFunc = (path: string) => {
+        assert.strictEqual(path, paths[callCount]);
+        return expected[callCount++];
+      };
+      await transferManager.uploadManyFiles(paths, {
+        customDestinationBuilder: transformationFunc,
+      });
     });
   });
 
