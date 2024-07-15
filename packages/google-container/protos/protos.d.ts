@@ -21757,7 +21757,8 @@ export namespace google {
                     DEPLOYMENT = 11,
                     STATEFULSET = 12,
                     CADVISOR = 13,
-                    KUBELET = 14
+                    KUBELET = 14,
+                    DCGM = 15
                 }
             }
 
@@ -47455,7 +47456,8 @@ export namespace google {
                     DEPLOYMENT = 11,
                     STATEFULSET = 12,
                     CADVISOR = 13,
-                    KUBELET = 14
+                    KUBELET = 14,
+                    DCGM = 15
                 }
             }
 

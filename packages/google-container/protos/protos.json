@@ -5104,6 +5104,11 @@
                   },
                   "nested": {
                     "Channel": {
+                      "valuesOptions": {
+                        "CHANNEL_EXPERIMENTAL": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "CHANNEL_UNSPECIFIED": 0,
                         "CHANNEL_DISABLED": 1,
@@ -5958,7 +5963,8 @@
                         "DEPLOYMENT": 11,
                         "STATEFULSET": 12,
                         "CADVISOR": 13,
-                        "KUBELET": 14
+                        "KUBELET": 14,
+                        "DCGM": 15
                       }
                     }
                   }
@@ -12839,7 +12845,8 @@
                         "DEPLOYMENT": 11,
                         "STATEFULSET": 12,
                         "CADVISOR": 13,
-                        "KUBELET": 14
+                        "KUBELET": 14,
+                        "DCGM": 15
                       }
                     }
                   }
