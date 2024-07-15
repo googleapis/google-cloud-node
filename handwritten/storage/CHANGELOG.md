@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.12.0](https://github.com/googleapis/nodejs-storage/compare/v7.11.3...v7.12.0) (2024-07-15)
+
+
+### Features
+
+* Add function to allow user to set destination in transfer manager ([#2497](https://github.com/googleapis/nodejs-storage/issues/2497)) ([dc1e488](https://github.com/googleapis/nodejs-storage/commit/dc1e488b50dd7e2deab3e8b28c7d6ece36b90b0e))
+
 ## [7.11.3](https://github.com/googleapis/nodejs-storage/compare/v7.11.2...v7.11.3) (2024-07-09)
 
 
