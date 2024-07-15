@@ -50,13 +50,6 @@
                 "getTaskTrackingInfo"
               ]
             },
-            "SearchTasks": {
-              "methods": [
-                "searchTasks",
-                "searchTasksStream",
-                "searchTasksAsync"
-              ]
-            },
             "ListTasks": {
               "methods": [
                 "listTasks",
@@ -114,13 +107,6 @@
             "GetTaskTrackingInfo": {
               "methods": [
                 "getTaskTrackingInfo"
-              ]
-            },
-            "SearchTasks": {
-              "methods": [
-                "searchTasks",
-                "searchTasksStream",
-                "searchTasksAsync"
               ]
             },
             "ListTasks": {
