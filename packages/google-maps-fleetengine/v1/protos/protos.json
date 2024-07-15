@@ -14,6 +14,8 @@
                     "java_outer_classname": "Tasks",
                     "java_package": "google.maps.fleetengine.delivery.v1",
                     "objc_class_prefix": "CFED",
+                    "php_namespace": "Google\\Maps\\FleetEngine\\Delivery\\V1",
+                    "ruby_package": "Google::Maps::FleetEngine::Delivery::V1",
                     "(google.api.resource_definition).type": "fleetengine.googleapis.com/Provider",
                     "(google.api.resource_definition).pattern": "providers/{provider}"
                   },
@@ -442,38 +444,6 @@
                             }
                           ]
                         },
-                        "SearchTasks": {
-                          "requestType": "SearchTasksRequest",
-                          "responseType": "SearchTasksResponse",
-                          "options": {
-                            "deprecated": true,
-                            "(google.api.http).get": "/v1/{parent=providers/*}/tasks:search",
-                            "(google.api.routing).routing_parameters.field": "parent",
-                            "(google.api.routing).routing_parameters.path_template": "{provider_id=providers/*}",
-                            "(google.api.method_signature)": "parent"
-                          },
-                          "parsedOptions": [
-                            {
-                              "deprecated": true
-                            },
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{parent=providers/*}/tasks:search"
-                              }
-                            },
-                            {
-                              "(google.api.routing)": {
-                                "routing_parameters": {
-                                  "field": "parent",
-                                  "path_template": "{provider_id=providers/*}"
-                                }
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "parent"
-                            }
-                          ]
-                        },
                         "UpdateTask": {
                           "requestType": "UpdateTaskRequest",
                           "responseType": "Task",
@@ -814,64 +784,6 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "fleetengine.googleapis.com/Task"
                           }
-                        }
-                      }
-                    },
-                    "SearchTasksRequest": {
-                      "options": {
-                        "deprecated": true
-                      },
-                      "fields": {
-                        "header": {
-                          "type": "DeliveryRequestHeader",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "parent": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "trackingId": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "SearchTasksResponse": {
-                      "options": {
-                        "deprecated": true
-                      },
-                      "fields": {
-                        "tasks": {
-                          "rule": "repeated",
-                          "type": "Task",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
                         }
                       }
                     },
@@ -1551,7 +1463,10 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
             },
             "FieldBehavior": {
               "values": {
@@ -1669,6 +1584,11 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -1777,6 +1697,10 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
                 }
               }
             },
@@ -3158,8 +3082,20 @@
                   1001
                 ],
                 [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
                   9995,
                   9999
+                ],
+                [
+                  10000,
+                  10000
                 ]
               ],
               "reserved": [

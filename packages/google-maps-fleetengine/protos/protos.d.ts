@@ -2588,20 +2588,6 @@ export namespace maps {
                 public updateVehicle(request: maps.fleetengine.v1.IUpdateVehicleRequest): Promise<maps.fleetengine.v1.Vehicle>;
 
                 /**
-                 * Calls UpdateVehicleLocation.
-                 * @param request UpdateVehicleLocationRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and VehicleLocation
-                 */
-                public updateVehicleLocation(request: maps.fleetengine.v1.IUpdateVehicleLocationRequest, callback: maps.fleetengine.v1.VehicleService.UpdateVehicleLocationCallback): void;
-
-                /**
-                 * Calls UpdateVehicleLocation.
-                 * @param request UpdateVehicleLocationRequest message or plain object
-                 * @returns Promise
-                 */
-                public updateVehicleLocation(request: maps.fleetengine.v1.IUpdateVehicleLocationRequest): Promise<maps.fleetengine.v1.VehicleLocation>;
-
-                /**
                  * Calls UpdateVehicleAttributes.
                  * @param request UpdateVehicleAttributesRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and UpdateVehicleAttributesResponse
@@ -2642,20 +2628,6 @@ export namespace maps {
                  * @returns Promise
                  */
                 public searchVehicles(request: maps.fleetengine.v1.ISearchVehiclesRequest): Promise<maps.fleetengine.v1.SearchVehiclesResponse>;
-
-                /**
-                 * Calls SearchFuzzedVehicles.
-                 * @param request SearchVehiclesRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and SearchVehiclesResponse
-                 */
-                public searchFuzzedVehicles(request: maps.fleetengine.v1.ISearchVehiclesRequest, callback: maps.fleetengine.v1.VehicleService.SearchFuzzedVehiclesCallback): void;
-
-                /**
-                 * Calls SearchFuzzedVehicles.
-                 * @param request SearchVehiclesRequest message or plain object
-                 * @returns Promise
-                 */
-                public searchFuzzedVehicles(request: maps.fleetengine.v1.ISearchVehiclesRequest): Promise<maps.fleetengine.v1.SearchVehiclesResponse>;
             }
 
             namespace VehicleService {
@@ -2682,13 +2654,6 @@ export namespace maps {
                 type UpdateVehicleCallback = (error: (Error|null), response?: maps.fleetengine.v1.Vehicle) => void;
 
                 /**
-                 * Callback as used by {@link maps.fleetengine.v1.VehicleService|updateVehicleLocation}.
-                 * @param error Error, if any
-                 * @param [response] VehicleLocation
-                 */
-                type UpdateVehicleLocationCallback = (error: (Error|null), response?: maps.fleetengine.v1.VehicleLocation) => void;
-
-                /**
                  * Callback as used by {@link maps.fleetengine.v1.VehicleService|updateVehicleAttributes}.
                  * @param error Error, if any
                  * @param [response] UpdateVehicleAttributesResponse
@@ -2708,13 +2673,6 @@ export namespace maps {
                  * @param [response] SearchVehiclesResponse
                  */
                 type SearchVehiclesCallback = (error: (Error|null), response?: maps.fleetengine.v1.SearchVehiclesResponse) => void;
-
-                /**
-                 * Callback as used by {@link maps.fleetengine.v1.VehicleService|searchFuzzedVehicles}.
-                 * @param error Error, if any
-                 * @param [response] SearchVehiclesResponse
-                 */
-                type SearchFuzzedVehiclesCallback = (error: (Error|null), response?: maps.fleetengine.v1.SearchVehiclesResponse) => void;
             }
 
             /** Properties of a CreateVehicleRequest. */
@@ -3056,121 +3014,6 @@ export namespace maps {
 
                 /**
                  * Gets the default type url for UpdateVehicleRequest
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of an UpdateVehicleLocationRequest. */
-            interface IUpdateVehicleLocationRequest {
-
-                /** UpdateVehicleLocationRequest header */
-                header?: (maps.fleetengine.v1.IRequestHeader|null);
-
-                /** UpdateVehicleLocationRequest name */
-                name?: (string|null);
-
-                /** UpdateVehicleLocationRequest currentLocation */
-                currentLocation?: (maps.fleetengine.v1.IVehicleLocation|null);
-
-                /** UpdateVehicleLocationRequest currentState */
-                currentState?: (maps.fleetengine.v1.VehicleState|keyof typeof maps.fleetengine.v1.VehicleState|null);
-            }
-
-            /** Represents an UpdateVehicleLocationRequest. */
-            class UpdateVehicleLocationRequest implements IUpdateVehicleLocationRequest {
-
-                /**
-                 * Constructs a new UpdateVehicleLocationRequest.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: maps.fleetengine.v1.IUpdateVehicleLocationRequest);
-
-                /** UpdateVehicleLocationRequest header. */
-                public header?: (maps.fleetengine.v1.IRequestHeader|null);
-
-                /** UpdateVehicleLocationRequest name. */
-                public name: string;
-
-                /** UpdateVehicleLocationRequest currentLocation. */
-                public currentLocation?: (maps.fleetengine.v1.IVehicleLocation|null);
-
-                /** UpdateVehicleLocationRequest currentState. */
-                public currentState: (maps.fleetengine.v1.VehicleState|keyof typeof maps.fleetengine.v1.VehicleState);
-
-                /**
-                 * Creates a new UpdateVehicleLocationRequest instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns UpdateVehicleLocationRequest instance
-                 */
-                public static create(properties?: maps.fleetengine.v1.IUpdateVehicleLocationRequest): maps.fleetengine.v1.UpdateVehicleLocationRequest;
-
-                /**
-                 * Encodes the specified UpdateVehicleLocationRequest message. Does not implicitly {@link maps.fleetengine.v1.UpdateVehicleLocationRequest.verify|verify} messages.
-                 * @param message UpdateVehicleLocationRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: maps.fleetengine.v1.IUpdateVehicleLocationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified UpdateVehicleLocationRequest message, length delimited. Does not implicitly {@link maps.fleetengine.v1.UpdateVehicleLocationRequest.verify|verify} messages.
-                 * @param message UpdateVehicleLocationRequest message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: maps.fleetengine.v1.IUpdateVehicleLocationRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an UpdateVehicleLocationRequest message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns UpdateVehicleLocationRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): maps.fleetengine.v1.UpdateVehicleLocationRequest;
-
-                /**
-                 * Decodes an UpdateVehicleLocationRequest message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns UpdateVehicleLocationRequest
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): maps.fleetengine.v1.UpdateVehicleLocationRequest;
-
-                /**
-                 * Verifies an UpdateVehicleLocationRequest message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an UpdateVehicleLocationRequest message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns UpdateVehicleLocationRequest
-                 */
-                public static fromObject(object: { [k: string]: any }): maps.fleetengine.v1.UpdateVehicleLocationRequest;
-
-                /**
-                 * Creates a plain object from an UpdateVehicleLocationRequest message. Also converts values to other types if specified.
-                 * @param message UpdateVehicleLocationRequest
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: maps.fleetengine.v1.UpdateVehicleLocationRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this UpdateVehicleLocationRequest to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for UpdateVehicleLocationRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
