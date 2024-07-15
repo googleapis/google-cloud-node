@@ -37,6 +37,11 @@ function main(name, phaseId) {
    *  Required. The phase ID to advance the `Rollout` to.
    */
   // const phaseId = 'abc123'
+  /**
+   *  Optional. Deploy policies to override. Format is
+   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+   */
+  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;

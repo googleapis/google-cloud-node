@@ -62,6 +62,11 @@ function main(parent, rolloutId, rollout) {
    */
   // const validateOnly = true
   /**
+   *  Optional. Deploy policies to override. Format is
+   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+   */
+  // const overrideDeployPolicy = ['abc','def']
+  /**
    *  Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
    *  will start at the first phase.
    */
