@@ -21,7 +21,9 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as estimatebillingserviceModule from '../src';
+import * as evaluationserviceModule from '../src';
+
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -60,6 +62,15 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
     : sinon.stub().resolves([response]);
 }
 
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+}
+
 function stubLongRunningCall<ResponseType>(
   response?: ResponseType,
   callError?: Error,
@@ -92,6 +103,44 @@ function stubLongRunningCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -115,18 +164,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1alpha.EstimateBillingServiceClient', () => {
+describe('v1alpha.EvaluationServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -138,8 +187,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient
-            .servicePath;
+          evaluationserviceModule.v1alpha.EvaluationServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -148,8 +196,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient
-            .apiEndpoint;
+          evaluationserviceModule.v1alpha.EvaluationServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -157,7 +204,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -166,7 +213,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -179,7 +226,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+            new evaluationserviceModule.v1alpha.EvaluationServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -193,9 +240,9 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+            new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -211,7 +258,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -219,21 +266,20 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
 
     it('has port', () => {
-      const port =
-        estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient.port;
+      const port = evaluationserviceModule.v1alpha.EvaluationServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           fallback: true,
         });
       assert(client);
@@ -241,23 +287,23 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.estimateBillingServiceStub, undefined);
+      assert.strictEqual(client.evaluationServiceStub, undefined);
       await client.initialize();
-      assert(client.estimateBillingServiceStub);
+      assert(client.evaluationServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      assert(client.estimateBillingServiceStub);
+      assert(client.evaluationServiceStub);
       client.close().then(() => {
         done();
       });
@@ -265,11 +311,11 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.estimateBillingServiceStub, undefined);
+      assert.strictEqual(client.evaluationServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -278,7 +324,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -291,7 +337,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -312,70 +358,204 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
   });
 
-  describe('estimateDataSize', () => {
-    it('invokes estimateDataSize without error', async () => {
+  describe('getEvaluation', () => {
+    it('invokes getEvaluation without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
       );
-      client.innerApiCalls.estimateDataSize =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.estimateDataSize(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.getEvaluation = stubSimpleCall(expectedResponse);
+      const [response] = await client.getEvaluation(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getEvaluation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getEvaluation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes estimateDataSize without error using callback', async () => {
+    it('invokes getEvaluation without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+      );
+      client.innerApiCalls.getEvaluation =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getEvaluation(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.IEvaluation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getEvaluation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEvaluation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEvaluation with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getEvaluation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getEvaluation(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getEvaluation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEvaluation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getEvaluation with closed client', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.GetEvaluationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getEvaluation(request), expectedError);
+    });
+  });
+
+  describe('createEvaluation', () => {
+    it('invokes createEvaluation without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.estimateDataSize =
+      client.innerApiCalls.createEvaluation =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createEvaluation(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createEvaluation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEvaluation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createEvaluation without error using callback', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createEvaluation =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.estimateDataSize(
+        client.createEvaluation(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeMetadata
+              protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+              protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
             > | null
           ) => {
             if (err) {
@@ -387,90 +567,90 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeMetadata
+        protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.createEvaluation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.createEvaluation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes estimateDataSize with call error', async () => {
+    it('invokes createEvaluation with call error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest',
+        ['parent']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.estimateDataSize = stubLongRunningCall(
+      client.innerApiCalls.createEvaluation = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.estimateDataSize(request), expectedError);
+      await assert.rejects(client.createEvaluation(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.createEvaluation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.createEvaluation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes estimateDataSize with LRO error', async () => {
+    it('invokes createEvaluation with LRO error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.CreateEvaluationRequest',
+        ['parent']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.estimateDataSize = stubLongRunningCall(
+      client.innerApiCalls.createEvaluation = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.estimateDataSize(request);
+      const [operation] = await client.createEvaluation(request);
       await assert.rejects(operation.promise(), expectedError);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.createEvaluation as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.createEvaluation as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkEstimateDataSizeProgress without error', async () => {
+    it('invokes checkCreateEvaluationProgress without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -483,7 +663,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkEstimateDataSizeProgress(
+      const decodedOperation = await client.checkCreateEvaluationProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -491,9 +671,9 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkEstimateDataSizeProgress with error', async () => {
+    it('invokes checkCreateEvaluationProgress with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -505,16 +685,724 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkEstimateDataSizeProgress(''),
+        client.checkCreateEvaluationProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
+
+  describe('listEvaluations', () => {
+    it('invokes listEvaluations without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+      ];
+      client.innerApiCalls.listEvaluations = stubSimpleCall(expectedResponse);
+      const [response] = await client.listEvaluations(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEvaluations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEvaluations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEvaluations without error using callback', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+      ];
+      client.innerApiCalls.listEvaluations =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEvaluations(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1alpha.IEvaluation[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEvaluations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEvaluations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEvaluations with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEvaluations = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listEvaluations(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listEvaluations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEvaluations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEvaluationsStream without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+      ];
+      client.descriptors.page.listEvaluations.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEvaluationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.Evaluation[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1alpha.Evaluation
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listEvaluations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEvaluations, request)
+      );
+      assert(
+        (client.descriptors.page.listEvaluations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listEvaluationsStream with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEvaluations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listEvaluationsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.Evaluation[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1alpha.Evaluation
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listEvaluations.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEvaluations, request)
+      );
+      assert(
+        (client.descriptors.page.listEvaluations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listEvaluations without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.Evaluation()
+        ),
+      ];
+      client.descriptors.page.listEvaluations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1alpha.IEvaluation[] =
+        [];
+      const iterable = client.listEvaluationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listEvaluations with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEvaluations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listEvaluationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.IEvaluation[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listEvaluations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listEvaluationResults', () => {
+    it('invokes listEvaluationResults without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+      ];
+      client.innerApiCalls.listEvaluationResults =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listEvaluationResults(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEvaluationResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEvaluationResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEvaluationResults without error using callback', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+      ];
+      client.innerApiCalls.listEvaluationResults =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listEvaluationResults(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listEvaluationResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEvaluationResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEvaluationResults with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listEvaluationResults = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listEvaluationResults(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listEvaluationResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEvaluationResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listEvaluationResultsStream without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+      ];
+      client.descriptors.page.listEvaluationResults.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listEvaluationResultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listEvaluationResults
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEvaluationResults, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listEvaluationResults
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listEvaluationResultsStream with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEvaluationResults.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listEvaluationResultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listEvaluationResults
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listEvaluationResults, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listEvaluationResults
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEvaluationResults without error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult()
+        ),
+      ];
+      client.descriptors.page.listEvaluationResults.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult[] =
+        [];
+      const iterable = client.listEvaluationResultsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEvaluationResults
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listEvaluationResults
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listEvaluationResults with error', async () => {
+      const client =
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsRequest',
+        ['evaluation']
+      );
+      request.evaluation = defaultValue1;
+      const expectedHeaderRequestParams = `evaluation=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listEvaluationResults.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listEvaluationResultsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listEvaluationResults
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listEvaluationResults
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -545,7 +1433,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -590,7 +1478,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -626,7 +1514,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -675,7 +1563,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -717,7 +1605,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -739,7 +1627,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -774,7 +1662,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -799,7 +1687,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -822,7 +1710,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -857,7 +1745,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -882,7 +1770,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -905,7 +1793,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -940,7 +1828,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -965,7 +1853,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1002,7 +1890,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1039,7 +1927,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1091,7 +1979,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         engine: 'engineValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1167,7 +2055,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1231,7 +2119,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1280,7 +2168,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         project: 'projectValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1322,7 +2210,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1427,7 +2315,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1575,7 +2463,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1739,7 +2627,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1866,7 +2754,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1994,7 +2882,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2121,7 +3009,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2231,7 +3119,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2358,7 +3246,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2486,7 +3374,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2614,7 +3502,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2759,7 +3647,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2869,7 +3757,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2996,7 +3884,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3123,7 +4011,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3250,7 +4138,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3376,7 +4264,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3504,7 +4392,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3646,7 +4534,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3728,7 +4616,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3856,7 +4744,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3999,7 +4887,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4095,7 +4983,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4203,7 +5091,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4310,7 +5198,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4400,7 +5288,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4494,7 +5382,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4601,7 +5489,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4698,7 +5586,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4823,7 +5711,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4913,7 +5801,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5021,7 +5909,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         sampleQuery: 'sampleQueryValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5097,7 +5985,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         sampleQuerySet: 'sampleQuerySetValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new evaluationserviceModule.v1alpha.EvaluationServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
