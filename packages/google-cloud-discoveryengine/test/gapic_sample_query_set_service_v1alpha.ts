@@ -21,14 +21,11 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as estimatebillingserviceModule from '../src';
+import * as samplequerysetserviceModule from '../src';
 
-import {
-  protobuf,
-  LROperation,
-  operationsProtos,
-  LocationProtos,
-} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -60,36 +57,51 @@ function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
     : sinon.stub().resolves([response]);
 }
 
-function stubLongRunningCall<ResponseType>(
+function stubSimpleCallWithCallback<ResponseType>(
   response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
+  error?: Error
 ) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().rejects(callError)
-    : sinon.stub().resolves([mockOperation]);
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubLongRunningCallWithCallback<ResponseType>(
-  response?: ResponseType,
-  callError?: Error,
-  lroError?: Error
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
 ) {
-  const innerStub = lroError
-    ? sinon.stub().rejects(lroError)
-    : sinon.stub().resolves([response]);
-  const mockOperation = {
-    promise: innerStub,
-  };
-  return callError
-    ? sinon.stub().callsArgWith(2, callError)
-    : sinon.stub().callsArgWith(2, null, mockOperation);
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
 }
 
 function stubAsyncIterationCall<ResponseType>(
@@ -115,18 +127,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1alpha.EstimateBillingServiceClient', () => {
+describe('v1alpha.SampleQuerySetServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -138,7 +150,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient
+          samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient
             .servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
@@ -148,7 +160,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient
+          samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient
             .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
@@ -157,7 +169,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           universeDomain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -166,7 +178,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           universe_domain: 'example.com',
         });
       const servicePath = client.apiEndpoint;
@@ -179,7 +191,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+            new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -193,7 +205,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient(
+            new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient(
               {universeDomain: 'configured.example.com'}
             );
           const servicePath = client.apiEndpoint;
@@ -211,7 +223,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -220,20 +232,20 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('has port', () => {
       const port =
-        estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient.port;
+        samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient();
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           fallback: true,
         });
       assert(client);
@@ -241,23 +253,23 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.estimateBillingServiceStub, undefined);
+      assert.strictEqual(client.sampleQuerySetServiceStub, undefined);
       await client.initialize();
-      assert(client.estimateBillingServiceStub);
+      assert(client.sampleQuerySetServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      assert(client.estimateBillingServiceStub);
+      assert(client.sampleQuerySetServiceStub);
       client.close().then(() => {
         done();
       });
@@ -265,11 +277,11 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      assert.strictEqual(client.estimateBillingServiceStub, undefined);
+      assert.strictEqual(client.sampleQuerySetServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -278,7 +290,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -291,7 +303,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -312,71 +324,66 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
   });
 
-  describe('estimateDataSize', () => {
-    it('invokes estimateDataSize without error', async () => {
+  describe('getSampleQuerySet', () => {
+    it('invokes getSampleQuerySet without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
       );
-      client.innerApiCalls.estimateDataSize =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.estimateDataSize(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.getSampleQuerySet = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSampleQuerySet(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getSampleQuerySet as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getSampleQuerySet as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes estimateDataSize without error using callback', async () => {
+    it('invokes getSampleQuerySet without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
       );
-      client.innerApiCalls.estimateDataSize =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.getSampleQuerySet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.estimateDataSize(
+        client.getSampleQuerySet(
           request,
           (
             err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeResponse,
-              protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeMetadata
-            > | null
+            result?: protos.google.cloud.discoveryengine.v1alpha.ISampleQuerySet | null
           ) => {
             if (err) {
               reject(err);
@@ -386,135 +393,826 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
           }
         );
       });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeResponse,
-        protos.google.cloud.discoveryengine.v1alpha.IEstimateDataSizeMetadata
-      >;
-      const [response] = await operation.promise();
+      const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getSampleQuerySet as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getSampleQuerySet as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes estimateDataSize with call error', async () => {
+    it('invokes getSampleQuerySet with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.estimateDataSize = stubLongRunningCall(
+      client.innerApiCalls.getSampleQuerySet = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.estimateDataSize(request), expectedError);
+      await assert.rejects(client.getSampleQuerySet(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getSampleQuerySet as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
+        client.innerApiCalls.getSampleQuerySet as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes estimateDataSize with LRO error', async () => {
+    it('invokes getSampleQuerySet with closed client', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest()
+        new protos.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1alpha.EstimateDataSizeRequest',
-        ['location']
+        '.google.cloud.discoveryengine.v1alpha.GetSampleQuerySetRequest',
+        ['name']
       );
-      request.location = defaultValue1;
-      const expectedHeaderRequestParams = `location=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.estimateDataSize = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.estimateDataSize(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.estimateDataSize as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.estimateDataSize as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSampleQuerySet(request), expectedError);
     });
+  });
 
-    it('invokes checkEstimateDataSizeProgress without error', async () => {
+  describe('createSampleQuerySet', () => {
+    it('invokes createSampleQuerySet without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
+        new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
       );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkEstimateDataSizeProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+      client.innerApiCalls.createSampleQuerySet =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createSampleQuerySet(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkEstimateDataSizeProgress with error', async () => {
+    it('invokes createSampleQuerySet without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
-      const expectedError = new Error('expected');
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+      );
+      client.innerApiCalls.createSampleQuerySet =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSampleQuerySet(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.ISampleQuerySet | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
 
-      client.operationsClient.getOperation = stubSimpleCall(
+    it('invokes createSampleQuerySet with error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSampleQuerySet = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.checkEstimateDataSizeProgress(''),
+      await assert.rejects(client.createSampleQuerySet(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSampleQuerySet with closed client', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.CreateSampleQuerySetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createSampleQuerySet(request), expectedError);
+    });
+  });
+
+  describe('updateSampleQuerySet', () => {
+    it('invokes updateSampleQuerySet without error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest()
+      );
+      request.sampleQuerySet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest',
+        ['sampleQuerySet', 'name']
+      );
+      request.sampleQuerySet.name = defaultValue1;
+      const expectedHeaderRequestParams = `sample_query_set.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+      );
+      client.innerApiCalls.updateSampleQuerySet =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSampleQuerySet(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSampleQuerySet without error using callback', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest()
+      );
+      request.sampleQuerySet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest',
+        ['sampleQuerySet', 'name']
+      );
+      request.sampleQuerySet.name = defaultValue1;
+      const expectedHeaderRequestParams = `sample_query_set.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+      );
+      client.innerApiCalls.updateSampleQuerySet =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSampleQuerySet(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.ISampleQuerySet | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSampleQuerySet with error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest()
+      );
+      request.sampleQuerySet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest',
+        ['sampleQuerySet', 'name']
+      );
+      request.sampleQuerySet.name = defaultValue1;
+      const expectedHeaderRequestParams = `sample_query_set.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSampleQuerySet = stubSimpleCall(
+        undefined,
         expectedError
       );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+      await assert.rejects(client.updateSampleQuerySet(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSampleQuerySet with closed client', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest()
+      );
+      request.sampleQuerySet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.UpdateSampleQuerySetRequest',
+        ['sampleQuerySet', 'name']
+      );
+      request.sampleQuerySet.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSampleQuerySet(request), expectedError);
+    });
+  });
+
+  describe('deleteSampleQuerySet', () => {
+    it('invokes deleteSampleQuerySet without error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSampleQuerySet =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSampleQuerySet(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSampleQuerySet without error using callback', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSampleQuerySet =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSampleQuerySet(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSampleQuerySet with error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSampleQuerySet = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteSampleQuerySet(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSampleQuerySet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSampleQuerySet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSampleQuerySet with closed client', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.DeleteSampleQuerySetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteSampleQuerySet(request), expectedError);
+    });
+  });
+
+  describe('listSampleQuerySets', () => {
+    it('invokes listSampleQuerySets without error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+      ];
+      client.innerApiCalls.listSampleQuerySets =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listSampleQuerySets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSampleQuerySets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSampleQuerySets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSampleQuerySets without error using callback', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+      ];
+      client.innerApiCalls.listSampleQuerySets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSampleQuerySets(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1alpha.ISampleQuerySet[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSampleQuerySets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSampleQuerySets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSampleQuerySets with error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSampleQuerySets = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSampleQuerySets(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSampleQuerySets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSampleQuerySets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSampleQuerySetsStream without error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+      ];
+      client.descriptors.page.listSampleQuerySets.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSampleQuerySetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSampleQuerySets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSampleQuerySets, request)
+      );
+      assert(
+        (client.descriptors.page.listSampleQuerySets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listSampleQuerySetsStream with error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSampleQuerySets.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSampleQuerySetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSampleQuerySets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSampleQuerySets, request)
+      );
+      assert(
+        (client.descriptors.page.listSampleQuerySets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listSampleQuerySets without error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1alpha.SampleQuerySet()
+        ),
+      ];
+      client.descriptors.page.listSampleQuerySets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1alpha.ISampleQuerySet[] =
+        [];
+      const iterable = client.listSampleQuerySetsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSampleQuerySets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSampleQuerySets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listSampleQuerySets with error', async () => {
+      const client =
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.ListSampleQuerySetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSampleQuerySets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSampleQuerySetsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1alpha.ISampleQuerySet[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSampleQuerySets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSampleQuerySets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -545,7 +1243,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -590,7 +1288,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -626,7 +1324,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -675,7 +1373,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -714,322 +1412,6 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       );
     });
   });
-  describe('getOperation', () => {
-    it('invokes getOperation without error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const response = await client.getOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes getOperation without error using callback', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      client.operationsClient.getOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.getOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: operationsProtos.google.longrunning.Operation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-    it('invokes getOperation with error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.GetOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.getOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.getOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('cancelOperation', () => {
-    it('invokes cancelOperation without error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.cancelOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes cancelOperation without error using callback', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.cancelOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.cancelOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
-    });
-    it('invokes cancelOperation with error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.CancelOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.cancelOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.cancelOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.cancelOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('deleteOperation', () => {
-    it('invokes deleteOperation without error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation =
-        stubSimpleCall(expectedResponse);
-      const response = await client.deleteOperation(request);
-      assert.deepStrictEqual(response, [expectedResponse]);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-    it('invokes deleteOperation without error using callback', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.operationsClient.deleteOperation = sinon
-        .stub()
-        .callsArgWith(2, null, expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.operationsClient.deleteOperation(
-          request,
-          undefined,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.Empty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
-    });
-    it('invokes deleteOperation with error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.DeleteOperationRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.deleteOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(async () => {
-        await client.deleteOperation(request);
-      }, expectedError);
-      assert(
-        (client.operationsClient.deleteOperation as SinonStub)
-          .getCall(0)
-          .calledWith(request)
-      );
-    });
-  });
-  describe('listOperationsAsync', () => {
-    it('uses async iteration with listOperations without error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-        generateSampleMessage(
-          new operationsProtos.google.longrunning.ListOperationsResponse()
-        ),
-      ];
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-        [];
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-    it('uses async iteration with listOperations with error', async () => {
-      const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new operationsProtos.google.longrunning.ListOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.operationsClient.descriptor.listOperations.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.operationsClient.listOperationsAsync(request);
-      await assert.rejects(async () => {
-        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.operationsClient.descriptor.listOperations
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-    });
-  });
 
   describe('Path templates', () => {
     describe('aclConfig', () => {
@@ -1039,7 +1421,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1091,7 +1473,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         engine: 'engineValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1167,7 +1549,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1231,7 +1613,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1280,7 +1662,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         project: 'projectValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1322,7 +1704,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1427,7 +1809,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1575,7 +1957,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1739,7 +2121,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1866,7 +2248,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1994,7 +2376,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2121,7 +2503,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2231,7 +2613,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2358,7 +2740,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2486,7 +2868,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2614,7 +2996,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2759,7 +3141,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2869,7 +3251,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2996,7 +3378,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3123,7 +3505,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3250,7 +3632,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3376,7 +3758,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3504,7 +3886,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3646,7 +4028,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3728,7 +4110,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3856,7 +4238,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -3999,7 +4381,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4095,7 +4477,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4203,7 +4585,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4310,7 +4692,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4400,7 +4782,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4494,7 +4876,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4601,7 +4983,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4698,7 +5080,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4823,7 +5205,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -4913,7 +5295,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5021,7 +5403,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         sampleQuery: 'sampleQueryValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -5097,7 +5479,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
         sampleQuerySet: 'sampleQuerySetValue',
       };
       const client =
-        new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
+        new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });

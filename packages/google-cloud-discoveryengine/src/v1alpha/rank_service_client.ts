@@ -210,6 +210,9 @@ export class RankServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      evaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/evaluations/{evaluation}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -338,6 +341,12 @@ export class RankServiceClient {
         ),
       rankingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/rankingConfigs/{ranking_config}'
+      ),
+      sampleQueryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}/sampleQueries/{sampleQuery}'
+      ),
+      sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}'
       ),
     };
 
@@ -817,6 +826,58 @@ export class RankServiceClient {
    */
   matchEngineFromEngineName(engineName: string) {
     return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified evaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  evaluationPath(project: string, location: string, evaluation: string) {
+    return this.pathTemplates.evaluationPathTemplate.render({
+      project: project,
+      location: location,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
+  }
+
+  /**
+   * Parse the evaluation from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
   }
 
   /**
@@ -3903,6 +3964,136 @@ export class RankServiceClient {
   matchRankingConfigFromRankingConfigName(rankingConfigName: string) {
     return this.pathTemplates.rankingConfigPathTemplate.match(rankingConfigName)
       .ranking_config;
+  }
+
+  /**
+   * Return a fully-qualified sampleQuery resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sampleQuerySet
+   * @param {string} sampleQuery
+   * @returns {string} Resource name string.
+   */
+  sampleQueryPath(
+    project: string,
+    location: string,
+    sampleQuerySet: string,
+    sampleQuery: string
+  ) {
+    return this.pathTemplates.sampleQueryPathTemplate.render({
+      project: project,
+      location: location,
+      sampleQuerySet: sampleQuerySet,
+      sampleQuery: sampleQuery,
+    });
+  }
+
+  /**
+   * Parse the project from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .location;
+  }
+
+  /**
+   * Parse the sampleQuerySet from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the sampleQuerySet.
+   */
+  matchSampleQuerySetFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .sampleQuerySet;
+  }
+
+  /**
+   * Parse the sampleQuery from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the sampleQuery.
+   */
+  matchSampleQueryFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .sampleQuery;
+  }
+
+  /**
+   * Return a fully-qualified sampleQuerySet resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sampleQuerySet
+   * @returns {string} Resource name string.
+   */
+  sampleQuerySetPath(
+    project: string,
+    location: string,
+    sampleQuerySet: string
+  ) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.render({
+      project: project,
+      location: location,
+      sampleQuerySet: sampleQuerySet,
+    });
+  }
+
+  /**
+   * Parse the project from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).project;
+  }
+
+  /**
+   * Parse the location from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).location;
+  }
+
+  /**
+   * Parse the sampleQuerySet from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the sampleQuerySet.
+   */
+  matchSampleQuerySetFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).sampleQuerySet;
   }
 
   /**

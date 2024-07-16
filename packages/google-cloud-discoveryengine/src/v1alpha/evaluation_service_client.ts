@@ -23,6 +23,8 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
   LocationsClient,
@@ -34,18 +36,19 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1alpha/conversational_search_service_client_config.json`.
+ * `src/v1alpha/evaluation_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './conversational_search_service_client_config.json';
+import * as gapicConfig from './evaluation_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service for conversational search.
+ *  Service for managing
+ *  {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s,
  * @class
  * @memberof v1alpha
  */
-export class ConversationalSearchServiceClient {
+export class EvaluationServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -66,10 +69,11 @@ export class ConversationalSearchServiceClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
-  conversationalSearchServiceStub?: Promise<{[name: string]: Function}>;
+  operationsClient: gax.OperationsClient;
+  evaluationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of ConversationalSearchServiceClient.
+   * Construct an instance of EvaluationServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -104,7 +108,7 @@ export class ConversationalSearchServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ConversationalSearchServiceClient({fallback: true}, gax);
+   *     const client = new EvaluationServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -112,8 +116,7 @@ export class ConversationalSearchServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof ConversationalSearchServiceClient;
+    const staticMembers = this.constructor as typeof EvaluationServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -215,6 +218,9 @@ export class ConversationalSearchServiceClient {
       ),
       evaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/evaluations/{evaluation}'
+      ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
@@ -354,21 +360,151 @@ export class ConversationalSearchServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConversations: new this._gaxModule.PageDescriptor(
+      listEvaluations: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'conversations'
+        'evaluations'
       ),
-      listSessions: new this._gaxModule.PageDescriptor(
+      listEvaluationResults: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'sessions'
+        'evaluationResults'
+      ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}:cancel',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1alpha/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataConnector/operations/*}',
+          additional_bindings: [
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/engines/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/branches/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/models/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/operations/*}',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
+            },
+            {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/sampleQuerySets/*/operations/*}',
+            },
+            {get: '/v1alpha/{name=projects/*/operations/*}'},
+          ],
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataConnector}/operations',
+          additional_bindings: [
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/branches/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/schemas/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/targetSites}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*/engines/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/collections/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/branches/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {get: '/v1alpha/{name=projects/*/locations/*}/operations'},
+            {get: '/v1alpha/{name=projects/*}/operations'},
+          ],
+        },
+      ];
+    }
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
+    const createEvaluationResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.Evaluation'
+    ) as gax.protobuf.Type;
+    const createEvaluationMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.CreateEvaluationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      createEvaluation: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createEvaluationResponse.decode.bind(createEvaluationResponse),
+        createEvaluationMetadata.decode.bind(createEvaluationMetadata)
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.discoveryengine.v1alpha.ConversationalSearchService',
+      'google.cloud.discoveryengine.v1alpha.EvaluationService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -396,43 +532,34 @@ export class ConversationalSearchServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.conversationalSearchServiceStub) {
-      return this.conversationalSearchServiceStub;
+    if (this.evaluationServiceStub) {
+      return this.evaluationServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.discoveryengine.v1alpha.ConversationalSearchService.
-    this.conversationalSearchServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.discoveryengine.v1alpha.EvaluationService.
+    this.evaluationServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.discoveryengine.v1alpha.ConversationalSearchService'
+            'google.cloud.discoveryengine.v1alpha.EvaluationService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.discoveryengine.v1alpha
-            .ConversationalSearchService,
+            .EvaluationService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const conversationalSearchServiceStubMethods = [
-      'converseConversation',
-      'createConversation',
-      'deleteConversation',
-      'updateConversation',
-      'getConversation',
-      'listConversations',
-      'answerQuery',
-      'getAnswer',
-      'createSession',
-      'deleteSession',
-      'updateSession',
-      'getSession',
-      'listSessions',
+    const evaluationServiceStubMethods = [
+      'getEvaluation',
+      'listEvaluations',
+      'createEvaluation',
+      'listEvaluationResults',
     ];
-    for (const methodName of conversationalSearchServiceStubMethods) {
-      const callPromise = this.conversationalSearchServiceStub.then(
+    for (const methodName of evaluationServiceStubMethods) {
+      const callPromise = this.evaluationServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -446,7 +573,10 @@ export class ConversationalSearchServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -457,7 +587,7 @@ export class ConversationalSearchServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.conversationalSearchServiceStub;
+    return this.evaluationServiceStub;
   }
 
   /**
@@ -545,136 +675,88 @@ export class ConversationalSearchServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Converses a conversation.
+   * Gets a {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Conversation to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`.
-   *   Use
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/-`
-   *   to activate auto session mode, which automatically creates a new
-   *   conversation inside a ConverseConversation session.
-   * @param {google.cloud.discoveryengine.v1alpha.TextInput} request.query
-   *   Required. Current user input.
-   * @param {string} request.servingConfig
-   *   The resource name of the Serving Config to use. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
-   *   If this is not set, the default serving config will be used.
-   * @param {google.cloud.discoveryengine.v1alpha.Conversation} request.conversation
-   *   The conversation to be used by auto session only. The name field will be
-   *   ignored as we automatically assign new name for the conversation in auto
-   *   session.
-   * @param {boolean} request.safeSearch
-   *   Whether to turn on safe search.
-   * @param {number[]} request.userLabels
-   *   The user labels applied to a resource must meet the following requirements:
+   *   Required. Full resource name of
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}, such as
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
    *
-   *   * Each resource can have multiple labels, up to a maximum of 64.
-   *   * Each label must be a key-value pair.
-   *   * Keys have a minimum length of 1 character and a maximum length of 63
-   *     characters and cannot be empty. Values can be empty and have a maximum
-   *     length of 63 characters.
-   *   * Keys and values can contain only lowercase letters, numeric characters,
-   *     underscores, and dashes. All characters must use UTF-8 encoding, and
-   *     international characters are allowed.
-   *   * The key portion of a label must be unique. However, you can use the same
-   *     key with multiple resources.
-   *   * Keys must start with a lowercase letter or international character.
+   *   If the caller does not have permission to access the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}, regardless
+   *   of whether or not it exists, a PERMISSION_DENIED error is returned.
    *
-   *   See [Google Cloud
-   *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
-   *   for more details.
-   * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.ContentSearchSpec.SummarySpec} request.summarySpec
-   *   A specification for configuring the summary returned in the response.
-   * @param {string} request.filter
-   *   The filter syntax consists of an expression language for constructing a
-   *   predicate from one or more fields of the documents being filtered. Filter
-   *   expression is case-sensitive. This will be used to filter search results
-   *   which may affect the summary response.
-   *
-   *   If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
-   *
-   *   Filtering in Vertex AI Search is done by mapping the LHS filter key to a
-   *   key property defined in the Vertex AI Search backend -- this mapping is
-   *   defined by the customer in their schema. For example a media customer might
-   *   have a field 'name' in their schema. In this case the filter would look
-   *   like this: filter --> name:'ANY("king kong")'
-   *
-   *   For more information about filtering including syntax and filter
-   *   operators, see
-   *   [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
-   * @param {google.cloud.discoveryengine.v1alpha.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain documents in search results which may
-   *   affect the converse response. For more information on boosting, see
-   *   [Boosting](https://cloud.google.com/retail/docs/boosting#boost)
+   *   If the requested
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation} does not
+   *   exist, a NOT_FOUND error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.ConverseConversationResponse|ConverseConversationResponse}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.converse_conversation.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_ConverseConversation_async
+   * @example <caption>include:samples/generated/v1alpha/evaluation_service.get_evaluation.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EvaluationService_GetEvaluation_async
    */
-  converseConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest,
+  getEvaluation(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse,
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
       (
-        | protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest
+        | protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  converseConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest,
+  getEvaluation(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse,
-      | protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  converseConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest,
+  getEvaluation(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest,
     callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse,
-      | protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  converseConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest,
+  getEvaluation(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse,
-          | protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest
+          protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse,
-      | protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.IConverseConversationResponse,
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
       (
-        | protos.google.cloud.discoveryengine.v1alpha.IConverseConversationRequest
+        | protos.google.cloud.discoveryengine.v1alpha.IGetEvaluationRequest
         | undefined
       ),
       {} | undefined,
@@ -696,1153 +778,250 @@ export class ConversationalSearchServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.converseConversation(request, options, callback);
-  }
-  /**
-   * Creates a Conversation.
-   *
-   * If the {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation} to
-   * create already exists, an ALREADY_EXISTS error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Full resource name of parent data store. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
-   * @param {google.cloud.discoveryengine.v1alpha.Conversation} request.conversation
-   *   Required. The conversation to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.create_conversation.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_CreateConversation_async
-   */
-  createConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  createConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IConversation,
-          | protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.ICreateConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createConversation(request, options, callback);
-  }
-  /**
-   * Deletes a Conversation.
-   *
-   * If the {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation} to
-   * delete does not exist, a NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Conversation to delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.delete_conversation.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_DeleteConversation_async
-   */
-  deleteConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  deleteConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IDeleteConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteConversation(request, options, callback);
-  }
-  /**
-   * Updates a Conversation.
-   *
-   * {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation} action
-   * type cannot be changed. If the
-   * {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation} to update
-   * does not exist, a NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1alpha.Conversation} request.conversation
-   *   Required. The Conversation to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation} to
-   *   update. The following are NOT supported:
-   *
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.Conversation.name|Conversation.name}
-   *
-   *   If not set or empty, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.update_conversation.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_UpdateConversation_async
-   */
-  updateConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  updateConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IConversation,
-          | protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IUpdateConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'conversation.name': request.conversation!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateConversation(request, options, callback);
-  }
-  /**
-   * Gets a Conversation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Conversation to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.get_conversation.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_GetConversation_async
-   */
-  getConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  getConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConversation(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConversation(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IConversation,
-          | protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IGetConversationRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getConversation(request, options, callback);
-  }
-  /**
-   * Answer query method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.servingConfig
-   *   Required. The resource name of the Search serving config, such as
-   *   `projects/* /locations/global/collections/default_collection/engines/* /servingConfigs/default_serving_config`,
-   *   or
-   *   `projects/* /locations/global/collections/default_collection/dataStores/* /servingConfigs/default_serving_config`.
-   *   This field is used to identify the serving configuration name, set
-   *   of models used to make the search.
-   * @param {google.cloud.discoveryengine.v1alpha.Query} request.query
-   *   Required. Current user query.
-   * @param {string} request.session
-   *   The session resource name. Not required.
-   *
-   *   When session field is not set, the API is in sessionless mode.
-   *
-   *   We support auto session mode: users can use the wildcard symbol `-` as
-   *   session ID.  A new ID will be automatically generated and assigned.
-   * @param {google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.SafetySpec} request.safetySpec
-   *   Model specification.
-   * @param {google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.RelatedQuestionsSpec} request.relatedQuestionsSpec
-   *   Related questions specification.
-   * @param {google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.AnswerGenerationSpec} request.answerGenerationSpec
-   *   Answer generation specification.
-   * @param {google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.SearchSpec} request.searchSpec
-   *   Search specification.
-   * @param {google.cloud.discoveryengine.v1alpha.AnswerQueryRequest.QueryUnderstandingSpec} request.queryUnderstandingSpec
-   *   Query understanding specification.
-   * @param {boolean} request.asynchronousMode
-   *   Asynchronous mode control.
-   *
-   *   If enabled, the response will be returned with answer/session resource
-   *   name without final answer. The API users need to do the polling to get
-   *   the latest status of answer/session by calling
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.ConversationalSearchService.GetAnswer|ConversationalSearchService.GetAnswer}
-   *   or
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.ConversationalSearchService.GetSession|ConversationalSearchService.GetSession}
-   *   method.
-   * @param {string} request.userPseudoId
-   *   A unique identifier for tracking visitors. For example, this could be
-   *   implemented with an HTTP cookie, which should be able to uniquely identify
-   *   a visitor on a single device. This unique identifier should not change if
-   *   the visitor logs in or out of the website.
-   *
-   *   This field should NOT have a fixed value such as `unknown_visitor`.
-   *
-   *   The field must be a UTF-8 encoded string with a length limit of 128
-   *   characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.AnswerQueryResponse|AnswerQueryResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.answer_query.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_AnswerQuery_async
-   */
-  answerQuery(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  answerQuery(
-    request: protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse,
-      | protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  answerQuery(
-    request: protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse,
-      | protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  answerQuery(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse,
-          | protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse,
-      | protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryResponse,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IAnswerQueryRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.answerQuery(request, options, callback);
-  }
-  /**
-   * Gets a Answer.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Answer to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/engines/{engine_id}/sessions/{session_id}/answers/{answer_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Answer|Answer}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.get_answer.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_GetAnswer_async
-   */
-  getAnswer(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IAnswer,
-      protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest | undefined,
-      {} | undefined,
-    ]
-  >;
-  getAnswer(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IAnswer,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnswer(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IAnswer,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getAnswer(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.IAnswer,
-          | protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.IAnswer,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.IAnswer,
-      protos.google.cloud.discoveryengine.v1alpha.IGetAnswerRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getAnswer(request, options, callback);
-  }
-  /**
-   * Creates a Session.
-   *
-   * If the {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session} to create
-   * already exists, an ALREADY_EXISTS error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. Full resource name of parent data store. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
-   * @param {google.cloud.discoveryengine.v1alpha.Session} request.session
-   *   Required. The session to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.create_session.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_CreateSession_async
-   */
-  createSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  createSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.ISession,
-          | protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.ICreateSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.createSession(request, options, callback);
-  }
-  /**
-   * Deletes a Session.
-   *
-   * If the {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session} to delete
-   * does not exist, a NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Session to delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.delete_session.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_DeleteSession_async
-   */
-  deleteSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  deleteSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IDeleteSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deleteSession(request, options, callback);
-  }
-  /**
-   * Updates a Session.
-   *
-   * {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session} action type cannot
-   * be changed. If the {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session}
-   * to update does not exist, a NOT_FOUND error is returned.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.discoveryengine.v1alpha.Session} request.session
-   *   Required. The Session to update.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session} to update. The
-   *   following are NOT supported:
-   *
-   *   * {@link protos.google.cloud.discoveryengine.v1alpha.Session.name|Session.name}
-   *
-   *   If not set or empty, all supported fields are updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.update_session.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_UpdateSession_async
-   */
-  updateSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  updateSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.ISession,
-          | protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IUpdateSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        'session.name': request.session!.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.updateSession(request, options, callback);
-  }
-  /**
-   * Gets a Session.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Session to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.get_session.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_GetSession_async
-   */
-  getSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  >;
-  getSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSession(
-    request: protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest,
-    callback: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getSession(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.discoveryengine.v1alpha.ISession,
-          | protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      | protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.discoveryengine.v1alpha.ISession,
-      (
-        | protos.google.cloud.discoveryengine.v1alpha.IGetSessionRequest
-        | undefined
-      ),
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getSession(request, options, callback);
+    return this.innerApiCalls.getEvaluation(request, options, callback);
   }
 
   /**
-   * Lists all Conversations by their parent
-   * {@link protos.google.cloud.discoveryengine.v1alpha.DataStore|DataStore}.
+   * Creates a {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}.
+   *
+   * Upon creation, the evaluation will be automatically triggered and begin
+   * execution.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
-   * @param {number} request.pageSize
-   *   Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListConversations` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.filter
-   *   A filter to apply on the list results. The supported features are:
-   *   user_pseudo_id, state.
-   *
-   *   Example:
-   *   "user_pseudo_id = some_id"
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by, sorted in ascending order.
-   *   Use "desc" after a field name for descending.
-   *   Supported fields:
-   *     * `update_time`
-   *     * `create_time`
-   *     * `conversation_name`
-   *
-   *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *   Required. The parent resource name, such as
+   *   `projects/{project}/locations/{location}`.
+   * @param {google.cloud.discoveryengine.v1alpha.Evaluation} request.evaluation
+   *   Required. The {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}
+   *   to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation}.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/evaluation_service.create_evaluation.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EvaluationService_CreateEvaluation_async
+   */
+  createEvaluation(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createEvaluation(
+    request: protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEvaluation(
+    request: protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEvaluation(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+            protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.IEvaluation,
+        protos.google.cloud.discoveryengine.v1alpha.ICreateEvaluationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createEvaluation(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createEvaluation()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/evaluation_service.create_evaluation.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EvaluationService_CreateEvaluation_async
+   */
+  async checkCreateEvaluationProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.Evaluation,
+      protos.google.cloud.discoveryengine.v1alpha.CreateEvaluationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createEvaluation,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.Evaluation,
+      protos.google.cloud.discoveryengine.v1alpha.CreateEvaluationMetadata
+    >;
+  }
+  /**
+   * Gets a list of
+   * {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent location resource name, such as
+   *   `projects/{project}/locations/{location}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s under this
+   *   location, regardless of whether or not this location exists, a
+   *   `PERMISSION_DENIED` error is returned.
+   * @param {number} request.pageSize
+   *   Maximum number of
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s to return.
+   *   If unspecified, defaults to 100. The maximum allowed value is 1000. Values
+   *   above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsResponse.next_page_token|ListEvaluationsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   must match the call that provided the page token. Otherwise, an
+   *   `INVALID_ARGUMENT` error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listConversationsAsync()`
+   *   We recommend using `listEvaluationsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listConversations(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
+  listEvaluations(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation[],
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest | null,
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsResponse,
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation[],
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest | null,
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsResponse,
     ]
   >;
-  listConversations(
-    request: protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
+  listEvaluations(
+    request: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListConversationsResponse
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.IConversation
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation
     >
   ): void;
-  listConversations(
-    request: protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
+  listEvaluations(
+    request: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListConversationsResponse
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.IConversation
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation
     >
   ): void;
-  listConversations(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
+  listEvaluations(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
-          | protos.google.cloud.discoveryengine.v1alpha.IListConversationsResponse
+          protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
+          | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1alpha.IConversation
+          protos.google.cloud.discoveryengine.v1alpha.IEvaluation
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListConversationsResponse
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.IConversation
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.IConversation[],
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest | null,
-      protos.google.cloud.discoveryengine.v1alpha.IListConversationsResponse,
+      protos.google.cloud.discoveryengine.v1alpha.IEvaluation[],
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest | null,
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsResponse,
     ]
   > | void {
     request = request || {};
@@ -1861,7 +1040,7 @@ export class ConversationalSearchServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConversations(request, options, callback);
+    return this.innerApiCalls.listEvaluations(request, options, callback);
   }
 
   /**
@@ -1869,44 +1048,44 @@ export class ConversationalSearchServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   *   Required. The parent location resource name, such as
+   *   `projects/{project}/locations/{location}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s under this
+   *   location, regardless of whether or not this location exists, a
+   *   `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
-   *   Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
+   *   Maximum number of
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s to return.
+   *   If unspecified, defaults to 100. The maximum allowed value is 1000. Values
+   *   above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous `ListConversations` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.filter
-   *   A filter to apply on the list results. The supported features are:
-   *   user_pseudo_id, state.
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsResponse.next_page_token|ListEvaluationsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   Example:
-   *   "user_pseudo_id = some_id"
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by, sorted in ascending order.
-   *   Use "desc" after a field name for descending.
-   *   Supported fields:
-   *     * `update_time`
-   *     * `create_time`
-   *     * `conversation_name`
-   *
-   *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   must match the call that provided the page token. Otherwise, an
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConversationsAsync()`
+   *   We recommend using `listEvaluationsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listConversationsStream(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
+  listEvaluationsStream(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1917,64 +1096,64 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listConversations'];
+    const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listConversations.createStream(
-      this.innerApiCalls.listConversations as GaxCall,
+    return this.descriptors.page.listEvaluations.createStream(
+      this.innerApiCalls.listEvaluations as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listConversations`, but returns an iterable object.
+   * Equivalent to `listEvaluations`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   *   Required. The parent location resource name, such as
+   *   `projects/{project}/locations/{location}`.
+   *
+   *   If the caller does not have permission to list
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s under this
+   *   location, regardless of whether or not this location exists, a
+   *   `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
-   *   Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
+   *   Maximum number of
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}s to return.
+   *   If unspecified, defaults to 100. The maximum allowed value is 1000. Values
+   *   above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous `ListConversations` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.filter
-   *   A filter to apply on the list results. The supported features are:
-   *   user_pseudo_id, state.
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationsResponse.next_page_token|ListEvaluationsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   Example:
-   *   "user_pseudo_id = some_id"
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by, sorted in ascending order.
-   *   Use "desc" after a field name for descending.
-   *   Supported fields:
-   *     * `update_time`
-   *     * `create_time`
-   *     * `conversation_name`
-   *
-   *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluations|EvaluationService.ListEvaluations}
+   *   must match the call that provided the page token. Otherwise, an
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Conversation|Conversation}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.list_conversations.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_ListConversations_async
+   * @example <caption>include:samples/generated/v1alpha/evaluation_service.list_evaluations.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EvaluationService_ListEvaluations_async
    */
-  listConversationsAsync(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListConversationsRequest,
+  listEvaluationsAsync(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.IConversation> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.IEvaluation> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1983,113 +1162,111 @@ export class ConversationalSearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listConversations'];
+    const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listConversations.asyncIterate(
-      this.innerApiCalls['listConversations'] as GaxCall,
+    return this.descriptors.page.listEvaluations.asyncIterate(
+      this.innerApiCalls['listEvaluations'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.IConversation>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.IEvaluation>;
   }
   /**
-   * Lists all Sessions by their parent
-   * {@link protos.google.cloud.discoveryengine.v1alpha.DataStore|DataStore}.
+   * Gets a list of results for a given a
+   * {@link protos.google.cloud.discoveryengine.v1alpha.Evaluation|Evaluation}.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {string} request.evaluation
+   *   Required. The evaluation resource name, such as
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   *
+   *   If the caller does not have permission to list {@link protos.|EvaluationResult}
+   *   under this evaluation, regardless of whether or not this evaluation
+   *   set exists, a `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
-   *   Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
+   *   Maximum number of {@link protos.|EvaluationResult} to return. If unspecified,
+   *   defaults to 100. The maximum allowed value is 1000. Values above 1000 will
+   *   be coerced to 1000.
+   *
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous `ListSessions` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.filter
-   *   A filter to apply on the list results. The supported features are:
-   *   user_pseudo_id, state.
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.next_page_token|ListEvaluationResultsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   Example:
-   *   "user_pseudo_id = some_id"
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by, sorted in ascending order.
-   *   Use "desc" after a field name for descending.
-   *   Supported fields:
-   *     * `update_time`
-   *     * `create_time`
-   *     * `session_name`
-   *
-   *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   must match the call that provided the page token. Otherwise, an
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session}.
+   *   The first element of the array is Array of {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult|EvaluationResult}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listSessionsAsync()`
+   *   We recommend using `listEvaluationResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSessions(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
+  listEvaluationResults(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.ISession[],
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest | null,
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse,
+      protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult[],
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest | null,
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsResponse,
     ]
   >;
-  listSessions(
-    request: protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
+  listEvaluationResults(
+    request: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.ISession
+      protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult
     >
   ): void;
-  listSessions(
-    request: protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
+  listEvaluationResults(
+    request: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.ISession
+      protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult
     >
   ): void;
-  listSessions(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
+  listEvaluationResults(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
-          | protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse
+          protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
+          | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsResponse
           | null
           | undefined,
-          protos.google.cloud.discoveryengine.v1alpha.ISession
+          protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
-      | protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
+      | protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsResponse
       | null
       | undefined,
-      protos.google.cloud.discoveryengine.v1alpha.ISession
+      protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult
     >
   ): Promise<
     [
-      protos.google.cloud.discoveryengine.v1alpha.ISession[],
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest | null,
-      protos.google.cloud.discoveryengine.v1alpha.IListSessionsResponse,
+      protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult[],
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest | null,
+      protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsResponse,
     ]
   > | void {
     request = request || {};
@@ -2105,55 +1282,53 @@ export class ConversationalSearchServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        evaluation: request.evaluation ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listSessions(request, options, callback);
+    return this.innerApiCalls.listEvaluationResults(request, options, callback);
   }
 
   /**
    * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {string} request.evaluation
+   *   Required. The evaluation resource name, such as
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   *
+   *   If the caller does not have permission to list {@link protos.|EvaluationResult}
+   *   under this evaluation, regardless of whether or not this evaluation
+   *   set exists, a `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
-   *   Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
+   *   Maximum number of {@link protos.|EvaluationResult} to return. If unspecified,
+   *   defaults to 100. The maximum allowed value is 1000. Values above 1000 will
+   *   be coerced to 1000.
+   *
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous `ListSessions` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.filter
-   *   A filter to apply on the list results. The supported features are:
-   *   user_pseudo_id, state.
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.next_page_token|ListEvaluationResultsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   Example:
-   *   "user_pseudo_id = some_id"
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by, sorted in ascending order.
-   *   Use "desc" after a field name for descending.
-   *   Supported fields:
-   *     * `update_time`
-   *     * `create_time`
-   *     * `session_name`
-   *
-   *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   must match the call that provided the page token. Otherwise, an
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult|EvaluationResult} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listSessionsAsync()`
+   *   We recommend using `listEvaluationResultsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listSessionsStream(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
+  listEvaluationResultsStream(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -2162,82 +1337,80 @@ export class ConversationalSearchServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        evaluation: request.evaluation ?? '',
       });
-    const defaultCallSettings = this._defaults['listSessions'];
+    const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSessions.createStream(
-      this.innerApiCalls.listSessions as GaxCall,
+    return this.descriptors.page.listEvaluationResults.createStream(
+      this.innerApiCalls.listEvaluationResults as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listSessions`, but returns an iterable object.
+   * Equivalent to `listEvaluationResults`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+   * @param {string} request.evaluation
+   *   Required. The evaluation resource name, such as
+   *   `projects/{project}/locations/{location}/evaluations/{evaluation}`.
+   *
+   *   If the caller does not have permission to list {@link protos.|EvaluationResult}
+   *   under this evaluation, regardless of whether or not this evaluation
+   *   set exists, a `PERMISSION_DENIED` error is returned.
    * @param {number} request.pageSize
-   *   Maximum number of results to return. If unspecified, defaults
-   *   to 50. Max allowed value is 1000.
+   *   Maximum number of {@link protos.|EvaluationResult} to return. If unspecified,
+   *   defaults to 100. The maximum allowed value is 1000. Values above 1000 will
+   *   be coerced to 1000.
+   *
+   *   If this field is negative, an `INVALID_ARGUMENT` error is returned.
    * @param {string} request.pageToken
-   *   A page token, received from a previous `ListSessions` call.
-   *   Provide this to retrieve the subsequent page.
-   * @param {string} request.filter
-   *   A filter to apply on the list results. The supported features are:
-   *   user_pseudo_id, state.
+   *   A page token
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.next_page_token|ListEvaluationResultsResponse.next_page_token},
+   *   received from a previous
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   call. Provide this to retrieve the subsequent page.
    *
-   *   Example:
-   *   "user_pseudo_id = some_id"
-   * @param {string} request.orderBy
-   *   A comma-separated list of fields to order by, sorted in ascending order.
-   *   Use "desc" after a field name for descending.
-   *   Supported fields:
-   *     * `update_time`
-   *     * `create_time`
-   *     * `session_name`
-   *
-   *   Example:
-   *   "update_time desc"
-   *   "create_time"
+   *   When paginating, all other parameters provided to
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.EvaluationService.ListEvaluationResults|EvaluationService.ListEvaluationResults}
+   *   must match the call that provided the page token. Otherwise, an
+   *   `INVALID_ARGUMENT` error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.discoveryengine.v1alpha.Session|Session}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.EvaluationResult|EvaluationResult}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1alpha/conversational_search_service.list_sessions.js</caption>
-   * region_tag:discoveryengine_v1alpha_generated_ConversationalSearchService_ListSessions_async
+   * @example <caption>include:samples/generated/v1alpha/evaluation_service.list_evaluation_results.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_EvaluationService_ListEvaluationResults_async
    */
-  listSessionsAsync(
-    request?: protos.google.cloud.discoveryengine.v1alpha.IListSessionsRequest,
+  listEvaluationResultsAsync(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IListEvaluationResultsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.ISession> {
+  ): AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        evaluation: request.evaluation ?? '',
       });
-    const defaultCallSettings = this._defaults['listSessions'];
+    const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listSessions.asyncIterate(
-      this.innerApiCalls['listSessions'] as GaxCall,
+    return this.descriptors.page.listEvaluationResults.asyncIterate(
+      this.innerApiCalls['listEvaluationResults'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.ISession>;
+    ) as AsyncIterable<protos.google.cloud.discoveryengine.v1alpha.ListEvaluationResultsResponse.IEvaluationResult>;
   }
   /**
    * Gets information about a location.
@@ -2315,6 +1488,181 @@ export class ConversationalSearchServiceClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -2476,6 +1824,42 @@ export class ConversationalSearchServiceClient {
   matchEvaluationFromEvaluationName(evaluationName: string) {
     return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
       .evaluation;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -5649,11 +5033,12 @@ export class ConversationalSearchServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.conversationalSearchServiceStub && !this._terminated) {
-      return this.conversationalSearchServiceStub.then(stub => {
+    if (this.evaluationServiceStub && !this._terminated) {
+      return this.evaluationServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.locationsClient.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
