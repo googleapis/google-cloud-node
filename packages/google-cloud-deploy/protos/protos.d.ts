@@ -587,6 +587,76 @@ export namespace google {
                     public abandonRelease(request: google.cloud.deploy.v1.IAbandonReleaseRequest): Promise<google.cloud.deploy.v1.AbandonReleaseResponse>;
 
                     /**
+                     * Calls CreateDeployPolicy.
+                     * @param request CreateDeployPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDeployPolicy(request: google.cloud.deploy.v1.ICreateDeployPolicyRequest, callback: google.cloud.deploy.v1.CloudDeploy.CreateDeployPolicyCallback): void;
+
+                    /**
+                     * Calls CreateDeployPolicy.
+                     * @param request CreateDeployPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDeployPolicy(request: google.cloud.deploy.v1.ICreateDeployPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateDeployPolicy.
+                     * @param request UpdateDeployPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateDeployPolicy(request: google.cloud.deploy.v1.IUpdateDeployPolicyRequest, callback: google.cloud.deploy.v1.CloudDeploy.UpdateDeployPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateDeployPolicy.
+                     * @param request UpdateDeployPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDeployPolicy(request: google.cloud.deploy.v1.IUpdateDeployPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDeployPolicy.
+                     * @param request DeleteDeployPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDeployPolicy(request: google.cloud.deploy.v1.IDeleteDeployPolicyRequest, callback: google.cloud.deploy.v1.CloudDeploy.DeleteDeployPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteDeployPolicy.
+                     * @param request DeleteDeployPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDeployPolicy(request: google.cloud.deploy.v1.IDeleteDeployPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListDeployPolicies.
+                     * @param request ListDeployPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDeployPoliciesResponse
+                     */
+                    public listDeployPolicies(request: google.cloud.deploy.v1.IListDeployPoliciesRequest, callback: google.cloud.deploy.v1.CloudDeploy.ListDeployPoliciesCallback): void;
+
+                    /**
+                     * Calls ListDeployPolicies.
+                     * @param request ListDeployPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDeployPolicies(request: google.cloud.deploy.v1.IListDeployPoliciesRequest): Promise<google.cloud.deploy.v1.ListDeployPoliciesResponse>;
+
+                    /**
+                     * Calls GetDeployPolicy.
+                     * @param request GetDeployPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DeployPolicy
+                     */
+                    public getDeployPolicy(request: google.cloud.deploy.v1.IGetDeployPolicyRequest, callback: google.cloud.deploy.v1.CloudDeploy.GetDeployPolicyCallback): void;
+
+                    /**
+                     * Calls GetDeployPolicy.
+                     * @param request GetDeployPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDeployPolicy(request: google.cloud.deploy.v1.IGetDeployPolicyRequest): Promise<google.cloud.deploy.v1.DeployPolicy>;
+
+                    /**
                      * Calls ApproveRollout.
                      * @param request ApproveRolloutRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ApproveRolloutResponse
@@ -1008,6 +1078,41 @@ export namespace google {
                      * @param [response] AbandonReleaseResponse
                      */
                     type AbandonReleaseCallback = (error: (Error|null), response?: google.cloud.deploy.v1.AbandonReleaseResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|createDeployPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDeployPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|updateDeployPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateDeployPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|deleteDeployPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDeployPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|listDeployPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListDeployPoliciesResponse
+                     */
+                    type ListDeployPoliciesCallback = (error: (Error|null), response?: google.cloud.deploy.v1.ListDeployPoliciesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|getDeployPolicy}.
+                     * @param error Error, if any
+                     * @param [response] DeployPolicy
+                     */
+                    type GetDeployPolicyCallback = (error: (Error|null), response?: google.cloud.deploy.v1.DeployPolicy) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.deploy.v1.CloudDeploy|approveRollout}.
@@ -4294,6 +4399,9 @@ export namespace google {
 
                     /** RollbackTargetRequest validateOnly */
                     validateOnly?: (boolean|null);
+
+                    /** RollbackTargetRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents a RollbackTargetRequest. */
@@ -4325,6 +4433,9 @@ export namespace google {
 
                     /** RollbackTargetRequest validateOnly. */
                     public validateOnly: boolean;
+
+                    /** RollbackTargetRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new RollbackTargetRequest instance using the specified properties.
@@ -5072,6 +5183,9 @@ export namespace google {
 
                     /** GkeCluster internalIp */
                     internalIp?: (boolean|null);
+
+                    /** GkeCluster proxyUrl */
+                    proxyUrl?: (string|null);
                 }
 
                 /** Represents a GkeCluster. */
@@ -5088,6 +5202,9 @@ export namespace google {
 
                     /** GkeCluster internalIp. */
                     public internalIp: boolean;
+
+                    /** GkeCluster proxyUrl. */
+                    public proxyUrl: string;
 
                     /**
                      * Creates a new GkeCluster instance using the specified properties.
@@ -7640,6 +7757,379 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DeployPolicy. */
+                interface IDeployPolicy {
+
+                    /** DeployPolicy name */
+                    name?: (string|null);
+
+                    /** DeployPolicy uid */
+                    uid?: (string|null);
+
+                    /** DeployPolicy description */
+                    description?: (string|null);
+
+                    /** DeployPolicy annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** DeployPolicy labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DeployPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeployPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeployPolicy suspended */
+                    suspended?: (boolean|null);
+
+                    /** DeployPolicy selectors */
+                    selectors?: (google.cloud.deploy.v1.IDeployPolicyResourceSelector[]|null);
+
+                    /** DeployPolicy rules */
+                    rules?: (google.cloud.deploy.v1.IPolicyRule[]|null);
+
+                    /** DeployPolicy etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeployPolicy. */
+                class DeployPolicy implements IDeployPolicy {
+
+                    /**
+                     * Constructs a new DeployPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployPolicy);
+
+                    /** DeployPolicy name. */
+                    public name: string;
+
+                    /** DeployPolicy uid. */
+                    public uid: string;
+
+                    /** DeployPolicy description. */
+                    public description: string;
+
+                    /** DeployPolicy annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** DeployPolicy labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DeployPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeployPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeployPolicy suspended. */
+                    public suspended: boolean;
+
+                    /** DeployPolicy selectors. */
+                    public selectors: google.cloud.deploy.v1.IDeployPolicyResourceSelector[];
+
+                    /** DeployPolicy rules. */
+                    public rules: google.cloud.deploy.v1.IPolicyRule[];
+
+                    /** DeployPolicy etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeployPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployPolicy instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployPolicy): google.cloud.deploy.v1.DeployPolicy;
+
+                    /**
+                     * Encodes the specified DeployPolicy message. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicy.verify|verify} messages.
+                     * @param message DeployPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployPolicy message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicy.verify|verify} messages.
+                     * @param message DeployPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployPolicy;
+
+                    /**
+                     * Decodes a DeployPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployPolicy;
+
+                    /**
+                     * Verifies a DeployPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployPolicy;
+
+                    /**
+                     * Creates a plain object from a DeployPolicy message. Also converts values to other types if specified.
+                     * @param message DeployPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeployPolicy {
+
+                    /** Invoker enum. */
+                    enum Invoker {
+                        INVOKER_UNSPECIFIED = 0,
+                        USER = 1,
+                        DEPLOY_AUTOMATION = 2
+                    }
+                }
+
+                /** Properties of a DeployPolicyResourceSelector. */
+                interface IDeployPolicyResourceSelector {
+
+                    /** DeployPolicyResourceSelector deliveryPipeline */
+                    deliveryPipeline?: (google.cloud.deploy.v1.IDeliveryPipelineAttribute|null);
+
+                    /** DeployPolicyResourceSelector target */
+                    target?: (google.cloud.deploy.v1.ITargetAttribute|null);
+                }
+
+                /** Represents a DeployPolicyResourceSelector. */
+                class DeployPolicyResourceSelector implements IDeployPolicyResourceSelector {
+
+                    /**
+                     * Constructs a new DeployPolicyResourceSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployPolicyResourceSelector);
+
+                    /** DeployPolicyResourceSelector deliveryPipeline. */
+                    public deliveryPipeline?: (google.cloud.deploy.v1.IDeliveryPipelineAttribute|null);
+
+                    /** DeployPolicyResourceSelector target. */
+                    public target?: (google.cloud.deploy.v1.ITargetAttribute|null);
+
+                    /**
+                     * Creates a new DeployPolicyResourceSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployPolicyResourceSelector instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployPolicyResourceSelector): google.cloud.deploy.v1.DeployPolicyResourceSelector;
+
+                    /**
+                     * Encodes the specified DeployPolicyResourceSelector message. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicyResourceSelector.verify|verify} messages.
+                     * @param message DeployPolicyResourceSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployPolicyResourceSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployPolicyResourceSelector message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicyResourceSelector.verify|verify} messages.
+                     * @param message DeployPolicyResourceSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployPolicyResourceSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployPolicyResourceSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployPolicyResourceSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployPolicyResourceSelector;
+
+                    /**
+                     * Decodes a DeployPolicyResourceSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployPolicyResourceSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployPolicyResourceSelector;
+
+                    /**
+                     * Verifies a DeployPolicyResourceSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployPolicyResourceSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployPolicyResourceSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployPolicyResourceSelector;
+
+                    /**
+                     * Creates a plain object from a DeployPolicyResourceSelector message. Also converts values to other types if specified.
+                     * @param message DeployPolicyResourceSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployPolicyResourceSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployPolicyResourceSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployPolicyResourceSelector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeliveryPipelineAttribute. */
+                interface IDeliveryPipelineAttribute {
+
+                    /** DeliveryPipelineAttribute id */
+                    id?: (string|null);
+
+                    /** DeliveryPipelineAttribute labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a DeliveryPipelineAttribute. */
+                class DeliveryPipelineAttribute implements IDeliveryPipelineAttribute {
+
+                    /**
+                     * Constructs a new DeliveryPipelineAttribute.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeliveryPipelineAttribute);
+
+                    /** DeliveryPipelineAttribute id. */
+                    public id: string;
+
+                    /** DeliveryPipelineAttribute labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new DeliveryPipelineAttribute instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeliveryPipelineAttribute instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeliveryPipelineAttribute): google.cloud.deploy.v1.DeliveryPipelineAttribute;
+
+                    /**
+                     * Encodes the specified DeliveryPipelineAttribute message. Does not implicitly {@link google.cloud.deploy.v1.DeliveryPipelineAttribute.verify|verify} messages.
+                     * @param message DeliveryPipelineAttribute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeliveryPipelineAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeliveryPipelineAttribute message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeliveryPipelineAttribute.verify|verify} messages.
+                     * @param message DeliveryPipelineAttribute message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeliveryPipelineAttribute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeliveryPipelineAttribute message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeliveryPipelineAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeliveryPipelineAttribute;
+
+                    /**
+                     * Decodes a DeliveryPipelineAttribute message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeliveryPipelineAttribute
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeliveryPipelineAttribute;
+
+                    /**
+                     * Verifies a DeliveryPipelineAttribute message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeliveryPipelineAttribute message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeliveryPipelineAttribute
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeliveryPipelineAttribute;
+
+                    /**
+                     * Creates a plain object from a DeliveryPipelineAttribute message. Also converts values to other types if specified.
+                     * @param message DeliveryPipelineAttribute
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeliveryPipelineAttribute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeliveryPipelineAttribute to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeliveryPipelineAttribute
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a TargetAttribute. */
                 interface ITargetAttribute {
 
@@ -7737,6 +8227,667 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TargetAttribute
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PolicyRule. */
+                interface IPolicyRule {
+
+                    /** PolicyRule restrictRollouts */
+                    restrictRollouts?: (google.cloud.deploy.v1.IRestrictRollout|null);
+                }
+
+                /** Represents a PolicyRule. */
+                class PolicyRule implements IPolicyRule {
+
+                    /**
+                     * Constructs a new PolicyRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IPolicyRule);
+
+                    /** PolicyRule restrictRollouts. */
+                    public restrictRollouts?: (google.cloud.deploy.v1.IRestrictRollout|null);
+
+                    /** PolicyRule rule. */
+                    public rule?: "restrictRollouts";
+
+                    /**
+                     * Creates a new PolicyRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyRule instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IPolicyRule): google.cloud.deploy.v1.PolicyRule;
+
+                    /**
+                     * Encodes the specified PolicyRule message. Does not implicitly {@link google.cloud.deploy.v1.PolicyRule.verify|verify} messages.
+                     * @param message PolicyRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyRule message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PolicyRule.verify|verify} messages.
+                     * @param message PolicyRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IPolicyRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.PolicyRule;
+
+                    /**
+                     * Decodes a PolicyRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.PolicyRule;
+
+                    /**
+                     * Verifies a PolicyRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.PolicyRule;
+
+                    /**
+                     * Creates a plain object from a PolicyRule message. Also converts values to other types if specified.
+                     * @param message PolicyRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.PolicyRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicyRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestrictRollout. */
+                interface IRestrictRollout {
+
+                    /** RestrictRollout id */
+                    id?: (string|null);
+
+                    /** RestrictRollout invokers */
+                    invokers?: (google.cloud.deploy.v1.DeployPolicy.Invoker[]|null);
+
+                    /** RestrictRollout actions */
+                    actions?: (google.cloud.deploy.v1.RestrictRollout.Actions[]|null);
+
+                    /** RestrictRollout timeWindow */
+                    timeWindow?: (google.cloud.deploy.v1.ITimeWindow|null);
+                }
+
+                /** Represents a RestrictRollout. */
+                class RestrictRollout implements IRestrictRollout {
+
+                    /**
+                     * Constructs a new RestrictRollout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRestrictRollout);
+
+                    /** RestrictRollout id. */
+                    public id: string;
+
+                    /** RestrictRollout invokers. */
+                    public invokers: google.cloud.deploy.v1.DeployPolicy.Invoker[];
+
+                    /** RestrictRollout actions. */
+                    public actions: google.cloud.deploy.v1.RestrictRollout.Actions[];
+
+                    /** RestrictRollout timeWindow. */
+                    public timeWindow?: (google.cloud.deploy.v1.ITimeWindow|null);
+
+                    /**
+                     * Creates a new RestrictRollout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestrictRollout instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRestrictRollout): google.cloud.deploy.v1.RestrictRollout;
+
+                    /**
+                     * Encodes the specified RestrictRollout message. Does not implicitly {@link google.cloud.deploy.v1.RestrictRollout.verify|verify} messages.
+                     * @param message RestrictRollout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRestrictRollout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestrictRollout message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RestrictRollout.verify|verify} messages.
+                     * @param message RestrictRollout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRestrictRollout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestrictRollout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestrictRollout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.RestrictRollout;
+
+                    /**
+                     * Decodes a RestrictRollout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestrictRollout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.RestrictRollout;
+
+                    /**
+                     * Verifies a RestrictRollout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestrictRollout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestrictRollout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.RestrictRollout;
+
+                    /**
+                     * Creates a plain object from a RestrictRollout message. Also converts values to other types if specified.
+                     * @param message RestrictRollout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.RestrictRollout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestrictRollout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestrictRollout
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RestrictRollout {
+
+                    /** Actions enum. */
+                    enum Actions {
+                        ACTIONS_UNSPECIFIED = 0,
+                        ADVANCE = 1,
+                        APPROVE = 2,
+                        CANCEL = 3,
+                        CREATE = 4,
+                        IGNORE_JOB = 5,
+                        RETRY_JOB = 6,
+                        ROLLBACK = 7,
+                        TERMINATE_JOBRUN = 8
+                    }
+                }
+
+                /** Properties of a TimeWindow. */
+                interface ITimeWindow {
+
+                    /** TimeWindow timeZone */
+                    timeZone?: (string|null);
+
+                    /** TimeWindow ranges */
+                    ranges?: (google.cloud.deploy.v1.IRange[]|null);
+                }
+
+                /** Represents a TimeWindow. */
+                class TimeWindow implements ITimeWindow {
+
+                    /**
+                     * Constructs a new TimeWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ITimeWindow);
+
+                    /** TimeWindow timeZone. */
+                    public timeZone: string;
+
+                    /** TimeWindow ranges. */
+                    public ranges: google.cloud.deploy.v1.IRange[];
+
+                    /**
+                     * Creates a new TimeWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeWindow instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ITimeWindow): google.cloud.deploy.v1.TimeWindow;
+
+                    /**
+                     * Encodes the specified TimeWindow message. Does not implicitly {@link google.cloud.deploy.v1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeWindow message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.TimeWindow.verify|verify} messages.
+                     * @param message TimeWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ITimeWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.TimeWindow;
+
+                    /**
+                     * Decodes a TimeWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.TimeWindow;
+
+                    /**
+                     * Verifies a TimeWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.TimeWindow;
+
+                    /**
+                     * Creates a plain object from a TimeWindow message. Also converts values to other types if specified.
+                     * @param message TimeWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.TimeWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TimeWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Range. */
+                interface IRange {
+
+                    /** Range startDate */
+                    startDate?: (google.type.IDate|null);
+
+                    /** Range endDate */
+                    endDate?: (google.type.IDate|null);
+
+                    /** Range startTimeOfDay */
+                    startTimeOfDay?: (google.type.ITimeOfDay|null);
+
+                    /** Range endTimeOfDay */
+                    endTimeOfDay?: (google.type.ITimeOfDay|null);
+
+                    /** Range dayOfWeek */
+                    dayOfWeek?: (google.type.DayOfWeek[]|null);
+                }
+
+                /** Represents a Range. */
+                class Range implements IRange {
+
+                    /**
+                     * Constructs a new Range.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRange);
+
+                    /** Range startDate. */
+                    public startDate?: (google.type.IDate|null);
+
+                    /** Range endDate. */
+                    public endDate?: (google.type.IDate|null);
+
+                    /** Range startTimeOfDay. */
+                    public startTimeOfDay?: (google.type.ITimeOfDay|null);
+
+                    /** Range endTimeOfDay. */
+                    public endTimeOfDay?: (google.type.ITimeOfDay|null);
+
+                    /** Range dayOfWeek. */
+                    public dayOfWeek: google.type.DayOfWeek[];
+
+                    /**
+                     * Creates a new Range instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Range instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRange): google.cloud.deploy.v1.Range;
+
+                    /**
+                     * Encodes the specified Range message. Does not implicitly {@link google.cloud.deploy.v1.Range.verify|verify} messages.
+                     * @param message Range message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Range message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Range.verify|verify} messages.
+                     * @param message Range message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Range message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Range
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Range;
+
+                    /**
+                     * Decodes a Range message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Range
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Range;
+
+                    /**
+                     * Verifies a Range message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Range
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Range;
+
+                    /**
+                     * Creates a plain object from a Range message. Also converts values to other types if specified.
+                     * @param message Range
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Range, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Range to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Range
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PolicyViolation. */
+                interface IPolicyViolation {
+
+                    /** PolicyViolation policyViolationDetails */
+                    policyViolationDetails?: (google.cloud.deploy.v1.IPolicyViolationDetails[]|null);
+                }
+
+                /** Represents a PolicyViolation. */
+                class PolicyViolation implements IPolicyViolation {
+
+                    /**
+                     * Constructs a new PolicyViolation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IPolicyViolation);
+
+                    /** PolicyViolation policyViolationDetails. */
+                    public policyViolationDetails: google.cloud.deploy.v1.IPolicyViolationDetails[];
+
+                    /**
+                     * Creates a new PolicyViolation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyViolation instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IPolicyViolation): google.cloud.deploy.v1.PolicyViolation;
+
+                    /**
+                     * Encodes the specified PolicyViolation message. Does not implicitly {@link google.cloud.deploy.v1.PolicyViolation.verify|verify} messages.
+                     * @param message PolicyViolation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IPolicyViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyViolation message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PolicyViolation.verify|verify} messages.
+                     * @param message PolicyViolation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IPolicyViolation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyViolation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyViolation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.PolicyViolation;
+
+                    /**
+                     * Decodes a PolicyViolation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyViolation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.PolicyViolation;
+
+                    /**
+                     * Verifies a PolicyViolation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyViolation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyViolation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.PolicyViolation;
+
+                    /**
+                     * Creates a plain object from a PolicyViolation message. Also converts values to other types if specified.
+                     * @param message PolicyViolation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.PolicyViolation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyViolation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicyViolation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PolicyViolationDetails. */
+                interface IPolicyViolationDetails {
+
+                    /** PolicyViolationDetails policy */
+                    policy?: (string|null);
+
+                    /** PolicyViolationDetails ruleId */
+                    ruleId?: (string|null);
+
+                    /** PolicyViolationDetails failureMessage */
+                    failureMessage?: (string|null);
+                }
+
+                /** Represents a PolicyViolationDetails. */
+                class PolicyViolationDetails implements IPolicyViolationDetails {
+
+                    /**
+                     * Constructs a new PolicyViolationDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IPolicyViolationDetails);
+
+                    /** PolicyViolationDetails policy. */
+                    public policy: string;
+
+                    /** PolicyViolationDetails ruleId. */
+                    public ruleId: string;
+
+                    /** PolicyViolationDetails failureMessage. */
+                    public failureMessage: string;
+
+                    /**
+                     * Creates a new PolicyViolationDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PolicyViolationDetails instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IPolicyViolationDetails): google.cloud.deploy.v1.PolicyViolationDetails;
+
+                    /**
+                     * Encodes the specified PolicyViolationDetails message. Does not implicitly {@link google.cloud.deploy.v1.PolicyViolationDetails.verify|verify} messages.
+                     * @param message PolicyViolationDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IPolicyViolationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PolicyViolationDetails message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.PolicyViolationDetails.verify|verify} messages.
+                     * @param message PolicyViolationDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IPolicyViolationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PolicyViolationDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PolicyViolationDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.PolicyViolationDetails;
+
+                    /**
+                     * Decodes a PolicyViolationDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PolicyViolationDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.PolicyViolationDetails;
+
+                    /**
+                     * Verifies a PolicyViolationDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PolicyViolationDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PolicyViolationDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.PolicyViolationDetails;
+
+                    /**
+                     * Creates a plain object from a PolicyViolationDetails message. Also converts values to other types if specified.
+                     * @param message PolicyViolationDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.PolicyViolationDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PolicyViolationDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PolicyViolationDetails
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8434,6 +9585,696 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a CreateDeployPolicyRequest. */
+                interface ICreateDeployPolicyRequest {
+
+                    /** CreateDeployPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDeployPolicyRequest deployPolicyId */
+                    deployPolicyId?: (string|null);
+
+                    /** CreateDeployPolicyRequest deployPolicy */
+                    deployPolicy?: (google.cloud.deploy.v1.IDeployPolicy|null);
+
+                    /** CreateDeployPolicyRequest requestId */
+                    requestId?: (string|null);
+
+                    /** CreateDeployPolicyRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateDeployPolicyRequest. */
+                class CreateDeployPolicyRequest implements ICreateDeployPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateDeployPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICreateDeployPolicyRequest);
+
+                    /** CreateDeployPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateDeployPolicyRequest deployPolicyId. */
+                    public deployPolicyId: string;
+
+                    /** CreateDeployPolicyRequest deployPolicy. */
+                    public deployPolicy?: (google.cloud.deploy.v1.IDeployPolicy|null);
+
+                    /** CreateDeployPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /** CreateDeployPolicyRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateDeployPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDeployPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICreateDeployPolicyRequest): google.cloud.deploy.v1.CreateDeployPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateDeployPolicyRequest message. Does not implicitly {@link google.cloud.deploy.v1.CreateDeployPolicyRequest.verify|verify} messages.
+                     * @param message CreateDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICreateDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDeployPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CreateDeployPolicyRequest.verify|verify} messages.
+                     * @param message CreateDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICreateDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDeployPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CreateDeployPolicyRequest;
+
+                    /**
+                     * Decodes a CreateDeployPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CreateDeployPolicyRequest;
+
+                    /**
+                     * Verifies a CreateDeployPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDeployPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDeployPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CreateDeployPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDeployPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateDeployPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CreateDeployPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDeployPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDeployPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateDeployPolicyRequest. */
+                interface IUpdateDeployPolicyRequest {
+
+                    /** UpdateDeployPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDeployPolicyRequest deployPolicy */
+                    deployPolicy?: (google.cloud.deploy.v1.IDeployPolicy|null);
+
+                    /** UpdateDeployPolicyRequest requestId */
+                    requestId?: (string|null);
+
+                    /** UpdateDeployPolicyRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** UpdateDeployPolicyRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateDeployPolicyRequest. */
+                class UpdateDeployPolicyRequest implements IUpdateDeployPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateDeployPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IUpdateDeployPolicyRequest);
+
+                    /** UpdateDeployPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateDeployPolicyRequest deployPolicy. */
+                    public deployPolicy?: (google.cloud.deploy.v1.IDeployPolicy|null);
+
+                    /** UpdateDeployPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /** UpdateDeployPolicyRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** UpdateDeployPolicyRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateDeployPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDeployPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IUpdateDeployPolicyRequest): google.cloud.deploy.v1.UpdateDeployPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateDeployPolicyRequest message. Does not implicitly {@link google.cloud.deploy.v1.UpdateDeployPolicyRequest.verify|verify} messages.
+                     * @param message UpdateDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IUpdateDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDeployPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.UpdateDeployPolicyRequest.verify|verify} messages.
+                     * @param message UpdateDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IUpdateDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDeployPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.UpdateDeployPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateDeployPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.UpdateDeployPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateDeployPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDeployPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDeployPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.UpdateDeployPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDeployPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDeployPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.UpdateDeployPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDeployPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateDeployPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDeployPolicyRequest. */
+                interface IDeleteDeployPolicyRequest {
+
+                    /** DeleteDeployPolicyRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDeployPolicyRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteDeployPolicyRequest allowMissing */
+                    allowMissing?: (boolean|null);
+
+                    /** DeleteDeployPolicyRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** DeleteDeployPolicyRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteDeployPolicyRequest. */
+                class DeleteDeployPolicyRequest implements IDeleteDeployPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteDeployPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeleteDeployPolicyRequest);
+
+                    /** DeleteDeployPolicyRequest name. */
+                    public name: string;
+
+                    /** DeleteDeployPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteDeployPolicyRequest allowMissing. */
+                    public allowMissing: boolean;
+
+                    /** DeleteDeployPolicyRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** DeleteDeployPolicyRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteDeployPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDeployPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeleteDeployPolicyRequest): google.cloud.deploy.v1.DeleteDeployPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteDeployPolicyRequest message. Does not implicitly {@link google.cloud.deploy.v1.DeleteDeployPolicyRequest.verify|verify} messages.
+                     * @param message DeleteDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeleteDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDeployPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeleteDeployPolicyRequest.verify|verify} messages.
+                     * @param message DeleteDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeleteDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDeployPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeleteDeployPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteDeployPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeleteDeployPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteDeployPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDeployPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDeployPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeleteDeployPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDeployPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDeployPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeleteDeployPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDeployPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDeployPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeployPoliciesRequest. */
+                interface IListDeployPoliciesRequest {
+
+                    /** ListDeployPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDeployPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDeployPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDeployPoliciesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDeployPoliciesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDeployPoliciesRequest. */
+                class ListDeployPoliciesRequest implements IListDeployPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListDeployPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IListDeployPoliciesRequest);
+
+                    /** ListDeployPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListDeployPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDeployPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDeployPoliciesRequest filter. */
+                    public filter: string;
+
+                    /** ListDeployPoliciesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDeployPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeployPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IListDeployPoliciesRequest): google.cloud.deploy.v1.ListDeployPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListDeployPoliciesRequest message. Does not implicitly {@link google.cloud.deploy.v1.ListDeployPoliciesRequest.verify|verify} messages.
+                     * @param message ListDeployPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IListDeployPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeployPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListDeployPoliciesRequest.verify|verify} messages.
+                     * @param message ListDeployPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IListDeployPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeployPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeployPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.ListDeployPoliciesRequest;
+
+                    /**
+                     * Decodes a ListDeployPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeployPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.ListDeployPoliciesRequest;
+
+                    /**
+                     * Verifies a ListDeployPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeployPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeployPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.ListDeployPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDeployPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListDeployPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.ListDeployPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeployPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeployPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDeployPoliciesResponse. */
+                interface IListDeployPoliciesResponse {
+
+                    /** ListDeployPoliciesResponse deployPolicies */
+                    deployPolicies?: (google.cloud.deploy.v1.IDeployPolicy[]|null);
+
+                    /** ListDeployPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDeployPoliciesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDeployPoliciesResponse. */
+                class ListDeployPoliciesResponse implements IListDeployPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListDeployPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IListDeployPoliciesResponse);
+
+                    /** ListDeployPoliciesResponse deployPolicies. */
+                    public deployPolicies: google.cloud.deploy.v1.IDeployPolicy[];
+
+                    /** ListDeployPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDeployPoliciesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDeployPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDeployPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IListDeployPoliciesResponse): google.cloud.deploy.v1.ListDeployPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListDeployPoliciesResponse message. Does not implicitly {@link google.cloud.deploy.v1.ListDeployPoliciesResponse.verify|verify} messages.
+                     * @param message ListDeployPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IListDeployPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDeployPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.ListDeployPoliciesResponse.verify|verify} messages.
+                     * @param message ListDeployPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IListDeployPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDeployPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDeployPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.ListDeployPoliciesResponse;
+
+                    /**
+                     * Decodes a ListDeployPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDeployPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.ListDeployPoliciesResponse;
+
+                    /**
+                     * Verifies a ListDeployPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDeployPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDeployPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.ListDeployPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDeployPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListDeployPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.ListDeployPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDeployPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDeployPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDeployPolicyRequest. */
+                interface IGetDeployPolicyRequest {
+
+                    /** GetDeployPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDeployPolicyRequest. */
+                class GetDeployPolicyRequest implements IGetDeployPolicyRequest {
+
+                    /**
+                     * Constructs a new GetDeployPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IGetDeployPolicyRequest);
+
+                    /** GetDeployPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDeployPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDeployPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IGetDeployPolicyRequest): google.cloud.deploy.v1.GetDeployPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetDeployPolicyRequest message. Does not implicitly {@link google.cloud.deploy.v1.GetDeployPolicyRequest.verify|verify} messages.
+                     * @param message GetDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IGetDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDeployPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.GetDeployPolicyRequest.verify|verify} messages.
+                     * @param message GetDeployPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IGetDeployPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDeployPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.GetDeployPolicyRequest;
+
+                    /**
+                     * Decodes a GetDeployPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDeployPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.GetDeployPolicyRequest;
+
+                    /**
+                     * Verifies a GetDeployPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDeployPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDeployPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.GetDeployPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetDeployPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetDeployPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.GetDeployPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDeployPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDeployPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a BuildArtifact. */
@@ -9416,6 +11257,9 @@ export namespace google {
 
                     /** CreateReleaseRequest validateOnly */
                     validateOnly?: (boolean|null);
+
+                    /** CreateReleaseRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents a CreateReleaseRequest. */
@@ -9441,6 +11285,9 @@ export namespace google {
 
                     /** CreateReleaseRequest validateOnly. */
                     public validateOnly: boolean;
+
+                    /** CreateReleaseRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new CreateReleaseRequest instance using the specified properties.
@@ -11848,6 +13695,9 @@ export namespace google {
                     /** CreateRolloutRequest validateOnly */
                     validateOnly?: (boolean|null);
 
+                    /** CreateRolloutRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
+
                     /** CreateRolloutRequest startingPhaseId */
                     startingPhaseId?: (string|null);
                 }
@@ -11875,6 +13725,9 @@ export namespace google {
 
                     /** CreateRolloutRequest validateOnly. */
                     public validateOnly: boolean;
+
+                    /** CreateRolloutRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /** CreateRolloutRequest startingPhaseId. */
                     public startingPhaseId: string;
@@ -12098,6 +13951,9 @@ export namespace google {
 
                     /** ApproveRolloutRequest approved */
                     approved?: (boolean|null);
+
+                    /** ApproveRolloutRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents an ApproveRolloutRequest. */
@@ -12114,6 +13970,9 @@ export namespace google {
 
                     /** ApproveRolloutRequest approved. */
                     public approved: boolean;
+
+                    /** ApproveRolloutRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new ApproveRolloutRequest instance using the specified properties.
@@ -12292,6 +14151,9 @@ export namespace google {
 
                     /** AdvanceRolloutRequest phaseId */
                     phaseId?: (string|null);
+
+                    /** AdvanceRolloutRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents an AdvanceRolloutRequest. */
@@ -12308,6 +14170,9 @@ export namespace google {
 
                     /** AdvanceRolloutRequest phaseId. */
                     public phaseId: string;
+
+                    /** AdvanceRolloutRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new AdvanceRolloutRequest instance using the specified properties.
@@ -12483,6 +14348,9 @@ export namespace google {
 
                     /** CancelRolloutRequest name */
                     name?: (string|null);
+
+                    /** CancelRolloutRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents a CancelRolloutRequest. */
@@ -12496,6 +14364,9 @@ export namespace google {
 
                     /** CancelRolloutRequest name. */
                     public name: string;
+
+                    /** CancelRolloutRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new CancelRolloutRequest instance using the specified properties.
@@ -12677,6 +14548,9 @@ export namespace google {
 
                     /** IgnoreJobRequest jobId */
                     jobId?: (string|null);
+
+                    /** IgnoreJobRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents an IgnoreJobRequest. */
@@ -12696,6 +14570,9 @@ export namespace google {
 
                     /** IgnoreJobRequest jobId. */
                     public jobId: string;
+
+                    /** IgnoreJobRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new IgnoreJobRequest instance using the specified properties.
@@ -12877,6 +14754,9 @@ export namespace google {
 
                     /** RetryJobRequest jobId */
                     jobId?: (string|null);
+
+                    /** RetryJobRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents a RetryJobRequest. */
@@ -12896,6 +14776,9 @@ export namespace google {
 
                     /** RetryJobRequest jobId. */
                     public jobId: string;
+
+                    /** RetryJobRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new RetryJobRequest instance using the specified properties.
@@ -14500,6 +16383,9 @@ export namespace google {
 
                     /** TerminateJobRunRequest name */
                     name?: (string|null);
+
+                    /** TerminateJobRunRequest overrideDeployPolicy */
+                    overrideDeployPolicy?: (string[]|null);
                 }
 
                 /** Represents a TerminateJobRunRequest. */
@@ -14513,6 +16399,9 @@ export namespace google {
 
                     /** TerminateJobRunRequest name. */
                     public name: string;
+
+                    /** TerminateJobRunRequest overrideDeployPolicy. */
+                    public overrideDeployPolicy: string[];
 
                     /**
                      * Creates a new TerminateJobRunRequest instance using the specified properties.
@@ -16862,6 +18751,9 @@ export namespace google {
                     /** AutomationRun stateDescription */
                     stateDescription?: (string|null);
 
+                    /** AutomationRun policyViolation */
+                    policyViolation?: (google.cloud.deploy.v1.IPolicyViolation|null);
+
                     /** AutomationRun expireTime */
                     expireTime?: (google.protobuf.ITimestamp|null);
 
@@ -16919,6 +18811,9 @@ export namespace google {
 
                     /** AutomationRun stateDescription. */
                     public stateDescription: string;
+
+                    /** AutomationRun policyViolation. */
+                    public policyViolation?: (google.cloud.deploy.v1.IPolicyViolation|null);
 
                     /** AutomationRun expireTime. */
                     public expireTime?: (google.protobuf.ITimestamp|null);
@@ -27198,6 +29093,133 @@ export namespace google {
 
             /**
              * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

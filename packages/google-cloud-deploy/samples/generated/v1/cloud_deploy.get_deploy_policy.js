@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
+  // [START clouddeploy_v1_generated_CloudDeploy_GetDeployPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,15 +29,10 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the `JobRun`. Format must be
-   *  `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
+   *  Required. Name of the `DeployPolicy`. Format must be
+   *  `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
    */
   // const name = 'abc123'
-  /**
-   *  Optional. Deploy policies to override. Format is
-   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
-   */
-  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -45,19 +40,19 @@ function main(name) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callTerminateJobRun() {
+  async function callGetDeployPolicy() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await deployClient.terminateJobRun(request);
+    const response = await deployClient.getDeployPolicy(request);
     console.log(response);
   }
 
-  callTerminateJobRun();
-  // [END clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
+  callGetDeployPolicy();
+  // [END clouddeploy_v1_generated_CloudDeploy_GetDeployPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

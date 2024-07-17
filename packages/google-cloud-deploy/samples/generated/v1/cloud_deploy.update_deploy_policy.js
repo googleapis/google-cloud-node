@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, releaseId, release) {
-  // [START clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+function main(updateMask, deployPolicy) {
+  // [START clouddeploy_v1_generated_CloudDeploy_UpdateDeployPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,19 +29,17 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
-   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  `DeployPolicy` resource by the update.
+   *  The fields specified in the update_mask are relative to the resource, not
+   *  the full request. A field will be overwritten if it's in the mask. If the
+   *  user doesn't provide a mask then all fields are overwritten.
    */
-  // const parent = 'abc123'
+  // const updateMask = {}
   /**
-   *  Required. ID of the `Release`.
+   *  Required. The `DeployPolicy` to update.
    */
-  // const releaseId = 'abc123'
-  /**
-   *  Required. The `Release` to create.
-   */
-  // const release = {}
+  // const deployPolicy = {}
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server knows to ignore the
@@ -57,15 +55,15 @@ function main(parent, releaseId, release) {
    */
   // const requestId = 'abc123'
   /**
+   *  Optional. If set to true, updating a `DeployPolicy` that does not exist
+   *  will result in the creation of a new `DeployPolicy`.
+   */
+  // const allowMissing = true
+  /**
    *  Optional. If set to true, the request is validated and the user is provided
    *  with an expected result, but no actual change is made.
    */
   // const validateOnly = true
-  /**
-   *  Optional. Deploy policies to override. Format is
-   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
-   */
-  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -73,22 +71,21 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callCreateRelease() {
+  async function callUpdateDeployPolicy() {
     // Construct request
     const request = {
-      parent,
-      releaseId,
-      release,
+      updateMask,
+      deployPolicy,
     };
 
     // Run request
-    const [operation] = await deployClient.createRelease(request);
+    const [operation] = await deployClient.updateDeployPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRelease();
-  // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+  callUpdateDeployPolicy();
+  // [END clouddeploy_v1_generated_CloudDeploy_UpdateDeployPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

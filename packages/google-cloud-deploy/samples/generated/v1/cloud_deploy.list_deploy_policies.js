@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
+function main(parent) {
+  // [START clouddeploy_v1_generated_CloudDeploy_ListDeployPolicies_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,15 +29,33 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the `JobRun`. Format must be
-   *  `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
+   *  Required. The parent, which owns this collection of deploy policies. Format
+   *  must be `projects/{project_id}/locations/{location_name}`.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
   /**
-   *  Optional. Deploy policies to override. Format is
-   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+   *  The maximum number of deploy policies to return. The service may return
+   *  fewer than this value. If unspecified, at most 50 deploy policies will
+   *  be returned. The maximum value is 1000; values above 1000 will be set
+   *  to 1000.
    */
-  // const overrideDeployPolicy = ['abc','def']
+  // const pageSize = 1234
+  /**
+   *  A page token, received from a previous `ListDeployPolicies` call.
+   *  Provide this to retrieve the subsequent page.
+   *  When paginating, all other provided parameters match
+   *  the call that provided the page token.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Filter deploy policies to be returned. See https://google.aip.dev/160 for
+   *  more details. All fields can be used in the filter.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Field to sort by. See https://google.aip.dev/132#ordering for more details.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -45,19 +63,21 @@ function main(name) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callTerminateJobRun() {
+  async function callListDeployPolicies() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await deployClient.terminateJobRun(request);
-    console.log(response);
+    const iterable = deployClient.listDeployPoliciesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callTerminateJobRun();
-  // [END clouddeploy_v1_generated_CloudDeploy_TerminateJobRun_async]
+  callListDeployPolicies();
+  // [END clouddeploy_v1_generated_CloudDeploy_ListDeployPolicies_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, releaseId, release) {
-  // [START clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+function main(name) {
+  // [START clouddeploy_v1_generated_CloudDeploy_DeleteDeployPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,19 +29,10 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
-   *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
+   *  Required. The name of the `DeployPolicy` to delete. Format should be
+   *  `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. ID of the `Release`.
-   */
-  // const releaseId = 'abc123'
-  /**
-   *  Required. The `Release` to create.
-   */
-  // const release = {}
+  // const name = 'abc123'
   /**
    *  Optional. A request ID to identify requests. Specify a unique request ID
    *  so that if you must retry your request, the server knows to ignore the
@@ -57,15 +48,21 @@ function main(parent, releaseId, release) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. If set to true, the request is validated and the user is provided
-   *  with an expected result, but no actual change is made.
+   *  Optional. If set to true, then deleting an already deleted or non-existing
+   *  `DeployPolicy` will succeed.
+   */
+  // const allowMissing = true
+  /**
+   *  Optional. If set, validate the request and preview the review, but do not
+   *  actually post it.
    */
   // const validateOnly = true
   /**
-   *  Optional. Deploy policies to override. Format is
-   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
+   *  Optional. This checksum is computed by the server based on the value of
+   *  other fields, and may be sent on update and delete requests to ensure the
+   *  client has an up-to-date value before proceeding.
    */
-  // const overrideDeployPolicy = ['abc','def']
+  // const etag = 'abc123'
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
@@ -73,22 +70,20 @@ function main(parent, releaseId, release) {
   // Instantiates a client
   const deployClient = new CloudDeployClient();
 
-  async function callCreateRelease() {
+  async function callDeleteDeployPolicy() {
     // Construct request
     const request = {
-      parent,
-      releaseId,
-      release,
+      name,
     };
 
     // Run request
-    const [operation] = await deployClient.createRelease(request);
+    const [operation] = await deployClient.deleteDeployPolicy(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callCreateRelease();
-  // [END clouddeploy_v1_generated_CloudDeploy_CreateRelease_async]
+  callDeleteDeployPolicy();
+  // [END clouddeploy_v1_generated_CloudDeploy_DeleteDeployPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
