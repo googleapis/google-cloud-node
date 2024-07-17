@@ -776,6 +776,198 @@
             }
         },
         {
+            "regionTag": "livestream_v1_generated_LivestreamService_ListClips_async",
+            "title": "LivestreamService listClips Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of all clips in the specified channel.",
+            "canonical": true,
+            "file": "livestream_service.list_clips.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListClips",
+                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListClips",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.video.livestream.v1.ListClipsResponse",
+                "client": {
+                    "shortName": "LivestreamServiceClient",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+                },
+                "method": {
+                    "shortName": "ListClips",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListClips",
+                    "service": {
+                        "shortName": "LivestreamService",
+                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "livestream_v1_generated_LivestreamService_GetClip_async",
+            "title": "LivestreamService getClip Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the specified clip.",
+            "canonical": true,
+            "file": "livestream_service.get_clip.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetClip",
+                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetClip",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.video.livestream.v1.Clip",
+                "client": {
+                    "shortName": "LivestreamServiceClient",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+                },
+                "method": {
+                    "shortName": "GetClip",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetClip",
+                    "service": {
+                        "shortName": "LivestreamService",
+                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "livestream_v1_generated_LivestreamService_CreateClip_async",
+            "title": "LivestreamService createClip Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a clip with the provided clip ID in the specified channel.",
+            "canonical": true,
+            "file": "livestream_service.create_clip.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 81,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateClip",
+                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateClip",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "clip_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "clip",
+                        "type": ".google.cloud.video.livestream.v1.Clip"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "LivestreamServiceClient",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateClip",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateClip",
+                    "service": {
+                        "shortName": "LivestreamService",
+                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "livestream_v1_generated_LivestreamService_DeleteClip_async",
+            "title": "LivestreamService deleteClip Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified clip job resource. This method only deletes the clip job and does not delete the VOD clip stored in the GCS.",
+            "canonical": true,
+            "file": "livestream_service.delete_clip.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteClip",
+                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteClip",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "LivestreamServiceClient",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteClip",
+                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteClip",
+                    "service": {
+                        "shortName": "LivestreamService",
+                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "livestream_v1_generated_LivestreamService_CreateAsset_async",
             "title": "LivestreamService createAsset Sample",
             "origin": "API_DEFINITION",
