@@ -188,7 +188,8 @@
     "packages/google-shopping-merchant-promotions": {},
     "packages/google-cloud-privilegedaccessmanager": {},
     "packages/google-shopping-merchant-products": {},
-    "packages/google-shopping-merchant-accounts": {}
+    "packages/google-shopping-merchant-accounts": {},
+    "packages/google-cloud-gdchardwaremanagement": {}
   },
   "plugins": [
     {
