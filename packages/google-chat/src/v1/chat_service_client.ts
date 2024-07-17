@@ -216,6 +216,9 @@ export class ChatServiceClient {
         'spaces/{space}/messages/{message}/reactions/{reaction}'
       ),
       spacePathTemplate: new this._gaxModule.PathTemplate('spaces/{space}'),
+      spaceEventPathTemplate: new this._gaxModule.PathTemplate(
+        'spaces/{space}/spaceEvents/{space_event}'
+      ),
       spaceReadStatePathTemplate: new this._gaxModule.PathTemplate(
         'users/{user}/spaces/{space}/spaceReadState'
       ),
@@ -250,6 +253,11 @@ export class ChatServiceClient {
         'pageToken',
         'nextPageToken',
         'reactions'
+      ),
+      listSpaceEvents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'spaceEvents'
       ),
     };
 
@@ -329,6 +337,8 @@ export class ChatServiceClient {
       'getSpaceReadState',
       'updateSpaceReadState',
       'getThreadReadState',
+      'getSpaceEvent',
+      'listSpaceEvents',
     ];
     for (const methodName of chatServiceStubMethods) {
       const callPromise = this.chatServiceStub.then(
@@ -2857,6 +2867,103 @@ export class ChatServiceClient {
     this.initialize();
     return this.innerApiCalls.getThreadReadState(request, options, callback);
   }
+  /**
+   * Returns an event from a Google Chat space. The [event
+   * payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
+   * contains the most recent version of the resource that changed. For example,
+   * if you request an event about a new message but the message was later
+   * updated, the server returns the updated `Message` resource in the event
+   * payload.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * To get an event, the authenticated user must be a member of the space.
+   *
+   * For an example, see [Get details about an
+   * event from a Google Chat
+   * space](https://developers.google.com/workspace/chat/get-space-event).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the space event.
+   *
+   *   Format: `spaces/{space}/spaceEvents/{spaceEvent}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.chat.v1.SpaceEvent|SpaceEvent}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.get_space_event.js</caption>
+   * region_tag:chat_v1_generated_ChatService_GetSpaceEvent_async
+   */
+  getSpaceEvent(
+    request?: protos.google.chat.v1.IGetSpaceEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceEvent,
+      protos.google.chat.v1.IGetSpaceEventRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSpaceEvent(
+    request: protos.google.chat.v1.IGetSpaceEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceEvent,
+      protos.google.chat.v1.IGetSpaceEventRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceEvent(
+    request: protos.google.chat.v1.IGetSpaceEventRequest,
+    callback: Callback<
+      protos.google.chat.v1.ISpaceEvent,
+      protos.google.chat.v1.IGetSpaceEventRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getSpaceEvent(
+    request?: protos.google.chat.v1.IGetSpaceEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.chat.v1.ISpaceEvent,
+          protos.google.chat.v1.IGetSpaceEventRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.chat.v1.ISpaceEvent,
+      protos.google.chat.v1.IGetSpaceEventRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceEvent,
+      protos.google.chat.v1.IGetSpaceEventRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getSpaceEvent(request, options, callback);
+  }
 
   /**
    * Lists messages in a space that the caller is a member of, including
@@ -4277,6 +4384,392 @@ export class ChatServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.chat.v1.IReaction>;
   }
+  /**
+   * Lists events from a Google Chat space. For each event, the
+   * [payload](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.oneof_payload)
+   * contains the most recent version of the Chat resource. For example, if you
+   * list events about new space members, the server returns `Membership`
+   * resources that contain the latest membership details. If new members were
+   * removed during the requested period, the event payload contains an empty
+   * `Membership` resource.
+   *
+   * Requires [user
+   * authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+   * To list events, the authenticated user must be a member of the space.
+   *
+   * For an example, see [List events from a Google Chat
+   * space](https://developers.google.com/workspace/chat/list-space-events).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the [Google Chat
+   *   space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces)
+   *   where the events occurred.
+   *
+   *   Format: `spaces/{space}`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of space events returned. The service might
+   *   return fewer than this value.
+   *
+   *   Negative values return an `INVALID_ARGUMENT` error.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous list space events call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to list space events must
+   *   match the call that provided the page token. Passing different values to
+   *   the other parameters might lead to unexpected results.
+   * @param {string} request.filter
+   *   Required. A query filter.
+   *
+   *   You must specify at least one event type (`event_type`)
+   *   using the has `:` operator. To filter by multiple event types, use the `OR`
+   *   operator. Omit batch event types in your filter. The request automatically
+   *   returns any related batch events. For example, if you filter by new
+   *   reactions
+   *   (`google.workspace.chat.reaction.v1.created`), the server also returns
+   *   batch new reactions events
+   *   (`google.workspace.chat.reaction.v1.batchCreated`). For a list of supported
+   *   event types, see the [`SpaceEvents` reference
+   *   documentation](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.event_type).
+   *
+   *   Optionally, you can also filter by start time (`start_time`) and
+   *   end time (`end_time`):
+   *
+   *   * `start_time`: Exclusive timestamp from which to start listing space
+   *   events.
+   *    You can list events that occurred up to 28 days ago. If unspecified, lists
+   *    space events from the past 28 days.
+   *   * `end_time`: Inclusive timestamp until which space events are listed.
+   *    If unspecified, lists events up to the time of the request.
+   *
+   *   To specify a start or end time, use the equals `=` operator and format in
+   *   [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339). To filter by both
+   *   `start_time` and `end_time`, use the `AND` operator.
+   *
+   *   For example, the following queries are valid:
+   *
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" AND
+   *   end_time="2023-08-23T19:21:54+00:00"
+   *   ```
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" AND
+   *   (event_types:"google.workspace.chat.space.v1.updated" OR
+   *   event_types:"google.workspace.chat.message.v1.created")
+   *   ```
+   *
+   *   The following queries are invalid:
+   *
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" OR
+   *   end_time="2023-08-23T19:21:54+00:00"
+   *   ```
+   *   ```
+   *   event_types:"google.workspace.chat.space.v1.updated" AND
+   *   event_types:"google.workspace.chat.message.v1.created"
+   *   ```
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.chat.v1.SpaceEvent|SpaceEvent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listSpaceEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSpaceEvents(
+    request?: protos.google.chat.v1.IListSpaceEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceEvent[],
+      protos.google.chat.v1.IListSpaceEventsRequest | null,
+      protos.google.chat.v1.IListSpaceEventsResponse,
+    ]
+  >;
+  listSpaceEvents(
+    request: protos.google.chat.v1.IListSpaceEventsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.chat.v1.IListSpaceEventsRequest,
+      protos.google.chat.v1.IListSpaceEventsResponse | null | undefined,
+      protos.google.chat.v1.ISpaceEvent
+    >
+  ): void;
+  listSpaceEvents(
+    request: protos.google.chat.v1.IListSpaceEventsRequest,
+    callback: PaginationCallback<
+      protos.google.chat.v1.IListSpaceEventsRequest,
+      protos.google.chat.v1.IListSpaceEventsResponse | null | undefined,
+      protos.google.chat.v1.ISpaceEvent
+    >
+  ): void;
+  listSpaceEvents(
+    request?: protos.google.chat.v1.IListSpaceEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.chat.v1.IListSpaceEventsRequest,
+          protos.google.chat.v1.IListSpaceEventsResponse | null | undefined,
+          protos.google.chat.v1.ISpaceEvent
+        >,
+    callback?: PaginationCallback<
+      protos.google.chat.v1.IListSpaceEventsRequest,
+      protos.google.chat.v1.IListSpaceEventsResponse | null | undefined,
+      protos.google.chat.v1.ISpaceEvent
+    >
+  ): Promise<
+    [
+      protos.google.chat.v1.ISpaceEvent[],
+      protos.google.chat.v1.IListSpaceEventsRequest | null,
+      protos.google.chat.v1.IListSpaceEventsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listSpaceEvents(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the [Google Chat
+   *   space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces)
+   *   where the events occurred.
+   *
+   *   Format: `spaces/{space}`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of space events returned. The service might
+   *   return fewer than this value.
+   *
+   *   Negative values return an `INVALID_ARGUMENT` error.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous list space events call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to list space events must
+   *   match the call that provided the page token. Passing different values to
+   *   the other parameters might lead to unexpected results.
+   * @param {string} request.filter
+   *   Required. A query filter.
+   *
+   *   You must specify at least one event type (`event_type`)
+   *   using the has `:` operator. To filter by multiple event types, use the `OR`
+   *   operator. Omit batch event types in your filter. The request automatically
+   *   returns any related batch events. For example, if you filter by new
+   *   reactions
+   *   (`google.workspace.chat.reaction.v1.created`), the server also returns
+   *   batch new reactions events
+   *   (`google.workspace.chat.reaction.v1.batchCreated`). For a list of supported
+   *   event types, see the [`SpaceEvents` reference
+   *   documentation](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.event_type).
+   *
+   *   Optionally, you can also filter by start time (`start_time`) and
+   *   end time (`end_time`):
+   *
+   *   * `start_time`: Exclusive timestamp from which to start listing space
+   *   events.
+   *    You can list events that occurred up to 28 days ago. If unspecified, lists
+   *    space events from the past 28 days.
+   *   * `end_time`: Inclusive timestamp until which space events are listed.
+   *    If unspecified, lists events up to the time of the request.
+   *
+   *   To specify a start or end time, use the equals `=` operator and format in
+   *   [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339). To filter by both
+   *   `start_time` and `end_time`, use the `AND` operator.
+   *
+   *   For example, the following queries are valid:
+   *
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" AND
+   *   end_time="2023-08-23T19:21:54+00:00"
+   *   ```
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" AND
+   *   (event_types:"google.workspace.chat.space.v1.updated" OR
+   *   event_types:"google.workspace.chat.message.v1.created")
+   *   ```
+   *
+   *   The following queries are invalid:
+   *
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" OR
+   *   end_time="2023-08-23T19:21:54+00:00"
+   *   ```
+   *   ```
+   *   event_types:"google.workspace.chat.space.v1.updated" AND
+   *   event_types:"google.workspace.chat.message.v1.created"
+   *   ```
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.chat.v1.SpaceEvent|SpaceEvent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listSpaceEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listSpaceEventsStream(
+    request?: protos.google.chat.v1.IListSpaceEventsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSpaceEvents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSpaceEvents.createStream(
+      this.innerApiCalls.listSpaceEvents as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listSpaceEvents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Resource name of the [Google Chat
+   *   space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces)
+   *   where the events occurred.
+   *
+   *   Format: `spaces/{space}`.
+   * @param {number} request.pageSize
+   *   Optional. The maximum number of space events returned. The service might
+   *   return fewer than this value.
+   *
+   *   Negative values return an `INVALID_ARGUMENT` error.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous list space events call. Provide this
+   *   to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to list space events must
+   *   match the call that provided the page token. Passing different values to
+   *   the other parameters might lead to unexpected results.
+   * @param {string} request.filter
+   *   Required. A query filter.
+   *
+   *   You must specify at least one event type (`event_type`)
+   *   using the has `:` operator. To filter by multiple event types, use the `OR`
+   *   operator. Omit batch event types in your filter. The request automatically
+   *   returns any related batch events. For example, if you filter by new
+   *   reactions
+   *   (`google.workspace.chat.reaction.v1.created`), the server also returns
+   *   batch new reactions events
+   *   (`google.workspace.chat.reaction.v1.batchCreated`). For a list of supported
+   *   event types, see the [`SpaceEvents` reference
+   *   documentation](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces.spaceEvents#SpaceEvent.FIELDS.event_type).
+   *
+   *   Optionally, you can also filter by start time (`start_time`) and
+   *   end time (`end_time`):
+   *
+   *   * `start_time`: Exclusive timestamp from which to start listing space
+   *   events.
+   *    You can list events that occurred up to 28 days ago. If unspecified, lists
+   *    space events from the past 28 days.
+   *   * `end_time`: Inclusive timestamp until which space events are listed.
+   *    If unspecified, lists events up to the time of the request.
+   *
+   *   To specify a start or end time, use the equals `=` operator and format in
+   *   [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339). To filter by both
+   *   `start_time` and `end_time`, use the `AND` operator.
+   *
+   *   For example, the following queries are valid:
+   *
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" AND
+   *   end_time="2023-08-23T19:21:54+00:00"
+   *   ```
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" AND
+   *   (event_types:"google.workspace.chat.space.v1.updated" OR
+   *   event_types:"google.workspace.chat.message.v1.created")
+   *   ```
+   *
+   *   The following queries are invalid:
+   *
+   *   ```
+   *   start_time="2023-08-23T19:20:33+00:00" OR
+   *   end_time="2023-08-23T19:21:54+00:00"
+   *   ```
+   *   ```
+   *   event_types:"google.workspace.chat.space.v1.updated" AND
+   *   event_types:"google.workspace.chat.message.v1.created"
+   *   ```
+   *
+   *   Invalid queries are rejected by the server with an `INVALID_ARGUMENT`
+   *   error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.chat.v1.SpaceEvent|SpaceEvent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/chat_service.list_space_events.js</caption>
+   * region_tag:chat_v1_generated_ChatService_ListSpaceEvents_async
+   */
+  listSpaceEventsAsync(
+    request?: protos.google.chat.v1.IListSpaceEventsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.chat.v1.ISpaceEvent> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listSpaceEvents'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSpaceEvents.asyncIterate(
+      this.innerApiCalls['listSpaceEvents'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.chat.v1.ISpaceEvent>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -4538,6 +5031,44 @@ export class ChatServiceClient {
    */
   matchSpaceFromSpaceName(spaceName: string) {
     return this.pathTemplates.spacePathTemplate.match(spaceName).space;
+  }
+
+  /**
+   * Return a fully-qualified spaceEvent resource name string.
+   *
+   * @param {string} space
+   * @param {string} space_event
+   * @returns {string} Resource name string.
+   */
+  spaceEventPath(space: string, spaceEvent: string) {
+    return this.pathTemplates.spaceEventPathTemplate.render({
+      space: space,
+      space_event: spaceEvent,
+    });
+  }
+
+  /**
+   * Parse the space from SpaceEvent resource.
+   *
+   * @param {string} spaceEventName
+   *   A fully-qualified path representing SpaceEvent resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromSpaceEventName(spaceEventName: string) {
+    return this.pathTemplates.spaceEventPathTemplate.match(spaceEventName)
+      .space;
+  }
+
+  /**
+   * Parse the space_event from SpaceEvent resource.
+   *
+   * @param {string} spaceEventName
+   *   A fully-qualified path representing SpaceEvent resource.
+   * @returns {string} A string representing the space_event.
+   */
+  matchSpaceEventFromSpaceEventName(spaceEventName: string) {
+    return this.pathTemplates.spaceEventPathTemplate.match(spaceEventName)
+      .space_event;
   }
 
   /**

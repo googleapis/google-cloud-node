@@ -120,6 +120,11 @@
                 "getThreadReadState"
               ]
             },
+            "GetSpaceEvent": {
+              "methods": [
+                "getSpaceEvent"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -146,6 +151,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListSpaceEvents": {
+              "methods": [
+                "listSpaceEvents",
+                "listSpaceEventsStream",
+                "listSpaceEventsAsync"
               ]
             }
           }
@@ -263,6 +275,11 @@
                 "getThreadReadState"
               ]
             },
+            "GetSpaceEvent": {
+              "methods": [
+                "getSpaceEvent"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -289,6 +306,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListSpaceEvents": {
+              "methods": [
+                "listSpaceEvents",
+                "listSpaceEventsStream",
+                "listSpaceEventsAsync"
               ]
             }
           }
