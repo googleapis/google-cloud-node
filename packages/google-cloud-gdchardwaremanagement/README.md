@@ -87,7 +87,8 @@ npm install @google-cloud/gdchardwaremanagement
 // const orderBy = 'abc123'
 
 // Imports the Gdchardwaremanagement library
-const {GDCHardwareManagementClient} = require('@google-cloud/gdchardwaremanagement').v1alpha;
+const {GDCHardwareManagementClient} =
+  require('@google-cloud/gdchardwaremanagement').v1alpha;
 
 // Instantiates a client
 const gdchardwaremanagementClient = new GDCHardwareManagementClient();
@@ -101,7 +102,7 @@ async function callListSkus() {
   // Run request
   const iterable = gdchardwaremanagementClient.listSkusAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
