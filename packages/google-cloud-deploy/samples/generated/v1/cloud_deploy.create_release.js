@@ -29,8 +29,8 @@ function main(parent, releaseId, release) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Release` should be created.
-   *  Format should be
+   *  Required. The parent collection in which the `Release` is created.
+   *  The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const parent = 'abc123'

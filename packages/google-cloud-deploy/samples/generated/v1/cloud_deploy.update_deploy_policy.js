@@ -29,11 +29,11 @@ function main(updateMask, deployPolicy) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
-   *  `DeployPolicy` resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it's in the mask. If the
-   *  user doesn't provide a mask then all fields are overwritten.
+   *  Required. Field mask is used to specify the fields to be overwritten by the
+   *  update in the `DeployPolicy` resource. The fields specified in the
+   *  update_mask are relative to the resource, not the full request. A field
+   *  will be overwritten if it's in the mask. If the user doesn't provide a mask
+   *  then all fields are overwritten.
    */
   // const updateMask = {}
   /**

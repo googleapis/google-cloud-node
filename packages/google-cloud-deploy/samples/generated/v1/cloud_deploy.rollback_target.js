@@ -29,8 +29,8 @@ function main(name, targetId, rolloutId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The `DeliveryPipeline` for which the rollback `Rollout` should be
-   *  created. Format should be
+   *  Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
+   *  created. The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const name = 'abc123'
