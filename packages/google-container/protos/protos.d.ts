@@ -3968,6 +3968,9 @@ export namespace google {
 
                 /** AddonsConfig statefulHaConfig */
                 statefulHaConfig?: (google.container.v1.IStatefulHAConfig|null);
+
+                /** AddonsConfig rayOperatorConfig */
+                rayOperatorConfig?: (google.container.v1.IRayOperatorConfig|null);
             }
 
             /** Represents an AddonsConfig. */
@@ -4014,6 +4017,9 @@ export namespace google {
 
                 /** AddonsConfig statefulHaConfig. */
                 public statefulHaConfig?: (google.container.v1.IStatefulHAConfig|null);
+
+                /** AddonsConfig rayOperatorConfig. */
+                public rayOperatorConfig?: (google.container.v1.IRayOperatorConfig|null);
 
                 /**
                  * Creates a new AddonsConfig instance using the specified properties.
@@ -5412,6 +5418,115 @@ export namespace google {
 
                 /**
                  * Gets the default type url for GcsFuseCsiDriverConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a RayOperatorConfig. */
+            interface IRayOperatorConfig {
+
+                /** RayOperatorConfig enabled */
+                enabled?: (boolean|null);
+
+                /** RayOperatorConfig rayClusterLoggingConfig */
+                rayClusterLoggingConfig?: (google.container.v1.IRayClusterLoggingConfig|null);
+
+                /** RayOperatorConfig rayClusterMonitoringConfig */
+                rayClusterMonitoringConfig?: (google.container.v1.IRayClusterMonitoringConfig|null);
+            }
+
+            /** Represents a RayOperatorConfig. */
+            class RayOperatorConfig implements IRayOperatorConfig {
+
+                /**
+                 * Constructs a new RayOperatorConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IRayOperatorConfig);
+
+                /** RayOperatorConfig enabled. */
+                public enabled: boolean;
+
+                /** RayOperatorConfig rayClusterLoggingConfig. */
+                public rayClusterLoggingConfig?: (google.container.v1.IRayClusterLoggingConfig|null);
+
+                /** RayOperatorConfig rayClusterMonitoringConfig. */
+                public rayClusterMonitoringConfig?: (google.container.v1.IRayClusterMonitoringConfig|null);
+
+                /**
+                 * Creates a new RayOperatorConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RayOperatorConfig instance
+                 */
+                public static create(properties?: google.container.v1.IRayOperatorConfig): google.container.v1.RayOperatorConfig;
+
+                /**
+                 * Encodes the specified RayOperatorConfig message. Does not implicitly {@link google.container.v1.RayOperatorConfig.verify|verify} messages.
+                 * @param message RayOperatorConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IRayOperatorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RayOperatorConfig message, length delimited. Does not implicitly {@link google.container.v1.RayOperatorConfig.verify|verify} messages.
+                 * @param message RayOperatorConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IRayOperatorConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RayOperatorConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RayOperatorConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.RayOperatorConfig;
+
+                /**
+                 * Decodes a RayOperatorConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RayOperatorConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.RayOperatorConfig;
+
+                /**
+                 * Verifies a RayOperatorConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RayOperatorConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RayOperatorConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.RayOperatorConfig;
+
+                /**
+                 * Creates a plain object from a RayOperatorConfig message. Also converts values to other types if specified.
+                 * @param message RayOperatorConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.RayOperatorConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RayOperatorConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RayOperatorConfig
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -21208,6 +21323,103 @@ export namespace google {
                 }
             }
 
+            /** Properties of a RayClusterLoggingConfig. */
+            interface IRayClusterLoggingConfig {
+
+                /** RayClusterLoggingConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a RayClusterLoggingConfig. */
+            class RayClusterLoggingConfig implements IRayClusterLoggingConfig {
+
+                /**
+                 * Constructs a new RayClusterLoggingConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IRayClusterLoggingConfig);
+
+                /** RayClusterLoggingConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new RayClusterLoggingConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RayClusterLoggingConfig instance
+                 */
+                public static create(properties?: google.container.v1.IRayClusterLoggingConfig): google.container.v1.RayClusterLoggingConfig;
+
+                /**
+                 * Encodes the specified RayClusterLoggingConfig message. Does not implicitly {@link google.container.v1.RayClusterLoggingConfig.verify|verify} messages.
+                 * @param message RayClusterLoggingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IRayClusterLoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RayClusterLoggingConfig message, length delimited. Does not implicitly {@link google.container.v1.RayClusterLoggingConfig.verify|verify} messages.
+                 * @param message RayClusterLoggingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IRayClusterLoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RayClusterLoggingConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RayClusterLoggingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.RayClusterLoggingConfig;
+
+                /**
+                 * Decodes a RayClusterLoggingConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RayClusterLoggingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.RayClusterLoggingConfig;
+
+                /**
+                 * Verifies a RayClusterLoggingConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RayClusterLoggingConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RayClusterLoggingConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.RayClusterLoggingConfig;
+
+                /**
+                 * Creates a plain object from a RayClusterLoggingConfig message. Also converts values to other types if specified.
+                 * @param message RayClusterLoggingConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.RayClusterLoggingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RayClusterLoggingConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RayClusterLoggingConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a MonitoringConfig. */
             interface IMonitoringConfig {
 
@@ -21438,6 +21650,103 @@ export namespace google {
                     INTERNAL_VPC_LB = 3,
                     EXTERNAL_LB = 4
                 }
+            }
+
+            /** Properties of a RayClusterMonitoringConfig. */
+            interface IRayClusterMonitoringConfig {
+
+                /** RayClusterMonitoringConfig enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a RayClusterMonitoringConfig. */
+            class RayClusterMonitoringConfig implements IRayClusterMonitoringConfig {
+
+                /**
+                 * Constructs a new RayClusterMonitoringConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.IRayClusterMonitoringConfig);
+
+                /** RayClusterMonitoringConfig enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Creates a new RayClusterMonitoringConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns RayClusterMonitoringConfig instance
+                 */
+                public static create(properties?: google.container.v1.IRayClusterMonitoringConfig): google.container.v1.RayClusterMonitoringConfig;
+
+                /**
+                 * Encodes the specified RayClusterMonitoringConfig message. Does not implicitly {@link google.container.v1.RayClusterMonitoringConfig.verify|verify} messages.
+                 * @param message RayClusterMonitoringConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.IRayClusterMonitoringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified RayClusterMonitoringConfig message, length delimited. Does not implicitly {@link google.container.v1.RayClusterMonitoringConfig.verify|verify} messages.
+                 * @param message RayClusterMonitoringConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.IRayClusterMonitoringConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a RayClusterMonitoringConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns RayClusterMonitoringConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.RayClusterMonitoringConfig;
+
+                /**
+                 * Decodes a RayClusterMonitoringConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns RayClusterMonitoringConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.RayClusterMonitoringConfig;
+
+                /**
+                 * Verifies a RayClusterMonitoringConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a RayClusterMonitoringConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns RayClusterMonitoringConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.RayClusterMonitoringConfig;
+
+                /**
+                 * Creates a plain object from a RayClusterMonitoringConfig message. Also converts values to other types if specified.
+                 * @param message RayClusterMonitoringConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.RayClusterMonitoringConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this RayClusterMonitoringConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for RayClusterMonitoringConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a NodePoolLoggingConfig. */
