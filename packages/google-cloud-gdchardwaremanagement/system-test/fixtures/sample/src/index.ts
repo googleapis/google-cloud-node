@@ -16,10 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1alpha from './v1alpha';
-const GDCHardwareManagementClient = v1alpha.GDCHardwareManagementClient;
-type GDCHardwareManagementClient = v1alpha.GDCHardwareManagementClient;
-export {v1alpha, GDCHardwareManagementClient};
-export default {v1alpha, GDCHardwareManagementClient};
-import * as protos from '../protos/protos';
-export {protos}
+import {GDCHardwareManagementClient} from '@google-cloud/gdchardwaremanagement';
+
+// check that the client class type name can be used
+function doStuffWithGDCHardwareManagementClient(
+  client: GDCHardwareManagementClient
+) {
+  client.close();
+}
+
+function main() {
+  // check that the client instance can be created
+  const gDCHardwareManagementClient = new GDCHardwareManagementClient();
+  doStuffWithGDCHardwareManagementClient(gDCHardwareManagementClient);
+}
+
+main();
