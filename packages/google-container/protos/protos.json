@@ -7904,6 +7904,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "rayOperatorConfig": {
+                      "type": "RayOperatorConfig",
+                      "id": 21,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -8003,6 +8010,28 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    }
+                  }
+                },
+                "RayOperatorConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "rayClusterLoggingConfig": {
+                      "type": "RayClusterLoggingConfig",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "rayClusterMonitoringConfig": {
+                      "type": "RayClusterMonitoringConfig",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -12784,6 +12813,14 @@
                     }
                   }
                 },
+                "RayClusterLoggingConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "MonitoringConfig": {
                   "fields": {
                     "componentConfig": {
@@ -12833,6 +12870,14 @@
                         "INTERNAL_VPC_LB": 3,
                         "EXTERNAL_LB": 4
                       }
+                    }
+                  }
+                },
+                "RayClusterMonitoringConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 },
