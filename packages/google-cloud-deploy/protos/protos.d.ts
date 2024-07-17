@@ -18926,7 +18926,8 @@ export namespace google {
                         CANCELLED = 2,
                         FAILED = 3,
                         IN_PROGRESS = 4,
-                        PENDING = 5
+                        PENDING = 5,
+                        ABORTED = 6
                     }
                 }
 
@@ -20267,6 +20268,121 @@ export namespace google {
                     REPAIR_STATE_SKIPPED = 6
                 }
 
+                /** Properties of a CustomTargetTypeNotificationEvent. */
+                interface ICustomTargetTypeNotificationEvent {
+
+                    /** CustomTargetTypeNotificationEvent message */
+                    message?: (string|null);
+
+                    /** CustomTargetTypeNotificationEvent customTargetTypeUid */
+                    customTargetTypeUid?: (string|null);
+
+                    /** CustomTargetTypeNotificationEvent customTargetType */
+                    customTargetType?: (string|null);
+
+                    /** CustomTargetTypeNotificationEvent type */
+                    type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
+                }
+
+                /** Represents a CustomTargetTypeNotificationEvent. */
+                class CustomTargetTypeNotificationEvent implements ICustomTargetTypeNotificationEvent {
+
+                    /**
+                     * Constructs a new CustomTargetTypeNotificationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.ICustomTargetTypeNotificationEvent);
+
+                    /** CustomTargetTypeNotificationEvent message. */
+                    public message: string;
+
+                    /** CustomTargetTypeNotificationEvent customTargetTypeUid. */
+                    public customTargetTypeUid: string;
+
+                    /** CustomTargetTypeNotificationEvent customTargetType. */
+                    public customTargetType: string;
+
+                    /** CustomTargetTypeNotificationEvent type. */
+                    public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
+
+                    /**
+                     * Creates a new CustomTargetTypeNotificationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CustomTargetTypeNotificationEvent instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.ICustomTargetTypeNotificationEvent): google.cloud.deploy.v1.CustomTargetTypeNotificationEvent;
+
+                    /**
+                     * Encodes the specified CustomTargetTypeNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetTypeNotificationEvent.verify|verify} messages.
+                     * @param message CustomTargetTypeNotificationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.ICustomTargetTypeNotificationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CustomTargetTypeNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.CustomTargetTypeNotificationEvent.verify|verify} messages.
+                     * @param message CustomTargetTypeNotificationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.ICustomTargetTypeNotificationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CustomTargetTypeNotificationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CustomTargetTypeNotificationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.CustomTargetTypeNotificationEvent;
+
+                    /**
+                     * Decodes a CustomTargetTypeNotificationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CustomTargetTypeNotificationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.CustomTargetTypeNotificationEvent;
+
+                    /**
+                     * Verifies a CustomTargetTypeNotificationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CustomTargetTypeNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CustomTargetTypeNotificationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.CustomTargetTypeNotificationEvent;
+
+                    /**
+                     * Creates a plain object from a CustomTargetTypeNotificationEvent message. Also converts values to other types if specified.
+                     * @param message CustomTargetTypeNotificationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.CustomTargetTypeNotificationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CustomTargetTypeNotificationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CustomTargetTypeNotificationEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeliveryPipelineNotificationEvent. */
                 interface IDeliveryPipelineNotificationEvent {
 
@@ -20376,6 +20492,307 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeliveryPipelineNotificationEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeployPolicyEvaluationEvent. */
+                interface IDeployPolicyEvaluationEvent {
+
+                    /** DeployPolicyEvaluationEvent message */
+                    message?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent ruleType */
+                    ruleType?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent rule */
+                    rule?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent pipelineUid */
+                    pipelineUid?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent deliveryPipeline */
+                    deliveryPipeline?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent targetUid */
+                    targetUid?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent target */
+                    target?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent invoker */
+                    invoker?: (google.cloud.deploy.v1.DeployPolicy.Invoker|keyof typeof google.cloud.deploy.v1.DeployPolicy.Invoker|null);
+
+                    /** DeployPolicyEvaluationEvent deployPolicy */
+                    deployPolicy?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent deployPolicyUid */
+                    deployPolicyUid?: (string|null);
+
+                    /** DeployPolicyEvaluationEvent allowed */
+                    allowed?: (boolean|null);
+
+                    /** DeployPolicyEvaluationEvent verdict */
+                    verdict?: (google.cloud.deploy.v1.DeployPolicyEvaluationEvent.PolicyVerdict|keyof typeof google.cloud.deploy.v1.DeployPolicyEvaluationEvent.PolicyVerdict|null);
+
+                    /** DeployPolicyEvaluationEvent overrides */
+                    overrides?: (google.cloud.deploy.v1.DeployPolicyEvaluationEvent.PolicyVerdictOverride[]|null);
+                }
+
+                /** Represents a DeployPolicyEvaluationEvent. */
+                class DeployPolicyEvaluationEvent implements IDeployPolicyEvaluationEvent {
+
+                    /**
+                     * Constructs a new DeployPolicyEvaluationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployPolicyEvaluationEvent);
+
+                    /** DeployPolicyEvaluationEvent message. */
+                    public message: string;
+
+                    /** DeployPolicyEvaluationEvent ruleType. */
+                    public ruleType: string;
+
+                    /** DeployPolicyEvaluationEvent rule. */
+                    public rule: string;
+
+                    /** DeployPolicyEvaluationEvent pipelineUid. */
+                    public pipelineUid: string;
+
+                    /** DeployPolicyEvaluationEvent deliveryPipeline. */
+                    public deliveryPipeline: string;
+
+                    /** DeployPolicyEvaluationEvent targetUid. */
+                    public targetUid: string;
+
+                    /** DeployPolicyEvaluationEvent target. */
+                    public target: string;
+
+                    /** DeployPolicyEvaluationEvent invoker. */
+                    public invoker: (google.cloud.deploy.v1.DeployPolicy.Invoker|keyof typeof google.cloud.deploy.v1.DeployPolicy.Invoker);
+
+                    /** DeployPolicyEvaluationEvent deployPolicy. */
+                    public deployPolicy: string;
+
+                    /** DeployPolicyEvaluationEvent deployPolicyUid. */
+                    public deployPolicyUid: string;
+
+                    /** DeployPolicyEvaluationEvent allowed. */
+                    public allowed: boolean;
+
+                    /** DeployPolicyEvaluationEvent verdict. */
+                    public verdict: (google.cloud.deploy.v1.DeployPolicyEvaluationEvent.PolicyVerdict|keyof typeof google.cloud.deploy.v1.DeployPolicyEvaluationEvent.PolicyVerdict);
+
+                    /** DeployPolicyEvaluationEvent overrides. */
+                    public overrides: google.cloud.deploy.v1.DeployPolicyEvaluationEvent.PolicyVerdictOverride[];
+
+                    /**
+                     * Creates a new DeployPolicyEvaluationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployPolicyEvaluationEvent instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployPolicyEvaluationEvent): google.cloud.deploy.v1.DeployPolicyEvaluationEvent;
+
+                    /**
+                     * Encodes the specified DeployPolicyEvaluationEvent message. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicyEvaluationEvent.verify|verify} messages.
+                     * @param message DeployPolicyEvaluationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployPolicyEvaluationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployPolicyEvaluationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicyEvaluationEvent.verify|verify} messages.
+                     * @param message DeployPolicyEvaluationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployPolicyEvaluationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployPolicyEvaluationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployPolicyEvaluationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployPolicyEvaluationEvent;
+
+                    /**
+                     * Decodes a DeployPolicyEvaluationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployPolicyEvaluationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployPolicyEvaluationEvent;
+
+                    /**
+                     * Verifies a DeployPolicyEvaluationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployPolicyEvaluationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployPolicyEvaluationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployPolicyEvaluationEvent;
+
+                    /**
+                     * Creates a plain object from a DeployPolicyEvaluationEvent message. Also converts values to other types if specified.
+                     * @param message DeployPolicyEvaluationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployPolicyEvaluationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployPolicyEvaluationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployPolicyEvaluationEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DeployPolicyEvaluationEvent {
+
+                    /** PolicyVerdict enum. */
+                    enum PolicyVerdict {
+                        POLICY_VERDICT_UNSPECIFIED = 0,
+                        ALLOWED_BY_POLICY = 1,
+                        DENIED_BY_POLICY = 2
+                    }
+
+                    /** PolicyVerdictOverride enum. */
+                    enum PolicyVerdictOverride {
+                        POLICY_VERDICT_OVERRIDE_UNSPECIFIED = 0,
+                        POLICY_OVERRIDDEN = 1,
+                        POLICY_SUSPENDED = 2
+                    }
+                }
+
+                /** Properties of a DeployPolicyNotificationEvent. */
+                interface IDeployPolicyNotificationEvent {
+
+                    /** DeployPolicyNotificationEvent message */
+                    message?: (string|null);
+
+                    /** DeployPolicyNotificationEvent deployPolicy */
+                    deployPolicy?: (string|null);
+
+                    /** DeployPolicyNotificationEvent deployPolicyUid */
+                    deployPolicyUid?: (string|null);
+
+                    /** DeployPolicyNotificationEvent type */
+                    type?: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type|null);
+                }
+
+                /** Represents a DeployPolicyNotificationEvent. */
+                class DeployPolicyNotificationEvent implements IDeployPolicyNotificationEvent {
+
+                    /**
+                     * Constructs a new DeployPolicyNotificationEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IDeployPolicyNotificationEvent);
+
+                    /** DeployPolicyNotificationEvent message. */
+                    public message: string;
+
+                    /** DeployPolicyNotificationEvent deployPolicy. */
+                    public deployPolicy: string;
+
+                    /** DeployPolicyNotificationEvent deployPolicyUid. */
+                    public deployPolicyUid: string;
+
+                    /** DeployPolicyNotificationEvent type. */
+                    public type: (google.cloud.deploy.v1.Type|keyof typeof google.cloud.deploy.v1.Type);
+
+                    /**
+                     * Creates a new DeployPolicyNotificationEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeployPolicyNotificationEvent instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IDeployPolicyNotificationEvent): google.cloud.deploy.v1.DeployPolicyNotificationEvent;
+
+                    /**
+                     * Encodes the specified DeployPolicyNotificationEvent message. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicyNotificationEvent.verify|verify} messages.
+                     * @param message DeployPolicyNotificationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IDeployPolicyNotificationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeployPolicyNotificationEvent message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.DeployPolicyNotificationEvent.verify|verify} messages.
+                     * @param message DeployPolicyNotificationEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IDeployPolicyNotificationEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeployPolicyNotificationEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeployPolicyNotificationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.DeployPolicyNotificationEvent;
+
+                    /**
+                     * Decodes a DeployPolicyNotificationEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeployPolicyNotificationEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.DeployPolicyNotificationEvent;
+
+                    /**
+                     * Verifies a DeployPolicyNotificationEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeployPolicyNotificationEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeployPolicyNotificationEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.DeployPolicyNotificationEvent;
+
+                    /**
+                     * Creates a plain object from a DeployPolicyNotificationEvent message. Also converts values to other types if specified.
+                     * @param message DeployPolicyNotificationEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.DeployPolicyNotificationEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeployPolicyNotificationEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeployPolicyNotificationEvent
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

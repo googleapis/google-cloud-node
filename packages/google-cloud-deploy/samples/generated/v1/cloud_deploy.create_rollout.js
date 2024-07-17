@@ -29,8 +29,8 @@ function main(parent, rolloutId, rollout) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `Rollout` should be created.
-   *  Format should be
+   *  Required. The parent collection in which the `Rollout` must be created.
+   *  The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
    */
   // const parent = 'abc123'

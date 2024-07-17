@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the `DeliveryPipeline` to delete. Format should be
+   *  Required. The name of the `DeliveryPipeline` to delete. The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    */
   // const name = 'abc123'

@@ -925,8 +925,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The `DeliveryPipeline` for which the rollback `Rollout` should be
-   *   created. Format should be
+   *   Required. The `DeliveryPipeline` for which the rollback `Rollout` must be
+   *   created. The format is
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {string} request.targetId
    *   Required. ID of the `Target` that is being rolled back.
@@ -2506,9 +2506,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `DeliveryPipeline` should be
-   *   created. Format should be
-   *   `projects/{project_id}/locations/{location_name}`.
+   *   Required. The parent collection in which the `DeliveryPipeline` must be
+   *   created. The format is `projects/{project_id}/locations/{location_name}`.
    * @param {string} request.deliveryPipelineId
    *   Required. ID of the `DeliveryPipeline`.
    * @param {google.cloud.deploy.v1.DeliveryPipeline} request.deliveryPipeline
@@ -2669,11 +2668,11 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `DeliveryPipeline` resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it's in the mask. If the
-   *   user doesn't provide a mask then all fields are overwritten.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the `DeliveryPipeline` resource. The fields specified in the
+   *   update_mask are relative to the resource, not the full request. A field
+   *   will be overwritten if it's in the mask. If the user doesn't provide a mask
+   *   then all fields are overwritten.
    * @param {google.cloud.deploy.v1.DeliveryPipeline} request.deliveryPipeline
    *   Required. The `DeliveryPipeline` to update.
    * @param {string} [request.requestId]
@@ -2835,7 +2834,7 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the `DeliveryPipeline` to delete. Format should be
+   *   Required. The name of the `DeliveryPipeline` to delete. The format is
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {string} [request.requestId]
    *   Optional. A request ID to identify requests. Specify a unique request ID
@@ -3004,8 +3003,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `Target` should be created.
-   *   Format should be
+   *   Required. The parent collection in which the `Target` must be created.
+   *   The format is
    *   `projects/{project_id}/locations/{location_name}`.
    * @param {string} request.targetId
    *   Required. ID of the `Target`.
@@ -3163,11 +3162,11 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Target resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it's in the mask. If the
-   *   user doesn't provide a mask then all fields are overwritten.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the `Target` resource. The fields specified in the update_mask
+   *   are relative to the resource, not the full request. A field will be
+   *   overwritten if it's in the mask. If the user doesn't provide a mask then
+   *   all fields are overwritten.
    * @param {google.cloud.deploy.v1.Target} request.target
    *   Required. The `Target` to update.
    * @param {string} [request.requestId]
@@ -3325,7 +3324,7 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the `Target` to delete. Format should be
+   *   Required. The name of the `Target` to delete. The format is
    *   `projects/{project_id}/locations/{location_name}/targets/{target_name}`.
    * @param {string} [request.requestId]
    *   Optional. A request ID to identify requests. Specify a unique request ID
@@ -3486,9 +3485,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `CustomTargetType` should be
-   *   created. Format should be
-   *   `projects/{project_id}/locations/{location_name}`.
+   *   Required. The parent collection in which the `CustomTargetType` must be
+   *   created. The format is `projects/{project_id}/locations/{location_name}`.
    * @param {string} request.customTargetTypeId
    *   Required. ID of the `CustomTargetType`.
    * @param {google.cloud.deploy.v1.CustomTargetType} request.customTargetType
@@ -3649,11 +3647,11 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `CustomTargetType` resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it's in the mask. If the
-   *   user doesn't provide a mask then all fields are overwritten.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the `CustomTargetType` resource. The fields specified in the
+   *   update_mask are relative to the resource, not the full request. A field
+   *   will be overwritten if it's in the mask. If the user doesn't provide a mask
+   *   then all fields are overwritten.
    * @param {google.cloud.deploy.v1.CustomTargetType} request.customTargetType
    *   Required. The `CustomTargetType` to update.
    * @param {string} [request.requestId]
@@ -3980,8 +3978,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `Release` should be created.
-   *   Format should be
+   *   Required. The parent collection in which the `Release` is created.
+   *   The format is
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {string} request.releaseId
    *   Required. ID of the `Release`.
@@ -4142,9 +4140,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `DeployPolicy` should be
-   *   created. Format should be
-   *   `projects/{project_id}/locations/{location_name}`.
+   *   Required. The parent collection in which the `DeployPolicy` must be
+   *   created. The format is `projects/{project_id}/locations/{location_name}`.
    * @param {string} request.deployPolicyId
    *   Required. ID of the `DeployPolicy`.
    * @param {google.cloud.deploy.v1.DeployPolicy} request.deployPolicy
@@ -4301,11 +4298,11 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `DeployPolicy` resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it's in the mask. If the
-   *   user doesn't provide a mask then all fields are overwritten.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the `DeployPolicy` resource. The fields specified in the
+   *   update_mask are relative to the resource, not the full request. A field
+   *   will be overwritten if it's in the mask. If the user doesn't provide a mask
+   *   then all fields are overwritten.
    * @param {google.cloud.deploy.v1.DeployPolicy} request.deployPolicy
    *   Required. The `DeployPolicy` to update.
    * @param {string} [request.requestId]
@@ -4463,7 +4460,7 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the `DeployPolicy` to delete. Format should be
+   *   Required. The name of the `DeployPolicy` to delete. The format is
    *   `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
    * @param {string} [request.requestId]
    *   Optional. A request ID to identify requests. Specify a unique request ID
@@ -4624,8 +4621,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `Rollout` should be created.
-   *   Format should be
+   *   Required. The parent collection in which the `Rollout` must be created.
+   *   The format is
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/releases/{release_name}`.
    * @param {string} request.rolloutId
    *   Required. ID of the `Rollout`.
@@ -4789,8 +4786,8 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent collection in which the `Automation` should be
-   *   created. Format should be
+   *   Required. The parent collection in which the `Automation` must be created.
+   *   The format is
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}`.
    * @param {string} request.automationId
    *   Required. ID of the `Automation`.
@@ -4948,11 +4945,11 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   `Automation` resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request. A field will be overwritten if it's in the mask. If the
-   *   user doesn't provide a mask then all fields are overwritten.
+   *   Required. Field mask is used to specify the fields to be overwritten by the
+   *   update in the `Automation` resource. The fields specified in the
+   *   update_mask are relative to the resource, not the full request. A field
+   *   will be overwritten if it's in the mask. If the user doesn't provide a mask
+   *   then all fields are overwritten.
    * @param {google.cloud.deploy.v1.Automation} request.automation
    *   Required. The `Automation` to update.
    * @param {string} [request.requestId]
@@ -5110,7 +5107,7 @@ export class CloudDeployClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the `Automation` to delete. Format should be
+   *   Required. The name of the `Automation` to delete. The format is
    *   `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
    * @param {string} [request.requestId]
    *   Optional. A request ID to identify requests. Specify a unique request ID

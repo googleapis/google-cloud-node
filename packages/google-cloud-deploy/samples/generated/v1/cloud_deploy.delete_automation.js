@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the `Automation` to delete. Format should be
+   *  Required. The name of the `Automation` to delete. The format is
    *  `projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}/automations/{automation_name}`.
    */
   // const name = 'abc123'
