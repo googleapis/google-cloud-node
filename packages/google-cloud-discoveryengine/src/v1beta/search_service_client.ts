@@ -209,6 +209,9 @@ export class SearchServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      evaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/evaluations/{evaluation}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -223,6 +226,10 @@ export class SearchServiceClient {
       projectLocationCollectionDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
         ),
       projectLocationCollectionDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -295,6 +302,10 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
       projectLocationDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/controls/{control}'
@@ -335,6 +346,12 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
         ),
+      sampleQueryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}/sampleQueries/{sample_query}'
+      ),
+      sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -676,20 +693,26 @@ export class SearchServiceClient {
    *   documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The ranking expression is a single function or multiple functions that are
-   *   joint by "+".
+   *   joined by "+".
+   *
    *     * ranking_expression = function, { " + ", function };
+   *
    *   Supported functions:
+   *
    *     * double * relevance_score
    *     * double * dotProduct(embedding_field_path)
+   *
    *   Function variables:
-   *     `relevance_score`: pre-defined keywords, used for measure relevance
+   *
+   *     * `relevance_score`: pre-defined keywords, used for measure relevance
    *     between query and document.
-   *     `embedding_field_path`: the document embedding field
+   *     * `embedding_field_path`: the document embedding field
    *     used with query embedding vector.
-   *     `dotProduct`: embedding function between embedding_field_path and query
+   *     * `dotProduct`: embedding function between embedding_field_path and query
    *     embedding vector.
    *
    *    Example ranking expression:
+   *
    *      If document has an embedding field doc_embedding, the ranking expression
    *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
    * @param {boolean} request.safeSearch
@@ -962,20 +985,26 @@ export class SearchServiceClient {
    *   documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The ranking expression is a single function or multiple functions that are
-   *   joint by "+".
+   *   joined by "+".
+   *
    *     * ranking_expression = function, { " + ", function };
+   *
    *   Supported functions:
+   *
    *     * double * relevance_score
    *     * double * dotProduct(embedding_field_path)
+   *
    *   Function variables:
-   *     `relevance_score`: pre-defined keywords, used for measure relevance
+   *
+   *     * `relevance_score`: pre-defined keywords, used for measure relevance
    *     between query and document.
-   *     `embedding_field_path`: the document embedding field
+   *     * `embedding_field_path`: the document embedding field
    *     used with query embedding vector.
-   *     `dotProduct`: embedding function between embedding_field_path and query
+   *     * `dotProduct`: embedding function between embedding_field_path and query
    *     embedding vector.
    *
    *    Example ranking expression:
+   *
    *      If document has an embedding field doc_embedding, the ranking expression
    *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
    * @param {boolean} request.safeSearch
@@ -1196,20 +1225,26 @@ export class SearchServiceClient {
    *   documents. This overrides
    *   {@link protos.google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression|ServingConfig.ranking_expression}.
    *   The ranking expression is a single function or multiple functions that are
-   *   joint by "+".
+   *   joined by "+".
+   *
    *     * ranking_expression = function, { " + ", function };
+   *
    *   Supported functions:
+   *
    *     * double * relevance_score
    *     * double * dotProduct(embedding_field_path)
+   *
    *   Function variables:
-   *     `relevance_score`: pre-defined keywords, used for measure relevance
+   *
+   *     * `relevance_score`: pre-defined keywords, used for measure relevance
    *     between query and document.
-   *     `embedding_field_path`: the document embedding field
+   *     * `embedding_field_path`: the document embedding field
    *     used with query embedding vector.
-   *     `dotProduct`: embedding function between embedding_field_path and query
+   *     * `dotProduct`: embedding function between embedding_field_path and query
    *     embedding vector.
    *
    *    Example ranking expression:
+   *
    *      If document has an embedding field doc_embedding, the ranking expression
    *      could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
    * @param {boolean} request.safeSearch
@@ -1413,6 +1448,58 @@ export class SearchServiceClient {
    */
   matchEngineFromEngineName(engineName: string) {
     return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified evaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  evaluationPath(project: string, location: string, evaluation: string) {
+    return this.pathTemplates.evaluationPathTemplate.render({
+      project: project,
+      location: location,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
+  }
+
+  /**
+   * Parse the evaluation from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
   }
 
   /**
@@ -1745,6 +1832,145 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
       projectLocationCollectionDataStoreBranchDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).chunk;
   }
 
   /**
@@ -3546,6 +3772,127 @@ export class SearchServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).chunk;
+  }
+
+  /**
    * Return a fully-qualified projectLocationDataStoreControl resource name string.
    *
    * @param {string} project
@@ -4375,6 +4722,136 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineTargetSiteName
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified sampleQuery resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sample_query_set
+   * @param {string} sample_query
+   * @returns {string} Resource name string.
+   */
+  sampleQueryPath(
+    project: string,
+    location: string,
+    sampleQuerySet: string,
+    sampleQuery: string
+  ) {
+    return this.pathTemplates.sampleQueryPathTemplate.render({
+      project: project,
+      location: location,
+      sample_query_set: sampleQuerySet,
+      sample_query: sampleQuery,
+    });
+  }
+
+  /**
+   * Parse the project from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .location;
+  }
+
+  /**
+   * Parse the sample_query_set from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the sample_query_set.
+   */
+  matchSampleQuerySetFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .sample_query_set;
+  }
+
+  /**
+   * Parse the sample_query from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the sample_query.
+   */
+  matchSampleQueryFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .sample_query;
+  }
+
+  /**
+   * Return a fully-qualified sampleQuerySet resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sample_query_set
+   * @returns {string} Resource name string.
+   */
+  sampleQuerySetPath(
+    project: string,
+    location: string,
+    sampleQuerySet: string
+  ) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.render({
+      project: project,
+      location: location,
+      sample_query_set: sampleQuerySet,
+    });
+  }
+
+  /**
+   * Parse the project from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).project;
+  }
+
+  /**
+   * Parse the location from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).location;
+  }
+
+  /**
+   * Parse the sample_query_set from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the sample_query_set.
+   */
+  matchSampleQuerySetFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).sample_query_set;
   }
 
   /**
