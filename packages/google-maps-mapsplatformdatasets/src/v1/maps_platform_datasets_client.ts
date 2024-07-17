@@ -208,6 +208,11 @@ export class MapsPlatformDatasetsClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      fetchDatasetErrors: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'errors'
+      ),
       listDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -269,6 +274,7 @@ export class MapsPlatformDatasetsClient {
       'createDataset',
       'updateDatasetMetadata',
       'getDataset',
+      'fetchDatasetErrors',
       'listDatasets',
       'deleteDataset',
     ];
@@ -781,6 +787,210 @@ export class MapsPlatformDatasetsClient {
     return this.innerApiCalls.deleteDataset(request, options, callback);
   }
 
+  /**
+   * Gets all the errors of a dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The name of the dataset to list all the errors for.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   * @param {number} request.pageSize
+   *   The maximum number of errors to return per page.
+   *
+   *   The maximum value is 500; values above 500 will be capped to 500.
+   *
+   *   If unspecified, at most 50 errors will be returned.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListDatasetErrors call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.rpc.Status|Status}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchDatasetErrorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchDatasetErrors(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.rpc.IStatus[],
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
+    ]
+  >;
+  fetchDatasetErrors(
+    request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      | null
+      | undefined,
+      protos.google.rpc.IStatus
+    >
+  ): void;
+  fetchDatasetErrors(
+    request: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    callback: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      | null
+      | undefined,
+      protos.google.rpc.IStatus
+    >
+  ): void;
+  fetchDatasetErrors(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+          | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+          | null
+          | undefined,
+          protos.google.rpc.IStatus
+        >,
+    callback?: PaginationCallback<
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+      | protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse
+      | null
+      | undefined,
+      protos.google.rpc.IStatus
+    >
+  ): Promise<
+    [
+      protos.google.rpc.IStatus[],
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest | null,
+      protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.fetchDatasetErrors(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The name of the dataset to list all the errors for.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   * @param {number} request.pageSize
+   *   The maximum number of errors to return per page.
+   *
+   *   The maximum value is 500; values above 500 will be capped to 500.
+   *
+   *   If unspecified, at most 50 errors will be returned.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListDatasetErrors call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.rpc.Status|Status} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchDatasetErrorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchDatasetErrorsStream(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchDatasetErrors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchDatasetErrors.createStream(
+      this.innerApiCalls.fetchDatasetErrors as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `fetchDatasetErrors`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. The name of the dataset to list all the errors for.
+   *   Format: projects/{project}/datasets/{dataset_id}
+   * @param {number} request.pageSize
+   *   The maximum number of errors to return per page.
+   *
+   *   The maximum value is 500; values above 500 will be capped to 500.
+   *
+   *   If unspecified, at most 50 errors will be returned.
+   * @param {string} request.pageToken
+   *   The page token, received from a previous ListDatasetErrors call.
+   *   Provide this to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.rpc.Status|Status}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js</caption>
+   * region_tag:mapsplatformdatasets_v1_generated_MapsPlatformDatasets_FetchDatasetErrors_async
+   */
+  fetchDatasetErrorsAsync(
+    request?: protos.google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.rpc.IStatus> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchDatasetErrors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.fetchDatasetErrors.asyncIterate(
+      this.innerApiCalls['fetchDatasetErrors'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.rpc.IStatus>;
+  }
   /**
    * Lists all the datasets for the specified project.
    *

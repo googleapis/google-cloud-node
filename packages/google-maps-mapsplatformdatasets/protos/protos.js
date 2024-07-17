@@ -2691,6 +2691,504 @@
                         return ListDatasetsResponse;
                     })();
     
+                    v1.FetchDatasetErrorsRequest = (function() {
+    
+                        /**
+                         * Properties of a FetchDatasetErrorsRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IFetchDatasetErrorsRequest
+                         * @property {string|null} [dataset] FetchDatasetErrorsRequest dataset
+                         * @property {number|null} [pageSize] FetchDatasetErrorsRequest pageSize
+                         * @property {string|null} [pageToken] FetchDatasetErrorsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new FetchDatasetErrorsRequest.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a FetchDatasetErrorsRequest.
+                         * @implements IFetchDatasetErrorsRequest
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest=} [properties] Properties to set
+                         */
+                        function FetchDatasetErrorsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchDatasetErrorsRequest dataset.
+                         * @member {string} dataset
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @instance
+                         */
+                        FetchDatasetErrorsRequest.prototype.dataset = "";
+    
+                        /**
+                         * FetchDatasetErrorsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @instance
+                         */
+                        FetchDatasetErrorsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * FetchDatasetErrorsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @instance
+                         */
+                        FetchDatasetErrorsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new FetchDatasetErrorsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest} FetchDatasetErrorsRequest instance
+                         */
+                        FetchDatasetErrorsRequest.create = function create(properties) {
+                            return new FetchDatasetErrorsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDatasetErrorsRequest message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest} message FetchDatasetErrorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDatasetErrorsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDatasetErrorsRequest message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest} message FetchDatasetErrorsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDatasetErrorsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchDatasetErrorsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest} FetchDatasetErrorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDatasetErrorsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataset = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchDatasetErrorsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest} FetchDatasetErrorsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDatasetErrorsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchDatasetErrorsRequest message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchDatasetErrorsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchDatasetErrorsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest} FetchDatasetErrorsRequest
+                         */
+                        FetchDatasetErrorsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest();
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchDatasetErrorsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest} message FetchDatasetErrorsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchDatasetErrorsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataset = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchDatasetErrorsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchDatasetErrorsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchDatasetErrorsRequest
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchDatasetErrorsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest";
+                        };
+    
+                        return FetchDatasetErrorsRequest;
+                    })();
+    
+                    v1.FetchDatasetErrorsResponse = (function() {
+    
+                        /**
+                         * Properties of a FetchDatasetErrorsResponse.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @interface IFetchDatasetErrorsResponse
+                         * @property {string|null} [nextPageToken] FetchDatasetErrorsResponse nextPageToken
+                         * @property {Array.<google.rpc.IStatus>|null} [errors] FetchDatasetErrorsResponse errors
+                         */
+    
+                        /**
+                         * Constructs a new FetchDatasetErrorsResponse.
+                         * @memberof google.maps.mapsplatformdatasets.v1
+                         * @classdesc Represents a FetchDatasetErrorsResponse.
+                         * @implements IFetchDatasetErrorsResponse
+                         * @constructor
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse=} [properties] Properties to set
+                         */
+                        function FetchDatasetErrorsResponse(properties) {
+                            this.errors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * FetchDatasetErrorsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @instance
+                         */
+                        FetchDatasetErrorsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * FetchDatasetErrorsResponse errors.
+                         * @member {Array.<google.rpc.IStatus>} errors
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @instance
+                         */
+                        FetchDatasetErrorsResponse.prototype.errors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new FetchDatasetErrorsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse=} [properties] Properties to set
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse} FetchDatasetErrorsResponse instance
+                         */
+                        FetchDatasetErrorsResponse.create = function create(properties) {
+                            return new FetchDatasetErrorsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDatasetErrorsResponse message. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse} message FetchDatasetErrorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDatasetErrorsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.errors != null && message.errors.length)
+                                for (var i = 0; i < message.errors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.errors[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified FetchDatasetErrorsResponse message, length delimited. Does not implicitly {@link google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsResponse} message FetchDatasetErrorsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        FetchDatasetErrorsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a FetchDatasetErrorsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse} FetchDatasetErrorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDatasetErrorsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.errors && message.errors.length))
+                                            message.errors = [];
+                                        message.errors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a FetchDatasetErrorsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse} FetchDatasetErrorsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        FetchDatasetErrorsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a FetchDatasetErrorsResponse message.
+                         * @function verify
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        FetchDatasetErrorsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.errors != null && message.hasOwnProperty("errors")) {
+                                if (!Array.isArray(message.errors))
+                                    return "errors: array expected";
+                                for (var i = 0; i < message.errors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.errors[i]);
+                                    if (error)
+                                        return "errors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a FetchDatasetErrorsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse} FetchDatasetErrorsResponse
+                         */
+                        FetchDatasetErrorsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse)
+                                return object;
+                            var message = new $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse();
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.errors) {
+                                if (!Array.isArray(object.errors))
+                                    throw TypeError(".google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse.errors: array expected");
+                                message.errors = [];
+                                for (var i = 0; i < object.errors.length; ++i) {
+                                    if (typeof object.errors[i] !== "object")
+                                        throw TypeError(".google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse.errors: object expected");
+                                    message.errors[i] = $root.google.rpc.Status.fromObject(object.errors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a FetchDatasetErrorsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse} message FetchDatasetErrorsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        FetchDatasetErrorsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.errors = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.errors && message.errors.length) {
+                                object.errors = [];
+                                for (var j = 0; j < message.errors.length; ++j)
+                                    object.errors[j] = $root.google.rpc.Status.toObject(message.errors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this FetchDatasetErrorsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        FetchDatasetErrorsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for FetchDatasetErrorsResponse
+                         * @function getTypeUrl
+                         * @memberof google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        FetchDatasetErrorsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse";
+                        };
+    
+                        return FetchDatasetErrorsResponse;
+                    })();
+    
                     v1.DeleteDatasetRequest = (function() {
     
                         /**
@@ -3022,6 +3520,39 @@
                          * @instance
                          * @param {google.maps.mapsplatformdatasets.v1.IGetDatasetRequest} request GetDatasetRequest message or plain object
                          * @returns {Promise<google.maps.mapsplatformdatasets.v1.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets|fetchDatasetErrors}.
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @typedef FetchDatasetErrorsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse} [response] FetchDatasetErrorsResponse
+                         */
+    
+                        /**
+                         * Calls FetchDatasetErrors.
+                         * @function fetchDatasetErrors
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest} request FetchDatasetErrorsRequest message or plain object
+                         * @param {google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets.FetchDatasetErrorsCallback} callback Node-style callback called with the error, if any, and FetchDatasetErrorsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(MapsPlatformDatasets.prototype.fetchDatasetErrors = function fetchDatasetErrors(request, callback) {
+                            return this.rpcCall(fetchDatasetErrors, $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest, $root.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse, request, callback);
+                        }, "name", { value: "FetchDatasetErrors" });
+    
+                        /**
+                         * Calls FetchDatasetErrors.
+                         * @function fetchDatasetErrors
+                         * @memberof google.maps.mapsplatformdatasets.v1.MapsPlatformDatasets
+                         * @instance
+                         * @param {google.maps.mapsplatformdatasets.v1.IFetchDatasetErrorsRequest} request FetchDatasetErrorsRequest message or plain object
+                         * @returns {Promise<google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsResponse>} Promise
                          * @variation 2
                          */
     
@@ -24787,6 +25318,242 @@
                 return FieldMask;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -25204,6 +25971,290 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         return google;

@@ -869,6 +869,306 @@ describe('v1.MapsPlatformDatasetsClient', () => {
     });
   });
 
+  describe('fetchDatasetErrors', () => {
+    it('invokes fetchDatasetErrors without error', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+      ];
+      client.innerApiCalls.fetchDatasetErrors =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchDatasetErrors(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchDatasetErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDatasetErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchDatasetErrors without error using callback', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+      ];
+      client.innerApiCalls.fetchDatasetErrors =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchDatasetErrors(
+          request,
+          (err?: Error | null, result?: protos.google.rpc.IStatus[] | null) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchDatasetErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDatasetErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchDatasetErrors with error', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchDatasetErrors = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.fetchDatasetErrors(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.fetchDatasetErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDatasetErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchDatasetErrorsStream without error', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+      ];
+      client.descriptors.page.fetchDatasetErrors.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.fetchDatasetErrorsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.rpc.Status[] = [];
+        stream.on('data', (response: protos.google.rpc.Status) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchDatasetErrors, request)
+      );
+      assert(
+        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes fetchDatasetErrorsStream with error', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchDatasetErrors.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.fetchDatasetErrorsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.rpc.Status[] = [];
+        stream.on('data', (response: protos.google.rpc.Status) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.fetchDatasetErrors, request)
+      );
+      assert(
+        (client.descriptors.page.fetchDatasetErrors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with fetchDatasetErrors without error', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+        generateSampleMessage(new protos.google.rpc.Status()),
+      ];
+      client.descriptors.page.fetchDatasetErrors.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.rpc.IStatus[] = [];
+      const iterable = client.fetchDatasetErrorsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with fetchDatasetErrors with error', async () => {
+      const client =
+        new mapsplatformdatasetsModule.v1.MapsPlatformDatasetsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.maps.mapsplatformdatasets.v1.FetchDatasetErrorsRequest',
+        ['dataset']
+      );
+      request.dataset = defaultValue1;
+      const expectedHeaderRequestParams = `dataset=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.fetchDatasetErrors.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.fetchDatasetErrorsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.rpc.IStatus[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.fetchDatasetErrors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
   describe('listDatasets', () => {
     it('invokes listDatasets without error', async () => {
       const client =
