@@ -103,7 +103,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteAccount_async",
             "title": "AnalyticsAdminService deleteAccount Sample",
             "origin": "API_DEFINITION",
-            "description": " Marks target Account as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted accounts. However, they can be restored using the Trash Can UI. If the accounts are not restored before the expiration time, the account and all child resources (eg: Properties, GoogleAdsLinks, Streams, UserLinks) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
+            "description": " Marks target Account as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted accounts. However, they can be restored using the Trash Can UI. If the accounts are not restored before the expiration time, the account and all child resources (eg: Properties, GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
             "canonical": true,
             "file": "analytics_admin_service.delete_account.js",
             "language": "JAVASCRIPT",
@@ -407,7 +407,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteProperty_async",
             "title": "AnalyticsAdminService deleteProperty Sample",
             "origin": "API_DEFINITION",
-            "description": " Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, UserLinks) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found, or is not a GA4 Property.",
+            "description": " Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found, or is not a GA4 Property.",
             "canonical": true,
             "file": "analytics_admin_service.delete_property.js",
             "language": "JAVASCRIPT",
@@ -1106,7 +1106,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 99,
+                    "end": 102,
                     "type": "FULL"
                 }
             ],
@@ -1171,7 +1171,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateConversionEvent_async",
             "title": "AnalyticsAdminService createConversionEvent Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a conversion event with the specified attributes.",
+            "description": " Deprecated: Use `CreateKeyEvent` instead. Creates a conversion event with the specified attributes.",
             "canonical": true,
             "file": "analytics_admin_service.create_conversion_event.js",
             "language": "JAVASCRIPT",
@@ -1215,7 +1215,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async",
             "title": "AnalyticsAdminService updateConversionEvent Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates a conversion event with the specified attributes.",
+            "description": " Deprecated: Use `UpdateKeyEvent` instead. Updates a conversion event with the specified attributes.",
             "canonical": true,
             "file": "analytics_admin_service.update_conversion_event.js",
             "language": "JAVASCRIPT",
@@ -1259,7 +1259,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetConversionEvent_async",
             "title": "AnalyticsAdminService getConversionEvent Sample",
             "origin": "API_DEFINITION",
-            "description": " Retrieve a single conversion event.",
+            "description": " Deprecated: Use `GetKeyEvent` instead. Retrieve a single conversion event.",
             "canonical": true,
             "file": "analytics_admin_service.get_conversion_event.js",
             "language": "JAVASCRIPT",
@@ -1299,7 +1299,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteConversionEvent_async",
             "title": "AnalyticsAdminService deleteConversionEvent Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes a conversion event in a property.",
+            "description": " Deprecated: Use `DeleteKeyEvent` instead. Deletes a conversion event in a property.",
             "canonical": true,
             "file": "analytics_admin_service.delete_conversion_event.js",
             "language": "JAVASCRIPT",
@@ -1339,7 +1339,7 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListConversionEvents_async",
             "title": "AnalyticsAdminService listConversionEvents Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.",
+            "description": " Deprecated: Use `ListKeyEvents` instead. Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.",
             "canonical": true,
             "file": "analytics_admin_service.list_conversion_events.js",
             "language": "JAVASCRIPT",
@@ -1376,6 +1376,222 @@
                 "method": {
                     "shortName": "ListConversionEvents",
                     "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListConversionEvents",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateKeyEvent_async",
+            "title": "AnalyticsAdminService createKeyEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a Key Event.",
+            "canonical": true,
+            "file": "analytics_admin_service.create_key_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CreateKeyEvent",
+                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "key_event",
+                        "type": ".google.analytics.admin.v1beta.KeyEvent"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1beta.KeyEvent",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "CreateKeyEvent",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEvent",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateKeyEvent_async",
+            "title": "AnalyticsAdminService updateKeyEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates a Key Event.",
+            "canonical": true,
+            "file": "analytics_admin_service.update_key_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateKeyEvent",
+                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "key_event",
+                        "type": ".google.analytics.admin.v1beta.KeyEvent"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1beta.KeyEvent",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateKeyEvent",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEvent",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetKeyEvent_async",
+            "title": "AnalyticsAdminService getKeyEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieve a single Key Event.",
+            "canonical": true,
+            "file": "analytics_admin_service.get_key_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetKeyEvent",
+                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1beta.KeyEvent",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "GetKeyEvent",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEvent",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteKeyEvent_async",
+            "title": "AnalyticsAdminService deleteKeyEvent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a Key Event.",
+            "canonical": true,
+            "file": "analytics_admin_service.delete_key_event.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteKeyEvent",
+                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEvent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteKeyEvent",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEvent",
+                    "service": {
+                        "shortName": "AnalyticsAdminService",
+                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListKeyEvents_async",
+            "title": "AnalyticsAdminService listKeyEvents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns a list of Key Events in the specified parent property. Returns an empty list if no Key Events are found.",
+            "canonical": true,
+            "file": "analytics_admin_service.list_key_events.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 69,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListKeyEvents",
+                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEvents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_size",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.admin.v1beta.ListKeyEventsResponse",
+                "client": {
+                    "shortName": "AnalyticsAdminServiceClient",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+                },
+                "method": {
+                    "shortName": "ListKeyEvents",
+                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEvents",
                     "service": {
                         "shortName": "AnalyticsAdminService",
                         "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
@@ -2119,14 +2335,14 @@
             "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_RunAccessReport_async",
             "title": "AnalyticsAdminService runAccessReport Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. The property must be in Google Analytics 360. This method is only available to Administrators. These data access records include GA4 UI Reporting, GA4 UI Explorations, GA4 Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).",
+            "description": " Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. Reports may be requested for any property, but dimensions that aren't related to quota can only be requested on Google Analytics 360 properties. This method is only available to Administrators. These data access records include GA4 UI Reporting, GA4 UI Explorations, GA4 Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).",
             "canonical": true,
             "file": "analytics_admin_service.run_access_report.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 131,
+                    "end": 146,
                     "type": "FULL"
                 }
             ],
@@ -2177,6 +2393,14 @@
                     },
                     {
                         "name": "return_entity_quota",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "include_all_users",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "expand_groups",
                         "type": "TYPE_BOOL"
                     }
                 ],

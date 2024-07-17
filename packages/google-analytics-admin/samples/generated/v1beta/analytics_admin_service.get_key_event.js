@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataSharingSettings_async]
+  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_GetKeyEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,9 +29,9 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the settings to lookup.
-   *  Format: accounts/{account}/dataSharingSettings
-   *  Example: `accounts/1000/dataSharingSettings`
+   *  Required. The resource name of the Key Event to retrieve.
+   *  Format: properties/{property}/keyEvents/{key_event}
+   *  Example: "properties/123/keyEvents/456"
    */
   // const name = 'abc123'
 
@@ -41,19 +41,19 @@ function main(name) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callGetDataSharingSettings() {
+  async function callGetKeyEvent() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await adminClient.getDataSharingSettings(request);
+    const response = await adminClient.getKeyEvent(request);
     console.log(response);
   }
 
-  callGetDataSharingSettings();
-  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataSharingSettings_async]
+  callGetKeyEvent();
+  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_GetKeyEvent_async]
 }
 
 process.on('unhandledRejection', err => {

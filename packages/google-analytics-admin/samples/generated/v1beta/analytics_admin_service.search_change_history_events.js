@@ -30,12 +30,15 @@ function main(account) {
    */
   /**
    *  Required. The account resource for which to return change history
-   *  resources.
+   *  resources. Format: accounts/{account}
+   *  Example: `accounts/100`
    */
   // const account = 'abc123'
   /**
    *  Optional. Resource name for a child property. If set, only return changes
    *  made to this property or its child resources.
+   *  Format: properties/{propertyId}
+   *  Example: `properties/100`
    */
   // const property = 'abc123'
   /**

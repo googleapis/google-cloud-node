@@ -35044,6 +35044,76 @@ export namespace google {
                     public listConversionEvents(request: google.analytics.admin.v1beta.IListConversionEventsRequest): Promise<google.analytics.admin.v1beta.ListConversionEventsResponse>;
 
                     /**
+                     * Calls CreateKeyEvent.
+                     * @param request CreateKeyEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and KeyEvent
+                     */
+                    public createKeyEvent(request: google.analytics.admin.v1beta.ICreateKeyEventRequest, callback: google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEventCallback): void;
+
+                    /**
+                     * Calls CreateKeyEvent.
+                     * @param request CreateKeyEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createKeyEvent(request: google.analytics.admin.v1beta.ICreateKeyEventRequest): Promise<google.analytics.admin.v1beta.KeyEvent>;
+
+                    /**
+                     * Calls UpdateKeyEvent.
+                     * @param request UpdateKeyEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and KeyEvent
+                     */
+                    public updateKeyEvent(request: google.analytics.admin.v1beta.IUpdateKeyEventRequest, callback: google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEventCallback): void;
+
+                    /**
+                     * Calls UpdateKeyEvent.
+                     * @param request UpdateKeyEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateKeyEvent(request: google.analytics.admin.v1beta.IUpdateKeyEventRequest): Promise<google.analytics.admin.v1beta.KeyEvent>;
+
+                    /**
+                     * Calls GetKeyEvent.
+                     * @param request GetKeyEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and KeyEvent
+                     */
+                    public getKeyEvent(request: google.analytics.admin.v1beta.IGetKeyEventRequest, callback: google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEventCallback): void;
+
+                    /**
+                     * Calls GetKeyEvent.
+                     * @param request GetKeyEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getKeyEvent(request: google.analytics.admin.v1beta.IGetKeyEventRequest): Promise<google.analytics.admin.v1beta.KeyEvent>;
+
+                    /**
+                     * Calls DeleteKeyEvent.
+                     * @param request DeleteKeyEventRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteKeyEvent(request: google.analytics.admin.v1beta.IDeleteKeyEventRequest, callback: google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEventCallback): void;
+
+                    /**
+                     * Calls DeleteKeyEvent.
+                     * @param request DeleteKeyEventRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteKeyEvent(request: google.analytics.admin.v1beta.IDeleteKeyEventRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListKeyEvents.
+                     * @param request ListKeyEventsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListKeyEventsResponse
+                     */
+                    public listKeyEvents(request: google.analytics.admin.v1beta.IListKeyEventsRequest, callback: google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEventsCallback): void;
+
+                    /**
+                     * Calls ListKeyEvents.
+                     * @param request ListKeyEventsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listKeyEvents(request: google.analytics.admin.v1beta.IListKeyEventsRequest): Promise<google.analytics.admin.v1beta.ListKeyEventsResponse>;
+
+                    /**
                      * Calls CreateCustomDimension.
                      * @param request CreateCustomDimensionRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and CustomDimension
@@ -35516,6 +35586,41 @@ export namespace google {
                     type ListConversionEventsCallback = (error: (Error|null), response?: google.analytics.admin.v1beta.ListConversionEventsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.analytics.admin.v1beta.AnalyticsAdminService|createKeyEvent}.
+                     * @param error Error, if any
+                     * @param [response] KeyEvent
+                     */
+                    type CreateKeyEventCallback = (error: (Error|null), response?: google.analytics.admin.v1beta.KeyEvent) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1beta.AnalyticsAdminService|updateKeyEvent}.
+                     * @param error Error, if any
+                     * @param [response] KeyEvent
+                     */
+                    type UpdateKeyEventCallback = (error: (Error|null), response?: google.analytics.admin.v1beta.KeyEvent) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1beta.AnalyticsAdminService|getKeyEvent}.
+                     * @param error Error, if any
+                     * @param [response] KeyEvent
+                     */
+                    type GetKeyEventCallback = (error: (Error|null), response?: google.analytics.admin.v1beta.KeyEvent) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1beta.AnalyticsAdminService|deleteKeyEvent}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteKeyEventCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.admin.v1beta.AnalyticsAdminService|listKeyEvents}.
+                     * @param error Error, if any
+                     * @param [response] ListKeyEventsResponse
+                     */
+                    type ListKeyEventsCallback = (error: (Error|null), response?: google.analytics.admin.v1beta.ListKeyEventsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.analytics.admin.v1beta.AnalyticsAdminService|createCustomDimension}.
                      * @param error Error, if any
                      * @param [response] CustomDimension
@@ -35677,6 +35782,12 @@ export namespace google {
 
                     /** RunAccessReportRequest returnEntityQuota */
                     returnEntityQuota?: (boolean|null);
+
+                    /** RunAccessReportRequest includeAllUsers */
+                    includeAllUsers?: (boolean|null);
+
+                    /** RunAccessReportRequest expandGroups */
+                    expandGroups?: (boolean|null);
                 }
 
                 /** Represents a RunAccessReportRequest. */
@@ -35720,6 +35831,12 @@ export namespace google {
 
                     /** RunAccessReportRequest returnEntityQuota. */
                     public returnEntityQuota: boolean;
+
+                    /** RunAccessReportRequest includeAllUsers. */
+                    public includeAllUsers: boolean;
+
+                    /** RunAccessReportRequest expandGroups. */
+                    public expandGroups: boolean;
 
                     /**
                      * Creates a new RunAccessReportRequest instance using the specified properties.
@@ -40137,6 +40254,618 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateKeyEventRequest. */
+                interface ICreateKeyEventRequest {
+
+                    /** CreateKeyEventRequest keyEvent */
+                    keyEvent?: (google.analytics.admin.v1beta.IKeyEvent|null);
+
+                    /** CreateKeyEventRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a CreateKeyEventRequest. */
+                class CreateKeyEventRequest implements ICreateKeyEventRequest {
+
+                    /**
+                     * Constructs a new CreateKeyEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.ICreateKeyEventRequest);
+
+                    /** CreateKeyEventRequest keyEvent. */
+                    public keyEvent?: (google.analytics.admin.v1beta.IKeyEvent|null);
+
+                    /** CreateKeyEventRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new CreateKeyEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateKeyEventRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.ICreateKeyEventRequest): google.analytics.admin.v1beta.CreateKeyEventRequest;
+
+                    /**
+                     * Encodes the specified CreateKeyEventRequest message. Does not implicitly {@link google.analytics.admin.v1beta.CreateKeyEventRequest.verify|verify} messages.
+                     * @param message CreateKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.ICreateKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateKeyEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.CreateKeyEventRequest.verify|verify} messages.
+                     * @param message CreateKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.ICreateKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateKeyEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.CreateKeyEventRequest;
+
+                    /**
+                     * Decodes a CreateKeyEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.CreateKeyEventRequest;
+
+                    /**
+                     * Verifies a CreateKeyEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateKeyEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateKeyEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.CreateKeyEventRequest;
+
+                    /**
+                     * Creates a plain object from a CreateKeyEventRequest message. Also converts values to other types if specified.
+                     * @param message CreateKeyEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.CreateKeyEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateKeyEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateKeyEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateKeyEventRequest. */
+                interface IUpdateKeyEventRequest {
+
+                    /** UpdateKeyEventRequest keyEvent */
+                    keyEvent?: (google.analytics.admin.v1beta.IKeyEvent|null);
+
+                    /** UpdateKeyEventRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateKeyEventRequest. */
+                class UpdateKeyEventRequest implements IUpdateKeyEventRequest {
+
+                    /**
+                     * Constructs a new UpdateKeyEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.IUpdateKeyEventRequest);
+
+                    /** UpdateKeyEventRequest keyEvent. */
+                    public keyEvent?: (google.analytics.admin.v1beta.IKeyEvent|null);
+
+                    /** UpdateKeyEventRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateKeyEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateKeyEventRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.IUpdateKeyEventRequest): google.analytics.admin.v1beta.UpdateKeyEventRequest;
+
+                    /**
+                     * Encodes the specified UpdateKeyEventRequest message. Does not implicitly {@link google.analytics.admin.v1beta.UpdateKeyEventRequest.verify|verify} messages.
+                     * @param message UpdateKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.IUpdateKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateKeyEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.UpdateKeyEventRequest.verify|verify} messages.
+                     * @param message UpdateKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.IUpdateKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateKeyEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.UpdateKeyEventRequest;
+
+                    /**
+                     * Decodes an UpdateKeyEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.UpdateKeyEventRequest;
+
+                    /**
+                     * Verifies an UpdateKeyEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateKeyEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateKeyEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.UpdateKeyEventRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateKeyEventRequest message. Also converts values to other types if specified.
+                     * @param message UpdateKeyEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.UpdateKeyEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateKeyEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateKeyEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetKeyEventRequest. */
+                interface IGetKeyEventRequest {
+
+                    /** GetKeyEventRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetKeyEventRequest. */
+                class GetKeyEventRequest implements IGetKeyEventRequest {
+
+                    /**
+                     * Constructs a new GetKeyEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.IGetKeyEventRequest);
+
+                    /** GetKeyEventRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetKeyEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetKeyEventRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.IGetKeyEventRequest): google.analytics.admin.v1beta.GetKeyEventRequest;
+
+                    /**
+                     * Encodes the specified GetKeyEventRequest message. Does not implicitly {@link google.analytics.admin.v1beta.GetKeyEventRequest.verify|verify} messages.
+                     * @param message GetKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.IGetKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetKeyEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.GetKeyEventRequest.verify|verify} messages.
+                     * @param message GetKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.IGetKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetKeyEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.GetKeyEventRequest;
+
+                    /**
+                     * Decodes a GetKeyEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.GetKeyEventRequest;
+
+                    /**
+                     * Verifies a GetKeyEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetKeyEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetKeyEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.GetKeyEventRequest;
+
+                    /**
+                     * Creates a plain object from a GetKeyEventRequest message. Also converts values to other types if specified.
+                     * @param message GetKeyEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.GetKeyEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetKeyEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetKeyEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteKeyEventRequest. */
+                interface IDeleteKeyEventRequest {
+
+                    /** DeleteKeyEventRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteKeyEventRequest. */
+                class DeleteKeyEventRequest implements IDeleteKeyEventRequest {
+
+                    /**
+                     * Constructs a new DeleteKeyEventRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.IDeleteKeyEventRequest);
+
+                    /** DeleteKeyEventRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteKeyEventRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteKeyEventRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.IDeleteKeyEventRequest): google.analytics.admin.v1beta.DeleteKeyEventRequest;
+
+                    /**
+                     * Encodes the specified DeleteKeyEventRequest message. Does not implicitly {@link google.analytics.admin.v1beta.DeleteKeyEventRequest.verify|verify} messages.
+                     * @param message DeleteKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.IDeleteKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteKeyEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.DeleteKeyEventRequest.verify|verify} messages.
+                     * @param message DeleteKeyEventRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.IDeleteKeyEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteKeyEventRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.DeleteKeyEventRequest;
+
+                    /**
+                     * Decodes a DeleteKeyEventRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteKeyEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.DeleteKeyEventRequest;
+
+                    /**
+                     * Verifies a DeleteKeyEventRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteKeyEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteKeyEventRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.DeleteKeyEventRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteKeyEventRequest message. Also converts values to other types if specified.
+                     * @param message DeleteKeyEventRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.DeleteKeyEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteKeyEventRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteKeyEventRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListKeyEventsRequest. */
+                interface IListKeyEventsRequest {
+
+                    /** ListKeyEventsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListKeyEventsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListKeyEventsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListKeyEventsRequest. */
+                class ListKeyEventsRequest implements IListKeyEventsRequest {
+
+                    /**
+                     * Constructs a new ListKeyEventsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.IListKeyEventsRequest);
+
+                    /** ListKeyEventsRequest parent. */
+                    public parent: string;
+
+                    /** ListKeyEventsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListKeyEventsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListKeyEventsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListKeyEventsRequest instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.IListKeyEventsRequest): google.analytics.admin.v1beta.ListKeyEventsRequest;
+
+                    /**
+                     * Encodes the specified ListKeyEventsRequest message. Does not implicitly {@link google.analytics.admin.v1beta.ListKeyEventsRequest.verify|verify} messages.
+                     * @param message ListKeyEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.IListKeyEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListKeyEventsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.ListKeyEventsRequest.verify|verify} messages.
+                     * @param message ListKeyEventsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.IListKeyEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListKeyEventsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListKeyEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.ListKeyEventsRequest;
+
+                    /**
+                     * Decodes a ListKeyEventsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListKeyEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.ListKeyEventsRequest;
+
+                    /**
+                     * Verifies a ListKeyEventsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListKeyEventsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListKeyEventsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.ListKeyEventsRequest;
+
+                    /**
+                     * Creates a plain object from a ListKeyEventsRequest message. Also converts values to other types if specified.
+                     * @param message ListKeyEventsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.ListKeyEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListKeyEventsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListKeyEventsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListKeyEventsResponse. */
+                interface IListKeyEventsResponse {
+
+                    /** ListKeyEventsResponse keyEvents */
+                    keyEvents?: (google.analytics.admin.v1beta.IKeyEvent[]|null);
+
+                    /** ListKeyEventsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListKeyEventsResponse. */
+                class ListKeyEventsResponse implements IListKeyEventsResponse {
+
+                    /**
+                     * Constructs a new ListKeyEventsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.IListKeyEventsResponse);
+
+                    /** ListKeyEventsResponse keyEvents. */
+                    public keyEvents: google.analytics.admin.v1beta.IKeyEvent[];
+
+                    /** ListKeyEventsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListKeyEventsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListKeyEventsResponse instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.IListKeyEventsResponse): google.analytics.admin.v1beta.ListKeyEventsResponse;
+
+                    /**
+                     * Encodes the specified ListKeyEventsResponse message. Does not implicitly {@link google.analytics.admin.v1beta.ListKeyEventsResponse.verify|verify} messages.
+                     * @param message ListKeyEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.IListKeyEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListKeyEventsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.ListKeyEventsResponse.verify|verify} messages.
+                     * @param message ListKeyEventsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.IListKeyEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListKeyEventsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListKeyEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.ListKeyEventsResponse;
+
+                    /**
+                     * Decodes a ListKeyEventsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListKeyEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.ListKeyEventsResponse;
+
+                    /**
+                     * Verifies a ListKeyEventsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListKeyEventsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListKeyEventsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.ListKeyEventsResponse;
+
+                    /**
+                     * Creates a plain object from a ListKeyEventsResponse message. Also converts values to other types if specified.
+                     * @param message ListKeyEventsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.ListKeyEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListKeyEventsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListKeyEventsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateCustomDimensionRequest. */
                 interface ICreateCustomDimensionRequest {
 
@@ -42272,6 +43001,9 @@ export namespace google {
 
                     /** Account deleted */
                     deleted?: (boolean|null);
+
+                    /** Account gmpOrganization */
+                    gmpOrganization?: (string|null);
                 }
 
                 /** Represents an Account. */
@@ -42300,6 +43032,9 @@ export namespace google {
 
                     /** Account deleted. */
                     public deleted: boolean;
+
+                    /** Account gmpOrganization. */
+                    public gmpOrganization: string;
 
                     /**
                      * Creates a new Account instance using the specified properties.
@@ -44131,6 +44866,9 @@ export namespace google {
 
                     /** ConversionEvent countingMethod */
                     countingMethod?: (google.analytics.admin.v1beta.ConversionEvent.ConversionCountingMethod|keyof typeof google.analytics.admin.v1beta.ConversionEvent.ConversionCountingMethod|null);
+
+                    /** ConversionEvent defaultConversionValue */
+                    defaultConversionValue?: (google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue|null);
                 }
 
                 /** Represents a ConversionEvent. */
@@ -44159,6 +44897,12 @@ export namespace google {
 
                     /** ConversionEvent countingMethod. */
                     public countingMethod: (google.analytics.admin.v1beta.ConversionEvent.ConversionCountingMethod|keyof typeof google.analytics.admin.v1beta.ConversionEvent.ConversionCountingMethod);
+
+                    /** ConversionEvent defaultConversionValue. */
+                    public defaultConversionValue?: (google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue|null);
+
+                    /** ConversionEvent _defaultConversionValue. */
+                    public _defaultConversionValue?: "defaultConversionValue";
 
                     /**
                      * Creates a new ConversionEvent instance using the specified properties.
@@ -44240,9 +44984,364 @@ export namespace google {
 
                 namespace ConversionEvent {
 
+                    /** Properties of a DefaultConversionValue. */
+                    interface IDefaultConversionValue {
+
+                        /** DefaultConversionValue value */
+                        value?: (number|null);
+
+                        /** DefaultConversionValue currencyCode */
+                        currencyCode?: (string|null);
+                    }
+
+                    /** Represents a DefaultConversionValue. */
+                    class DefaultConversionValue implements IDefaultConversionValue {
+
+                        /**
+                         * Constructs a new DefaultConversionValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue);
+
+                        /** DefaultConversionValue value. */
+                        public value?: (number|null);
+
+                        /** DefaultConversionValue currencyCode. */
+                        public currencyCode?: (string|null);
+
+                        /** DefaultConversionValue _value. */
+                        public _value?: "value";
+
+                        /** DefaultConversionValue _currencyCode. */
+                        public _currencyCode?: "currencyCode";
+
+                        /**
+                         * Creates a new DefaultConversionValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DefaultConversionValue instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue): google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Encodes the specified DefaultConversionValue message. Does not implicitly {@link google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue.verify|verify} messages.
+                         * @param message DefaultConversionValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DefaultConversionValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue.verify|verify} messages.
+                         * @param message DefaultConversionValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1beta.ConversionEvent.IDefaultConversionValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DefaultConversionValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DefaultConversionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Decodes a DefaultConversionValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DefaultConversionValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Verifies a DefaultConversionValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DefaultConversionValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DefaultConversionValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue;
+
+                        /**
+                         * Creates a plain object from a DefaultConversionValue message. Also converts values to other types if specified.
+                         * @param message DefaultConversionValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1beta.ConversionEvent.DefaultConversionValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DefaultConversionValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DefaultConversionValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** ConversionCountingMethod enum. */
                     enum ConversionCountingMethod {
                         CONVERSION_COUNTING_METHOD_UNSPECIFIED = 0,
+                        ONCE_PER_EVENT = 1,
+                        ONCE_PER_SESSION = 2
+                    }
+                }
+
+                /** Properties of a KeyEvent. */
+                interface IKeyEvent {
+
+                    /** KeyEvent name */
+                    name?: (string|null);
+
+                    /** KeyEvent eventName */
+                    eventName?: (string|null);
+
+                    /** KeyEvent createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** KeyEvent deletable */
+                    deletable?: (boolean|null);
+
+                    /** KeyEvent custom */
+                    custom?: (boolean|null);
+
+                    /** KeyEvent countingMethod */
+                    countingMethod?: (google.analytics.admin.v1beta.KeyEvent.CountingMethod|keyof typeof google.analytics.admin.v1beta.KeyEvent.CountingMethod|null);
+
+                    /** KeyEvent defaultValue */
+                    defaultValue?: (google.analytics.admin.v1beta.KeyEvent.IDefaultValue|null);
+                }
+
+                /** Represents a KeyEvent. */
+                class KeyEvent implements IKeyEvent {
+
+                    /**
+                     * Constructs a new KeyEvent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.admin.v1beta.IKeyEvent);
+
+                    /** KeyEvent name. */
+                    public name: string;
+
+                    /** KeyEvent eventName. */
+                    public eventName: string;
+
+                    /** KeyEvent createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** KeyEvent deletable. */
+                    public deletable: boolean;
+
+                    /** KeyEvent custom. */
+                    public custom: boolean;
+
+                    /** KeyEvent countingMethod. */
+                    public countingMethod: (google.analytics.admin.v1beta.KeyEvent.CountingMethod|keyof typeof google.analytics.admin.v1beta.KeyEvent.CountingMethod);
+
+                    /** KeyEvent defaultValue. */
+                    public defaultValue?: (google.analytics.admin.v1beta.KeyEvent.IDefaultValue|null);
+
+                    /**
+                     * Creates a new KeyEvent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KeyEvent instance
+                     */
+                    public static create(properties?: google.analytics.admin.v1beta.IKeyEvent): google.analytics.admin.v1beta.KeyEvent;
+
+                    /**
+                     * Encodes the specified KeyEvent message. Does not implicitly {@link google.analytics.admin.v1beta.KeyEvent.verify|verify} messages.
+                     * @param message KeyEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.admin.v1beta.IKeyEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KeyEvent message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.KeyEvent.verify|verify} messages.
+                     * @param message KeyEvent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.admin.v1beta.IKeyEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KeyEvent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KeyEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.KeyEvent;
+
+                    /**
+                     * Decodes a KeyEvent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KeyEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.KeyEvent;
+
+                    /**
+                     * Verifies a KeyEvent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KeyEvent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KeyEvent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.KeyEvent;
+
+                    /**
+                     * Creates a plain object from a KeyEvent message. Also converts values to other types if specified.
+                     * @param message KeyEvent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.admin.v1beta.KeyEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KeyEvent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KeyEvent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace KeyEvent {
+
+                    /** Properties of a DefaultValue. */
+                    interface IDefaultValue {
+
+                        /** DefaultValue numericValue */
+                        numericValue?: (number|null);
+
+                        /** DefaultValue currencyCode */
+                        currencyCode?: (string|null);
+                    }
+
+                    /** Represents a DefaultValue. */
+                    class DefaultValue implements IDefaultValue {
+
+                        /**
+                         * Constructs a new DefaultValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.analytics.admin.v1beta.KeyEvent.IDefaultValue);
+
+                        /** DefaultValue numericValue. */
+                        public numericValue: number;
+
+                        /** DefaultValue currencyCode. */
+                        public currencyCode: string;
+
+                        /**
+                         * Creates a new DefaultValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DefaultValue instance
+                         */
+                        public static create(properties?: google.analytics.admin.v1beta.KeyEvent.IDefaultValue): google.analytics.admin.v1beta.KeyEvent.DefaultValue;
+
+                        /**
+                         * Encodes the specified DefaultValue message. Does not implicitly {@link google.analytics.admin.v1beta.KeyEvent.DefaultValue.verify|verify} messages.
+                         * @param message DefaultValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.analytics.admin.v1beta.KeyEvent.IDefaultValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DefaultValue message, length delimited. Does not implicitly {@link google.analytics.admin.v1beta.KeyEvent.DefaultValue.verify|verify} messages.
+                         * @param message DefaultValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.analytics.admin.v1beta.KeyEvent.IDefaultValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DefaultValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DefaultValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.admin.v1beta.KeyEvent.DefaultValue;
+
+                        /**
+                         * Decodes a DefaultValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DefaultValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.admin.v1beta.KeyEvent.DefaultValue;
+
+                        /**
+                         * Verifies a DefaultValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DefaultValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DefaultValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.analytics.admin.v1beta.KeyEvent.DefaultValue;
+
+                        /**
+                         * Creates a plain object from a DefaultValue message. Also converts values to other types if specified.
+                         * @param message DefaultValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.analytics.admin.v1beta.KeyEvent.DefaultValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DefaultValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DefaultValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** CountingMethod enum. */
+                    enum CountingMethod {
+                        COUNTING_METHOD_UNSPECIFIED = 0,
                         ONCE_PER_EVENT = 1,
                         ONCE_PER_SESSION = 2
                     }

@@ -180,6 +180,7 @@
   * [Analytics_admin_service.create_data_stream](#analytics_admin_service.create_data_stream)
   * [Analytics_admin_service.create_firebase_link](#analytics_admin_service.create_firebase_link)
   * [Analytics_admin_service.create_google_ads_link](#analytics_admin_service.create_google_ads_link)
+  * [Analytics_admin_service.create_key_event](#analytics_admin_service.create_key_event)
   * [Analytics_admin_service.create_measurement_protocol_secret](#analytics_admin_service.create_measurement_protocol_secret)
   * [Analytics_admin_service.create_property](#analytics_admin_service.create_property)
   * [Analytics_admin_service.delete_account](#analytics_admin_service.delete_account)
@@ -187,6 +188,7 @@
   * [Analytics_admin_service.delete_data_stream](#analytics_admin_service.delete_data_stream)
   * [Analytics_admin_service.delete_firebase_link](#analytics_admin_service.delete_firebase_link)
   * [Analytics_admin_service.delete_google_ads_link](#analytics_admin_service.delete_google_ads_link)
+  * [Analytics_admin_service.delete_key_event](#analytics_admin_service.delete_key_event)
   * [Analytics_admin_service.delete_measurement_protocol_secret](#analytics_admin_service.delete_measurement_protocol_secret)
   * [Analytics_admin_service.delete_property](#analytics_admin_service.delete_property)
   * [Analytics_admin_service.get_account](#analytics_admin_service.get_account)
@@ -196,6 +198,7 @@
   * [Analytics_admin_service.get_data_retention_settings](#analytics_admin_service.get_data_retention_settings)
   * [Analytics_admin_service.get_data_sharing_settings](#analytics_admin_service.get_data_sharing_settings)
   * [Analytics_admin_service.get_data_stream](#analytics_admin_service.get_data_stream)
+  * [Analytics_admin_service.get_key_event](#analytics_admin_service.get_key_event)
   * [Analytics_admin_service.get_measurement_protocol_secret](#analytics_admin_service.get_measurement_protocol_secret)
   * [Analytics_admin_service.get_property](#analytics_admin_service.get_property)
   * [Analytics_admin_service.list_account_summaries](#analytics_admin_service.list_account_summaries)
@@ -206,6 +209,7 @@
   * [Analytics_admin_service.list_data_streams](#analytics_admin_service.list_data_streams)
   * [Analytics_admin_service.list_firebase_links](#analytics_admin_service.list_firebase_links)
   * [Analytics_admin_service.list_google_ads_links](#analytics_admin_service.list_google_ads_links)
+  * [Analytics_admin_service.list_key_events](#analytics_admin_service.list_key_events)
   * [Analytics_admin_service.list_measurement_protocol_secrets](#analytics_admin_service.list_measurement_protocol_secrets)
   * [Analytics_admin_service.list_properties](#analytics_admin_service.list_properties)
   * [Analytics_admin_service.provision_account_ticket](#analytics_admin_service.provision_account_ticket)
@@ -218,6 +222,7 @@
   * [Analytics_admin_service.update_data_retention_settings](#analytics_admin_service.update_data_retention_settings)
   * [Analytics_admin_service.update_data_stream](#analytics_admin_service.update_data_stream)
   * [Analytics_admin_service.update_google_ads_link](#analytics_admin_service.update_google_ads_link)
+  * [Analytics_admin_service.update_key_event](#analytics_admin_service.update_key_event)
   * [Analytics_admin_service.update_measurement_protocol_secret](#analytics_admin_service.update_measurement_protocol_secret)
   * [Analytics_admin_service.update_property](#analytics_admin_service.update_property)
   * [Quickstart](#quickstart)
@@ -3093,6 +3098,23 @@ __Usage:__
 
 
 
+### Analytics_admin_service.create_key_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.create_key_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.create_key_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.create_key_event.js`
+
+
+-----
+
+
+
+
 ### Analytics_admin_service.create_measurement_protocol_secret
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.create_measurement_protocol_secret.js).
@@ -3205,6 +3227,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.delete_google_ads_link.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.delete_key_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.delete_key_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.delete_key_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.delete_key_event.js`
 
 
 -----
@@ -3358,6 +3397,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.get_data_stream.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.get_key_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.get_key_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.get_key_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.get_key_event.js`
 
 
 -----
@@ -3528,6 +3584,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.list_google_ads_links.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.list_key_events
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.list_key_events.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.list_key_events.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.list_key_events.js`
 
 
 -----
@@ -3732,6 +3805,23 @@ __Usage:__
 
 
 `node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_google_ads_link.js`
+
+
+-----
+
+
+
+
+### Analytics_admin_service.update_key_event
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_key_event.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_key_event.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-analytics-admin/samples/generated/v1beta/analytics_admin_service.update_key_event.js`
 
 
 -----

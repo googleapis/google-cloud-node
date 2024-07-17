@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataSharingSettings_async]
+function main(keyEvent, updateMask) {
+  // [START analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateKeyEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,11 +29,17 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the settings to lookup.
-   *  Format: accounts/{account}/dataSharingSettings
-   *  Example: `accounts/1000/dataSharingSettings`
+   *  Required. The Key Event to update.
+   *  The `name` field is used to identify the settings to be updated.
    */
-  // const name = 'abc123'
+  // const keyEvent = {}
+  /**
+   *  Required. The list of fields to be updated. Field names must be in snake
+   *  case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *  replace the entire entity, use one path with the string "*" to match all
+   *  fields.
+   */
+  // const updateMask = {}
 
   // Imports the Admin library
   const {AnalyticsAdminServiceClient} = require('@google-cloud/admin').v1beta;
@@ -41,19 +47,20 @@ function main(name) {
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callGetDataSharingSettings() {
+  async function callUpdateKeyEvent() {
     // Construct request
     const request = {
-      name,
+      keyEvent,
+      updateMask,
     };
 
     // Run request
-    const response = await adminClient.getDataSharingSettings(request);
+    const response = await adminClient.updateKeyEvent(request);
     console.log(response);
   }
 
-  callGetDataSharingSettings();
-  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataSharingSettings_async]
+  callUpdateKeyEvent();
+  // [END analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateKeyEvent_async]
 }
 
 process.on('unhandledRejection', err => {
