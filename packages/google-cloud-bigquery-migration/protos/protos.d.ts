@@ -174,6 +174,9 @@ export namespace google {
                         /** MigrationTask translationConfigDetails */
                         translationConfigDetails?: (google.cloud.bigquery.migration.v2.ITranslationConfigDetails|null);
 
+                        /** MigrationTask translationDetails */
+                        translationDetails?: (google.cloud.bigquery.migration.v2.ITranslationDetails|null);
+
                         /** MigrationTask id */
                         id?: (string|null);
 
@@ -191,6 +194,24 @@ export namespace google {
 
                         /** MigrationTask lastUpdateTime */
                         lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                        /** MigrationTask resourceErrorDetails */
+                        resourceErrorDetails?: (google.cloud.bigquery.migration.v2.IResourceErrorDetail[]|null);
+
+                        /** MigrationTask resourceErrorCount */
+                        resourceErrorCount?: (number|null);
+
+                        /** MigrationTask metrics */
+                        metrics?: (google.cloud.bigquery.migration.v2.ITimeSeries[]|null);
+
+                        /** MigrationTask taskResult */
+                        taskResult?: (google.cloud.bigquery.migration.v2.IMigrationTaskResult|null);
+
+                        /** MigrationTask totalProcessingErrorCount */
+                        totalProcessingErrorCount?: (number|null);
+
+                        /** MigrationTask totalResourceErrorCount */
+                        totalResourceErrorCount?: (number|null);
                     }
 
                     /** Represents a MigrationTask. */
@@ -204,6 +225,9 @@ export namespace google {
 
                         /** MigrationTask translationConfigDetails. */
                         public translationConfigDetails?: (google.cloud.bigquery.migration.v2.ITranslationConfigDetails|null);
+
+                        /** MigrationTask translationDetails. */
+                        public translationDetails?: (google.cloud.bigquery.migration.v2.ITranslationDetails|null);
 
                         /** MigrationTask id. */
                         public id: string;
@@ -223,8 +247,26 @@ export namespace google {
                         /** MigrationTask lastUpdateTime. */
                         public lastUpdateTime?: (google.protobuf.ITimestamp|null);
 
+                        /** MigrationTask resourceErrorDetails. */
+                        public resourceErrorDetails: google.cloud.bigquery.migration.v2.IResourceErrorDetail[];
+
+                        /** MigrationTask resourceErrorCount. */
+                        public resourceErrorCount: number;
+
+                        /** MigrationTask metrics. */
+                        public metrics: google.cloud.bigquery.migration.v2.ITimeSeries[];
+
+                        /** MigrationTask taskResult. */
+                        public taskResult?: (google.cloud.bigquery.migration.v2.IMigrationTaskResult|null);
+
+                        /** MigrationTask totalProcessingErrorCount. */
+                        public totalProcessingErrorCount: number;
+
+                        /** MigrationTask totalResourceErrorCount. */
+                        public totalResourceErrorCount: number;
+
                         /** MigrationTask taskDetails. */
-                        public taskDetails?: "translationConfigDetails";
+                        public taskDetails?: ("translationConfigDetails"|"translationDetails");
 
                         /**
                          * Creates a new MigrationTask instance using the specified properties.
@@ -481,6 +523,209 @@ export namespace google {
                             PAUSED = 5,
                             PENDING_DEPENDENCY = 6
                         }
+                    }
+
+                    /** Properties of a MigrationTaskResult. */
+                    interface IMigrationTaskResult {
+
+                        /** MigrationTaskResult translationTaskResult */
+                        translationTaskResult?: (google.cloud.bigquery.migration.v2.ITranslationTaskResult|null);
+                    }
+
+                    /** Represents a MigrationTaskResult. */
+                    class MigrationTaskResult implements IMigrationTaskResult {
+
+                        /**
+                         * Constructs a new MigrationTaskResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.IMigrationTaskResult);
+
+                        /** MigrationTaskResult translationTaskResult. */
+                        public translationTaskResult?: (google.cloud.bigquery.migration.v2.ITranslationTaskResult|null);
+
+                        /** MigrationTaskResult details. */
+                        public details?: "translationTaskResult";
+
+                        /**
+                         * Creates a new MigrationTaskResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MigrationTaskResult instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.IMigrationTaskResult): google.cloud.bigquery.migration.v2.MigrationTaskResult;
+
+                        /**
+                         * Encodes the specified MigrationTaskResult message. Does not implicitly {@link google.cloud.bigquery.migration.v2.MigrationTaskResult.verify|verify} messages.
+                         * @param message MigrationTaskResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.IMigrationTaskResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MigrationTaskResult message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.MigrationTaskResult.verify|verify} messages.
+                         * @param message MigrationTaskResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.IMigrationTaskResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MigrationTaskResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MigrationTaskResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.MigrationTaskResult;
+
+                        /**
+                         * Decodes a MigrationTaskResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MigrationTaskResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.MigrationTaskResult;
+
+                        /**
+                         * Verifies a MigrationTaskResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MigrationTaskResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MigrationTaskResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.MigrationTaskResult;
+
+                        /**
+                         * Creates a plain object from a MigrationTaskResult message. Also converts values to other types if specified.
+                         * @param message MigrationTaskResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.MigrationTaskResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MigrationTaskResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MigrationTaskResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TranslationTaskResult. */
+                    interface ITranslationTaskResult {
+
+                        /** TranslationTaskResult translatedLiterals */
+                        translatedLiterals?: (google.cloud.bigquery.migration.v2.ILiteral[]|null);
+
+                        /** TranslationTaskResult reportLogMessages */
+                        reportLogMessages?: (google.cloud.bigquery.migration.v2.IGcsReportLogMessage[]|null);
+                    }
+
+                    /** Represents a TranslationTaskResult. */
+                    class TranslationTaskResult implements ITranslationTaskResult {
+
+                        /**
+                         * Constructs a new TranslationTaskResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ITranslationTaskResult);
+
+                        /** TranslationTaskResult translatedLiterals. */
+                        public translatedLiterals: google.cloud.bigquery.migration.v2.ILiteral[];
+
+                        /** TranslationTaskResult reportLogMessages. */
+                        public reportLogMessages: google.cloud.bigquery.migration.v2.IGcsReportLogMessage[];
+
+                        /**
+                         * Creates a new TranslationTaskResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TranslationTaskResult instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ITranslationTaskResult): google.cloud.bigquery.migration.v2.TranslationTaskResult;
+
+                        /**
+                         * Encodes the specified TranslationTaskResult message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationTaskResult.verify|verify} messages.
+                         * @param message TranslationTaskResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ITranslationTaskResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TranslationTaskResult message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationTaskResult.verify|verify} messages.
+                         * @param message TranslationTaskResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ITranslationTaskResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TranslationTaskResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TranslationTaskResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.TranslationTaskResult;
+
+                        /**
+                         * Decodes a TranslationTaskResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TranslationTaskResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.TranslationTaskResult;
+
+                        /**
+                         * Verifies a TranslationTaskResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TranslationTaskResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TranslationTaskResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.TranslationTaskResult;
+
+                        /**
+                         * Creates a plain object from a TranslationTaskResult message. Also converts values to other types if specified.
+                         * @param message TranslationTaskResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.TranslationTaskResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TranslationTaskResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TranslationTaskResult
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a ResourceErrorDetail. */
@@ -1266,6 +1511,9 @@ export namespace google {
 
                         /** TranslationConfigDetails requestSource */
                         requestSource?: (string|null);
+
+                        /** TranslationConfigDetails targetTypes */
+                        targetTypes?: (string[]|null);
                     }
 
                     /** Represents a TranslationConfigDetails. */
@@ -1297,6 +1545,9 @@ export namespace google {
 
                         /** TranslationConfigDetails requestSource. */
                         public requestSource: string;
+
+                        /** TranslationConfigDetails targetTypes. */
+                        public targetTypes: string[];
 
                         /** TranslationConfigDetails sourceLocation. */
                         public sourceLocation?: "gcsSourcePath";
@@ -1429,6 +1680,15 @@ export namespace google {
 
                         /** Dialect mysqlDialect */
                         mysqlDialect?: (google.cloud.bigquery.migration.v2.IMySQLDialect|null);
+
+                        /** Dialect db2Dialect */
+                        db2Dialect?: (google.cloud.bigquery.migration.v2.IDB2Dialect|null);
+
+                        /** Dialect sqliteDialect */
+                        sqliteDialect?: (google.cloud.bigquery.migration.v2.ISQLiteDialect|null);
+
+                        /** Dialect greenplumDialect */
+                        greenplumDialect?: (google.cloud.bigquery.migration.v2.IGreenplumDialect|null);
                     }
 
                     /** Represents a Dialect. */
@@ -1482,8 +1742,17 @@ export namespace google {
                         /** Dialect mysqlDialect. */
                         public mysqlDialect?: (google.cloud.bigquery.migration.v2.IMySQLDialect|null);
 
+                        /** Dialect db2Dialect. */
+                        public db2Dialect?: (google.cloud.bigquery.migration.v2.IDB2Dialect|null);
+
+                        /** Dialect sqliteDialect. */
+                        public sqliteDialect?: (google.cloud.bigquery.migration.v2.ISQLiteDialect|null);
+
+                        /** Dialect greenplumDialect. */
+                        public greenplumDialect?: (google.cloud.bigquery.migration.v2.IGreenplumDialect|null);
+
                         /** Dialect dialectValue. */
-                        public dialectValue?: ("bigqueryDialect"|"hiveqlDialect"|"redshiftDialect"|"teradataDialect"|"oracleDialect"|"sparksqlDialect"|"snowflakeDialect"|"netezzaDialect"|"azureSynapseDialect"|"verticaDialect"|"sqlServerDialect"|"postgresqlDialect"|"prestoDialect"|"mysqlDialect");
+                        public dialectValue?: ("bigqueryDialect"|"hiveqlDialect"|"redshiftDialect"|"teradataDialect"|"oracleDialect"|"sparksqlDialect"|"snowflakeDialect"|"netezzaDialect"|"azureSynapseDialect"|"verticaDialect"|"sqlServerDialect"|"postgresqlDialect"|"prestoDialect"|"mysqlDialect"|"db2Dialect"|"sqliteDialect"|"greenplumDialect");
 
                         /**
                          * Creates a new Dialect instance using the specified properties.
@@ -2853,6 +3122,279 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DB2Dialect. */
+                    interface IDB2Dialect {
+                    }
+
+                    /** Represents a DB2Dialect. */
+                    class DB2Dialect implements IDB2Dialect {
+
+                        /**
+                         * Constructs a new DB2Dialect.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.IDB2Dialect);
+
+                        /**
+                         * Creates a new DB2Dialect instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DB2Dialect instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.IDB2Dialect): google.cloud.bigquery.migration.v2.DB2Dialect;
+
+                        /**
+                         * Encodes the specified DB2Dialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.DB2Dialect.verify|verify} messages.
+                         * @param message DB2Dialect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.IDB2Dialect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DB2Dialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.DB2Dialect.verify|verify} messages.
+                         * @param message DB2Dialect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.IDB2Dialect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DB2Dialect message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DB2Dialect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.DB2Dialect;
+
+                        /**
+                         * Decodes a DB2Dialect message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DB2Dialect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.DB2Dialect;
+
+                        /**
+                         * Verifies a DB2Dialect message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DB2Dialect message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DB2Dialect
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.DB2Dialect;
+
+                        /**
+                         * Creates a plain object from a DB2Dialect message. Also converts values to other types if specified.
+                         * @param message DB2Dialect
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.DB2Dialect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DB2Dialect to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DB2Dialect
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SQLiteDialect. */
+                    interface ISQLiteDialect {
+                    }
+
+                    /** Represents a SQLiteDialect. */
+                    class SQLiteDialect implements ISQLiteDialect {
+
+                        /**
+                         * Constructs a new SQLiteDialect.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ISQLiteDialect);
+
+                        /**
+                         * Creates a new SQLiteDialect instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SQLiteDialect instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ISQLiteDialect): google.cloud.bigquery.migration.v2.SQLiteDialect;
+
+                        /**
+                         * Encodes the specified SQLiteDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SQLiteDialect.verify|verify} messages.
+                         * @param message SQLiteDialect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ISQLiteDialect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SQLiteDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SQLiteDialect.verify|verify} messages.
+                         * @param message SQLiteDialect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ISQLiteDialect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SQLiteDialect message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SQLiteDialect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.SQLiteDialect;
+
+                        /**
+                         * Decodes a SQLiteDialect message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SQLiteDialect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.SQLiteDialect;
+
+                        /**
+                         * Verifies a SQLiteDialect message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SQLiteDialect message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SQLiteDialect
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.SQLiteDialect;
+
+                        /**
+                         * Creates a plain object from a SQLiteDialect message. Also converts values to other types if specified.
+                         * @param message SQLiteDialect
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.SQLiteDialect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SQLiteDialect to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SQLiteDialect
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GreenplumDialect. */
+                    interface IGreenplumDialect {
+                    }
+
+                    /** Represents a GreenplumDialect. */
+                    class GreenplumDialect implements IGreenplumDialect {
+
+                        /**
+                         * Constructs a new GreenplumDialect.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.IGreenplumDialect);
+
+                        /**
+                         * Creates a new GreenplumDialect instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GreenplumDialect instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.IGreenplumDialect): google.cloud.bigquery.migration.v2.GreenplumDialect;
+
+                        /**
+                         * Encodes the specified GreenplumDialect message. Does not implicitly {@link google.cloud.bigquery.migration.v2.GreenplumDialect.verify|verify} messages.
+                         * @param message GreenplumDialect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.IGreenplumDialect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GreenplumDialect message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.GreenplumDialect.verify|verify} messages.
+                         * @param message GreenplumDialect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.IGreenplumDialect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GreenplumDialect message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GreenplumDialect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.GreenplumDialect;
+
+                        /**
+                         * Decodes a GreenplumDialect message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GreenplumDialect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.GreenplumDialect;
+
+                        /**
+                         * Verifies a GreenplumDialect message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GreenplumDialect message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GreenplumDialect
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.GreenplumDialect;
+
+                        /**
+                         * Creates a plain object from a GreenplumDialect message. Also converts values to other types if specified.
+                         * @param message GreenplumDialect
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.GreenplumDialect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GreenplumDialect to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GreenplumDialect
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an ObjectNameMappingList. */
                     interface IObjectNameMappingList {
 
@@ -3312,6 +3854,9 @@ export namespace google {
 
                         /** SourceEnv schemaSearchPath */
                         schemaSearchPath?: (string[]|null);
+
+                        /** SourceEnv metadataStoreDataset */
+                        metadataStoreDataset?: (string|null);
                     }
 
                     /** Represents a SourceEnv. */
@@ -3328,6 +3873,9 @@ export namespace google {
 
                         /** SourceEnv schemaSearchPath. */
                         public schemaSearchPath: string[];
+
+                        /** SourceEnv metadataStoreDataset. */
+                        public metadataStoreDataset: string;
 
                         /**
                          * Creates a new SourceEnv instance using the specified properties.
@@ -3401,6 +3949,817 @@ export namespace google {
 
                         /**
                          * Gets the default type url for SourceEnv
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TranslationDetails. */
+                    interface ITranslationDetails {
+
+                        /** TranslationDetails sourceTargetMapping */
+                        sourceTargetMapping?: (google.cloud.bigquery.migration.v2.ISourceTargetMapping[]|null);
+
+                        /** TranslationDetails targetBaseUri */
+                        targetBaseUri?: (string|null);
+
+                        /** TranslationDetails sourceEnvironment */
+                        sourceEnvironment?: (google.cloud.bigquery.migration.v2.ISourceEnvironment|null);
+
+                        /** TranslationDetails targetReturnLiterals */
+                        targetReturnLiterals?: (string[]|null);
+
+                        /** TranslationDetails targetTypes */
+                        targetTypes?: (string[]|null);
+                    }
+
+                    /** Represents a TranslationDetails. */
+                    class TranslationDetails implements ITranslationDetails {
+
+                        /**
+                         * Constructs a new TranslationDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ITranslationDetails);
+
+                        /** TranslationDetails sourceTargetMapping. */
+                        public sourceTargetMapping: google.cloud.bigquery.migration.v2.ISourceTargetMapping[];
+
+                        /** TranslationDetails targetBaseUri. */
+                        public targetBaseUri: string;
+
+                        /** TranslationDetails sourceEnvironment. */
+                        public sourceEnvironment?: (google.cloud.bigquery.migration.v2.ISourceEnvironment|null);
+
+                        /** TranslationDetails targetReturnLiterals. */
+                        public targetReturnLiterals: string[];
+
+                        /** TranslationDetails targetTypes. */
+                        public targetTypes: string[];
+
+                        /**
+                         * Creates a new TranslationDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TranslationDetails instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ITranslationDetails): google.cloud.bigquery.migration.v2.TranslationDetails;
+
+                        /**
+                         * Encodes the specified TranslationDetails message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationDetails.verify|verify} messages.
+                         * @param message TranslationDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ITranslationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TranslationDetails message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationDetails.verify|verify} messages.
+                         * @param message TranslationDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ITranslationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TranslationDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TranslationDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.TranslationDetails;
+
+                        /**
+                         * Decodes a TranslationDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TranslationDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.TranslationDetails;
+
+                        /**
+                         * Verifies a TranslationDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TranslationDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TranslationDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.TranslationDetails;
+
+                        /**
+                         * Creates a plain object from a TranslationDetails message. Also converts values to other types if specified.
+                         * @param message TranslationDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.TranslationDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TranslationDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TranslationDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SourceTargetMapping. */
+                    interface ISourceTargetMapping {
+
+                        /** SourceTargetMapping sourceSpec */
+                        sourceSpec?: (google.cloud.bigquery.migration.v2.ISourceSpec|null);
+
+                        /** SourceTargetMapping targetSpec */
+                        targetSpec?: (google.cloud.bigquery.migration.v2.ITargetSpec|null);
+                    }
+
+                    /** Represents a SourceTargetMapping. */
+                    class SourceTargetMapping implements ISourceTargetMapping {
+
+                        /**
+                         * Constructs a new SourceTargetMapping.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ISourceTargetMapping);
+
+                        /** SourceTargetMapping sourceSpec. */
+                        public sourceSpec?: (google.cloud.bigquery.migration.v2.ISourceSpec|null);
+
+                        /** SourceTargetMapping targetSpec. */
+                        public targetSpec?: (google.cloud.bigquery.migration.v2.ITargetSpec|null);
+
+                        /**
+                         * Creates a new SourceTargetMapping instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceTargetMapping instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ISourceTargetMapping): google.cloud.bigquery.migration.v2.SourceTargetMapping;
+
+                        /**
+                         * Encodes the specified SourceTargetMapping message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceTargetMapping.verify|verify} messages.
+                         * @param message SourceTargetMapping message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ISourceTargetMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceTargetMapping message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceTargetMapping.verify|verify} messages.
+                         * @param message SourceTargetMapping message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ISourceTargetMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceTargetMapping message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceTargetMapping
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.SourceTargetMapping;
+
+                        /**
+                         * Decodes a SourceTargetMapping message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceTargetMapping
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.SourceTargetMapping;
+
+                        /**
+                         * Verifies a SourceTargetMapping message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceTargetMapping message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceTargetMapping
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.SourceTargetMapping;
+
+                        /**
+                         * Creates a plain object from a SourceTargetMapping message. Also converts values to other types if specified.
+                         * @param message SourceTargetMapping
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.SourceTargetMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceTargetMapping to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceTargetMapping
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SourceSpec. */
+                    interface ISourceSpec {
+
+                        /** SourceSpec baseUri */
+                        baseUri?: (string|null);
+
+                        /** SourceSpec literal */
+                        literal?: (google.cloud.bigquery.migration.v2.ILiteral|null);
+
+                        /** SourceSpec encoding */
+                        encoding?: (string|null);
+                    }
+
+                    /** Represents a SourceSpec. */
+                    class SourceSpec implements ISourceSpec {
+
+                        /**
+                         * Constructs a new SourceSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ISourceSpec);
+
+                        /** SourceSpec baseUri. */
+                        public baseUri?: (string|null);
+
+                        /** SourceSpec literal. */
+                        public literal?: (google.cloud.bigquery.migration.v2.ILiteral|null);
+
+                        /** SourceSpec encoding. */
+                        public encoding: string;
+
+                        /** SourceSpec source. */
+                        public source?: ("baseUri"|"literal");
+
+                        /**
+                         * Creates a new SourceSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceSpec instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ISourceSpec): google.cloud.bigquery.migration.v2.SourceSpec;
+
+                        /**
+                         * Encodes the specified SourceSpec message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceSpec.verify|verify} messages.
+                         * @param message SourceSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ISourceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceSpec message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceSpec.verify|verify} messages.
+                         * @param message SourceSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ISourceSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.SourceSpec;
+
+                        /**
+                         * Decodes a SourceSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.SourceSpec;
+
+                        /**
+                         * Verifies a SourceSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.SourceSpec;
+
+                        /**
+                         * Creates a plain object from a SourceSpec message. Also converts values to other types if specified.
+                         * @param message SourceSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.SourceSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TargetSpec. */
+                    interface ITargetSpec {
+
+                        /** TargetSpec relativePath */
+                        relativePath?: (string|null);
+                    }
+
+                    /** Represents a TargetSpec. */
+                    class TargetSpec implements ITargetSpec {
+
+                        /**
+                         * Constructs a new TargetSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ITargetSpec);
+
+                        /** TargetSpec relativePath. */
+                        public relativePath: string;
+
+                        /**
+                         * Creates a new TargetSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TargetSpec instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ITargetSpec): google.cloud.bigquery.migration.v2.TargetSpec;
+
+                        /**
+                         * Encodes the specified TargetSpec message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TargetSpec.verify|verify} messages.
+                         * @param message TargetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ITargetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TargetSpec message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TargetSpec.verify|verify} messages.
+                         * @param message TargetSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ITargetSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TargetSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TargetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.TargetSpec;
+
+                        /**
+                         * Decodes a TargetSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TargetSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.TargetSpec;
+
+                        /**
+                         * Verifies a TargetSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TargetSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TargetSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.TargetSpec;
+
+                        /**
+                         * Creates a plain object from a TargetSpec message. Also converts values to other types if specified.
+                         * @param message TargetSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.TargetSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TargetSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TargetSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a Literal. */
+                    interface ILiteral {
+
+                        /** Literal literalString */
+                        literalString?: (string|null);
+
+                        /** Literal literalBytes */
+                        literalBytes?: (Uint8Array|string|null);
+
+                        /** Literal relativePath */
+                        relativePath?: (string|null);
+                    }
+
+                    /** Represents a Literal. */
+                    class Literal implements ILiteral {
+
+                        /**
+                         * Constructs a new Literal.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ILiteral);
+
+                        /** Literal literalString. */
+                        public literalString?: (string|null);
+
+                        /** Literal literalBytes. */
+                        public literalBytes?: (Uint8Array|string|null);
+
+                        /** Literal relativePath. */
+                        public relativePath: string;
+
+                        /** Literal literalData. */
+                        public literalData?: ("literalString"|"literalBytes");
+
+                        /**
+                         * Creates a new Literal instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Literal instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ILiteral): google.cloud.bigquery.migration.v2.Literal;
+
+                        /**
+                         * Encodes the specified Literal message. Does not implicitly {@link google.cloud.bigquery.migration.v2.Literal.verify|verify} messages.
+                         * @param message Literal message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ILiteral, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Literal message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.Literal.verify|verify} messages.
+                         * @param message Literal message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ILiteral, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Literal message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Literal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.Literal;
+
+                        /**
+                         * Decodes a Literal message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Literal
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.Literal;
+
+                        /**
+                         * Verifies a Literal message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Literal message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Literal
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.Literal;
+
+                        /**
+                         * Creates a plain object from a Literal message. Also converts values to other types if specified.
+                         * @param message Literal
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.Literal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Literal to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Literal
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a SourceEnvironment. */
+                    interface ISourceEnvironment {
+
+                        /** SourceEnvironment defaultDatabase */
+                        defaultDatabase?: (string|null);
+
+                        /** SourceEnvironment schemaSearchPath */
+                        schemaSearchPath?: (string[]|null);
+
+                        /** SourceEnvironment metadataStoreDataset */
+                        metadataStoreDataset?: (string|null);
+                    }
+
+                    /** Represents a SourceEnvironment. */
+                    class SourceEnvironment implements ISourceEnvironment {
+
+                        /**
+                         * Constructs a new SourceEnvironment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ISourceEnvironment);
+
+                        /** SourceEnvironment defaultDatabase. */
+                        public defaultDatabase: string;
+
+                        /** SourceEnvironment schemaSearchPath. */
+                        public schemaSearchPath: string[];
+
+                        /** SourceEnvironment metadataStoreDataset. */
+                        public metadataStoreDataset: string;
+
+                        /**
+                         * Creates a new SourceEnvironment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceEnvironment instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ISourceEnvironment): google.cloud.bigquery.migration.v2.SourceEnvironment;
+
+                        /**
+                         * Encodes the specified SourceEnvironment message. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceEnvironment.verify|verify} messages.
+                         * @param message SourceEnvironment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ISourceEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceEnvironment message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.SourceEnvironment.verify|verify} messages.
+                         * @param message SourceEnvironment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ISourceEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceEnvironment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.SourceEnvironment;
+
+                        /**
+                         * Decodes a SourceEnvironment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.SourceEnvironment;
+
+                        /**
+                         * Verifies a SourceEnvironment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceEnvironment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceEnvironment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.SourceEnvironment;
+
+                        /**
+                         * Creates a plain object from a SourceEnvironment message. Also converts values to other types if specified.
+                         * @param message SourceEnvironment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.SourceEnvironment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceEnvironment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceEnvironment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GcsReportLogMessage. */
+                    interface IGcsReportLogMessage {
+
+                        /** GcsReportLogMessage severity */
+                        severity?: (string|null);
+
+                        /** GcsReportLogMessage category */
+                        category?: (string|null);
+
+                        /** GcsReportLogMessage filePath */
+                        filePath?: (string|null);
+
+                        /** GcsReportLogMessage filename */
+                        filename?: (string|null);
+
+                        /** GcsReportLogMessage sourceScriptLine */
+                        sourceScriptLine?: (number|null);
+
+                        /** GcsReportLogMessage sourceScriptColumn */
+                        sourceScriptColumn?: (number|null);
+
+                        /** GcsReportLogMessage message */
+                        message?: (string|null);
+
+                        /** GcsReportLogMessage scriptContext */
+                        scriptContext?: (string|null);
+
+                        /** GcsReportLogMessage action */
+                        action?: (string|null);
+
+                        /** GcsReportLogMessage effect */
+                        effect?: (string|null);
+
+                        /** GcsReportLogMessage objectName */
+                        objectName?: (string|null);
+                    }
+
+                    /** Represents a GcsReportLogMessage. */
+                    class GcsReportLogMessage implements IGcsReportLogMessage {
+
+                        /**
+                         * Constructs a new GcsReportLogMessage.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.IGcsReportLogMessage);
+
+                        /** GcsReportLogMessage severity. */
+                        public severity: string;
+
+                        /** GcsReportLogMessage category. */
+                        public category: string;
+
+                        /** GcsReportLogMessage filePath. */
+                        public filePath: string;
+
+                        /** GcsReportLogMessage filename. */
+                        public filename: string;
+
+                        /** GcsReportLogMessage sourceScriptLine. */
+                        public sourceScriptLine: number;
+
+                        /** GcsReportLogMessage sourceScriptColumn. */
+                        public sourceScriptColumn: number;
+
+                        /** GcsReportLogMessage message. */
+                        public message: string;
+
+                        /** GcsReportLogMessage scriptContext. */
+                        public scriptContext: string;
+
+                        /** GcsReportLogMessage action. */
+                        public action: string;
+
+                        /** GcsReportLogMessage effect. */
+                        public effect: string;
+
+                        /** GcsReportLogMessage objectName. */
+                        public objectName: string;
+
+                        /**
+                         * Creates a new GcsReportLogMessage instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsReportLogMessage instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.IGcsReportLogMessage): google.cloud.bigquery.migration.v2.GcsReportLogMessage;
+
+                        /**
+                         * Encodes the specified GcsReportLogMessage message. Does not implicitly {@link google.cloud.bigquery.migration.v2.GcsReportLogMessage.verify|verify} messages.
+                         * @param message GcsReportLogMessage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.IGcsReportLogMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsReportLogMessage message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.GcsReportLogMessage.verify|verify} messages.
+                         * @param message GcsReportLogMessage message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.IGcsReportLogMessage, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsReportLogMessage message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsReportLogMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.GcsReportLogMessage;
+
+                        /**
+                         * Decodes a GcsReportLogMessage message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsReportLogMessage
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.GcsReportLogMessage;
+
+                        /**
+                         * Verifies a GcsReportLogMessage message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsReportLogMessage message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsReportLogMessage
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.GcsReportLogMessage;
+
+                        /**
+                         * Creates a plain object from a GcsReportLogMessage message. Also converts values to other types if specified.
+                         * @param message GcsReportLogMessage
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.GcsReportLogMessage, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsReportLogMessage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsReportLogMessage
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -4521,6 +5880,138 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TranslationReportRecord. */
+                    interface ITranslationReportRecord {
+
+                        /** TranslationReportRecord severity */
+                        severity?: (google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity|keyof typeof google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity|null);
+
+                        /** TranslationReportRecord scriptLine */
+                        scriptLine?: (number|null);
+
+                        /** TranslationReportRecord scriptColumn */
+                        scriptColumn?: (number|null);
+
+                        /** TranslationReportRecord category */
+                        category?: (string|null);
+
+                        /** TranslationReportRecord message */
+                        message?: (string|null);
+                    }
+
+                    /** Represents a TranslationReportRecord. */
+                    class TranslationReportRecord implements ITranslationReportRecord {
+
+                        /**
+                         * Constructs a new TranslationReportRecord.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.migration.v2.ITranslationReportRecord);
+
+                        /** TranslationReportRecord severity. */
+                        public severity: (google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity|keyof typeof google.cloud.bigquery.migration.v2.TranslationReportRecord.Severity);
+
+                        /** TranslationReportRecord scriptLine. */
+                        public scriptLine: number;
+
+                        /** TranslationReportRecord scriptColumn. */
+                        public scriptColumn: number;
+
+                        /** TranslationReportRecord category. */
+                        public category: string;
+
+                        /** TranslationReportRecord message. */
+                        public message: string;
+
+                        /**
+                         * Creates a new TranslationReportRecord instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TranslationReportRecord instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.migration.v2.ITranslationReportRecord): google.cloud.bigquery.migration.v2.TranslationReportRecord;
+
+                        /**
+                         * Encodes the specified TranslationReportRecord message. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationReportRecord.verify|verify} messages.
+                         * @param message TranslationReportRecord message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.migration.v2.ITranslationReportRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TranslationReportRecord message, length delimited. Does not implicitly {@link google.cloud.bigquery.migration.v2.TranslationReportRecord.verify|verify} messages.
+                         * @param message TranslationReportRecord message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.migration.v2.ITranslationReportRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TranslationReportRecord message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TranslationReportRecord
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.migration.v2.TranslationReportRecord;
+
+                        /**
+                         * Decodes a TranslationReportRecord message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TranslationReportRecord
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.migration.v2.TranslationReportRecord;
+
+                        /**
+                         * Verifies a TranslationReportRecord message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TranslationReportRecord message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TranslationReportRecord
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.migration.v2.TranslationReportRecord;
+
+                        /**
+                         * Creates a plain object from a TranslationReportRecord message. Also converts values to other types if specified.
+                         * @param message TranslationReportRecord
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.migration.v2.TranslationReportRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TranslationReportRecord to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TranslationReportRecord
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TranslationReportRecord {
+
+                        /** Severity enum. */
+                        enum Severity {
+                            SEVERITY_UNSPECIFIED = 0,
+                            INFO = 1,
+                            WARNING = 2,
+                            ERROR = 3
+                        }
                     }
                 }
 
