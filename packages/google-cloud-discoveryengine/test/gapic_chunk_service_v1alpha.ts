@@ -4867,8 +4867,8 @@ describe('v1alpha.ChunkServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -4943,7 +4943,7 @@ describe('v1alpha.ChunkServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
