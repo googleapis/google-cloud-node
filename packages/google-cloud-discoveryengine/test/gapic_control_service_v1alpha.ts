@@ -5314,8 +5314,8 @@ describe('v1alpha.ControlServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client = new controlserviceModule.v1alpha.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -5390,7 +5390,7 @@ describe('v1alpha.ControlServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client = new controlserviceModule.v1alpha.ControlServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},

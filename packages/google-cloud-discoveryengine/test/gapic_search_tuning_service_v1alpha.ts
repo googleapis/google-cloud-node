@@ -5110,8 +5110,8 @@ describe('v1alpha.SearchTuningServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client =
         new searchtuningserviceModule.v1alpha.SearchTuningServiceClient({
@@ -5187,7 +5187,7 @@ describe('v1alpha.SearchTuningServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client =
         new searchtuningserviceModule.v1alpha.SearchTuningServiceClient({

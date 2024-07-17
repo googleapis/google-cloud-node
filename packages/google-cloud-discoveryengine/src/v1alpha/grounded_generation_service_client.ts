@@ -344,10 +344,10 @@ export class GroundedGenerationServiceClient {
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
         ),
       sampleQueryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}/sampleQueries/{sampleQuery}'
+        'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}/sampleQueries/{sample_query}'
       ),
       sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}'
+        'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}'
       ),
     };
 
@@ -3975,8 +3975,8 @@ export class GroundedGenerationServiceClient {
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} sampleQuerySet
-   * @param {string} sampleQuery
+   * @param {string} sample_query_set
+   * @param {string} sample_query
    * @returns {string} Resource name string.
    */
   sampleQueryPath(
@@ -3988,8 +3988,8 @@ export class GroundedGenerationServiceClient {
     return this.pathTemplates.sampleQueryPathTemplate.render({
       project: project,
       location: location,
-      sampleQuerySet: sampleQuerySet,
-      sampleQuery: sampleQuery,
+      sample_query_set: sampleQuerySet,
+      sample_query: sampleQuery,
     });
   }
 
@@ -4018,27 +4018,27 @@ export class GroundedGenerationServiceClient {
   }
 
   /**
-   * Parse the sampleQuerySet from SampleQuery resource.
+   * Parse the sample_query_set from SampleQuery resource.
    *
    * @param {string} sampleQueryName
    *   A fully-qualified path representing SampleQuery resource.
-   * @returns {string} A string representing the sampleQuerySet.
+   * @returns {string} A string representing the sample_query_set.
    */
   matchSampleQuerySetFromSampleQueryName(sampleQueryName: string) {
     return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
-      .sampleQuerySet;
+      .sample_query_set;
   }
 
   /**
-   * Parse the sampleQuery from SampleQuery resource.
+   * Parse the sample_query from SampleQuery resource.
    *
    * @param {string} sampleQueryName
    *   A fully-qualified path representing SampleQuery resource.
-   * @returns {string} A string representing the sampleQuery.
+   * @returns {string} A string representing the sample_query.
    */
   matchSampleQueryFromSampleQueryName(sampleQueryName: string) {
     return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
-      .sampleQuery;
+      .sample_query;
   }
 
   /**
@@ -4046,7 +4046,7 @@ export class GroundedGenerationServiceClient {
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} sampleQuerySet
+   * @param {string} sample_query_set
    * @returns {string} Resource name string.
    */
   sampleQuerySetPath(
@@ -4057,7 +4057,7 @@ export class GroundedGenerationServiceClient {
     return this.pathTemplates.sampleQuerySetPathTemplate.render({
       project: project,
       location: location,
-      sampleQuerySet: sampleQuerySet,
+      sample_query_set: sampleQuerySet,
     });
   }
 
@@ -4088,16 +4088,16 @@ export class GroundedGenerationServiceClient {
   }
 
   /**
-   * Parse the sampleQuerySet from SampleQuerySet resource.
+   * Parse the sample_query_set from SampleQuerySet resource.
    *
    * @param {string} sampleQuerySetName
    *   A fully-qualified path representing SampleQuerySet resource.
-   * @returns {string} A string representing the sampleQuerySet.
+   * @returns {string} A string representing the sample_query_set.
    */
   matchSampleQuerySetFromSampleQuerySetName(sampleQuerySetName: string) {
     return this.pathTemplates.sampleQuerySetPathTemplate.match(
       sampleQuerySetName
-    ).sampleQuerySet;
+    ).sample_query_set;
   }
 
   /**

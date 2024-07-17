@@ -5905,8 +5905,8 @@ describe('v1alpha.EvaluationServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client =
         new evaluationserviceModule.v1alpha.EvaluationServiceClient({
@@ -5982,7 +5982,7 @@ describe('v1alpha.EvaluationServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client =
         new evaluationserviceModule.v1alpha.EvaluationServiceClient({

@@ -5017,8 +5017,8 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({
@@ -5094,7 +5094,7 @@ describe('v1alpha.EstimateBillingServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client =
         new estimatebillingserviceModule.v1alpha.EstimateBillingServiceClient({

@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. Full resource name of
    *  SampleQuery google.cloud.discoveryengine.v1alpha.SampleQuery, such as
-   *  `projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}/sampleQueries/{sampleQuery}`.
+   *  `projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}/sampleQueries/{sample_query}`.
    *  If the caller does not have permission to delete the
    *  SampleQuery google.cloud.discoveryengine.v1alpha.SampleQuery, regardless
    *  of whether or not it exists, a `PERMISSION_DENIED` error is returned.
