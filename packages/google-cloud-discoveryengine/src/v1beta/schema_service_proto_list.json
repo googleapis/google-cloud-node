@@ -1,5 +1,6 @@
 [
   "../../protos/google/cloud/discoveryengine/v1beta/answer.proto",
+  "../../protos/google/cloud/discoveryengine/v1beta/chunk.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/common.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/completion.proto",
   "../../protos/google/cloud/discoveryengine/v1beta/completion_service.proto",

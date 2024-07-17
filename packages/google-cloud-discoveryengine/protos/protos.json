@@ -17860,8 +17860,8 @@
                     "objc_class_prefix": "DISCOVERYENGINE",
                     "php_namespace": "Google\\Cloud\\DiscoveryEngine\\V1beta",
                     "ruby_package": "Google::Cloud::DiscoveryEngine::V1beta",
-                    "(google.api.resource_definition).type": "discoveryengine.googleapis.com/Chunk",
-                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}"
+                    "(google.api.resource_definition).type": "healthcare.googleapis.com/FhirStore",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/fhirStores/{fhir_store}"
                   },
                   "nested": {
                     "Answer": {
@@ -18265,6 +18265,107 @@
                             "NON_ANSWER_SEEKING_QUERY_IGNORED": 2,
                             "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
                             "POTENTIAL_POLICY_VIOLATION": 4
+                          }
+                        }
+                      }
+                    },
+                    "Chunk": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/Chunk",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}"
+                      },
+                      "oneofs": {
+                        "_relevanceScore": {
+                          "oneof": [
+                            "relevanceScore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "content": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "relevanceScore": {
+                          "type": "double",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "documentMetadata": {
+                          "type": "DocumentMetadata",
+                          "id": 5
+                        },
+                        "derivedStructData": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pageSpan": {
+                          "type": "PageSpan",
+                          "id": 6
+                        },
+                        "chunkMetadata": {
+                          "type": "ChunkMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DocumentMetadata": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "structData": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "PageSpan": {
+                          "fields": {
+                            "pageStart": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "pageEnd": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ChunkMetadata": {
+                          "fields": {
+                            "previousChunks": {
+                              "rule": "repeated",
+                              "type": "Chunk",
+                              "id": 1
+                            },
+                            "nextChunks": {
+                              "rule": "repeated",
+                              "type": "Chunk",
+                              "id": 2
+                            }
                           }
                         }
                       }
@@ -20628,6 +20729,14 @@
                             "extractiveContentSpec": {
                               "type": "ExtractiveContentSpec",
                               "id": 3
+                            },
+                            "searchResultMode": {
+                              "type": "SearchResultMode",
+                              "id": 4
+                            },
+                            "chunkSpec": {
+                              "type": "ChunkSpec",
+                              "id": 5
                             }
                           },
                           "nested": {
@@ -20730,6 +20839,25 @@
                                   "id": 5
                                 }
                               }
+                            },
+                            "ChunkSpec": {
+                              "fields": {
+                                "numPreviousChunks": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "numNextChunks": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "SearchResultMode": {
+                              "values": {
+                                "SEARCH_RESULT_MODE_UNSPECIFIED": 0,
+                                "DOCUMENTS": 1,
+                                "CHUNKS": 2
+                              }
                             }
                           }
                         },
@@ -20824,6 +20952,10 @@
                             "document": {
                               "type": "Document",
                               "id": 2
+                            },
+                            "chunk": {
+                              "type": "Chunk",
+                              "id": 18
                             },
                             "modelScores": {
                               "keyType": "string",
@@ -21791,6 +21923,10 @@
                                   "type": "string",
                                   "id": 4
                                 },
+                                "searchResultMode": {
+                                  "type": "SearchRequest.ContentSearchSpec.SearchResultMode",
+                                  "id": 5
+                                },
                                 "dataStoreSpecs": {
                                   "rule": "repeated",
                                   "type": "SearchRequest.DataStoreSpec",
@@ -22308,6 +22444,10 @@
                           "type": "string",
                           "id": 1
                         },
+                        "chunkingConfig": {
+                          "type": "ChunkingConfig",
+                          "id": 3
+                        },
                         "defaultParsingConfig": {
                           "type": "ParsingConfig",
                           "id": 4
@@ -22319,12 +22459,42 @@
                         }
                       },
                       "nested": {
+                        "ChunkingConfig": {
+                          "oneofs": {
+                            "chunkMode": {
+                              "oneof": [
+                                "layoutBasedChunkingConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "layoutBasedChunkingConfig": {
+                              "type": "LayoutBasedChunkingConfig",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "LayoutBasedChunkingConfig": {
+                              "fields": {
+                                "chunkSize": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "includeAncestorHeadings": {
+                                  "type": "bool",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
                         "ParsingConfig": {
                           "oneofs": {
                             "typeDedicatedConfig": {
                               "oneof": [
                                 "digitalParsingConfig",
-                                "ocrParsingConfig"
+                                "ocrParsingConfig",
+                                "layoutParsingConfig"
                               ]
                             }
                           },
@@ -22336,6 +22506,10 @@
                             "ocrParsingConfig": {
                               "type": "OcrParsingConfig",
                               "id": 2
+                            },
+                            "layoutParsingConfig": {
+                              "type": "LayoutParsingConfig",
+                              "id": 3
                             }
                           },
                           "nested": {
@@ -22357,6 +22531,9 @@
                                   "id": 2
                                 }
                               }
+                            },
+                            "LayoutParsingConfig": {
+                              "fields": {}
                             }
                           }
                         }
