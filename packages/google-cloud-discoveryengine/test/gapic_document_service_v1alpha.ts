@@ -6344,8 +6344,8 @@ describe('v1alpha.DocumentServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client = new documentserviceModule.v1alpha.DocumentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -6420,7 +6420,7 @@ describe('v1alpha.DocumentServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client = new documentserviceModule.v1alpha.DocumentServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},

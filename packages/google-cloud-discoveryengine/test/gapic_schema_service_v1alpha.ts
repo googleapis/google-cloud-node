@@ -5785,8 +5785,8 @@ describe('v1alpha.SchemaServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client = new schemaserviceModule.v1alpha.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -5861,7 +5861,7 @@ describe('v1alpha.SchemaServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client = new schemaserviceModule.v1alpha.SchemaServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},

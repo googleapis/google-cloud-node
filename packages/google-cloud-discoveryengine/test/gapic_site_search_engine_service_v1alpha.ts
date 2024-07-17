@@ -7667,8 +7667,8 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client =
         new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
@@ -7746,7 +7746,7 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client =
         new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(

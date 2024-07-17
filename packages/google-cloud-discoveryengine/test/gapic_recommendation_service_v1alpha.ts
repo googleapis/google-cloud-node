@@ -4554,8 +4554,8 @@ describe('v1alpha.RecommendationServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client =
         new recommendationserviceModule.v1alpha.RecommendationServiceClient({
@@ -4631,7 +4631,7 @@ describe('v1alpha.RecommendationServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client =
         new recommendationserviceModule.v1alpha.RecommendationServiceClient({

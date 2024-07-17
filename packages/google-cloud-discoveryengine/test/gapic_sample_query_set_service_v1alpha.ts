@@ -5399,8 +5399,8 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
-        sampleQuery: 'sampleQueryValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({
@@ -5476,7 +5476,7 @@ describe('v1alpha.SampleQuerySetServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
         location: 'locationValue',
-        sampleQuerySet: 'sampleQuerySetValue',
+        sample_query_set: 'sampleQuerySetValue',
       };
       const client =
         new samplequerysetserviceModule.v1alpha.SampleQuerySetServiceClient({

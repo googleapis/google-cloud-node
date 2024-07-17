@@ -9537,7 +9537,7 @@
                     "SampleQuery": {
                       "options": {
                         "(google.api.resource).type": "discoveryengine.googleapis.com/SampleQuery",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}/sampleQueries/{sampleQuery}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}/sampleQueries/{sample_query}"
                       },
                       "oneofs": {
                         "content": {
@@ -9555,7 +9555,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "createTime": {
@@ -14564,7 +14564,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "evaluationSpec": {
@@ -15780,14 +15780,14 @@
                     "SampleQuerySet": {
                       "options": {
                         "(google.api.resource).type": "discoveryengine.googleapis.com/SampleQuerySet",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}"
                       },
                       "fields": {
                         "name": {
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "displayName": {

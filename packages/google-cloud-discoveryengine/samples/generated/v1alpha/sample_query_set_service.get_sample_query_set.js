@@ -32,7 +32,7 @@ function main(name) {
    *  Required. Full resource name of
    *  SampleQuerySet google.cloud.discoveryengine.v1alpha.SampleQuerySet, such
    *  as
-   *  `projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}`.
+   *  `projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}`.
    *  If the caller does not have permission to access the
    *  SampleQuerySet google.cloud.discoveryengine.v1alpha.SampleQuerySet,
    *  regardless of whether or not it exists, a PERMISSION_DENIED error is
