@@ -30,7 +30,7 @@ function main(parent, firebaseLink) {
    */
   /**
    *  Required. Format: properties/{property_id}
-   *  Example: properties/1234
+   *  Example: `properties/1234`
    */
   // const parent = 'abc123'
   /**
