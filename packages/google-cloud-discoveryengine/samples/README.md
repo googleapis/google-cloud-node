@@ -215,10 +215,25 @@
   * [Engine_service.resume_engine](#engine_service.resume_engine)
   * [Engine_service.tune_engine](#engine_service.tune_engine)
   * [Engine_service.update_engine](#engine_service.update_engine)
+  * [Evaluation_service.create_evaluation](#evaluation_service.create_evaluation)
+  * [Evaluation_service.get_evaluation](#evaluation_service.get_evaluation)
+  * [Evaluation_service.list_evaluation_results](#evaluation_service.list_evaluation_results)
+  * [Evaluation_service.list_evaluations](#evaluation_service.list_evaluations)
   * [Grounded_generation_service.check_grounding](#grounded_generation_service.check_grounding)
   * [Project_service.provision_project](#project_service.provision_project)
   * [Rank_service.rank](#rank_service.rank)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
+  * [Sample_query_service.create_sample_query](#sample_query_service.create_sample_query)
+  * [Sample_query_service.delete_sample_query](#sample_query_service.delete_sample_query)
+  * [Sample_query_service.get_sample_query](#sample_query_service.get_sample_query)
+  * [Sample_query_service.import_sample_queries](#sample_query_service.import_sample_queries)
+  * [Sample_query_service.list_sample_queries](#sample_query_service.list_sample_queries)
+  * [Sample_query_service.update_sample_query](#sample_query_service.update_sample_query)
+  * [Sample_query_set_service.create_sample_query_set](#sample_query_set_service.create_sample_query_set)
+  * [Sample_query_set_service.delete_sample_query_set](#sample_query_set_service.delete_sample_query_set)
+  * [Sample_query_set_service.get_sample_query_set](#sample_query_set_service.get_sample_query_set)
+  * [Sample_query_set_service.list_sample_query_sets](#sample_query_set_service.list_sample_query_sets)
+  * [Sample_query_set_service.update_sample_query_set](#sample_query_set_service.update_sample_query_set)
   * [Schema_service.create_schema](#schema_service.create_schema)
   * [Schema_service.delete_schema](#schema_service.delete_schema)
   * [Schema_service.get_schema](#schema_service.get_schema)
@@ -3713,6 +3728,74 @@ __Usage:__
 
 
 
+### Evaluation_service.create_evaluation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.create_evaluation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.create_evaluation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.create_evaluation.js`
+
+
+-----
+
+
+
+
+### Evaluation_service.get_evaluation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.get_evaluation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.get_evaluation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.get_evaluation.js`
+
+
+-----
+
+
+
+
+### Evaluation_service.list_evaluation_results
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluation_results.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluation_results.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluation_results.js`
+
+
+-----
+
+
+
+
+### Evaluation_service.list_evaluations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/evaluation_service.list_evaluations.js`
+
+
+-----
+
+
+
+
 ### Grounded_generation_service.check_grounding
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/grounded_generation_service.check_grounding.js).
@@ -3774,6 +3857,193 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/recommendation_service.recommend.js`
+
+
+-----
+
+
+
+
+### Sample_query_service.create_sample_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.create_sample_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.create_sample_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.create_sample_query.js`
+
+
+-----
+
+
+
+
+### Sample_query_service.delete_sample_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.delete_sample_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.delete_sample_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.delete_sample_query.js`
+
+
+-----
+
+
+
+
+### Sample_query_service.get_sample_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.get_sample_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.get_sample_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.get_sample_query.js`
+
+
+-----
+
+
+
+
+### Sample_query_service.import_sample_queries
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.import_sample_queries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.import_sample_queries.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.import_sample_queries.js`
+
+
+-----
+
+
+
+
+### Sample_query_service.list_sample_queries
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.list_sample_queries.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.list_sample_queries.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.list_sample_queries.js`
+
+
+-----
+
+
+
+
+### Sample_query_service.update_sample_query
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.update_sample_query.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.update_sample_query.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_service.update_sample_query.js`
+
+
+-----
+
+
+
+
+### Sample_query_set_service.create_sample_query_set
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.create_sample_query_set.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.create_sample_query_set.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.create_sample_query_set.js`
+
+
+-----
+
+
+
+
+### Sample_query_set_service.delete_sample_query_set
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.delete_sample_query_set.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.delete_sample_query_set.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.delete_sample_query_set.js`
+
+
+-----
+
+
+
+
+### Sample_query_set_service.get_sample_query_set
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.get_sample_query_set.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.get_sample_query_set.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.get_sample_query_set.js`
+
+
+-----
+
+
+
+
+### Sample_query_set_service.list_sample_query_sets
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.list_sample_query_sets.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.list_sample_query_sets.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.list_sample_query_sets.js`
+
+
+-----
+
+
+
+
+### Sample_query_set_service.update_sample_query_set
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.update_sample_query_set.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.update_sample_query_set.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/sample_query_set_service.update_sample_query_set.js`
 
 
 -----

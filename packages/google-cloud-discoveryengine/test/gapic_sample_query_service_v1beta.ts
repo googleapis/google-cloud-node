@@ -21,9 +21,16 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as groundedgenerationserviceModule from '../src';
+import * as samplequeryserviceModule from '../src';
 
-import {protobuf, LocationProtos} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {
+  protobuf,
+  LROperation,
+  operationsProtos,
+  LocationProtos,
+} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -64,6 +71,76 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubLongRunningCall<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().rejects(callError)
+    : sinon.stub().resolves([mockOperation]);
+}
+
+function stubLongRunningCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  callError?: Error,
+  lroError?: Error
+) {
+  const innerStub = lroError
+    ? sinon.stub().rejects(lroError)
+    : sinon.stub().resolves([response]);
+  const mockOperation = {
+    promise: innerStub,
+  };
+  return callError
+    ? sinon.stub().callsArgWith(2, callError)
+    : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -87,18 +164,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1beta.GroundedGenerationServiceClient', () => {
+describe('v1beta.SampleQueryServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -110,8 +187,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient
-            .servicePath;
+          samplequeryserviceModule.v1beta.SampleQueryServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -120,8 +196,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient
-            .apiEndpoint;
+          samplequeryserviceModule.v1beta.SampleQueryServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -129,18 +204,18 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {universeDomain: 'example.com'}
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          universeDomain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {universe_domain: 'example.com'}
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          universe_domain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
@@ -151,7 +226,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
+            new samplequeryserviceModule.v1beta.SampleQueryServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -165,9 +240,9 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-              {universeDomain: 'configured.example.com'}
-            );
+            new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -183,59 +258,53 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
 
     it('has port', () => {
       const port =
-        groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient
-          .port;
+        samplequeryserviceModule.v1beta.SampleQueryServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient();
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            fallback: true,
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          fallback: true,
+        });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.groundedGenerationServiceStub, undefined);
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.sampleQueryServiceStub, undefined);
       await client.initialize();
-      assert(client.groundedGenerationServiceStub);
+      assert(client.sampleQueryServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
-      assert(client.groundedGenerationServiceStub);
+      assert(client.sampleQueryServiceStub);
       client.close().then(() => {
         done();
       });
@@ -243,13 +312,11 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.groundedGenerationServiceStub, undefined);
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.sampleQueryServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -258,12 +325,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -273,12 +338,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -296,70 +359,66 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     });
   });
 
-  describe('checkGrounding', () => {
-    it('invokes checkGrounding without error', async () => {
+  describe('getSampleQuery', () => {
+    it('invokes getSampleQuery without error', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
-        ['groundingConfig']
+        '.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest',
+        ['name']
       );
-      request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
+        new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
-      client.innerApiCalls.checkGrounding = stubSimpleCall(expectedResponse);
-      const [response] = await client.checkGrounding(request);
+      client.innerApiCalls.getSampleQuery = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSampleQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.checkGrounding as SinonStub
+        client.innerApiCalls.getSampleQuery as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.checkGrounding as SinonStub
+        client.innerApiCalls.getSampleQuery as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkGrounding without error using callback', async () => {
+    it('invokes getSampleQuery without error using callback', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
-        ['groundingConfig']
+        '.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest',
+        ['name']
       );
-      request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingResponse()
+        new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
       );
-      client.innerApiCalls.checkGrounding =
+      client.innerApiCalls.getSampleQuery =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.checkGrounding(
+        client.getSampleQuery(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1beta.ICheckGroundingResponse | null
+            result?: protos.google.cloud.discoveryengine.v1beta.ISampleQuery | null
           ) => {
             if (err) {
               reject(err);
@@ -372,80 +431,1022 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.checkGrounding as SinonStub
+        client.innerApiCalls.getSampleQuery as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.checkGrounding as SinonStub
+        client.innerApiCalls.getSampleQuery as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkGrounding with error', async () => {
+    it('invokes getSampleQuery with error', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
-        ['groundingConfig']
+        '.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest',
+        ['name']
       );
-      request.groundingConfig = defaultValue1;
-      const expectedHeaderRequestParams = `grounding_config=${defaultValue1}`;
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.checkGrounding = stubSimpleCall(
+      client.innerApiCalls.getSampleQuery = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.checkGrounding(request), expectedError);
+      await assert.rejects(client.getSampleQuery(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.checkGrounding as SinonStub
+        client.innerApiCalls.getSampleQuery as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.checkGrounding as SinonStub
+        client.innerApiCalls.getSampleQuery as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes checkGrounding with closed client', async () => {
+    it('invokes getSampleQuery with closed client', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1beta.CheckGroundingRequest()
+        new protos.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1beta.CheckGroundingRequest',
-        ['groundingConfig']
+        '.google.cloud.discoveryengine.v1beta.GetSampleQueryRequest',
+        ['name']
       );
-      request.groundingConfig = defaultValue1;
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(client.checkGrounding(request), expectedError);
+      await assert.rejects(client.getSampleQuery(request), expectedError);
+    });
+  });
+
+  describe('createSampleQuery', () => {
+    it('invokes createSampleQuery without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+      );
+      client.innerApiCalls.createSampleQuery = stubSimpleCall(expectedResponse);
+      const [response] = await client.createSampleQuery(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSampleQuery without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+      );
+      client.innerApiCalls.createSampleQuery =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createSampleQuery(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.ISampleQuery | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSampleQuery with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createSampleQuery = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createSampleQuery(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createSampleQuery with closed client', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.CreateSampleQueryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createSampleQuery(request), expectedError);
+    });
+  });
+
+  describe('updateSampleQuery', () => {
+    it('invokes updateSampleQuery without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest()
+      );
+      request.sampleQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest',
+        ['sampleQuery', 'name']
+      );
+      request.sampleQuery.name = defaultValue1;
+      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+      );
+      client.innerApiCalls.updateSampleQuery = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateSampleQuery(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSampleQuery without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest()
+      );
+      request.sampleQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest',
+        ['sampleQuery', 'name']
+      );
+      request.sampleQuery.name = defaultValue1;
+      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+      );
+      client.innerApiCalls.updateSampleQuery =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateSampleQuery(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.ISampleQuery | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSampleQuery with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest()
+      );
+      request.sampleQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest',
+        ['sampleQuery', 'name']
+      );
+      request.sampleQuery.name = defaultValue1;
+      const expectedHeaderRequestParams = `sample_query.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateSampleQuery = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateSampleQuery(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateSampleQuery with closed client', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest()
+      );
+      request.sampleQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.UpdateSampleQueryRequest',
+        ['sampleQuery', 'name']
+      );
+      request.sampleQuery.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateSampleQuery(request), expectedError);
+    });
+  });
+
+  describe('deleteSampleQuery', () => {
+    it('invokes deleteSampleQuery without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSampleQuery = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteSampleQuery(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSampleQuery without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteSampleQuery =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteSampleQuery(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSampleQuery with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteSampleQuery = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteSampleQuery(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteSampleQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSampleQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteSampleQuery with closed client', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.DeleteSampleQueryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteSampleQuery(request), expectedError);
+    });
+  });
+
+  describe('importSampleQueries', () => {
+    it('invokes importSampleQueries without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importSampleQueries =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.importSampleQueries(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importSampleQueries without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.importSampleQueries =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.importSampleQueries(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.discoveryengine.v1beta.IImportSampleQueriesResponse,
+              protos.google.cloud.discoveryengine.v1beta.IImportSampleQueriesMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IImportSampleQueriesResponse,
+        protos.google.cloud.discoveryengine.v1beta.IImportSampleQueriesMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importSampleQueries with call error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importSampleQueries = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.importSampleQueries(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes importSampleQueries with LRO error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ImportSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.importSampleQueries = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.importSampleQueries(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkImportSampleQueriesProgress without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkImportSampleQueriesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkImportSampleQueriesProgress with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkImportSampleQueriesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listSampleQueries', () => {
+    it('invokes listSampleQueries without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+      ];
+      client.innerApiCalls.listSampleQueries = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSampleQueries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSampleQueries without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+      ];
+      client.innerApiCalls.listSampleQueries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSampleQueries(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.discoveryengine.v1beta.ISampleQuery[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSampleQueries with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSampleQueries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSampleQueries(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSampleQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSampleQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSampleQueriesStream without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+      ];
+      client.descriptors.page.listSampleQueries.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSampleQueriesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SampleQuery[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.SampleQuery
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSampleQueries.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSampleQueries, request)
+      );
+      assert(
+        (client.descriptors.page.listSampleQueries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listSampleQueriesStream with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSampleQueries.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSampleQueriesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.SampleQuery[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.discoveryengine.v1beta.SampleQuery
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSampleQueries.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSampleQueries, request)
+      );
+      assert(
+        (client.descriptors.page.listSampleQueries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listSampleQueries without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.discoveryengine.v1beta.SampleQuery()
+        ),
+      ];
+      client.descriptors.page.listSampleQueries.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.discoveryengine.v1beta.ISampleQuery[] =
+        [];
+      const iterable = client.listSampleQueriesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSampleQueries.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSampleQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listSampleQueries with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.ListSampleQueriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSampleQueries.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSampleQueriesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.discoveryengine.v1beta.ISampleQuery[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSampleQueries.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSampleQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -473,12 +1474,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -520,12 +1519,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -558,12 +1555,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -609,12 +1604,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -650,6 +1643,322 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       );
     });
   });
+  describe('getOperation', () => {
+    it('invokes getOperation without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const response = await client.getOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes getOperation without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      client.operationsClient.getOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.getOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: operationsProtos.google.longrunning.Operation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+    it('invokes getOperation with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.GetOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.getOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.getOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('cancelOperation', () => {
+    it('invokes cancelOperation without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.cancelOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes cancelOperation without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.cancelOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.cancelOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
+    });
+    it('invokes cancelOperation with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.CancelOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.cancelOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.cancelOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.cancelOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('deleteOperation', () => {
+    it('invokes deleteOperation without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation =
+        stubSimpleCall(expectedResponse);
+      const response = await client.deleteOperation(request);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+    it('invokes deleteOperation without error using callback', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.operationsClient.deleteOperation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.operationsClient.deleteOperation(
+          request,
+          undefined,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.Empty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
+    });
+    it('invokes deleteOperation with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.DeleteOperationRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.deleteOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(async () => {
+        await client.deleteOperation(request);
+      }, expectedError);
+      assert(
+        (client.operationsClient.deleteOperation as SinonStub)
+          .getCall(0)
+          .calledWith(request)
+      );
+    });
+  });
+  describe('listOperationsAsync', () => {
+    it('uses async iteration with listOperations without error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+        generateSampleMessage(
+          new operationsProtos.google.longrunning.ListOperationsResponse()
+        ),
+      ];
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+        [];
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+    it('uses async iteration with listOperations with error', async () => {
+      const client =
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new operationsProtos.google.longrunning.ListOperationsRequest()
+      );
+      const expectedError = new Error('expected');
+      client.operationsClient.descriptor.listOperations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.operationsClient.listOperationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: operationsProtos.google.longrunning.ListOperationsResponse[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.operationsClient.descriptor.listOperations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
 
   describe('Path templates', () => {
     describe('engine', () => {
@@ -661,12 +1970,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         engine: 'engineValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
@@ -739,12 +2046,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.evaluationPathTemplate.render = sinon
         .stub()
@@ -798,86 +2103,16 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       });
     });
 
-    describe('groundingConfig', () => {
-      const fakePath = '/rendered/path/groundingConfig';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        grounding_config: 'groundingConfigValue',
-      };
-      const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      client.pathTemplates.groundingConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.groundingConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('groundingConfigPath', () => {
-        const result = client.groundingConfigPath(
-          'projectValue',
-          'locationValue',
-          'groundingConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.groundingConfigPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromGroundingConfigName', () => {
-        const result = client.matchProjectFromGroundingConfigName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromGroundingConfigName', () => {
-        const result = client.matchLocationFromGroundingConfigName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchGroundingConfigFromGroundingConfigName', () => {
-        const result =
-          client.matchGroundingConfigFromGroundingConfigName(fakePath);
-        assert.strictEqual(result, 'groundingConfigValue');
-        assert(
-          (client.pathTemplates.groundingConfigPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
         project: 'projectValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -916,12 +2151,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1023,12 +2256,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1173,12 +2404,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1339,12 +2568,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1468,12 +2695,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1598,12 +2823,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1727,12 +2950,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1839,12 +3060,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1968,12 +3187,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2098,12 +3315,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2228,12 +3443,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2375,12 +3588,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2487,12 +3698,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2616,12 +3825,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2745,12 +3952,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2874,12 +4079,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3002,12 +4205,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3132,12 +4333,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3276,12 +4475,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
@@ -3360,12 +4557,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         document: 'documentValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3490,12 +4685,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3635,12 +4828,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         control: 'controlValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3733,12 +4924,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3843,12 +5032,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3952,12 +5139,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4044,12 +5229,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         schema: 'schemaValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4140,12 +5323,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreServingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4249,12 +5430,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         session: 'sessionValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4348,12 +5527,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         answer: 'answerValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4475,12 +5652,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4567,12 +5742,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4677,12 +5850,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.sampleQueryPathTemplate.render = sinon
         .stub()
@@ -4755,12 +5926,10 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client =
-        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new samplequeryserviceModule.v1beta.SampleQueryServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.sampleQuerySetPathTemplate.render = sinon
         .stub()

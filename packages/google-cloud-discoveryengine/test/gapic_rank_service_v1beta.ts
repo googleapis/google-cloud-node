@@ -666,6 +666,70 @@ describe('v1beta.RankServiceClient', () => {
       });
     });
 
+    describe('evaluation', () => {
+      const fakePath = '/rendered/path/evaluation';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        evaluation: 'evaluationValue',
+      };
+      const client = new rankserviceModule.v1beta.RankServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.evaluationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.evaluationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('evaluationPath', () => {
+        const result = client.evaluationPath(
+          'projectValue',
+          'locationValue',
+          'evaluationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.evaluationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEvaluationName', () => {
+        const result = client.matchProjectFromEvaluationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEvaluationName', () => {
+        const result = client.matchLocationFromEvaluationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEvaluationFromEvaluationName', () => {
+        const result = client.matchEvaluationFromEvaluationName(fakePath);
+        assert.strictEqual(result, 'evaluationValue');
+        assert(
+          (client.pathTemplates.evaluationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('project', () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -4430,6 +4494,147 @@ describe('v1beta.RankServiceClient', () => {
         assert.strictEqual(result, 'rankingConfigValue');
         assert(
           (client.pathTemplates.rankingConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sampleQuery', () => {
+      const fakePath = '/rendered/path/sampleQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        sample_query_set: 'sampleQuerySetValue',
+        sample_query: 'sampleQueryValue',
+      };
+      const client = new rankserviceModule.v1beta.RankServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.sampleQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sampleQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sampleQueryPath', () => {
+        const result = client.sampleQueryPath(
+          'projectValue',
+          'locationValue',
+          'sampleQuerySetValue',
+          'sampleQueryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sampleQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSampleQueryName', () => {
+        const result = client.matchProjectFromSampleQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSampleQueryName', () => {
+        const result = client.matchLocationFromSampleQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSampleQuerySetFromSampleQueryName', () => {
+        const result = client.matchSampleQuerySetFromSampleQueryName(fakePath);
+        assert.strictEqual(result, 'sampleQuerySetValue');
+        assert(
+          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSampleQueryFromSampleQueryName', () => {
+        const result = client.matchSampleQueryFromSampleQueryName(fakePath);
+        assert.strictEqual(result, 'sampleQueryValue');
+        assert(
+          (client.pathTemplates.sampleQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('sampleQuerySet', () => {
+      const fakePath = '/rendered/path/sampleQuerySet';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        sample_query_set: 'sampleQuerySetValue',
+      };
+      const client = new rankserviceModule.v1beta.RankServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.sampleQuerySetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.sampleQuerySetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('sampleQuerySetPath', () => {
+        const result = client.sampleQuerySetPath(
+          'projectValue',
+          'locationValue',
+          'sampleQuerySetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.sampleQuerySetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSampleQuerySetName', () => {
+        const result = client.matchProjectFromSampleQuerySetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSampleQuerySetName', () => {
+        const result = client.matchLocationFromSampleQuerySetName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSampleQuerySetFromSampleQuerySetName', () => {
+        const result =
+          client.matchSampleQuerySetFromSampleQuerySetName(fakePath);
+        assert.strictEqual(result, 'sampleQuerySetValue');
+        assert(
+          (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
