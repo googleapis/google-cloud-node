@@ -2960,228 +2960,1014 @@ export namespace google {
             /** Namespace v1beta. */
             namespace v1beta {
 
-                /** Properties of a CitationMetadata. */
-                interface ICitationMetadata {
+                /** Represents a CacheService */
+                class CacheService extends $protobuf.rpc.Service {
 
-                    /** CitationMetadata citationSources */
-                    citationSources?: (google.ai.generativelanguage.v1beta.ICitationSource[]|null);
+                    /**
+                     * Constructs a new CacheService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CacheService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CacheService;
+
+                    /**
+                     * Calls ListCachedContents.
+                     * @param request ListCachedContentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListCachedContentsResponse
+                     */
+                    public listCachedContents(request: google.ai.generativelanguage.v1beta.IListCachedContentsRequest, callback: google.ai.generativelanguage.v1beta.CacheService.ListCachedContentsCallback): void;
+
+                    /**
+                     * Calls ListCachedContents.
+                     * @param request ListCachedContentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listCachedContents(request: google.ai.generativelanguage.v1beta.IListCachedContentsRequest): Promise<google.ai.generativelanguage.v1beta.ListCachedContentsResponse>;
+
+                    /**
+                     * Calls CreateCachedContent.
+                     * @param request CreateCachedContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CachedContent
+                     */
+                    public createCachedContent(request: google.ai.generativelanguage.v1beta.ICreateCachedContentRequest, callback: google.ai.generativelanguage.v1beta.CacheService.CreateCachedContentCallback): void;
+
+                    /**
+                     * Calls CreateCachedContent.
+                     * @param request CreateCachedContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createCachedContent(request: google.ai.generativelanguage.v1beta.ICreateCachedContentRequest): Promise<google.ai.generativelanguage.v1beta.CachedContent>;
+
+                    /**
+                     * Calls GetCachedContent.
+                     * @param request GetCachedContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CachedContent
+                     */
+                    public getCachedContent(request: google.ai.generativelanguage.v1beta.IGetCachedContentRequest, callback: google.ai.generativelanguage.v1beta.CacheService.GetCachedContentCallback): void;
+
+                    /**
+                     * Calls GetCachedContent.
+                     * @param request GetCachedContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getCachedContent(request: google.ai.generativelanguage.v1beta.IGetCachedContentRequest): Promise<google.ai.generativelanguage.v1beta.CachedContent>;
+
+                    /**
+                     * Calls UpdateCachedContent.
+                     * @param request UpdateCachedContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CachedContent
+                     */
+                    public updateCachedContent(request: google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest, callback: google.ai.generativelanguage.v1beta.CacheService.UpdateCachedContentCallback): void;
+
+                    /**
+                     * Calls UpdateCachedContent.
+                     * @param request UpdateCachedContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCachedContent(request: google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest): Promise<google.ai.generativelanguage.v1beta.CachedContent>;
+
+                    /**
+                     * Calls DeleteCachedContent.
+                     * @param request DeleteCachedContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteCachedContent(request: google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest, callback: google.ai.generativelanguage.v1beta.CacheService.DeleteCachedContentCallback): void;
+
+                    /**
+                     * Calls DeleteCachedContent.
+                     * @param request DeleteCachedContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteCachedContent(request: google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest): Promise<google.protobuf.Empty>;
                 }
 
-                /** Represents a CitationMetadata. */
-                class CitationMetadata implements ICitationMetadata {
+                namespace CacheService {
 
                     /**
-                     * Constructs a new CitationMetadata.
+                     * Callback as used by {@link google.ai.generativelanguage.v1beta.CacheService|listCachedContents}.
+                     * @param error Error, if any
+                     * @param [response] ListCachedContentsResponse
+                     */
+                    type ListCachedContentsCallback = (error: (Error|null), response?: google.ai.generativelanguage.v1beta.ListCachedContentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ai.generativelanguage.v1beta.CacheService|createCachedContent}.
+                     * @param error Error, if any
+                     * @param [response] CachedContent
+                     */
+                    type CreateCachedContentCallback = (error: (Error|null), response?: google.ai.generativelanguage.v1beta.CachedContent) => void;
+
+                    /**
+                     * Callback as used by {@link google.ai.generativelanguage.v1beta.CacheService|getCachedContent}.
+                     * @param error Error, if any
+                     * @param [response] CachedContent
+                     */
+                    type GetCachedContentCallback = (error: (Error|null), response?: google.ai.generativelanguage.v1beta.CachedContent) => void;
+
+                    /**
+                     * Callback as used by {@link google.ai.generativelanguage.v1beta.CacheService|updateCachedContent}.
+                     * @param error Error, if any
+                     * @param [response] CachedContent
+                     */
+                    type UpdateCachedContentCallback = (error: (Error|null), response?: google.ai.generativelanguage.v1beta.CachedContent) => void;
+
+                    /**
+                     * Callback as used by {@link google.ai.generativelanguage.v1beta.CacheService|deleteCachedContent}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteCachedContentCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                }
+
+                /** Properties of a ListCachedContentsRequest. */
+                interface IListCachedContentsRequest {
+
+                    /** ListCachedContentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListCachedContentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListCachedContentsRequest. */
+                class ListCachedContentsRequest implements IListCachedContentsRequest {
+
+                    /**
+                     * Constructs a new ListCachedContentsRequest.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.ai.generativelanguage.v1beta.ICitationMetadata);
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IListCachedContentsRequest);
 
-                    /** CitationMetadata citationSources. */
-                    public citationSources: google.ai.generativelanguage.v1beta.ICitationSource[];
+                    /** ListCachedContentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListCachedContentsRequest pageToken. */
+                    public pageToken: string;
 
                     /**
-                     * Creates a new CitationMetadata instance using the specified properties.
+                     * Creates a new ListCachedContentsRequest instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns CitationMetadata instance
+                     * @returns ListCachedContentsRequest instance
                      */
-                    public static create(properties?: google.ai.generativelanguage.v1beta.ICitationMetadata): google.ai.generativelanguage.v1beta.CitationMetadata;
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IListCachedContentsRequest): google.ai.generativelanguage.v1beta.ListCachedContentsRequest;
 
                     /**
-                     * Encodes the specified CitationMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationMetadata.verify|verify} messages.
-                     * @param message CitationMetadata message or plain object to encode
+                     * Encodes the specified ListCachedContentsRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ListCachedContentsRequest.verify|verify} messages.
+                     * @param message ListCachedContentsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.ai.generativelanguage.v1beta.ICitationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.ai.generativelanguage.v1beta.IListCachedContentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified CitationMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationMetadata.verify|verify} messages.
-                     * @param message CitationMetadata message or plain object to encode
+                     * Encodes the specified ListCachedContentsRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ListCachedContentsRequest.verify|verify} messages.
+                     * @param message ListCachedContentsRequest message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICitationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IListCachedContentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a CitationMetadata message from the specified reader or buffer.
+                     * Decodes a ListCachedContentsRequest message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns CitationMetadata
+                     * @returns ListCachedContentsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CitationMetadata;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.ListCachedContentsRequest;
 
                     /**
-                     * Decodes a CitationMetadata message from the specified reader or buffer, length delimited.
+                     * Decodes a ListCachedContentsRequest message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns CitationMetadata
+                     * @returns ListCachedContentsRequest
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CitationMetadata;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.ListCachedContentsRequest;
 
                     /**
-                     * Verifies a CitationMetadata message.
+                     * Verifies a ListCachedContentsRequest message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a CitationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * Creates a ListCachedContentsRequest message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns CitationMetadata
+                     * @returns ListCachedContentsRequest
                      */
-                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CitationMetadata;
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.ListCachedContentsRequest;
 
                     /**
-                     * Creates a plain object from a CitationMetadata message. Also converts values to other types if specified.
-                     * @param message CitationMetadata
+                     * Creates a plain object from a ListCachedContentsRequest message. Also converts values to other types if specified.
+                     * @param message ListCachedContentsRequest
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.ai.generativelanguage.v1beta.CitationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.ai.generativelanguage.v1beta.ListCachedContentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this CitationMetadata to JSON.
+                     * Converts this ListCachedContentsRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for CitationMetadata
+                     * Gets the default type url for ListCachedContentsRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a CitationSource. */
-                interface ICitationSource {
+                /** Properties of a ListCachedContentsResponse. */
+                interface IListCachedContentsResponse {
 
-                    /** CitationSource startIndex */
-                    startIndex?: (number|null);
+                    /** ListCachedContentsResponse cachedContents */
+                    cachedContents?: (google.ai.generativelanguage.v1beta.ICachedContent[]|null);
 
-                    /** CitationSource endIndex */
-                    endIndex?: (number|null);
-
-                    /** CitationSource uri */
-                    uri?: (string|null);
-
-                    /** CitationSource license */
-                    license?: (string|null);
+                    /** ListCachedContentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
                 }
 
-                /** Represents a CitationSource. */
-                class CitationSource implements ICitationSource {
+                /** Represents a ListCachedContentsResponse. */
+                class ListCachedContentsResponse implements IListCachedContentsResponse {
 
                     /**
-                     * Constructs a new CitationSource.
+                     * Constructs a new ListCachedContentsResponse.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.ai.generativelanguage.v1beta.ICitationSource);
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IListCachedContentsResponse);
 
-                    /** CitationSource startIndex. */
-                    public startIndex?: (number|null);
+                    /** ListCachedContentsResponse cachedContents. */
+                    public cachedContents: google.ai.generativelanguage.v1beta.ICachedContent[];
 
-                    /** CitationSource endIndex. */
-                    public endIndex?: (number|null);
-
-                    /** CitationSource uri. */
-                    public uri?: (string|null);
-
-                    /** CitationSource license. */
-                    public license?: (string|null);
-
-                    /** CitationSource _startIndex. */
-                    public _startIndex?: "startIndex";
-
-                    /** CitationSource _endIndex. */
-                    public _endIndex?: "endIndex";
-
-                    /** CitationSource _uri. */
-                    public _uri?: "uri";
-
-                    /** CitationSource _license. */
-                    public _license?: "license";
+                    /** ListCachedContentsResponse nextPageToken. */
+                    public nextPageToken: string;
 
                     /**
-                     * Creates a new CitationSource instance using the specified properties.
+                     * Creates a new ListCachedContentsResponse instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns CitationSource instance
+                     * @returns ListCachedContentsResponse instance
                      */
-                    public static create(properties?: google.ai.generativelanguage.v1beta.ICitationSource): google.ai.generativelanguage.v1beta.CitationSource;
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IListCachedContentsResponse): google.ai.generativelanguage.v1beta.ListCachedContentsResponse;
 
                     /**
-                     * Encodes the specified CitationSource message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationSource.verify|verify} messages.
-                     * @param message CitationSource message or plain object to encode
+                     * Encodes the specified ListCachedContentsResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ListCachedContentsResponse.verify|verify} messages.
+                     * @param message ListCachedContentsResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.ai.generativelanguage.v1beta.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.ai.generativelanguage.v1beta.IListCachedContentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified CitationSource message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationSource.verify|verify} messages.
-                     * @param message CitationSource message or plain object to encode
+                     * Encodes the specified ListCachedContentsResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ListCachedContentsResponse.verify|verify} messages.
+                     * @param message ListCachedContentsResponse message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IListCachedContentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a CitationSource message from the specified reader or buffer.
+                     * Decodes a ListCachedContentsResponse message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns CitationSource
+                     * @returns ListCachedContentsResponse
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CitationSource;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.ListCachedContentsResponse;
 
                     /**
-                     * Decodes a CitationSource message from the specified reader or buffer, length delimited.
+                     * Decodes a ListCachedContentsResponse message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns CitationSource
+                     * @returns ListCachedContentsResponse
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CitationSource;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.ListCachedContentsResponse;
 
                     /**
-                     * Verifies a CitationSource message.
+                     * Verifies a ListCachedContentsResponse message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a CitationSource message from a plain object. Also converts values to their respective internal types.
+                     * Creates a ListCachedContentsResponse message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns CitationSource
+                     * @returns ListCachedContentsResponse
                      */
-                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CitationSource;
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.ListCachedContentsResponse;
 
                     /**
-                     * Creates a plain object from a CitationSource message. Also converts values to other types if specified.
-                     * @param message CitationSource
+                     * Creates a plain object from a ListCachedContentsResponse message. Also converts values to other types if specified.
+                     * @param message ListCachedContentsResponse
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.ai.generativelanguage.v1beta.CitationSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.ai.generativelanguage.v1beta.ListCachedContentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this CitationSource to JSON.
+                     * Converts this ListCachedContentsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for CitationSource
+                     * Gets the default type url for ListCachedContentsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateCachedContentRequest. */
+                interface ICreateCachedContentRequest {
+
+                    /** CreateCachedContentRequest cachedContent */
+                    cachedContent?: (google.ai.generativelanguage.v1beta.ICachedContent|null);
+                }
+
+                /** Represents a CreateCachedContentRequest. */
+                class CreateCachedContentRequest implements ICreateCachedContentRequest {
+
+                    /**
+                     * Constructs a new CreateCachedContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICreateCachedContentRequest);
+
+                    /** CreateCachedContentRequest cachedContent. */
+                    public cachedContent?: (google.ai.generativelanguage.v1beta.ICachedContent|null);
+
+                    /**
+                     * Creates a new CreateCachedContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateCachedContentRequest instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICreateCachedContentRequest): google.ai.generativelanguage.v1beta.CreateCachedContentRequest;
+
+                    /**
+                     * Encodes the specified CreateCachedContentRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CreateCachedContentRequest.verify|verify} messages.
+                     * @param message CreateCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICreateCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateCachedContentRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CreateCachedContentRequest.verify|verify} messages.
+                     * @param message CreateCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICreateCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateCachedContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CreateCachedContentRequest;
+
+                    /**
+                     * Decodes a CreateCachedContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CreateCachedContentRequest;
+
+                    /**
+                     * Verifies a CreateCachedContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateCachedContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateCachedContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CreateCachedContentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateCachedContentRequest message. Also converts values to other types if specified.
+                     * @param message CreateCachedContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CreateCachedContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateCachedContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateCachedContentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetCachedContentRequest. */
+                interface IGetCachedContentRequest {
+
+                    /** GetCachedContentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetCachedContentRequest. */
+                class GetCachedContentRequest implements IGetCachedContentRequest {
+
+                    /**
+                     * Constructs a new GetCachedContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IGetCachedContentRequest);
+
+                    /** GetCachedContentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetCachedContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetCachedContentRequest instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IGetCachedContentRequest): google.ai.generativelanguage.v1beta.GetCachedContentRequest;
+
+                    /**
+                     * Encodes the specified GetCachedContentRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GetCachedContentRequest.verify|verify} messages.
+                     * @param message GetCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IGetCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetCachedContentRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GetCachedContentRequest.verify|verify} messages.
+                     * @param message GetCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGetCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetCachedContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GetCachedContentRequest;
+
+                    /**
+                     * Decodes a GetCachedContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GetCachedContentRequest;
+
+                    /**
+                     * Verifies a GetCachedContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetCachedContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetCachedContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GetCachedContentRequest;
+
+                    /**
+                     * Creates a plain object from a GetCachedContentRequest message. Also converts values to other types if specified.
+                     * @param message GetCachedContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.GetCachedContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetCachedContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetCachedContentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateCachedContentRequest. */
+                interface IUpdateCachedContentRequest {
+
+                    /** UpdateCachedContentRequest cachedContent */
+                    cachedContent?: (google.ai.generativelanguage.v1beta.ICachedContent|null);
+
+                    /** UpdateCachedContentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCachedContentRequest. */
+                class UpdateCachedContentRequest implements IUpdateCachedContentRequest {
+
+                    /**
+                     * Constructs a new UpdateCachedContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest);
+
+                    /** UpdateCachedContentRequest cachedContent. */
+                    public cachedContent?: (google.ai.generativelanguage.v1beta.ICachedContent|null);
+
+                    /** UpdateCachedContentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCachedContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCachedContentRequest instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest): google.ai.generativelanguage.v1beta.UpdateCachedContentRequest;
+
+                    /**
+                     * Encodes the specified UpdateCachedContentRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.UpdateCachedContentRequest.verify|verify} messages.
+                     * @param message UpdateCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCachedContentRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.UpdateCachedContentRequest.verify|verify} messages.
+                     * @param message UpdateCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IUpdateCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCachedContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.UpdateCachedContentRequest;
+
+                    /**
+                     * Decodes an UpdateCachedContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.UpdateCachedContentRequest;
+
+                    /**
+                     * Verifies an UpdateCachedContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCachedContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCachedContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.UpdateCachedContentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCachedContentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCachedContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.UpdateCachedContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCachedContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCachedContentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteCachedContentRequest. */
+                interface IDeleteCachedContentRequest {
+
+                    /** DeleteCachedContentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteCachedContentRequest. */
+                class DeleteCachedContentRequest implements IDeleteCachedContentRequest {
+
+                    /**
+                     * Constructs a new DeleteCachedContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest);
+
+                    /** DeleteCachedContentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteCachedContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteCachedContentRequest instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest): google.ai.generativelanguage.v1beta.DeleteCachedContentRequest;
+
+                    /**
+                     * Encodes the specified DeleteCachedContentRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.DeleteCachedContentRequest.verify|verify} messages.
+                     * @param message DeleteCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteCachedContentRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.DeleteCachedContentRequest.verify|verify} messages.
+                     * @param message DeleteCachedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IDeleteCachedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteCachedContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.DeleteCachedContentRequest;
+
+                    /**
+                     * Decodes a DeleteCachedContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteCachedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.DeleteCachedContentRequest;
+
+                    /**
+                     * Verifies a DeleteCachedContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteCachedContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteCachedContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.DeleteCachedContentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteCachedContentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteCachedContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.DeleteCachedContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteCachedContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteCachedContentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CachedContent. */
+                interface ICachedContent {
+
+                    /** CachedContent expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CachedContent ttl */
+                    ttl?: (google.protobuf.IDuration|null);
+
+                    /** CachedContent name */
+                    name?: (string|null);
+
+                    /** CachedContent displayName */
+                    displayName?: (string|null);
+
+                    /** CachedContent model */
+                    model?: (string|null);
+
+                    /** CachedContent systemInstruction */
+                    systemInstruction?: (google.ai.generativelanguage.v1beta.IContent|null);
+
+                    /** CachedContent contents */
+                    contents?: (google.ai.generativelanguage.v1beta.IContent[]|null);
+
+                    /** CachedContent tools */
+                    tools?: (google.ai.generativelanguage.v1beta.ITool[]|null);
+
+                    /** CachedContent toolConfig */
+                    toolConfig?: (google.ai.generativelanguage.v1beta.IToolConfig|null);
+
+                    /** CachedContent createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CachedContent updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CachedContent usageMetadata */
+                    usageMetadata?: (google.ai.generativelanguage.v1beta.CachedContent.IUsageMetadata|null);
+                }
+
+                /** Represents a CachedContent. */
+                class CachedContent implements ICachedContent {
+
+                    /**
+                     * Constructs a new CachedContent.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICachedContent);
+
+                    /** CachedContent expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CachedContent ttl. */
+                    public ttl?: (google.protobuf.IDuration|null);
+
+                    /** CachedContent name. */
+                    public name?: (string|null);
+
+                    /** CachedContent displayName. */
+                    public displayName?: (string|null);
+
+                    /** CachedContent model. */
+                    public model?: (string|null);
+
+                    /** CachedContent systemInstruction. */
+                    public systemInstruction?: (google.ai.generativelanguage.v1beta.IContent|null);
+
+                    /** CachedContent contents. */
+                    public contents: google.ai.generativelanguage.v1beta.IContent[];
+
+                    /** CachedContent tools. */
+                    public tools: google.ai.generativelanguage.v1beta.ITool[];
+
+                    /** CachedContent toolConfig. */
+                    public toolConfig?: (google.ai.generativelanguage.v1beta.IToolConfig|null);
+
+                    /** CachedContent createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CachedContent updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CachedContent usageMetadata. */
+                    public usageMetadata?: (google.ai.generativelanguage.v1beta.CachedContent.IUsageMetadata|null);
+
+                    /** CachedContent expiration. */
+                    public expiration?: ("expireTime"|"ttl");
+
+                    /** CachedContent _name. */
+                    public _name?: "name";
+
+                    /** CachedContent _displayName. */
+                    public _displayName?: "displayName";
+
+                    /** CachedContent _model. */
+                    public _model?: "model";
+
+                    /** CachedContent _systemInstruction. */
+                    public _systemInstruction?: "systemInstruction";
+
+                    /** CachedContent _toolConfig. */
+                    public _toolConfig?: "toolConfig";
+
+                    /**
+                     * Creates a new CachedContent instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CachedContent instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICachedContent): google.ai.generativelanguage.v1beta.CachedContent;
+
+                    /**
+                     * Encodes the specified CachedContent message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CachedContent.verify|verify} messages.
+                     * @param message CachedContent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICachedContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CachedContent message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CachedContent.verify|verify} messages.
+                     * @param message CachedContent message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICachedContent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CachedContent message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CachedContent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CachedContent;
+
+                    /**
+                     * Decodes a CachedContent message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CachedContent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CachedContent;
+
+                    /**
+                     * Verifies a CachedContent message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CachedContent message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CachedContent
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CachedContent;
+
+                    /**
+                     * Creates a plain object from a CachedContent message. Also converts values to other types if specified.
+                     * @param message CachedContent
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CachedContent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CachedContent to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CachedContent
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CachedContent {
+
+                    /** Properties of a UsageMetadata. */
+                    interface IUsageMetadata {
+
+                        /** UsageMetadata totalTokenCount */
+                        totalTokenCount?: (number|null);
+                    }
+
+                    /** Represents a UsageMetadata. */
+                    class UsageMetadata implements IUsageMetadata {
+
+                        /**
+                         * Constructs a new UsageMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.CachedContent.IUsageMetadata);
+
+                        /** UsageMetadata totalTokenCount. */
+                        public totalTokenCount: number;
+
+                        /**
+                         * Creates a new UsageMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UsageMetadata instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.CachedContent.IUsageMetadata): google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata;
+
+                        /**
+                         * Encodes the specified UsageMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata.verify|verify} messages.
+                         * @param message UsageMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.CachedContent.IUsageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UsageMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata.verify|verify} messages.
+                         * @param message UsageMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.CachedContent.IUsageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UsageMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UsageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata;
+
+                        /**
+                         * Decodes a UsageMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UsageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata;
+
+                        /**
+                         * Verifies a UsageMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UsageMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UsageMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata;
+
+                        /**
+                         * Creates a plain object from a UsageMetadata message. Also converts values to other types if specified.
+                         * @param message UsageMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.CachedContent.UsageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UsageMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UsageMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Type enum. */
@@ -3315,6 +4101,12 @@ export namespace google {
 
                     /** Part fileData */
                     fileData?: (google.ai.generativelanguage.v1beta.IFileData|null);
+
+                    /** Part executableCode */
+                    executableCode?: (google.ai.generativelanguage.v1beta.IExecutableCode|null);
+
+                    /** Part codeExecutionResult */
+                    codeExecutionResult?: (google.ai.generativelanguage.v1beta.ICodeExecutionResult|null);
                 }
 
                 /** Represents a Part. */
@@ -3341,8 +4133,14 @@ export namespace google {
                     /** Part fileData. */
                     public fileData?: (google.ai.generativelanguage.v1beta.IFileData|null);
 
+                    /** Part executableCode. */
+                    public executableCode?: (google.ai.generativelanguage.v1beta.IExecutableCode|null);
+
+                    /** Part codeExecutionResult. */
+                    public codeExecutionResult?: (google.ai.generativelanguage.v1beta.ICodeExecutionResult|null);
+
                     /** Part data. */
-                    public data?: ("text"|"inlineData"|"functionCall"|"functionResponse"|"fileData");
+                    public data?: ("text"|"inlineData"|"functionCall"|"functionResponse"|"fileData"|"executableCode"|"codeExecutionResult");
 
                     /**
                      * Creates a new Part instance using the specified properties.
@@ -3628,11 +4426,240 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExecutableCode. */
+                interface IExecutableCode {
+
+                    /** ExecutableCode language */
+                    language?: (google.ai.generativelanguage.v1beta.ExecutableCode.Language|keyof typeof google.ai.generativelanguage.v1beta.ExecutableCode.Language|null);
+
+                    /** ExecutableCode code */
+                    code?: (string|null);
+                }
+
+                /** Represents an ExecutableCode. */
+                class ExecutableCode implements IExecutableCode {
+
+                    /**
+                     * Constructs a new ExecutableCode.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IExecutableCode);
+
+                    /** ExecutableCode language. */
+                    public language: (google.ai.generativelanguage.v1beta.ExecutableCode.Language|keyof typeof google.ai.generativelanguage.v1beta.ExecutableCode.Language);
+
+                    /** ExecutableCode code. */
+                    public code: string;
+
+                    /**
+                     * Creates a new ExecutableCode instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExecutableCode instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IExecutableCode): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Encodes the specified ExecutableCode message. Does not implicitly {@link google.ai.generativelanguage.v1beta.ExecutableCode.verify|verify} messages.
+                     * @param message ExecutableCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IExecutableCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExecutableCode message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.ExecutableCode.verify|verify} messages.
+                     * @param message ExecutableCode message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IExecutableCode, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExecutableCode message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExecutableCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Decodes an ExecutableCode message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExecutableCode
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Verifies an ExecutableCode message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExecutableCode message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExecutableCode
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.ExecutableCode;
+
+                    /**
+                     * Creates a plain object from an ExecutableCode message. Also converts values to other types if specified.
+                     * @param message ExecutableCode
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.ExecutableCode, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExecutableCode to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExecutableCode
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExecutableCode {
+
+                    /** Language enum. */
+                    enum Language {
+                        LANGUAGE_UNSPECIFIED = 0,
+                        PYTHON = 1
+                    }
+                }
+
+                /** Properties of a CodeExecutionResult. */
+                interface ICodeExecutionResult {
+
+                    /** CodeExecutionResult outcome */
+                    outcome?: (google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome|keyof typeof google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome|null);
+
+                    /** CodeExecutionResult output */
+                    output?: (string|null);
+                }
+
+                /** Represents a CodeExecutionResult. */
+                class CodeExecutionResult implements ICodeExecutionResult {
+
+                    /**
+                     * Constructs a new CodeExecutionResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICodeExecutionResult);
+
+                    /** CodeExecutionResult outcome. */
+                    public outcome: (google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome|keyof typeof google.ai.generativelanguage.v1beta.CodeExecutionResult.Outcome);
+
+                    /** CodeExecutionResult output. */
+                    public output: string;
+
+                    /**
+                     * Creates a new CodeExecutionResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CodeExecutionResult instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICodeExecutionResult): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Encodes the specified CodeExecutionResult message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecutionResult.verify|verify} messages.
+                     * @param message CodeExecutionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICodeExecutionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CodeExecutionResult message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecutionResult.verify|verify} messages.
+                     * @param message CodeExecutionResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICodeExecutionResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CodeExecutionResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CodeExecutionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Decodes a CodeExecutionResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CodeExecutionResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Verifies a CodeExecutionResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CodeExecutionResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CodeExecutionResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CodeExecutionResult;
+
+                    /**
+                     * Creates a plain object from a CodeExecutionResult message. Also converts values to other types if specified.
+                     * @param message CodeExecutionResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CodeExecutionResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CodeExecutionResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CodeExecutionResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CodeExecutionResult {
+
+                    /** Outcome enum. */
+                    enum Outcome {
+                        OUTCOME_UNSPECIFIED = 0,
+                        OUTCOME_OK = 1,
+                        OUTCOME_FAILED = 2,
+                        OUTCOME_DEADLINE_EXCEEDED = 3
+                    }
+                }
+
                 /** Properties of a Tool. */
                 interface ITool {
 
                     /** Tool functionDeclarations */
                     functionDeclarations?: (google.ai.generativelanguage.v1beta.IFunctionDeclaration[]|null);
+
+                    /** Tool codeExecution */
+                    codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
                 }
 
                 /** Represents a Tool. */
@@ -3646,6 +4673,9 @@ export namespace google {
 
                     /** Tool functionDeclarations. */
                     public functionDeclarations: google.ai.generativelanguage.v1beta.IFunctionDeclaration[];
+
+                    /** Tool codeExecution. */
+                    public codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
 
                     /**
                      * Creates a new Tool instance using the specified properties.
@@ -3719,6 +4749,97 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Tool
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CodeExecution. */
+                interface ICodeExecution {
+                }
+
+                /** Represents a CodeExecution. */
+                class CodeExecution implements ICodeExecution {
+
+                    /**
+                     * Constructs a new CodeExecution.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICodeExecution);
+
+                    /**
+                     * Creates a new CodeExecution instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CodeExecution instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICodeExecution): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Encodes the specified CodeExecution message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecution.verify|verify} messages.
+                     * @param message CodeExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICodeExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CodeExecution message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CodeExecution.verify|verify} messages.
+                     * @param message CodeExecution message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICodeExecution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CodeExecution message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CodeExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Decodes a CodeExecution message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CodeExecution
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Verifies a CodeExecution message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CodeExecution message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CodeExecution
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CodeExecution;
+
+                    /**
+                     * Creates a plain object from a CodeExecution message. Also converts values to other types if specified.
+                     * @param message CodeExecution
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CodeExecution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CodeExecution to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CodeExecution
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4593,6 +5714,230 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GroundingPassages
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CitationMetadata. */
+                interface ICitationMetadata {
+
+                    /** CitationMetadata citationSources */
+                    citationSources?: (google.ai.generativelanguage.v1beta.ICitationSource[]|null);
+                }
+
+                /** Represents a CitationMetadata. */
+                class CitationMetadata implements ICitationMetadata {
+
+                    /**
+                     * Constructs a new CitationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICitationMetadata);
+
+                    /** CitationMetadata citationSources. */
+                    public citationSources: google.ai.generativelanguage.v1beta.ICitationSource[];
+
+                    /**
+                     * Creates a new CitationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CitationMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICitationMetadata): google.ai.generativelanguage.v1beta.CitationMetadata;
+
+                    /**
+                     * Encodes the specified CitationMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationMetadata.verify|verify} messages.
+                     * @param message CitationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICitationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CitationMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationMetadata.verify|verify} messages.
+                     * @param message CitationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICitationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CitationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CitationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CitationMetadata;
+
+                    /**
+                     * Decodes a CitationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CitationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CitationMetadata;
+
+                    /**
+                     * Verifies a CitationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CitationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CitationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CitationMetadata;
+
+                    /**
+                     * Creates a plain object from a CitationMetadata message. Also converts values to other types if specified.
+                     * @param message CitationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CitationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CitationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CitationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CitationSource. */
+                interface ICitationSource {
+
+                    /** CitationSource startIndex */
+                    startIndex?: (number|null);
+
+                    /** CitationSource endIndex */
+                    endIndex?: (number|null);
+
+                    /** CitationSource uri */
+                    uri?: (string|null);
+
+                    /** CitationSource license */
+                    license?: (string|null);
+                }
+
+                /** Represents a CitationSource. */
+                class CitationSource implements ICitationSource {
+
+                    /**
+                     * Constructs a new CitationSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ICitationSource);
+
+                    /** CitationSource startIndex. */
+                    public startIndex?: (number|null);
+
+                    /** CitationSource endIndex. */
+                    public endIndex?: (number|null);
+
+                    /** CitationSource uri. */
+                    public uri?: (string|null);
+
+                    /** CitationSource license. */
+                    public license?: (string|null);
+
+                    /** CitationSource _startIndex. */
+                    public _startIndex?: "startIndex";
+
+                    /** CitationSource _endIndex. */
+                    public _endIndex?: "endIndex";
+
+                    /** CitationSource _uri. */
+                    public _uri?: "uri";
+
+                    /** CitationSource _license. */
+                    public _license?: "license";
+
+                    /**
+                     * Creates a new CitationSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CitationSource instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ICitationSource): google.ai.generativelanguage.v1beta.CitationSource;
+
+                    /**
+                     * Encodes the specified CitationSource message. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationSource.verify|verify} messages.
+                     * @param message CitationSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CitationSource message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.CitationSource.verify|verify} messages.
+                     * @param message CitationSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ICitationSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CitationSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CitationSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.CitationSource;
+
+                    /**
+                     * Decodes a CitationSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CitationSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.CitationSource;
+
+                    /**
+                     * Verifies a CitationSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CitationSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CitationSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.CitationSource;
+
+                    /**
+                     * Creates a plain object from a CitationSource message. Also converts values to other types if specified.
+                     * @param message CitationSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.CitationSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CitationSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CitationSource
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7068,6 +8413,9 @@ export namespace google {
 
                     /** GenerateContentRequest generationConfig */
                     generationConfig?: (google.ai.generativelanguage.v1beta.IGenerationConfig|null);
+
+                    /** GenerateContentRequest cachedContent */
+                    cachedContent?: (string|null);
                 }
 
                 /** Represents a GenerateContentRequest. */
@@ -7100,11 +8448,17 @@ export namespace google {
                     /** GenerateContentRequest generationConfig. */
                     public generationConfig?: (google.ai.generativelanguage.v1beta.IGenerationConfig|null);
 
+                    /** GenerateContentRequest cachedContent. */
+                    public cachedContent?: (string|null);
+
                     /** GenerateContentRequest _systemInstruction. */
                     public _systemInstruction?: "systemInstruction";
 
                     /** GenerateContentRequest _generationConfig. */
                     public _generationConfig?: "generationConfig";
+
+                    /** GenerateContentRequest _cachedContent. */
+                    public _cachedContent?: "cachedContent";
 
                     /**
                      * Creates a new GenerateContentRequest instance using the specified properties.
@@ -7695,6 +9049,9 @@ export namespace google {
                         /** UsageMetadata promptTokenCount */
                         promptTokenCount?: (number|null);
 
+                        /** UsageMetadata cachedContentTokenCount */
+                        cachedContentTokenCount?: (number|null);
+
                         /** UsageMetadata candidatesTokenCount */
                         candidatesTokenCount?: (number|null);
 
@@ -7713,6 +9070,9 @@ export namespace google {
 
                         /** UsageMetadata promptTokenCount. */
                         public promptTokenCount: number;
+
+                        /** UsageMetadata cachedContentTokenCount. */
+                        public cachedContentTokenCount: number;
 
                         /** UsageMetadata candidatesTokenCount. */
                         public candidatesTokenCount: number;
@@ -9388,6 +10748,9 @@ export namespace google {
 
                     /** CountTokensResponse totalTokens */
                     totalTokens?: (number|null);
+
+                    /** CountTokensResponse cachedContentTokenCount */
+                    cachedContentTokenCount?: (number|null);
                 }
 
                 /** Represents a CountTokensResponse. */
@@ -9401,6 +10764,9 @@ export namespace google {
 
                     /** CountTokensResponse totalTokens. */
                     public totalTokens: number;
+
+                    /** CountTokensResponse cachedContentTokenCount. */
+                    public cachedContentTokenCount: number;
 
                     /**
                      * Creates a new CountTokensResponse instance using the specified properties.
@@ -10430,6 +11796,9 @@ export namespace google {
                     /** Model temperature */
                     temperature?: (number|null);
 
+                    /** Model maxTemperature */
+                    maxTemperature?: (number|null);
+
                     /** Model topP */
                     topP?: (number|null);
 
@@ -10473,6 +11842,9 @@ export namespace google {
                     /** Model temperature. */
                     public temperature?: (number|null);
 
+                    /** Model maxTemperature. */
+                    public maxTemperature?: (number|null);
+
                     /** Model topP. */
                     public topP?: (number|null);
 
@@ -10481,6 +11853,9 @@ export namespace google {
 
                     /** Model _temperature. */
                     public _temperature?: "temperature";
+
+                    /** Model _maxTemperature. */
+                    public _maxTemperature?: "maxTemperature";
 
                     /** Model _topP. */
                     public _topP?: "topP";
@@ -34322,109 +35697,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Any
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -34607,6 +35879,109 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

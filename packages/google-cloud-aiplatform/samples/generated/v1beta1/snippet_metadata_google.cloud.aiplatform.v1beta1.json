@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.21.0",
+        "version": "3.25.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1084,6 +1084,50 @@
                 "method": {
                     "shortName": "ListDeploymentResourcePools",
                     "fullName": "google.cloud.aiplatform.v1beta1.DeploymentResourcePoolService.ListDeploymentResourcePools",
+                    "service": {
+                        "shortName": "DeploymentResourcePoolService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.DeploymentResourcePoolService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async",
+            "title": "DatasetService updateDeploymentResourcePool Sample",
+            "origin": "API_DEFINITION",
+            "description": " Update a DeploymentResourcePool.",
+            "canonical": true,
+            "file": "deployment_resource_pool_service.update_deployment_resource_pool.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateDeploymentResourcePool",
+                "fullName": "google.cloud.aiplatform.v1beta1.DeploymentResourcePoolService.UpdateDeploymentResourcePool",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "deployment_resource_pool",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeploymentResourcePool"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "DeploymentResourcePoolServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.DeploymentResourcePoolServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateDeploymentResourcePool",
+                    "fullName": "google.cloud.aiplatform.v1beta1.DeploymentResourcePoolService.UpdateDeploymentResourcePool",
                     "service": {
                         "shortName": "DeploymentResourcePoolService",
                         "fullName": "google.cloud.aiplatform.v1beta1.DeploymentResourcePoolService"
@@ -7050,7 +7094,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 61,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -7065,6 +7109,14 @@
                     },
                     {
                         "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "contents",
                         "type": "TYPE_MESSAGE[]"
                     }
                 ],
@@ -11836,6 +11888,50 @@
                 "method": {
                     "shortName": "RawPredict",
                     "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.RawPredict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "aiplatform_v1beta1_generated_PredictionService_StreamRawPredict_async",
+            "title": "DatasetService streamRawPredict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Perform a streaming online prediction with an arbitrary HTTP payload.",
+            "canonical": true,
+            "file": "prediction_service.stream_raw_predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 61,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamRawPredict",
+                "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamRawPredict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "endpoint",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "http_body",
+                        "type": ".google.api.HttpBody"
+                    }
+                ],
+                "resultType": ".google.api.HttpBody",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamRawPredict",
+                    "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.StreamRawPredict",
                     "service": {
                         "shortName": "PredictionService",
                         "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"

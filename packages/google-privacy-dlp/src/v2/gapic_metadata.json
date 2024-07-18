@@ -170,6 +170,16 @@
                 "getProjectDataProfile"
               ]
             },
+            "GetFileStoreDataProfile": {
+              "methods": [
+                "getFileStoreDataProfile"
+              ]
+            },
+            "DeleteFileStoreDataProfile": {
+              "methods": [
+                "deleteFileStoreDataProfile"
+              ]
+            },
             "GetTableDataProfile": {
               "methods": [
                 "getTableDataProfile"
@@ -276,6 +286,13 @@
                 "listColumnDataProfiles",
                 "listColumnDataProfilesStream",
                 "listColumnDataProfilesAsync"
+              ]
+            },
+            "ListFileStoreDataProfiles": {
+              "methods": [
+                "listFileStoreDataProfiles",
+                "listFileStoreDataProfilesStream",
+                "listFileStoreDataProfilesAsync"
               ]
             },
             "ListConnections": {
@@ -457,6 +474,16 @@
                 "getProjectDataProfile"
               ]
             },
+            "GetFileStoreDataProfile": {
+              "methods": [
+                "getFileStoreDataProfile"
+              ]
+            },
+            "DeleteFileStoreDataProfile": {
+              "methods": [
+                "deleteFileStoreDataProfile"
+              ]
+            },
             "GetTableDataProfile": {
               "methods": [
                 "getTableDataProfile"
@@ -563,6 +590,13 @@
                 "listColumnDataProfiles",
                 "listColumnDataProfilesStream",
                 "listColumnDataProfilesAsync"
+              ]
+            },
+            "ListFileStoreDataProfiles": {
+              "methods": [
+                "listFileStoreDataProfiles",
+                "listFileStoreDataProfilesStream",
+                "listFileStoreDataProfilesAsync"
               ]
             },
             "ListConnections": {

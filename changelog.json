@@ -5,6 +5,1014 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "9a80089d974280420e269f24aba563f4adceb4c3",
+          "message": "[chat] Add doc for Discoverable Space support for GA launch",
+          "issues": [
+            "5525"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "200b6aab-7102-4e28-ade4-9d531d4b4e37",
+      "createTime": "2024-07-10T13:39:29.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c1a0a8a52866dee658ad34479b3ae62ae4b21bb5",
+          "message": "[parallelstore] add iam.googleapis.com/ServiceAccount resource definition",
+          "issues": [
+            "5520"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "024116eb-8dc1-40bc-be88-010ba35ec954",
+      "createTime": "2024-07-10T13:39:29.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "88382897c1c0ba6f5f80ba72ab775808de301962",
+          "message": "[container] Deprecate \"EXPERIMENTAL\" option for Gateway API (this value has never been supported)",
+          "issues": [
+            "5519"
+          ]
+        }
+      ],
+      "version": "5.15.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "a1e7a682-230f-4de1-a1a9-df976fd6e121",
+      "createTime": "2024-07-10T13:39:29.893Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "347ea87f938abbf9abe37df7ffb32625ec142e1a",
+          "message": "[sql] add Dataplex integration opt-in field",
+          "issues": [
+            "5527"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6d8a33d6caf2b9dbe4aa043d083cb76e989ed5a3",
+          "message": "[sql] add Dataplex integration opt-in field",
+          "issues": [
+            "5518"
+          ]
+        }
+      ],
+      "version": "0.16.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "bfc0b2b4-0a03-41e3-9b38-2c092121dd5c",
+      "createTime": "2024-07-10T13:39:29.878Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "63f8e88a7cd2f64bfc39aa26a1bfe24963285e1b",
+          "message": "[securitycenter] added cloud provider field to list findings response",
+          "issues": [
+            "5529"
+          ]
+        }
+      ],
+      "version": "8.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "63c47a71-64f1-4edd-8954-4c113253dc3d",
+      "createTime": "2024-07-10T13:39:29.831Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b0dc1b2ef66334394613c6e92a4c5b0ebb8e0faf",
+          "message": "[discoveryengine] add Chunk resource in the search response",
+          "issues": [
+            "5526"
+          ]
+        }
+      ],
+      "version": "1.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "efa0432f-de37-4f44-b8f7-4afe87dd4468",
+      "createTime": "2024-07-10T13:39:29.806Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e85b5752ea97e102b8cd729d1e9b18aadfd8f045",
+          "message": "[bigquery-analyticshub] support public directory self service for Listings/Exchanges",
+          "issues": [
+            "5523"
+          ]
+        }
+      ],
+      "version": "1.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "369f4b54-d89c-4ed2-9f54-4d3fa65e0fa6",
+      "createTime": "2024-07-10T13:39:29.773Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2359c347ca89df4aee706b0c6798560d686a15cc",
+          "message": "Enable rest_numeric_enums for aiplatform v1 and v1beta1",
+          "issues": [
+            "5531"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "89832091d214555b274df86d817866a33b559e05",
+          "message": "Add model and contents fields to ComputeTokensRequest v1",
+          "issues": [
+            "5517"
+          ]
+        }
+      ],
+      "version": "3.25.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "0463772e-c740-47ce-896b-66c0cb6aa421",
+      "createTime": "2024-07-10T13:39:29.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9e8416fe9c4c401119910fb5867b5b445e8224e7",
+          "message": "Added http configuration rule to ResourceValueConfig and ValuedResource API methods",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "9e8416fe9c4c401119910fb5867b5b445e8224e7",
+          "message": "Added toxic combination field to finding",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "9e8416fe9c4c401119910fb5867b5b445e8224e7",
+          "message": "[securitycenter] added cloud provider field to list findings response",
+          "issues": [
+            "5507"
+          ]
+        }
+      ],
+      "version": "8.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "102d7d8d-e23f-485f-a7a4-c7f32f982ad8",
+      "createTime": "2024-06-27T09:25:51.635Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "03bfa5d4314e3c2e97e50d0c09b98cffe3669d9b",
+          "message": "[dataplex] expose data scan execution create time to customers",
+          "issues": [
+            "5510"
+          ]
+        }
+      ],
+      "version": "3.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "42ddd14e-bdab-40a7-b67c-1a111fcc8760",
+      "createTime": "2024-06-27T09:25:51.546Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "04e52ae670c14b47c80635a90761b3ee7fcd35c3",
+          "message": "[edgenetwork] A new field `bonding_type` is added to message `.google.cloud.edgenetwork.v1.Subnet`",
+          "issues": [
+            "5505"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "16ef638e-321c-4792-a661-22d1fc6c64ff",
+      "createTime": "2024-06-26T22:23:49.050Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e0f0fd24a745bb3b072456aa012c37946f2084a4",
+          "message": "[sql] A new field `upgradable_database_versions` is added to message `.google.cloud.sql.v1beta4.DatabaseInstance`",
+          "issues": [
+            "5478"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "ec545c53-5a11-407b-87b5-08e2ed1d1d98",
+      "createTime": "2024-06-26T22:23:49.026Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "41a96b4231d6b98fac2c06ea8686597789ef6b1c",
+          "message": "[securitycenter] Add toxic_combination and group_memberships fields to finding",
+          "issues": [
+            "5495"
+          ]
+        }
+      ],
+      "version": "8.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "a1fa66a1-a862-4491-845b-ec114cc8409d",
+      "createTime": "2024-06-26T22:23:48.922Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "617956910ab08fb98763da804a85a6c3e6acec8d",
+          "message": "[recaptchaenterprise] added SMS Toll Fraud assessment",
+          "issues": [
+            "5499"
+          ]
+        }
+      ],
+      "version": "5.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "fe45174f-cdcd-4a6f-aff1-ffa745001ec4",
+      "createTime": "2024-06-26T22:23:48.897Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "dc87003cc97da35701fca6127f41cfc088c5a99d",
+          "message": "[gkehub] add a new field `PENDING` under `DeploymentState` enum",
+          "issues": [
+            "5472"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "d17b37fc-bd24-46bc-94ab-ca02c8fe2a3f",
+      "createTime": "2024-06-26T22:23:48.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "910da3caf3602e360423db51ed171a42bba4f68a",
+          "message": "[dataproc] add the cohort and auto tuning configuration to the batch's RuntimeConfig",
+          "issues": [
+            "5494"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "a980b2cf-d4f0-440c-89dd-215f3de85be5",
+      "createTime": "2024-06-26T22:23:48.867Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f42b77d76efc700ade152faf7e42b3abf3fb8f44",
+          "message": "[batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support",
+          "issues": [
+            "5500"
+          ]
+        }
+      ],
+      "version": "1.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "e17eb8ba-a0c4-48d7-842a-f47e59efa3f1",
+      "createTime": "2024-06-26T22:23:48.853Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "83498e9a326d0640bf3654491814dc19cc479def",
+          "message": "Add MALFORMED_FUNCTION_CALL to FinishReason",
+          "issues": [
+            "5481"
+          ]
+        }
+      ],
+      "version": "3.24.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "eb27dfdf-0a7a-4476-81e9-549f32ef5a96",
+      "createTime": "2024-06-26T22:23:48.838Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "13034af24e1d08cccab85e1f1f448a8ff24e469c",
+          "message": "[generativelanguage] Add code execution",
+          "issues": [
+            "5506"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "75c026f34b039e368c38bfb6242f01048d3bfb79",
+          "message": "[generativelanguage] Add content caching",
+          "issues": [
+            "5451"
+          ]
+        }
+      ],
+      "version": "2.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "c8d5fb6e-a376-4ca8-9494-f7e90e58be8c",
+      "createTime": "2024-06-26T22:23:48.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "458d04e25c339b4bce483f2535e86af8b323f169",
+          "message": "[securitycentermanagement] add `TOXIC_COMBINATION` to `FindingClass` enum",
+          "issues": [
+            "5489"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "50736554b0433c16534e771d6673dffe3efac7c9",
+          "message": "[securitycentermanagement] add an INGEST_ONLY EnablementState",
+          "issues": [
+            "5445"
+          ]
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "2fbd8fc4-18b4-401f-aa33-a4c17356bfad",
+      "createTime": "2024-06-21T18:05:56.946Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "616dee9c69245409909487ee9ebfd68121dab85e",
+          "message": "Update gax",
+          "issues": [
+            "5487"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "c22ba18e-e309-40ad-aa5e-3f7d68869fbe",
+      "createTime": "2024-06-21T18:05:56.923Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "30aef59a85ea7d9835b08694f9be482b84e30c94",
+          "message": "Avoid unhandled exception on streamingRecognize",
+          "issues": [
+            "5465"
+          ]
+        }
+      ],
+      "version": "6.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "5dce29cf-853d-489b-9957-39febca8da89",
+      "createTime": "2024-06-21T18:05:56.828Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "140597eac392a4b777c3e0fda197544b0f2912ba",
+          "message": "[retail] support merged facets",
+          "issues": [
+            "5446"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "6d1f8a02-d637-4357-9b97-2ef7ec6fa704",
+      "createTime": "2024-06-21T18:05:56.770Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "83da16fbfb5fc37d689b72ef9d6f607d7167ae95",
+          "message": "[kmsinventory] support Key Access Justifications policy configuration",
+          "issues": [
+            "5480"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "22518213-eaae-49f6-bc19-c1e5202b8561",
+      "createTime": "2024-06-21T18:05:56.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a6a77c9eda7428840ce2a01572ee2773b2760f36",
+          "message": "[kms] support Key Access Justifications policy configuration",
+          "issues": [
+            "5479"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "edab1c40-6ad6-42df-8642-a1995e1296f5",
+      "createTime": "2024-06-21T18:05:56.733Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "00ad68517838b0e231cac523dc0cc4adbf20621e",
+          "message": "[dataplex] exposing EntrySource.location field that contains location of a resource in the source system",
+          "issues": [
+            "5483"
+          ]
+        }
+      ],
+      "version": "3.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "a6feda3b-480b-4635-8cfb-ea55783c6987",
+      "createTime": "2024-06-21T18:05:56.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "724f42c129e09a79dd0be0c87578ed0507fa19b5",
+          "message": "Add initial files for google.cloud.developerconnect.v1",
+          "issues": [
+            "5397"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "4bf31f6f-a04f-4177-b158-137432c98dcb",
+      "createTime": "2024-06-12T19:36:15.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1c4766cff1e12857cca5632541ee18d854cd9f9a",
+          "message": "Add initial files for google.cloud.managedkafka.v1",
+          "issues": [
+            "5395"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "f550562a-788a-417d-9cb0-3ec60092694d",
+      "createTime": "2024-06-12T19:36:15.444Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e62ec4df1773c683cc60cbb1adafeffc98970a61",
+          "message": "[container] A new message `HugepagesConfig` is added",
+          "issues": [
+            "5447"
+          ]
+        }
+      ],
+      "version": "5.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "7d47866d-f220-4ef4-9b58-d24ef8ee08bb",
+      "createTime": "2024-06-12T19:36:15.363Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5de5142eb62d6e102e8666f2e7c6a96e8f016c00",
+          "message": "[sql] add Cluster maintenance and Self-service maintenance to SqlOperationType",
+          "issues": [
+            "5452"
+          ]
+        }
+      ],
+      "version": "0.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "b01879ed-a542-4d9d-98ed-b300a8e399b3",
+      "createTime": "2024-06-12T19:36:15.280Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ada6ab8a7a9a0879cedaa4fab9a4d2c12b16bd74",
+          "message": "Add initial files for google.shopping.merchant.datasources.v1beta",
+          "issues": [
+            "5421"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "0e81c995-4449-458d-ae92-00c6853126b3",
+      "createTime": "2024-06-05T20:50:50.793Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d6817c22178d09598d48c7fb423b1930986a2b7d",
+          "message": "[redis] Add support for different node types",
+          "issues": [
+            "5433"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "1f4b644d-2ee2-444b-a815-f1ed3322030e",
+      "createTime": "2024-06-05T20:50:50.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "201f11acf0cbe5b3a7f06f8d87871835cdf36bd9",
+          "message": "[sql] Support for CLUSTER_MAINTENANCE and SELF_SERVICE_MAINTENANCE operation types",
+          "issues": [
+            "5428"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "4288ef94-31e2-44f5-b682-359cb25fb912",
+      "createTime": "2024-06-05T20:50:50.640Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "docs",
+          "sha": "445cd4df1aa6d744f60b4dbbd769e20e7c8794c0",
+          "message": "[resourcesettings] Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024",
+          "issues": [
+            "5420"
+          ],
+          "breakingChangeNote": "[resourcesettings] Resource Settings is deprecated. As of November 7, 2023, no organizations will be onboarded for any of the enabled settings, and the service will be shut down on October 1, 2024 ([#5420](https://github.com/googleapis/google-cloud-node/issues/5420))"
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-settings",
+      "id": "985201e6-a8c4-4e81-a45d-3386bb81ff97",
+      "createTime": "2024-06-05T20:50:50.624Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6481ff45908281cbb91d9212918222bcbd1b2981",
+          "message": "[batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support",
+          "issues": [
+            "5426"
+          ]
+        }
+      ],
+      "version": "1.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "a477ab16-f1da-4ba1-961d-a163d125ee3d",
+      "createTime": "2024-06-05T20:50:50.609Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a1aba11b9fb796f7c8abfa9930e8636bd7106d01",
+          "message": "Add rag_embedding_model_config to RagCorpus",
+          "issues": [
+            "5430"
+          ]
+        }
+      ],
+      "version": "3.23.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "c1844f9b-eada-4b15-8a78-59a2c8219e94",
+      "createTime": "2024-06-05T20:50:50.595Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "84adc73cb2c7aa1e87bf2d060fd99d713234c79c",
+          "message": "Add initial files for google.shopping.merchant.promotions.v1beta",
+          "issues": [
+            "5422"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "a7b3e996-c2ee-4943-8eb8-e5f8c7c0b3be",
+      "createTime": "2024-06-04T23:09:06.033Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "304acc9821a8edf054952999b6e282d9d5affd8f",
+          "message": "[mapsplatformdatasets] make v1 stable/default version",
+          "issues": [
+            "5390"
+          ],
+          "breakingChangeNote": "[mapsplatformdatasets] make v1 stable/default version ([#5390](https://github.com/googleapis/google-cloud-node/issues/5390))"
+        }
+      ],
+      "version": "2.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "20342ea6-6662-4747-8a64-fd441ddbdc00",
+      "createTime": "2024-06-04T23:09:06.019Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "50cd4b851c9a14788a292cd27d4abb8b317091ec",
+          "message": "Add initial files for google.maps.fleetengine.v1",
+          "issues": [
+            "5251"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "0fc5b78f-4d6a-42af-a8ea-22d2b77f1b8b",
+      "createTime": "2024-06-03T22:56:46.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3a9774328aeebdc48ac718cdac5adcead0ed8312",
+          "message": "Add initial files for google.streetview.publish.v1",
+          "issues": [
+            "5396"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "a666299b-56ce-4476-8baf-3f3f770e8692",
+      "createTime": "2024-06-03T22:56:46.477Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1cb9152693f1e44877312f39b6be31080bc6efaa",
+          "message": "Add initial files for google.maps.fleetengine.delivery.v1",
+          "issues": [
+            "5252"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "847f1b9a-35bd-4d5e-871a-6cf0e5a9c55b",
+      "createTime": "2024-06-03T22:56:46.462Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "81e759d8fc99473fc0109115e5fdd2b7ddd008f9",
+          "message": "[dlp] add secrets discovery support",
+          "issues": [
+            "5380"
+          ]
+        }
+      ],
+      "version": "5.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "d0636457-94d0-45a5-9fba-68c8cc6f538f",
+      "createTime": "2024-06-03T22:56:46.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2c879f6acf259e280043a9e845b5e9af1435f188",
+          "message": "[container] A new message `HugepagesConfig` is added",
+          "issues": [
+            "5391"
+          ]
+        }
+      ],
+      "version": "5.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "cc6c977d-58e0-4bdb-a76b-6a64148755e6",
+      "createTime": "2024-06-03T22:56:46.419Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "10d9310f765fe35d140b0465284c07b053caf8fb",
+          "message": "[video-stitcher] add apis for Create, Read, Update, Delete for VODConfigs",
+          "issues": [
+            "5378"
+          ]
+        }
+      ],
+      "version": "2.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "acf51a7f-3099-4c34-9833-b2b6e9fb1ff4",
+      "createTime": "2024-06-03T22:56:46.402Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "035a7272b13ee4a44778c62d58e1aaf01924267b",
+          "message": "[networkservices] A new field `metadata` is added to message `.google.cloud.networkservices.v1.LbTrafficExtension`",
+          "issues": [
+            "5414"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "bc0b8c45-6a30-448a-8b1c-41fff0bbfd90",
+      "createTime": "2024-06-03T22:56:46.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "750a6ac920aa0fd3f468dc64bee5acd1b619d543",
+          "message": "[documentai] Make Layout Parser generally available in V1",
+          "issues": [
+            "5411"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "b6b04dbfa0a014b559d7093f5400187a2f7b192b",
+          "message": "[documentai] Make Layout Parser generally available in V1",
+          "issues": [
+            "5393"
+          ]
+        }
+      ],
+      "version": "8.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "baa33911-0a27-4fa9-ab22-fed956ce5b80",
+      "createTime": "2024-06-03T22:56:46.338Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86d61047ce001f8a396a934e6bda663636219d58",
+          "message": "[discoveryengine] support multiple parent patterns for controls",
+          "issues": [
+            "5392"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d1bee15d1460292b6c637182328d1367fca6bc62",
+          "message": "[discoveryengine] promote grounding check APIs to v1 GA",
+          "issues": [
+            "5387"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "d63c9acb-e56e-4a56-bdde-c2b71de6c2d9",
+      "createTime": "2024-06-03T22:56:46.322Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "489b16633276bcc446d2936ffb75bc68e57116e8",
+          "message": "[contentwarehouse] Make Layout Parser generally available in V1",
+          "issues": [
+            "5394"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "5a4b3ab4-7527-49aa-a484-5bc129dac53f",
+      "createTime": "2024-06-03T22:56:46.301Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6d60ea883cd5e3759296a14057b5ee3a86962464",
+          "message": "Add ValueType.STRUCT to Feature ",
+          "issues": [
+            "5381"
+          ]
+        }
+      ],
+      "version": "3.22.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "bb1a89ce-8e44-40f9-a0d4-0f973e1ed523",
+      "createTime": "2024-06-03T22:56:46.212Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "723d429fc69717376df5ee5fcbb620311080b3fe",
           "message": "Add initial files for google.maps.routeoptimization.v1",
           "issues": [
@@ -34097,5 +35105,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-05-23T18:44:11.657Z"
+  "updateTime": "2024-07-10T13:39:29.924Z"
 }

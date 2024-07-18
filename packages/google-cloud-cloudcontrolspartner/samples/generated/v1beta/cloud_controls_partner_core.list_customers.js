@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. Parent resource
-   *  Format: organizations/{organization}/locations/{location}
+   *  Format: `organizations/{organization}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

@@ -1094,6 +1094,9 @@ export namespace google {
 
                     /** CryptoKey cryptoKeyBackend */
                     cryptoKeyBackend?: (string|null);
+
+                    /** CryptoKey keyAccessJustificationsPolicy */
+                    keyAccessJustificationsPolicy?: (google.cloud.kms.v1.IKeyAccessJustificationsPolicy|null);
                 }
 
                 /** Represents a CryptoKey. */
@@ -1137,6 +1140,9 @@ export namespace google {
 
                     /** CryptoKey cryptoKeyBackend. */
                     public cryptoKeyBackend: string;
+
+                    /** CryptoKey keyAccessJustificationsPolicy. */
+                    public keyAccessJustificationsPolicy?: (google.cloud.kms.v1.IKeyAccessJustificationsPolicy|null);
 
                     /** CryptoKey rotationSchedule. */
                     public rotationSchedule?: "rotationPeriod";
@@ -2315,6 +2321,119 @@ export namespace google {
                     HSM = 2,
                     EXTERNAL = 3,
                     EXTERNAL_VPC = 4
+                }
+
+                /** AccessReason enum. */
+                enum AccessReason {
+                    REASON_UNSPECIFIED = 0,
+                    CUSTOMER_INITIATED_SUPPORT = 1,
+                    GOOGLE_INITIATED_SERVICE = 2,
+                    THIRD_PARTY_DATA_REQUEST = 3,
+                    GOOGLE_INITIATED_REVIEW = 4,
+                    CUSTOMER_INITIATED_ACCESS = 5,
+                    GOOGLE_INITIATED_SYSTEM_OPERATION = 6,
+                    REASON_NOT_EXPECTED = 7,
+                    MODIFIED_CUSTOMER_INITIATED_ACCESS = 8,
+                    MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION = 9,
+                    GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 10,
+                    CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING = 11
+                }
+
+                /** Properties of a KeyAccessJustificationsPolicy. */
+                interface IKeyAccessJustificationsPolicy {
+
+                    /** KeyAccessJustificationsPolicy allowedAccessReasons */
+                    allowedAccessReasons?: (google.cloud.kms.v1.AccessReason[]|null);
+                }
+
+                /** Represents a KeyAccessJustificationsPolicy. */
+                class KeyAccessJustificationsPolicy implements IKeyAccessJustificationsPolicy {
+
+                    /**
+                     * Constructs a new KeyAccessJustificationsPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IKeyAccessJustificationsPolicy);
+
+                    /** KeyAccessJustificationsPolicy allowedAccessReasons. */
+                    public allowedAccessReasons: google.cloud.kms.v1.AccessReason[];
+
+                    /**
+                     * Creates a new KeyAccessJustificationsPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KeyAccessJustificationsPolicy instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IKeyAccessJustificationsPolicy): google.cloud.kms.v1.KeyAccessJustificationsPolicy;
+
+                    /**
+                     * Encodes the specified KeyAccessJustificationsPolicy message. Does not implicitly {@link google.cloud.kms.v1.KeyAccessJustificationsPolicy.verify|verify} messages.
+                     * @param message KeyAccessJustificationsPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IKeyAccessJustificationsPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KeyAccessJustificationsPolicy message, length delimited. Does not implicitly {@link google.cloud.kms.v1.KeyAccessJustificationsPolicy.verify|verify} messages.
+                     * @param message KeyAccessJustificationsPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IKeyAccessJustificationsPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KeyAccessJustificationsPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KeyAccessJustificationsPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.KeyAccessJustificationsPolicy;
+
+                    /**
+                     * Decodes a KeyAccessJustificationsPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KeyAccessJustificationsPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.KeyAccessJustificationsPolicy;
+
+                    /**
+                     * Verifies a KeyAccessJustificationsPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KeyAccessJustificationsPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KeyAccessJustificationsPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.KeyAccessJustificationsPolicy;
+
+                    /**
+                     * Creates a plain object from a KeyAccessJustificationsPolicy message. Also converts values to other types if specified.
+                     * @param message KeyAccessJustificationsPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.KeyAccessJustificationsPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KeyAccessJustificationsPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for KeyAccessJustificationsPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

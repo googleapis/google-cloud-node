@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.25.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.24.0...aiplatform-v3.25.0) (2024-07-10)
+
+
+### Features
+
+* Add model and contents fields to ComputeTokensRequest v1 ([#5517](https://github.com/googleapis/google-cloud-node/issues/5517)) ([8983209](https://github.com/googleapis/google-cloud-node/commit/89832091d214555b274df86d817866a33b559e05))
+* Enable rest_numeric_enums for aiplatform v1 and v1beta1 ([#5531](https://github.com/googleapis/google-cloud-node/issues/5531)) ([2359c34](https://github.com/googleapis/google-cloud-node/commit/2359c347ca89df4aee706b0c6798560d686a15cc))
+
+## [3.24.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.23.0...aiplatform-v3.24.0) (2024-06-26)
+
+
+### Features
+
+* Add MALFORMED_FUNCTION_CALL to FinishReason ([#5481](https://github.com/googleapis/google-cloud-node/issues/5481)) ([83498e9](https://github.com/googleapis/google-cloud-node/commit/83498e9a326d0640bf3654491814dc19cc479def))
+
+## [3.23.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.22.0...aiplatform-v3.23.0) (2024-06-05)
+
+
+### Features
+
+* Add rag_embedding_model_config to RagCorpus ([#5430](https://github.com/googleapis/google-cloud-node/issues/5430)) ([a1aba11](https://github.com/googleapis/google-cloud-node/commit/a1aba11b9fb796f7c8abfa9930e8636bd7106d01))
+
+## [3.22.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.21.0...aiplatform-v3.22.0) (2024-06-03)
+
+
+### Features
+
+* Add ValueType.STRUCT to Feature  ([#5381](https://github.com/googleapis/google-cloud-node/issues/5381)) ([6d60ea8](https://github.com/googleapis/google-cloud-node/commit/6d60ea883cd5e3759296a14057b5ee3a86962464))
+
 ## [3.21.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.20.0...aiplatform-v3.21.0) (2024-05-21)
 
 

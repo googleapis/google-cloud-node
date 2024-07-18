@@ -8,10 +8,13 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.EdgeContainer.V1",
                     "go_package": "cloud.google.com/go/edgecontainer/apiv1/edgecontainerpb;edgecontainerpb",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceProto",
                     "java_package": "com.google.cloud.edgecontainer.v1",
+                    "php_namespace": "Google\\Cloud\\EdgeContainer\\V1",
+                    "ruby_package": "Google::Cloud::EdgeContainer::V1",
                     "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
                   },

@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format: projects/${project}/datasets/{dataset_id}
+   *  Required. The name of the dataset to delete.
+   *  Format: projects/{project}/datasets/{dataset_id}
    */
   // const name = 'abc123'
 

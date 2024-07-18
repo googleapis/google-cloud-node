@@ -30793,6 +30793,72 @@
                      * @variation 2
                      */
     
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|getSpaceEvent}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef GetSpaceEventCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.SpaceEvent} [response] SpaceEvent
+                     */
+    
+                    /**
+                     * Calls GetSpaceEvent.
+                     * @function getSpaceEvent
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetSpaceEventRequest} request GetSpaceEventRequest message or plain object
+                     * @param {google.chat.v1.ChatService.GetSpaceEventCallback} callback Node-style callback called with the error, if any, and SpaceEvent
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.getSpaceEvent = function getSpaceEvent(request, callback) {
+                        return this.rpcCall(getSpaceEvent, $root.google.chat.v1.GetSpaceEventRequest, $root.google.chat.v1.SpaceEvent, request, callback);
+                    }, "name", { value: "GetSpaceEvent" });
+    
+                    /**
+                     * Calls GetSpaceEvent.
+                     * @function getSpaceEvent
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IGetSpaceEventRequest} request GetSpaceEventRequest message or plain object
+                     * @returns {Promise<google.chat.v1.SpaceEvent>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.chat.v1.ChatService|listSpaceEvents}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef ListSpaceEventsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.ListSpaceEventsResponse} [response] ListSpaceEventsResponse
+                     */
+    
+                    /**
+                     * Calls ListSpaceEvents.
+                     * @function listSpaceEvents
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListSpaceEventsRequest} request ListSpaceEventsRequest message or plain object
+                     * @param {google.chat.v1.ChatService.ListSpaceEventsCallback} callback Node-style callback called with the error, if any, and ListSpaceEventsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.listSpaceEvents = function listSpaceEvents(request, callback) {
+                        return this.rpcCall(listSpaceEvents, $root.google.chat.v1.ListSpaceEventsRequest, $root.google.chat.v1.ListSpaceEventsResponse, request, callback);
+                    }, "name", { value: "ListSpaceEvents" });
+    
+                    /**
+                     * Calls ListSpaceEvents.
+                     * @function listSpaceEvents
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.IListSpaceEventsRequest} request ListSpaceEventsRequest message or plain object
+                     * @returns {Promise<google.chat.v1.ListSpaceEventsResponse>} Promise
+                     * @variation 2
+                     */
+    
                     return ChatService;
                 })();
     
@@ -45215,6 +45281,8 @@
                      * @property {boolean|null} [importMode] Space importMode
                      * @property {google.protobuf.ITimestamp|null} [createTime] Space createTime
                      * @property {boolean|null} [adminInstalled] Space adminInstalled
+                     * @property {google.chat.v1.Space.IAccessSettings|null} [accessSettings] Space accessSettings
+                     * @property {string|null} [spaceUri] Space spaceUri
                      */
     
                     /**
@@ -45337,6 +45405,22 @@
                     Space.prototype.adminInstalled = false;
     
                     /**
+                     * Space accessSettings.
+                     * @member {google.chat.v1.Space.IAccessSettings|null|undefined} accessSettings
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.accessSettings = null;
+    
+                    /**
+                     * Space spaceUri.
+                     * @member {string} spaceUri
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.spaceUri = "";
+    
+                    /**
                      * Creates a new Space instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.Space
@@ -45386,6 +45470,10 @@
                             $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                         if (message.adminInstalled != null && Object.hasOwnProperty.call(message, "adminInstalled"))
                             writer.uint32(/* id 19, wireType 0 =*/152).bool(message.adminInstalled);
+                        if (message.accessSettings != null && Object.hasOwnProperty.call(message, "accessSettings"))
+                            $root.google.chat.v1.Space.AccessSettings.encode(message.accessSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                        if (message.spaceUri != null && Object.hasOwnProperty.call(message, "spaceUri"))
+                            writer.uint32(/* id 25, wireType 2 =*/202).string(message.spaceUri);
                         return writer;
                     };
     
@@ -45470,6 +45558,14 @@
                                 }
                             case 19: {
                                     message.adminInstalled = reader.bool();
+                                    break;
+                                }
+                            case 23: {
+                                    message.accessSettings = $root.google.chat.v1.Space.AccessSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 25: {
+                                    message.spaceUri = reader.string();
                                     break;
                                 }
                             default:
@@ -45576,6 +45672,14 @@
                         if (message.adminInstalled != null && message.hasOwnProperty("adminInstalled"))
                             if (typeof message.adminInstalled !== "boolean")
                                 return "adminInstalled: boolean expected";
+                        if (message.accessSettings != null && message.hasOwnProperty("accessSettings")) {
+                            var error = $root.google.chat.v1.Space.AccessSettings.verify(message.accessSettings);
+                            if (error)
+                                return "accessSettings." + error;
+                        }
+                        if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
+                            if (!$util.isString(message.spaceUri))
+                                return "spaceUri: string expected";
                         return null;
                     };
     
@@ -45703,6 +45807,13 @@
                         }
                         if (object.adminInstalled != null)
                             message.adminInstalled = Boolean(object.adminInstalled);
+                        if (object.accessSettings != null) {
+                            if (typeof object.accessSettings !== "object")
+                                throw TypeError(".google.chat.v1.Space.accessSettings: object expected");
+                            message.accessSettings = $root.google.chat.v1.Space.AccessSettings.fromObject(object.accessSettings);
+                        }
+                        if (object.spaceUri != null)
+                            message.spaceUri = String(object.spaceUri);
                         return message;
                     };
     
@@ -45733,6 +45844,8 @@
                             object.importMode = false;
                             object.createTime = null;
                             object.adminInstalled = false;
+                            object.accessSettings = null;
+                            object.spaceUri = "";
                         }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
@@ -45760,6 +45873,10 @@
                             object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                         if (message.adminInstalled != null && message.hasOwnProperty("adminInstalled"))
                             object.adminInstalled = message.adminInstalled;
+                        if (message.accessSettings != null && message.hasOwnProperty("accessSettings"))
+                            object.accessSettings = $root.google.chat.v1.Space.AccessSettings.toObject(message.accessSettings, options);
+                        if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
+                            object.spaceUri = message.spaceUri;
                         return object;
                     };
     
@@ -46066,6 +46183,273 @@
                         };
     
                         return SpaceDetails;
+                    })();
+    
+                    Space.AccessSettings = (function() {
+    
+                        /**
+                         * Properties of an AccessSettings.
+                         * @memberof google.chat.v1.Space
+                         * @interface IAccessSettings
+                         * @property {google.chat.v1.Space.AccessSettings.AccessState|null} [accessState] AccessSettings accessState
+                         * @property {string|null} [audience] AccessSettings audience
+                         */
+    
+                        /**
+                         * Constructs a new AccessSettings.
+                         * @memberof google.chat.v1.Space
+                         * @classdesc Represents an AccessSettings.
+                         * @implements IAccessSettings
+                         * @constructor
+                         * @param {google.chat.v1.Space.IAccessSettings=} [properties] Properties to set
+                         */
+                        function AccessSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessSettings accessState.
+                         * @member {google.chat.v1.Space.AccessSettings.AccessState} accessState
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @instance
+                         */
+                        AccessSettings.prototype.accessState = 0;
+    
+                        /**
+                         * AccessSettings audience.
+                         * @member {string} audience
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @instance
+                         */
+                        AccessSettings.prototype.audience = "";
+    
+                        /**
+                         * Creates a new AccessSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IAccessSettings=} [properties] Properties to set
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings instance
+                         */
+                        AccessSettings.create = function create(properties) {
+                            return new AccessSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSettings message. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IAccessSettings} message AccessSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.accessState != null && Object.hasOwnProperty.call(message, "accessState"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.accessState);
+                            if (message.audience != null && Object.hasOwnProperty.call(message, "audience"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.audience);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IAccessSettings} message AccessSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.AccessSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.accessState = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.audience = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessSettings message.
+                         * @function verify
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.accessState != null && message.hasOwnProperty("accessState"))
+                                switch (message.accessState) {
+                                default:
+                                    return "accessState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                if (!$util.isString(message.audience))
+                                    return "audience: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.chat.v1.Space.AccessSettings} AccessSettings
+                         */
+                        AccessSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.chat.v1.Space.AccessSettings)
+                                return object;
+                            var message = new $root.google.chat.v1.Space.AccessSettings();
+                            switch (object.accessState) {
+                            default:
+                                if (typeof object.accessState === "number") {
+                                    message.accessState = object.accessState;
+                                    break;
+                                }
+                                break;
+                            case "ACCESS_STATE_UNSPECIFIED":
+                            case 0:
+                                message.accessState = 0;
+                                break;
+                            case "PRIVATE":
+                            case 1:
+                                message.accessState = 1;
+                                break;
+                            case "DISCOVERABLE":
+                            case 2:
+                                message.accessState = 2;
+                                break;
+                            }
+                            if (object.audience != null)
+                                message.audience = String(object.audience);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {google.chat.v1.Space.AccessSettings} message AccessSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.accessState = options.enums === String ? "ACCESS_STATE_UNSPECIFIED" : 0;
+                                object.audience = "";
+                            }
+                            if (message.accessState != null && message.hasOwnProperty("accessState"))
+                                object.accessState = options.enums === String ? $root.google.chat.v1.Space.AccessSettings.AccessState[message.accessState] === undefined ? message.accessState : $root.google.chat.v1.Space.AccessSettings.AccessState[message.accessState] : message.accessState;
+                            if (message.audience != null && message.hasOwnProperty("audience"))
+                                object.audience = message.audience;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessSettings
+                         * @function getTypeUrl
+                         * @memberof google.chat.v1.Space.AccessSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.chat.v1.Space.AccessSettings";
+                        };
+    
+                        /**
+                         * AccessState enum.
+                         * @name google.chat.v1.Space.AccessSettings.AccessState
+                         * @enum {number}
+                         * @property {number} ACCESS_STATE_UNSPECIFIED=0 ACCESS_STATE_UNSPECIFIED value
+                         * @property {number} PRIVATE=1 PRIVATE value
+                         * @property {number} DISCOVERABLE=2 DISCOVERABLE value
+                         */
+                        AccessSettings.AccessState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACCESS_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PRIVATE"] = 1;
+                            values[valuesById[2] = "DISCOVERABLE"] = 2;
+                            return values;
+                        })();
+    
+                        return AccessSettings;
                     })();
     
                     return Space;
@@ -48072,6 +48456,5516 @@
                     values[valuesById[1] = "HISTORY_OFF"] = 1;
                     values[valuesById[2] = "HISTORY_ON"] = 2;
                     return values;
+                })();
+    
+                v1.SpaceEvent = (function() {
+    
+                    /**
+                     * Properties of a SpaceEvent.
+                     * @memberof google.chat.v1
+                     * @interface ISpaceEvent
+                     * @property {string|null} [name] SpaceEvent name
+                     * @property {google.protobuf.ITimestamp|null} [eventTime] SpaceEvent eventTime
+                     * @property {string|null} [eventType] SpaceEvent eventType
+                     * @property {google.chat.v1.IMessageCreatedEventData|null} [messageCreatedEventData] SpaceEvent messageCreatedEventData
+                     * @property {google.chat.v1.IMessageUpdatedEventData|null} [messageUpdatedEventData] SpaceEvent messageUpdatedEventData
+                     * @property {google.chat.v1.IMessageDeletedEventData|null} [messageDeletedEventData] SpaceEvent messageDeletedEventData
+                     * @property {google.chat.v1.IMessageBatchCreatedEventData|null} [messageBatchCreatedEventData] SpaceEvent messageBatchCreatedEventData
+                     * @property {google.chat.v1.IMessageBatchUpdatedEventData|null} [messageBatchUpdatedEventData] SpaceEvent messageBatchUpdatedEventData
+                     * @property {google.chat.v1.IMessageBatchDeletedEventData|null} [messageBatchDeletedEventData] SpaceEvent messageBatchDeletedEventData
+                     * @property {google.chat.v1.ISpaceUpdatedEventData|null} [spaceUpdatedEventData] SpaceEvent spaceUpdatedEventData
+                     * @property {google.chat.v1.ISpaceBatchUpdatedEventData|null} [spaceBatchUpdatedEventData] SpaceEvent spaceBatchUpdatedEventData
+                     * @property {google.chat.v1.IMembershipCreatedEventData|null} [membershipCreatedEventData] SpaceEvent membershipCreatedEventData
+                     * @property {google.chat.v1.IMembershipUpdatedEventData|null} [membershipUpdatedEventData] SpaceEvent membershipUpdatedEventData
+                     * @property {google.chat.v1.IMembershipDeletedEventData|null} [membershipDeletedEventData] SpaceEvent membershipDeletedEventData
+                     * @property {google.chat.v1.IMembershipBatchCreatedEventData|null} [membershipBatchCreatedEventData] SpaceEvent membershipBatchCreatedEventData
+                     * @property {google.chat.v1.IMembershipBatchUpdatedEventData|null} [membershipBatchUpdatedEventData] SpaceEvent membershipBatchUpdatedEventData
+                     * @property {google.chat.v1.IMembershipBatchDeletedEventData|null} [membershipBatchDeletedEventData] SpaceEvent membershipBatchDeletedEventData
+                     * @property {google.chat.v1.IReactionCreatedEventData|null} [reactionCreatedEventData] SpaceEvent reactionCreatedEventData
+                     * @property {google.chat.v1.IReactionDeletedEventData|null} [reactionDeletedEventData] SpaceEvent reactionDeletedEventData
+                     * @property {google.chat.v1.IReactionBatchCreatedEventData|null} [reactionBatchCreatedEventData] SpaceEvent reactionBatchCreatedEventData
+                     * @property {google.chat.v1.IReactionBatchDeletedEventData|null} [reactionBatchDeletedEventData] SpaceEvent reactionBatchDeletedEventData
+                     */
+    
+                    /**
+                     * Constructs a new SpaceEvent.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SpaceEvent.
+                     * @implements ISpaceEvent
+                     * @constructor
+                     * @param {google.chat.v1.ISpaceEvent=} [properties] Properties to set
+                     */
+                    function SpaceEvent(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SpaceEvent name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.name = "";
+    
+                    /**
+                     * SpaceEvent eventTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} eventTime
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.eventTime = null;
+    
+                    /**
+                     * SpaceEvent eventType.
+                     * @member {string} eventType
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.eventType = "";
+    
+                    /**
+                     * SpaceEvent messageCreatedEventData.
+                     * @member {google.chat.v1.IMessageCreatedEventData|null|undefined} messageCreatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.messageCreatedEventData = null;
+    
+                    /**
+                     * SpaceEvent messageUpdatedEventData.
+                     * @member {google.chat.v1.IMessageUpdatedEventData|null|undefined} messageUpdatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.messageUpdatedEventData = null;
+    
+                    /**
+                     * SpaceEvent messageDeletedEventData.
+                     * @member {google.chat.v1.IMessageDeletedEventData|null|undefined} messageDeletedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.messageDeletedEventData = null;
+    
+                    /**
+                     * SpaceEvent messageBatchCreatedEventData.
+                     * @member {google.chat.v1.IMessageBatchCreatedEventData|null|undefined} messageBatchCreatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.messageBatchCreatedEventData = null;
+    
+                    /**
+                     * SpaceEvent messageBatchUpdatedEventData.
+                     * @member {google.chat.v1.IMessageBatchUpdatedEventData|null|undefined} messageBatchUpdatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.messageBatchUpdatedEventData = null;
+    
+                    /**
+                     * SpaceEvent messageBatchDeletedEventData.
+                     * @member {google.chat.v1.IMessageBatchDeletedEventData|null|undefined} messageBatchDeletedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.messageBatchDeletedEventData = null;
+    
+                    /**
+                     * SpaceEvent spaceUpdatedEventData.
+                     * @member {google.chat.v1.ISpaceUpdatedEventData|null|undefined} spaceUpdatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.spaceUpdatedEventData = null;
+    
+                    /**
+                     * SpaceEvent spaceBatchUpdatedEventData.
+                     * @member {google.chat.v1.ISpaceBatchUpdatedEventData|null|undefined} spaceBatchUpdatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.spaceBatchUpdatedEventData = null;
+    
+                    /**
+                     * SpaceEvent membershipCreatedEventData.
+                     * @member {google.chat.v1.IMembershipCreatedEventData|null|undefined} membershipCreatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.membershipCreatedEventData = null;
+    
+                    /**
+                     * SpaceEvent membershipUpdatedEventData.
+                     * @member {google.chat.v1.IMembershipUpdatedEventData|null|undefined} membershipUpdatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.membershipUpdatedEventData = null;
+    
+                    /**
+                     * SpaceEvent membershipDeletedEventData.
+                     * @member {google.chat.v1.IMembershipDeletedEventData|null|undefined} membershipDeletedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.membershipDeletedEventData = null;
+    
+                    /**
+                     * SpaceEvent membershipBatchCreatedEventData.
+                     * @member {google.chat.v1.IMembershipBatchCreatedEventData|null|undefined} membershipBatchCreatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.membershipBatchCreatedEventData = null;
+    
+                    /**
+                     * SpaceEvent membershipBatchUpdatedEventData.
+                     * @member {google.chat.v1.IMembershipBatchUpdatedEventData|null|undefined} membershipBatchUpdatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.membershipBatchUpdatedEventData = null;
+    
+                    /**
+                     * SpaceEvent membershipBatchDeletedEventData.
+                     * @member {google.chat.v1.IMembershipBatchDeletedEventData|null|undefined} membershipBatchDeletedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.membershipBatchDeletedEventData = null;
+    
+                    /**
+                     * SpaceEvent reactionCreatedEventData.
+                     * @member {google.chat.v1.IReactionCreatedEventData|null|undefined} reactionCreatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.reactionCreatedEventData = null;
+    
+                    /**
+                     * SpaceEvent reactionDeletedEventData.
+                     * @member {google.chat.v1.IReactionDeletedEventData|null|undefined} reactionDeletedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.reactionDeletedEventData = null;
+    
+                    /**
+                     * SpaceEvent reactionBatchCreatedEventData.
+                     * @member {google.chat.v1.IReactionBatchCreatedEventData|null|undefined} reactionBatchCreatedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.reactionBatchCreatedEventData = null;
+    
+                    /**
+                     * SpaceEvent reactionBatchDeletedEventData.
+                     * @member {google.chat.v1.IReactionBatchDeletedEventData|null|undefined} reactionBatchDeletedEventData
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    SpaceEvent.prototype.reactionBatchDeletedEventData = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * SpaceEvent payload.
+                     * @member {"messageCreatedEventData"|"messageUpdatedEventData"|"messageDeletedEventData"|"messageBatchCreatedEventData"|"messageBatchUpdatedEventData"|"messageBatchDeletedEventData"|"spaceUpdatedEventData"|"spaceBatchUpdatedEventData"|"membershipCreatedEventData"|"membershipUpdatedEventData"|"membershipDeletedEventData"|"membershipBatchCreatedEventData"|"membershipBatchUpdatedEventData"|"membershipBatchDeletedEventData"|"reactionCreatedEventData"|"reactionDeletedEventData"|"reactionBatchCreatedEventData"|"reactionBatchDeletedEventData"|undefined} payload
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     */
+                    Object.defineProperty(SpaceEvent.prototype, "payload", {
+                        get: $util.oneOfGetter($oneOfFields = ["messageCreatedEventData", "messageUpdatedEventData", "messageDeletedEventData", "messageBatchCreatedEventData", "messageBatchUpdatedEventData", "messageBatchDeletedEventData", "spaceUpdatedEventData", "spaceBatchUpdatedEventData", "membershipCreatedEventData", "membershipUpdatedEventData", "membershipDeletedEventData", "membershipBatchCreatedEventData", "membershipBatchUpdatedEventData", "membershipBatchDeletedEventData", "reactionCreatedEventData", "reactionDeletedEventData", "reactionBatchCreatedEventData", "reactionBatchDeletedEventData"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new SpaceEvent instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {google.chat.v1.ISpaceEvent=} [properties] Properties to set
+                     * @returns {google.chat.v1.SpaceEvent} SpaceEvent instance
+                     */
+                    SpaceEvent.create = function create(properties) {
+                        return new SpaceEvent(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceEvent message. Does not implicitly {@link google.chat.v1.SpaceEvent.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {google.chat.v1.ISpaceEvent} message SpaceEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceEvent.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.eventTime != null && Object.hasOwnProperty.call(message, "eventTime"))
+                            $root.google.protobuf.Timestamp.encode(message.eventTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.eventType != null && Object.hasOwnProperty.call(message, "eventType"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.eventType);
+                        if (message.messageCreatedEventData != null && Object.hasOwnProperty.call(message, "messageCreatedEventData"))
+                            $root.google.chat.v1.MessageCreatedEventData.encode(message.messageCreatedEventData, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                        if (message.messageUpdatedEventData != null && Object.hasOwnProperty.call(message, "messageUpdatedEventData"))
+                            $root.google.chat.v1.MessageUpdatedEventData.encode(message.messageUpdatedEventData, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                        if (message.messageDeletedEventData != null && Object.hasOwnProperty.call(message, "messageDeletedEventData"))
+                            $root.google.chat.v1.MessageDeletedEventData.encode(message.messageDeletedEventData, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                        if (message.spaceUpdatedEventData != null && Object.hasOwnProperty.call(message, "spaceUpdatedEventData"))
+                            $root.google.chat.v1.SpaceUpdatedEventData.encode(message.spaceUpdatedEventData, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                        if (message.membershipCreatedEventData != null && Object.hasOwnProperty.call(message, "membershipCreatedEventData"))
+                            $root.google.chat.v1.MembershipCreatedEventData.encode(message.membershipCreatedEventData, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                        if (message.membershipUpdatedEventData != null && Object.hasOwnProperty.call(message, "membershipUpdatedEventData"))
+                            $root.google.chat.v1.MembershipUpdatedEventData.encode(message.membershipUpdatedEventData, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                        if (message.reactionCreatedEventData != null && Object.hasOwnProperty.call(message, "reactionCreatedEventData"))
+                            $root.google.chat.v1.ReactionCreatedEventData.encode(message.reactionCreatedEventData, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                        if (message.reactionDeletedEventData != null && Object.hasOwnProperty.call(message, "reactionDeletedEventData"))
+                            $root.google.chat.v1.ReactionDeletedEventData.encode(message.reactionDeletedEventData, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                        if (message.messageBatchCreatedEventData != null && Object.hasOwnProperty.call(message, "messageBatchCreatedEventData"))
+                            $root.google.chat.v1.MessageBatchCreatedEventData.encode(message.messageBatchCreatedEventData, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
+                        if (message.messageBatchUpdatedEventData != null && Object.hasOwnProperty.call(message, "messageBatchUpdatedEventData"))
+                            $root.google.chat.v1.MessageBatchUpdatedEventData.encode(message.messageBatchUpdatedEventData, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
+                        if (message.messageBatchDeletedEventData != null && Object.hasOwnProperty.call(message, "messageBatchDeletedEventData"))
+                            $root.google.chat.v1.MessageBatchDeletedEventData.encode(message.messageBatchDeletedEventData, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
+                        if (message.spaceBatchUpdatedEventData != null && Object.hasOwnProperty.call(message, "spaceBatchUpdatedEventData"))
+                            $root.google.chat.v1.SpaceBatchUpdatedEventData.encode(message.spaceBatchUpdatedEventData, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                        if (message.membershipBatchCreatedEventData != null && Object.hasOwnProperty.call(message, "membershipBatchCreatedEventData"))
+                            $root.google.chat.v1.MembershipBatchCreatedEventData.encode(message.membershipBatchCreatedEventData, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                        if (message.membershipBatchUpdatedEventData != null && Object.hasOwnProperty.call(message, "membershipBatchUpdatedEventData"))
+                            $root.google.chat.v1.MembershipBatchUpdatedEventData.encode(message.membershipBatchUpdatedEventData, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
+                        if (message.membershipBatchDeletedEventData != null && Object.hasOwnProperty.call(message, "membershipBatchDeletedEventData"))
+                            $root.google.chat.v1.MembershipBatchDeletedEventData.encode(message.membershipBatchDeletedEventData, writer.uint32(/* id 33, wireType 2 =*/266).fork()).ldelim();
+                        if (message.reactionBatchCreatedEventData != null && Object.hasOwnProperty.call(message, "reactionBatchCreatedEventData"))
+                            $root.google.chat.v1.ReactionBatchCreatedEventData.encode(message.reactionBatchCreatedEventData, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                        if (message.reactionBatchDeletedEventData != null && Object.hasOwnProperty.call(message, "reactionBatchDeletedEventData"))
+                            $root.google.chat.v1.ReactionBatchDeletedEventData.encode(message.reactionBatchDeletedEventData, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                        if (message.membershipDeletedEventData != null && Object.hasOwnProperty.call(message, "membershipDeletedEventData"))
+                            $root.google.chat.v1.MembershipDeletedEventData.encode(message.membershipDeletedEventData, writer.uint32(/* id 219, wireType 2 =*/1754).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceEvent message, length delimited. Does not implicitly {@link google.chat.v1.SpaceEvent.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {google.chat.v1.ISpaceEvent} message SpaceEvent message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SpaceEvent message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SpaceEvent} SpaceEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceEvent.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceEvent();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.eventTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 6: {
+                                    message.eventType = reader.string();
+                                    break;
+                                }
+                            case 12: {
+                                    message.messageCreatedEventData = $root.google.chat.v1.MessageCreatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 13: {
+                                    message.messageUpdatedEventData = $root.google.chat.v1.MessageUpdatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 14: {
+                                    message.messageDeletedEventData = $root.google.chat.v1.MessageDeletedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 26: {
+                                    message.messageBatchCreatedEventData = $root.google.chat.v1.MessageBatchCreatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 27: {
+                                    message.messageBatchUpdatedEventData = $root.google.chat.v1.MessageBatchUpdatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 28: {
+                                    message.messageBatchDeletedEventData = $root.google.chat.v1.MessageBatchDeletedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 15: {
+                                    message.spaceUpdatedEventData = $root.google.chat.v1.SpaceUpdatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 29: {
+                                    message.spaceBatchUpdatedEventData = $root.google.chat.v1.SpaceBatchUpdatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 17: {
+                                    message.membershipCreatedEventData = $root.google.chat.v1.MembershipCreatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 18: {
+                                    message.membershipUpdatedEventData = $root.google.chat.v1.MembershipUpdatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 219: {
+                                    message.membershipDeletedEventData = $root.google.chat.v1.MembershipDeletedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 31: {
+                                    message.membershipBatchCreatedEventData = $root.google.chat.v1.MembershipBatchCreatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 32: {
+                                    message.membershipBatchUpdatedEventData = $root.google.chat.v1.MembershipBatchUpdatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 33: {
+                                    message.membershipBatchDeletedEventData = $root.google.chat.v1.MembershipBatchDeletedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 21: {
+                                    message.reactionCreatedEventData = $root.google.chat.v1.ReactionCreatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 22: {
+                                    message.reactionDeletedEventData = $root.google.chat.v1.ReactionDeletedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 34: {
+                                    message.reactionBatchCreatedEventData = $root.google.chat.v1.ReactionBatchCreatedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 35: {
+                                    message.reactionBatchDeletedEventData = $root.google.chat.v1.ReactionBatchDeletedEventData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SpaceEvent message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SpaceEvent} SpaceEvent
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceEvent.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SpaceEvent message.
+                     * @function verify
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SpaceEvent.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.eventTime != null && message.hasOwnProperty("eventTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.eventTime);
+                            if (error)
+                                return "eventTime." + error;
+                        }
+                        if (message.eventType != null && message.hasOwnProperty("eventType"))
+                            if (!$util.isString(message.eventType))
+                                return "eventType: string expected";
+                        if (message.messageCreatedEventData != null && message.hasOwnProperty("messageCreatedEventData")) {
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MessageCreatedEventData.verify(message.messageCreatedEventData);
+                                if (error)
+                                    return "messageCreatedEventData." + error;
+                            }
+                        }
+                        if (message.messageUpdatedEventData != null && message.hasOwnProperty("messageUpdatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MessageUpdatedEventData.verify(message.messageUpdatedEventData);
+                                if (error)
+                                    return "messageUpdatedEventData." + error;
+                            }
+                        }
+                        if (message.messageDeletedEventData != null && message.hasOwnProperty("messageDeletedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MessageDeletedEventData.verify(message.messageDeletedEventData);
+                                if (error)
+                                    return "messageDeletedEventData." + error;
+                            }
+                        }
+                        if (message.messageBatchCreatedEventData != null && message.hasOwnProperty("messageBatchCreatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MessageBatchCreatedEventData.verify(message.messageBatchCreatedEventData);
+                                if (error)
+                                    return "messageBatchCreatedEventData." + error;
+                            }
+                        }
+                        if (message.messageBatchUpdatedEventData != null && message.hasOwnProperty("messageBatchUpdatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MessageBatchUpdatedEventData.verify(message.messageBatchUpdatedEventData);
+                                if (error)
+                                    return "messageBatchUpdatedEventData." + error;
+                            }
+                        }
+                        if (message.messageBatchDeletedEventData != null && message.hasOwnProperty("messageBatchDeletedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MessageBatchDeletedEventData.verify(message.messageBatchDeletedEventData);
+                                if (error)
+                                    return "messageBatchDeletedEventData." + error;
+                            }
+                        }
+                        if (message.spaceUpdatedEventData != null && message.hasOwnProperty("spaceUpdatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.SpaceUpdatedEventData.verify(message.spaceUpdatedEventData);
+                                if (error)
+                                    return "spaceUpdatedEventData." + error;
+                            }
+                        }
+                        if (message.spaceBatchUpdatedEventData != null && message.hasOwnProperty("spaceBatchUpdatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.SpaceBatchUpdatedEventData.verify(message.spaceBatchUpdatedEventData);
+                                if (error)
+                                    return "spaceBatchUpdatedEventData." + error;
+                            }
+                        }
+                        if (message.membershipCreatedEventData != null && message.hasOwnProperty("membershipCreatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MembershipCreatedEventData.verify(message.membershipCreatedEventData);
+                                if (error)
+                                    return "membershipCreatedEventData." + error;
+                            }
+                        }
+                        if (message.membershipUpdatedEventData != null && message.hasOwnProperty("membershipUpdatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MembershipUpdatedEventData.verify(message.membershipUpdatedEventData);
+                                if (error)
+                                    return "membershipUpdatedEventData." + error;
+                            }
+                        }
+                        if (message.membershipDeletedEventData != null && message.hasOwnProperty("membershipDeletedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MembershipDeletedEventData.verify(message.membershipDeletedEventData);
+                                if (error)
+                                    return "membershipDeletedEventData." + error;
+                            }
+                        }
+                        if (message.membershipBatchCreatedEventData != null && message.hasOwnProperty("membershipBatchCreatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MembershipBatchCreatedEventData.verify(message.membershipBatchCreatedEventData);
+                                if (error)
+                                    return "membershipBatchCreatedEventData." + error;
+                            }
+                        }
+                        if (message.membershipBatchUpdatedEventData != null && message.hasOwnProperty("membershipBatchUpdatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MembershipBatchUpdatedEventData.verify(message.membershipBatchUpdatedEventData);
+                                if (error)
+                                    return "membershipBatchUpdatedEventData." + error;
+                            }
+                        }
+                        if (message.membershipBatchDeletedEventData != null && message.hasOwnProperty("membershipBatchDeletedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.MembershipBatchDeletedEventData.verify(message.membershipBatchDeletedEventData);
+                                if (error)
+                                    return "membershipBatchDeletedEventData." + error;
+                            }
+                        }
+                        if (message.reactionCreatedEventData != null && message.hasOwnProperty("reactionCreatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.ReactionCreatedEventData.verify(message.reactionCreatedEventData);
+                                if (error)
+                                    return "reactionCreatedEventData." + error;
+                            }
+                        }
+                        if (message.reactionDeletedEventData != null && message.hasOwnProperty("reactionDeletedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.ReactionDeletedEventData.verify(message.reactionDeletedEventData);
+                                if (error)
+                                    return "reactionDeletedEventData." + error;
+                            }
+                        }
+                        if (message.reactionBatchCreatedEventData != null && message.hasOwnProperty("reactionBatchCreatedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.ReactionBatchCreatedEventData.verify(message.reactionBatchCreatedEventData);
+                                if (error)
+                                    return "reactionBatchCreatedEventData." + error;
+                            }
+                        }
+                        if (message.reactionBatchDeletedEventData != null && message.hasOwnProperty("reactionBatchDeletedEventData")) {
+                            if (properties.payload === 1)
+                                return "payload: multiple values";
+                            properties.payload = 1;
+                            {
+                                var error = $root.google.chat.v1.ReactionBatchDeletedEventData.verify(message.reactionBatchDeletedEventData);
+                                if (error)
+                                    return "reactionBatchDeletedEventData." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SpaceEvent message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SpaceEvent} SpaceEvent
+                     */
+                    SpaceEvent.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SpaceEvent)
+                            return object;
+                        var message = new $root.google.chat.v1.SpaceEvent();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.eventTime != null) {
+                            if (typeof object.eventTime !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.eventTime: object expected");
+                            message.eventTime = $root.google.protobuf.Timestamp.fromObject(object.eventTime);
+                        }
+                        if (object.eventType != null)
+                            message.eventType = String(object.eventType);
+                        if (object.messageCreatedEventData != null) {
+                            if (typeof object.messageCreatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.messageCreatedEventData: object expected");
+                            message.messageCreatedEventData = $root.google.chat.v1.MessageCreatedEventData.fromObject(object.messageCreatedEventData);
+                        }
+                        if (object.messageUpdatedEventData != null) {
+                            if (typeof object.messageUpdatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.messageUpdatedEventData: object expected");
+                            message.messageUpdatedEventData = $root.google.chat.v1.MessageUpdatedEventData.fromObject(object.messageUpdatedEventData);
+                        }
+                        if (object.messageDeletedEventData != null) {
+                            if (typeof object.messageDeletedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.messageDeletedEventData: object expected");
+                            message.messageDeletedEventData = $root.google.chat.v1.MessageDeletedEventData.fromObject(object.messageDeletedEventData);
+                        }
+                        if (object.messageBatchCreatedEventData != null) {
+                            if (typeof object.messageBatchCreatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.messageBatchCreatedEventData: object expected");
+                            message.messageBatchCreatedEventData = $root.google.chat.v1.MessageBatchCreatedEventData.fromObject(object.messageBatchCreatedEventData);
+                        }
+                        if (object.messageBatchUpdatedEventData != null) {
+                            if (typeof object.messageBatchUpdatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.messageBatchUpdatedEventData: object expected");
+                            message.messageBatchUpdatedEventData = $root.google.chat.v1.MessageBatchUpdatedEventData.fromObject(object.messageBatchUpdatedEventData);
+                        }
+                        if (object.messageBatchDeletedEventData != null) {
+                            if (typeof object.messageBatchDeletedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.messageBatchDeletedEventData: object expected");
+                            message.messageBatchDeletedEventData = $root.google.chat.v1.MessageBatchDeletedEventData.fromObject(object.messageBatchDeletedEventData);
+                        }
+                        if (object.spaceUpdatedEventData != null) {
+                            if (typeof object.spaceUpdatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.spaceUpdatedEventData: object expected");
+                            message.spaceUpdatedEventData = $root.google.chat.v1.SpaceUpdatedEventData.fromObject(object.spaceUpdatedEventData);
+                        }
+                        if (object.spaceBatchUpdatedEventData != null) {
+                            if (typeof object.spaceBatchUpdatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.spaceBatchUpdatedEventData: object expected");
+                            message.spaceBatchUpdatedEventData = $root.google.chat.v1.SpaceBatchUpdatedEventData.fromObject(object.spaceBatchUpdatedEventData);
+                        }
+                        if (object.membershipCreatedEventData != null) {
+                            if (typeof object.membershipCreatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.membershipCreatedEventData: object expected");
+                            message.membershipCreatedEventData = $root.google.chat.v1.MembershipCreatedEventData.fromObject(object.membershipCreatedEventData);
+                        }
+                        if (object.membershipUpdatedEventData != null) {
+                            if (typeof object.membershipUpdatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.membershipUpdatedEventData: object expected");
+                            message.membershipUpdatedEventData = $root.google.chat.v1.MembershipUpdatedEventData.fromObject(object.membershipUpdatedEventData);
+                        }
+                        if (object.membershipDeletedEventData != null) {
+                            if (typeof object.membershipDeletedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.membershipDeletedEventData: object expected");
+                            message.membershipDeletedEventData = $root.google.chat.v1.MembershipDeletedEventData.fromObject(object.membershipDeletedEventData);
+                        }
+                        if (object.membershipBatchCreatedEventData != null) {
+                            if (typeof object.membershipBatchCreatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.membershipBatchCreatedEventData: object expected");
+                            message.membershipBatchCreatedEventData = $root.google.chat.v1.MembershipBatchCreatedEventData.fromObject(object.membershipBatchCreatedEventData);
+                        }
+                        if (object.membershipBatchUpdatedEventData != null) {
+                            if (typeof object.membershipBatchUpdatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.membershipBatchUpdatedEventData: object expected");
+                            message.membershipBatchUpdatedEventData = $root.google.chat.v1.MembershipBatchUpdatedEventData.fromObject(object.membershipBatchUpdatedEventData);
+                        }
+                        if (object.membershipBatchDeletedEventData != null) {
+                            if (typeof object.membershipBatchDeletedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.membershipBatchDeletedEventData: object expected");
+                            message.membershipBatchDeletedEventData = $root.google.chat.v1.MembershipBatchDeletedEventData.fromObject(object.membershipBatchDeletedEventData);
+                        }
+                        if (object.reactionCreatedEventData != null) {
+                            if (typeof object.reactionCreatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.reactionCreatedEventData: object expected");
+                            message.reactionCreatedEventData = $root.google.chat.v1.ReactionCreatedEventData.fromObject(object.reactionCreatedEventData);
+                        }
+                        if (object.reactionDeletedEventData != null) {
+                            if (typeof object.reactionDeletedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.reactionDeletedEventData: object expected");
+                            message.reactionDeletedEventData = $root.google.chat.v1.ReactionDeletedEventData.fromObject(object.reactionDeletedEventData);
+                        }
+                        if (object.reactionBatchCreatedEventData != null) {
+                            if (typeof object.reactionBatchCreatedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.reactionBatchCreatedEventData: object expected");
+                            message.reactionBatchCreatedEventData = $root.google.chat.v1.ReactionBatchCreatedEventData.fromObject(object.reactionBatchCreatedEventData);
+                        }
+                        if (object.reactionBatchDeletedEventData != null) {
+                            if (typeof object.reactionBatchDeletedEventData !== "object")
+                                throw TypeError(".google.chat.v1.SpaceEvent.reactionBatchDeletedEventData: object expected");
+                            message.reactionBatchDeletedEventData = $root.google.chat.v1.ReactionBatchDeletedEventData.fromObject(object.reactionBatchDeletedEventData);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SpaceEvent message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {google.chat.v1.SpaceEvent} message SpaceEvent
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SpaceEvent.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.name = "";
+                            object.eventTime = null;
+                            object.eventType = "";
+                        }
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.eventTime != null && message.hasOwnProperty("eventTime"))
+                            object.eventTime = $root.google.protobuf.Timestamp.toObject(message.eventTime, options);
+                        if (message.eventType != null && message.hasOwnProperty("eventType"))
+                            object.eventType = message.eventType;
+                        if (message.messageCreatedEventData != null && message.hasOwnProperty("messageCreatedEventData")) {
+                            object.messageCreatedEventData = $root.google.chat.v1.MessageCreatedEventData.toObject(message.messageCreatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "messageCreatedEventData";
+                        }
+                        if (message.messageUpdatedEventData != null && message.hasOwnProperty("messageUpdatedEventData")) {
+                            object.messageUpdatedEventData = $root.google.chat.v1.MessageUpdatedEventData.toObject(message.messageUpdatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "messageUpdatedEventData";
+                        }
+                        if (message.messageDeletedEventData != null && message.hasOwnProperty("messageDeletedEventData")) {
+                            object.messageDeletedEventData = $root.google.chat.v1.MessageDeletedEventData.toObject(message.messageDeletedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "messageDeletedEventData";
+                        }
+                        if (message.spaceUpdatedEventData != null && message.hasOwnProperty("spaceUpdatedEventData")) {
+                            object.spaceUpdatedEventData = $root.google.chat.v1.SpaceUpdatedEventData.toObject(message.spaceUpdatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "spaceUpdatedEventData";
+                        }
+                        if (message.membershipCreatedEventData != null && message.hasOwnProperty("membershipCreatedEventData")) {
+                            object.membershipCreatedEventData = $root.google.chat.v1.MembershipCreatedEventData.toObject(message.membershipCreatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "membershipCreatedEventData";
+                        }
+                        if (message.membershipUpdatedEventData != null && message.hasOwnProperty("membershipUpdatedEventData")) {
+                            object.membershipUpdatedEventData = $root.google.chat.v1.MembershipUpdatedEventData.toObject(message.membershipUpdatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "membershipUpdatedEventData";
+                        }
+                        if (message.reactionCreatedEventData != null && message.hasOwnProperty("reactionCreatedEventData")) {
+                            object.reactionCreatedEventData = $root.google.chat.v1.ReactionCreatedEventData.toObject(message.reactionCreatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "reactionCreatedEventData";
+                        }
+                        if (message.reactionDeletedEventData != null && message.hasOwnProperty("reactionDeletedEventData")) {
+                            object.reactionDeletedEventData = $root.google.chat.v1.ReactionDeletedEventData.toObject(message.reactionDeletedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "reactionDeletedEventData";
+                        }
+                        if (message.messageBatchCreatedEventData != null && message.hasOwnProperty("messageBatchCreatedEventData")) {
+                            object.messageBatchCreatedEventData = $root.google.chat.v1.MessageBatchCreatedEventData.toObject(message.messageBatchCreatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "messageBatchCreatedEventData";
+                        }
+                        if (message.messageBatchUpdatedEventData != null && message.hasOwnProperty("messageBatchUpdatedEventData")) {
+                            object.messageBatchUpdatedEventData = $root.google.chat.v1.MessageBatchUpdatedEventData.toObject(message.messageBatchUpdatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "messageBatchUpdatedEventData";
+                        }
+                        if (message.messageBatchDeletedEventData != null && message.hasOwnProperty("messageBatchDeletedEventData")) {
+                            object.messageBatchDeletedEventData = $root.google.chat.v1.MessageBatchDeletedEventData.toObject(message.messageBatchDeletedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "messageBatchDeletedEventData";
+                        }
+                        if (message.spaceBatchUpdatedEventData != null && message.hasOwnProperty("spaceBatchUpdatedEventData")) {
+                            object.spaceBatchUpdatedEventData = $root.google.chat.v1.SpaceBatchUpdatedEventData.toObject(message.spaceBatchUpdatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "spaceBatchUpdatedEventData";
+                        }
+                        if (message.membershipBatchCreatedEventData != null && message.hasOwnProperty("membershipBatchCreatedEventData")) {
+                            object.membershipBatchCreatedEventData = $root.google.chat.v1.MembershipBatchCreatedEventData.toObject(message.membershipBatchCreatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "membershipBatchCreatedEventData";
+                        }
+                        if (message.membershipBatchUpdatedEventData != null && message.hasOwnProperty("membershipBatchUpdatedEventData")) {
+                            object.membershipBatchUpdatedEventData = $root.google.chat.v1.MembershipBatchUpdatedEventData.toObject(message.membershipBatchUpdatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "membershipBatchUpdatedEventData";
+                        }
+                        if (message.membershipBatchDeletedEventData != null && message.hasOwnProperty("membershipBatchDeletedEventData")) {
+                            object.membershipBatchDeletedEventData = $root.google.chat.v1.MembershipBatchDeletedEventData.toObject(message.membershipBatchDeletedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "membershipBatchDeletedEventData";
+                        }
+                        if (message.reactionBatchCreatedEventData != null && message.hasOwnProperty("reactionBatchCreatedEventData")) {
+                            object.reactionBatchCreatedEventData = $root.google.chat.v1.ReactionBatchCreatedEventData.toObject(message.reactionBatchCreatedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "reactionBatchCreatedEventData";
+                        }
+                        if (message.reactionBatchDeletedEventData != null && message.hasOwnProperty("reactionBatchDeletedEventData")) {
+                            object.reactionBatchDeletedEventData = $root.google.chat.v1.ReactionBatchDeletedEventData.toObject(message.reactionBatchDeletedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "reactionBatchDeletedEventData";
+                        }
+                        if (message.membershipDeletedEventData != null && message.hasOwnProperty("membershipDeletedEventData")) {
+                            object.membershipDeletedEventData = $root.google.chat.v1.MembershipDeletedEventData.toObject(message.membershipDeletedEventData, options);
+                            if (options.oneofs)
+                                object.payload = "membershipDeletedEventData";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SpaceEvent to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SpaceEvent.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SpaceEvent
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SpaceEvent
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SpaceEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SpaceEvent";
+                    };
+    
+                    return SpaceEvent;
+                })();
+    
+                v1.GetSpaceEventRequest = (function() {
+    
+                    /**
+                     * Properties of a GetSpaceEventRequest.
+                     * @memberof google.chat.v1
+                     * @interface IGetSpaceEventRequest
+                     * @property {string|null} [name] GetSpaceEventRequest name
+                     */
+    
+                    /**
+                     * Constructs a new GetSpaceEventRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a GetSpaceEventRequest.
+                     * @implements IGetSpaceEventRequest
+                     * @constructor
+                     * @param {google.chat.v1.IGetSpaceEventRequest=} [properties] Properties to set
+                     */
+                    function GetSpaceEventRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetSpaceEventRequest name.
+                     * @member {string} name
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @instance
+                     */
+                    GetSpaceEventRequest.prototype.name = "";
+    
+                    /**
+                     * Creates a new GetSpaceEventRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceEventRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.GetSpaceEventRequest} GetSpaceEventRequest instance
+                     */
+                    GetSpaceEventRequest.create = function create(properties) {
+                        return new GetSpaceEventRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetSpaceEventRequest message. Does not implicitly {@link google.chat.v1.GetSpaceEventRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceEventRequest} message GetSpaceEventRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSpaceEventRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetSpaceEventRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceEventRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {google.chat.v1.IGetSpaceEventRequest} message GetSpaceEventRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetSpaceEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetSpaceEventRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.GetSpaceEventRequest} GetSpaceEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSpaceEventRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.GetSpaceEventRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.name = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetSpaceEventRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.GetSpaceEventRequest} GetSpaceEventRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetSpaceEventRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetSpaceEventRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetSpaceEventRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetSpaceEventRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.GetSpaceEventRequest} GetSpaceEventRequest
+                     */
+                    GetSpaceEventRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.GetSpaceEventRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.GetSpaceEventRequest();
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetSpaceEventRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {google.chat.v1.GetSpaceEventRequest} message GetSpaceEventRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetSpaceEventRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.name = "";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetSpaceEventRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetSpaceEventRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetSpaceEventRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.GetSpaceEventRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetSpaceEventRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.GetSpaceEventRequest";
+                    };
+    
+                    return GetSpaceEventRequest;
+                })();
+    
+                v1.ListSpaceEventsRequest = (function() {
+    
+                    /**
+                     * Properties of a ListSpaceEventsRequest.
+                     * @memberof google.chat.v1
+                     * @interface IListSpaceEventsRequest
+                     * @property {string|null} [parent] ListSpaceEventsRequest parent
+                     * @property {number|null} [pageSize] ListSpaceEventsRequest pageSize
+                     * @property {string|null} [pageToken] ListSpaceEventsRequest pageToken
+                     * @property {string|null} [filter] ListSpaceEventsRequest filter
+                     */
+    
+                    /**
+                     * Constructs a new ListSpaceEventsRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListSpaceEventsRequest.
+                     * @implements IListSpaceEventsRequest
+                     * @constructor
+                     * @param {google.chat.v1.IListSpaceEventsRequest=} [properties] Properties to set
+                     */
+                    function ListSpaceEventsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSpaceEventsRequest parent.
+                     * @member {string} parent
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @instance
+                     */
+                    ListSpaceEventsRequest.prototype.parent = "";
+    
+                    /**
+                     * ListSpaceEventsRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @instance
+                     */
+                    ListSpaceEventsRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * ListSpaceEventsRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @instance
+                     */
+                    ListSpaceEventsRequest.prototype.pageToken = "";
+    
+                    /**
+                     * ListSpaceEventsRequest filter.
+                     * @member {string} filter
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @instance
+                     */
+                    ListSpaceEventsRequest.prototype.filter = "";
+    
+                    /**
+                     * Creates a new ListSpaceEventsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSpaceEventsRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListSpaceEventsRequest} ListSpaceEventsRequest instance
+                     */
+                    ListSpaceEventsRequest.create = function create(properties) {
+                        return new ListSpaceEventsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSpaceEventsRequest message. Does not implicitly {@link google.chat.v1.ListSpaceEventsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSpaceEventsRequest} message ListSpaceEventsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSpaceEventsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
+                        if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                            writer.uint32(/* id 8, wireType 2 =*/66).string(message.filter);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSpaceEventsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListSpaceEventsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {google.chat.v1.IListSpaceEventsRequest} message ListSpaceEventsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSpaceEventsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSpaceEventsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListSpaceEventsRequest} ListSpaceEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSpaceEventsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSpaceEventsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.parent = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 6: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.filter = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSpaceEventsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListSpaceEventsRequest} ListSpaceEventsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSpaceEventsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSpaceEventsRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSpaceEventsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            if (!$util.isString(message.parent))
+                                return "parent: string expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            if (!$util.isString(message.filter))
+                                return "filter: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSpaceEventsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListSpaceEventsRequest} ListSpaceEventsRequest
+                     */
+                    ListSpaceEventsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListSpaceEventsRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.ListSpaceEventsRequest();
+                        if (object.parent != null)
+                            message.parent = String(object.parent);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.filter != null)
+                            message.filter = String(object.filter);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSpaceEventsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {google.chat.v1.ListSpaceEventsRequest} message ListSpaceEventsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSpaceEventsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.parent = "";
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.filter = "";
+                        }
+                        if (message.parent != null && message.hasOwnProperty("parent"))
+                            object.parent = message.parent;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.filter != null && message.hasOwnProperty("filter"))
+                            object.filter = message.filter;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSpaceEventsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSpaceEventsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSpaceEventsRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListSpaceEventsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSpaceEventsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListSpaceEventsRequest";
+                    };
+    
+                    return ListSpaceEventsRequest;
+                })();
+    
+                v1.ListSpaceEventsResponse = (function() {
+    
+                    /**
+                     * Properties of a ListSpaceEventsResponse.
+                     * @memberof google.chat.v1
+                     * @interface IListSpaceEventsResponse
+                     * @property {Array.<google.chat.v1.ISpaceEvent>|null} [spaceEvents] ListSpaceEventsResponse spaceEvents
+                     * @property {string|null} [nextPageToken] ListSpaceEventsResponse nextPageToken
+                     */
+    
+                    /**
+                     * Constructs a new ListSpaceEventsResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ListSpaceEventsResponse.
+                     * @implements IListSpaceEventsResponse
+                     * @constructor
+                     * @param {google.chat.v1.IListSpaceEventsResponse=} [properties] Properties to set
+                     */
+                    function ListSpaceEventsResponse(properties) {
+                        this.spaceEvents = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ListSpaceEventsResponse spaceEvents.
+                     * @member {Array.<google.chat.v1.ISpaceEvent>} spaceEvents
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @instance
+                     */
+                    ListSpaceEventsResponse.prototype.spaceEvents = $util.emptyArray;
+    
+                    /**
+                     * ListSpaceEventsResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @instance
+                     */
+                    ListSpaceEventsResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * Creates a new ListSpaceEventsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSpaceEventsResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.ListSpaceEventsResponse} ListSpaceEventsResponse instance
+                     */
+                    ListSpaceEventsResponse.create = function create(properties) {
+                        return new ListSpaceEventsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ListSpaceEventsResponse message. Does not implicitly {@link google.chat.v1.ListSpaceEventsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSpaceEventsResponse} message ListSpaceEventsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSpaceEventsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spaceEvents != null && message.spaceEvents.length)
+                            for (var i = 0; i < message.spaceEvents.length; ++i)
+                                $root.google.chat.v1.SpaceEvent.encode(message.spaceEvents[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ListSpaceEventsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListSpaceEventsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {google.chat.v1.IListSpaceEventsResponse} message ListSpaceEventsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ListSpaceEventsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ListSpaceEventsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ListSpaceEventsResponse} ListSpaceEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSpaceEventsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ListSpaceEventsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.spaceEvents && message.spaceEvents.length))
+                                        message.spaceEvents = [];
+                                    message.spaceEvents.push($root.google.chat.v1.SpaceEvent.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ListSpaceEventsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ListSpaceEventsResponse} ListSpaceEventsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ListSpaceEventsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ListSpaceEventsResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ListSpaceEventsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spaceEvents != null && message.hasOwnProperty("spaceEvents")) {
+                            if (!Array.isArray(message.spaceEvents))
+                                return "spaceEvents: array expected";
+                            for (var i = 0; i < message.spaceEvents.length; ++i) {
+                                var error = $root.google.chat.v1.SpaceEvent.verify(message.spaceEvents[i]);
+                                if (error)
+                                    return "spaceEvents." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ListSpaceEventsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ListSpaceEventsResponse} ListSpaceEventsResponse
+                     */
+                    ListSpaceEventsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ListSpaceEventsResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.ListSpaceEventsResponse();
+                        if (object.spaceEvents) {
+                            if (!Array.isArray(object.spaceEvents))
+                                throw TypeError(".google.chat.v1.ListSpaceEventsResponse.spaceEvents: array expected");
+                            message.spaceEvents = [];
+                            for (var i = 0; i < object.spaceEvents.length; ++i) {
+                                if (typeof object.spaceEvents[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ListSpaceEventsResponse.spaceEvents: object expected");
+                                message.spaceEvents[i] = $root.google.chat.v1.SpaceEvent.fromObject(object.spaceEvents[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ListSpaceEventsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {google.chat.v1.ListSpaceEventsResponse} message ListSpaceEventsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ListSpaceEventsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.spaceEvents = [];
+                        if (options.defaults)
+                            object.nextPageToken = "";
+                        if (message.spaceEvents && message.spaceEvents.length) {
+                            object.spaceEvents = [];
+                            for (var j = 0; j < message.spaceEvents.length; ++j)
+                                object.spaceEvents[j] = $root.google.chat.v1.SpaceEvent.toObject(message.spaceEvents[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ListSpaceEventsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ListSpaceEventsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ListSpaceEventsResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ListSpaceEventsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ListSpaceEventsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ListSpaceEventsResponse";
+                    };
+    
+                    return ListSpaceEventsResponse;
+                })();
+    
+                v1.MembershipCreatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MembershipCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMembershipCreatedEventData
+                     * @property {google.chat.v1.IMembership|null} [membership] MembershipCreatedEventData membership
+                     */
+    
+                    /**
+                     * Constructs a new MembershipCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MembershipCreatedEventData.
+                     * @implements IMembershipCreatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMembershipCreatedEventData=} [properties] Properties to set
+                     */
+                    function MembershipCreatedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MembershipCreatedEventData membership.
+                     * @member {google.chat.v1.IMembership|null|undefined} membership
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @instance
+                     */
+                    MembershipCreatedEventData.prototype.membership = null;
+    
+                    /**
+                     * Creates a new MembershipCreatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipCreatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MembershipCreatedEventData} MembershipCreatedEventData instance
+                     */
+                    MembershipCreatedEventData.create = function create(properties) {
+                        return new MembershipCreatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipCreatedEventData message. Does not implicitly {@link google.chat.v1.MembershipCreatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipCreatedEventData} message MembershipCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipCreatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                            $root.google.chat.v1.Membership.encode(message.membership, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipCreatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipCreatedEventData} message MembershipCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipCreatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MembershipCreatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MembershipCreatedEventData} MembershipCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipCreatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipCreatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MembershipCreatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MembershipCreatedEventData} MembershipCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipCreatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MembershipCreatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MembershipCreatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.membership != null && message.hasOwnProperty("membership")) {
+                            var error = $root.google.chat.v1.Membership.verify(message.membership);
+                            if (error)
+                                return "membership." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MembershipCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MembershipCreatedEventData} MembershipCreatedEventData
+                     */
+                    MembershipCreatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MembershipCreatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MembershipCreatedEventData();
+                        if (object.membership != null) {
+                            if (typeof object.membership !== "object")
+                                throw TypeError(".google.chat.v1.MembershipCreatedEventData.membership: object expected");
+                            message.membership = $root.google.chat.v1.Membership.fromObject(object.membership);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MembershipCreatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.MembershipCreatedEventData} message MembershipCreatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MembershipCreatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.membership = null;
+                        if (message.membership != null && message.hasOwnProperty("membership"))
+                            object.membership = $root.google.chat.v1.Membership.toObject(message.membership, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MembershipCreatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MembershipCreatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MembershipCreatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MembershipCreatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MembershipCreatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MembershipCreatedEventData";
+                    };
+    
+                    return MembershipCreatedEventData;
+                })();
+    
+                v1.MembershipDeletedEventData = (function() {
+    
+                    /**
+                     * Properties of a MembershipDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMembershipDeletedEventData
+                     * @property {google.chat.v1.IMembership|null} [membership] MembershipDeletedEventData membership
+                     */
+    
+                    /**
+                     * Constructs a new MembershipDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MembershipDeletedEventData.
+                     * @implements IMembershipDeletedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMembershipDeletedEventData=} [properties] Properties to set
+                     */
+                    function MembershipDeletedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MembershipDeletedEventData membership.
+                     * @member {google.chat.v1.IMembership|null|undefined} membership
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @instance
+                     */
+                    MembershipDeletedEventData.prototype.membership = null;
+    
+                    /**
+                     * Creates a new MembershipDeletedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipDeletedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MembershipDeletedEventData} MembershipDeletedEventData instance
+                     */
+                    MembershipDeletedEventData.create = function create(properties) {
+                        return new MembershipDeletedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipDeletedEventData message. Does not implicitly {@link google.chat.v1.MembershipDeletedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipDeletedEventData} message MembershipDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipDeletedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                            $root.google.chat.v1.Membership.encode(message.membership, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipDeletedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipDeletedEventData} message MembershipDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipDeletedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MembershipDeletedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MembershipDeletedEventData} MembershipDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipDeletedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipDeletedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MembershipDeletedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MembershipDeletedEventData} MembershipDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipDeletedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MembershipDeletedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MembershipDeletedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.membership != null && message.hasOwnProperty("membership")) {
+                            var error = $root.google.chat.v1.Membership.verify(message.membership);
+                            if (error)
+                                return "membership." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MembershipDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MembershipDeletedEventData} MembershipDeletedEventData
+                     */
+                    MembershipDeletedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MembershipDeletedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MembershipDeletedEventData();
+                        if (object.membership != null) {
+                            if (typeof object.membership !== "object")
+                                throw TypeError(".google.chat.v1.MembershipDeletedEventData.membership: object expected");
+                            message.membership = $root.google.chat.v1.Membership.fromObject(object.membership);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MembershipDeletedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.MembershipDeletedEventData} message MembershipDeletedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MembershipDeletedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.membership = null;
+                        if (message.membership != null && message.hasOwnProperty("membership"))
+                            object.membership = $root.google.chat.v1.Membership.toObject(message.membership, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MembershipDeletedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MembershipDeletedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MembershipDeletedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MembershipDeletedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MembershipDeletedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MembershipDeletedEventData";
+                    };
+    
+                    return MembershipDeletedEventData;
+                })();
+    
+                v1.MembershipUpdatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MembershipUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMembershipUpdatedEventData
+                     * @property {google.chat.v1.IMembership|null} [membership] MembershipUpdatedEventData membership
+                     */
+    
+                    /**
+                     * Constructs a new MembershipUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MembershipUpdatedEventData.
+                     * @implements IMembershipUpdatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMembershipUpdatedEventData=} [properties] Properties to set
+                     */
+                    function MembershipUpdatedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MembershipUpdatedEventData membership.
+                     * @member {google.chat.v1.IMembership|null|undefined} membership
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @instance
+                     */
+                    MembershipUpdatedEventData.prototype.membership = null;
+    
+                    /**
+                     * Creates a new MembershipUpdatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipUpdatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MembershipUpdatedEventData} MembershipUpdatedEventData instance
+                     */
+                    MembershipUpdatedEventData.create = function create(properties) {
+                        return new MembershipUpdatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipUpdatedEventData message. Does not implicitly {@link google.chat.v1.MembershipUpdatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipUpdatedEventData} message MembershipUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipUpdatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
+                            $root.google.chat.v1.Membership.encode(message.membership, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipUpdatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipUpdatedEventData} message MembershipUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipUpdatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MembershipUpdatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MembershipUpdatedEventData} MembershipUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipUpdatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipUpdatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MembershipUpdatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MembershipUpdatedEventData} MembershipUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipUpdatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MembershipUpdatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MembershipUpdatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.membership != null && message.hasOwnProperty("membership")) {
+                            var error = $root.google.chat.v1.Membership.verify(message.membership);
+                            if (error)
+                                return "membership." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MembershipUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MembershipUpdatedEventData} MembershipUpdatedEventData
+                     */
+                    MembershipUpdatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MembershipUpdatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MembershipUpdatedEventData();
+                        if (object.membership != null) {
+                            if (typeof object.membership !== "object")
+                                throw TypeError(".google.chat.v1.MembershipUpdatedEventData.membership: object expected");
+                            message.membership = $root.google.chat.v1.Membership.fromObject(object.membership);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MembershipUpdatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.MembershipUpdatedEventData} message MembershipUpdatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MembershipUpdatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.membership = null;
+                        if (message.membership != null && message.hasOwnProperty("membership"))
+                            object.membership = $root.google.chat.v1.Membership.toObject(message.membership, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MembershipUpdatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MembershipUpdatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MembershipUpdatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MembershipUpdatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MembershipUpdatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MembershipUpdatedEventData";
+                    };
+    
+                    return MembershipUpdatedEventData;
+                })();
+    
+                v1.MembershipBatchCreatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MembershipBatchCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMembershipBatchCreatedEventData
+                     * @property {Array.<google.chat.v1.IMembershipCreatedEventData>|null} [memberships] MembershipBatchCreatedEventData memberships
+                     */
+    
+                    /**
+                     * Constructs a new MembershipBatchCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MembershipBatchCreatedEventData.
+                     * @implements IMembershipBatchCreatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMembershipBatchCreatedEventData=} [properties] Properties to set
+                     */
+                    function MembershipBatchCreatedEventData(properties) {
+                        this.memberships = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MembershipBatchCreatedEventData memberships.
+                     * @member {Array.<google.chat.v1.IMembershipCreatedEventData>} memberships
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @instance
+                     */
+                    MembershipBatchCreatedEventData.prototype.memberships = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MembershipBatchCreatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchCreatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MembershipBatchCreatedEventData} MembershipBatchCreatedEventData instance
+                     */
+                    MembershipBatchCreatedEventData.create = function create(properties) {
+                        return new MembershipBatchCreatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipBatchCreatedEventData message. Does not implicitly {@link google.chat.v1.MembershipBatchCreatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchCreatedEventData} message MembershipBatchCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipBatchCreatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.memberships != null && message.memberships.length)
+                            for (var i = 0; i < message.memberships.length; ++i)
+                                $root.google.chat.v1.MembershipCreatedEventData.encode(message.memberships[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipBatchCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipBatchCreatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchCreatedEventData} message MembershipBatchCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipBatchCreatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MembershipBatchCreatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MembershipBatchCreatedEventData} MembershipBatchCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipBatchCreatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipBatchCreatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.memberships && message.memberships.length))
+                                        message.memberships = [];
+                                    message.memberships.push($root.google.chat.v1.MembershipCreatedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MembershipBatchCreatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MembershipBatchCreatedEventData} MembershipBatchCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipBatchCreatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MembershipBatchCreatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MembershipBatchCreatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.memberships != null && message.hasOwnProperty("memberships")) {
+                            if (!Array.isArray(message.memberships))
+                                return "memberships: array expected";
+                            for (var i = 0; i < message.memberships.length; ++i) {
+                                var error = $root.google.chat.v1.MembershipCreatedEventData.verify(message.memberships[i]);
+                                if (error)
+                                    return "memberships." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MembershipBatchCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MembershipBatchCreatedEventData} MembershipBatchCreatedEventData
+                     */
+                    MembershipBatchCreatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MembershipBatchCreatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MembershipBatchCreatedEventData();
+                        if (object.memberships) {
+                            if (!Array.isArray(object.memberships))
+                                throw TypeError(".google.chat.v1.MembershipBatchCreatedEventData.memberships: array expected");
+                            message.memberships = [];
+                            for (var i = 0; i < object.memberships.length; ++i) {
+                                if (typeof object.memberships[i] !== "object")
+                                    throw TypeError(".google.chat.v1.MembershipBatchCreatedEventData.memberships: object expected");
+                                message.memberships[i] = $root.google.chat.v1.MembershipCreatedEventData.fromObject(object.memberships[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MembershipBatchCreatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.MembershipBatchCreatedEventData} message MembershipBatchCreatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MembershipBatchCreatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.memberships = [];
+                        if (message.memberships && message.memberships.length) {
+                            object.memberships = [];
+                            for (var j = 0; j < message.memberships.length; ++j)
+                                object.memberships[j] = $root.google.chat.v1.MembershipCreatedEventData.toObject(message.memberships[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MembershipBatchCreatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MembershipBatchCreatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MembershipBatchCreatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MembershipBatchCreatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MembershipBatchCreatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MembershipBatchCreatedEventData";
+                    };
+    
+                    return MembershipBatchCreatedEventData;
+                })();
+    
+                v1.MembershipBatchUpdatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MembershipBatchUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMembershipBatchUpdatedEventData
+                     * @property {Array.<google.chat.v1.IMembershipUpdatedEventData>|null} [memberships] MembershipBatchUpdatedEventData memberships
+                     */
+    
+                    /**
+                     * Constructs a new MembershipBatchUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MembershipBatchUpdatedEventData.
+                     * @implements IMembershipBatchUpdatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMembershipBatchUpdatedEventData=} [properties] Properties to set
+                     */
+                    function MembershipBatchUpdatedEventData(properties) {
+                        this.memberships = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MembershipBatchUpdatedEventData memberships.
+                     * @member {Array.<google.chat.v1.IMembershipUpdatedEventData>} memberships
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @instance
+                     */
+                    MembershipBatchUpdatedEventData.prototype.memberships = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MembershipBatchUpdatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchUpdatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MembershipBatchUpdatedEventData} MembershipBatchUpdatedEventData instance
+                     */
+                    MembershipBatchUpdatedEventData.create = function create(properties) {
+                        return new MembershipBatchUpdatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipBatchUpdatedEventData message. Does not implicitly {@link google.chat.v1.MembershipBatchUpdatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchUpdatedEventData} message MembershipBatchUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipBatchUpdatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.memberships != null && message.memberships.length)
+                            for (var i = 0; i < message.memberships.length; ++i)
+                                $root.google.chat.v1.MembershipUpdatedEventData.encode(message.memberships[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipBatchUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipBatchUpdatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchUpdatedEventData} message MembershipBatchUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipBatchUpdatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MembershipBatchUpdatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MembershipBatchUpdatedEventData} MembershipBatchUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipBatchUpdatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipBatchUpdatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.memberships && message.memberships.length))
+                                        message.memberships = [];
+                                    message.memberships.push($root.google.chat.v1.MembershipUpdatedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MembershipBatchUpdatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MembershipBatchUpdatedEventData} MembershipBatchUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipBatchUpdatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MembershipBatchUpdatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MembershipBatchUpdatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.memberships != null && message.hasOwnProperty("memberships")) {
+                            if (!Array.isArray(message.memberships))
+                                return "memberships: array expected";
+                            for (var i = 0; i < message.memberships.length; ++i) {
+                                var error = $root.google.chat.v1.MembershipUpdatedEventData.verify(message.memberships[i]);
+                                if (error)
+                                    return "memberships." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MembershipBatchUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MembershipBatchUpdatedEventData} MembershipBatchUpdatedEventData
+                     */
+                    MembershipBatchUpdatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MembershipBatchUpdatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MembershipBatchUpdatedEventData();
+                        if (object.memberships) {
+                            if (!Array.isArray(object.memberships))
+                                throw TypeError(".google.chat.v1.MembershipBatchUpdatedEventData.memberships: array expected");
+                            message.memberships = [];
+                            for (var i = 0; i < object.memberships.length; ++i) {
+                                if (typeof object.memberships[i] !== "object")
+                                    throw TypeError(".google.chat.v1.MembershipBatchUpdatedEventData.memberships: object expected");
+                                message.memberships[i] = $root.google.chat.v1.MembershipUpdatedEventData.fromObject(object.memberships[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MembershipBatchUpdatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.MembershipBatchUpdatedEventData} message MembershipBatchUpdatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MembershipBatchUpdatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.memberships = [];
+                        if (message.memberships && message.memberships.length) {
+                            object.memberships = [];
+                            for (var j = 0; j < message.memberships.length; ++j)
+                                object.memberships[j] = $root.google.chat.v1.MembershipUpdatedEventData.toObject(message.memberships[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MembershipBatchUpdatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MembershipBatchUpdatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MembershipBatchUpdatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MembershipBatchUpdatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MembershipBatchUpdatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MembershipBatchUpdatedEventData";
+                    };
+    
+                    return MembershipBatchUpdatedEventData;
+                })();
+    
+                v1.MembershipBatchDeletedEventData = (function() {
+    
+                    /**
+                     * Properties of a MembershipBatchDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMembershipBatchDeletedEventData
+                     * @property {Array.<google.chat.v1.IMembershipDeletedEventData>|null} [memberships] MembershipBatchDeletedEventData memberships
+                     */
+    
+                    /**
+                     * Constructs a new MembershipBatchDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MembershipBatchDeletedEventData.
+                     * @implements IMembershipBatchDeletedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMembershipBatchDeletedEventData=} [properties] Properties to set
+                     */
+                    function MembershipBatchDeletedEventData(properties) {
+                        this.memberships = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MembershipBatchDeletedEventData memberships.
+                     * @member {Array.<google.chat.v1.IMembershipDeletedEventData>} memberships
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @instance
+                     */
+                    MembershipBatchDeletedEventData.prototype.memberships = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MembershipBatchDeletedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchDeletedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MembershipBatchDeletedEventData} MembershipBatchDeletedEventData instance
+                     */
+                    MembershipBatchDeletedEventData.create = function create(properties) {
+                        return new MembershipBatchDeletedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipBatchDeletedEventData message. Does not implicitly {@link google.chat.v1.MembershipBatchDeletedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchDeletedEventData} message MembershipBatchDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipBatchDeletedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.memberships != null && message.memberships.length)
+                            for (var i = 0; i < message.memberships.length; ++i)
+                                $root.google.chat.v1.MembershipDeletedEventData.encode(message.memberships[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MembershipBatchDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipBatchDeletedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMembershipBatchDeletedEventData} message MembershipBatchDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MembershipBatchDeletedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MembershipBatchDeletedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MembershipBatchDeletedEventData} MembershipBatchDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipBatchDeletedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MembershipBatchDeletedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.memberships && message.memberships.length))
+                                        message.memberships = [];
+                                    message.memberships.push($root.google.chat.v1.MembershipDeletedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MembershipBatchDeletedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MembershipBatchDeletedEventData} MembershipBatchDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MembershipBatchDeletedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MembershipBatchDeletedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MembershipBatchDeletedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.memberships != null && message.hasOwnProperty("memberships")) {
+                            if (!Array.isArray(message.memberships))
+                                return "memberships: array expected";
+                            for (var i = 0; i < message.memberships.length; ++i) {
+                                var error = $root.google.chat.v1.MembershipDeletedEventData.verify(message.memberships[i]);
+                                if (error)
+                                    return "memberships." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MembershipBatchDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MembershipBatchDeletedEventData} MembershipBatchDeletedEventData
+                     */
+                    MembershipBatchDeletedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MembershipBatchDeletedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MembershipBatchDeletedEventData();
+                        if (object.memberships) {
+                            if (!Array.isArray(object.memberships))
+                                throw TypeError(".google.chat.v1.MembershipBatchDeletedEventData.memberships: array expected");
+                            message.memberships = [];
+                            for (var i = 0; i < object.memberships.length; ++i) {
+                                if (typeof object.memberships[i] !== "object")
+                                    throw TypeError(".google.chat.v1.MembershipBatchDeletedEventData.memberships: object expected");
+                                message.memberships[i] = $root.google.chat.v1.MembershipDeletedEventData.fromObject(object.memberships[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MembershipBatchDeletedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.MembershipBatchDeletedEventData} message MembershipBatchDeletedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MembershipBatchDeletedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.memberships = [];
+                        if (message.memberships && message.memberships.length) {
+                            object.memberships = [];
+                            for (var j = 0; j < message.memberships.length; ++j)
+                                object.memberships[j] = $root.google.chat.v1.MembershipDeletedEventData.toObject(message.memberships[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MembershipBatchDeletedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MembershipBatchDeletedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MembershipBatchDeletedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MembershipBatchDeletedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MembershipBatchDeletedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MembershipBatchDeletedEventData";
+                    };
+    
+                    return MembershipBatchDeletedEventData;
+                })();
+    
+                v1.MessageCreatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MessageCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMessageCreatedEventData
+                     * @property {google.chat.v1.IMessage|null} [message] MessageCreatedEventData message
+                     */
+    
+                    /**
+                     * Constructs a new MessageCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MessageCreatedEventData.
+                     * @implements IMessageCreatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMessageCreatedEventData=} [properties] Properties to set
+                     */
+                    function MessageCreatedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MessageCreatedEventData message.
+                     * @member {google.chat.v1.IMessage|null|undefined} message
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @instance
+                     */
+                    MessageCreatedEventData.prototype.message = null;
+    
+                    /**
+                     * Creates a new MessageCreatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageCreatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MessageCreatedEventData} MessageCreatedEventData instance
+                     */
+                    MessageCreatedEventData.create = function create(properties) {
+                        return new MessageCreatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MessageCreatedEventData message. Does not implicitly {@link google.chat.v1.MessageCreatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageCreatedEventData} message MessageCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageCreatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                            $root.google.chat.v1.Message.encode(message.message, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MessageCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageCreatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageCreatedEventData} message MessageCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageCreatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MessageCreatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MessageCreatedEventData} MessageCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageCreatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageCreatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MessageCreatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MessageCreatedEventData} MessageCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageCreatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MessageCreatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MessageCreatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.message != null && message.hasOwnProperty("message")) {
+                            var error = $root.google.chat.v1.Message.verify(message.message);
+                            if (error)
+                                return "message." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MessageCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MessageCreatedEventData} MessageCreatedEventData
+                     */
+                    MessageCreatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MessageCreatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MessageCreatedEventData();
+                        if (object.message != null) {
+                            if (typeof object.message !== "object")
+                                throw TypeError(".google.chat.v1.MessageCreatedEventData.message: object expected");
+                            message.message = $root.google.chat.v1.Message.fromObject(object.message);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MessageCreatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.MessageCreatedEventData} message MessageCreatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MessageCreatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.message = null;
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            object.message = $root.google.chat.v1.Message.toObject(message.message, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MessageCreatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MessageCreatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MessageCreatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MessageCreatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MessageCreatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MessageCreatedEventData";
+                    };
+    
+                    return MessageCreatedEventData;
+                })();
+    
+                v1.MessageUpdatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MessageUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMessageUpdatedEventData
+                     * @property {google.chat.v1.IMessage|null} [message] MessageUpdatedEventData message
+                     */
+    
+                    /**
+                     * Constructs a new MessageUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MessageUpdatedEventData.
+                     * @implements IMessageUpdatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMessageUpdatedEventData=} [properties] Properties to set
+                     */
+                    function MessageUpdatedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MessageUpdatedEventData message.
+                     * @member {google.chat.v1.IMessage|null|undefined} message
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @instance
+                     */
+                    MessageUpdatedEventData.prototype.message = null;
+    
+                    /**
+                     * Creates a new MessageUpdatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageUpdatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MessageUpdatedEventData} MessageUpdatedEventData instance
+                     */
+                    MessageUpdatedEventData.create = function create(properties) {
+                        return new MessageUpdatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MessageUpdatedEventData message. Does not implicitly {@link google.chat.v1.MessageUpdatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageUpdatedEventData} message MessageUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageUpdatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                            $root.google.chat.v1.Message.encode(message.message, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MessageUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageUpdatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageUpdatedEventData} message MessageUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageUpdatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MessageUpdatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MessageUpdatedEventData} MessageUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageUpdatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageUpdatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MessageUpdatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MessageUpdatedEventData} MessageUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageUpdatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MessageUpdatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MessageUpdatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.message != null && message.hasOwnProperty("message")) {
+                            var error = $root.google.chat.v1.Message.verify(message.message);
+                            if (error)
+                                return "message." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MessageUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MessageUpdatedEventData} MessageUpdatedEventData
+                     */
+                    MessageUpdatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MessageUpdatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MessageUpdatedEventData();
+                        if (object.message != null) {
+                            if (typeof object.message !== "object")
+                                throw TypeError(".google.chat.v1.MessageUpdatedEventData.message: object expected");
+                            message.message = $root.google.chat.v1.Message.fromObject(object.message);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MessageUpdatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.MessageUpdatedEventData} message MessageUpdatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MessageUpdatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.message = null;
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            object.message = $root.google.chat.v1.Message.toObject(message.message, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MessageUpdatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MessageUpdatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MessageUpdatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MessageUpdatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MessageUpdatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MessageUpdatedEventData";
+                    };
+    
+                    return MessageUpdatedEventData;
+                })();
+    
+                v1.MessageDeletedEventData = (function() {
+    
+                    /**
+                     * Properties of a MessageDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMessageDeletedEventData
+                     * @property {google.chat.v1.IMessage|null} [message] MessageDeletedEventData message
+                     */
+    
+                    /**
+                     * Constructs a new MessageDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MessageDeletedEventData.
+                     * @implements IMessageDeletedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMessageDeletedEventData=} [properties] Properties to set
+                     */
+                    function MessageDeletedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MessageDeletedEventData message.
+                     * @member {google.chat.v1.IMessage|null|undefined} message
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @instance
+                     */
+                    MessageDeletedEventData.prototype.message = null;
+    
+                    /**
+                     * Creates a new MessageDeletedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageDeletedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MessageDeletedEventData} MessageDeletedEventData instance
+                     */
+                    MessageDeletedEventData.create = function create(properties) {
+                        return new MessageDeletedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MessageDeletedEventData message. Does not implicitly {@link google.chat.v1.MessageDeletedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageDeletedEventData} message MessageDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageDeletedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                            $root.google.chat.v1.Message.encode(message.message, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MessageDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageDeletedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageDeletedEventData} message MessageDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageDeletedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MessageDeletedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MessageDeletedEventData} MessageDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageDeletedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageDeletedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.message = $root.google.chat.v1.Message.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MessageDeletedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MessageDeletedEventData} MessageDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageDeletedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MessageDeletedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MessageDeletedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.message != null && message.hasOwnProperty("message")) {
+                            var error = $root.google.chat.v1.Message.verify(message.message);
+                            if (error)
+                                return "message." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MessageDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MessageDeletedEventData} MessageDeletedEventData
+                     */
+                    MessageDeletedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MessageDeletedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MessageDeletedEventData();
+                        if (object.message != null) {
+                            if (typeof object.message !== "object")
+                                throw TypeError(".google.chat.v1.MessageDeletedEventData.message: object expected");
+                            message.message = $root.google.chat.v1.Message.fromObject(object.message);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MessageDeletedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.MessageDeletedEventData} message MessageDeletedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MessageDeletedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.message = null;
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            object.message = $root.google.chat.v1.Message.toObject(message.message, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MessageDeletedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MessageDeletedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MessageDeletedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MessageDeletedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MessageDeletedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MessageDeletedEventData";
+                    };
+    
+                    return MessageDeletedEventData;
+                })();
+    
+                v1.MessageBatchCreatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MessageBatchCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMessageBatchCreatedEventData
+                     * @property {Array.<google.chat.v1.IMessageCreatedEventData>|null} [messages] MessageBatchCreatedEventData messages
+                     */
+    
+                    /**
+                     * Constructs a new MessageBatchCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MessageBatchCreatedEventData.
+                     * @implements IMessageBatchCreatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMessageBatchCreatedEventData=} [properties] Properties to set
+                     */
+                    function MessageBatchCreatedEventData(properties) {
+                        this.messages = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MessageBatchCreatedEventData messages.
+                     * @member {Array.<google.chat.v1.IMessageCreatedEventData>} messages
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @instance
+                     */
+                    MessageBatchCreatedEventData.prototype.messages = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MessageBatchCreatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchCreatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MessageBatchCreatedEventData} MessageBatchCreatedEventData instance
+                     */
+                    MessageBatchCreatedEventData.create = function create(properties) {
+                        return new MessageBatchCreatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MessageBatchCreatedEventData message. Does not implicitly {@link google.chat.v1.MessageBatchCreatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchCreatedEventData} message MessageBatchCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageBatchCreatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.messages != null && message.messages.length)
+                            for (var i = 0; i < message.messages.length; ++i)
+                                $root.google.chat.v1.MessageCreatedEventData.encode(message.messages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MessageBatchCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageBatchCreatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchCreatedEventData} message MessageBatchCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageBatchCreatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MessageBatchCreatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MessageBatchCreatedEventData} MessageBatchCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageBatchCreatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageBatchCreatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.messages && message.messages.length))
+                                        message.messages = [];
+                                    message.messages.push($root.google.chat.v1.MessageCreatedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MessageBatchCreatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MessageBatchCreatedEventData} MessageBatchCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageBatchCreatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MessageBatchCreatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MessageBatchCreatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.messages != null && message.hasOwnProperty("messages")) {
+                            if (!Array.isArray(message.messages))
+                                return "messages: array expected";
+                            for (var i = 0; i < message.messages.length; ++i) {
+                                var error = $root.google.chat.v1.MessageCreatedEventData.verify(message.messages[i]);
+                                if (error)
+                                    return "messages." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MessageBatchCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MessageBatchCreatedEventData} MessageBatchCreatedEventData
+                     */
+                    MessageBatchCreatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MessageBatchCreatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MessageBatchCreatedEventData();
+                        if (object.messages) {
+                            if (!Array.isArray(object.messages))
+                                throw TypeError(".google.chat.v1.MessageBatchCreatedEventData.messages: array expected");
+                            message.messages = [];
+                            for (var i = 0; i < object.messages.length; ++i) {
+                                if (typeof object.messages[i] !== "object")
+                                    throw TypeError(".google.chat.v1.MessageBatchCreatedEventData.messages: object expected");
+                                message.messages[i] = $root.google.chat.v1.MessageCreatedEventData.fromObject(object.messages[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MessageBatchCreatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.MessageBatchCreatedEventData} message MessageBatchCreatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MessageBatchCreatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.messages = [];
+                        if (message.messages && message.messages.length) {
+                            object.messages = [];
+                            for (var j = 0; j < message.messages.length; ++j)
+                                object.messages[j] = $root.google.chat.v1.MessageCreatedEventData.toObject(message.messages[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MessageBatchCreatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MessageBatchCreatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MessageBatchCreatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MessageBatchCreatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MessageBatchCreatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MessageBatchCreatedEventData";
+                    };
+    
+                    return MessageBatchCreatedEventData;
+                })();
+    
+                v1.MessageBatchUpdatedEventData = (function() {
+    
+                    /**
+                     * Properties of a MessageBatchUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMessageBatchUpdatedEventData
+                     * @property {Array.<google.chat.v1.IMessageUpdatedEventData>|null} [messages] MessageBatchUpdatedEventData messages
+                     */
+    
+                    /**
+                     * Constructs a new MessageBatchUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MessageBatchUpdatedEventData.
+                     * @implements IMessageBatchUpdatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMessageBatchUpdatedEventData=} [properties] Properties to set
+                     */
+                    function MessageBatchUpdatedEventData(properties) {
+                        this.messages = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MessageBatchUpdatedEventData messages.
+                     * @member {Array.<google.chat.v1.IMessageUpdatedEventData>} messages
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @instance
+                     */
+                    MessageBatchUpdatedEventData.prototype.messages = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MessageBatchUpdatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchUpdatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MessageBatchUpdatedEventData} MessageBatchUpdatedEventData instance
+                     */
+                    MessageBatchUpdatedEventData.create = function create(properties) {
+                        return new MessageBatchUpdatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MessageBatchUpdatedEventData message. Does not implicitly {@link google.chat.v1.MessageBatchUpdatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchUpdatedEventData} message MessageBatchUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageBatchUpdatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.messages != null && message.messages.length)
+                            for (var i = 0; i < message.messages.length; ++i)
+                                $root.google.chat.v1.MessageUpdatedEventData.encode(message.messages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MessageBatchUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageBatchUpdatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchUpdatedEventData} message MessageBatchUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageBatchUpdatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MessageBatchUpdatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MessageBatchUpdatedEventData} MessageBatchUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageBatchUpdatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageBatchUpdatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.messages && message.messages.length))
+                                        message.messages = [];
+                                    message.messages.push($root.google.chat.v1.MessageUpdatedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MessageBatchUpdatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MessageBatchUpdatedEventData} MessageBatchUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageBatchUpdatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MessageBatchUpdatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MessageBatchUpdatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.messages != null && message.hasOwnProperty("messages")) {
+                            if (!Array.isArray(message.messages))
+                                return "messages: array expected";
+                            for (var i = 0; i < message.messages.length; ++i) {
+                                var error = $root.google.chat.v1.MessageUpdatedEventData.verify(message.messages[i]);
+                                if (error)
+                                    return "messages." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MessageBatchUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MessageBatchUpdatedEventData} MessageBatchUpdatedEventData
+                     */
+                    MessageBatchUpdatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MessageBatchUpdatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MessageBatchUpdatedEventData();
+                        if (object.messages) {
+                            if (!Array.isArray(object.messages))
+                                throw TypeError(".google.chat.v1.MessageBatchUpdatedEventData.messages: array expected");
+                            message.messages = [];
+                            for (var i = 0; i < object.messages.length; ++i) {
+                                if (typeof object.messages[i] !== "object")
+                                    throw TypeError(".google.chat.v1.MessageBatchUpdatedEventData.messages: object expected");
+                                message.messages[i] = $root.google.chat.v1.MessageUpdatedEventData.fromObject(object.messages[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MessageBatchUpdatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.MessageBatchUpdatedEventData} message MessageBatchUpdatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MessageBatchUpdatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.messages = [];
+                        if (message.messages && message.messages.length) {
+                            object.messages = [];
+                            for (var j = 0; j < message.messages.length; ++j)
+                                object.messages[j] = $root.google.chat.v1.MessageUpdatedEventData.toObject(message.messages[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MessageBatchUpdatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MessageBatchUpdatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MessageBatchUpdatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MessageBatchUpdatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MessageBatchUpdatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MessageBatchUpdatedEventData";
+                    };
+    
+                    return MessageBatchUpdatedEventData;
+                })();
+    
+                v1.MessageBatchDeletedEventData = (function() {
+    
+                    /**
+                     * Properties of a MessageBatchDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IMessageBatchDeletedEventData
+                     * @property {Array.<google.chat.v1.IMessageDeletedEventData>|null} [messages] MessageBatchDeletedEventData messages
+                     */
+    
+                    /**
+                     * Constructs a new MessageBatchDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a MessageBatchDeletedEventData.
+                     * @implements IMessageBatchDeletedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IMessageBatchDeletedEventData=} [properties] Properties to set
+                     */
+                    function MessageBatchDeletedEventData(properties) {
+                        this.messages = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MessageBatchDeletedEventData messages.
+                     * @member {Array.<google.chat.v1.IMessageDeletedEventData>} messages
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @instance
+                     */
+                    MessageBatchDeletedEventData.prototype.messages = $util.emptyArray;
+    
+                    /**
+                     * Creates a new MessageBatchDeletedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchDeletedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.MessageBatchDeletedEventData} MessageBatchDeletedEventData instance
+                     */
+                    MessageBatchDeletedEventData.create = function create(properties) {
+                        return new MessageBatchDeletedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified MessageBatchDeletedEventData message. Does not implicitly {@link google.chat.v1.MessageBatchDeletedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchDeletedEventData} message MessageBatchDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageBatchDeletedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.messages != null && message.messages.length)
+                            for (var i = 0; i < message.messages.length; ++i)
+                                $root.google.chat.v1.MessageDeletedEventData.encode(message.messages[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MessageBatchDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageBatchDeletedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IMessageBatchDeletedEventData} message MessageBatchDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MessageBatchDeletedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MessageBatchDeletedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.MessageBatchDeletedEventData} MessageBatchDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageBatchDeletedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.MessageBatchDeletedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.messages && message.messages.length))
+                                        message.messages = [];
+                                    message.messages.push($root.google.chat.v1.MessageDeletedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MessageBatchDeletedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.MessageBatchDeletedEventData} MessageBatchDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MessageBatchDeletedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MessageBatchDeletedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MessageBatchDeletedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.messages != null && message.hasOwnProperty("messages")) {
+                            if (!Array.isArray(message.messages))
+                                return "messages: array expected";
+                            for (var i = 0; i < message.messages.length; ++i) {
+                                var error = $root.google.chat.v1.MessageDeletedEventData.verify(message.messages[i]);
+                                if (error)
+                                    return "messages." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MessageBatchDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.MessageBatchDeletedEventData} MessageBatchDeletedEventData
+                     */
+                    MessageBatchDeletedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.MessageBatchDeletedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.MessageBatchDeletedEventData();
+                        if (object.messages) {
+                            if (!Array.isArray(object.messages))
+                                throw TypeError(".google.chat.v1.MessageBatchDeletedEventData.messages: array expected");
+                            message.messages = [];
+                            for (var i = 0; i < object.messages.length; ++i) {
+                                if (typeof object.messages[i] !== "object")
+                                    throw TypeError(".google.chat.v1.MessageBatchDeletedEventData.messages: object expected");
+                                message.messages[i] = $root.google.chat.v1.MessageDeletedEventData.fromObject(object.messages[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MessageBatchDeletedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.MessageBatchDeletedEventData} message MessageBatchDeletedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MessageBatchDeletedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.messages = [];
+                        if (message.messages && message.messages.length) {
+                            object.messages = [];
+                            for (var j = 0; j < message.messages.length; ++j)
+                                object.messages[j] = $root.google.chat.v1.MessageDeletedEventData.toObject(message.messages[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MessageBatchDeletedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MessageBatchDeletedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for MessageBatchDeletedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.MessageBatchDeletedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    MessageBatchDeletedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.MessageBatchDeletedEventData";
+                    };
+    
+                    return MessageBatchDeletedEventData;
+                })();
+    
+                v1.SpaceUpdatedEventData = (function() {
+    
+                    /**
+                     * Properties of a SpaceUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface ISpaceUpdatedEventData
+                     * @property {google.chat.v1.ISpace|null} [space] SpaceUpdatedEventData space
+                     */
+    
+                    /**
+                     * Constructs a new SpaceUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SpaceUpdatedEventData.
+                     * @implements ISpaceUpdatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.ISpaceUpdatedEventData=} [properties] Properties to set
+                     */
+                    function SpaceUpdatedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SpaceUpdatedEventData space.
+                     * @member {google.chat.v1.ISpace|null|undefined} space
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @instance
+                     */
+                    SpaceUpdatedEventData.prototype.space = null;
+    
+                    /**
+                     * Creates a new SpaceUpdatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.ISpaceUpdatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.SpaceUpdatedEventData} SpaceUpdatedEventData instance
+                     */
+                    SpaceUpdatedEventData.create = function create(properties) {
+                        return new SpaceUpdatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceUpdatedEventData message. Does not implicitly {@link google.chat.v1.SpaceUpdatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.ISpaceUpdatedEventData} message SpaceUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceUpdatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.space != null && Object.hasOwnProperty.call(message, "space"))
+                            $root.google.chat.v1.Space.encode(message.space, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.SpaceUpdatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.ISpaceUpdatedEventData} message SpaceUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceUpdatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SpaceUpdatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SpaceUpdatedEventData} SpaceUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceUpdatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceUpdatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.space = $root.google.chat.v1.Space.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SpaceUpdatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SpaceUpdatedEventData} SpaceUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceUpdatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SpaceUpdatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SpaceUpdatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.space != null && message.hasOwnProperty("space")) {
+                            var error = $root.google.chat.v1.Space.verify(message.space);
+                            if (error)
+                                return "space." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SpaceUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SpaceUpdatedEventData} SpaceUpdatedEventData
+                     */
+                    SpaceUpdatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SpaceUpdatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.SpaceUpdatedEventData();
+                        if (object.space != null) {
+                            if (typeof object.space !== "object")
+                                throw TypeError(".google.chat.v1.SpaceUpdatedEventData.space: object expected");
+                            message.space = $root.google.chat.v1.Space.fromObject(object.space);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SpaceUpdatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.SpaceUpdatedEventData} message SpaceUpdatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SpaceUpdatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.space = null;
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            object.space = $root.google.chat.v1.Space.toObject(message.space, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SpaceUpdatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SpaceUpdatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SpaceUpdatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SpaceUpdatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SpaceUpdatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SpaceUpdatedEventData";
+                    };
+    
+                    return SpaceUpdatedEventData;
+                })();
+    
+                v1.SpaceBatchUpdatedEventData = (function() {
+    
+                    /**
+                     * Properties of a SpaceBatchUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface ISpaceBatchUpdatedEventData
+                     * @property {Array.<google.chat.v1.ISpaceUpdatedEventData>|null} [spaces] SpaceBatchUpdatedEventData spaces
+                     */
+    
+                    /**
+                     * Constructs a new SpaceBatchUpdatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SpaceBatchUpdatedEventData.
+                     * @implements ISpaceBatchUpdatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.ISpaceBatchUpdatedEventData=} [properties] Properties to set
+                     */
+                    function SpaceBatchUpdatedEventData(properties) {
+                        this.spaces = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SpaceBatchUpdatedEventData spaces.
+                     * @member {Array.<google.chat.v1.ISpaceUpdatedEventData>} spaces
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @instance
+                     */
+                    SpaceBatchUpdatedEventData.prototype.spaces = $util.emptyArray;
+    
+                    /**
+                     * Creates a new SpaceBatchUpdatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.ISpaceBatchUpdatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.SpaceBatchUpdatedEventData} SpaceBatchUpdatedEventData instance
+                     */
+                    SpaceBatchUpdatedEventData.create = function create(properties) {
+                        return new SpaceBatchUpdatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceBatchUpdatedEventData message. Does not implicitly {@link google.chat.v1.SpaceBatchUpdatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.ISpaceBatchUpdatedEventData} message SpaceBatchUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceBatchUpdatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spaces != null && message.spaces.length)
+                            for (var i = 0; i < message.spaces.length; ++i)
+                                $root.google.chat.v1.SpaceUpdatedEventData.encode(message.spaces[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SpaceBatchUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.SpaceBatchUpdatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.ISpaceBatchUpdatedEventData} message SpaceBatchUpdatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SpaceBatchUpdatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SpaceBatchUpdatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SpaceBatchUpdatedEventData} SpaceBatchUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceBatchUpdatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SpaceBatchUpdatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.spaces && message.spaces.length))
+                                        message.spaces = [];
+                                    message.spaces.push($root.google.chat.v1.SpaceUpdatedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SpaceBatchUpdatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SpaceBatchUpdatedEventData} SpaceBatchUpdatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SpaceBatchUpdatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SpaceBatchUpdatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SpaceBatchUpdatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spaces != null && message.hasOwnProperty("spaces")) {
+                            if (!Array.isArray(message.spaces))
+                                return "spaces: array expected";
+                            for (var i = 0; i < message.spaces.length; ++i) {
+                                var error = $root.google.chat.v1.SpaceUpdatedEventData.verify(message.spaces[i]);
+                                if (error)
+                                    return "spaces." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SpaceBatchUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SpaceBatchUpdatedEventData} SpaceBatchUpdatedEventData
+                     */
+                    SpaceBatchUpdatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SpaceBatchUpdatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.SpaceBatchUpdatedEventData();
+                        if (object.spaces) {
+                            if (!Array.isArray(object.spaces))
+                                throw TypeError(".google.chat.v1.SpaceBatchUpdatedEventData.spaces: array expected");
+                            message.spaces = [];
+                            for (var i = 0; i < object.spaces.length; ++i) {
+                                if (typeof object.spaces[i] !== "object")
+                                    throw TypeError(".google.chat.v1.SpaceBatchUpdatedEventData.spaces: object expected");
+                                message.spaces[i] = $root.google.chat.v1.SpaceUpdatedEventData.fromObject(object.spaces[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SpaceBatchUpdatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {google.chat.v1.SpaceBatchUpdatedEventData} message SpaceBatchUpdatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SpaceBatchUpdatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.spaces = [];
+                        if (message.spaces && message.spaces.length) {
+                            object.spaces = [];
+                            for (var j = 0; j < message.spaces.length; ++j)
+                                object.spaces[j] = $root.google.chat.v1.SpaceUpdatedEventData.toObject(message.spaces[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SpaceBatchUpdatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SpaceBatchUpdatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SpaceBatchUpdatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SpaceBatchUpdatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SpaceBatchUpdatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SpaceBatchUpdatedEventData";
+                    };
+    
+                    return SpaceBatchUpdatedEventData;
+                })();
+    
+                v1.ReactionCreatedEventData = (function() {
+    
+                    /**
+                     * Properties of a ReactionCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IReactionCreatedEventData
+                     * @property {google.chat.v1.IReaction|null} [reaction] ReactionCreatedEventData reaction
+                     */
+    
+                    /**
+                     * Constructs a new ReactionCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ReactionCreatedEventData.
+                     * @implements IReactionCreatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IReactionCreatedEventData=} [properties] Properties to set
+                     */
+                    function ReactionCreatedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReactionCreatedEventData reaction.
+                     * @member {google.chat.v1.IReaction|null|undefined} reaction
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @instance
+                     */
+                    ReactionCreatedEventData.prototype.reaction = null;
+    
+                    /**
+                     * Creates a new ReactionCreatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionCreatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.ReactionCreatedEventData} ReactionCreatedEventData instance
+                     */
+                    ReactionCreatedEventData.create = function create(properties) {
+                        return new ReactionCreatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionCreatedEventData message. Does not implicitly {@link google.chat.v1.ReactionCreatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionCreatedEventData} message ReactionCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionCreatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.reaction != null && Object.hasOwnProperty.call(message, "reaction"))
+                            $root.google.chat.v1.Reaction.encode(message.reaction, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionCreatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionCreatedEventData} message ReactionCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionCreatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReactionCreatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ReactionCreatedEventData} ReactionCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionCreatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionCreatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.reaction = $root.google.chat.v1.Reaction.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReactionCreatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ReactionCreatedEventData} ReactionCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionCreatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReactionCreatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReactionCreatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.reaction != null && message.hasOwnProperty("reaction")) {
+                            var error = $root.google.chat.v1.Reaction.verify(message.reaction);
+                            if (error)
+                                return "reaction." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReactionCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ReactionCreatedEventData} ReactionCreatedEventData
+                     */
+                    ReactionCreatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ReactionCreatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.ReactionCreatedEventData();
+                        if (object.reaction != null) {
+                            if (typeof object.reaction !== "object")
+                                throw TypeError(".google.chat.v1.ReactionCreatedEventData.reaction: object expected");
+                            message.reaction = $root.google.chat.v1.Reaction.fromObject(object.reaction);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReactionCreatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.ReactionCreatedEventData} message ReactionCreatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReactionCreatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.reaction = null;
+                        if (message.reaction != null && message.hasOwnProperty("reaction"))
+                            object.reaction = $root.google.chat.v1.Reaction.toObject(message.reaction, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReactionCreatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReactionCreatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReactionCreatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ReactionCreatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReactionCreatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ReactionCreatedEventData";
+                    };
+    
+                    return ReactionCreatedEventData;
+                })();
+    
+                v1.ReactionDeletedEventData = (function() {
+    
+                    /**
+                     * Properties of a ReactionDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IReactionDeletedEventData
+                     * @property {google.chat.v1.IReaction|null} [reaction] ReactionDeletedEventData reaction
+                     */
+    
+                    /**
+                     * Constructs a new ReactionDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ReactionDeletedEventData.
+                     * @implements IReactionDeletedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IReactionDeletedEventData=} [properties] Properties to set
+                     */
+                    function ReactionDeletedEventData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReactionDeletedEventData reaction.
+                     * @member {google.chat.v1.IReaction|null|undefined} reaction
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @instance
+                     */
+                    ReactionDeletedEventData.prototype.reaction = null;
+    
+                    /**
+                     * Creates a new ReactionDeletedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionDeletedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.ReactionDeletedEventData} ReactionDeletedEventData instance
+                     */
+                    ReactionDeletedEventData.create = function create(properties) {
+                        return new ReactionDeletedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionDeletedEventData message. Does not implicitly {@link google.chat.v1.ReactionDeletedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionDeletedEventData} message ReactionDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionDeletedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.reaction != null && Object.hasOwnProperty.call(message, "reaction"))
+                            $root.google.chat.v1.Reaction.encode(message.reaction, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionDeletedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionDeletedEventData} message ReactionDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionDeletedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReactionDeletedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ReactionDeletedEventData} ReactionDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionDeletedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionDeletedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.reaction = $root.google.chat.v1.Reaction.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReactionDeletedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ReactionDeletedEventData} ReactionDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionDeletedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReactionDeletedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReactionDeletedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.reaction != null && message.hasOwnProperty("reaction")) {
+                            var error = $root.google.chat.v1.Reaction.verify(message.reaction);
+                            if (error)
+                                return "reaction." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReactionDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ReactionDeletedEventData} ReactionDeletedEventData
+                     */
+                    ReactionDeletedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ReactionDeletedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.ReactionDeletedEventData();
+                        if (object.reaction != null) {
+                            if (typeof object.reaction !== "object")
+                                throw TypeError(".google.chat.v1.ReactionDeletedEventData.reaction: object expected");
+                            message.reaction = $root.google.chat.v1.Reaction.fromObject(object.reaction);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReactionDeletedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.ReactionDeletedEventData} message ReactionDeletedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReactionDeletedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.reaction = null;
+                        if (message.reaction != null && message.hasOwnProperty("reaction"))
+                            object.reaction = $root.google.chat.v1.Reaction.toObject(message.reaction, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReactionDeletedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReactionDeletedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReactionDeletedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ReactionDeletedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReactionDeletedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ReactionDeletedEventData";
+                    };
+    
+                    return ReactionDeletedEventData;
+                })();
+    
+                v1.ReactionBatchCreatedEventData = (function() {
+    
+                    /**
+                     * Properties of a ReactionBatchCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IReactionBatchCreatedEventData
+                     * @property {Array.<google.chat.v1.IReactionCreatedEventData>|null} [reactions] ReactionBatchCreatedEventData reactions
+                     */
+    
+                    /**
+                     * Constructs a new ReactionBatchCreatedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ReactionBatchCreatedEventData.
+                     * @implements IReactionBatchCreatedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IReactionBatchCreatedEventData=} [properties] Properties to set
+                     */
+                    function ReactionBatchCreatedEventData(properties) {
+                        this.reactions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReactionBatchCreatedEventData reactions.
+                     * @member {Array.<google.chat.v1.IReactionCreatedEventData>} reactions
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @instance
+                     */
+                    ReactionBatchCreatedEventData.prototype.reactions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new ReactionBatchCreatedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionBatchCreatedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.ReactionBatchCreatedEventData} ReactionBatchCreatedEventData instance
+                     */
+                    ReactionBatchCreatedEventData.create = function create(properties) {
+                        return new ReactionBatchCreatedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionBatchCreatedEventData message. Does not implicitly {@link google.chat.v1.ReactionBatchCreatedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionBatchCreatedEventData} message ReactionBatchCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionBatchCreatedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.reactions != null && message.reactions.length)
+                            for (var i = 0; i < message.reactions.length; ++i)
+                                $root.google.chat.v1.ReactionCreatedEventData.encode(message.reactions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionBatchCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionBatchCreatedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionBatchCreatedEventData} message ReactionBatchCreatedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionBatchCreatedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReactionBatchCreatedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ReactionBatchCreatedEventData} ReactionBatchCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionBatchCreatedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionBatchCreatedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.reactions && message.reactions.length))
+                                        message.reactions = [];
+                                    message.reactions.push($root.google.chat.v1.ReactionCreatedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReactionBatchCreatedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ReactionBatchCreatedEventData} ReactionBatchCreatedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionBatchCreatedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReactionBatchCreatedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReactionBatchCreatedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.reactions != null && message.hasOwnProperty("reactions")) {
+                            if (!Array.isArray(message.reactions))
+                                return "reactions: array expected";
+                            for (var i = 0; i < message.reactions.length; ++i) {
+                                var error = $root.google.chat.v1.ReactionCreatedEventData.verify(message.reactions[i]);
+                                if (error)
+                                    return "reactions." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReactionBatchCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ReactionBatchCreatedEventData} ReactionBatchCreatedEventData
+                     */
+                    ReactionBatchCreatedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ReactionBatchCreatedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.ReactionBatchCreatedEventData();
+                        if (object.reactions) {
+                            if (!Array.isArray(object.reactions))
+                                throw TypeError(".google.chat.v1.ReactionBatchCreatedEventData.reactions: array expected");
+                            message.reactions = [];
+                            for (var i = 0; i < object.reactions.length; ++i) {
+                                if (typeof object.reactions[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ReactionBatchCreatedEventData.reactions: object expected");
+                                message.reactions[i] = $root.google.chat.v1.ReactionCreatedEventData.fromObject(object.reactions[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReactionBatchCreatedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {google.chat.v1.ReactionBatchCreatedEventData} message ReactionBatchCreatedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReactionBatchCreatedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.reactions = [];
+                        if (message.reactions && message.reactions.length) {
+                            object.reactions = [];
+                            for (var j = 0; j < message.reactions.length; ++j)
+                                object.reactions[j] = $root.google.chat.v1.ReactionCreatedEventData.toObject(message.reactions[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReactionBatchCreatedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReactionBatchCreatedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReactionBatchCreatedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ReactionBatchCreatedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReactionBatchCreatedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ReactionBatchCreatedEventData";
+                    };
+    
+                    return ReactionBatchCreatedEventData;
+                })();
+    
+                v1.ReactionBatchDeletedEventData = (function() {
+    
+                    /**
+                     * Properties of a ReactionBatchDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @interface IReactionBatchDeletedEventData
+                     * @property {Array.<google.chat.v1.IReactionDeletedEventData>|null} [reactions] ReactionBatchDeletedEventData reactions
+                     */
+    
+                    /**
+                     * Constructs a new ReactionBatchDeletedEventData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ReactionBatchDeletedEventData.
+                     * @implements IReactionBatchDeletedEventData
+                     * @constructor
+                     * @param {google.chat.v1.IReactionBatchDeletedEventData=} [properties] Properties to set
+                     */
+                    function ReactionBatchDeletedEventData(properties) {
+                        this.reactions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ReactionBatchDeletedEventData reactions.
+                     * @member {Array.<google.chat.v1.IReactionDeletedEventData>} reactions
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @instance
+                     */
+                    ReactionBatchDeletedEventData.prototype.reactions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new ReactionBatchDeletedEventData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionBatchDeletedEventData=} [properties] Properties to set
+                     * @returns {google.chat.v1.ReactionBatchDeletedEventData} ReactionBatchDeletedEventData instance
+                     */
+                    ReactionBatchDeletedEventData.create = function create(properties) {
+                        return new ReactionBatchDeletedEventData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionBatchDeletedEventData message. Does not implicitly {@link google.chat.v1.ReactionBatchDeletedEventData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionBatchDeletedEventData} message ReactionBatchDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionBatchDeletedEventData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.reactions != null && message.reactions.length)
+                            for (var i = 0; i < message.reactions.length; ++i)
+                                $root.google.chat.v1.ReactionDeletedEventData.encode(message.reactions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ReactionBatchDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionBatchDeletedEventData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.IReactionBatchDeletedEventData} message ReactionBatchDeletedEventData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ReactionBatchDeletedEventData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ReactionBatchDeletedEventData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ReactionBatchDeletedEventData} ReactionBatchDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionBatchDeletedEventData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ReactionBatchDeletedEventData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.reactions && message.reactions.length))
+                                        message.reactions = [];
+                                    message.reactions.push($root.google.chat.v1.ReactionDeletedEventData.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ReactionBatchDeletedEventData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ReactionBatchDeletedEventData} ReactionBatchDeletedEventData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ReactionBatchDeletedEventData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ReactionBatchDeletedEventData message.
+                     * @function verify
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ReactionBatchDeletedEventData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.reactions != null && message.hasOwnProperty("reactions")) {
+                            if (!Array.isArray(message.reactions))
+                                return "reactions: array expected";
+                            for (var i = 0; i < message.reactions.length; ++i) {
+                                var error = $root.google.chat.v1.ReactionDeletedEventData.verify(message.reactions[i]);
+                                if (error)
+                                    return "reactions." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ReactionBatchDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ReactionBatchDeletedEventData} ReactionBatchDeletedEventData
+                     */
+                    ReactionBatchDeletedEventData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ReactionBatchDeletedEventData)
+                            return object;
+                        var message = new $root.google.chat.v1.ReactionBatchDeletedEventData();
+                        if (object.reactions) {
+                            if (!Array.isArray(object.reactions))
+                                throw TypeError(".google.chat.v1.ReactionBatchDeletedEventData.reactions: array expected");
+                            message.reactions = [];
+                            for (var i = 0; i < object.reactions.length; ++i) {
+                                if (typeof object.reactions[i] !== "object")
+                                    throw TypeError(".google.chat.v1.ReactionBatchDeletedEventData.reactions: object expected");
+                                message.reactions[i] = $root.google.chat.v1.ReactionDeletedEventData.fromObject(object.reactions[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ReactionBatchDeletedEventData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {google.chat.v1.ReactionBatchDeletedEventData} message ReactionBatchDeletedEventData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ReactionBatchDeletedEventData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.reactions = [];
+                        if (message.reactions && message.reactions.length) {
+                            object.reactions = [];
+                            for (var j = 0; j < message.reactions.length; ++j)
+                                object.reactions[j] = $root.google.chat.v1.ReactionDeletedEventData.toObject(message.reactions[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ReactionBatchDeletedEventData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ReactionBatchDeletedEventData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ReactionBatchDeletedEventData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ReactionBatchDeletedEventData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ReactionBatchDeletedEventData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ReactionBatchDeletedEventData";
+                    };
+    
+                    return ReactionBatchDeletedEventData;
                 })();
     
                 v1.SpaceReadState = (function() {

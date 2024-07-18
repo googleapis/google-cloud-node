@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.6.0...dlp-v5.7.0) (2024-06-03)
+
+
+### Features
+
+* [dlp] add secrets discovery support ([#5380](https://github.com/googleapis/google-cloud-node/issues/5380)) ([81e759d](https://github.com/googleapis/google-cloud-node/commit/81e759d8fc99473fc0109115e5fdd2b7ddd008f9))
+
 ## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.5.0...dlp-v5.6.0) (2024-05-21)
 
 

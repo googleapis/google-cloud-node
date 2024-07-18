@@ -30,8 +30,8 @@ function main(parent) {
    */
   /**
    *  Required. The parent, which owns the collection of BigQuery exports. Its
-   *  format is "organizations/[organization_id]", "folders/[folder_id]",
-   *  "projects/[project_id]".
+   *  format is `organizations/[organization_id]`, `folders/[folder_id]`,
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**

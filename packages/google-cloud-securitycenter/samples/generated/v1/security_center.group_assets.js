@@ -30,8 +30,8 @@ function main(parent, groupBy) {
    */
   /**
    *  Required. The name of the parent to group the assets by. Its format is
-   *  "organizations/[organization_id]", "folders/[folder_id]", or
-   *  "projects/[project_id]".
+   *  `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**

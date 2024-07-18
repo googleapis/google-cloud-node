@@ -7904,82 +7904,6 @@ describe('v2.SecurityCenterClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('attackPath', () => {
-      const fakePath = '/rendered/path/attackPath';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        simulation: 'simulationValue',
-        valued_resource: 'valuedResourceValue',
-        attack_path: 'attackPathValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.attackPathPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.attackPathPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('attackPathPath', () => {
-        const result = client.attackPathPath(
-          'organizationValue',
-          'simulationValue',
-          'valuedResourceValue',
-          'attackPathValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.attackPathPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromAttackPathName', () => {
-        const result = client.matchOrganizationFromAttackPathName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.attackPathPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromAttackPathName', () => {
-        const result = client.matchSimulationFromAttackPathName(fakePath);
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (client.pathTemplates.attackPathPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchValuedResourceFromAttackPathName', () => {
-        const result = client.matchValuedResourceFromAttackPathName(fakePath);
-        assert.strictEqual(result, 'valuedResourceValue');
-        assert(
-          (client.pathTemplates.attackPathPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchAttackPathFromAttackPathName', () => {
-        const result = client.matchAttackPathFromAttackPathName(fakePath);
-        assert.strictEqual(result, 'attackPathValue');
-        assert(
-          (client.pathTemplates.attackPathPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('folderAssetSecurityMarks', () => {
       const fakePath = '/rendered/path/folderAssetSecurityMarks';
       const expectedParameters = {
@@ -9499,6 +9423,408 @@ describe('v2.SecurityCenterClient', () => {
       });
     });
 
+    describe('organizationLocationResourceValueConfig', () => {
+      const fakePath = '/rendered/path/organizationLocationResourceValueConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        resource_value_config: 'resourceValueConfigValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationResourceValueConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationResourceValueConfigPath', () => {
+        const result = client.organizationLocationResourceValueConfigPath(
+          'organizationValue',
+          'locationValue',
+          'resourceValueConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationResourceValueConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationResourceValueConfigName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationResourceValueConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationResourceValueConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationResourceValueConfigName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationResourceValueConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationResourceValueConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchResourceValueConfigFromOrganizationLocationResourceValueConfigName', () => {
+        const result =
+          client.matchResourceValueConfigFromOrganizationLocationResourceValueConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'resourceValueConfigValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationResourceValueConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationLocationSimluation', () => {
+      const fakePath = '/rendered/path/organizationLocationSimluation';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        simluation: 'simluationValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationSimluationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationSimluationPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationSimluationPath', () => {
+        const result = client.organizationLocationSimluationPath(
+          'organizationValue',
+          'locationValue',
+          'simluationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationSimluationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationSimluationName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationSimluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSimluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationSimluationName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationSimluationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSimluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSimluationFromOrganizationLocationSimluationName', () => {
+        const result =
+          client.matchSimluationFromOrganizationLocationSimluationName(
+            fakePath
+          );
+        assert.strictEqual(result, 'simluationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationSimluationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationLocationSimluationValuedResource', () => {
+      const fakePath =
+        '/rendered/path/organizationLocationSimluationValuedResource';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        simluation: 'simluationValue',
+        valued_resource: 'valuedResourceValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationSimluationValuedResourcePath', () => {
+        const result = client.organizationLocationSimluationValuedResourcePath(
+          'organizationValue',
+          'locationValue',
+          'simluationValue',
+          'valuedResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimluationValuedResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationSimluationValuedResourceName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationSimluationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimluationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationSimluationValuedResourceName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationSimluationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimluationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSimluationFromOrganizationLocationSimluationValuedResourceName', () => {
+        const result =
+          client.matchSimluationFromOrganizationLocationSimluationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'simluationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimluationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchValuedResourceFromOrganizationLocationSimluationValuedResourceName', () => {
+        const result =
+          client.matchValuedResourceFromOrganizationLocationSimluationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'valuedResourceValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimluationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationLocationSimulationValuedResourceAttackPath', () => {
+      const fakePath =
+        '/rendered/path/organizationLocationSimulationValuedResourceAttackPath';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        simulation: 'simulationValue',
+        valued_resource: 'valuedResourceValue',
+        attack_path: 'attackPathValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationSimulationValuedResourceAttackPathPath', () => {
+        const result =
+          client.organizationLocationSimulationValuedResourceAttackPathPath(
+            'organizationValue',
+            'locationValue',
+            'simulationValue',
+            'valuedResourceValue',
+            'attackPathValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'simulationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'valuedResourceValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'attackPathValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationMuteConfig', () => {
       const fakePath = '/rendered/path/organizationMuteConfig';
       const expectedParameters = {
@@ -9554,6 +9880,329 @@ describe('v2.SecurityCenterClient', () => {
         assert(
           (
             client.pathTemplates.organizationMuteConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationResourceValueConfig', () => {
+      const fakePath = '/rendered/path/organizationResourceValueConfig';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        resource_value_config: 'resourceValueConfigValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationResourceValueConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationResourceValueConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationResourceValueConfigPath', () => {
+        const result = client.organizationResourceValueConfigPath(
+          'organizationValue',
+          'resourceValueConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationResourceValueConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationResourceValueConfigName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationResourceValueConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationResourceValueConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchResourceValueConfigFromOrganizationResourceValueConfigName', () => {
+        const result =
+          client.matchResourceValueConfigFromOrganizationResourceValueConfigName(
+            fakePath
+          );
+        assert.strictEqual(result, 'resourceValueConfigValue');
+        assert(
+          (
+            client.pathTemplates.organizationResourceValueConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSimulation', () => {
+      const fakePath = '/rendered/path/organizationSimulation';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        simulation: 'simulationValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSimulationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationSimulationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationSimulationPath', () => {
+        const result = client.organizationSimulationPath(
+          'organizationValue',
+          'simulationValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationSimulationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSimulationName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSimulationName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationSimulationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSimulationFromOrganizationSimulationName', () => {
+        const result =
+          client.matchSimulationFromOrganizationSimulationName(fakePath);
+        assert.strictEqual(result, 'simulationValue');
+        assert(
+          (
+            client.pathTemplates.organizationSimulationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSimulationValuedResource', () => {
+      const fakePath = '/rendered/path/organizationSimulationValuedResource';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        simulation: 'simulationValue',
+        valued_resource: 'valuedResourceValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSimulationValuedResourcePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSimulationValuedResourcePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationSimulationValuedResourcePath', () => {
+        const result = client.organizationSimulationValuedResourcePath(
+          'organizationValue',
+          'simulationValue',
+          'valuedResourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSimulationValuedResourceName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSimulationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSimulationFromOrganizationSimulationValuedResourceName', () => {
+        const result =
+          client.matchSimulationFromOrganizationSimulationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'simulationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchValuedResourceFromOrganizationSimulationValuedResourceName', () => {
+        const result =
+          client.matchValuedResourceFromOrganizationSimulationValuedResourceName(
+            fakePath
+          );
+        assert.strictEqual(result, 'valuedResourceValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSimulationValuedResourceAttackPath', () => {
+      const fakePath =
+        '/rendered/path/organizationSimulationValuedResourceAttackPath';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        simulation: 'simulationValue',
+        valued_resource: 'valuedResourceValue',
+        attack_path: 'attackPathValue',
+      };
+      const client = new securitycenterModule.v2.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationSimulationValuedResourceAttackPathPath', () => {
+        const result =
+          client.organizationSimulationValuedResourceAttackPathPath(
+            'organizationValue',
+            'simulationValue',
+            'valuedResourceValue',
+            'attackPathValue'
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourceAttackPathPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSimulationFromOrganizationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchSimulationFromOrganizationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'simulationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'valuedResourceValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourceAttackPathPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAttackPathFromOrganizationSimulationValuedResourceAttackPathName', () => {
+        const result =
+          client.matchAttackPathFromOrganizationSimulationValuedResourceAttackPathName(
+            fakePath
+          );
+        assert.strictEqual(result, 'attackPathValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationSimulationValuedResourceAttackPathPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -11288,186 +11937,6 @@ describe('v2.SecurityCenterClient', () => {
               .projectSourceLocationFindingSecurityMarksPathTemplate
               .match as SinonStub
           )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('resourceValueConfig', () => {
-      const fakePath = '/rendered/path/resourceValueConfig';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        resource_value_config: 'resourceValueConfigValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.resourceValueConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.resourceValueConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('resourceValueConfigPath', () => {
-        const result = client.resourceValueConfigPath(
-          'organizationValue',
-          'resourceValueConfigValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (
-            client.pathTemplates.resourceValueConfigPathTemplate
-              .render as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromResourceValueConfigName', () => {
-        const result =
-          client.matchOrganizationFromResourceValueConfigName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (
-            client.pathTemplates.resourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchResourceValueConfigFromResourceValueConfigName', () => {
-        const result =
-          client.matchResourceValueConfigFromResourceValueConfigName(fakePath);
-        assert.strictEqual(result, 'resourceValueConfigValue');
-        assert(
-          (
-            client.pathTemplates.resourceValueConfigPathTemplate
-              .match as SinonStub
-          )
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('simulation', () => {
-      const fakePath = '/rendered/path/simulation';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        simulation: 'simulationValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.simulationPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.simulationPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('simulationPath', () => {
-        const result = client.simulationPath(
-          'organizationValue',
-          'simulationValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.simulationPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromSimulationName', () => {
-        const result = client.matchOrganizationFromSimulationName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.simulationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromSimulationName', () => {
-        const result = client.matchSimulationFromSimulationName(fakePath);
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (client.pathTemplates.simulationPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
-    describe('valuedResource', () => {
-      const fakePath = '/rendered/path/valuedResource';
-      const expectedParameters = {
-        organization: 'organizationValue',
-        simulation: 'simulationValue',
-        valued_resource: 'valuedResourceValue',
-      };
-      const client = new securitycenterModule.v2.SecurityCenterClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.valuedResourcePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.valuedResourcePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('valuedResourcePath', () => {
-        const result = client.valuedResourcePath(
-          'organizationValue',
-          'simulationValue',
-          'valuedResourceValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.valuedResourcePathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchOrganizationFromValuedResourceName', () => {
-        const result = client.matchOrganizationFromValuedResourceName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
-        assert(
-          (client.pathTemplates.valuedResourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchSimulationFromValuedResourceName', () => {
-        const result = client.matchSimulationFromValuedResourceName(fakePath);
-        assert.strictEqual(result, 'simulationValue');
-        assert(
-          (client.pathTemplates.valuedResourcePathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchValuedResourceFromValuedResourceName', () => {
-        const result =
-          client.matchValuedResourceFromValuedResourceName(fakePath);
-        assert.strictEqual(result, 'valuedResourceValue');
-        assert(
-          (client.pathTemplates.valuedResourcePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -35,6 +35,11 @@
                 "deleteEvent"
               ]
             },
+            "GetClip": {
+              "methods": [
+                "getClip"
+              ]
+            },
             "GetAsset": {
               "methods": [
                 "getAsset"
@@ -85,6 +90,16 @@
                 "updateInput"
               ]
             },
+            "CreateClip": {
+              "methods": [
+                "createClip"
+              ]
+            },
+            "DeleteClip": {
+              "methods": [
+                "deleteClip"
+              ]
+            },
             "CreateAsset": {
               "methods": [
                 "createAsset"
@@ -119,6 +134,13 @@
                 "listEvents",
                 "listEventsStream",
                 "listEventsAsync"
+              ]
+            },
+            "ListClips": {
+              "methods": [
+                "listClips",
+                "listClipsStream",
+                "listClipsAsync"
               ]
             },
             "ListAssets": {
@@ -158,6 +180,11 @@
                 "deleteEvent"
               ]
             },
+            "GetClip": {
+              "methods": [
+                "getClip"
+              ]
+            },
             "GetAsset": {
               "methods": [
                 "getAsset"
@@ -208,6 +235,16 @@
                 "updateInput"
               ]
             },
+            "CreateClip": {
+              "methods": [
+                "createClip"
+              ]
+            },
+            "DeleteClip": {
+              "methods": [
+                "deleteClip"
+              ]
+            },
             "CreateAsset": {
               "methods": [
                 "createAsset"
@@ -242,6 +279,13 @@
                 "listEvents",
                 "listEventsStream",
                 "listEventsAsync"
+              ]
+            },
+            "ListClips": {
+              "methods": [
+                "listClips",
+                "listClipsStream",
+                "listClipsAsync"
               ]
             },
             "ListAssets": {

@@ -9370,6 +9370,14 @@
                                 "finishDigit": {
                                   "type": "string",
                                   "id": 3
+                                },
+                                "interdigitTimeoutDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 6
+                                },
+                                "endpointingTimeoutDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 7
                                 }
                               }
                             },
@@ -9634,6 +9642,12 @@
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}"
                           },
                           "oneofs": {
+                            "sessionEntryResource": {
+                              "oneof": [
+                                "startFlow",
+                                "startPlaybook"
+                              ]
+                            },
                             "_genAppBuilderSettings": {
                               "oneof": [
                                 "genAppBuilderSettings"
@@ -9687,7 +9701,6 @@
                               "type": "string",
                               "id": 16,
                               "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
                               }
                             },
@@ -9695,7 +9708,6 @@
                               "type": "string",
                               "id": 39,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
                               }
                             },
@@ -11799,7 +11811,8 @@
                                 "playAudio",
                                 "mixedAudio",
                                 "telephonyTransferCall",
-                                "knowledgeInfoCard"
+                                "knowledgeInfoCard",
+                                "toolCall"
                               ]
                             }
                           },
@@ -11849,6 +11862,10 @@
                             "knowledgeInfoCard": {
                               "type": "KnowledgeInfoCard",
                               "id": 20
+                            },
+                            "toolCall": {
+                              "type": "google.cloud.dialogflow.cx.v3beta1.ToolCall",
+                              "id": 22
                             },
                             "channel": {
                               "type": "string",
@@ -11994,6 +12011,80 @@
                             },
                             "KnowledgeInfoCard": {
                               "fields": {}
+                            }
+                          }
+                        },
+                        "ToolCall": {
+                          "fields": {
+                            "tool": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
+                              }
+                            },
+                            "action": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "inputParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ToolCallResult": {
+                          "oneofs": {
+                            "result": {
+                              "oneof": [
+                                "error",
+                                "outputParameters"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "tool": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
+                              }
+                            },
+                            "action": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "error": {
+                              "type": "Error",
+                              "id": 3
+                            },
+                            "outputParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Error": {
+                              "fields": {
+                                "message": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -15794,7 +15885,8 @@
                                 "PARAMETER_FILLING": 3,
                                 "NO_MATCH": 4,
                                 "NO_INPUT": 5,
-                                "EVENT": 6
+                                "EVENT": 6,
+                                "PLAYBOOK": 9
                               }
                             }
                           }
@@ -16219,10 +16311,9 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "parameters": {
-                              "rule": "repeated",
-                              "type": "ActionParameter",
-                              "id": 2,
+                            "actionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -16238,10 +16329,9 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "parameters": {
-                              "rule": "repeated",
-                              "type": "ActionParameter",
-                              "id": 3,
+                            "actionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -16337,32 +16427,18 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "inputParameters": {
-                              "rule": "repeated",
-                              "type": "ActionParameter",
-                              "id": 3
-                            },
-                            "outputParameters": {
-                              "rule": "repeated",
-                              "type": "ActionParameter",
-                              "id": 4
-                            }
-                          }
-                        },
-                        "ActionParameter": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
+                            "inputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 5,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "value": {
-                              "type": "google.protobuf.Value",
-                              "id": 2,
+                            "outputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 6,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -16410,15 +16486,19 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
                               }
                             },
-                            "inputParameters": {
-                              "rule": "repeated",
-                              "type": "ActionParameter",
-                              "id": 2
+                            "inputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
-                            "outputParameters": {
-                              "rule": "repeated",
-                              "type": "ActionParameter",
-                              "id": 3
+                            "outputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "flowState": {
                               "type": "OutputState",
@@ -17225,54 +17305,6 @@
                             "force": {
                               "type": "bool",
                               "id": 2
-                            }
-                          }
-                        },
-                        "ToolCallResult": {
-                          "oneofs": {
-                            "result": {
-                              "oneof": [
-                                "error",
-                                "outputParameters"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "tool": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED",
-                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
-                              }
-                            },
-                            "action": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "error": {
-                              "type": "Error",
-                              "id": 3
-                            },
-                            "outputParameters": {
-                              "type": "google.protobuf.Struct",
-                              "id": 4
-                            }
-                          },
-                          "nested": {
-                            "Error": {
-                              "fields": {
-                                "message": {
-                                  "type": "string",
-                                  "id": 1,
-                                  "options": {
-                                    "(google.api.field_behavior)": "OPTIONAL"
-                                  }
-                                }
-                              }
                             }
                           }
                         },
@@ -19578,10 +19610,9 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "steps": {
-                              "rule": "repeated",
-                              "type": "Step",
-                              "id": 4
+                            "instruction": {
+                              "type": "Instruction",
+                              "id": 17
                             },
                             "tokenCount": {
                               "type": "int64",
@@ -19653,6 +19684,15 @@
                                   "type": "string",
                                   "id": 1
                                 },
+                                "steps": {
+                                  "rule": "repeated",
+                                  "type": "Step",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "Instruction": {
+                              "fields": {
                                 "steps": {
                                   "rule": "repeated",
                                   "type": "Step",
@@ -20094,6 +20134,10 @@
                                 "audioFormat": {
                                   "type": "AudioFormat",
                                   "id": 4
+                                },
+                                "storeTtsAudio": {
+                                  "type": "bool",
+                                  "id": 6
                                 }
                               },
                               "nested": {
@@ -20449,22 +20493,6 @@
                               "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "actions": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 6,
-                              "options": {
-                                "deprecated": true
-                              }
-                            },
-                            "schemas": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 7,
-                              "options": {
-                                "deprecated": true
                               }
                             },
                             "openApiSpec": {

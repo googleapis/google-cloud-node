@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-analyticshub",
-        "version": "1.4.0",
+        "version": "1.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -510,7 +510,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -686,7 +686,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 78,
                     "type": "FULL"
                 }
             ],

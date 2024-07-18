@@ -30,8 +30,8 @@ function main(parent, muteConfig, muteConfigId) {
    */
   /**
    *  Required. Resource name of the new mute configs's parent. Its format is
-   *  "organizations/[organization_id]", "folders/[folder_id]", or
-   *  "projects/[project_id]".
+   *  `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *  `projects/[project_id]`.
    */
   // const parent = 'abc123'
   /**

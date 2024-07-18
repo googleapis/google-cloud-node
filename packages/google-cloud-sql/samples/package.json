@@ -14,11 +14,11 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/sql": "^0.12.0"
+    "@google-cloud/sql": "^0.16.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",
     "chai": "^4.2.0",
-    "mocha": "^8.0.0"
+    "mocha": "^9.0.0"
   }
 }

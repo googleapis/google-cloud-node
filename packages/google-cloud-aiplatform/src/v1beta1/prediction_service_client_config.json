@@ -29,6 +29,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "StreamRawPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DirectPredict": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

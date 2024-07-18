@@ -11,12 +11,12 @@
                     "csharp_namespace": "Google.Cloud.SecurityCenter.V1",
                     "go_package": "cloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "SecurityHealthAnalyticsCustomModuleProto",
+                    "java_outer_classname": "ValuedResourceProto",
                     "java_package": "com.google.cloud.securitycenter.v1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1",
-                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/SecurityHealthAnalyticsSettings",
-                    "(google.api.resource_definition).pattern": "projects/{project}/securityHealthAnalyticsSettings"
+                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/EventThreatDetectionSettings",
+                    "(google.api.resource_definition).pattern": "projects/{project}/eventThreatDetectionSettings"
                   },
                   "nested": {
                     "Access": {
@@ -103,7 +103,9 @@
                     "Asset": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
-                        "(google.api.resource).pattern": "projects/{project}/assets/{asset}"
+                        "(google.api.resource).pattern": "projects/{project}/assets/{asset}",
+                        "(google.api.resource).plural": "assets",
+                        "(google.api.resource).singular": "asset"
                       },
                       "fields": {
                         "name": {
@@ -226,6 +228,167 @@
                         }
                       }
                     },
+                    "AttackExposure": {
+                      "fields": {
+                        "score": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "latestCalculationTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "attackExposureResult": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4
+                        },
+                        "exposedHighValueResourcesCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "exposedMediumValueResourcesCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "exposedLowValueResourcesCount": {
+                          "type": "int32",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CALCULATED": 1,
+                            "NOT_CALCULATED": 2
+                          }
+                        }
+                      }
+                    },
+                    "AttackPath": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/AttackPath",
+                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}",
+                        "(google.api.resource).plural": "attackPaths",
+                        "(google.api.resource).singular": "attackPath"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "pathNodes": {
+                          "rule": "repeated",
+                          "type": "AttackPathNode",
+                          "id": 2
+                        },
+                        "edges": {
+                          "rule": "repeated",
+                          "type": "AttackPathEdge",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AttackPathNode": {
+                          "fields": {
+                            "resource": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resourceType": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "associatedFindings": {
+                              "rule": "repeated",
+                              "type": "PathNodeAssociatedFinding",
+                              "id": 4
+                            },
+                            "uuid": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "attackSteps": {
+                              "rule": "repeated",
+                              "type": "AttackStepNode",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "PathNodeAssociatedFinding": {
+                              "fields": {
+                                "canonicalFinding": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "findingCategory": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "NodeType": {
+                              "values": {
+                                "NODE_TYPE_UNSPECIFIED": 0,
+                                "NODE_TYPE_AND": 1,
+                                "NODE_TYPE_OR": 2,
+                                "NODE_TYPE_DEFENSE": 3,
+                                "NODE_TYPE_ATTACKER": 4
+                              }
+                            },
+                            "AttackStepNode": {
+                              "fields": {
+                                "uuid": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "type": {
+                                  "type": "NodeType",
+                                  "id": 2
+                                },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 3
+                                },
+                                "labels": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "AttackPathEdge": {
+                          "fields": {
+                            "source": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "destination": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "BackupDisasterRecovery": {
                       "fields": {
                         "backupTemplate": {
@@ -276,7 +439,9 @@
                     "BigQueryExport": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/BigQueryExport",
-                        "(google.api.resource).pattern": "projects/{project}/bigQueryExports/{export}"
+                        "(google.api.resource).pattern": "projects/{project}/bigQueryExports/{export}",
+                        "(google.api.resource).plural": "bigQueryExports",
+                        "(google.api.resource).singular": "bigQueryExport"
                       },
                       "fields": {
                         "name": {
@@ -596,6 +761,65 @@
                         }
                       }
                     },
+                    "EffectiveEventThreatDetectionCustomModule": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/EffectiveEventThreatDetectionCustomModule",
+                        "(google.api.resource).pattern": "projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "config": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "enablementState": {
+                          "type": "EnablementState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EnablementState": {
+                          "values": {
+                            "ENABLEMENT_STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2
+                          }
+                        }
+                      }
+                    },
                     "EffectiveSecurityHealthAnalyticsCustomModule": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/EffectiveSecurityHealthAnalyticsCustomModule",
@@ -712,6 +936,132 @@
                         }
                       }
                     },
+                    "EventThreatDetectionCustomModule": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule",
+                        "(google.api.resource).pattern": "projects/{project}/eventThreatDetectionSettings/customModules/{module}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "config": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        },
+                        "ancestorModule": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        },
+                        "enablementState": {
+                          "type": "EnablementState",
+                          "id": 4
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastEditor": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EnablementState": {
+                          "values": {
+                            "ENABLEMENT_STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2,
+                            "INHERITED": 3
+                          }
+                        }
+                      }
+                    },
+                    "CustomModuleValidationErrors": {
+                      "fields": {
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "CustomModuleValidationError",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "CustomModuleValidationError": {
+                      "oneofs": {
+                        "_start": {
+                          "oneof": [
+                            "start"
+                          ]
+                        },
+                        "_end": {
+                          "oneof": [
+                            "end"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fieldPath": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "start": {
+                          "type": "Position",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "end": {
+                          "type": "Position",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "Position": {
+                      "fields": {
+                        "lineNumber": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "columnNumber": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
                     "Exfiltration": {
                       "fields": {
                         "sources": {
@@ -746,7 +1096,9 @@
                     "ExternalSystem": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ExternalSystem",
-                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}"
+                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}/externalSystems/{externalsystem}",
+                        "(google.api.resource).plural": "externalSystems",
+                        "(google.api.resource).singular": "externalSystem"
                       },
                       "fields": {
                         "name": {
@@ -875,7 +1227,9 @@
                     "Finding": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Finding",
-                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}"
+                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}",
+                        "(google.api.resource).plural": "findings",
+                        "(google.api.resource).singular": "finding"
                       },
                       "fields": {
                         "name": {
@@ -1037,6 +1391,10 @@
                           "type": "Database",
                           "id": 44
                         },
+                        "attackExposure": {
+                          "type": "AttackExposure",
+                          "id": 45
+                        },
                         "files": {
                           "rule": "repeated",
                           "type": "File",
@@ -1088,6 +1446,15 @@
                         "notebook": {
                           "type": "Notebook",
                           "id": 63
+                        },
+                        "toxicCombination": {
+                          "type": "ToxicCombination",
+                          "id": 64
+                        },
+                        "groupMemberships": {
+                          "rule": "repeated",
+                          "type": "GroupMembership",
+                          "id": 65
                         }
                       },
                       "nested": {
@@ -1123,7 +1490,28 @@
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
-                            "POSTURE_VIOLATION": 6
+                            "POSTURE_VIOLATION": 6,
+                            "TOXIC_COMBINATION": 7
+                          }
+                        }
+                      }
+                    },
+                    "GroupMembership": {
+                      "fields": {
+                        "groupType": {
+                          "type": "GroupType",
+                          "id": 1
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GroupType": {
+                          "values": {
+                            "GROUP_TYPE_UNSPECIFIED": 0,
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1
                           }
                         }
                       }
@@ -1600,6 +1988,7 @@
                             "PROCESS_DISCOVERY": 56,
                             "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
                             "UNIX_SHELL": 7,
+                            "PYTHON": 59,
                             "PERMISSION_GROUPS_DISCOVERY": 18,
                             "CLOUD_GROUPS": 19,
                             "APPLICATION_LAYER_PROTOCOL": 45,
@@ -1649,7 +2038,10 @@
                             "OBTAIN_CAPABILITIES": 43,
                             "ACTIVE_SCANNING": 1,
                             "SCANNING_IP_BLOCKS": 2,
-                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57
+                            "CONTAINER_ADMINISTRATION_COMMAND": 60,
+                            "ESCAPE_TO_HOST": 61,
+                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57,
+                            "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES": 62
                           }
                         }
                       }
@@ -1797,6 +2189,19 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "ToxicCombination": {
+                      "fields": {
+                        "attackExposureScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -2017,7 +2422,9 @@
                     "MuteConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/MuteConfig",
-                        "(google.api.resource).pattern": "projects/{project}/muteConfigs/{mute_config}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/muteConfigs/{mute_config}",
+                        "(google.api.resource).plural": "muteConfigs",
+                        "(google.api.resource).singular": "muteConfig"
                       },
                       "fields": {
                         "name": {
@@ -2068,7 +2475,9 @@
                     "NotificationConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/NotificationConfig",
-                        "(google.api.resource).pattern": "projects/{project}/notificationConfigs/{notification_config}"
+                        "(google.api.resource).pattern": "projects/{project}/notificationConfigs/{notification_config}",
+                        "(google.api.resource).plural": "notificationConfigs",
+                        "(google.api.resource).singular": "notificationConfig"
                       },
                       "oneofs": {
                         "notifyConfig": {
@@ -2140,6 +2549,14 @@
                       }
                     },
                     "Resource": {
+                      "oneofs": {
+                        "cloudProviderMetadata": {
+                          "oneof": [
+                            "awsMetadata",
+                            "azureMetadata"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -2176,13 +2593,198 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 9
+                        },
+                        "organization": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "awsMetadata": {
+                          "type": "AwsMetadata",
+                          "id": 16
+                        },
+                        "azureMetadata": {
+                          "type": "AzureMetadata",
+                          "id": 17
+                        },
+                        "resourcePath": {
+                          "type": "ResourcePath",
+                          "id": 18
+                        },
+                        "resourcePathString": {
+                          "type": "string",
+                          "id": 19
+                        }
+                      }
+                    },
+                    "CloudProvider": {
+                      "values": {
+                        "CLOUD_PROVIDER_UNSPECIFIED": 0,
+                        "GOOGLE_CLOUD_PLATFORM": 1,
+                        "AMAZON_WEB_SERVICES": 2,
+                        "MICROSOFT_AZURE": 3
+                      }
+                    },
+                    "AwsMetadata": {
+                      "fields": {
+                        "organization": {
+                          "type": "AwsOrganization",
+                          "id": 2
+                        },
+                        "organizationalUnits": {
+                          "rule": "repeated",
+                          "type": "AwsOrganizationalUnit",
+                          "id": 3
+                        },
+                        "account": {
+                          "type": "AwsAccount",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "AwsOrganization": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AwsOrganizationalUnit": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AwsAccount": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AzureMetadata": {
+                      "fields": {
+                        "managementGroups": {
+                          "rule": "repeated",
+                          "type": "AzureManagementGroup",
+                          "id": 4
+                        },
+                        "subscription": {
+                          "type": "AzureSubscription",
+                          "id": 5
+                        },
+                        "resourceGroup": {
+                          "type": "AzureResourceGroup",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "AzureManagementGroup": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AzureSubscription": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AzureResourceGroup": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ResourcePath": {
+                      "fields": {
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "ResourcePathNode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ResourcePathNodeType": {
+                          "values": {
+                            "RESOURCE_PATH_NODE_TYPE_UNSPECIFIED": 0,
+                            "GCP_ORGANIZATION": 1,
+                            "GCP_FOLDER": 2,
+                            "GCP_PROJECT": 3,
+                            "AWS_ORGANIZATION": 4,
+                            "AWS_ORGANIZATIONAL_UNIT": 5,
+                            "AWS_ACCOUNT": 6,
+                            "AZURE_MANAGEMENT_GROUP": 7,
+                            "AZURE_SUBSCRIPTION": 8,
+                            "AZURE_RESOURCE_GROUP": 9
+                          }
+                        },
+                        "ResourcePathNode": {
+                          "fields": {
+                            "nodeType": {
+                              "type": "ResourcePathNodeType",
+                              "id": 1
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
                     "OrganizationSettings": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/OrganizationSettings",
-                        "(google.api.resource).pattern": "organizations/{organization}/organizationSettings"
+                        "(google.api.resource).pattern": "organizations/{organization}/organizationSettings",
+                        "(google.api.resource).plural": "organizationSettings",
+                        "(google.api.resource).singular": "organizationSettings"
                       },
                       "fields": {
                         "name": {
@@ -2226,6 +2828,97 @@
                             }
                           }
                         }
+                      }
+                    },
+                    "ResourceValueConfig": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/ResourceValueConfig",
+                        "(google.api.resource).pattern": "organizations/{organization}/resourceValueConfigs/{resource_value_config}",
+                        "(google.api.resource).plural": "resourceValueConfigs",
+                        "(google.api.resource).singular": "resourceValueConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resourceValue": {
+                          "type": "ResourceValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tagValues": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "resourceLabelsSelector": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 10
+                        },
+                        "sensitiveDataProtectionMapping": {
+                          "type": "SensitiveDataProtectionMapping",
+                          "id": 11
+                        }
+                      },
+                      "nested": {
+                        "SensitiveDataProtectionMapping": {
+                          "fields": {
+                            "highSensitivityMapping": {
+                              "type": "ResourceValue",
+                              "id": 1
+                            },
+                            "mediumSensitivityMapping": {
+                              "type": "ResourceValue",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ResourceValue": {
+                      "values": {
+                        "RESOURCE_VALUE_UNSPECIFIED": 0,
+                        "HIGH": 1,
+                        "MEDIUM": 2,
+                        "LOW": 3,
+                        "NONE": 4
                       }
                     },
                     "RunAssetDiscoveryResponse": {
@@ -2433,7 +3126,7 @@
                           "options": {
                             "(google.api.http).post": "/v1/{parent=organizations/*}/muteConfigs",
                             "(google.api.http).body": "mute_config",
-                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*}/muteConfigs",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/muteConfigs",
                             "(google.api.http).additional_bindings.body": "mute_config",
                             "(google.api.method_signature)": "parent,mute_config,mute_config_id"
                           },
@@ -2444,11 +3137,23 @@
                                 "body": "mute_config",
                                 "additional_bindings": [
                                   {
+                                    "post": "/v1/{parent=organizations/*/locations/*}/muteConfigs",
+                                    "body": "mute_config"
+                                  },
+                                  {
                                     "post": "/v1/{parent=folders/*}/muteConfigs",
                                     "body": "mute_config"
                                   },
                                   {
+                                    "post": "/v1/{parent=folders/*/locations/*}/muteConfigs",
+                                    "body": "mute_config"
+                                  },
+                                  {
                                     "post": "/v1/{parent=projects/*}/muteConfigs",
+                                    "body": "mute_config"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/locations/*}/muteConfigs",
                                     "body": "mute_config"
                                   }
                                 ]
@@ -2502,7 +3207,7 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=organizations/*/muteConfigs/*}",
-                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/muteConfigs/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/muteConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
@@ -2515,6 +3220,15 @@
                                   },
                                   {
                                     "delete": "/v1/{name=projects/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=organizations/*/locations/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=folders/*/locations/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/locations/*/muteConfigs/*}"
                                   }
                                 ]
                               }
@@ -2578,6 +3292,42 @@
                             }
                           ]
                         },
+                        "GetSimulation": {
+                          "requestType": "GetSimulationRequest",
+                          "responseType": "Simulation",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/simulations/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/simulations/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetValuedResource": {
+                          "requestType": "GetValuedResourceRequest",
+                          "responseType": "ValuedResource",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/simulations/*/valuedResources/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/simulations/*/valuedResources/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GetBigQueryExport": {
                           "requestType": "GetBigQueryExportRequest",
                           "responseType": "BigQueryExport",
@@ -2630,7 +3380,7 @@
                           "responseType": "MuteConfig",
                           "options": {
                             "(google.api.http).get": "/v1/{name=organizations/*/muteConfigs/*}",
-                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/muteConfigs/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/muteConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
@@ -2643,6 +3393,15 @@
                                   },
                                   {
                                     "get": "/v1/{name=projects/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=organizations/*/locations/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=folders/*/locations/*/muteConfigs/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/locations/*/muteConfigs/*}"
                                   }
                                 ]
                               }
@@ -2915,7 +3674,7 @@
                           "responseType": "ListMuteConfigsResponse",
                           "options": {
                             "(google.api.http).get": "/v1/{parent=organizations/*}/muteConfigs",
-                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*}/muteConfigs",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*/muteConfigs}",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
@@ -2928,6 +3687,15 @@
                                   },
                                   {
                                     "get": "/v1/{parent=projects/*}/muteConfigs"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=organizations/*/locations/*/muteConfigs}"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=folders/*/locations/*/muteConfigs}"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/locations/*/muteConfigs}"
                                   }
                                 ]
                               }
@@ -3283,7 +4051,7 @@
                           "options": {
                             "(google.api.http).patch": "/v1/{mute_config.name=organizations/*/muteConfigs/*}",
                             "(google.api.http).body": "mute_config",
-                            "(google.api.http).additional_bindings.patch": "/v1/{mute_config.name=projects/*/muteConfigs/*}",
+                            "(google.api.http).additional_bindings.patch": "/v1/{mute_config.name=projects/*/locations/*/muteConfigs/*}",
                             "(google.api.http).additional_bindings.body": "mute_config",
                             "(google.api.method_signature)": "mute_config,update_mask"
                           },
@@ -3299,6 +4067,18 @@
                                   },
                                   {
                                     "patch": "/v1/{mute_config.name=projects/*/muteConfigs/*}",
+                                    "body": "mute_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{mute_config.name=organizations/*/locations/*/muteConfigs/*}",
+                                    "body": "mute_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{mute_config.name=folders/*/locations/*/muteConfigs/*}",
+                                    "body": "mute_config"
+                                  },
+                                  {
+                                    "patch": "/v1/{mute_config.name=projects/*/locations/*/muteConfigs/*}",
                                     "body": "mute_config"
                                   }
                                 ]
@@ -3577,6 +4357,403 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "CreateEventThreatDetectionCustomModule": {
+                          "requestType": "CreateEventThreatDetectionCustomModuleRequest",
+                          "responseType": "EventThreatDetectionCustomModule",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/customModules",
+                            "(google.api.http).body": "event_threat_detection_custom_module",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/eventThreatDetectionSettings}/customModules",
+                            "(google.api.http).additional_bindings.body": "event_threat_detection_custom_module",
+                            "(google.api.method_signature)": "parent,event_threat_detection_custom_module"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/customModules",
+                                "body": "event_threat_detection_custom_module",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*/eventThreatDetectionSettings}/customModules",
+                                    "body": "event_threat_detection_custom_module"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/eventThreatDetectionSettings}/customModules",
+                                    "body": "event_threat_detection_custom_module"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,event_threat_detection_custom_module"
+                            }
+                          ]
+                        },
+                        "DeleteEventThreatDetectionCustomModule": {
+                          "requestType": "DeleteEventThreatDetectionCustomModuleRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/eventThreatDetectionSettings/customModules/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/eventThreatDetectionSettings/customModules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/eventThreatDetectionSettings/customModules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1/{name=folders/*/eventThreatDetectionSettings/customModules/*}"
+                                  },
+                                  {
+                                    "delete": "/v1/{name=projects/*/eventThreatDetectionSettings/customModules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetEventThreatDetectionCustomModule": {
+                          "requestType": "GetEventThreatDetectionCustomModuleRequest",
+                          "responseType": "EventThreatDetectionCustomModule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/eventThreatDetectionSettings/customModules/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/eventThreatDetectionSettings/customModules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/eventThreatDetectionSettings/customModules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/eventThreatDetectionSettings/customModules/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/eventThreatDetectionSettings/customModules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDescendantEventThreatDetectionCustomModules": {
+                          "requestType": "ListDescendantEventThreatDetectionCustomModulesRequest",
+                          "responseType": "ListDescendantEventThreatDetectionCustomModulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/customModules:listDescendant",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/eventThreatDetectionSettings}/customModules:listDescendant",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/customModules:listDescendant",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/eventThreatDetectionSettings}/customModules:listDescendant"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/eventThreatDetectionSettings}/customModules:listDescendant"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListEventThreatDetectionCustomModules": {
+                          "requestType": "ListEventThreatDetectionCustomModulesRequest",
+                          "responseType": "ListEventThreatDetectionCustomModulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/customModules",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/eventThreatDetectionSettings}/customModules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/customModules",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/eventThreatDetectionSettings}/customModules"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/eventThreatDetectionSettings}/customModules"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateEventThreatDetectionCustomModule": {
+                          "requestType": "UpdateEventThreatDetectionCustomModuleRequest",
+                          "responseType": "EventThreatDetectionCustomModule",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{event_threat_detection_custom_module.name=organizations/*/eventThreatDetectionSettings/customModules/*}",
+                            "(google.api.http).body": "event_threat_detection_custom_module",
+                            "(google.api.http).additional_bindings.patch": "/v1/{event_threat_detection_custom_module.name=projects/*/eventThreatDetectionSettings/customModules/*}",
+                            "(google.api.http).additional_bindings.body": "event_threat_detection_custom_module",
+                            "(google.api.method_signature)": "event_threat_detection_custom_module,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{event_threat_detection_custom_module.name=organizations/*/eventThreatDetectionSettings/customModules/*}",
+                                "body": "event_threat_detection_custom_module",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{event_threat_detection_custom_module.name=folders/*/eventThreatDetectionSettings/customModules/*}",
+                                    "body": "event_threat_detection_custom_module"
+                                  },
+                                  {
+                                    "patch": "/v1/{event_threat_detection_custom_module.name=projects/*/eventThreatDetectionSettings/customModules/*}",
+                                    "body": "event_threat_detection_custom_module"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "event_threat_detection_custom_module,update_mask"
+                            }
+                          ]
+                        },
+                        "ValidateEventThreatDetectionCustomModule": {
+                          "requestType": "ValidateEventThreatDetectionCustomModuleRequest",
+                          "responseType": "ValidateEventThreatDetectionCustomModuleResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/eventThreatDetectionSettings}:validateCustomModule",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/eventThreatDetectionSettings}:validateCustomModule",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/eventThreatDetectionSettings}:validateCustomModule",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*/eventThreatDetectionSettings}:validateCustomModule",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/eventThreatDetectionSettings}:validateCustomModule",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        "GetEffectiveEventThreatDetectionCustomModule": {
+                          "requestType": "GetEffectiveEventThreatDetectionCustomModuleRequest",
+                          "responseType": "EffectiveEventThreatDetectionCustomModule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/eventThreatDetectionSettings/effectiveCustomModules/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/eventThreatDetectionSettings/effectiveCustomModules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/eventThreatDetectionSettings/effectiveCustomModules/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/eventThreatDetectionSettings/effectiveCustomModules/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/eventThreatDetectionSettings/effectiveCustomModules/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListEffectiveEventThreatDetectionCustomModules": {
+                          "requestType": "ListEffectiveEventThreatDetectionCustomModulesRequest",
+                          "responseType": "ListEffectiveEventThreatDetectionCustomModulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/effectiveCustomModules",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/eventThreatDetectionSettings}/effectiveCustomModules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/eventThreatDetectionSettings}/effectiveCustomModules",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/eventThreatDetectionSettings}/effectiveCustomModules"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/eventThreatDetectionSettings}/effectiveCustomModules"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "BatchCreateResourceValueConfigs": {
+                          "requestType": "BatchCreateResourceValueConfigsRequest",
+                          "responseType": "BatchCreateResourceValueConfigsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*}/resourceValueConfigs:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*}/resourceValueConfigs:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        },
+                        "DeleteResourceValueConfig": {
+                          "requestType": "DeleteResourceValueConfigRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=organizations/*/resourceValueConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetResourceValueConfig": {
+                          "requestType": "GetResourceValueConfigRequest",
+                          "responseType": "ResourceValueConfig",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/resourceValueConfigs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListResourceValueConfigs": {
+                          "requestType": "ListResourceValueConfigsRequest",
+                          "responseType": "ListResourceValueConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*}/resourceValueConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*}/resourceValueConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateResourceValueConfig": {
+                          "requestType": "UpdateResourceValueConfigRequest",
+                          "responseType": "ResourceValueConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{resource_value_config.name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.http).body": "resource_value_config",
+                            "(google.api.method_signature)": "resource_value_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{resource_value_config.name=organizations/*/resourceValueConfigs/*}",
+                                "body": "resource_value_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "resource_value_config,update_mask"
+                            }
+                          ]
+                        },
+                        "ListValuedResources": {
+                          "requestType": "ListValuedResourcesRequest",
+                          "responseType": "ListValuedResourcesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/simulations/*}/valuedResources",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=organizations/*/simulations/*/attackExposureResults/*}/valuedResources",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/simulations/*}/valuedResources",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=organizations/*/simulations/*/attackExposureResults/*}/valuedResources"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListAttackPaths": {
+                          "requestType": "ListAttackPathsRequest",
+                          "responseType": "ListAttackPathsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/simulations/*}/attackPaths",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=organizations/*/simulations/*/attackExposureResults/*}/attackPaths",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/simulations/*}/attackPaths",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=organizations/*/simulations/*/valuedResources/*}/attackPaths"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=organizations/*/simulations/*/attackExposureResults/*}/attackPaths"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -3655,6 +4832,126 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "CreateResourceValueConfigRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/ResourceValueConfig"
+                          }
+                        },
+                        "resourceValueConfig": {
+                          "type": "ResourceValueConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateResourceValueConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/ResourceValueConfig"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateResourceValueConfigRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateResourceValueConfigsResponse": {
+                      "fields": {
+                        "resourceValueConfigs": {
+                          "rule": "repeated",
+                          "type": "ResourceValueConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DeleteResourceValueConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/ResourceValueConfig"
+                          }
+                        }
+                      }
+                    },
+                    "GetResourceValueConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/ResourceValueConfig"
+                          }
+                        }
+                      }
+                    },
+                    "ListResourceValueConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/ResourceValueConfig"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListResourceValueConfigsResponse": {
+                      "fields": {
+                        "resourceValueConfigs": {
+                          "rule": "repeated",
+                          "type": "ResourceValueConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateResourceValueConfigRequest": {
+                      "fields": {
+                        "resourceValueConfig": {
+                          "type": "ResourceValueConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     },
@@ -4008,6 +5305,115 @@
                         }
                       }
                     },
+                    "ListValuedResourcesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/ValuedResource"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListValuedResourcesResponse": {
+                      "fields": {
+                        "valuedResources": {
+                          "rule": "repeated",
+                          "type": "ValuedResource",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "totalSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAttackPathsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/AttackPath"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListAttackPathsResponse": {
+                      "fields": {
+                        "attackPaths": {
+                          "rule": "repeated",
+                          "type": "AttackPath",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetSimulationRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/Simulation"
+                          }
+                        }
+                      }
+                    },
+                    "GetValuedResourceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/ValuedResource"
+                          }
+                        }
+                      }
+                    },
                     "ListMuteConfigsRequest": {
                       "fields": {
                         "parent": {
@@ -4348,6 +5754,14 @@
                               }
                             },
                             "Resource": {
+                              "oneofs": {
+                                "cloudProviderMetadata": {
+                                  "oneof": [
+                                    "awsMetadata",
+                                    "azureMetadata"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "name": {
                                   "type": "string",
@@ -4381,6 +5795,38 @@
                                   "rule": "repeated",
                                   "type": "Folder",
                                   "id": 7
+                                },
+                                "cloudProvider": {
+                                  "type": "CloudProvider",
+                                  "id": 9
+                                },
+                                "organization": {
+                                  "type": "string",
+                                  "id": 10
+                                },
+                                "service": {
+                                  "type": "string",
+                                  "id": 11
+                                },
+                                "location": {
+                                  "type": "string",
+                                  "id": 12
+                                },
+                                "awsMetadata": {
+                                  "type": "AwsMetadata",
+                                  "id": 16
+                                },
+                                "azureMetadata": {
+                                  "type": "AzureMetadata",
+                                  "id": 17
+                                },
+                                "resourcePath": {
+                                  "type": "ResourcePath",
+                                  "id": 18
+                                },
+                                "resourcePathString": {
+                                  "type": "string",
+                                  "id": 19
                                 }
                               }
                             }
@@ -4739,6 +6185,296 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "securitycenter.googleapis.com/BigQueryExport"
                           }
+                        }
+                      }
+                    },
+                    "CreateEventThreatDetectionCustomModuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        },
+                        "eventThreatDetectionCustomModule": {
+                          "type": "EventThreatDetectionCustomModule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ValidateEventThreatDetectionCustomModuleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        },
+                        "rawText": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ValidateEventThreatDetectionCustomModuleResponse": {
+                      "fields": {
+                        "errors": {
+                          "type": "CustomModuleValidationErrors",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteEventThreatDetectionCustomModuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        }
+                      }
+                    },
+                    "GetEventThreatDetectionCustomModuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        }
+                      }
+                    },
+                    "ListDescendantEventThreatDetectionCustomModulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDescendantEventThreatDetectionCustomModulesResponse": {
+                      "fields": {
+                        "eventThreatDetectionCustomModules": {
+                          "rule": "repeated",
+                          "type": "EventThreatDetectionCustomModule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListEventThreatDetectionCustomModulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/EventThreatDetectionCustomModule"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEventThreatDetectionCustomModulesResponse": {
+                      "fields": {
+                        "eventThreatDetectionCustomModules": {
+                          "rule": "repeated",
+                          "type": "EventThreatDetectionCustomModule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateEventThreatDetectionCustomModuleRequest": {
+                      "fields": {
+                        "eventThreatDetectionCustomModule": {
+                          "type": "EventThreatDetectionCustomModule",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetEffectiveEventThreatDetectionCustomModuleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "securitycenter.googleapis.com/EffectiveEventThreatDetectionCustomModule"
+                          }
+                        }
+                      }
+                    },
+                    "ListEffectiveEventThreatDetectionCustomModulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/EffectiveEventThreatDetectionCustomModule"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEffectiveEventThreatDetectionCustomModulesResponse": {
+                      "fields": {
+                        "effectiveEventThreatDetectionCustomModules": {
+                          "rule": "repeated",
+                          "type": "EffectiveEventThreatDetectionCustomModule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Simulation": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/Simulation",
+                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}",
+                        "(google.api.resource).plural": "simulations",
+                        "(google.api.resource).singular": "simulation"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "resourceValueConfigsMetadata": {
+                          "rule": "repeated",
+                          "type": "ResourceValueConfigMetadata",
+                          "id": 3
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ValuedResource": {
+                      "options": {
+                        "(google.api.resource).type": "securitycenter.googleapis.com/ValuedResource",
+                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}",
+                        "(google.api.resource).plural": "valuedResources",
+                        "(google.api.resource).singular": "valuedResource"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "resourceType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "resourceValue": {
+                          "type": "ResourceValue",
+                          "id": 5
+                        },
+                        "exposedScore": {
+                          "type": "double",
+                          "id": 6
+                        },
+                        "resourceValueConfigsUsed": {
+                          "rule": "repeated",
+                          "type": "ResourceValueConfigMetadata",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "ResourceValue": {
+                          "values": {
+                            "RESOURCE_VALUE_UNSPECIFIED": 0,
+                            "RESOURCE_VALUE_LOW": 1,
+                            "RESOURCE_VALUE_MEDIUM": 2,
+                            "RESOURCE_VALUE_HIGH": 3
+                          }
+                        }
+                      }
+                    },
+                    "ResourceValueConfigMetadata": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -7495,8 +9231,8 @@
                     "java_package": "com.google.cloud.securitycenter.v2",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V2",
                     "ruby_package": "Google::Cloud::SecurityCenter::V2",
-                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/FolderLocation",
-                    "(google.api.resource_definition).pattern": "folders/{folder}/locations/{location}"
+                    "(google.api.resource_definition).type": "securitycenter.googleapis.com/OrganizationValuedResource",
+                    "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}"
                   },
                   "nested": {
                     "Access": {
@@ -7627,7 +9363,7 @@
                     "AttackPath": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/AttackPath",
-                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}",
                         "(google.api.resource).plural": "attackPaths",
                         "(google.api.resource).singular": "attackPath"
                       },
@@ -7842,6 +9578,94 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        }
+                      }
+                    },
+                    "CloudArmor": {
+                      "fields": {
+                        "securityPolicy": {
+                          "type": "SecurityPolicy",
+                          "id": 1
+                        },
+                        "requests": {
+                          "type": "Requests",
+                          "id": 2
+                        },
+                        "adaptiveProtection": {
+                          "type": "AdaptiveProtection",
+                          "id": 3
+                        },
+                        "attack": {
+                          "type": "Attack",
+                          "id": 4
+                        },
+                        "threatVector": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "duration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "SecurityPolicy": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "preview": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Requests": {
+                      "fields": {
+                        "ratio": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "shortTermAllowed": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "longTermAllowed": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "longTermDenied": {
+                          "type": "int32",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "AdaptiveProtection": {
+                      "fields": {
+                        "confidence": {
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Attack": {
+                      "fields": {
+                        "volumePps": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "volumeBps": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "classification": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -8417,6 +10241,23 @@
                           "rule": "repeated",
                           "type": "LoadBalancer",
                           "id": 50
+                        },
+                        "cloudArmor": {
+                          "type": "CloudArmor",
+                          "id": 51
+                        },
+                        "notebook": {
+                          "type": "Notebook",
+                          "id": 55
+                        },
+                        "toxicCombination": {
+                          "type": "ToxicCombination",
+                          "id": 56
+                        },
+                        "groupMemberships": {
+                          "rule": "repeated",
+                          "type": "GroupMembership",
+                          "id": 57
                         }
                       },
                       "nested": {
@@ -8452,7 +10293,28 @@
                             "MISCONFIGURATION": 3,
                             "OBSERVATION": 4,
                             "SCC_ERROR": 5,
-                            "POSTURE_VIOLATION": 6
+                            "POSTURE_VIOLATION": 6,
+                            "TOXIC_COMBINATION": 7
+                          }
+                        }
+                      }
+                    },
+                    "GroupMembership": {
+                      "fields": {
+                        "groupType": {
+                          "type": "GroupType",
+                          "id": 1
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "GroupType": {
+                          "values": {
+                            "GROUP_TYPE_UNSPECIFIED": 0,
+                            "GROUP_TYPE_TOXIC_COMBINATION": 1
                           }
                         }
                       }
@@ -8929,6 +10791,7 @@
                             "PROCESS_DISCOVERY": 56,
                             "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
                             "UNIX_SHELL": 7,
+                            "PYTHON": 59,
                             "PERMISSION_GROUPS_DISCOVERY": 18,
                             "CLOUD_GROUPS": 19,
                             "APPLICATION_LAYER_PROTOCOL": 45,
@@ -8978,8 +10841,31 @@
                             "OBTAIN_CAPABILITIES": 43,
                             "ACTIVE_SCANNING": 1,
                             "SCANNING_IP_BLOCKS": 2,
-                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57
+                            "CONTAINER_ADMINISTRATION_COMMAND": 60,
+                            "ESCAPE_TO_HOST": 61,
+                            "CONTAINER_AND_RESOURCE_DISCOVERY": 57,
+                            "STEAL_OR_FORGE_AUTHENTICATION_CERTIFICATES": 62
                           }
+                        }
+                      }
+                    },
+                    "Notebook": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "lastAuthor": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "notebookUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
                         }
                       }
                     },
@@ -9127,6 +11013,19 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "ToxicCombination": {
+                      "fields": {
+                        "attackExposureScore": {
+                          "type": "double",
+                          "id": 1
+                        },
+                        "relatedFindings": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -9344,6 +11243,18 @@
                         }
                       }
                     },
+                    "Folder": {
+                      "fields": {
+                        "resourceFolder": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resourceFolderDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "MuteConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/MuteConfig",
@@ -9482,6 +11393,15 @@
                       }
                     },
                     "Resource": {
+                      "oneofs": {
+                        "cloudProviderMetadata": {
+                          "oneof": [
+                            "gcpMetadata",
+                            "awsMetadata",
+                            "azureMetadata"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -9494,13 +11414,230 @@
                         "type": {
                           "type": "string",
                           "id": 3
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 4
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "gcpMetadata": {
+                          "type": "GcpMetadata",
+                          "id": 7
+                        },
+                        "awsMetadata": {
+                          "type": "AwsMetadata",
+                          "id": 8
+                        },
+                        "azureMetadata": {
+                          "type": "AzureMetadata",
+                          "id": 9
+                        },
+                        "resourcePath": {
+                          "type": "ResourcePath",
+                          "id": 10
+                        },
+                        "resourcePathString": {
+                          "type": "string",
+                          "id": 11
+                        }
+                      }
+                    },
+                    "CloudProvider": {
+                      "values": {
+                        "CLOUD_PROVIDER_UNSPECIFIED": 0,
+                        "GOOGLE_CLOUD_PLATFORM": 1,
+                        "AMAZON_WEB_SERVICES": 2,
+                        "MICROSOFT_AZURE": 3
+                      }
+                    },
+                    "GcpMetadata": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "projectDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "parentDisplayName": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "folders": {
+                          "rule": "repeated",
+                          "type": "Folder",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "organization": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "AwsMetadata": {
+                      "fields": {
+                        "organization": {
+                          "type": "AwsOrganization",
+                          "id": 1
+                        },
+                        "organizationalUnits": {
+                          "rule": "repeated",
+                          "type": "AwsOrganizationalUnit",
+                          "id": 2
+                        },
+                        "account": {
+                          "type": "AwsAccount",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AwsOrganization": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AwsOrganizationalUnit": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AwsAccount": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AzureMetadata": {
+                      "fields": {
+                        "managementGroups": {
+                          "rule": "repeated",
+                          "type": "AzureManagementGroup",
+                          "id": 1
+                        },
+                        "subscription": {
+                          "type": "AzureSubscription",
+                          "id": 2
+                        },
+                        "resourceGroup": {
+                          "type": "AzureResourceGroup",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "AzureManagementGroup": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AzureSubscription": {
+                          "fields": {
+                            "id": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "AzureResourceGroup": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ResourcePath": {
+                      "fields": {
+                        "nodes": {
+                          "rule": "repeated",
+                          "type": "ResourcePathNode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ResourcePathNodeType": {
+                          "values": {
+                            "RESOURCE_PATH_NODE_TYPE_UNSPECIFIED": 0,
+                            "GCP_ORGANIZATION": 1,
+                            "GCP_FOLDER": 2,
+                            "GCP_PROJECT": 3,
+                            "AWS_ORGANIZATION": 4,
+                            "AWS_ORGANIZATIONAL_UNIT": 5,
+                            "AWS_ACCOUNT": 6,
+                            "AZURE_MANAGEMENT_GROUP": 7,
+                            "AZURE_SUBSCRIPTION": 8,
+                            "AZURE_RESOURCE_GROUP": 9
+                          }
+                        },
+                        "ResourcePathNode": {
+                          "fields": {
+                            "nodeType": {
+                              "type": "ResourcePathNodeType",
+                              "id": 1
+                            },
+                            "id": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
                     "ResourceValueConfig": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ResourceValueConfig",
-                        "(google.api.resource).pattern": "organizations/{organization}/resourceValueConfigs/{resource_value_config}"
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/resourceValueConfigs/{resource_value_config}",
+                        "(google.api.resource).plural": "resourceValueConfigs",
+                        "(google.api.resource).singular": "resourceValueConfig"
                       },
                       "fields": {
                         "name": {
@@ -9550,6 +11687,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 10
+                        },
                         "sensitiveDataProtectionMapping": {
                           "type": "SensitiveDataProtectionMapping",
                           "id": 11
@@ -9591,13 +11732,19 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=organizations/*}/resourceValueConfigs:batchCreate",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs:batchCreate",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,requests"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=organizations/*}/resourceValueConfigs:batchCreate",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs:batchCreate",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -9946,12 +12093,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=organizations/*/resourceValueConfigs/*}"
+                                "delete": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}"
+                                }
                               }
                             },
                             {
@@ -9991,12 +12142,16 @@
                           "responseType": "Simulation",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/simulations/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/simulations/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/simulations/*}"
+                                "get": "/v2/{name=organizations/*/simulations/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/simulations/*}"
+                                }
                               }
                             },
                             {
@@ -10009,12 +12164,16 @@
                           "responseType": "ValuedResource",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/simulations/*/valuedResources/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/simulations/*/valuedResources/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/simulations/*/valuedResources/*}"
+                                "get": "/v2/{name=organizations/*/simulations/*/valuedResources/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/simulations/*/valuedResources/*}"
+                                }
                               }
                             },
                             {
@@ -10130,12 +12289,16 @@
                           "responseType": "ResourceValueConfig",
                           "options": {
                             "(google.api.http).get": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/resourceValueConfigs/*}"
+                                "get": "/v2/{name=organizations/*/resourceValueConfigs/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/resourceValueConfigs/*}"
+                                }
                               }
                             },
                             {
@@ -10210,7 +12373,7 @@
                           "responseType": "ListAttackPathsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*/simulations/*}/attackPaths",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/attackPaths",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*/simulations/*/attackExposureResults/*}/attackPaths",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
@@ -10222,7 +12385,13 @@
                                     "get": "/v2/{parent=organizations/*/simulations/*/valuedResources/*}/attackPaths"
                                   },
                                   {
+                                    "get": "/v2/{parent=organizations/*/locations/*/simulations/*/valuedResources/*}/attackPaths"
+                                  },
+                                  {
                                     "get": "/v2/{parent=organizations/*/simulations/*/attackExposureResults/*}/attackPaths"
+                                  },
+                                  {
+                                    "get": "/v2/{parent=organizations/*/locations/*/simulations/*/attackExposureResults/*}/attackPaths"
                                   }
                                 ]
                               }
@@ -10383,12 +12552,16 @@
                           "responseType": "ListResourceValueConfigsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=organizations/*}/resourceValueConfigs",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=organizations/*}/resourceValueConfigs"
+                                "get": "/v2/{parent=organizations/*}/resourceValueConfigs",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=organizations/*/locations/*}/resourceValueConfigs"
+                                }
                               }
                             },
                             {
@@ -10795,13 +12968,19 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{resource_value_config.name=organizations/*/resourceValueConfigs/*}",
                             "(google.api.http).body": "resource_value_config",
+                            "(google.api.http).additional_bindings.patch": "/v2/{resource_value_config.name=organizations/*/locations/*/resourceValueConfigs/*}",
+                            "(google.api.http).additional_bindings.body": "resource_value_config",
                             "(google.api.method_signature)": "resource_value_config,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v2/{resource_value_config.name=organizations/*/resourceValueConfigs/*}",
-                                "body": "resource_value_config"
+                                "body": "resource_value_config",
+                                "additional_bindings": {
+                                  "patch": "/v2/{resource_value_config.name=organizations/*/locations/*/resourceValueConfigs/*}",
+                                  "body": "resource_value_config"
+                                }
                               }
                             },
                             {
@@ -11405,6 +13584,15 @@
                           },
                           "nested": {
                             "Resource": {
+                              "oneofs": {
+                                "cloudProviderMetadata": {
+                                  "oneof": [
+                                    "gcpMetadata",
+                                    "awsMetadata",
+                                    "azureMetadata"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "name": {
                                   "type": "string",
@@ -11417,6 +13605,38 @@
                                 "type": {
                                   "type": "string",
                                   "id": 3
+                                },
+                                "cloudProvider": {
+                                  "type": "CloudProvider",
+                                  "id": 4
+                                },
+                                "service": {
+                                  "type": "string",
+                                  "id": 5
+                                },
+                                "location": {
+                                  "type": "string",
+                                  "id": 6
+                                },
+                                "gcpMetadata": {
+                                  "type": "GcpMetadata",
+                                  "id": 7
+                                },
+                                "awsMetadata": {
+                                  "type": "AwsMetadata",
+                                  "id": 8
+                                },
+                                "azureMetadata": {
+                                  "type": "AzureMetadata",
+                                  "id": 9
+                                },
+                                "resourcePath": {
+                                  "type": "ResourcePath",
+                                  "id": 10
+                                },
+                                "resourcePathString": {
+                                  "type": "string",
+                                  "id": 11
                                 }
                               }
                             }
@@ -11765,7 +13985,7 @@
                     "Simulation": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Simulation",
-                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/simulations/{simluation}",
                         "(google.api.resource).plural": "simulations",
                         "(google.api.resource).singular": "simulation"
                       },
@@ -11785,13 +14005,17 @@
                           "rule": "repeated",
                           "type": "ResourceValueConfigMetadata",
                           "id": 3
+                        },
+                        "cloudProvider": {
+                          "type": "CloudProvider",
+                          "id": 4
                         }
                       }
                     },
                     "ValuedResource": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/ValuedResource",
-                        "(google.api.resource).pattern": "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/simulations/{simluation}/valuedResources/{valued_resource}",
                         "(google.api.resource).plural": "valuedResources",
                         "(google.api.resource).singular": "valuedResource"
                       },

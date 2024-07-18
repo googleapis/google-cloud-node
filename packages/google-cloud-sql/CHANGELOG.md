@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.15.0...sql-v0.16.0) (2024-07-10)
+
+
+### Features
+
+* [sql] add Dataplex integration opt-in field ([#5518](https://github.com/googleapis/google-cloud-node/issues/5518)) ([6d8a33d](https://github.com/googleapis/google-cloud-node/commit/6d8a33d6caf2b9dbe4aa043d083cb76e989ed5a3))
+* [sql] add Dataplex integration opt-in field ([#5527](https://github.com/googleapis/google-cloud-node/issues/5527)) ([347ea87](https://github.com/googleapis/google-cloud-node/commit/347ea87f938abbf9abe37df7ffb32625ec142e1a))
+
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.14.0...sql-v0.15.0) (2024-06-26)
+
+
+### Features
+
+* [sql] A new field `upgradable_database_versions` is added to message `.google.cloud.sql.v1beta4.DatabaseInstance` ([#5478](https://github.com/googleapis/google-cloud-node/issues/5478)) ([e0f0fd2](https://github.com/googleapis/google-cloud-node/commit/e0f0fd24a745bb3b072456aa012c37946f2084a4))
+
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.13.0...sql-v0.14.0) (2024-06-12)
+
+
+### Features
+
+* [sql] add Cluster maintenance and Self-service maintenance to SqlOperationType ([#5452](https://github.com/googleapis/google-cloud-node/issues/5452)) ([5de5142](https://github.com/googleapis/google-cloud-node/commit/5de5142eb62d6e102e8666f2e7c6a96e8f016c00))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.12.0...sql-v0.13.0) (2024-06-05)
+
+
+### Features
+
+* [sql] Support for CLUSTER_MAINTENANCE and SELF_SERVICE_MAINTENANCE operation types ([#5428](https://github.com/googleapis/google-cloud-node/issues/5428)) ([201f11a](https://github.com/googleapis/google-cloud-node/commit/201f11acf0cbe5b3a7f06f8d87871835cdf36bd9))
+
 ## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.11.0...sql-v0.12.0) (2024-05-21)
 
 

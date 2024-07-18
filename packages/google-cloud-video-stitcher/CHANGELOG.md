@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v2.3.0...video-stitcher-v2.4.0) (2024-06-03)
+
+
+### Features
+
+* [video-stitcher] add apis for Create, Read, Update, Delete for VODConfigs ([#5378](https://github.com/googleapis/google-cloud-node/issues/5378)) ([10d9310](https://github.com/googleapis/google-cloud-node/commit/10d9310f765fe35d140b0465284c07b053caf8fb))
+
 ## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/video-stitcher-v2.2.0...video-stitcher-v2.3.0) (2024-05-21)
 
 

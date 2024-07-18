@@ -1650,6 +1650,44 @@ describe('v2alpha.UserEventServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('alertConfig', () => {
+      const fakePath = '/rendered/path/alertConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new usereventserviceModule.v2alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.alertConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.alertConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('alertConfigPath', () => {
+        const result = client.alertConfigPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAlertConfigName', () => {
+        const result = client.matchProjectFromAlertConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.alertConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('attributesConfig', () => {
       const fakePath = '/rendered/path/attributesConfig';
       const expectedParameters = {
@@ -1711,6 +1749,82 @@ describe('v2alpha.UserEventServiceClient', () => {
         assert.strictEqual(result, 'catalogValue');
         assert(
           (client.pathTemplates.attributesConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('branch', () => {
+      const fakePath = '/rendered/path/branch';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        branch: 'branchValue',
+      };
+      const client = new usereventserviceModule.v2alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.branchPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.branchPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('branchPath', () => {
+        const result = client.branchPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'branchValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.branchPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBranchName', () => {
+        const result = client.matchProjectFromBranchName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBranchName', () => {
+        const result = client.matchLocationFromBranchName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromBranchName', () => {
+        const result = client.matchCatalogFromBranchName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBranchFromBranchName', () => {
+        const result = client.matchBranchFromBranchName(fakePath);
+        assert.strictEqual(result, 'branchValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1918,6 +2032,44 @@ describe('v2alpha.UserEventServiceClient', () => {
         assert.strictEqual(result, 'controlValue');
         assert(
           (client.pathTemplates.controlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('loggingConfig', () => {
+      const fakePath = '/rendered/path/loggingConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new usereventserviceModule.v2alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.loggingConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.loggingConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('loggingConfigPath', () => {
+        const result = client.loggingConfigPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.loggingConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLoggingConfigName', () => {
+        const result = client.matchProjectFromLoggingConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.loggingConfigPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2179,6 +2331,44 @@ describe('v2alpha.UserEventServiceClient', () => {
         assert.strictEqual(result, 'productValue');
         assert(
           (client.pathTemplates.productPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('retailProject', () => {
+      const fakePath = '/rendered/path/retailProject';
+      const expectedParameters = {
+        project: 'projectValue',
+      };
+      const client = new usereventserviceModule.v2alpha.UserEventServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.retailProjectPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.retailProjectPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('retailProjectPath', () => {
+        const result = client.retailProjectPath('projectValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.retailProjectPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromRetailProjectName', () => {
+        const result = client.matchProjectFromRetailProjectName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.retailProjectPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

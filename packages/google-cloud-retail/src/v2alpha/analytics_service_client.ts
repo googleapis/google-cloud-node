@@ -208,8 +208,14 @@ export class AnalyticsServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
+      ),
+      branchPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
       ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
@@ -220,6 +226,9 @@ export class AnalyticsServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      loggingConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/loggingConfig'
+      ),
       merchantCenterAccountLinkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/merchantCenterAccountLinks/{merchant_center_account_link}'
       ),
@@ -228,6 +237,9 @@ export class AnalyticsServiceClient {
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
+      ),
+      retailProjectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/retailProject'
       ),
       servingConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/servingConfigs/{serving_config}'
@@ -877,6 +889,30 @@ export class AnalyticsServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
+
+  /**
    * Return a fully-qualified attributesConfig resource name string.
    *
    * @param {string} project
@@ -929,6 +965,73 @@ export class AnalyticsServiceClient {
     return this.pathTemplates.attributesConfigPathTemplate.match(
       attributesConfigName
     ).catalog;
+  }
+
+  /**
+   * Return a fully-qualified branch resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} branch
+   * @returns {string} Resource name string.
+   */
+  branchPath(
+    project: string,
+    location: string,
+    catalog: string,
+    branch: string
+  ) {
+    return this.pathTemplates.branchPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      branch: branch,
+    });
+  }
+
+  /**
+   * Parse the project from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).project;
+  }
+
+  /**
+   * Parse the location from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).location;
+  }
+
+  /**
+   * Parse the catalog from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).catalog;
+  }
+
+  /**
+   * Parse the branch from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).branch;
   }
 
   /**
@@ -1100,6 +1203,30 @@ export class AnalyticsServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified loggingConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  loggingConfigPath(project: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from LoggingConfig resource.
+   *
+   * @param {string} loggingConfigName
+   *   A fully-qualified path representing LoggingConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLoggingConfigName(loggingConfigName: string) {
+    return this.pathTemplates.loggingConfigPathTemplate.match(loggingConfigName)
+      .project;
   }
 
   /**
@@ -1326,6 +1453,30 @@ export class AnalyticsServiceClient {
    */
   matchProductFromProductName(productName: string) {
     return this.pathTemplates.productPathTemplate.match(productName).product;
+  }
+
+  /**
+   * Return a fully-qualified retailProject resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  retailProjectPath(project: string) {
+    return this.pathTemplates.retailProjectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from RetailProject resource.
+   *
+   * @param {string} retailProjectName
+   *   A fully-qualified path representing RetailProject resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromRetailProjectName(retailProjectName: string) {
+    return this.pathTemplates.retailProjectPathTemplate.match(retailProjectName)
+      .project;
   }
 
   /**

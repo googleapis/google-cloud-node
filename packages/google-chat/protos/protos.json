@@ -2754,7 +2754,7 @@
                 "ChatService": {
                   "options": {
                     "(google.api.default_host)": "chat.googleapis.com",
-                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly"
+                    "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/chat.admin.delete,https://www.googleapis.com/auth/chat.admin.memberships,https://www.googleapis.com/auth/chat.admin.memberships.readonly,https://www.googleapis.com/auth/chat.admin.spaces,https://www.googleapis.com/auth/chat.admin.spaces.readonly,https://www.googleapis.com/auth/chat.bot,https://www.googleapis.com/auth/chat.delete,https://www.googleapis.com/auth/chat.import,https://www.googleapis.com/auth/chat.memberships,https://www.googleapis.com/auth/chat.memberships.app,https://www.googleapis.com/auth/chat.memberships.readonly,https://www.googleapis.com/auth/chat.messages,https://www.googleapis.com/auth/chat.messages.create,https://www.googleapis.com/auth/chat.messages.reactions,https://www.googleapis.com/auth/chat.messages.reactions.create,https://www.googleapis.com/auth/chat.messages.reactions.readonly,https://www.googleapis.com/auth/chat.messages.readonly,https://www.googleapis.com/auth/chat.spaces,https://www.googleapis.com/auth/chat.spaces.create,https://www.googleapis.com/auth/chat.spaces.readonly,https://www.googleapis.com/auth/chat.users.readstate,https://www.googleapis.com/auth/chat.users.readstate.readonly"
                   },
                   "methods": {
                     "CreateMessage": {
@@ -3234,6 +3234,42 @@
                         },
                         {
                           "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "GetSpaceEvent": {
+                      "requestType": "GetSpaceEventRequest",
+                      "responseType": "SpaceEvent",
+                      "options": {
+                        "(google.api.http).get": "/v1/{name=spaces/*/spaceEvents/*}",
+                        "(google.api.method_signature)": "name"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{name=spaces/*/spaceEvents/*}"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "name"
+                        }
+                      ]
+                    },
+                    "ListSpaceEvents": {
+                      "requestType": "ListSpaceEventsRequest",
+                      "responseType": "ListSpaceEventsResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/{parent=spaces/*}/spaceEvents",
+                        "(google.api.method_signature)": "parent,filter"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/{parent=spaces/*}/spaceEvents"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": "parent,filter"
                         }
                       ]
                     }
@@ -4575,6 +4611,20 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "accessSettings": {
+                      "type": "AccessSettings",
+                      "id": 23,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "spaceUri": {
+                      "type": "string",
+                      "id": 25,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   },
                   "nested": {
@@ -4610,6 +4660,33 @@
                         "guidelines": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "AccessSettings": {
+                      "fields": {
+                        "accessState": {
+                          "type": "AccessState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "audience": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AccessState": {
+                          "values": {
+                            "ACCESS_STATE_UNSPECIFIED": 0,
+                            "PRIVATE": 1,
+                            "DISCOVERABLE": 2
+                          }
                         }
                       }
                     }
@@ -4746,6 +4823,327 @@
                     "HISTORY_STATE_UNSPECIFIED": 0,
                     "HISTORY_OFF": 1,
                     "HISTORY_ON": 2
+                  }
+                },
+                "SpaceEvent": {
+                  "options": {
+                    "(google.api.resource).type": "chat.googleapis.com/SpaceEvent",
+                    "(google.api.resource).pattern": "spaces/{space}/spaceEvents/{space_event}"
+                  },
+                  "oneofs": {
+                    "payload": {
+                      "oneof": [
+                        "messageCreatedEventData",
+                        "messageUpdatedEventData",
+                        "messageDeletedEventData",
+                        "messageBatchCreatedEventData",
+                        "messageBatchUpdatedEventData",
+                        "messageBatchDeletedEventData",
+                        "spaceUpdatedEventData",
+                        "spaceBatchUpdatedEventData",
+                        "membershipCreatedEventData",
+                        "membershipUpdatedEventData",
+                        "membershipDeletedEventData",
+                        "membershipBatchCreatedEventData",
+                        "membershipBatchUpdatedEventData",
+                        "membershipBatchDeletedEventData",
+                        "reactionCreatedEventData",
+                        "reactionDeletedEventData",
+                        "reactionBatchCreatedEventData",
+                        "reactionBatchDeletedEventData"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1
+                    },
+                    "eventTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 3
+                    },
+                    "eventType": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "messageCreatedEventData": {
+                      "type": "MessageCreatedEventData",
+                      "id": 12
+                    },
+                    "messageUpdatedEventData": {
+                      "type": "MessageUpdatedEventData",
+                      "id": 13
+                    },
+                    "messageDeletedEventData": {
+                      "type": "MessageDeletedEventData",
+                      "id": 14
+                    },
+                    "messageBatchCreatedEventData": {
+                      "type": "MessageBatchCreatedEventData",
+                      "id": 26
+                    },
+                    "messageBatchUpdatedEventData": {
+                      "type": "MessageBatchUpdatedEventData",
+                      "id": 27
+                    },
+                    "messageBatchDeletedEventData": {
+                      "type": "MessageBatchDeletedEventData",
+                      "id": 28
+                    },
+                    "spaceUpdatedEventData": {
+                      "type": "SpaceUpdatedEventData",
+                      "id": 15
+                    },
+                    "spaceBatchUpdatedEventData": {
+                      "type": "SpaceBatchUpdatedEventData",
+                      "id": 29
+                    },
+                    "membershipCreatedEventData": {
+                      "type": "MembershipCreatedEventData",
+                      "id": 17
+                    },
+                    "membershipUpdatedEventData": {
+                      "type": "MembershipUpdatedEventData",
+                      "id": 18
+                    },
+                    "membershipDeletedEventData": {
+                      "type": "MembershipDeletedEventData",
+                      "id": 219
+                    },
+                    "membershipBatchCreatedEventData": {
+                      "type": "MembershipBatchCreatedEventData",
+                      "id": 31
+                    },
+                    "membershipBatchUpdatedEventData": {
+                      "type": "MembershipBatchUpdatedEventData",
+                      "id": 32
+                    },
+                    "membershipBatchDeletedEventData": {
+                      "type": "MembershipBatchDeletedEventData",
+                      "id": 33
+                    },
+                    "reactionCreatedEventData": {
+                      "type": "ReactionCreatedEventData",
+                      "id": 21
+                    },
+                    "reactionDeletedEventData": {
+                      "type": "ReactionDeletedEventData",
+                      "id": 22
+                    },
+                    "reactionBatchCreatedEventData": {
+                      "type": "ReactionBatchCreatedEventData",
+                      "id": 34
+                    },
+                    "reactionBatchDeletedEventData": {
+                      "type": "ReactionBatchDeletedEventData",
+                      "id": 35
+                    }
+                  }
+                },
+                "GetSpaceEventRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/SpaceEvent"
+                      }
+                    }
+                  }
+                },
+                "ListSpaceEventsRequest": {
+                  "fields": {
+                    "parent": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).child_type": "chat.googleapis.com/SpaceEvent"
+                      }
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 5
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 6
+                    },
+                    "filter": {
+                      "type": "string",
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "ListSpaceEventsResponse": {
+                  "fields": {
+                    "spaceEvents": {
+                      "rule": "repeated",
+                      "type": "SpaceEvent",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                },
+                "MembershipCreatedEventData": {
+                  "fields": {
+                    "membership": {
+                      "type": "Membership",
+                      "id": 1
+                    }
+                  }
+                },
+                "MembershipDeletedEventData": {
+                  "fields": {
+                    "membership": {
+                      "type": "Membership",
+                      "id": 1
+                    }
+                  }
+                },
+                "MembershipUpdatedEventData": {
+                  "fields": {
+                    "membership": {
+                      "type": "Membership",
+                      "id": 1
+                    }
+                  }
+                },
+                "MembershipBatchCreatedEventData": {
+                  "fields": {
+                    "memberships": {
+                      "rule": "repeated",
+                      "type": "MembershipCreatedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "MembershipBatchUpdatedEventData": {
+                  "fields": {
+                    "memberships": {
+                      "rule": "repeated",
+                      "type": "MembershipUpdatedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "MembershipBatchDeletedEventData": {
+                  "fields": {
+                    "memberships": {
+                      "rule": "repeated",
+                      "type": "MembershipDeletedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "MessageCreatedEventData": {
+                  "fields": {
+                    "message": {
+                      "type": "Message",
+                      "id": 1
+                    }
+                  }
+                },
+                "MessageUpdatedEventData": {
+                  "fields": {
+                    "message": {
+                      "type": "Message",
+                      "id": 1
+                    }
+                  }
+                },
+                "MessageDeletedEventData": {
+                  "fields": {
+                    "message": {
+                      "type": "Message",
+                      "id": 1
+                    }
+                  }
+                },
+                "MessageBatchCreatedEventData": {
+                  "fields": {
+                    "messages": {
+                      "rule": "repeated",
+                      "type": "MessageCreatedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "MessageBatchUpdatedEventData": {
+                  "fields": {
+                    "messages": {
+                      "rule": "repeated",
+                      "type": "MessageUpdatedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "MessageBatchDeletedEventData": {
+                  "fields": {
+                    "messages": {
+                      "rule": "repeated",
+                      "type": "MessageDeletedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "SpaceUpdatedEventData": {
+                  "fields": {
+                    "space": {
+                      "type": "Space",
+                      "id": 1
+                    }
+                  }
+                },
+                "SpaceBatchUpdatedEventData": {
+                  "fields": {
+                    "spaces": {
+                      "rule": "repeated",
+                      "type": "SpaceUpdatedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "ReactionCreatedEventData": {
+                  "fields": {
+                    "reaction": {
+                      "type": "Reaction",
+                      "id": 1
+                    }
+                  }
+                },
+                "ReactionDeletedEventData": {
+                  "fields": {
+                    "reaction": {
+                      "type": "Reaction",
+                      "id": 1
+                    }
+                  }
+                },
+                "ReactionBatchCreatedEventData": {
+                  "fields": {
+                    "reactions": {
+                      "rule": "repeated",
+                      "type": "ReactionCreatedEventData",
+                      "id": 1
+                    }
+                  }
+                },
+                "ReactionBatchDeletedEventData": {
+                  "fields": {
+                    "reactions": {
+                      "rule": "repeated",
+                      "type": "ReactionDeletedEventData",
+                      "id": 1
+                    }
                   }
                 },
                 "SpaceReadState": {

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-parallelstore",
-        "version": "0.3.0",
+        "version": "0.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -262,7 +262,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -285,6 +285,10 @@
                     },
                     {
                         "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "service_account",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -314,7 +318,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 76,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -337,6 +341,10 @@
                     },
                     {
                         "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "service_account",
                         "type": "TYPE_STRING"
                     }
                 ],

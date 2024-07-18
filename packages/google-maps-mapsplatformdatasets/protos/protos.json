@@ -229,6 +229,10 @@
                         "pageToken": {
                           "type": "string",
                           "id": 3
+                        },
+                        "tag": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -242,6 +246,39 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "FetchDatasetErrorsRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "mapsplatformdatasets.googleapis.com/Dataset"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "FetchDatasetErrorsResponse": {
+                      "fields": {
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "errors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 3
                         }
                       }
                     },
@@ -318,6 +355,24 @@
                             },
                             {
                               "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "FetchDatasetErrors": {
+                          "requestType": "FetchDatasetErrorsRequest",
+                          "responseType": "FetchDatasetErrorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{dataset=projects/*/datasets/*}:fetchDatasetErrors",
+                            "(google.api.method_signature)": "dataset"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{dataset=projects/*/datasets/*}:fetchDatasetErrors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset"
                             }
                           ]
                         },
@@ -2574,6 +2629,18 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "Duration": {
               "fields": {
                 "seconds": {
@@ -2588,6 +2655,35 @@
             },
             "Empty": {
               "fields": {}
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
             }
           }
         }

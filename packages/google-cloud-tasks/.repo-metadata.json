@@ -10,7 +10,7 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tasks/latest",
   "name": "tasks",
   "name_pretty": "Cloud Tasks",
-  "api_id": "tasks.googleapis.com",
+  "api_id": "cloudtasks.googleapis.com",
   "codeowner_team": "@googleapis/aap-dpes",
   "api_shortname": "cloudtasks",
   "library_type": "GAPIC_AUTO"

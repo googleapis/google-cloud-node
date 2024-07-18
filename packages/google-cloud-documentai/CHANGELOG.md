@@ -1,5 +1,13 @@
 # Changelog
 
+## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.7.0...documentai-v8.8.0) (2024-06-03)
+
+
+### Features
+
+* [documentai] Make Layout Parser generally available in V1 ([#5393](https://github.com/googleapis/google-cloud-node/issues/5393)) ([b6b04db](https://github.com/googleapis/google-cloud-node/commit/b6b04dbfa0a014b559d7093f5400187a2f7b192b))
+* [documentai] Make Layout Parser generally available in V1 ([#5411](https://github.com/googleapis/google-cloud-node/issues/5411)) ([750a6ac](https://github.com/googleapis/google-cloud-node/commit/750a6ac920aa0fd3f468dc64bee5acd1b619d543))
+
 ## [8.7.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.6.0...documentai-v8.7.0) (2024-05-21)
 
 

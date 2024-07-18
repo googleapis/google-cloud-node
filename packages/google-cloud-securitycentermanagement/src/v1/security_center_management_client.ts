@@ -1888,6 +1888,9 @@ export class SecurityCenterManagementClient {
    *     * security-health-analytics
    *     * vm-threat-detection
    *     * web-security-scanner
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1994,13 +1997,13 @@ export class SecurityCenterManagementClient {
    *     * "intended_enablement_state"
    *     * "modules"
    * @param {boolean} [request.validateOnly]
-   *   Optional. When set to true, only validations (including IAM checks) will
+   *   Optional. When set to true, only validations (including IAM checks) will be
    *   done for the request (service will not be updated). An OK response
-   *   indicates the request is valid while an error response indicates the
-   *   request is invalid. Note that a subsequent request to actually update the
-   *   service could still fail because 1. the state could have changed (e.g. IAM
-   *   permission lost) or
-   *   2. A failure occurred while trying to delete the module.
+   *   indicates that the request is valid, while an error response indicates that
+   *   the request is invalid. Note that a subsequent request to actually update
+   *   the service could still fail for one of the following reasons:
+   *   - The state could have changed (e.g. IAM permission lost).
+   *   - A failure occurred while trying to delete the module.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3413,6 +3416,9 @@ export class SecurityCenterManagementClient {
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
    *   Optional. The value returned by the last call indicating a continuation.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3521,6 +3527,9 @@ export class SecurityCenterManagementClient {
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
    *   Optional. The value returned by the last call indicating a continuation.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3573,6 +3582,9 @@ export class SecurityCenterManagementClient {
    *   Default is 10, minimum is 1, maximum is 1000.
    * @param {string} [request.pageToken]
    *   Optional. The value returned by the last call indicating a continuation.
+   * @param {boolean} request.showEligibleModulesOnly
+   *   Flag that, when set, will be used to filter the ModuleSettings that are
+   *   in scope. The default setting is that all modules will be shown.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

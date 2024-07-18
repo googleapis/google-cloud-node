@@ -4550,6 +4550,280 @@ describe('v2.DlpServiceClient', () => {
     });
   });
 
+  describe('getFileStoreDataProfile', () => {
+    it('invokes getFileStoreDataProfile without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+      );
+      client.innerApiCalls.getFileStoreDataProfile =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getFileStoreDataProfile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getFileStoreDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFileStoreDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFileStoreDataProfile without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+      );
+      client.innerApiCalls.getFileStoreDataProfile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getFileStoreDataProfile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IFileStoreDataProfile | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getFileStoreDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFileStoreDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFileStoreDataProfile with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getFileStoreDataProfile = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getFileStoreDataProfile(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getFileStoreDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFileStoreDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getFileStoreDataProfile with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.GetFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getFileStoreDataProfile(request),
+        expectedError
+      );
+    });
+  });
+
+  describe('deleteFileStoreDataProfile', () => {
+    it('invokes deleteFileStoreDataProfile without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteFileStoreDataProfile =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteFileStoreDataProfile(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteFileStoreDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFileStoreDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteFileStoreDataProfile without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteFileStoreDataProfile =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteFileStoreDataProfile(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteFileStoreDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFileStoreDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteFileStoreDataProfile with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteFileStoreDataProfile = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.deleteFileStoreDataProfile(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFileStoreDataProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFileStoreDataProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteFileStoreDataProfile with closed client', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteFileStoreDataProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.deleteFileStoreDataProfile(request),
+        expectedError
+      );
+    });
+  });
+
   describe('getTableDataProfile', () => {
     it('invokes getTableDataProfile without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -8706,6 +8980,359 @@ describe('v2.DlpServiceClient', () => {
     });
   });
 
+  describe('listFileStoreDataProfiles', () => {
+    it('invokes listFileStoreDataProfiles without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+      ];
+      client.innerApiCalls.listFileStoreDataProfiles =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listFileStoreDataProfiles(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listFileStoreDataProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFileStoreDataProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listFileStoreDataProfiles without error using callback', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+      ];
+      client.innerApiCalls.listFileStoreDataProfiles =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listFileStoreDataProfiles(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.privacy.dlp.v2.IFileStoreDataProfile[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listFileStoreDataProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFileStoreDataProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listFileStoreDataProfiles with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listFileStoreDataProfiles = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listFileStoreDataProfiles(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.listFileStoreDataProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFileStoreDataProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listFileStoreDataProfilesStream without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+      ];
+      client.descriptors.page.listFileStoreDataProfiles.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listFileStoreDataProfilesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.FileStoreDataProfile[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.FileStoreDataProfile) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listFileStoreDataProfiles, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('invokes listFileStoreDataProfilesStream with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listFileStoreDataProfiles.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listFileStoreDataProfilesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.privacy.dlp.v2.FileStoreDataProfile[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.privacy.dlp.v2.FileStoreDataProfile) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listFileStoreDataProfiles, request)
+      );
+      assert(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listFileStoreDataProfiles without error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+        generateSampleMessage(
+          new protos.google.privacy.dlp.v2.FileStoreDataProfile()
+        ),
+      ];
+      client.descriptors.page.listFileStoreDataProfiles.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.privacy.dlp.v2.IFileStoreDataProfile[] =
+        [];
+      const iterable = client.listFileStoreDataProfilesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+
+    it('uses async iteration with listFileStoreDataProfiles with error', async () => {
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListFileStoreDataProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listFileStoreDataProfiles.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listFileStoreDataProfilesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.privacy.dlp.v2.IFileStoreDataProfile[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.descriptors.page.listFileStoreDataProfiles
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+
   describe('listConnections', () => {
     it('invokes listConnections without error', async () => {
       const client = new dlpserviceModule.v2.DlpServiceClient({
@@ -10153,6 +10780,94 @@ describe('v2.DlpServiceClient', () => {
       });
     });
 
+    describe('organizationLocationFileStoreDataProfile', () => {
+      const fakePath =
+        '/rendered/path/organizationLocationFileStoreDataProfile';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        file_store_data_profile: 'fileStoreDataProfileValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationFileStoreDataProfilePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationFileStoreDataProfilePath', () => {
+        const result = client.organizationLocationFileStoreDataProfilePath(
+          'organizationValue',
+          'locationValue',
+          'fileStoreDataProfileValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFileStoreDataProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationFileStoreDataProfileName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationFileStoreDataProfileName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFileStoreDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationFileStoreDataProfileName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationFileStoreDataProfileName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFileStoreDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFileStoreDataProfileFromOrganizationLocationFileStoreDataProfileName', () => {
+        const result =
+          client.matchFileStoreDataProfileFromOrganizationLocationFileStoreDataProfileName(
+            fakePath
+          );
+        assert.strictEqual(result, 'fileStoreDataProfileValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationFileStoreDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationLocationInspectTemplate', () => {
       const fakePath = '/rendered/path/organizationLocationInspectTemplate';
       const expectedParameters = {
@@ -11114,6 +11829,89 @@ describe('v2.DlpServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationDlpJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationFileStoreDataProfile', () => {
+      const fakePath = '/rendered/path/projectLocationFileStoreDataProfile';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        file_store_data_profile: 'fileStoreDataProfileValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationFileStoreDataProfilePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationFileStoreDataProfilePath', () => {
+        const result = client.projectLocationFileStoreDataProfilePath(
+          'projectValue',
+          'locationValue',
+          'fileStoreDataProfileValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationFileStoreDataProfilePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationFileStoreDataProfileName', () => {
+        const result =
+          client.matchProjectFromProjectLocationFileStoreDataProfileName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFileStoreDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationFileStoreDataProfileName', () => {
+        const result =
+          client.matchLocationFromProjectLocationFileStoreDataProfileName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFileStoreDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFileStoreDataProfileFromProjectLocationFileStoreDataProfileName', () => {
+        const result =
+          client.matchFileStoreDataProfileFromProjectLocationFileStoreDataProfileName(
+            fakePath
+          );
+        assert.strictEqual(result, 'fileStoreDataProfileValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationFileStoreDataProfilePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

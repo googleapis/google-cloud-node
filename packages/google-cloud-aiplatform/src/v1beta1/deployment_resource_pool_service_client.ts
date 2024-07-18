@@ -151,6 +151,9 @@ export class DeploymentResourcePoolServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -686,6 +689,15 @@ export class DeploymentResourcePoolServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -810,6 +822,15 @@ export class DeploymentResourcePoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
@@ -965,6 +986,18 @@ export class DeploymentResourcePoolServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
             },
             {
               delete:
@@ -1153,6 +1186,18 @@ export class DeploymentResourcePoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1315,6 +1360,15 @@ export class DeploymentResourcePoolServiceClient {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
@@ -1446,6 +1500,15 @@ export class DeploymentResourcePoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
@@ -1580,6 +1643,15 @@ export class DeploymentResourcePoolServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
             {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1708,6 +1780,15 @@ export class DeploymentResourcePoolServiceClient {
             {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
@@ -1863,6 +1944,15 @@ export class DeploymentResourcePoolServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -2002,6 +2092,15 @@ export class DeploymentResourcePoolServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
             },
             {
@@ -2068,6 +2167,12 @@ export class DeploymentResourcePoolServiceClient {
     const createDeploymentResourcePoolMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateDeploymentResourcePoolResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeploymentResourcePool'
+    ) as gax.protobuf.Type;
+    const updateDeploymentResourcePoolMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateDeploymentResourcePoolOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteDeploymentResourcePoolResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -2083,6 +2188,15 @@ export class DeploymentResourcePoolServiceClient {
         ),
         createDeploymentResourcePoolMetadata.decode.bind(
           createDeploymentResourcePoolMetadata
+        )
+      ),
+      updateDeploymentResourcePool: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateDeploymentResourcePoolResponse.decode.bind(
+          updateDeploymentResourcePoolResponse
+        ),
+        updateDeploymentResourcePoolMetadata.decode.bind(
+          updateDeploymentResourcePoolMetadata
         )
       ),
       deleteDeploymentResourcePool: new this._gaxModule.LongrunningDescriptor(
@@ -2150,6 +2264,7 @@ export class DeploymentResourcePoolServiceClient {
       'createDeploymentResourcePool',
       'getDeploymentResourcePool',
       'listDeploymentResourcePools',
+      'updateDeploymentResourcePool',
       'deleteDeploymentResourcePool',
       'queryDeployedModels',
     ];
@@ -2520,6 +2635,154 @@ export class DeploymentResourcePoolServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool,
       protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolOperationMetadata
+    >;
+  }
+  /**
+   * Update a DeploymentResourcePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.DeploymentResourcePool} request.deploymentResourcePool
+   *   Required. The DeploymentResourcePool to update.
+   *
+   *   The DeploymentResourcePool's `name` field is used to identify the
+   *   DeploymentResourcePool to update.
+   *   Format:
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async
+   */
+  updateDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDeploymentResourcePool(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateDeploymentResourcePool(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IDeploymentResourcePool,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateDeploymentResourcePoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'deployment_resource_pool.name':
+          request.deploymentResourcePool!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateDeploymentResourcePool(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateDeploymentResourcePool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DeploymentResourcePoolService_UpdateDeploymentResourcePool_async
+   */
+  async checkUpdateDeploymentResourcePoolProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool,
+      protos.google.cloud.aiplatform.v1beta1.UpdateDeploymentResourcePoolOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateDeploymentResourcePool,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.DeploymentResourcePool,
+      protos.google.cloud.aiplatform.v1beta1.UpdateDeploymentResourcePoolOperationMetadata
     >;
   }
   /**

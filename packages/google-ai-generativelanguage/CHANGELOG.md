@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.5.0...generativelanguage-v2.6.0) (2024-06-26)
+
+
+### Features
+
+* [generativelanguage] Add code execution ([#5506](https://github.com/googleapis/google-cloud-node/issues/5506)) ([13034af](https://github.com/googleapis/google-cloud-node/commit/13034af24e1d08cccab85e1f1f448a8ff24e469c))
+* [generativelanguage] Add content caching ([#5451](https://github.com/googleapis/google-cloud-node/issues/5451)) ([75c026f](https://github.com/googleapis/google-cloud-node/commit/75c026f34b039e368c38bfb6242f01048d3bfb79))
+
 ## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.4.0...generativelanguage-v2.5.0) (2024-05-21)
 
 

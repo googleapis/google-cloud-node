@@ -93,12 +93,6 @@ function main(parent, groupBy) {
    *  Required. Expression that defines what assets fields to use for grouping.
    *  The string value should follow SQL syntax: comma separated list of fields.
    *  For example: "parent,resource_name".
-   *  The following fields are supported:
-   *  * resource_name
-   *  * category
-   *  * state
-   *  * parent
-   *  * severity
    */
   // const groupBy = 'abc123'
   /**

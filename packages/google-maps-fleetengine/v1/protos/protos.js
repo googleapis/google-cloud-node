@@ -2319,39 +2319,6 @@
                          */
     
                         /**
-                         * Callback as used by {@link maps.fleetengine.delivery.v1.DeliveryService|searchTasks}.
-                         * @memberof maps.fleetengine.delivery.v1.DeliveryService
-                         * @typedef SearchTasksCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {maps.fleetengine.delivery.v1.SearchTasksResponse} [response] SearchTasksResponse
-                         */
-    
-                        /**
-                         * Calls SearchTasks.
-                         * @function searchTasks
-                         * @memberof maps.fleetengine.delivery.v1.DeliveryService
-                         * @instance
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksRequest} request SearchTasksRequest message or plain object
-                         * @param {maps.fleetengine.delivery.v1.DeliveryService.SearchTasksCallback} callback Node-style callback called with the error, if any, and SearchTasksResponse
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(DeliveryService.prototype.searchTasks = function searchTasks(request, callback) {
-                            return this.rpcCall(searchTasks, $root.maps.fleetengine.delivery.v1.SearchTasksRequest, $root.maps.fleetengine.delivery.v1.SearchTasksResponse, request, callback);
-                        }, "name", { value: "SearchTasks" });
-    
-                        /**
-                         * Calls SearchTasks.
-                         * @function searchTasks
-                         * @memberof maps.fleetengine.delivery.v1.DeliveryService
-                         * @instance
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksRequest} request SearchTasksRequest message or plain object
-                         * @returns {Promise<maps.fleetengine.delivery.v1.SearchTasksResponse>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
                          * Callback as used by {@link maps.fleetengine.delivery.v1.DeliveryService|updateTask}.
                          * @memberof maps.fleetengine.delivery.v1.DeliveryService
                          * @typedef UpdateTaskCallback
@@ -4895,555 +4862,6 @@
                         };
     
                         return GetTaskRequest;
-                    })();
-    
-                    v1.SearchTasksRequest = (function() {
-    
-                        /**
-                         * Properties of a SearchTasksRequest.
-                         * @memberof maps.fleetengine.delivery.v1
-                         * @interface ISearchTasksRequest
-                         * @property {maps.fleetengine.delivery.v1.IDeliveryRequestHeader|null} [header] SearchTasksRequest header
-                         * @property {string|null} [parent] SearchTasksRequest parent
-                         * @property {string|null} [trackingId] SearchTasksRequest trackingId
-                         * @property {number|null} [pageSize] SearchTasksRequest pageSize
-                         * @property {string|null} [pageToken] SearchTasksRequest pageToken
-                         */
-    
-                        /**
-                         * Constructs a new SearchTasksRequest.
-                         * @memberof maps.fleetengine.delivery.v1
-                         * @classdesc Represents a SearchTasksRequest.
-                         * @implements ISearchTasksRequest
-                         * @constructor
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksRequest=} [properties] Properties to set
-                         */
-                        function SearchTasksRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchTasksRequest header.
-                         * @member {maps.fleetengine.delivery.v1.IDeliveryRequestHeader|null|undefined} header
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @instance
-                         */
-                        SearchTasksRequest.prototype.header = null;
-    
-                        /**
-                         * SearchTasksRequest parent.
-                         * @member {string} parent
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @instance
-                         */
-                        SearchTasksRequest.prototype.parent = "";
-    
-                        /**
-                         * SearchTasksRequest trackingId.
-                         * @member {string} trackingId
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @instance
-                         */
-                        SearchTasksRequest.prototype.trackingId = "";
-    
-                        /**
-                         * SearchTasksRequest pageSize.
-                         * @member {number} pageSize
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @instance
-                         */
-                        SearchTasksRequest.prototype.pageSize = 0;
-    
-                        /**
-                         * SearchTasksRequest pageToken.
-                         * @member {string} pageToken
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @instance
-                         */
-                        SearchTasksRequest.prototype.pageToken = "";
-    
-                        /**
-                         * Creates a new SearchTasksRequest instance using the specified properties.
-                         * @function create
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksRequest=} [properties] Properties to set
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksRequest} SearchTasksRequest instance
-                         */
-                        SearchTasksRequest.create = function create(properties) {
-                            return new SearchTasksRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchTasksRequest message. Does not implicitly {@link maps.fleetengine.delivery.v1.SearchTasksRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksRequest} message SearchTasksRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchTasksRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.header != null && Object.hasOwnProperty.call(message, "header"))
-                                $root.maps.fleetengine.delivery.v1.DeliveryRequestHeader.encode(message.header, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
-                            if (message.trackingId != null && Object.hasOwnProperty.call(message, "trackingId"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.trackingId);
-                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
-                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.pageSize);
-                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchTasksRequest message, length delimited. Does not implicitly {@link maps.fleetengine.delivery.v1.SearchTasksRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksRequest} message SearchTasksRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchTasksRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchTasksRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksRequest} SearchTasksRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchTasksRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.delivery.v1.SearchTasksRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.header = $root.maps.fleetengine.delivery.v1.DeliveryRequestHeader.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 3: {
-                                        message.parent = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.trackingId = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.pageSize = reader.int32();
-                                        break;
-                                    }
-                                case 6: {
-                                        message.pageToken = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchTasksRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksRequest} SearchTasksRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchTasksRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchTasksRequest message.
-                         * @function verify
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchTasksRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.header != null && message.hasOwnProperty("header")) {
-                                var error = $root.maps.fleetengine.delivery.v1.DeliveryRequestHeader.verify(message.header);
-                                if (error)
-                                    return "header." + error;
-                            }
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                if (!$util.isString(message.parent))
-                                    return "parent: string expected";
-                            if (message.trackingId != null && message.hasOwnProperty("trackingId"))
-                                if (!$util.isString(message.trackingId))
-                                    return "trackingId: string expected";
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                if (!$util.isInteger(message.pageSize))
-                                    return "pageSize: integer expected";
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                if (!$util.isString(message.pageToken))
-                                    return "pageToken: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchTasksRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksRequest} SearchTasksRequest
-                         */
-                        SearchTasksRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.maps.fleetengine.delivery.v1.SearchTasksRequest)
-                                return object;
-                            var message = new $root.maps.fleetengine.delivery.v1.SearchTasksRequest();
-                            if (object.header != null) {
-                                if (typeof object.header !== "object")
-                                    throw TypeError(".maps.fleetengine.delivery.v1.SearchTasksRequest.header: object expected");
-                                message.header = $root.maps.fleetengine.delivery.v1.DeliveryRequestHeader.fromObject(object.header);
-                            }
-                            if (object.parent != null)
-                                message.parent = String(object.parent);
-                            if (object.trackingId != null)
-                                message.trackingId = String(object.trackingId);
-                            if (object.pageSize != null)
-                                message.pageSize = object.pageSize | 0;
-                            if (object.pageToken != null)
-                                message.pageToken = String(object.pageToken);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchTasksRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.SearchTasksRequest} message SearchTasksRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchTasksRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.header = null;
-                                object.parent = "";
-                                object.trackingId = "";
-                                object.pageSize = 0;
-                                object.pageToken = "";
-                            }
-                            if (message.header != null && message.hasOwnProperty("header"))
-                                object.header = $root.maps.fleetengine.delivery.v1.DeliveryRequestHeader.toObject(message.header, options);
-                            if (message.parent != null && message.hasOwnProperty("parent"))
-                                object.parent = message.parent;
-                            if (message.trackingId != null && message.hasOwnProperty("trackingId"))
-                                object.trackingId = message.trackingId;
-                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
-                                object.pageSize = message.pageSize;
-                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
-                                object.pageToken = message.pageToken;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchTasksRequest to JSON.
-                         * @function toJSON
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchTasksRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SearchTasksRequest
-                         * @function getTypeUrl
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksRequest
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SearchTasksRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/maps.fleetengine.delivery.v1.SearchTasksRequest";
-                        };
-    
-                        return SearchTasksRequest;
-                    })();
-    
-                    v1.SearchTasksResponse = (function() {
-    
-                        /**
-                         * Properties of a SearchTasksResponse.
-                         * @memberof maps.fleetengine.delivery.v1
-                         * @interface ISearchTasksResponse
-                         * @property {Array.<maps.fleetengine.delivery.v1.ITask>|null} [tasks] SearchTasksResponse tasks
-                         * @property {string|null} [nextPageToken] SearchTasksResponse nextPageToken
-                         */
-    
-                        /**
-                         * Constructs a new SearchTasksResponse.
-                         * @memberof maps.fleetengine.delivery.v1
-                         * @classdesc Represents a SearchTasksResponse.
-                         * @implements ISearchTasksResponse
-                         * @constructor
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksResponse=} [properties] Properties to set
-                         */
-                        function SearchTasksResponse(properties) {
-                            this.tasks = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SearchTasksResponse tasks.
-                         * @member {Array.<maps.fleetengine.delivery.v1.ITask>} tasks
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @instance
-                         */
-                        SearchTasksResponse.prototype.tasks = $util.emptyArray;
-    
-                        /**
-                         * SearchTasksResponse nextPageToken.
-                         * @member {string} nextPageToken
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @instance
-                         */
-                        SearchTasksResponse.prototype.nextPageToken = "";
-    
-                        /**
-                         * Creates a new SearchTasksResponse instance using the specified properties.
-                         * @function create
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksResponse=} [properties] Properties to set
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksResponse} SearchTasksResponse instance
-                         */
-                        SearchTasksResponse.create = function create(properties) {
-                            return new SearchTasksResponse(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SearchTasksResponse message. Does not implicitly {@link maps.fleetengine.delivery.v1.SearchTasksResponse.verify|verify} messages.
-                         * @function encode
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksResponse} message SearchTasksResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchTasksResponse.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.tasks != null && message.tasks.length)
-                                for (var i = 0; i < message.tasks.length; ++i)
-                                    $root.maps.fleetengine.delivery.v1.Task.encode(message.tasks[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SearchTasksResponse message, length delimited. Does not implicitly {@link maps.fleetengine.delivery.v1.SearchTasksResponse.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.ISearchTasksResponse} message SearchTasksResponse message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SearchTasksResponse.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SearchTasksResponse message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksResponse} SearchTasksResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchTasksResponse.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.maps.fleetengine.delivery.v1.SearchTasksResponse();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        if (!(message.tasks && message.tasks.length))
-                                            message.tasks = [];
-                                        message.tasks.push($root.maps.fleetengine.delivery.v1.Task.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 2: {
-                                        message.nextPageToken = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SearchTasksResponse message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksResponse} SearchTasksResponse
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SearchTasksResponse.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SearchTasksResponse message.
-                         * @function verify
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SearchTasksResponse.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.tasks != null && message.hasOwnProperty("tasks")) {
-                                if (!Array.isArray(message.tasks))
-                                    return "tasks: array expected";
-                                for (var i = 0; i < message.tasks.length; ++i) {
-                                    var error = $root.maps.fleetengine.delivery.v1.Task.verify(message.tasks[i]);
-                                    if (error)
-                                        return "tasks." + error;
-                                }
-                            }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                if (!$util.isString(message.nextPageToken))
-                                    return "nextPageToken: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SearchTasksResponse message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {maps.fleetengine.delivery.v1.SearchTasksResponse} SearchTasksResponse
-                         */
-                        SearchTasksResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.maps.fleetengine.delivery.v1.SearchTasksResponse)
-                                return object;
-                            var message = new $root.maps.fleetengine.delivery.v1.SearchTasksResponse();
-                            if (object.tasks) {
-                                if (!Array.isArray(object.tasks))
-                                    throw TypeError(".maps.fleetengine.delivery.v1.SearchTasksResponse.tasks: array expected");
-                                message.tasks = [];
-                                for (var i = 0; i < object.tasks.length; ++i) {
-                                    if (typeof object.tasks[i] !== "object")
-                                        throw TypeError(".maps.fleetengine.delivery.v1.SearchTasksResponse.tasks: object expected");
-                                    message.tasks[i] = $root.maps.fleetengine.delivery.v1.Task.fromObject(object.tasks[i]);
-                                }
-                            }
-                            if (object.nextPageToken != null)
-                                message.nextPageToken = String(object.nextPageToken);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SearchTasksResponse message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {maps.fleetengine.delivery.v1.SearchTasksResponse} message SearchTasksResponse
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SearchTasksResponse.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.tasks = [];
-                            if (options.defaults)
-                                object.nextPageToken = "";
-                            if (message.tasks && message.tasks.length) {
-                                object.tasks = [];
-                                for (var j = 0; j < message.tasks.length; ++j)
-                                    object.tasks[j] = $root.maps.fleetengine.delivery.v1.Task.toObject(message.tasks[j], options);
-                            }
-                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
-                                object.nextPageToken = message.nextPageToken;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SearchTasksResponse to JSON.
-                         * @function toJSON
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SearchTasksResponse.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for SearchTasksResponse
-                         * @function getTypeUrl
-                         * @memberof maps.fleetengine.delivery.v1.SearchTasksResponse
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        SearchTasksResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/maps.fleetengine.delivery.v1.SearchTasksResponse";
-                        };
-    
-                        return SearchTasksResponse;
                     })();
     
                     v1.UpdateTaskRequest = (function() {
@@ -13451,6 +12869,7 @@
                  * @property {google.api.ClientLibraryOrganization|null} [organization] Publishing organization
                  * @property {Array.<google.api.IClientLibrarySettings>|null} [librarySettings] Publishing librarySettings
                  * @property {string|null} [protoReferenceDocumentationUri] Publishing protoReferenceDocumentationUri
+                 * @property {string|null} [restReferenceDocumentationUri] Publishing restReferenceDocumentationUri
                  */
     
                 /**
@@ -13552,6 +12971,14 @@
                 Publishing.prototype.protoReferenceDocumentationUri = "";
     
                 /**
+                 * Publishing restReferenceDocumentationUri.
+                 * @member {string} restReferenceDocumentationUri
+                 * @memberof google.api.Publishing
+                 * @instance
+                 */
+                Publishing.prototype.restReferenceDocumentationUri = "";
+    
+                /**
                  * Creates a new Publishing instance using the specified properties.
                  * @function create
                  * @memberof google.api.Publishing
@@ -13598,6 +13025,8 @@
                             $root.google.api.ClientLibrarySettings.encode(message.librarySettings[i], writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                     if (message.protoReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "protoReferenceDocumentationUri"))
                         writer.uint32(/* id 110, wireType 2 =*/882).string(message.protoReferenceDocumentationUri);
+                    if (message.restReferenceDocumentationUri != null && Object.hasOwnProperty.call(message, "restReferenceDocumentationUri"))
+                        writer.uint32(/* id 111, wireType 2 =*/890).string(message.restReferenceDocumentationUri);
                     return writer;
                 };
     
@@ -13676,6 +13105,10 @@
                             }
                         case 110: {
                                 message.protoReferenceDocumentationUri = reader.string();
+                                break;
+                            }
+                        case 111: {
+                                message.restReferenceDocumentationUri = reader.string();
                                 break;
                             }
                         default:
@@ -13770,6 +13203,9 @@
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         if (!$util.isString(message.protoReferenceDocumentationUri))
                             return "protoReferenceDocumentationUri: string expected";
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        if (!$util.isString(message.restReferenceDocumentationUri))
+                            return "restReferenceDocumentationUri: string expected";
                     return null;
                 };
     
@@ -13864,6 +13300,8 @@
                     }
                     if (object.protoReferenceDocumentationUri != null)
                         message.protoReferenceDocumentationUri = String(object.protoReferenceDocumentationUri);
+                    if (object.restReferenceDocumentationUri != null)
+                        message.restReferenceDocumentationUri = String(object.restReferenceDocumentationUri);
                     return message;
                 };
     
@@ -13893,6 +13331,7 @@
                         object.docTagPrefix = "";
                         object.organization = options.enums === String ? "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED" : 0;
                         object.protoReferenceDocumentationUri = "";
+                        object.restReferenceDocumentationUri = "";
                     }
                     if (message.methodSettings && message.methodSettings.length) {
                         object.methodSettings = [];
@@ -13923,6 +13362,8 @@
                     }
                     if (message.protoReferenceDocumentationUri != null && message.hasOwnProperty("protoReferenceDocumentationUri"))
                         object.protoReferenceDocumentationUri = message.protoReferenceDocumentationUri;
+                    if (message.restReferenceDocumentationUri != null && message.hasOwnProperty("restReferenceDocumentationUri"))
+                        object.restReferenceDocumentationUri = message.restReferenceDocumentationUri;
                     return object;
                 };
     
@@ -24069,12 +23510,9 @@
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
-                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length) {
-                        writer.uint32(/* id 1052, wireType 2 =*/8418).fork();
+                    if (message[".google.api.fieldBehavior"] != null && message[".google.api.fieldBehavior"].length)
                         for (var i = 0; i < message[".google.api.fieldBehavior"].length; ++i)
-                            writer.int32(message[".google.api.fieldBehavior"][i]);
-                        writer.ldelim();
-                    }
+                            writer.uint32(/* id 1052, wireType 0 =*/8416).int32(message[".google.api.fieldBehavior"][i]);
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
                     return writer;
@@ -25920,6 +25358,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] ServiceOptions uninterpretedOption
                  * @property {string|null} [".google.api.defaultHost"] ServiceOptions .google.api.defaultHost
                  * @property {string|null} [".google.api.oauthScopes"] ServiceOptions .google.api.oauthScopes
+                 * @property {string|null} [".google.api.apiVersion"] ServiceOptions .google.api.apiVersion
                  */
     
                 /**
@@ -25979,6 +25418,14 @@
                 ServiceOptions.prototype[".google.api.oauthScopes"] = "";
     
                 /**
+                 * ServiceOptions .google.api.apiVersion.
+                 * @member {string} .google.api.apiVersion
+                 * @memberof google.protobuf.ServiceOptions
+                 * @instance
+                 */
+                ServiceOptions.prototype[".google.api.apiVersion"] = "";
+    
+                /**
                  * Creates a new ServiceOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.ServiceOptions
@@ -26013,6 +25460,8 @@
                         writer.uint32(/* id 1049, wireType 2 =*/8394).string(message[".google.api.defaultHost"]);
                     if (message[".google.api.oauthScopes"] != null && Object.hasOwnProperty.call(message, ".google.api.oauthScopes"))
                         writer.uint32(/* id 1050, wireType 2 =*/8402).string(message[".google.api.oauthScopes"]);
+                    if (message[".google.api.apiVersion"] != null && Object.hasOwnProperty.call(message, ".google.api.apiVersion"))
+                        writer.uint32(/* id 525000001, wireType 2 =*/4200000010).string(message[".google.api.apiVersion"]);
                     return writer;
                 };
     
@@ -26067,6 +25516,10 @@
                             }
                         case 1050: {
                                 message[".google.api.oauthScopes"] = reader.string();
+                                break;
+                            }
+                        case 525000001: {
+                                message[".google.api.apiVersion"] = reader.string();
                                 break;
                             }
                         default:
@@ -26127,6 +25580,9 @@
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         if (!$util.isString(message[".google.api.oauthScopes"]))
                             return ".google.api.oauthScopes: string expected";
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        if (!$util.isString(message[".google.api.apiVersion"]))
+                            return ".google.api.apiVersion: string expected";
                     return null;
                 };
     
@@ -26163,6 +25619,8 @@
                         message[".google.api.defaultHost"] = String(object[".google.api.defaultHost"]);
                     if (object[".google.api.oauthScopes"] != null)
                         message[".google.api.oauthScopes"] = String(object[".google.api.oauthScopes"]);
+                    if (object[".google.api.apiVersion"] != null)
+                        message[".google.api.apiVersion"] = String(object[".google.api.apiVersion"]);
                     return message;
                 };
     
@@ -26186,6 +25644,7 @@
                         object.features = null;
                         object[".google.api.defaultHost"] = "";
                         object[".google.api.oauthScopes"] = "";
+                        object[".google.api.apiVersion"] = "";
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -26200,6 +25659,8 @@
                         object[".google.api.defaultHost"] = message[".google.api.defaultHost"];
                     if (message[".google.api.oauthScopes"] != null && message.hasOwnProperty(".google.api.oauthScopes"))
                         object[".google.api.oauthScopes"] = message[".google.api.oauthScopes"];
+                    if (message[".google.api.apiVersion"] != null && message.hasOwnProperty(".google.api.apiVersion"))
+                        object[".google.api.apiVersion"] = message[".google.api.apiVersion"];
                     return object;
                 };
     

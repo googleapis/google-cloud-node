@@ -192,8 +192,6 @@ export class DeliveryServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      searchTasks:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tasks'),
       listTasks:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'tasks'),
       listDeliveryVehicles:
@@ -243,7 +241,7 @@ export class DeliveryServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const deliveryServiceStubMethods =
-        ['createDeliveryVehicle', 'getDeliveryVehicle', 'updateDeliveryVehicle', 'batchCreateTasks', 'createTask', 'getTask', 'searchTasks', 'updateTask', 'listTasks', 'getTaskTrackingInfo', 'listDeliveryVehicles'];
+        ['createDeliveryVehicle', 'getDeliveryVehicle', 'updateDeliveryVehicle', 'batchCreateTasks', 'createTask', 'getTask', 'updateTask', 'listTasks', 'getTaskTrackingInfo', 'listDeliveryVehicles'];
     for (const methodName of deliveryServiceStubMethods) {
       const callPromise = this.deliveryServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -538,9 +536,9 @@ export class DeliveryServiceClient {
 /**
  * Writes updated `DeliveryVehicle` data to Fleet Engine, and assigns
  * `Tasks` to the `DeliveryVehicle`. You cannot update the name of the
- * `DeliveryVehicle`. You *can* update `remaining_vehicle_journey_segments`
- * though, but it must contain all of the `VehicleJourneySegment`s currently
- * on the `DeliveryVehicle`. The `task_id`s are retrieved from
+ * `DeliveryVehicle`. You *can* update `remaining_vehicle_journey_segments`,
+ * but it must contain all of the `VehicleJourneySegment`s to be persisted on
+ * the `DeliveryVehicle`. The `task_id`s are retrieved from
  * `remaining_vehicle_journey_segments`, and their corresponding `Tasks` are
  * assigned to the `DeliveryVehicle` if they have not yet been assigned.
  *
@@ -1111,275 +1109,6 @@ export class DeliveryServiceClient {
   }
 
  /**
- * Deprecated: Use `GetTaskTrackingInfo` instead.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]
- *   Optional. The standard Delivery API request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Google Cloud Project ID. For example,
- *   `sample-cloud-project`.
- * @param {string} request.trackingId
- *   Required. The identifier of the set of related Tasks being requested.
- *   Tracking IDs are subject to the following restrictions:
- *
- *   * Must be a valid Unicode string.
- *   * Limited to a maximum length of 64 characters.
- *   * Normalized according to [Unicode Normalization Form C]
- *   (http://www.unicode.org/reports/tr15/).
- *   * May not contain any of the following ASCII characters: '/', ':', '?',
- *   ',', or '#'.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Tasks to return. The service may return
- *   fewer than this value. If you don't specify this value, then the server
- *   determines the number of results to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `SearchTasks` call. You
- *   must provide this value to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `SearchTasks` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.maps.fleetengine.delivery.v1.Task|Task}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `searchTasksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated SearchTasks is deprecated and may be removed in a future version.
- */
-  searchTasks(
-      request?: protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.maps.fleetengine.delivery.v1.ITask[],
-        protos.maps.fleetengine.delivery.v1.ISearchTasksRequest|null,
-        protos.maps.fleetengine.delivery.v1.ISearchTasksResponse
-      ]>;
-  searchTasks(
-      request: protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-          protos.maps.fleetengine.delivery.v1.ISearchTasksResponse|null|undefined,
-          protos.maps.fleetengine.delivery.v1.ITask>): void;
-  searchTasks(
-      request: protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-      callback: PaginationCallback<
-          protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-          protos.maps.fleetengine.delivery.v1.ISearchTasksResponse|null|undefined,
-          protos.maps.fleetengine.delivery.v1.ITask>): void;
-  searchTasks(
-      request?: protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
-          protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-          protos.maps.fleetengine.delivery.v1.ISearchTasksResponse|null|undefined,
-          protos.maps.fleetengine.delivery.v1.ITask>,
-      callback?: PaginationCallback<
-          protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-          protos.maps.fleetengine.delivery.v1.ISearchTasksResponse|null|undefined,
-          protos.maps.fleetengine.delivery.v1.ITask>):
-      Promise<[
-        protos.maps.fleetengine.delivery.v1.ITask[],
-        protos.maps.fleetengine.delivery.v1.ISearchTasksRequest|null,
-        protos.maps.fleetengine.delivery.v1.ISearchTasksResponse
-      ]>|void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    }
-    else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
-    {
-      const fieldValue = request.parent;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
-        if (match) {
-          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
-        }
-      }
-    }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    this.initialize();
-    this.warn('DEP$DeliveryService-$SearchTasks','SearchTasks is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    return this.innerApiCalls.searchTasks(request, options, callback);
-  }
-
-/**
- * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]
- *   Optional. The standard Delivery API request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Google Cloud Project ID. For example,
- *   `sample-cloud-project`.
- * @param {string} request.trackingId
- *   Required. The identifier of the set of related Tasks being requested.
- *   Tracking IDs are subject to the following restrictions:
- *
- *   * Must be a valid Unicode string.
- *   * Limited to a maximum length of 64 characters.
- *   * Normalized according to [Unicode Normalization Form C]
- *   (http://www.unicode.org/reports/tr15/).
- *   * May not contain any of the following ASCII characters: '/', ':', '?',
- *   ',', or '#'.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Tasks to return. The service may return
- *   fewer than this value. If you don't specify this value, then the server
- *   determines the number of results to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `SearchTasks` call. You
- *   must provide this value to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `SearchTasks` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.maps.fleetengine.delivery.v1.Task|Task} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `searchTasksAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @deprecated SearchTasks is deprecated and may be removed in a future version.
- */
-  searchTasksStream(
-      request?: protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-      options?: CallOptions):
-    Transform{
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
-    {
-      const fieldValue = request.parent;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
-        if (match) {
-          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
-        }
-      }
-    }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    const defaultCallSettings = this._defaults['searchTasks'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    this.warn('DEP$DeliveryService-$SearchTasks','SearchTasks is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    return this.descriptors.page.searchTasks.createStream(
-      this.innerApiCalls.searchTasks as GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-/**
- * Equivalent to `searchTasks`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {maps.fleetengine.delivery.v1.DeliveryRequestHeader} [request.header]
- *   Optional. The standard Delivery API request header.
- * @param {string} request.parent
- *   Required. Must be in the format `providers/{provider}`.
- *   The provider must be the Google Cloud Project ID. For example,
- *   `sample-cloud-project`.
- * @param {string} request.trackingId
- *   Required. The identifier of the set of related Tasks being requested.
- *   Tracking IDs are subject to the following restrictions:
- *
- *   * Must be a valid Unicode string.
- *   * Limited to a maximum length of 64 characters.
- *   * Normalized according to [Unicode Normalization Form C]
- *   (http://www.unicode.org/reports/tr15/).
- *   * May not contain any of the following ASCII characters: '/', ':', '?',
- *   ',', or '#'.
- * @param {number} [request.pageSize]
- *   Optional. The maximum number of Tasks to return. The service may return
- *   fewer than this value. If you don't specify this value, then the server
- *   determines the number of results to return.
- * @param {string} [request.pageToken]
- *   Optional. A page token, received from a previous `SearchTasks` call. You
- *   must provide this value to retrieve the subsequent page.
- *
- *   When paginating, all other parameters provided to `SearchTasks` must match
- *   the call that provided the page token.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.maps.fleetengine.delivery.v1.Task|Task}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1/delivery_service.search_tasks.js</caption>
- * region_tag:fleetengine_v1_generated_DeliveryService_SearchTasks_async
- * @deprecated SearchTasks is deprecated and may be removed in a future version.
- */
-  searchTasksAsync(
-      request?: protos.maps.fleetengine.delivery.v1.ISearchTasksRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.maps.fleetengine.delivery.v1.ITask>{
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    let routingParameter = {};
-    {
-      const fieldValue = request.parent;
-      if (fieldValue !== undefined && fieldValue !== null) {
-        const match = fieldValue.toString().match(RegExp('(?<provider_id>providers/[^/]+)'));
-        if (match) {
-          const parameterValue = match.groups?.['provider_id'] ?? fieldValue;
-          Object.assign(routingParameter, { provider_id: parameterValue });
-        }
-      }
-    }
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams(
-      routingParameter
-    );
-    const defaultCallSettings = this._defaults['searchTasks'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    this.warn('DEP$DeliveryService-$SearchTasks','SearchTasks is deprecated and may be removed in a future version.', 'DeprecationWarning');
-    return this.descriptors.page.searchTasks.asyncIterate(
-      this.innerApiCalls['searchTasks'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.maps.fleetengine.delivery.v1.ITask>;
-  }
- /**
  * Gets all `Task`s that meet the specified filtering criteria.
  *
  * @param {Object} request
@@ -1404,8 +1133,8 @@ export class DeliveryServiceClient {
  *   Optional. A filter query to apply when listing Tasks. See
  *   http://aip.dev/160 for examples of filter syntax. If you don't specify a
  *   value, or if you filter on an empty string, then all Tasks are returned.
- *   For information about the Task properties that you can filter on, see [Task
- *   list](/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list_tasks).
+ *   For information about the Task properties that you can filter on, see [List
+ *   tasks](https://developers.google.com/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list-tasks).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1510,8 +1239,8 @@ export class DeliveryServiceClient {
  *   Optional. A filter query to apply when listing Tasks. See
  *   http://aip.dev/160 for examples of filter syntax. If you don't specify a
  *   value, or if you filter on an empty string, then all Tasks are returned.
- *   For information about the Task properties that you can filter on, see [Task
- *   list](/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list_tasks).
+ *   For information about the Task properties that you can filter on, see [List
+ *   tasks](https://developers.google.com/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list-tasks).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1583,8 +1312,8 @@ export class DeliveryServiceClient {
  *   Optional. A filter query to apply when listing Tasks. See
  *   http://aip.dev/160 for examples of filter syntax. If you don't specify a
  *   value, or if you filter on an empty string, then all Tasks are returned.
- *   For information about the Task properties that you can filter on, see [Task
- *   list](/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list_tasks).
+ *   For information about the Task properties that you can filter on, see [List
+ *   tasks](https://developers.google.com/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list-tasks).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

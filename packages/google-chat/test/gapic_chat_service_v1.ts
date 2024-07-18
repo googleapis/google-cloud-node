@@ -3038,6 +3038,136 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('getSpaceEvent', () => {
+    it('invokes getSpaceEvent without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.SpaceEvent()
+      );
+      client.innerApiCalls.getSpaceEvent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getSpaceEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSpaceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSpaceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSpaceEvent without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.chat.v1.SpaceEvent()
+      );
+      client.innerApiCalls.getSpaceEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getSpaceEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ISpaceEvent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getSpaceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSpaceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSpaceEvent with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getSpaceEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getSpaceEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getSpaceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSpaceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getSpaceEvent with closed client', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.GetSpaceEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.GetSpaceEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getSpaceEvent(request), expectedError);
+    });
+  });
+
   describe('listMessages', () => {
     it('invokes listMessages without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
@@ -4130,6 +4260,301 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('listSpaceEvents', () => {
+    it('invokes listSpaceEvents without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+      ];
+      client.innerApiCalls.listSpaceEvents = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSpaceEvents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSpaceEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSpaceEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSpaceEvents without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+      ];
+      client.innerApiCalls.listSpaceEvents =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSpaceEvents(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ISpaceEvent[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listSpaceEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSpaceEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSpaceEvents with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSpaceEvents = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSpaceEvents(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listSpaceEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSpaceEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listSpaceEventsStream without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+      ];
+      client.descriptors.page.listSpaceEvents.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSpaceEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.SpaceEvent[] = [];
+        stream.on('data', (response: protos.google.chat.v1.SpaceEvent) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSpaceEvents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSpaceEvents, request)
+      );
+      assert(
+        (client.descriptors.page.listSpaceEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listSpaceEventsStream with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSpaceEvents.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSpaceEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.SpaceEvent[] = [];
+        stream.on('data', (response: protos.google.chat.v1.SpaceEvent) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSpaceEvents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSpaceEvents, request)
+      );
+      assert(
+        (client.descriptors.page.listSpaceEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listSpaceEvents without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+        generateSampleMessage(new protos.google.chat.v1.SpaceEvent()),
+      ];
+      client.descriptors.page.listSpaceEvents.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.chat.v1.ISpaceEvent[] = [];
+      const iterable = client.listSpaceEventsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSpaceEvents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSpaceEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listSpaceEvents with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.ListSpaceEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.chat.v1.ListSpaceEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSpaceEvents.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSpaceEventsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.chat.v1.ISpaceEvent[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSpaceEvents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listSpaceEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('attachment', () => {
       const fakePath = '/rendered/path/attachment';
@@ -4469,6 +4894,55 @@ describe('v1.ChatServiceClient', () => {
         assert.strictEqual(result, 'spaceValue');
         assert(
           (client.pathTemplates.spacePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('spaceEvent', () => {
+      const fakePath = '/rendered/path/spaceEvent';
+      const expectedParameters = {
+        space: 'spaceValue',
+        space_event: 'spaceEventValue',
+      };
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.spaceEventPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.spaceEventPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('spaceEventPath', () => {
+        const result = client.spaceEventPath('spaceValue', 'spaceEventValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.spaceEventPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchSpaceFromSpaceEventName', () => {
+        const result = client.matchSpaceFromSpaceEventName(fakePath);
+        assert.strictEqual(result, 'spaceValue');
+        assert(
+          (client.pathTemplates.spaceEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSpaceEventFromSpaceEventName', () => {
+        const result = client.matchSpaceEventFromSpaceEventName(fakePath);
+        assert.strictEqual(result, 'spaceEventValue');
+        assert(
+          (client.pathTemplates.spaceEventPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

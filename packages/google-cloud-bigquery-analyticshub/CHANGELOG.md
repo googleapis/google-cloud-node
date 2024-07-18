@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v1.5.0...bigquery-analyticshub-v1.6.0) (2024-07-10)
+
+
+### Features
+
+* [bigquery-analyticshub] support public directory self service for Listings/Exchanges ([#5523](https://github.com/googleapis/google-cloud-node/issues/5523)) ([e85b575](https://github.com/googleapis/google-cloud-node/commit/e85b5752ea97e102b8cd729d1e9b18aadfd8f045))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-analyticshub-v1.4.0...bigquery-analyticshub-v1.5.0) (2024-05-21)
 
 

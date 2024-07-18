@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.6.0...networkservices-v0.7.0) (2024-06-03)
+
+
+### Features
+
+* [networkservices] A new field `metadata` is added to message `.google.cloud.networkservices.v1.LbTrafficExtension` ([#5414](https://github.com/googleapis/google-cloud-node/issues/5414)) ([035a727](https://github.com/googleapis/google-cloud-node/commit/035a7272b13ee4a44778c62d58e1aaf01924267b))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/networkservices-v0.5.0...networkservices-v0.6.0) (2024-05-21)
 
 

@@ -205,17 +205,17 @@ function main(servingConfig) {
    *  documents. This overrides
    *  ServingConfig.ranking_expression google.cloud.discoveryengine.v1beta.ServingConfig.ranking_expression.
    *  The ranking expression is a single function or multiple functions that are
-   *  joint by "+".
+   *  joined by "+".
    *    * ranking_expression = function, { " + ", function };
    *  Supported functions:
    *    * double * relevance_score
    *    * double * dotProduct(embedding_field_path)
    *  Function variables:
-   *    `relevance_score`: pre-defined keywords, used for measure relevance
+   *    * `relevance_score`: pre-defined keywords, used for measure relevance
    *    between query and document.
-   *    `embedding_field_path`: the document embedding field
+   *    * `embedding_field_path`: the document embedding field
    *    used with query embedding vector.
-   *    `dotProduct`: embedding function between embedding_field_path and query
+   *    * `dotProduct`: embedding function between embedding_field_path and query
    *    embedding vector.
    *   Example ranking expression:
    *     If document has an embedding field doc_embedding, the ranking expression

@@ -150,6 +150,9 @@ export class JobServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -713,6 +716,15 @@ export class JobServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -837,6 +849,15 @@ export class JobServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
@@ -992,6 +1013,18 @@ export class JobServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
             },
             {
               delete:
@@ -1180,6 +1213,18 @@ export class JobServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1342,6 +1387,15 @@ export class JobServiceClient {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
@@ -1473,6 +1527,15 @@ export class JobServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
@@ -1607,6 +1670,15 @@ export class JobServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
             {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1735,6 +1807,15 @@ export class JobServiceClient {
             {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
@@ -1890,6 +1971,15 @@ export class JobServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -2027,6 +2117,15 @@ export class JobServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',

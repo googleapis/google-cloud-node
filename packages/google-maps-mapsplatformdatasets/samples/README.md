@@ -14,6 +14,7 @@
 * [Samples](#samples)
   * [Maps_platform_datasets.create_dataset](#maps_platform_datasets.create_dataset)
   * [Maps_platform_datasets.delete_dataset](#maps_platform_datasets.delete_dataset)
+  * [Maps_platform_datasets.fetch_dataset_errors](#maps_platform_datasets.fetch_dataset_errors)
   * [Maps_platform_datasets.get_dataset](#maps_platform_datasets.get_dataset)
   * [Maps_platform_datasets.list_datasets](#maps_platform_datasets.list_datasets)
   * [Maps_platform_datasets.update_dataset_metadata](#maps_platform_datasets.update_dataset_metadata)
@@ -68,6 +69,23 @@ __Usage:__
 
 
 `node packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.delete_dataset.js`
+
+
+-----
+
+
+
+
+### Maps_platform_datasets.fetch_dataset_errors
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js`
 
 
 -----

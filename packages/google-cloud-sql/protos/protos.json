@@ -1256,7 +1256,10 @@
                             "SWITCHOVER": 39,
                             "ACQUIRE_SSRS_LEASE": 42,
                             "RELEASE_SSRS_LEASE": 43,
-                            "RECONFIGURE_OLD_PRIMARY": 44
+                            "RECONFIGURE_OLD_PRIMARY": 44,
+                            "CLUSTER_MAINTENANCE": 45,
+                            "SELF_SERVICE_MAINTENANCE": 46,
+                            "SWITCHOVER_TO_REPLICA": 47
                           }
                         },
                         "SqlOperationStatus": {
@@ -1501,6 +1504,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "enableDataplexIntegration": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1676,6 +1686,7 @@
                         "POSTGRES_13": 23,
                         "POSTGRES_14": 110,
                         "POSTGRES_15": 172,
+                        "POSTGRES_16": 272,
                         "MYSQL_8_0": 20,
                         "MYSQL_8_0_18": 41,
                         "MYSQL_8_0_26": 85,
@@ -1693,6 +1704,8 @@
                         "MYSQL_8_0_38": 356,
                         "MYSQL_8_0_39": 357,
                         "MYSQL_8_0_40": 358,
+                        "MYSQL_8_4": 398,
+                        "MYSQL_8_4_0": 399,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,
@@ -3854,6 +3867,14 @@
                           "type": "string",
                           "id": 42
                         },
+                        "upgradableDatabaseVersions": {
+                          "rule": "repeated",
+                          "type": "AvailableDatabaseVersion",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "sqlNetworkArchitecture": {
                           "type": "SqlNetworkArchitecture",
                           "id": 47,
@@ -4106,6 +4127,13 @@
                     },
                     "ReplicationCluster": {
                       "fields": {
+                        "psaWriteEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "failoverDrReplicaName": {
                           "type": "string",
                           "id": 2,
@@ -4118,6 +4146,48 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AvailableDatabaseVersion": {
+                      "oneofs": {
+                        "_majorVersion": {
+                          "oneof": [
+                            "majorVersion"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "majorVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -4312,7 +4382,11 @@
                             "PG_SUBSCRIPTION_COUNT": 41,
                             "PG_SYNC_PARALLEL_LEVEL": 42,
                             "INSUFFICIENT_DISK_SIZE": 43,
-                            "INSUFFICIENT_MACHINE_TIER": 44
+                            "INSUFFICIENT_MACHINE_TIER": 44,
+                            "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED": 45,
+                            "EXTENSIONS_NOT_MIGRATED": 46,
+                            "PG_CRON_FLAG_ENABLED_IN_REPLICA": 47,
+                            "EXTENSIONS_NOT_ENABLED_IN_REPLICA": 48
                           }
                         }
                       }
@@ -7202,6 +7276,11 @@
                           "oneof": [
                             "preferredZone"
                           ]
+                        },
+                        "_preferredSecondaryZone": {
+                          "oneof": [
+                            "preferredSecondaryZone"
+                          ]
                         }
                       },
                       "fields": {
@@ -7237,6 +7316,14 @@
                         "preferredZone": {
                           "type": "string",
                           "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "preferredSecondaryZone": {
+                          "type": "string",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -7556,6 +7643,14 @@
                           "type": "string",
                           "id": 42
                         },
+                        "upgradableDatabaseVersions": {
+                          "rule": "repeated",
+                          "type": "AvailableDatabaseVersion",
+                          "id": 45,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "sqlNetworkArchitecture": {
                           "type": "SqlNetworkArchitecture",
                           "id": 47,
@@ -7808,6 +7903,11 @@
                     },
                     "ReplicationCluster": {
                       "oneofs": {
+                        "_psaWriteEndpoint": {
+                          "oneof": [
+                            "psaWriteEndpoint"
+                          ]
+                        },
                         "_failoverDrReplicaName": {
                           "oneof": [
                             "failoverDrReplicaName"
@@ -7820,6 +7920,14 @@
                         }
                       },
                       "fields": {
+                        "psaWriteEndpoint": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
                         "failoverDrReplicaName": {
                           "type": "string",
                           "id": 2,
@@ -7833,6 +7941,48 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AvailableDatabaseVersion": {
+                      "oneofs": {
+                        "_majorVersion": {
+                          "oneof": [
+                            "majorVersion"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "majorVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
                             "proto3_optional": true
                           }
                         }
@@ -8528,7 +8678,11 @@
                             "PG_SUBSCRIPTION_COUNT": 41,
                             "PG_SYNC_PARALLEL_LEVEL": 42,
                             "INSUFFICIENT_DISK_SIZE": 43,
-                            "INSUFFICIENT_MACHINE_TIER": 44
+                            "INSUFFICIENT_MACHINE_TIER": 44,
+                            "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED": 45,
+                            "EXTENSIONS_NOT_MIGRATED": 46,
+                            "PG_CRON_FLAG_ENABLED_IN_REPLICA": 47,
+                            "EXTENSIONS_NOT_ENABLED_IN_REPLICA": 48
                           }
                         }
                       }
@@ -8963,7 +9117,10 @@
                             "SWITCHOVER": 39,
                             "ACQUIRE_SSRS_LEASE": 42,
                             "RELEASE_SSRS_LEASE": 43,
-                            "RECONFIGURE_OLD_PRIMARY": 44
+                            "RECONFIGURE_OLD_PRIMARY": 44,
+                            "CLUSTER_MAINTENANCE": 45,
+                            "SELF_SERVICE_MAINTENANCE": 46,
+                            "SWITCHOVER_TO_REPLICA": 47
                           }
                         },
                         "SqlOperationStatus": {
@@ -9280,6 +9437,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "enableDataplexIntegration": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -9589,6 +9753,7 @@
                         "POSTGRES_13": 23,
                         "POSTGRES_14": 110,
                         "POSTGRES_15": 172,
+                        "POSTGRES_16": 272,
                         "MYSQL_8_0": 20,
                         "MYSQL_8_0_18": 41,
                         "MYSQL_8_0_26": 85,
@@ -9606,6 +9771,8 @@
                         "MYSQL_8_0_38": 356,
                         "MYSQL_8_0_39": 357,
                         "MYSQL_8_0_40": 358,
+                        "MYSQL_8_4": 398,
+                        "MYSQL_8_4_0": 399,
                         "SQLSERVER_2019_STANDARD": 26,
                         "SQLSERVER_2019_ENTERPRISE": 27,
                         "SQLSERVER_2019_EXPRESS": 28,

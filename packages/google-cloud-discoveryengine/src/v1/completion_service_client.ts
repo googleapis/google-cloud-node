@@ -221,6 +221,10 @@ export class CompletionServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}'
         ),
+      projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
+        ),
       projectLocationCollectionDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/controls/{control}'
@@ -275,6 +279,10 @@ export class CompletionServiceClient {
       projectLocationDataStoreBranchDocumentPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}'
+        ),
+      projectLocationDataStoreBranchDocumentChunkPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/branches/{branch}/documents/{document}/chunks/{chunk}'
         ),
       projectLocationDataStoreControlPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -437,6 +445,18 @@ export class CompletionServiceClient {
     const purgeSuggestionDenyListEntriesMetadata = protoFilesRoot.lookup(
       '.google.cloud.discoveryengine.v1.PurgeSuggestionDenyListEntriesMetadata'
     ) as gax.protobuf.Type;
+    const importCompletionSuggestionsResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsResponse'
+    ) as gax.protobuf.Type;
+    const importCompletionSuggestionsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsMetadata'
+    ) as gax.protobuf.Type;
+    const purgeCompletionSuggestionsResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsResponse'
+    ) as gax.protobuf.Type;
+    const purgeCompletionSuggestionsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importSuggestionDenyListEntries:
@@ -456,6 +476,24 @@ export class CompletionServiceClient {
         ),
         purgeSuggestionDenyListEntriesMetadata.decode.bind(
           purgeSuggestionDenyListEntriesMetadata
+        )
+      ),
+      importCompletionSuggestions: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importCompletionSuggestionsResponse.decode.bind(
+          importCompletionSuggestionsResponse
+        ),
+        importCompletionSuggestionsMetadata.decode.bind(
+          importCompletionSuggestionsMetadata
+        )
+      ),
+      purgeCompletionSuggestions: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeCompletionSuggestionsResponse.decode.bind(
+          purgeCompletionSuggestionsResponse
+        ),
+        purgeCompletionSuggestionsMetadata.decode.bind(
+          purgeCompletionSuggestionsMetadata
         )
       ),
     };
@@ -514,6 +552,8 @@ export class CompletionServiceClient {
       'completeQuery',
       'importSuggestionDenyListEntries',
       'purgeSuggestionDenyListEntries',
+      'importCompletionSuggestions',
+      'purgeCompletionSuggestions',
     ];
     for (const methodName of completionServiceStubMethods) {
       const callPromise = this.completionServiceStub.then(
@@ -1057,6 +1097,303 @@ export class CompletionServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.discoveryengine.v1.PurgeSuggestionDenyListEntriesResponse,
       protos.google.cloud.discoveryengine.v1.PurgeSuggestionDenyListEntriesMetadata
+    >;
+  }
+  /**
+   * Imports
+   * {@link protos.google.cloud.discoveryengine.v1.CompletionSuggestion|CompletionSuggestion}s
+   * for a DataStore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.ImportCompletionSuggestionsRequest.InlineSource} request.inlineSource
+   *   The Inline source for suggestion entries.
+   * @param {google.cloud.discoveryengine.v1.GcsSource} request.gcsSource
+   *   Cloud Storage location for the input content.
+   * @param {google.cloud.discoveryengine.v1.BigQuerySource} request.bigquerySource
+   *   BigQuery input source.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name for which to import customer
+   *   autocomplete suggestions.
+   *
+   *   Follows pattern `projects/* /locations/* /collections/* /dataStores/*`
+   * @param {google.cloud.discoveryengine.v1.ImportErrorConfig} request.errorConfig
+   *   The desired location of errors incurred during the Import.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/completion_service.import_completion_suggestions.js</caption>
+   * region_tag:discoveryengine_v1_generated_CompletionService_ImportCompletionSuggestions_async
+   */
+  importCompletionSuggestions(
+    request?: protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importCompletionSuggestions(
+    request: protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importCompletionSuggestions(
+    request: protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importCompletionSuggestions(
+    request?: protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+            protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IImportCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importCompletionSuggestions(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `importCompletionSuggestions()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/completion_service.import_completion_suggestions.js</caption>
+   * region_tag:discoveryengine_v1_generated_CompletionService_ImportCompletionSuggestions_async
+   */
+  async checkImportCompletionSuggestionsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsResponse,
+      protos.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importCompletionSuggestions,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsResponse,
+      protos.google.cloud.discoveryengine.v1.ImportCompletionSuggestionsMetadata
+    >;
+  }
+  /**
+   * Permanently deletes all
+   * {@link protos.google.cloud.discoveryengine.v1.CompletionSuggestion|CompletionSuggestion}s
+   * for a DataStore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent data store resource name for which to purge completion
+   *   suggestions. Follows pattern
+   *   projects/* /locations/* /collections/* /dataStores/*.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/completion_service.purge_completion_suggestions.js</caption>
+   * region_tag:discoveryengine_v1_generated_CompletionService_PurgeCompletionSuggestions_async
+   */
+  purgeCompletionSuggestions(
+    request?: protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  purgeCompletionSuggestions(
+    request: protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeCompletionSuggestions(
+    request: protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeCompletionSuggestions(
+    request?: protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+            protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsResponse,
+        protos.google.cloud.discoveryengine.v1.IPurgeCompletionSuggestionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeCompletionSuggestions(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeCompletionSuggestions()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/completion_service.purge_completion_suggestions.js</caption>
+   * region_tag:discoveryengine_v1_generated_CompletionService_PurgeCompletionSuggestions_async
+   */
+  async checkPurgeCompletionSuggestionsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsResponse,
+      protos.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeCompletionSuggestions,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsResponse,
+      protos.google.cloud.discoveryengine.v1.PurgeCompletionSuggestionsMetadata
     >;
   }
   /**
@@ -1610,6 +1947,145 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.match(
       projectLocationCollectionDataStoreBranchDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationCollectionDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_collection_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationCollectionDataStoreBranchDocumentChunkName(
+    projectLocationCollectionDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationCollectionDataStoreBranchDocumentChunkName
+    ).chunk;
   }
 
   /**
@@ -3014,6 +3490,127 @@ export class CompletionServiceClient {
     return this.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.match(
       projectLocationDataStoreBranchDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreBranchDocumentChunk resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} branch
+   * @param {string} document
+   * @param {string} chunk
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreBranchDocumentChunkPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    branch: string,
+    document: string,
+    chunk: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        branch: branch,
+        document: document,
+        chunk: chunk,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).data_store;
+  }
+
+  /**
+   * Parse the branch from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).branch;
+  }
+
+  /**
+   * Parse the document from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the document.
+   */
+  matchDocumentFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).document;
+  }
+
+  /**
+   * Parse the chunk from ProjectLocationDataStoreBranchDocumentChunk resource.
+   *
+   * @param {string} projectLocationDataStoreBranchDocumentChunkName
+   *   A fully-qualified path representing project_location_data_store_branch_document_chunk resource.
+   * @returns {string} A string representing the chunk.
+   */
+  matchChunkFromProjectLocationDataStoreBranchDocumentChunkName(
+    projectLocationDataStoreBranchDocumentChunkName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.match(
+      projectLocationDataStoreBranchDocumentChunkName
+    ).chunk;
   }
 
   /**

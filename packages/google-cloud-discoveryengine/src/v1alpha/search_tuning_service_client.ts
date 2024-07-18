@@ -213,6 +213,9 @@ export class SearchTuningServiceClient {
       enginePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/collections/{collection}/engines/{engine}'
       ),
+      evaluationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/evaluations/{evaluation}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -339,6 +342,12 @@ export class SearchTuningServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/siteSearchEngine/targetSites/{target_site}'
         ),
+      sampleQueryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}/sampleQueries/{sample_query}'
+      ),
+      sampleQuerySetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/sampleQuerySets/{sample_query_set}'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -1247,6 +1256,58 @@ export class SearchTuningServiceClient {
    */
   matchEngineFromEngineName(engineName: string) {
     return this.pathTemplates.enginePathTemplate.match(engineName).engine;
+  }
+
+  /**
+   * Return a fully-qualified evaluation resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} evaluation
+   * @returns {string} Resource name string.
+   */
+  evaluationPath(project: string, location: string, evaluation: string) {
+    return this.pathTemplates.evaluationPathTemplate.render({
+      project: project,
+      location: location,
+      evaluation: evaluation,
+    });
+  }
+
+  /**
+   * Parse the project from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .location;
+  }
+
+  /**
+   * Parse the evaluation from Evaluation resource.
+   *
+   * @param {string} evaluationName
+   *   A fully-qualified path representing Evaluation resource.
+   * @returns {string} A string representing the evaluation.
+   */
+  matchEvaluationFromEvaluationName(evaluationName: string) {
+    return this.pathTemplates.evaluationPathTemplate.match(evaluationName)
+      .evaluation;
   }
 
   /**
@@ -4281,6 +4342,136 @@ export class SearchTuningServiceClient {
     return this.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.match(
       projectLocationDataStoreSiteSearchEngineTargetSiteName
     ).target_site;
+  }
+
+  /**
+   * Return a fully-qualified sampleQuery resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sample_query_set
+   * @param {string} sample_query
+   * @returns {string} Resource name string.
+   */
+  sampleQueryPath(
+    project: string,
+    location: string,
+    sampleQuerySet: string,
+    sampleQuery: string
+  ) {
+    return this.pathTemplates.sampleQueryPathTemplate.render({
+      project: project,
+      location: location,
+      sample_query_set: sampleQuerySet,
+      sample_query: sampleQuery,
+    });
+  }
+
+  /**
+   * Parse the project from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .location;
+  }
+
+  /**
+   * Parse the sample_query_set from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the sample_query_set.
+   */
+  matchSampleQuerySetFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .sample_query_set;
+  }
+
+  /**
+   * Parse the sample_query from SampleQuery resource.
+   *
+   * @param {string} sampleQueryName
+   *   A fully-qualified path representing SampleQuery resource.
+   * @returns {string} A string representing the sample_query.
+   */
+  matchSampleQueryFromSampleQueryName(sampleQueryName: string) {
+    return this.pathTemplates.sampleQueryPathTemplate.match(sampleQueryName)
+      .sample_query;
+  }
+
+  /**
+   * Return a fully-qualified sampleQuerySet resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} sample_query_set
+   * @returns {string} Resource name string.
+   */
+  sampleQuerySetPath(
+    project: string,
+    location: string,
+    sampleQuerySet: string
+  ) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.render({
+      project: project,
+      location: location,
+      sample_query_set: sampleQuerySet,
+    });
+  }
+
+  /**
+   * Parse the project from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).project;
+  }
+
+  /**
+   * Parse the location from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).location;
+  }
+
+  /**
+   * Parse the sample_query_set from SampleQuerySet resource.
+   *
+   * @param {string} sampleQuerySetName
+   *   A fully-qualified path representing SampleQuerySet resource.
+   * @returns {string} A string representing the sample_query_set.
+   */
+  matchSampleQuerySetFromSampleQuerySetName(sampleQuerySetName: string) {
+    return this.pathTemplates.sampleQuerySetPathTemplate.match(
+      sampleQuerySetName
+    ).sample_query_set;
   }
 
   /**

@@ -268,12 +268,6 @@ export class BackupDRClient {
           selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
           post: '/v1/{resource=projects/*/locations/*/managementServers/*}:testIamPermissions',
           body: '*',
-          additional_bindings: [
-            {
-              post: '/v1/{resource=projects/*/locations/*/backupVaults/*}:testIamPermissions',
-              body: '*',
-            },
-          ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',

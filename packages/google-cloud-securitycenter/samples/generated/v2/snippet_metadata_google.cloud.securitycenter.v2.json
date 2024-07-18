@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-securitycenter",
-        "version": "8.7.0",
+        "version": "8.11.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -830,7 +830,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 136,
+                    "end": 130,
                     "type": "FULL"
                 }
             ],
@@ -1694,7 +1694,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 61,
                     "type": "FULL"
                 }
             ],

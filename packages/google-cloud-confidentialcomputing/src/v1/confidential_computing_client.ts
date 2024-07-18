@@ -485,6 +485,10 @@ export class ConfidentialComputingClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.confidentialcomputing.v1.TdxCcelAttestation} [request.tdCcel]
+   *   Optional. A TDX with CCEL and RTMR Attestation Quote.
+   * @param {google.cloud.confidentialcomputing.v1.SevSnpAttestation} [request.sevSnpAttestation]
+   *   Optional. An SEV-SNP Attestation Report.
    * @param {string} request.challenge
    *   Required. The name of the Challenge whose nonce was used to generate the
    *   attestation, in the format `projects/* /locations/* /challenges/*`. The

@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Format:
-   *  organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections
+   *  `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/ekmConnections`
    */
   // const name = 'abc123'
 

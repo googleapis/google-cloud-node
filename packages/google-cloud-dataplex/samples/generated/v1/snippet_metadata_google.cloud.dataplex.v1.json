@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-dataplex",
-        "version": "3.8.0",
+        "version": "3.11.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -3395,14 +3395,14 @@
             "regionTag": "dataplex_v1_generated_DataScanService_GenerateDataQualityRules_async",
             "title": "CatalogService generateDataQualityRules Sample",
             "origin": "API_DEFINITION",
-            "description": " Generates recommended DataQualityRule from a data profiling DataScan.",
+            "description": " Generates recommended data quality rules based on the results of a data profiling scan. Use the recommendations to build rules for a data quality scan.",
             "canonical": true,
             "file": "data_scan_service.generate_data_quality_rules.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 56,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],

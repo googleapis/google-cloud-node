@@ -713,6 +713,12 @@ message EntrySource {
 
   // The update time of the resource in the source system.
   google.protobuf.Timestamp update_time = 11;
+
+  // Output only. Location of the resource in the source system. Entry will be
+  // searchable by this location. By default, this should match the location of
+  // the EntryGroup containing this entry. A different value allows capturing
+  // source location for data external to GCP.
+  string location = 12 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Create EntryGroup Request
@@ -1248,18 +1254,19 @@ message SearchEntriesResult {
   // Snippets for the entry, contains HTML-style highlighting for
   // matched tokens, will be used in UI.
   message Snippets {
+    option deprecated = true;
+
     // Entry
-    Entry dataplex_entry = 1;
+    Entry dataplex_entry = 1 [deprecated = true];
   }
 
   // Linked resource name.
-  string linked_resource = 8;
+  string linked_resource = 8 [deprecated = true];
 
-  // Entry format of the result.
   Entry dataplex_entry = 9;
 
   // Snippets.
-  Snippets snippets = 12;
+  Snippets snippets = 12 [deprecated = true];
 }
 
 message SearchEntriesResponse {
