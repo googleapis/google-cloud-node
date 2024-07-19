@@ -2421,7 +2421,7 @@
                   "options": {
                     "go_package": "cloud.google.com/go/speech/apiv2/speechpb;speechpb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "CloudSpeechProto",
+                    "java_outer_classname": "LocationsMetadataProto",
                     "java_package": "com.google.cloud.speech.v2",
                     "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKeyVersion",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
@@ -3630,6 +3630,13 @@
                     },
                     "RecognitionResponseMetadata": {
                       "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4"
+                          }
+                        },
                         "totalBilledDuration": {
                           "type": "google.protobuf.Duration",
                           "id": 6
@@ -4692,6 +4699,73 @@
                           "id": 4
                         }
                       }
+                    },
+                    "ModelFeature": {
+                      "fields": {
+                        "feature": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "releaseState": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ModelFeatures": {
+                      "fields": {
+                        "modelFeature": {
+                          "rule": "repeated",
+                          "type": "ModelFeature",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ModelMetadata": {
+                      "fields": {
+                        "modelFeatures": {
+                          "keyType": "string",
+                          "type": "ModelFeatures",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LanguageMetadata": {
+                      "fields": {
+                        "models": {
+                          "keyType": "string",
+                          "type": "ModelMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AccessMetadata": {
+                      "fields": {
+                        "constraintType": {
+                          "type": "ConstraintType",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ConstraintType": {
+                          "values": {
+                            "CONSTRAINT_TYPE_UNSPECIFIED": 0,
+                            "RESOURCE_LOCATIONS_ORG_POLICY_CREATE_CONSTRAINT": 1
+                          }
+                        }
+                      }
+                    },
+                    "LocationsMetadata": {
+                      "fields": {
+                        "languages": {
+                          "type": "LanguageMetadata",
+                          "id": 1
+                        },
+                        "accessMetadata": {
+                          "type": "AccessMetadata",
+                          "id": 2
+                        }
+                      }
                     }
                   }
                 }
@@ -4703,7 +4777,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -5184,6 +5258,30 @@
                 "childType": {
                   "type": "string",
                   "id": 2
+                }
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
                 }
               }
             }
