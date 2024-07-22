@@ -6669,6 +6669,7 @@
                          * @property {boolean|null} [importOnly] CryptoKey importOnly
                          * @property {google.protobuf.IDuration|null} [destroyScheduledDuration] CryptoKey destroyScheduledDuration
                          * @property {string|null} [cryptoKeyBackend] CryptoKey cryptoKeyBackend
+                         * @property {google.cloud.kms.v1.IKeyAccessJustificationsPolicy|null} [keyAccessJustificationsPolicy] CryptoKey keyAccessJustificationsPolicy
                          */
     
                         /**
@@ -6775,6 +6776,14 @@
                          */
                         CryptoKey.prototype.cryptoKeyBackend = "";
     
+                        /**
+                         * CryptoKey keyAccessJustificationsPolicy.
+                         * @member {google.cloud.kms.v1.IKeyAccessJustificationsPolicy|null|undefined} keyAccessJustificationsPolicy
+                         * @memberof google.cloud.kms.v1.CryptoKey
+                         * @instance
+                         */
+                        CryptoKey.prototype.keyAccessJustificationsPolicy = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6836,6 +6845,8 @@
                                 $root.google.protobuf.Duration.encode(message.destroyScheduledDuration, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.cryptoKeyBackend != null && Object.hasOwnProperty.call(message, "cryptoKeyBackend"))
                                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.cryptoKeyBackend);
+                            if (message.keyAccessJustificationsPolicy != null && Object.hasOwnProperty.call(message, "keyAccessJustificationsPolicy"))
+                                $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy.encode(message.keyAccessJustificationsPolicy, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -6931,6 +6942,10 @@
                                     }
                                 case 15: {
                                         message.cryptoKeyBackend = reader.string();
+                                        break;
+                                    }
+                                case 17: {
+                                        message.keyAccessJustificationsPolicy = $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -7031,6 +7046,11 @@
                             if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
                                 if (!$util.isString(message.cryptoKeyBackend))
                                     return "cryptoKeyBackend: string expected";
+                            if (message.keyAccessJustificationsPolicy != null && message.hasOwnProperty("keyAccessJustificationsPolicy")) {
+                                var error = $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy.verify(message.keyAccessJustificationsPolicy);
+                                if (error)
+                                    return "keyAccessJustificationsPolicy." + error;
+                            }
                             return null;
                         };
     
@@ -7121,6 +7141,11 @@
                             }
                             if (object.cryptoKeyBackend != null)
                                 message.cryptoKeyBackend = String(object.cryptoKeyBackend);
+                            if (object.keyAccessJustificationsPolicy != null) {
+                                if (typeof object.keyAccessJustificationsPolicy !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.CryptoKey.keyAccessJustificationsPolicy: object expected");
+                                message.keyAccessJustificationsPolicy = $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy.fromObject(object.keyAccessJustificationsPolicy);
+                            }
                             return message;
                         };
     
@@ -7149,6 +7174,7 @@
                                 object.importOnly = false;
                                 object.destroyScheduledDuration = null;
                                 object.cryptoKeyBackend = "";
+                                object.keyAccessJustificationsPolicy = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7179,6 +7205,8 @@
                                 object.destroyScheduledDuration = $root.google.protobuf.Duration.toObject(message.destroyScheduledDuration, options);
                             if (message.cryptoKeyBackend != null && message.hasOwnProperty("cryptoKeyBackend"))
                                 object.cryptoKeyBackend = message.cryptoKeyBackend;
+                            if (message.keyAccessJustificationsPolicy != null && message.hasOwnProperty("keyAccessJustificationsPolicy"))
+                                object.keyAccessJustificationsPolicy = $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy.toObject(message.keyAccessJustificationsPolicy, options);
                             return object;
                         };
     
@@ -10846,6 +10874,336 @@
                         values[valuesById[3] = "EXTERNAL"] = 3;
                         values[valuesById[4] = "EXTERNAL_VPC"] = 4;
                         return values;
+                    })();
+    
+                    /**
+                     * AccessReason enum.
+                     * @name google.cloud.kms.v1.AccessReason
+                     * @enum {number}
+                     * @property {number} REASON_UNSPECIFIED=0 REASON_UNSPECIFIED value
+                     * @property {number} CUSTOMER_INITIATED_SUPPORT=1 CUSTOMER_INITIATED_SUPPORT value
+                     * @property {number} GOOGLE_INITIATED_SERVICE=2 GOOGLE_INITIATED_SERVICE value
+                     * @property {number} THIRD_PARTY_DATA_REQUEST=3 THIRD_PARTY_DATA_REQUEST value
+                     * @property {number} GOOGLE_INITIATED_REVIEW=4 GOOGLE_INITIATED_REVIEW value
+                     * @property {number} CUSTOMER_INITIATED_ACCESS=5 CUSTOMER_INITIATED_ACCESS value
+                     * @property {number} GOOGLE_INITIATED_SYSTEM_OPERATION=6 GOOGLE_INITIATED_SYSTEM_OPERATION value
+                     * @property {number} REASON_NOT_EXPECTED=7 REASON_NOT_EXPECTED value
+                     * @property {number} MODIFIED_CUSTOMER_INITIATED_ACCESS=8 MODIFIED_CUSTOMER_INITIATED_ACCESS value
+                     * @property {number} MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION=9 MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION value
+                     * @property {number} GOOGLE_RESPONSE_TO_PRODUCTION_ALERT=10 GOOGLE_RESPONSE_TO_PRODUCTION_ALERT value
+                     * @property {number} CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING=11 CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING value
+                     */
+                    v1.AccessReason = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REASON_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "CUSTOMER_INITIATED_SUPPORT"] = 1;
+                        values[valuesById[2] = "GOOGLE_INITIATED_SERVICE"] = 2;
+                        values[valuesById[3] = "THIRD_PARTY_DATA_REQUEST"] = 3;
+                        values[valuesById[4] = "GOOGLE_INITIATED_REVIEW"] = 4;
+                        values[valuesById[5] = "CUSTOMER_INITIATED_ACCESS"] = 5;
+                        values[valuesById[6] = "GOOGLE_INITIATED_SYSTEM_OPERATION"] = 6;
+                        values[valuesById[7] = "REASON_NOT_EXPECTED"] = 7;
+                        values[valuesById[8] = "MODIFIED_CUSTOMER_INITIATED_ACCESS"] = 8;
+                        values[valuesById[9] = "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION"] = 9;
+                        values[valuesById[10] = "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"] = 10;
+                        values[valuesById[11] = "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING"] = 11;
+                        return values;
+                    })();
+    
+                    v1.KeyAccessJustificationsPolicy = (function() {
+    
+                        /**
+                         * Properties of a KeyAccessJustificationsPolicy.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IKeyAccessJustificationsPolicy
+                         * @property {Array.<google.cloud.kms.v1.AccessReason>|null} [allowedAccessReasons] KeyAccessJustificationsPolicy allowedAccessReasons
+                         */
+    
+                        /**
+                         * Constructs a new KeyAccessJustificationsPolicy.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a KeyAccessJustificationsPolicy.
+                         * @implements IKeyAccessJustificationsPolicy
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IKeyAccessJustificationsPolicy=} [properties] Properties to set
+                         */
+                        function KeyAccessJustificationsPolicy(properties) {
+                            this.allowedAccessReasons = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KeyAccessJustificationsPolicy allowedAccessReasons.
+                         * @member {Array.<google.cloud.kms.v1.AccessReason>} allowedAccessReasons
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @instance
+                         */
+                        KeyAccessJustificationsPolicy.prototype.allowedAccessReasons = $util.emptyArray;
+    
+                        /**
+                         * Creates a new KeyAccessJustificationsPolicy instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {google.cloud.kms.v1.IKeyAccessJustificationsPolicy=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.KeyAccessJustificationsPolicy} KeyAccessJustificationsPolicy instance
+                         */
+                        KeyAccessJustificationsPolicy.create = function create(properties) {
+                            return new KeyAccessJustificationsPolicy(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KeyAccessJustificationsPolicy message. Does not implicitly {@link google.cloud.kms.v1.KeyAccessJustificationsPolicy.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {google.cloud.kms.v1.IKeyAccessJustificationsPolicy} message KeyAccessJustificationsPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyAccessJustificationsPolicy.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.allowedAccessReasons != null && message.allowedAccessReasons.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.allowedAccessReasons.length; ++i)
+                                    writer.int32(message.allowedAccessReasons[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KeyAccessJustificationsPolicy message, length delimited. Does not implicitly {@link google.cloud.kms.v1.KeyAccessJustificationsPolicy.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {google.cloud.kms.v1.IKeyAccessJustificationsPolicy} message KeyAccessJustificationsPolicy message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KeyAccessJustificationsPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KeyAccessJustificationsPolicy message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.KeyAccessJustificationsPolicy} KeyAccessJustificationsPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyAccessJustificationsPolicy.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.allowedAccessReasons && message.allowedAccessReasons.length))
+                                            message.allowedAccessReasons = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.allowedAccessReasons.push(reader.int32());
+                                        } else
+                                            message.allowedAccessReasons.push(reader.int32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KeyAccessJustificationsPolicy message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.KeyAccessJustificationsPolicy} KeyAccessJustificationsPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KeyAccessJustificationsPolicy.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KeyAccessJustificationsPolicy message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KeyAccessJustificationsPolicy.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.allowedAccessReasons != null && message.hasOwnProperty("allowedAccessReasons")) {
+                                if (!Array.isArray(message.allowedAccessReasons))
+                                    return "allowedAccessReasons: array expected";
+                                for (var i = 0; i < message.allowedAccessReasons.length; ++i)
+                                    switch (message.allowedAccessReasons[i]) {
+                                    default:
+                                        return "allowedAccessReasons: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                        break;
+                                    }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KeyAccessJustificationsPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.KeyAccessJustificationsPolicy} KeyAccessJustificationsPolicy
+                         */
+                        KeyAccessJustificationsPolicy.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.KeyAccessJustificationsPolicy();
+                            if (object.allowedAccessReasons) {
+                                if (!Array.isArray(object.allowedAccessReasons))
+                                    throw TypeError(".google.cloud.kms.v1.KeyAccessJustificationsPolicy.allowedAccessReasons: array expected");
+                                message.allowedAccessReasons = [];
+                                for (var i = 0; i < object.allowedAccessReasons.length; ++i)
+                                    switch (object.allowedAccessReasons[i]) {
+                                    default:
+                                        if (typeof object.allowedAccessReasons[i] === "number") {
+                                            message.allowedAccessReasons[i] = object.allowedAccessReasons[i];
+                                            break;
+                                        }
+                                    case "REASON_UNSPECIFIED":
+                                    case 0:
+                                        message.allowedAccessReasons[i] = 0;
+                                        break;
+                                    case "CUSTOMER_INITIATED_SUPPORT":
+                                    case 1:
+                                        message.allowedAccessReasons[i] = 1;
+                                        break;
+                                    case "GOOGLE_INITIATED_SERVICE":
+                                    case 2:
+                                        message.allowedAccessReasons[i] = 2;
+                                        break;
+                                    case "THIRD_PARTY_DATA_REQUEST":
+                                    case 3:
+                                        message.allowedAccessReasons[i] = 3;
+                                        break;
+                                    case "GOOGLE_INITIATED_REVIEW":
+                                    case 4:
+                                        message.allowedAccessReasons[i] = 4;
+                                        break;
+                                    case "CUSTOMER_INITIATED_ACCESS":
+                                    case 5:
+                                        message.allowedAccessReasons[i] = 5;
+                                        break;
+                                    case "GOOGLE_INITIATED_SYSTEM_OPERATION":
+                                    case 6:
+                                        message.allowedAccessReasons[i] = 6;
+                                        break;
+                                    case "REASON_NOT_EXPECTED":
+                                    case 7:
+                                        message.allowedAccessReasons[i] = 7;
+                                        break;
+                                    case "MODIFIED_CUSTOMER_INITIATED_ACCESS":
+                                    case 8:
+                                        message.allowedAccessReasons[i] = 8;
+                                        break;
+                                    case "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION":
+                                    case 9:
+                                        message.allowedAccessReasons[i] = 9;
+                                        break;
+                                    case "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT":
+                                    case 10:
+                                        message.allowedAccessReasons[i] = 10;
+                                        break;
+                                    case "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING":
+                                    case 11:
+                                        message.allowedAccessReasons[i] = 11;
+                                        break;
+                                    }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KeyAccessJustificationsPolicy message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {google.cloud.kms.v1.KeyAccessJustificationsPolicy} message KeyAccessJustificationsPolicy
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KeyAccessJustificationsPolicy.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.allowedAccessReasons = [];
+                            if (message.allowedAccessReasons && message.allowedAccessReasons.length) {
+                                object.allowedAccessReasons = [];
+                                for (var j = 0; j < message.allowedAccessReasons.length; ++j)
+                                    object.allowedAccessReasons[j] = options.enums === String ? $root.google.cloud.kms.v1.AccessReason[message.allowedAccessReasons[j]] === undefined ? message.allowedAccessReasons[j] : $root.google.cloud.kms.v1.AccessReason[message.allowedAccessReasons[j]] : message.allowedAccessReasons[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KeyAccessJustificationsPolicy to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KeyAccessJustificationsPolicy.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for KeyAccessJustificationsPolicy
+                         * @function getTypeUrl
+                         * @memberof google.cloud.kms.v1.KeyAccessJustificationsPolicy
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KeyAccessJustificationsPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.kms.v1.KeyAccessJustificationsPolicy";
+                        };
+    
+                        return KeyAccessJustificationsPolicy;
                     })();
     
                     v1.KeyManagementService = (function() {

@@ -4,6 +4,27 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.15.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.0...container-v5.15.1) (2024-07-10)
+
+
+### Bug Fixes
+
+* [container] Deprecate "EXPERIMENTAL" option for Gateway API (this value has never been supported) ([#5519](https://github.com/googleapis/google-cloud-node/issues/5519)) ([8838289](https://github.com/googleapis/google-cloud-node/commit/88382897c1c0ba6f5f80ba72ab775808de301962))
+
+## [5.15.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.14.0...container-v5.15.0) (2024-06-12)
+
+
+### Features
+
+* [container] A new message `HugepagesConfig` is added ([#5447](https://github.com/googleapis/google-cloud-node/issues/5447)) ([e62ec4d](https://github.com/googleapis/google-cloud-node/commit/e62ec4df1773c683cc60cbb1adafeffc98970a61))
+
+## [5.14.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.13.0...container-v5.14.0) (2024-06-03)
+
+
+### Features
+
+* [container] A new message `HugepagesConfig` is added ([#5391](https://github.com/googleapis/google-cloud-node/issues/5391)) ([2c879f6](https://github.com/googleapis/google-cloud-node/commit/2c879f6acf259e280043a9e845b5e9af1435f188))
+
 ## [5.13.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.12.0...container-v5.13.0) (2024-05-21)
 
 

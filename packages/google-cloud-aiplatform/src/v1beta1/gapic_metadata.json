@@ -248,6 +248,11 @@
                 "createDeploymentResourcePool"
               ]
             },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "updateDeploymentResourcePool"
+              ]
+            },
             "DeleteDeploymentResourcePool": {
               "methods": [
                 "deleteDeploymentResourcePool"
@@ -280,6 +285,11 @@
             "CreateDeploymentResourcePool": {
               "methods": [
                 "createDeploymentResourcePool"
+              ]
+            },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "updateDeploymentResourcePool"
               ]
             },
             "DeleteDeploymentResourcePool": {
@@ -1119,6 +1129,74 @@
                 "searchFeatures",
                 "searchFeaturesStream",
                 "searchFeaturesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GenAiCacheService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenAiCacheServiceClient",
+          "rpcs": {
+            "CreateCachedContent": {
+              "methods": [
+                "createCachedContent"
+              ]
+            },
+            "GetCachedContent": {
+              "methods": [
+                "getCachedContent"
+              ]
+            },
+            "UpdateCachedContent": {
+              "methods": [
+                "updateCachedContent"
+              ]
+            },
+            "DeleteCachedContent": {
+              "methods": [
+                "deleteCachedContent"
+              ]
+            },
+            "ListCachedContents": {
+              "methods": [
+                "listCachedContents",
+                "listCachedContentsStream",
+                "listCachedContentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenAiCacheServiceClient",
+          "rpcs": {
+            "CreateCachedContent": {
+              "methods": [
+                "createCachedContent"
+              ]
+            },
+            "GetCachedContent": {
+              "methods": [
+                "getCachedContent"
+              ]
+            },
+            "UpdateCachedContent": {
+              "methods": [
+                "updateCachedContent"
+              ]
+            },
+            "DeleteCachedContent": {
+              "methods": [
+                "deleteCachedContent"
+              ]
+            },
+            "ListCachedContents": {
+              "methods": [
+                "listCachedContents",
+                "listCachedContentsStream",
+                "listCachedContentsAsync"
               ]
             }
           }
@@ -2613,6 +2691,11 @@
                 "getNotebookRuntimeTemplate"
               ]
             },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "updateNotebookRuntimeTemplate"
+              ]
+            },
             "GetNotebookRuntime": {
               "methods": [
                 "getNotebookRuntime"
@@ -2651,6 +2734,11 @@
             "StartNotebookRuntime": {
               "methods": [
                 "startNotebookRuntime"
+              ]
+            },
+            "CreateNotebookExecutionJob": {
+              "methods": [
+                "createNotebookExecutionJob"
               ]
             },
             "DeleteNotebookExecutionJob": {
@@ -2689,6 +2777,11 @@
                 "getNotebookRuntimeTemplate"
               ]
             },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "updateNotebookRuntimeTemplate"
+              ]
+            },
             "GetNotebookRuntime": {
               "methods": [
                 "getNotebookRuntime"
@@ -2727,6 +2820,11 @@
             "StartNotebookRuntime": {
               "methods": [
                 "startNotebookRuntime"
+              ]
+            },
+            "CreateNotebookExecutionJob": {
+              "methods": [
+                "createNotebookExecutionJob"
               ]
             },
             "DeleteNotebookExecutionJob": {
@@ -3019,6 +3117,11 @@
                 "generateContent"
               ]
             },
+            "StreamRawPredict": {
+              "methods": [
+                "streamRawPredict"
+              ]
+            },
             "StreamDirectPredict": {
               "methods": [
                 "streamDirectPredict"
@@ -3047,6 +3150,11 @@
             "StreamGenerateContent": {
               "methods": [
                 "streamGenerateContent"
+              ]
+            },
+            "ChatCompletions": {
+              "methods": [
+                "chatCompletions"
               ]
             }
           }
@@ -3132,6 +3240,11 @@
                 "createReasoningEngine"
               ]
             },
+            "UpdateReasoningEngine": {
+              "methods": [
+                "updateReasoningEngine"
+              ]
+            },
             "DeleteReasoningEngine": {
               "methods": [
                 "deleteReasoningEngine"
@@ -3157,6 +3270,11 @@
             "CreateReasoningEngine": {
               "methods": [
                 "createReasoningEngine"
+              ]
+            },
+            "UpdateReasoningEngine": {
+              "methods": [
+                "updateReasoningEngine"
               ]
             },
             "DeleteReasoningEngine": {

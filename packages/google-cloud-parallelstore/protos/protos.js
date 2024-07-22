@@ -3662,6 +3662,7 @@
                          * @property {google.cloud.parallelstore.v1beta.IDestinationParallelstore|null} [destinationParallelstore] ImportDataRequest destinationParallelstore
                          * @property {string|null} [name] ImportDataRequest name
                          * @property {string|null} [requestId] ImportDataRequest requestId
+                         * @property {string|null} [serviceAccount] ImportDataRequest serviceAccount
                          */
     
                         /**
@@ -3710,6 +3711,14 @@
                          * @instance
                          */
                         ImportDataRequest.prototype.requestId = "";
+    
+                        /**
+                         * ImportDataRequest serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.parallelstore.v1beta.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.serviceAccount = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -3768,6 +3777,8 @@
                                 $root.google.cloud.parallelstore.v1beta.DestinationParallelstore.encode(message.destinationParallelstore, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
                             return writer;
                         };
     
@@ -3816,6 +3827,10 @@
                                     }
                                 case 4: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -3876,6 +3891,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -3905,6 +3923,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -3924,6 +3944,7 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.serviceAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3939,6 +3960,8 @@
                             }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
                             return object;
                         };
     
@@ -3981,6 +4004,7 @@
                          * @property {google.cloud.parallelstore.v1beta.IDestinationGcsBucket|null} [destinationGcsBucket] ExportDataRequest destinationGcsBucket
                          * @property {string|null} [name] ExportDataRequest name
                          * @property {string|null} [requestId] ExportDataRequest requestId
+                         * @property {string|null} [serviceAccount] ExportDataRequest serviceAccount
                          */
     
                         /**
@@ -4029,6 +4053,14 @@
                          * @instance
                          */
                         ExportDataRequest.prototype.requestId = "";
+    
+                        /**
+                         * ExportDataRequest serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.cloud.parallelstore.v1beta.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.serviceAccount = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -4087,6 +4119,8 @@
                                 $root.google.cloud.parallelstore.v1beta.DestinationGcsBucket.encode(message.destinationGcsBucket, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.requestId);
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.serviceAccount);
                             return writer;
                         };
     
@@ -4135,6 +4169,10 @@
                                     }
                                 case 4: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.serviceAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -4195,6 +4233,9 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -4224,6 +4265,8 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -4243,6 +4286,7 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.serviceAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4258,6 +4302,8 @@
                             }
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
                             return object;
                         };
     

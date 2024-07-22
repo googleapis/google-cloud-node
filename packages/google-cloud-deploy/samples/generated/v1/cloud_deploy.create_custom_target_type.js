@@ -29,9 +29,8 @@ function main(parent, customTargetTypeId, customTargetType) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection in which the `CustomTargetType` should be
-   *  created. Format should be
-   *  `projects/{project_id}/locations/{location_name}`.
+   *  Required. The parent collection in which the `CustomTargetType` must be
+   *  created. The format is `projects/{project_id}/locations/{location_name}`.
    */
   // const parent = 'abc123'
   /**

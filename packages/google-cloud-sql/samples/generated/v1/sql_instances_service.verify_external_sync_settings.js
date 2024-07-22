@@ -53,13 +53,14 @@ function main() {
    */
   // const mysqlSyncConfig = {}
   /**
-   *  Optional. MigrationType decides if the migration is a physical file based
-   *  migration or logical migration
+   *  Optional. MigrationType configures the migration to use physical files or
+   *  logical dump files. If not set, then the logical dump file configuration is
+   *  used. Valid values are `LOGICAL` or `PHYSICAL`. Only applicable to MySQL.
    */
   // const migrationType = {}
   /**
-   *  Optional. Parallel level for initial data sync. Currently only applicable
-   *  for PostgreSQL.
+   *  Optional. Parallel level for initial data sync. Only applicable for
+   *  PostgreSQL.
    */
   // const syncParallelLevel = {}
 

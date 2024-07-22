@@ -30,11 +30,13 @@
   * [Dataset_service.restore_dataset_version](#dataset_service.restore_dataset_version)
   * [Dataset_service.search_data_items](#dataset_service.search_data_items)
   * [Dataset_service.update_dataset](#dataset_service.update_dataset)
+  * [Dataset_service.update_dataset_version](#dataset_service.update_dataset_version)
   * [Deployment_resource_pool_service.create_deployment_resource_pool](#deployment_resource_pool_service.create_deployment_resource_pool)
   * [Deployment_resource_pool_service.delete_deployment_resource_pool](#deployment_resource_pool_service.delete_deployment_resource_pool)
   * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
   * [Deployment_resource_pool_service.list_deployment_resource_pools](#deployment_resource_pool_service.list_deployment_resource_pools)
   * [Deployment_resource_pool_service.query_deployed_models](#deployment_resource_pool_service.query_deployed_models)
+  * [Deployment_resource_pool_service.update_deployment_resource_pool](#deployment_resource_pool_service.update_deployment_resource_pool)
   * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
   * [Endpoint_service.delete_endpoint](#endpoint_service.delete_endpoint)
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
@@ -212,6 +214,7 @@
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
   * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
   * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
@@ -325,6 +328,7 @@
   * [Deployment_resource_pool_service.get_deployment_resource_pool](#deployment_resource_pool_service.get_deployment_resource_pool)
   * [Deployment_resource_pool_service.list_deployment_resource_pools](#deployment_resource_pool_service.list_deployment_resource_pools)
   * [Deployment_resource_pool_service.query_deployed_models](#deployment_resource_pool_service.query_deployed_models)
+  * [Deployment_resource_pool_service.update_deployment_resource_pool](#deployment_resource_pool_service.update_deployment_resource_pool)
   * [Endpoint_service.create_endpoint](#endpoint_service.create_endpoint)
   * [Endpoint_service.delete_endpoint](#endpoint_service.delete_endpoint)
   * [Endpoint_service.deploy_model](#endpoint_service.deploy_model)
@@ -391,6 +395,11 @@
   * [Featurestore_service.update_entity_type](#featurestore_service.update_entity_type)
   * [Featurestore_service.update_feature](#featurestore_service.update_feature)
   * [Featurestore_service.update_featurestore](#featurestore_service.update_featurestore)
+  * [Gen_ai_cache_service.create_cached_content](#gen_ai_cache_service.create_cached_content)
+  * [Gen_ai_cache_service.delete_cached_content](#gen_ai_cache_service.delete_cached_content)
+  * [Gen_ai_cache_service.get_cached_content](#gen_ai_cache_service.get_cached_content)
+  * [Gen_ai_cache_service.list_cached_contents](#gen_ai_cache_service.list_cached_contents)
+  * [Gen_ai_cache_service.update_cached_content](#gen_ai_cache_service.update_cached_content)
   * [Gen_ai_tuning_service.cancel_tuning_job](#gen_ai_tuning_service.cancel_tuning_job)
   * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
   * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
@@ -515,6 +524,7 @@
   * [Model_service.update_model](#model_service.update_model)
   * [Model_service.upload_model](#model_service.upload_model)
   * [Notebook_service.assign_notebook_runtime](#notebook_service.assign_notebook_runtime)
+  * [Notebook_service.create_notebook_execution_job](#notebook_service.create_notebook_execution_job)
   * [Notebook_service.create_notebook_runtime_template](#notebook_service.create_notebook_runtime_template)
   * [Notebook_service.delete_notebook_execution_job](#notebook_service.delete_notebook_execution_job)
   * [Notebook_service.delete_notebook_runtime](#notebook_service.delete_notebook_runtime)
@@ -526,6 +536,7 @@
   * [Notebook_service.list_notebook_runtime_templates](#notebook_service.list_notebook_runtime_templates)
   * [Notebook_service.list_notebook_runtimes](#notebook_service.list_notebook_runtimes)
   * [Notebook_service.start_notebook_runtime](#notebook_service.start_notebook_runtime)
+  * [Notebook_service.update_notebook_runtime_template](#notebook_service.update_notebook_runtime_template)
   * [Notebook_service.upgrade_notebook_runtime](#notebook_service.upgrade_notebook_runtime)
   * [Persistent_resource_service.create_persistent_resource](#persistent_resource_service.create_persistent_resource)
   * [Persistent_resource_service.delete_persistent_resource](#persistent_resource_service.delete_persistent_resource)
@@ -557,6 +568,7 @@
   * [Prediction_service.stream_direct_predict](#prediction_service.stream_direct_predict)
   * [Prediction_service.stream_direct_raw_predict](#prediction_service.stream_direct_raw_predict)
   * [Prediction_service.stream_generate_content](#prediction_service.stream_generate_content)
+  * [Prediction_service.stream_raw_predict](#prediction_service.stream_raw_predict)
   * [Prediction_service.streaming_predict](#prediction_service.streaming_predict)
   * [Prediction_service.streaming_raw_predict](#prediction_service.streaming_raw_predict)
   * [Reasoning_engine_execution_service.query_reasoning_engine](#reasoning_engine_execution_service.query_reasoning_engine)
@@ -564,6 +576,7 @@
   * [Reasoning_engine_service.delete_reasoning_engine](#reasoning_engine_service.delete_reasoning_engine)
   * [Reasoning_engine_service.get_reasoning_engine](#reasoning_engine_service.get_reasoning_engine)
   * [Reasoning_engine_service.list_reasoning_engines](#reasoning_engine_service.list_reasoning_engines)
+  * [Reasoning_engine_service.update_reasoning_engine](#reasoning_engine_service.update_reasoning_engine)
   * [Schedule_service.create_schedule](#schedule_service.create_schedule)
   * [Schedule_service.delete_schedule](#schedule_service.delete_schedule)
   * [Schedule_service.get_schedule](#schedule_service.get_schedule)
@@ -954,6 +967,23 @@ __Usage:__
 
 
 
+### Dataset_service.update_dataset_version
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset_version.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset_version.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/dataset_service.update_dataset_version.js`
+
+
+-----
+
+
+
+
 ### Deployment_resource_pool_service.create_deployment_resource_pool
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.create_deployment_resource_pool.js).
@@ -1032,6 +1062,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.query_deployed_models.js`
+
+
+-----
+
+
+
+
+### Deployment_resource_pool_service.update_deployment_resource_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/deployment_resource_pool_service.update_deployment_resource_pool.js`
 
 
 -----
@@ -4048,6 +4095,23 @@ __Usage:__
 
 
 
+### Notebook_service.update_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.update_notebook_runtime_template.js`
+
+
+-----
+
+
+
+
 ### Notebook_service.upgrade_notebook_runtime
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/notebook_service.upgrade_notebook_runtime.js).
@@ -5969,6 +6033,23 @@ __Usage:__
 
 
 
+### Deployment_resource_pool_service.update_deployment_resource_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/deployment_resource_pool_service.update_deployment_resource_pool.js`
+
+
+-----
+
+
+
+
 ### Endpoint_service.create_endpoint
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/endpoint_service.create_endpoint.js).
@@ -7084,6 +7165,91 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/featurestore_service.update_featurestore.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.create_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.create_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.create_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.create_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.delete_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.delete_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.delete_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.delete_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.get_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.get_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.get_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.get_cached_content.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.list_cached_contents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.list_cached_contents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.list_cached_contents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.list_cached_contents.js`
+
+
+-----
+
+
+
+
+### Gen_ai_cache_service.update_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.update_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.update_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_cache_service.update_cached_content.js`
 
 
 -----
@@ -9199,6 +9365,23 @@ __Usage:__
 
 
 
+### Notebook_service.create_notebook_execution_job
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js`
+
+
+-----
+
+
+
+
 ### Notebook_service.create_notebook_runtime_template
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.create_notebook_runtime_template.js).
@@ -9379,6 +9562,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.start_notebook_runtime.js`
+
+
+-----
+
+
+
+
+### Notebook_service.update_notebook_runtime_template
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js`
 
 
 -----
@@ -9913,6 +10113,23 @@ __Usage:__
 
 
 
+### Prediction_service.stream_raw_predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.stream_raw_predict.js`
+
+
+-----
+
+
+
+
 ### Prediction_service.streaming_predict
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/prediction_service.streaming_predict.js).
@@ -10025,6 +10242,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.list_reasoning_engines.js`
+
+
+-----
+
+
+
+
+### Reasoning_engine_service.update_reasoning_engine
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/reasoning_engine_service.update_reasoning_engine.js`
 
 
 -----

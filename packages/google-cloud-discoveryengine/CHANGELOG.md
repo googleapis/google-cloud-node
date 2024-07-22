@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.9.0...discoveryengine-v1.10.0) (2024-07-10)
+
+
+### Features
+
+* [discoveryengine] add Chunk resource in the search response ([#5526](https://github.com/googleapis/google-cloud-node/issues/5526)) ([b0dc1b2](https://github.com/googleapis/google-cloud-node/commit/b0dc1b2ef66334394613c6e92a4c5b0ebb8e0faf))
+
+## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.8.0...discoveryengine-v1.9.0) (2024-06-03)
+
+
+### Features
+
+* [discoveryengine] promote grounding check APIs to v1 GA ([#5387](https://github.com/googleapis/google-cloud-node/issues/5387)) ([d1bee15](https://github.com/googleapis/google-cloud-node/commit/d1bee15d1460292b6c637182328d1367fca6bc62))
+* [discoveryengine] support multiple parent patterns for controls ([#5392](https://github.com/googleapis/google-cloud-node/issues/5392)) ([86d6104](https://github.com/googleapis/google-cloud-node/commit/86d61047ce001f8a396a934e6bda663636219d58))
+
 ## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.7.0...discoveryengine-v1.8.0) (2024-05-21)
 
 

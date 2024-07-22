@@ -4,7 +4,7 @@
 
 # [Maps Platform Datasets API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-mapsplatformdatasets)
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@googlemaps/maps-platform-datasets.svg)](https://www.npmjs.org/package/@googlemaps/maps-platform-datasets)
 
 
@@ -115,6 +115,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | --------------------------- | --------------------------------- | ------ |
 | Maps_platform_datasets.create_dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.create_dataset.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.create_dataset.js,packages/google-maps-mapsplatformdatasets/samples/README.md) |
 | Maps_platform_datasets.delete_dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.delete_dataset.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.delete_dataset.js,packages/google-maps-mapsplatformdatasets/samples/README.md) |
+| Maps_platform_datasets.fetch_dataset_errors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.fetch_dataset_errors.js,packages/google-maps-mapsplatformdatasets/samples/README.md) |
 | Maps_platform_datasets.get_dataset | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.get_dataset.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.get_dataset.js,packages/google-maps-mapsplatformdatasets/samples/README.md) |
 | Maps_platform_datasets.list_datasets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.list_datasets.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.list_datasets.js,packages/google-maps-mapsplatformdatasets/samples/README.md) |
 | Maps_platform_datasets.update_dataset_metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-mapsplatformdatasets/samples/generated/v1/maps_platform_datasets.update_dataset_metadata.js,packages/google-maps-mapsplatformdatasets/samples/README.md) |
@@ -159,13 +160,14 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
 
 
 
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]

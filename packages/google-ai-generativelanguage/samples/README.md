@@ -19,6 +19,11 @@
   * [Generative_service.stream_generate_content](#generative_service.stream_generate_content)
   * [Model_service.get_model](#model_service.get_model)
   * [Model_service.list_models](#model_service.list_models)
+  * [Cache_service.create_cached_content](#cache_service.create_cached_content)
+  * [Cache_service.delete_cached_content](#cache_service.delete_cached_content)
+  * [Cache_service.get_cached_content](#cache_service.get_cached_content)
+  * [Cache_service.list_cached_contents](#cache_service.list_cached_contents)
+  * [Cache_service.update_cached_content](#cache_service.update_cached_content)
   * [Discuss_service.count_message_tokens](#discuss_service.count_message_tokens)
   * [Discuss_service.generate_message](#discuss_service.generate_message)
   * [File_service.create_file](#file_service.create_file)
@@ -222,6 +227,91 @@ __Usage:__
 
 
 `node packages/google-ai-generativelanguage/samples/generated/v1/model_service.list_models.js`
+
+
+-----
+
+
+
+
+### Cache_service.create_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.create_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.create_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.create_cached_content.js`
+
+
+-----
+
+
+
+
+### Cache_service.delete_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.delete_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.delete_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.delete_cached_content.js`
+
+
+-----
+
+
+
+
+### Cache_service.get_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.get_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.get_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.get_cached_content.js`
+
+
+-----
+
+
+
+
+### Cache_service.list_cached_contents
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.list_cached_contents.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.list_cached_contents.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.list_cached_contents.js`
+
+
+-----
+
+
+
+
+### Cache_service.update_cached_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.update_cached_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.update_cached_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/cache_service.update_cached_content.js`
 
 
 -----

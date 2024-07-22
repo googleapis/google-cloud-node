@@ -1,4 +1,6 @@
 [
+  "../../protos/google/ai/generativelanguage/v1beta/cache_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta/cached_content.proto",
   "../../protos/google/ai/generativelanguage/v1beta/citation.proto",
   "../../protos/google/ai/generativelanguage/v1beta/content.proto",
   "../../protos/google/ai/generativelanguage/v1beta/discuss_service.proto",

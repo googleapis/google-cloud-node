@@ -152,6 +152,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -224,6 +227,9 @@ export class FeatureOnlineStoreAdminServiceClient {
       ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
       ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
@@ -599,6 +605,12 @@ export class FeatureOnlineStoreAdminServiceClient {
           post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
           additional_bindings: [
             {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
@@ -683,6 +695,15 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -717,6 +738,12 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
@@ -803,6 +830,15 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -850,6 +886,8 @@ export class FeatureOnlineStoreAdminServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -957,6 +995,18 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1016,6 +1066,14 @@ export class FeatureOnlineStoreAdminServiceClient {
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
+            },
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1134,6 +1192,18 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1214,6 +1284,8 @@ export class FeatureOnlineStoreAdminServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
@@ -1294,6 +1366,15 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
@@ -1335,6 +1416,10 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
@@ -1423,6 +1508,15 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1485,6 +1579,8 @@ export class FeatureOnlineStoreAdminServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
@@ -1553,6 +1649,15 @@ export class FeatureOnlineStoreAdminServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
             {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1595,6 +1700,8 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
             },
@@ -1681,6 +1788,15 @@ export class FeatureOnlineStoreAdminServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
@@ -1743,6 +1859,12 @@ export class FeatureOnlineStoreAdminServiceClient {
           selector: 'google.longrunning.Operations.WaitOperation',
           post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
           additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1828,6 +1950,15 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1873,6 +2004,12 @@ export class FeatureOnlineStoreAdminServiceClient {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1959,6 +2096,15 @@ export class FeatureOnlineStoreAdminServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
@@ -5123,6 +5269,58 @@ export class FeatureOnlineStoreAdminServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**

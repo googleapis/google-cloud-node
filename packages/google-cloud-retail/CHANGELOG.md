@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.4.0...retail-v3.5.0) (2024-06-21)
+
+
+### Features
+
+* [retail] support merged facets ([#5446](https://github.com/googleapis/google-cloud-node/issues/5446)) ([140597e](https://github.com/googleapis/google-cloud-node/commit/140597eac392a4b777c3e0fda197544b0f2912ba))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.3.0...retail-v3.4.0) (2024-05-21)
 
 

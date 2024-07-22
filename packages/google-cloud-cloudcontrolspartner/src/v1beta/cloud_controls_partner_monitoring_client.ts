@@ -408,7 +408,7 @@ export class CloudControlsPartnerMonitoringClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Format:
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/violations/{violation}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}/violations/{violation}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -513,7 +513,7 @@ export class CloudControlsPartnerMonitoringClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of customers row to return. The service may
    *   return fewer than this value. If unspecified, at most 10 customers will be
@@ -622,7 +622,7 @@ export class CloudControlsPartnerMonitoringClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of customers row to return. The service may
    *   return fewer than this value. If unspecified, at most 10 customers will be
@@ -679,7 +679,7 @@ export class CloudControlsPartnerMonitoringClient {
    * @param {string} request.parent
    *   Required. Parent resource
    *   Format
-   *   organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *   `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of customers row to return. The service may
    *   return fewer than this value. If unspecified, at most 10 customers will be

@@ -7400,6 +7400,7 @@
                              * @property {google.cloud.batch.v1.AllocationPolicy.IInstancePolicy|null} [policy] InstancePolicyOrTemplate policy
                              * @property {string|null} [instanceTemplate] InstancePolicyOrTemplate instanceTemplate
                              * @property {boolean|null} [installGpuDrivers] InstancePolicyOrTemplate installGpuDrivers
+                             * @property {boolean|null} [installOpsAgent] InstancePolicyOrTemplate installOpsAgent
                              */
     
                             /**
@@ -7440,6 +7441,14 @@
                              * @instance
                              */
                             InstancePolicyOrTemplate.prototype.installGpuDrivers = false;
+    
+                            /**
+                             * InstancePolicyOrTemplate installOpsAgent.
+                             * @member {boolean} installOpsAgent
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate
+                             * @instance
+                             */
+                            InstancePolicyOrTemplate.prototype.installOpsAgent = false;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -7485,6 +7494,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceTemplate);
                                 if (message.installGpuDrivers != null && Object.hasOwnProperty.call(message, "installGpuDrivers"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.installGpuDrivers);
+                                if (message.installOpsAgent != null && Object.hasOwnProperty.call(message, "installOpsAgent"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.installOpsAgent);
                                 return writer;
                             };
     
@@ -7529,6 +7540,10 @@
                                         }
                                     case 3: {
                                             message.installGpuDrivers = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.installOpsAgent = reader.bool();
                                             break;
                                         }
                                     default:
@@ -7585,6 +7600,9 @@
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     if (typeof message.installGpuDrivers !== "boolean")
                                         return "installGpuDrivers: boolean expected";
+                                if (message.installOpsAgent != null && message.hasOwnProperty("installOpsAgent"))
+                                    if (typeof message.installOpsAgent !== "boolean")
+                                        return "installOpsAgent: boolean expected";
                                 return null;
                             };
     
@@ -7609,6 +7627,8 @@
                                     message.instanceTemplate = String(object.instanceTemplate);
                                 if (object.installGpuDrivers != null)
                                     message.installGpuDrivers = Boolean(object.installGpuDrivers);
+                                if (object.installOpsAgent != null)
+                                    message.installOpsAgent = Boolean(object.installOpsAgent);
                                 return message;
                             };
     
@@ -7625,8 +7645,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.installGpuDrivers = false;
+                                    object.installOpsAgent = false;
+                                }
                                 if (message.policy != null && message.hasOwnProperty("policy")) {
                                     object.policy = $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicy.toObject(message.policy, options);
                                     if (options.oneofs)
@@ -7639,6 +7661,8 @@
                                 }
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     object.installGpuDrivers = message.installGpuDrivers;
+                                if (message.installOpsAgent != null && message.hasOwnProperty("installOpsAgent"))
+                                    object.installOpsAgent = message.installOpsAgent;
                                 return object;
                             };
     
@@ -24507,6 +24531,7 @@
                              * @property {google.cloud.batch.v1alpha.AllocationPolicy.IInstancePolicy|null} [policy] InstancePolicyOrTemplate policy
                              * @property {string|null} [instanceTemplate] InstancePolicyOrTemplate instanceTemplate
                              * @property {boolean|null} [installGpuDrivers] InstancePolicyOrTemplate installGpuDrivers
+                             * @property {boolean|null} [installOpsAgent] InstancePolicyOrTemplate installOpsAgent
                              */
     
                             /**
@@ -24547,6 +24572,14 @@
                              * @instance
                              */
                             InstancePolicyOrTemplate.prototype.installGpuDrivers = false;
+    
+                            /**
+                             * InstancePolicyOrTemplate installOpsAgent.
+                             * @member {boolean} installOpsAgent
+                             * @memberof google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicyOrTemplate
+                             * @instance
+                             */
+                            InstancePolicyOrTemplate.prototype.installOpsAgent = false;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -24592,6 +24625,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.instanceTemplate);
                                 if (message.installGpuDrivers != null && Object.hasOwnProperty.call(message, "installGpuDrivers"))
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.installGpuDrivers);
+                                if (message.installOpsAgent != null && Object.hasOwnProperty.call(message, "installOpsAgent"))
+                                    writer.uint32(/* id 4, wireType 0 =*/32).bool(message.installOpsAgent);
                                 return writer;
                             };
     
@@ -24636,6 +24671,10 @@
                                         }
                                     case 3: {
                                             message.installGpuDrivers = reader.bool();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.installOpsAgent = reader.bool();
                                             break;
                                         }
                                     default:
@@ -24692,6 +24731,9 @@
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     if (typeof message.installGpuDrivers !== "boolean")
                                         return "installGpuDrivers: boolean expected";
+                                if (message.installOpsAgent != null && message.hasOwnProperty("installOpsAgent"))
+                                    if (typeof message.installOpsAgent !== "boolean")
+                                        return "installOpsAgent: boolean expected";
                                 return null;
                             };
     
@@ -24716,6 +24758,8 @@
                                     message.instanceTemplate = String(object.instanceTemplate);
                                 if (object.installGpuDrivers != null)
                                     message.installGpuDrivers = Boolean(object.installGpuDrivers);
+                                if (object.installOpsAgent != null)
+                                    message.installOpsAgent = Boolean(object.installOpsAgent);
                                 return message;
                             };
     
@@ -24732,8 +24776,10 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.installGpuDrivers = false;
+                                    object.installOpsAgent = false;
+                                }
                                 if (message.policy != null && message.hasOwnProperty("policy")) {
                                     object.policy = $root.google.cloud.batch.v1alpha.AllocationPolicy.InstancePolicy.toObject(message.policy, options);
                                     if (options.oneofs)
@@ -24746,6 +24792,8 @@
                                 }
                                 if (message.installGpuDrivers != null && message.hasOwnProperty("installGpuDrivers"))
                                     object.installGpuDrivers = message.installGpuDrivers;
+                                if (message.installOpsAgent != null && message.hasOwnProperty("installOpsAgent"))
+                                    object.installOpsAgent = message.installOpsAgent;
                                 return object;
                             };
     

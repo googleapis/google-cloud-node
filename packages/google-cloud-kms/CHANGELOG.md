@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.4.0...kms-v4.5.0) (2024-06-21)
+
+
+### Features
+
+* [kms] support Key Access Justifications policy configuration ([#5479](https://github.com/googleapis/google-cloud-node/issues/5479)) ([a6a77c9](https://github.com/googleapis/google-cloud-node/commit/a6a77c9eda7428840ce2a01572ee2773b2760f36))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/kms-v4.3.0...kms-v4.4.0) (2024-05-21)
 
 

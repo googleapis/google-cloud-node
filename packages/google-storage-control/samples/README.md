@@ -12,6 +12,8 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create Folder](#create-folder)
+  * [Delete Folder](#delete-folder)
   * [Storage_control.create_folder](#storage_control.create_folder)
   * [Storage_control.create_managed_folder](#storage_control.create_managed_folder)
   * [Storage_control.delete_folder](#storage_control.delete_folder)
@@ -22,7 +24,10 @@
   * [Storage_control.list_folders](#storage_control.list_folders)
   * [Storage_control.list_managed_folders](#storage_control.list_managed_folders)
   * [Storage_control.rename_folder](#storage_control.rename_folder)
+  * [Get Folder](#get-folder)
+  * [List Folders](#list-folders)
   * [Quickstart](#quickstart)
+  * [Rename Folder](#rename-folder)
 
 ## Before you begin
 
@@ -36,6 +41,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Create Folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/createFolder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/createFolder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/createFolder.js`
+
+
+-----
+
+
+
+
+### Delete Folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/deleteFolder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/deleteFolder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/deleteFolder.js`
+
+
+-----
+
 
 
 
@@ -209,6 +248,40 @@ __Usage:__
 
 
 
+### Get Folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/getFolder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/getFolder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/getFolder.js`
+
+
+-----
+
+
+
+
+### List Folders
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/listFolders.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/listFolders.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/listFolders.js`
+
+
+-----
+
+
+
+
 ### Quickstart
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/quickstart.js).
@@ -221,10 +294,27 @@ __Usage:__
 `node packages/google-storage-control/samples/quickstart.js`
 
 
+-----
+
+
+
+
+### Rename Folder
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-storage-control/samples/renameFolder.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-storage-control/samples/renameFolder.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-storage-control/samples/renameFolder.js`
+
+
 
 
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=samples/README.md
-[product-docs]: https://cloud.google.com/storage/docs/overview
+[product-docs]: https://cloud.google.com/storage/docs/reference/rpc

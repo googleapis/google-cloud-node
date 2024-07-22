@@ -4,6 +4,29 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.10.0...security-center-v8.11.0) (2024-07-10)
+
+
+### Features
+
+* [securitycenter] added cloud provider field to list findings response ([#5529](https://github.com/googleapis/google-cloud-node/issues/5529)) ([63f8e88](https://github.com/googleapis/google-cloud-node/commit/63f8e88a7cd2f64bfc39aa26a1bfe24963285e1b))
+
+## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.9.0...security-center-v8.10.0) (2024-06-27)
+
+
+### Features
+
+* [securitycenter] added cloud provider field to list findings response ([#5507](https://github.com/googleapis/google-cloud-node/issues/5507)) ([9e8416f](https://github.com/googleapis/google-cloud-node/commit/9e8416fe9c4c401119910fb5867b5b445e8224e7))
+* Added http configuration rule to ResourceValueConfig and ValuedResource API methods ([9e8416f](https://github.com/googleapis/google-cloud-node/commit/9e8416fe9c4c401119910fb5867b5b445e8224e7))
+* Added toxic combination field to finding ([9e8416f](https://github.com/googleapis/google-cloud-node/commit/9e8416fe9c4c401119910fb5867b5b445e8224e7))
+
+## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.8.0...security-center-v8.9.0) (2024-06-26)
+
+
+### Features
+
+* [securitycenter] Add toxic_combination and group_memberships fields to finding ([#5495](https://github.com/googleapis/google-cloud-node/issues/5495)) ([41a96b4](https://github.com/googleapis/google-cloud-node/commit/41a96b4231d6b98fac2c06ea8686597789ef6b1c))
+
 ## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.7.0...security-center-v8.8.0) (2024-05-21)
 
 

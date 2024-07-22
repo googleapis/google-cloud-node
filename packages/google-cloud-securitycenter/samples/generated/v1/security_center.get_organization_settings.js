@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the organization to get organization settings for. Its
-   *  format is "organizations/[organization_id]/organizationSettings".
+   *  format is `organizations/[organization_id]/organizationSettings`.
    */
   // const name = 'abc123'
 

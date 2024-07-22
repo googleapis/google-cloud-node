@@ -1034,6 +1034,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
@@ -1044,6 +1045,7 @@
                                 case 1:
                                 case 2:
                                 case 3:
+                                case 4:
                                     break;
                                 }
                             if (message.modules != null && message.hasOwnProperty("modules")) {
@@ -1106,6 +1108,10 @@
                             case 3:
                                 message.intendedEnablementState = 3;
                                 break;
+                            case "INGEST_ONLY":
+                            case 4:
+                                message.intendedEnablementState = 4;
+                                break;
                             }
                             switch (object.effectiveEnablementState) {
                             default:
@@ -1129,6 +1135,10 @@
                             case "DISABLED":
                             case 3:
                                 message.effectiveEnablementState = 3;
+                                break;
+                            case "INGEST_ONLY":
+                            case 4:
+                                message.effectiveEnablementState = 4;
                                 break;
                             }
                             if (object.modules) {
@@ -1375,6 +1385,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                                 if (message.effectiveEnablementState != null && message.hasOwnProperty("effectiveEnablementState"))
@@ -1385,6 +1396,7 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
                                         break;
                                     }
                                 return null;
@@ -1425,6 +1437,10 @@
                                 case 3:
                                     message.intendedEnablementState = 3;
                                     break;
+                                case "INGEST_ONLY":
+                                case 4:
+                                    message.intendedEnablementState = 4;
+                                    break;
                                 }
                                 switch (object.effectiveEnablementState) {
                                 default:
@@ -1448,6 +1464,10 @@
                                 case "DISABLED":
                                 case 3:
                                     message.effectiveEnablementState = 3;
+                                    break;
+                                case "INGEST_ONLY":
+                                case 4:
+                                    message.effectiveEnablementState = 4;
                                     break;
                                 }
                                 return message;
@@ -1514,6 +1534,7 @@
                          * @property {number} INHERITED=1 INHERITED value
                          * @property {number} ENABLED=2 ENABLED value
                          * @property {number} DISABLED=3 DISABLED value
+                         * @property {number} INGEST_ONLY=4 INGEST_ONLY value
                          */
                         SecurityCenterService.EnablementState = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1521,6 +1542,7 @@
                             values[valuesById[1] = "INHERITED"] = 1;
                             values[valuesById[2] = "ENABLED"] = 2;
                             values[valuesById[3] = "DISABLED"] = 3;
+                            values[valuesById[4] = "INGEST_ONLY"] = 4;
                             return values;
                         })();
     
@@ -6801,6 +6823,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             return null;
@@ -6923,6 +6946,10 @@
                             case "POSTURE_VIOLATION":
                             case 6:
                                 message.findingClass = 6;
+                                break;
+                            case "TOXIC_COMBINATION":
+                            case 7:
+                                message.findingClass = 7;
                                 break;
                             }
                             return message;
@@ -7051,6 +7078,7 @@
                          * @property {number} OBSERVATION=4 OBSERVATION value
                          * @property {number} SCC_ERROR=5 SCC_ERROR value
                          * @property {number} POSTURE_VIOLATION=6 POSTURE_VIOLATION value
+                         * @property {number} TOXIC_COMBINATION=7 TOXIC_COMBINATION value
                          */
                         SimulatedFinding.FindingClass = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -7061,6 +7089,7 @@
                             values[valuesById[4] = "OBSERVATION"] = 4;
                             values[valuesById[5] = "SCC_ERROR"] = 5;
                             values[valuesById[6] = "POSTURE_VIOLATION"] = 6;
+                            values[valuesById[7] = "TOXIC_COMBINATION"] = 7;
                             return values;
                         })();
     
@@ -12050,6 +12079,7 @@
                          * @memberof google.cloud.securitycentermanagement.v1
                          * @interface IGetSecurityCenterServiceRequest
                          * @property {string|null} [name] GetSecurityCenterServiceRequest name
+                         * @property {boolean|null} [showEligibleModulesOnly] GetSecurityCenterServiceRequest showEligibleModulesOnly
                          */
     
                         /**
@@ -12074,6 +12104,14 @@
                          * @instance
                          */
                         GetSecurityCenterServiceRequest.prototype.name = "";
+    
+                        /**
+                         * GetSecurityCenterServiceRequest showEligibleModulesOnly.
+                         * @member {boolean} showEligibleModulesOnly
+                         * @memberof google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest
+                         * @instance
+                         */
+                        GetSecurityCenterServiceRequest.prototype.showEligibleModulesOnly = false;
     
                         /**
                          * Creates a new GetSecurityCenterServiceRequest instance using the specified properties.
@@ -12101,6 +12139,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.showEligibleModulesOnly != null && Object.hasOwnProperty.call(message, "showEligibleModulesOnly"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.showEligibleModulesOnly);
                             return writer;
                         };
     
@@ -12137,6 +12177,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.showEligibleModulesOnly = reader.bool();
                                         break;
                                     }
                                 default:
@@ -12177,6 +12221,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.showEligibleModulesOnly != null && message.hasOwnProperty("showEligibleModulesOnly"))
+                                if (typeof message.showEligibleModulesOnly !== "boolean")
+                                    return "showEligibleModulesOnly: boolean expected";
                             return null;
                         };
     
@@ -12194,6 +12241,8 @@
                             var message = new $root.google.cloud.securitycentermanagement.v1.GetSecurityCenterServiceRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.showEligibleModulesOnly != null)
+                                message.showEligibleModulesOnly = Boolean(object.showEligibleModulesOnly);
                             return message;
                         };
     
@@ -12210,10 +12259,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.showEligibleModulesOnly = false;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.showEligibleModulesOnly != null && message.hasOwnProperty("showEligibleModulesOnly"))
+                                object.showEligibleModulesOnly = message.showEligibleModulesOnly;
                             return object;
                         };
     
@@ -12255,6 +12308,7 @@
                          * @property {string|null} [parent] ListSecurityCenterServicesRequest parent
                          * @property {number|null} [pageSize] ListSecurityCenterServicesRequest pageSize
                          * @property {string|null} [pageToken] ListSecurityCenterServicesRequest pageToken
+                         * @property {boolean|null} [showEligibleModulesOnly] ListSecurityCenterServicesRequest showEligibleModulesOnly
                          */
     
                         /**
@@ -12297,6 +12351,14 @@
                         ListSecurityCenterServicesRequest.prototype.pageToken = "";
     
                         /**
+                         * ListSecurityCenterServicesRequest showEligibleModulesOnly.
+                         * @member {boolean} showEligibleModulesOnly
+                         * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
+                         * @instance
+                         */
+                        ListSecurityCenterServicesRequest.prototype.showEligibleModulesOnly = false;
+    
+                        /**
                          * Creates a new ListSecurityCenterServicesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycentermanagement.v1.ListSecurityCenterServicesRequest
@@ -12326,6 +12388,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.showEligibleModulesOnly != null && Object.hasOwnProperty.call(message, "showEligibleModulesOnly"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.showEligibleModulesOnly);
                             return writer;
                         };
     
@@ -12372,6 +12436,10 @@
                                         message.pageToken = reader.string();
                                         break;
                                     }
+                                case 4: {
+                                        message.showEligibleModulesOnly = reader.bool();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -12416,6 +12484,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.showEligibleModulesOnly != null && message.hasOwnProperty("showEligibleModulesOnly"))
+                                if (typeof message.showEligibleModulesOnly !== "boolean")
+                                    return "showEligibleModulesOnly: boolean expected";
                             return null;
                         };
     
@@ -12437,6 +12508,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.showEligibleModulesOnly != null)
+                                message.showEligibleModulesOnly = Boolean(object.showEligibleModulesOnly);
                             return message;
                         };
     
@@ -12457,6 +12530,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.showEligibleModulesOnly = false;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -12464,6 +12538,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.showEligibleModulesOnly != null && message.hasOwnProperty("showEligibleModulesOnly"))
+                                object.showEligibleModulesOnly = message.showEligibleModulesOnly;
                             return object;
                         };
     

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-oslogin",
-        "version": "5.6.0",
+        "version": "5.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -342,7 +342,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 56,
                     "type": "FULL"
                 }
             ],

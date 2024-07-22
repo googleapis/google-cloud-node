@@ -38,9 +38,9 @@ function main(job) {
    */
   // const validateOnly = true
   /**
-   *  If set to true, and if the Job does not exist, it will create a new
-   *  one. Caller must have both create and update permissions for this call if
-   *  this is set to true.
+   *  Optional. If set to true, and if the Job does not exist, it will create a
+   *  new one. Caller must have both create and update permissions for this call
+   *  if this is set to true.
    */
   // const allowMissing = true
 

@@ -377,7 +377,7 @@
                       "options": {
                         "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/operations",
                         "(google.api.http).additional_bindings.get": "/v1/projects/{project_id}/zones/{zone}/operations",
-                        "(google.api.method_signature)": "project_id,zone"
+                        "(google.api.method_signature)": "parent"
                       },
                       "parsedOptions": [
                         {
@@ -390,6 +390,9 @@
                         },
                         {
                           "(google.api.method_signature)": "project_id,zone"
+                        },
+                        {
+                          "(google.api.method_signature)": "parent"
                         }
                       ]
                     },
@@ -877,6 +880,13 @@
                   }
                 },
                 "LinuxNodeConfig": {
+                  "oneofs": {
+                    "_hugepages": {
+                      "oneof": [
+                        "hugepages"
+                      ]
+                    }
+                  },
                   "fields": {
                     "sysctls": {
                       "keyType": "string",
@@ -886,6 +896,14 @@
                     "cgroupMode": {
                       "type": "CgroupMode",
                       "id": 2
+                    },
+                    "hugepages": {
+                      "type": "HugepagesConfig",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL",
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -894,6 +912,38 @@
                         "CGROUP_MODE_UNSPECIFIED": 0,
                         "CGROUP_MODE_V1": 1,
                         "CGROUP_MODE_V2": 2
+                      }
+                    },
+                    "HugepagesConfig": {
+                      "oneofs": {
+                        "_hugepageSize2m": {
+                          "oneof": [
+                            "hugepageSize2m"
+                          ]
+                        },
+                        "_hugepageSize1g": {
+                          "oneof": [
+                            "hugepageSize1g"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "hugepageSize2m": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "hugepageSize1g": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
                       }
                     }
                   }
@@ -1109,6 +1159,10 @@
                       "type": "SoleTenantConfig",
                       "id": 42
                     },
+                    "containerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 43
+                    },
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 45
@@ -1140,12 +1194,24 @@
                       "oneof": [
                         "threadsPerCore"
                       ]
+                    },
+                    "_enableNestedVirtualization": {
+                      "oneof": [
+                        "enableNestedVirtualization"
+                      ]
                     }
                   },
                   "fields": {
                     "threadsPerCore": {
                       "type": "int64",
                       "id": 1,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    },
+                    "enableNestedVirtualization": {
+                      "type": "bool",
+                      "id": 2,
                       "options": {
                         "proto3_optional": true
                       }
@@ -1384,6 +1450,61 @@
                     }
                   }
                 },
+                "ContainerdConfig": {
+                  "fields": {
+                    "privateRegistryAccessConfig": {
+                      "type": "PrivateRegistryAccessConfig",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "PrivateRegistryAccessConfig": {
+                      "fields": {
+                        "enabled": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "certificateAuthorityDomainConfig": {
+                          "rule": "repeated",
+                          "type": "CertificateAuthorityDomainConfig",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "CertificateAuthorityDomainConfig": {
+                          "oneofs": {
+                            "certificateConfig": {
+                              "oneof": [
+                                "gcpSecretManagerCertificateConfig"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "fqdns": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            },
+                            "gcpSecretManagerCertificateConfig": {
+                              "type": "GCPSecretManagerCertificateConfig",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "GCPSecretManagerCertificateConfig": {
+                              "fields": {
+                                "secretUri": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "NodeTaint": {
                   "fields": {
                     "key": {
@@ -1543,6 +1664,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "rayOperatorConfig": {
+                      "type": "RayOperatorConfig",
+                      "id": 21,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1692,6 +1820,28 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    }
+                  }
+                },
+                "RayOperatorConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "rayClusterLoggingConfig": {
+                      "type": "RayClusterLoggingConfig",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "rayClusterMonitoringConfig": {
+                      "type": "RayClusterMonitoringConfig",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1922,6 +2072,16 @@
                     "_nodePoolDefaults": {
                       "oneof": [
                         "nodePoolDefaults"
+                      ]
+                    },
+                    "_satisfiesPzs": {
+                      "oneof": [
+                        "satisfiesPzs"
+                      ]
+                    },
+                    "_satisfiesPzi": {
+                      "oneof": [
+                        "satisfiesPzi"
                       ]
                     }
                   },
@@ -2225,6 +2385,22 @@
                     "enterpriseConfig": {
                       "type": "EnterpriseConfig",
                       "id": 149
+                    },
+                    "satisfiesPzs": {
+                      "type": "bool",
+                      "id": 152,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
+                    },
+                    "satisfiesPzi": {
+                      "type": "bool",
+                      "id": 153,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY",
+                        "proto3_optional": true
+                      }
                     }
                   },
                   "nested": {
@@ -2284,7 +2460,8 @@
                       "values": {
                         "MODE_UNSPECIFIED": 0,
                         "DISABLED": 1,
-                        "BASIC": 2
+                        "BASIC": 2,
+                        "ENTERPRISE": 3
                       }
                     },
                     "VulnerabilityMode": {
@@ -2306,6 +2483,10 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 2
+                    },
+                    "nodeKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 3
                     }
                   }
                 },
@@ -2326,6 +2507,14 @@
                     "loggingConfig": {
                       "type": "NodePoolLoggingConfig",
                       "id": 3
+                    },
+                    "containerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 4
+                    },
+                    "nodeKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 6
                     }
                   }
                 },
@@ -2561,6 +2750,10 @@
                       "type": "K8sBetaAPIConfig",
                       "id": 131
                     },
+                    "desiredContainerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 134
+                    },
                     "desiredEnableMultiNetworking": {
                       "type": "bool",
                       "id": 135,
@@ -2585,6 +2778,14 @@
                       "options": {
                         "proto3_optional": true
                       }
+                    },
+                    "desiredNodeKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 141
+                    },
+                    "desiredNodePoolAutoConfigKubeletConfig": {
+                      "type": "NodeKubeletConfig",
+                      "id": 142
                     }
                   }
                 },
@@ -3023,6 +3224,11 @@
                       "type": "WindowsNodeConfig",
                       "id": 34
                     },
+                    "accelerators": {
+                      "rule": "repeated",
+                      "type": "AcceleratorConfig",
+                      "id": 35
+                    },
                     "machineType": {
                       "type": "string",
                       "id": 36,
@@ -3047,6 +3253,10 @@
                     "resourceManagerTags": {
                       "type": "ResourceManagerTags",
                       "id": 39
+                    },
+                    "containerdConfig": {
+                      "type": "ContainerdConfig",
+                      "id": 40
                     },
                     "queuedProvisioning": {
                       "type": "NodePool.QueuedProvisioning",
@@ -4641,7 +4851,8 @@
                     "GPUSharingStrategy": {
                       "values": {
                         "GPU_SHARING_STRATEGY_UNSPECIFIED": 0,
-                        "TIME_SHARING": 1
+                        "TIME_SHARING": 1,
+                        "MPS": 2
                       }
                     }
                   }
@@ -4922,6 +5133,11 @@
                   },
                   "nested": {
                     "Channel": {
+                      "valuesOptions": {
+                        "CHANNEL_EXPERIMENTAL": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "CHANNEL_UNSPECIFIED": 0,
                         "CHANNEL_DISABLED": 1,
@@ -5156,6 +5372,13 @@
                     "clusterDnsDomain": {
                       "type": "string",
                       "id": 3
+                    },
+                    "additiveVpcScopeDnsDomain": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -5669,6 +5892,14 @@
                     }
                   }
                 },
+                "RayClusterLoggingConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "MonitoringConfig": {
                   "fields": {
                     "componentConfig": {
@@ -5721,6 +5952,14 @@
                     }
                   }
                 },
+                "RayClusterMonitoringConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "NodePoolLoggingConfig": {
                   "fields": {
                     "variantConfig": {
@@ -5767,7 +6006,10 @@
                         "POD": 9,
                         "DAEMONSET": 10,
                         "DEPLOYMENT": 11,
-                        "STATEFULSET": 12
+                        "STATEFULSET": 12,
+                        "CADVISOR": 13,
+                        "KUBELET": 14,
+                        "DCGM": 15
                       }
                     }
                   }
@@ -7662,6 +7904,13 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "rayOperatorConfig": {
+                      "type": "RayOperatorConfig",
+                      "id": 21,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -7761,6 +8010,28 @@
                     "enabled": {
                       "type": "bool",
                       "id": 1
+                    }
+                  }
+                },
+                "RayOperatorConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "rayClusterLoggingConfig": {
+                      "type": "RayClusterLoggingConfig",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "rayClusterMonitoringConfig": {
+                      "type": "RayClusterMonitoringConfig",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -11697,6 +11968,11 @@
                   },
                   "nested": {
                     "Channel": {
+                      "valuesOptions": {
+                        "CHANNEL_EXPERIMENTAL": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "CHANNEL_UNSPECIFIED": 0,
                         "CHANNEL_DISABLED": 1,
@@ -12537,6 +12813,14 @@
                     }
                   }
                 },
+                "RayClusterLoggingConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
                 "MonitoringConfig": {
                   "fields": {
                     "componentConfig": {
@@ -12586,6 +12870,14 @@
                         "INTERNAL_VPC_LB": 3,
                         "EXTERNAL_LB": 4
                       }
+                    }
+                  }
+                },
+                "RayClusterMonitoringConfig": {
+                  "fields": {
+                    "enabled": {
+                      "type": "bool",
+                      "id": 1
                     }
                   }
                 },
@@ -12643,7 +12935,8 @@
                         "DEPLOYMENT": 11,
                         "STATEFULSET": 12,
                         "CADVISOR": 13,
-                        "KUBELET": 14
+                        "KUBELET": 14,
+                        "DCGM": 15
                       }
                     }
                   }

@@ -1,2 +1,4 @@
 processes:
   - "NodeDependency"
+  - "OwlBotTemplateChangesNode"
+  - "OwlBotPRsNode"

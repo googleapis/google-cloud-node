@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.4.0...parallelstore-v0.5.0) (2024-07-10)
+
+
+### Features
+
+* [parallelstore] add iam.googleapis.com/ServiceAccount resource definition ([#5520](https://github.com/googleapis/google-cloud-node/issues/5520)) ([c1a0a8a](https://github.com/googleapis/google-cloud-node/commit/c1a0a8a52866dee658ad34479b3ae62ae4b21bb5))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.3.0...parallelstore-v0.4.0) (2024-05-21)
 
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.12.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.11.0...batch-v1.12.0) (2024-06-26)
+
+
+### Features
+
+* [batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support ([#5500](https://github.com/googleapis/google-cloud-node/issues/5500)) ([f42b77d](https://github.com/googleapis/google-cloud-node/commit/f42b77d76efc700ade152faf7e42b3abf3fb8f44))
+
+## [1.11.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.10.0...batch-v1.11.0) (2024-06-05)
+
+
+### Features
+
+* [batch] add a install_ops_agent field to InstancePolicyOrTemplate for Ops Agent support ([#5426](https://github.com/googleapis/google-cloud-node/issues/5426)) ([6481ff4](https://github.com/googleapis/google-cloud-node/commit/6481ff45908281cbb91d9212918222bcbd1b2981))
+
 ## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.9.0...batch-v1.10.0) (2024-05-21)
 
 

@@ -11560,6 +11560,34 @@ export namespace google {
                  * @returns Promise
                  */
                 public getThreadReadState(request: google.chat.v1.IGetThreadReadStateRequest): Promise<google.chat.v1.ThreadReadState>;
+
+                /**
+                 * Calls GetSpaceEvent.
+                 * @param request GetSpaceEventRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and SpaceEvent
+                 */
+                public getSpaceEvent(request: google.chat.v1.IGetSpaceEventRequest, callback: google.chat.v1.ChatService.GetSpaceEventCallback): void;
+
+                /**
+                 * Calls GetSpaceEvent.
+                 * @param request GetSpaceEventRequest message or plain object
+                 * @returns Promise
+                 */
+                public getSpaceEvent(request: google.chat.v1.IGetSpaceEventRequest): Promise<google.chat.v1.SpaceEvent>;
+
+                /**
+                 * Calls ListSpaceEvents.
+                 * @param request ListSpaceEventsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and ListSpaceEventsResponse
+                 */
+                public listSpaceEvents(request: google.chat.v1.IListSpaceEventsRequest, callback: google.chat.v1.ChatService.ListSpaceEventsCallback): void;
+
+                /**
+                 * Calls ListSpaceEvents.
+                 * @param request ListSpaceEventsRequest message or plain object
+                 * @returns Promise
+                 */
+                public listSpaceEvents(request: google.chat.v1.IListSpaceEventsRequest): Promise<google.chat.v1.ListSpaceEventsResponse>;
             }
 
             namespace ChatService {
@@ -11745,6 +11773,20 @@ export namespace google {
                  * @param [response] ThreadReadState
                  */
                 type GetThreadReadStateCallback = (error: (Error|null), response?: google.chat.v1.ThreadReadState) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|getSpaceEvent}.
+                 * @param error Error, if any
+                 * @param [response] SpaceEvent
+                 */
+                type GetSpaceEventCallback = (error: (Error|null), response?: google.chat.v1.SpaceEvent) => void;
+
+                /**
+                 * Callback as used by {@link google.chat.v1.ChatService|listSpaceEvents}.
+                 * @param error Error, if any
+                 * @param [response] ListSpaceEventsResponse
+                 */
+                type ListSpaceEventsCallback = (error: (Error|null), response?: google.chat.v1.ListSpaceEventsResponse) => void;
             }
 
             /** Properties of a Membership. */
@@ -17563,6 +17605,12 @@ export namespace google {
 
                 /** Space adminInstalled */
                 adminInstalled?: (boolean|null);
+
+                /** Space accessSettings */
+                accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
+
+                /** Space spaceUri */
+                spaceUri?: (string|null);
             }
 
             /** Represents a Space. */
@@ -17612,6 +17660,12 @@ export namespace google {
 
                 /** Space adminInstalled. */
                 public adminInstalled: boolean;
+
+                /** Space accessSettings. */
+                public accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
+
+                /** Space spaceUri. */
+                public spaceUri: string;
 
                 /**
                  * Creates a new Space instance using the specified properties.
@@ -17817,6 +17871,119 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AccessSettings. */
+                interface IAccessSettings {
+
+                    /** AccessSettings accessState */
+                    accessState?: (google.chat.v1.Space.AccessSettings.AccessState|keyof typeof google.chat.v1.Space.AccessSettings.AccessState|null);
+
+                    /** AccessSettings audience */
+                    audience?: (string|null);
+                }
+
+                /** Represents an AccessSettings. */
+                class AccessSettings implements IAccessSettings {
+
+                    /**
+                     * Constructs a new AccessSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IAccessSettings);
+
+                    /** AccessSettings accessState. */
+                    public accessState: (google.chat.v1.Space.AccessSettings.AccessState|keyof typeof google.chat.v1.Space.AccessSettings.AccessState);
+
+                    /** AccessSettings audience. */
+                    public audience: string;
+
+                    /**
+                     * Creates a new AccessSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessSettings instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IAccessSettings): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Encodes the specified AccessSettings message. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                     * @param message AccessSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IAccessSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.AccessSettings.verify|verify} messages.
+                     * @param message AccessSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IAccessSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Decodes an AccessSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Verifies an AccessSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.AccessSettings;
+
+                    /**
+                     * Creates a plain object from an AccessSettings message. Also converts values to other types if specified.
+                     * @param message AccessSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.AccessSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AccessSettings {
+
+                    /** AccessState enum. */
+                    enum AccessState {
+                        ACCESS_STATE_UNSPECIFIED = 0,
+                        PRIVATE = 1,
+                        DISCOVERABLE = 2
+                    }
                 }
             }
 
@@ -18728,6 +18895,2287 @@ export namespace google {
                 HISTORY_STATE_UNSPECIFIED = 0,
                 HISTORY_OFF = 1,
                 HISTORY_ON = 2
+            }
+
+            /** Properties of a SpaceEvent. */
+            interface ISpaceEvent {
+
+                /** SpaceEvent name */
+                name?: (string|null);
+
+                /** SpaceEvent eventTime */
+                eventTime?: (google.protobuf.ITimestamp|null);
+
+                /** SpaceEvent eventType */
+                eventType?: (string|null);
+
+                /** SpaceEvent messageCreatedEventData */
+                messageCreatedEventData?: (google.chat.v1.IMessageCreatedEventData|null);
+
+                /** SpaceEvent messageUpdatedEventData */
+                messageUpdatedEventData?: (google.chat.v1.IMessageUpdatedEventData|null);
+
+                /** SpaceEvent messageDeletedEventData */
+                messageDeletedEventData?: (google.chat.v1.IMessageDeletedEventData|null);
+
+                /** SpaceEvent messageBatchCreatedEventData */
+                messageBatchCreatedEventData?: (google.chat.v1.IMessageBatchCreatedEventData|null);
+
+                /** SpaceEvent messageBatchUpdatedEventData */
+                messageBatchUpdatedEventData?: (google.chat.v1.IMessageBatchUpdatedEventData|null);
+
+                /** SpaceEvent messageBatchDeletedEventData */
+                messageBatchDeletedEventData?: (google.chat.v1.IMessageBatchDeletedEventData|null);
+
+                /** SpaceEvent spaceUpdatedEventData */
+                spaceUpdatedEventData?: (google.chat.v1.ISpaceUpdatedEventData|null);
+
+                /** SpaceEvent spaceBatchUpdatedEventData */
+                spaceBatchUpdatedEventData?: (google.chat.v1.ISpaceBatchUpdatedEventData|null);
+
+                /** SpaceEvent membershipCreatedEventData */
+                membershipCreatedEventData?: (google.chat.v1.IMembershipCreatedEventData|null);
+
+                /** SpaceEvent membershipUpdatedEventData */
+                membershipUpdatedEventData?: (google.chat.v1.IMembershipUpdatedEventData|null);
+
+                /** SpaceEvent membershipDeletedEventData */
+                membershipDeletedEventData?: (google.chat.v1.IMembershipDeletedEventData|null);
+
+                /** SpaceEvent membershipBatchCreatedEventData */
+                membershipBatchCreatedEventData?: (google.chat.v1.IMembershipBatchCreatedEventData|null);
+
+                /** SpaceEvent membershipBatchUpdatedEventData */
+                membershipBatchUpdatedEventData?: (google.chat.v1.IMembershipBatchUpdatedEventData|null);
+
+                /** SpaceEvent membershipBatchDeletedEventData */
+                membershipBatchDeletedEventData?: (google.chat.v1.IMembershipBatchDeletedEventData|null);
+
+                /** SpaceEvent reactionCreatedEventData */
+                reactionCreatedEventData?: (google.chat.v1.IReactionCreatedEventData|null);
+
+                /** SpaceEvent reactionDeletedEventData */
+                reactionDeletedEventData?: (google.chat.v1.IReactionDeletedEventData|null);
+
+                /** SpaceEvent reactionBatchCreatedEventData */
+                reactionBatchCreatedEventData?: (google.chat.v1.IReactionBatchCreatedEventData|null);
+
+                /** SpaceEvent reactionBatchDeletedEventData */
+                reactionBatchDeletedEventData?: (google.chat.v1.IReactionBatchDeletedEventData|null);
+            }
+
+            /** Represents a SpaceEvent. */
+            class SpaceEvent implements ISpaceEvent {
+
+                /**
+                 * Constructs a new SpaceEvent.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISpaceEvent);
+
+                /** SpaceEvent name. */
+                public name: string;
+
+                /** SpaceEvent eventTime. */
+                public eventTime?: (google.protobuf.ITimestamp|null);
+
+                /** SpaceEvent eventType. */
+                public eventType: string;
+
+                /** SpaceEvent messageCreatedEventData. */
+                public messageCreatedEventData?: (google.chat.v1.IMessageCreatedEventData|null);
+
+                /** SpaceEvent messageUpdatedEventData. */
+                public messageUpdatedEventData?: (google.chat.v1.IMessageUpdatedEventData|null);
+
+                /** SpaceEvent messageDeletedEventData. */
+                public messageDeletedEventData?: (google.chat.v1.IMessageDeletedEventData|null);
+
+                /** SpaceEvent messageBatchCreatedEventData. */
+                public messageBatchCreatedEventData?: (google.chat.v1.IMessageBatchCreatedEventData|null);
+
+                /** SpaceEvent messageBatchUpdatedEventData. */
+                public messageBatchUpdatedEventData?: (google.chat.v1.IMessageBatchUpdatedEventData|null);
+
+                /** SpaceEvent messageBatchDeletedEventData. */
+                public messageBatchDeletedEventData?: (google.chat.v1.IMessageBatchDeletedEventData|null);
+
+                /** SpaceEvent spaceUpdatedEventData. */
+                public spaceUpdatedEventData?: (google.chat.v1.ISpaceUpdatedEventData|null);
+
+                /** SpaceEvent spaceBatchUpdatedEventData. */
+                public spaceBatchUpdatedEventData?: (google.chat.v1.ISpaceBatchUpdatedEventData|null);
+
+                /** SpaceEvent membershipCreatedEventData. */
+                public membershipCreatedEventData?: (google.chat.v1.IMembershipCreatedEventData|null);
+
+                /** SpaceEvent membershipUpdatedEventData. */
+                public membershipUpdatedEventData?: (google.chat.v1.IMembershipUpdatedEventData|null);
+
+                /** SpaceEvent membershipDeletedEventData. */
+                public membershipDeletedEventData?: (google.chat.v1.IMembershipDeletedEventData|null);
+
+                /** SpaceEvent membershipBatchCreatedEventData. */
+                public membershipBatchCreatedEventData?: (google.chat.v1.IMembershipBatchCreatedEventData|null);
+
+                /** SpaceEvent membershipBatchUpdatedEventData. */
+                public membershipBatchUpdatedEventData?: (google.chat.v1.IMembershipBatchUpdatedEventData|null);
+
+                /** SpaceEvent membershipBatchDeletedEventData. */
+                public membershipBatchDeletedEventData?: (google.chat.v1.IMembershipBatchDeletedEventData|null);
+
+                /** SpaceEvent reactionCreatedEventData. */
+                public reactionCreatedEventData?: (google.chat.v1.IReactionCreatedEventData|null);
+
+                /** SpaceEvent reactionDeletedEventData. */
+                public reactionDeletedEventData?: (google.chat.v1.IReactionDeletedEventData|null);
+
+                /** SpaceEvent reactionBatchCreatedEventData. */
+                public reactionBatchCreatedEventData?: (google.chat.v1.IReactionBatchCreatedEventData|null);
+
+                /** SpaceEvent reactionBatchDeletedEventData. */
+                public reactionBatchDeletedEventData?: (google.chat.v1.IReactionBatchDeletedEventData|null);
+
+                /** SpaceEvent payload. */
+                public payload?: ("messageCreatedEventData"|"messageUpdatedEventData"|"messageDeletedEventData"|"messageBatchCreatedEventData"|"messageBatchUpdatedEventData"|"messageBatchDeletedEventData"|"spaceUpdatedEventData"|"spaceBatchUpdatedEventData"|"membershipCreatedEventData"|"membershipUpdatedEventData"|"membershipDeletedEventData"|"membershipBatchCreatedEventData"|"membershipBatchUpdatedEventData"|"membershipBatchDeletedEventData"|"reactionCreatedEventData"|"reactionDeletedEventData"|"reactionBatchCreatedEventData"|"reactionBatchDeletedEventData");
+
+                /**
+                 * Creates a new SpaceEvent instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SpaceEvent instance
+                 */
+                public static create(properties?: google.chat.v1.ISpaceEvent): google.chat.v1.SpaceEvent;
+
+                /**
+                 * Encodes the specified SpaceEvent message. Does not implicitly {@link google.chat.v1.SpaceEvent.verify|verify} messages.
+                 * @param message SpaceEvent message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISpaceEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SpaceEvent message, length delimited. Does not implicitly {@link google.chat.v1.SpaceEvent.verify|verify} messages.
+                 * @param message SpaceEvent message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISpaceEvent, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SpaceEvent message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SpaceEvent
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SpaceEvent;
+
+                /**
+                 * Decodes a SpaceEvent message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SpaceEvent
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SpaceEvent;
+
+                /**
+                 * Verifies a SpaceEvent message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SpaceEvent message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SpaceEvent
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SpaceEvent;
+
+                /**
+                 * Creates a plain object from a SpaceEvent message. Also converts values to other types if specified.
+                 * @param message SpaceEvent
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SpaceEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SpaceEvent to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SpaceEvent
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetSpaceEventRequest. */
+            interface IGetSpaceEventRequest {
+
+                /** GetSpaceEventRequest name */
+                name?: (string|null);
+            }
+
+            /** Represents a GetSpaceEventRequest. */
+            class GetSpaceEventRequest implements IGetSpaceEventRequest {
+
+                /**
+                 * Constructs a new GetSpaceEventRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IGetSpaceEventRequest);
+
+                /** GetSpaceEventRequest name. */
+                public name: string;
+
+                /**
+                 * Creates a new GetSpaceEventRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetSpaceEventRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IGetSpaceEventRequest): google.chat.v1.GetSpaceEventRequest;
+
+                /**
+                 * Encodes the specified GetSpaceEventRequest message. Does not implicitly {@link google.chat.v1.GetSpaceEventRequest.verify|verify} messages.
+                 * @param message GetSpaceEventRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IGetSpaceEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetSpaceEventRequest message, length delimited. Does not implicitly {@link google.chat.v1.GetSpaceEventRequest.verify|verify} messages.
+                 * @param message GetSpaceEventRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IGetSpaceEventRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetSpaceEventRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetSpaceEventRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.GetSpaceEventRequest;
+
+                /**
+                 * Decodes a GetSpaceEventRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetSpaceEventRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.GetSpaceEventRequest;
+
+                /**
+                 * Verifies a GetSpaceEventRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetSpaceEventRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetSpaceEventRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.GetSpaceEventRequest;
+
+                /**
+                 * Creates a plain object from a GetSpaceEventRequest message. Also converts values to other types if specified.
+                 * @param message GetSpaceEventRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.GetSpaceEventRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetSpaceEventRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetSpaceEventRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListSpaceEventsRequest. */
+            interface IListSpaceEventsRequest {
+
+                /** ListSpaceEventsRequest parent */
+                parent?: (string|null);
+
+                /** ListSpaceEventsRequest pageSize */
+                pageSize?: (number|null);
+
+                /** ListSpaceEventsRequest pageToken */
+                pageToken?: (string|null);
+
+                /** ListSpaceEventsRequest filter */
+                filter?: (string|null);
+            }
+
+            /** Represents a ListSpaceEventsRequest. */
+            class ListSpaceEventsRequest implements IListSpaceEventsRequest {
+
+                /**
+                 * Constructs a new ListSpaceEventsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IListSpaceEventsRequest);
+
+                /** ListSpaceEventsRequest parent. */
+                public parent: string;
+
+                /** ListSpaceEventsRequest pageSize. */
+                public pageSize: number;
+
+                /** ListSpaceEventsRequest pageToken. */
+                public pageToken: string;
+
+                /** ListSpaceEventsRequest filter. */
+                public filter: string;
+
+                /**
+                 * Creates a new ListSpaceEventsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListSpaceEventsRequest instance
+                 */
+                public static create(properties?: google.chat.v1.IListSpaceEventsRequest): google.chat.v1.ListSpaceEventsRequest;
+
+                /**
+                 * Encodes the specified ListSpaceEventsRequest message. Does not implicitly {@link google.chat.v1.ListSpaceEventsRequest.verify|verify} messages.
+                 * @param message ListSpaceEventsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IListSpaceEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListSpaceEventsRequest message, length delimited. Does not implicitly {@link google.chat.v1.ListSpaceEventsRequest.verify|verify} messages.
+                 * @param message ListSpaceEventsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IListSpaceEventsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListSpaceEventsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListSpaceEventsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ListSpaceEventsRequest;
+
+                /**
+                 * Decodes a ListSpaceEventsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListSpaceEventsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ListSpaceEventsRequest;
+
+                /**
+                 * Verifies a ListSpaceEventsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListSpaceEventsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListSpaceEventsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ListSpaceEventsRequest;
+
+                /**
+                 * Creates a plain object from a ListSpaceEventsRequest message. Also converts values to other types if specified.
+                 * @param message ListSpaceEventsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ListSpaceEventsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListSpaceEventsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListSpaceEventsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ListSpaceEventsResponse. */
+            interface IListSpaceEventsResponse {
+
+                /** ListSpaceEventsResponse spaceEvents */
+                spaceEvents?: (google.chat.v1.ISpaceEvent[]|null);
+
+                /** ListSpaceEventsResponse nextPageToken */
+                nextPageToken?: (string|null);
+            }
+
+            /** Represents a ListSpaceEventsResponse. */
+            class ListSpaceEventsResponse implements IListSpaceEventsResponse {
+
+                /**
+                 * Constructs a new ListSpaceEventsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IListSpaceEventsResponse);
+
+                /** ListSpaceEventsResponse spaceEvents. */
+                public spaceEvents: google.chat.v1.ISpaceEvent[];
+
+                /** ListSpaceEventsResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /**
+                 * Creates a new ListSpaceEventsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ListSpaceEventsResponse instance
+                 */
+                public static create(properties?: google.chat.v1.IListSpaceEventsResponse): google.chat.v1.ListSpaceEventsResponse;
+
+                /**
+                 * Encodes the specified ListSpaceEventsResponse message. Does not implicitly {@link google.chat.v1.ListSpaceEventsResponse.verify|verify} messages.
+                 * @param message ListSpaceEventsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IListSpaceEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ListSpaceEventsResponse message, length delimited. Does not implicitly {@link google.chat.v1.ListSpaceEventsResponse.verify|verify} messages.
+                 * @param message ListSpaceEventsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IListSpaceEventsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ListSpaceEventsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ListSpaceEventsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ListSpaceEventsResponse;
+
+                /**
+                 * Decodes a ListSpaceEventsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ListSpaceEventsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ListSpaceEventsResponse;
+
+                /**
+                 * Verifies a ListSpaceEventsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ListSpaceEventsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ListSpaceEventsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ListSpaceEventsResponse;
+
+                /**
+                 * Creates a plain object from a ListSpaceEventsResponse message. Also converts values to other types if specified.
+                 * @param message ListSpaceEventsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ListSpaceEventsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ListSpaceEventsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ListSpaceEventsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MembershipCreatedEventData. */
+            interface IMembershipCreatedEventData {
+
+                /** MembershipCreatedEventData membership */
+                membership?: (google.chat.v1.IMembership|null);
+            }
+
+            /** Represents a MembershipCreatedEventData. */
+            class MembershipCreatedEventData implements IMembershipCreatedEventData {
+
+                /**
+                 * Constructs a new MembershipCreatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMembershipCreatedEventData);
+
+                /** MembershipCreatedEventData membership. */
+                public membership?: (google.chat.v1.IMembership|null);
+
+                /**
+                 * Creates a new MembershipCreatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MembershipCreatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMembershipCreatedEventData): google.chat.v1.MembershipCreatedEventData;
+
+                /**
+                 * Encodes the specified MembershipCreatedEventData message. Does not implicitly {@link google.chat.v1.MembershipCreatedEventData.verify|verify} messages.
+                 * @param message MembershipCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMembershipCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MembershipCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipCreatedEventData.verify|verify} messages.
+                 * @param message MembershipCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMembershipCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MembershipCreatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MembershipCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MembershipCreatedEventData;
+
+                /**
+                 * Decodes a MembershipCreatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MembershipCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MembershipCreatedEventData;
+
+                /**
+                 * Verifies a MembershipCreatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MembershipCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MembershipCreatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MembershipCreatedEventData;
+
+                /**
+                 * Creates a plain object from a MembershipCreatedEventData message. Also converts values to other types if specified.
+                 * @param message MembershipCreatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MembershipCreatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MembershipCreatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MembershipCreatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MembershipDeletedEventData. */
+            interface IMembershipDeletedEventData {
+
+                /** MembershipDeletedEventData membership */
+                membership?: (google.chat.v1.IMembership|null);
+            }
+
+            /** Represents a MembershipDeletedEventData. */
+            class MembershipDeletedEventData implements IMembershipDeletedEventData {
+
+                /**
+                 * Constructs a new MembershipDeletedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMembershipDeletedEventData);
+
+                /** MembershipDeletedEventData membership. */
+                public membership?: (google.chat.v1.IMembership|null);
+
+                /**
+                 * Creates a new MembershipDeletedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MembershipDeletedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMembershipDeletedEventData): google.chat.v1.MembershipDeletedEventData;
+
+                /**
+                 * Encodes the specified MembershipDeletedEventData message. Does not implicitly {@link google.chat.v1.MembershipDeletedEventData.verify|verify} messages.
+                 * @param message MembershipDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMembershipDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MembershipDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipDeletedEventData.verify|verify} messages.
+                 * @param message MembershipDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMembershipDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MembershipDeletedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MembershipDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MembershipDeletedEventData;
+
+                /**
+                 * Decodes a MembershipDeletedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MembershipDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MembershipDeletedEventData;
+
+                /**
+                 * Verifies a MembershipDeletedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MembershipDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MembershipDeletedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MembershipDeletedEventData;
+
+                /**
+                 * Creates a plain object from a MembershipDeletedEventData message. Also converts values to other types if specified.
+                 * @param message MembershipDeletedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MembershipDeletedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MembershipDeletedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MembershipDeletedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MembershipUpdatedEventData. */
+            interface IMembershipUpdatedEventData {
+
+                /** MembershipUpdatedEventData membership */
+                membership?: (google.chat.v1.IMembership|null);
+            }
+
+            /** Represents a MembershipUpdatedEventData. */
+            class MembershipUpdatedEventData implements IMembershipUpdatedEventData {
+
+                /**
+                 * Constructs a new MembershipUpdatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMembershipUpdatedEventData);
+
+                /** MembershipUpdatedEventData membership. */
+                public membership?: (google.chat.v1.IMembership|null);
+
+                /**
+                 * Creates a new MembershipUpdatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MembershipUpdatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMembershipUpdatedEventData): google.chat.v1.MembershipUpdatedEventData;
+
+                /**
+                 * Encodes the specified MembershipUpdatedEventData message. Does not implicitly {@link google.chat.v1.MembershipUpdatedEventData.verify|verify} messages.
+                 * @param message MembershipUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMembershipUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MembershipUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipUpdatedEventData.verify|verify} messages.
+                 * @param message MembershipUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMembershipUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MembershipUpdatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MembershipUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MembershipUpdatedEventData;
+
+                /**
+                 * Decodes a MembershipUpdatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MembershipUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MembershipUpdatedEventData;
+
+                /**
+                 * Verifies a MembershipUpdatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MembershipUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MembershipUpdatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MembershipUpdatedEventData;
+
+                /**
+                 * Creates a plain object from a MembershipUpdatedEventData message. Also converts values to other types if specified.
+                 * @param message MembershipUpdatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MembershipUpdatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MembershipUpdatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MembershipUpdatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MembershipBatchCreatedEventData. */
+            interface IMembershipBatchCreatedEventData {
+
+                /** MembershipBatchCreatedEventData memberships */
+                memberships?: (google.chat.v1.IMembershipCreatedEventData[]|null);
+            }
+
+            /** Represents a MembershipBatchCreatedEventData. */
+            class MembershipBatchCreatedEventData implements IMembershipBatchCreatedEventData {
+
+                /**
+                 * Constructs a new MembershipBatchCreatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMembershipBatchCreatedEventData);
+
+                /** MembershipBatchCreatedEventData memberships. */
+                public memberships: google.chat.v1.IMembershipCreatedEventData[];
+
+                /**
+                 * Creates a new MembershipBatchCreatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MembershipBatchCreatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMembershipBatchCreatedEventData): google.chat.v1.MembershipBatchCreatedEventData;
+
+                /**
+                 * Encodes the specified MembershipBatchCreatedEventData message. Does not implicitly {@link google.chat.v1.MembershipBatchCreatedEventData.verify|verify} messages.
+                 * @param message MembershipBatchCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMembershipBatchCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MembershipBatchCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipBatchCreatedEventData.verify|verify} messages.
+                 * @param message MembershipBatchCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMembershipBatchCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MembershipBatchCreatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MembershipBatchCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MembershipBatchCreatedEventData;
+
+                /**
+                 * Decodes a MembershipBatchCreatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MembershipBatchCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MembershipBatchCreatedEventData;
+
+                /**
+                 * Verifies a MembershipBatchCreatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MembershipBatchCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MembershipBatchCreatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MembershipBatchCreatedEventData;
+
+                /**
+                 * Creates a plain object from a MembershipBatchCreatedEventData message. Also converts values to other types if specified.
+                 * @param message MembershipBatchCreatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MembershipBatchCreatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MembershipBatchCreatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MembershipBatchCreatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MembershipBatchUpdatedEventData. */
+            interface IMembershipBatchUpdatedEventData {
+
+                /** MembershipBatchUpdatedEventData memberships */
+                memberships?: (google.chat.v1.IMembershipUpdatedEventData[]|null);
+            }
+
+            /** Represents a MembershipBatchUpdatedEventData. */
+            class MembershipBatchUpdatedEventData implements IMembershipBatchUpdatedEventData {
+
+                /**
+                 * Constructs a new MembershipBatchUpdatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMembershipBatchUpdatedEventData);
+
+                /** MembershipBatchUpdatedEventData memberships. */
+                public memberships: google.chat.v1.IMembershipUpdatedEventData[];
+
+                /**
+                 * Creates a new MembershipBatchUpdatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MembershipBatchUpdatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMembershipBatchUpdatedEventData): google.chat.v1.MembershipBatchUpdatedEventData;
+
+                /**
+                 * Encodes the specified MembershipBatchUpdatedEventData message. Does not implicitly {@link google.chat.v1.MembershipBatchUpdatedEventData.verify|verify} messages.
+                 * @param message MembershipBatchUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMembershipBatchUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MembershipBatchUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipBatchUpdatedEventData.verify|verify} messages.
+                 * @param message MembershipBatchUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMembershipBatchUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MembershipBatchUpdatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MembershipBatchUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MembershipBatchUpdatedEventData;
+
+                /**
+                 * Decodes a MembershipBatchUpdatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MembershipBatchUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MembershipBatchUpdatedEventData;
+
+                /**
+                 * Verifies a MembershipBatchUpdatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MembershipBatchUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MembershipBatchUpdatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MembershipBatchUpdatedEventData;
+
+                /**
+                 * Creates a plain object from a MembershipBatchUpdatedEventData message. Also converts values to other types if specified.
+                 * @param message MembershipBatchUpdatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MembershipBatchUpdatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MembershipBatchUpdatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MembershipBatchUpdatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MembershipBatchDeletedEventData. */
+            interface IMembershipBatchDeletedEventData {
+
+                /** MembershipBatchDeletedEventData memberships */
+                memberships?: (google.chat.v1.IMembershipDeletedEventData[]|null);
+            }
+
+            /** Represents a MembershipBatchDeletedEventData. */
+            class MembershipBatchDeletedEventData implements IMembershipBatchDeletedEventData {
+
+                /**
+                 * Constructs a new MembershipBatchDeletedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMembershipBatchDeletedEventData);
+
+                /** MembershipBatchDeletedEventData memberships. */
+                public memberships: google.chat.v1.IMembershipDeletedEventData[];
+
+                /**
+                 * Creates a new MembershipBatchDeletedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MembershipBatchDeletedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMembershipBatchDeletedEventData): google.chat.v1.MembershipBatchDeletedEventData;
+
+                /**
+                 * Encodes the specified MembershipBatchDeletedEventData message. Does not implicitly {@link google.chat.v1.MembershipBatchDeletedEventData.verify|verify} messages.
+                 * @param message MembershipBatchDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMembershipBatchDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MembershipBatchDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MembershipBatchDeletedEventData.verify|verify} messages.
+                 * @param message MembershipBatchDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMembershipBatchDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MembershipBatchDeletedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MembershipBatchDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MembershipBatchDeletedEventData;
+
+                /**
+                 * Decodes a MembershipBatchDeletedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MembershipBatchDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MembershipBatchDeletedEventData;
+
+                /**
+                 * Verifies a MembershipBatchDeletedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MembershipBatchDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MembershipBatchDeletedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MembershipBatchDeletedEventData;
+
+                /**
+                 * Creates a plain object from a MembershipBatchDeletedEventData message. Also converts values to other types if specified.
+                 * @param message MembershipBatchDeletedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MembershipBatchDeletedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MembershipBatchDeletedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MembershipBatchDeletedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessageCreatedEventData. */
+            interface IMessageCreatedEventData {
+
+                /** MessageCreatedEventData message */
+                message?: (google.chat.v1.IMessage|null);
+            }
+
+            /** Represents a MessageCreatedEventData. */
+            class MessageCreatedEventData implements IMessageCreatedEventData {
+
+                /**
+                 * Constructs a new MessageCreatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessageCreatedEventData);
+
+                /** MessageCreatedEventData message. */
+                public message?: (google.chat.v1.IMessage|null);
+
+                /**
+                 * Creates a new MessageCreatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessageCreatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMessageCreatedEventData): google.chat.v1.MessageCreatedEventData;
+
+                /**
+                 * Encodes the specified MessageCreatedEventData message. Does not implicitly {@link google.chat.v1.MessageCreatedEventData.verify|verify} messages.
+                 * @param message MessageCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessageCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessageCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageCreatedEventData.verify|verify} messages.
+                 * @param message MessageCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessageCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessageCreatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessageCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessageCreatedEventData;
+
+                /**
+                 * Decodes a MessageCreatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessageCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessageCreatedEventData;
+
+                /**
+                 * Verifies a MessageCreatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessageCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessageCreatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessageCreatedEventData;
+
+                /**
+                 * Creates a plain object from a MessageCreatedEventData message. Also converts values to other types if specified.
+                 * @param message MessageCreatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessageCreatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessageCreatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessageCreatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessageUpdatedEventData. */
+            interface IMessageUpdatedEventData {
+
+                /** MessageUpdatedEventData message */
+                message?: (google.chat.v1.IMessage|null);
+            }
+
+            /** Represents a MessageUpdatedEventData. */
+            class MessageUpdatedEventData implements IMessageUpdatedEventData {
+
+                /**
+                 * Constructs a new MessageUpdatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessageUpdatedEventData);
+
+                /** MessageUpdatedEventData message. */
+                public message?: (google.chat.v1.IMessage|null);
+
+                /**
+                 * Creates a new MessageUpdatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessageUpdatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMessageUpdatedEventData): google.chat.v1.MessageUpdatedEventData;
+
+                /**
+                 * Encodes the specified MessageUpdatedEventData message. Does not implicitly {@link google.chat.v1.MessageUpdatedEventData.verify|verify} messages.
+                 * @param message MessageUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessageUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessageUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageUpdatedEventData.verify|verify} messages.
+                 * @param message MessageUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessageUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessageUpdatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessageUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessageUpdatedEventData;
+
+                /**
+                 * Decodes a MessageUpdatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessageUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessageUpdatedEventData;
+
+                /**
+                 * Verifies a MessageUpdatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessageUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessageUpdatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessageUpdatedEventData;
+
+                /**
+                 * Creates a plain object from a MessageUpdatedEventData message. Also converts values to other types if specified.
+                 * @param message MessageUpdatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessageUpdatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessageUpdatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessageUpdatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessageDeletedEventData. */
+            interface IMessageDeletedEventData {
+
+                /** MessageDeletedEventData message */
+                message?: (google.chat.v1.IMessage|null);
+            }
+
+            /** Represents a MessageDeletedEventData. */
+            class MessageDeletedEventData implements IMessageDeletedEventData {
+
+                /**
+                 * Constructs a new MessageDeletedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessageDeletedEventData);
+
+                /** MessageDeletedEventData message. */
+                public message?: (google.chat.v1.IMessage|null);
+
+                /**
+                 * Creates a new MessageDeletedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessageDeletedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMessageDeletedEventData): google.chat.v1.MessageDeletedEventData;
+
+                /**
+                 * Encodes the specified MessageDeletedEventData message. Does not implicitly {@link google.chat.v1.MessageDeletedEventData.verify|verify} messages.
+                 * @param message MessageDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessageDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessageDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageDeletedEventData.verify|verify} messages.
+                 * @param message MessageDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessageDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessageDeletedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessageDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessageDeletedEventData;
+
+                /**
+                 * Decodes a MessageDeletedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessageDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessageDeletedEventData;
+
+                /**
+                 * Verifies a MessageDeletedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessageDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessageDeletedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessageDeletedEventData;
+
+                /**
+                 * Creates a plain object from a MessageDeletedEventData message. Also converts values to other types if specified.
+                 * @param message MessageDeletedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessageDeletedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessageDeletedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessageDeletedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessageBatchCreatedEventData. */
+            interface IMessageBatchCreatedEventData {
+
+                /** MessageBatchCreatedEventData messages */
+                messages?: (google.chat.v1.IMessageCreatedEventData[]|null);
+            }
+
+            /** Represents a MessageBatchCreatedEventData. */
+            class MessageBatchCreatedEventData implements IMessageBatchCreatedEventData {
+
+                /**
+                 * Constructs a new MessageBatchCreatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessageBatchCreatedEventData);
+
+                /** MessageBatchCreatedEventData messages. */
+                public messages: google.chat.v1.IMessageCreatedEventData[];
+
+                /**
+                 * Creates a new MessageBatchCreatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessageBatchCreatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMessageBatchCreatedEventData): google.chat.v1.MessageBatchCreatedEventData;
+
+                /**
+                 * Encodes the specified MessageBatchCreatedEventData message. Does not implicitly {@link google.chat.v1.MessageBatchCreatedEventData.verify|verify} messages.
+                 * @param message MessageBatchCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessageBatchCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessageBatchCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageBatchCreatedEventData.verify|verify} messages.
+                 * @param message MessageBatchCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessageBatchCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessageBatchCreatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessageBatchCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessageBatchCreatedEventData;
+
+                /**
+                 * Decodes a MessageBatchCreatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessageBatchCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessageBatchCreatedEventData;
+
+                /**
+                 * Verifies a MessageBatchCreatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessageBatchCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessageBatchCreatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessageBatchCreatedEventData;
+
+                /**
+                 * Creates a plain object from a MessageBatchCreatedEventData message. Also converts values to other types if specified.
+                 * @param message MessageBatchCreatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessageBatchCreatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessageBatchCreatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessageBatchCreatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessageBatchUpdatedEventData. */
+            interface IMessageBatchUpdatedEventData {
+
+                /** MessageBatchUpdatedEventData messages */
+                messages?: (google.chat.v1.IMessageUpdatedEventData[]|null);
+            }
+
+            /** Represents a MessageBatchUpdatedEventData. */
+            class MessageBatchUpdatedEventData implements IMessageBatchUpdatedEventData {
+
+                /**
+                 * Constructs a new MessageBatchUpdatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessageBatchUpdatedEventData);
+
+                /** MessageBatchUpdatedEventData messages. */
+                public messages: google.chat.v1.IMessageUpdatedEventData[];
+
+                /**
+                 * Creates a new MessageBatchUpdatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessageBatchUpdatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMessageBatchUpdatedEventData): google.chat.v1.MessageBatchUpdatedEventData;
+
+                /**
+                 * Encodes the specified MessageBatchUpdatedEventData message. Does not implicitly {@link google.chat.v1.MessageBatchUpdatedEventData.verify|verify} messages.
+                 * @param message MessageBatchUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessageBatchUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessageBatchUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageBatchUpdatedEventData.verify|verify} messages.
+                 * @param message MessageBatchUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessageBatchUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessageBatchUpdatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessageBatchUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessageBatchUpdatedEventData;
+
+                /**
+                 * Decodes a MessageBatchUpdatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessageBatchUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessageBatchUpdatedEventData;
+
+                /**
+                 * Verifies a MessageBatchUpdatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessageBatchUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessageBatchUpdatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessageBatchUpdatedEventData;
+
+                /**
+                 * Creates a plain object from a MessageBatchUpdatedEventData message. Also converts values to other types if specified.
+                 * @param message MessageBatchUpdatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessageBatchUpdatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessageBatchUpdatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessageBatchUpdatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a MessageBatchDeletedEventData. */
+            interface IMessageBatchDeletedEventData {
+
+                /** MessageBatchDeletedEventData messages */
+                messages?: (google.chat.v1.IMessageDeletedEventData[]|null);
+            }
+
+            /** Represents a MessageBatchDeletedEventData. */
+            class MessageBatchDeletedEventData implements IMessageBatchDeletedEventData {
+
+                /**
+                 * Constructs a new MessageBatchDeletedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IMessageBatchDeletedEventData);
+
+                /** MessageBatchDeletedEventData messages. */
+                public messages: google.chat.v1.IMessageDeletedEventData[];
+
+                /**
+                 * Creates a new MessageBatchDeletedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns MessageBatchDeletedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IMessageBatchDeletedEventData): google.chat.v1.MessageBatchDeletedEventData;
+
+                /**
+                 * Encodes the specified MessageBatchDeletedEventData message. Does not implicitly {@link google.chat.v1.MessageBatchDeletedEventData.verify|verify} messages.
+                 * @param message MessageBatchDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IMessageBatchDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MessageBatchDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.MessageBatchDeletedEventData.verify|verify} messages.
+                 * @param message MessageBatchDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IMessageBatchDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MessageBatchDeletedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MessageBatchDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.MessageBatchDeletedEventData;
+
+                /**
+                 * Decodes a MessageBatchDeletedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MessageBatchDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.MessageBatchDeletedEventData;
+
+                /**
+                 * Verifies a MessageBatchDeletedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MessageBatchDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MessageBatchDeletedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.MessageBatchDeletedEventData;
+
+                /**
+                 * Creates a plain object from a MessageBatchDeletedEventData message. Also converts values to other types if specified.
+                 * @param message MessageBatchDeletedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.MessageBatchDeletedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MessageBatchDeletedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for MessageBatchDeletedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SpaceUpdatedEventData. */
+            interface ISpaceUpdatedEventData {
+
+                /** SpaceUpdatedEventData space */
+                space?: (google.chat.v1.ISpace|null);
+            }
+
+            /** Represents a SpaceUpdatedEventData. */
+            class SpaceUpdatedEventData implements ISpaceUpdatedEventData {
+
+                /**
+                 * Constructs a new SpaceUpdatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISpaceUpdatedEventData);
+
+                /** SpaceUpdatedEventData space. */
+                public space?: (google.chat.v1.ISpace|null);
+
+                /**
+                 * Creates a new SpaceUpdatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SpaceUpdatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.ISpaceUpdatedEventData): google.chat.v1.SpaceUpdatedEventData;
+
+                /**
+                 * Encodes the specified SpaceUpdatedEventData message. Does not implicitly {@link google.chat.v1.SpaceUpdatedEventData.verify|verify} messages.
+                 * @param message SpaceUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISpaceUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SpaceUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.SpaceUpdatedEventData.verify|verify} messages.
+                 * @param message SpaceUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISpaceUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SpaceUpdatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SpaceUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SpaceUpdatedEventData;
+
+                /**
+                 * Decodes a SpaceUpdatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SpaceUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SpaceUpdatedEventData;
+
+                /**
+                 * Verifies a SpaceUpdatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SpaceUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SpaceUpdatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SpaceUpdatedEventData;
+
+                /**
+                 * Creates a plain object from a SpaceUpdatedEventData message. Also converts values to other types if specified.
+                 * @param message SpaceUpdatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SpaceUpdatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SpaceUpdatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SpaceUpdatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SpaceBatchUpdatedEventData. */
+            interface ISpaceBatchUpdatedEventData {
+
+                /** SpaceBatchUpdatedEventData spaces */
+                spaces?: (google.chat.v1.ISpaceUpdatedEventData[]|null);
+            }
+
+            /** Represents a SpaceBatchUpdatedEventData. */
+            class SpaceBatchUpdatedEventData implements ISpaceBatchUpdatedEventData {
+
+                /**
+                 * Constructs a new SpaceBatchUpdatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISpaceBatchUpdatedEventData);
+
+                /** SpaceBatchUpdatedEventData spaces. */
+                public spaces: google.chat.v1.ISpaceUpdatedEventData[];
+
+                /**
+                 * Creates a new SpaceBatchUpdatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SpaceBatchUpdatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.ISpaceBatchUpdatedEventData): google.chat.v1.SpaceBatchUpdatedEventData;
+
+                /**
+                 * Encodes the specified SpaceBatchUpdatedEventData message. Does not implicitly {@link google.chat.v1.SpaceBatchUpdatedEventData.verify|verify} messages.
+                 * @param message SpaceBatchUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISpaceBatchUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SpaceBatchUpdatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.SpaceBatchUpdatedEventData.verify|verify} messages.
+                 * @param message SpaceBatchUpdatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISpaceBatchUpdatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SpaceBatchUpdatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SpaceBatchUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SpaceBatchUpdatedEventData;
+
+                /**
+                 * Decodes a SpaceBatchUpdatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SpaceBatchUpdatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SpaceBatchUpdatedEventData;
+
+                /**
+                 * Verifies a SpaceBatchUpdatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SpaceBatchUpdatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SpaceBatchUpdatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SpaceBatchUpdatedEventData;
+
+                /**
+                 * Creates a plain object from a SpaceBatchUpdatedEventData message. Also converts values to other types if specified.
+                 * @param message SpaceBatchUpdatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SpaceBatchUpdatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SpaceBatchUpdatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SpaceBatchUpdatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReactionCreatedEventData. */
+            interface IReactionCreatedEventData {
+
+                /** ReactionCreatedEventData reaction */
+                reaction?: (google.chat.v1.IReaction|null);
+            }
+
+            /** Represents a ReactionCreatedEventData. */
+            class ReactionCreatedEventData implements IReactionCreatedEventData {
+
+                /**
+                 * Constructs a new ReactionCreatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IReactionCreatedEventData);
+
+                /** ReactionCreatedEventData reaction. */
+                public reaction?: (google.chat.v1.IReaction|null);
+
+                /**
+                 * Creates a new ReactionCreatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReactionCreatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IReactionCreatedEventData): google.chat.v1.ReactionCreatedEventData;
+
+                /**
+                 * Encodes the specified ReactionCreatedEventData message. Does not implicitly {@link google.chat.v1.ReactionCreatedEventData.verify|verify} messages.
+                 * @param message ReactionCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IReactionCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReactionCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionCreatedEventData.verify|verify} messages.
+                 * @param message ReactionCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IReactionCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReactionCreatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReactionCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ReactionCreatedEventData;
+
+                /**
+                 * Decodes a ReactionCreatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReactionCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ReactionCreatedEventData;
+
+                /**
+                 * Verifies a ReactionCreatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReactionCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReactionCreatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ReactionCreatedEventData;
+
+                /**
+                 * Creates a plain object from a ReactionCreatedEventData message. Also converts values to other types if specified.
+                 * @param message ReactionCreatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ReactionCreatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReactionCreatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReactionCreatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReactionDeletedEventData. */
+            interface IReactionDeletedEventData {
+
+                /** ReactionDeletedEventData reaction */
+                reaction?: (google.chat.v1.IReaction|null);
+            }
+
+            /** Represents a ReactionDeletedEventData. */
+            class ReactionDeletedEventData implements IReactionDeletedEventData {
+
+                /**
+                 * Constructs a new ReactionDeletedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IReactionDeletedEventData);
+
+                /** ReactionDeletedEventData reaction. */
+                public reaction?: (google.chat.v1.IReaction|null);
+
+                /**
+                 * Creates a new ReactionDeletedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReactionDeletedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IReactionDeletedEventData): google.chat.v1.ReactionDeletedEventData;
+
+                /**
+                 * Encodes the specified ReactionDeletedEventData message. Does not implicitly {@link google.chat.v1.ReactionDeletedEventData.verify|verify} messages.
+                 * @param message ReactionDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IReactionDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReactionDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionDeletedEventData.verify|verify} messages.
+                 * @param message ReactionDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IReactionDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReactionDeletedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReactionDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ReactionDeletedEventData;
+
+                /**
+                 * Decodes a ReactionDeletedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReactionDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ReactionDeletedEventData;
+
+                /**
+                 * Verifies a ReactionDeletedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReactionDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReactionDeletedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ReactionDeletedEventData;
+
+                /**
+                 * Creates a plain object from a ReactionDeletedEventData message. Also converts values to other types if specified.
+                 * @param message ReactionDeletedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ReactionDeletedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReactionDeletedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReactionDeletedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReactionBatchCreatedEventData. */
+            interface IReactionBatchCreatedEventData {
+
+                /** ReactionBatchCreatedEventData reactions */
+                reactions?: (google.chat.v1.IReactionCreatedEventData[]|null);
+            }
+
+            /** Represents a ReactionBatchCreatedEventData. */
+            class ReactionBatchCreatedEventData implements IReactionBatchCreatedEventData {
+
+                /**
+                 * Constructs a new ReactionBatchCreatedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IReactionBatchCreatedEventData);
+
+                /** ReactionBatchCreatedEventData reactions. */
+                public reactions: google.chat.v1.IReactionCreatedEventData[];
+
+                /**
+                 * Creates a new ReactionBatchCreatedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReactionBatchCreatedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IReactionBatchCreatedEventData): google.chat.v1.ReactionBatchCreatedEventData;
+
+                /**
+                 * Encodes the specified ReactionBatchCreatedEventData message. Does not implicitly {@link google.chat.v1.ReactionBatchCreatedEventData.verify|verify} messages.
+                 * @param message ReactionBatchCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IReactionBatchCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReactionBatchCreatedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionBatchCreatedEventData.verify|verify} messages.
+                 * @param message ReactionBatchCreatedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IReactionBatchCreatedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReactionBatchCreatedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReactionBatchCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ReactionBatchCreatedEventData;
+
+                /**
+                 * Decodes a ReactionBatchCreatedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReactionBatchCreatedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ReactionBatchCreatedEventData;
+
+                /**
+                 * Verifies a ReactionBatchCreatedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReactionBatchCreatedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReactionBatchCreatedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ReactionBatchCreatedEventData;
+
+                /**
+                 * Creates a plain object from a ReactionBatchCreatedEventData message. Also converts values to other types if specified.
+                 * @param message ReactionBatchCreatedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ReactionBatchCreatedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReactionBatchCreatedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReactionBatchCreatedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ReactionBatchDeletedEventData. */
+            interface IReactionBatchDeletedEventData {
+
+                /** ReactionBatchDeletedEventData reactions */
+                reactions?: (google.chat.v1.IReactionDeletedEventData[]|null);
+            }
+
+            /** Represents a ReactionBatchDeletedEventData. */
+            class ReactionBatchDeletedEventData implements IReactionBatchDeletedEventData {
+
+                /**
+                 * Constructs a new ReactionBatchDeletedEventData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IReactionBatchDeletedEventData);
+
+                /** ReactionBatchDeletedEventData reactions. */
+                public reactions: google.chat.v1.IReactionDeletedEventData[];
+
+                /**
+                 * Creates a new ReactionBatchDeletedEventData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ReactionBatchDeletedEventData instance
+                 */
+                public static create(properties?: google.chat.v1.IReactionBatchDeletedEventData): google.chat.v1.ReactionBatchDeletedEventData;
+
+                /**
+                 * Encodes the specified ReactionBatchDeletedEventData message. Does not implicitly {@link google.chat.v1.ReactionBatchDeletedEventData.verify|verify} messages.
+                 * @param message ReactionBatchDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IReactionBatchDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ReactionBatchDeletedEventData message, length delimited. Does not implicitly {@link google.chat.v1.ReactionBatchDeletedEventData.verify|verify} messages.
+                 * @param message ReactionBatchDeletedEventData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IReactionBatchDeletedEventData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ReactionBatchDeletedEventData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ReactionBatchDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ReactionBatchDeletedEventData;
+
+                /**
+                 * Decodes a ReactionBatchDeletedEventData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ReactionBatchDeletedEventData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ReactionBatchDeletedEventData;
+
+                /**
+                 * Verifies a ReactionBatchDeletedEventData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ReactionBatchDeletedEventData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ReactionBatchDeletedEventData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ReactionBatchDeletedEventData;
+
+                /**
+                 * Creates a plain object from a ReactionBatchDeletedEventData message. Also converts values to other types if specified.
+                 * @param message ReactionBatchDeletedEventData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ReactionBatchDeletedEventData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ReactionBatchDeletedEventData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ReactionBatchDeletedEventData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a SpaceReadState. */

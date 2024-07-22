@@ -145,6 +145,9 @@ export class PredictionServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -217,6 +220,9 @@ export class PredictionServiceClient {
       ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
       ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
@@ -383,6 +389,11 @@ export class PredictionServiceClient {
     // Some of the methods on this service provide streaming responses.
     // Provide descriptors for these.
     this.descriptors.stream = {
+      streamRawPredict: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
+      ),
       streamDirectPredict: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
@@ -409,6 +420,11 @@ export class PredictionServiceClient {
         !!opts.gaxServerStreamingRetries
       ),
       streamGenerateContent: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.SERVER_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
+      ),
+      chatCompletions: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.SERVER_STREAMING,
         !!opts.fallback,
         !!opts.gaxServerStreamingRetries
@@ -468,6 +484,7 @@ export class PredictionServiceClient {
     const predictionServiceStubMethods = [
       'predict',
       'rawPredict',
+      'streamRawPredict',
       'directPredict',
       'directRawPredict',
       'streamDirectPredict',
@@ -479,6 +496,7 @@ export class PredictionServiceClient {
       'countTokens',
       'generateContent',
       'streamGenerateContent',
+      'chatCompletions',
     ];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
@@ -583,7 +601,10 @@ export class PredictionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1286,6 +1307,12 @@ export class PredictionServiceClient {
    *   Optional. The user provided system instructions for the model.
    *   Note: only text should be used in parts and content in each part will be in
    *   a separate paragraph.
+   * @param {string} [request.cachedContent]
+   *   Optional. The name of the cached content used as context to serve the
+   *   prediction. Note: only used in explicit caching, where users can have
+   *   control over caching (e.g. what content to cache) and enjoy guaranteed cost
+   *   savings. Format:
+   *   `projects/{project}/locations/{location}/cachedContents/{cachedContent}`
    * @param {number[]} [request.tools]
    *   Optional. A list of `Tools` the model may use to generate the next
    *   response.
@@ -1389,6 +1416,42 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.generateContent(request, options, callback);
+  }
+
+  /**
+   * Perform a streaming online prediction with an arbitrary HTTP payload.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {google.api.HttpBody} request.httpBody
+   *   The prediction input. Supports HTTP headers and arbitrary data payload.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.stream_raw_predict.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_StreamRawPredict_async
+   */
+  streamRawPredict(
+    request?: protos.google.cloud.aiplatform.v1beta1.IStreamRawPredictRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        endpoint: request.endpoint ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.streamRawPredict(request, options);
   }
 
   /**
@@ -1528,6 +1591,12 @@ export class PredictionServiceClient {
    *   Optional. The user provided system instructions for the model.
    *   Note: only text should be used in parts and content in each part will be in
    *   a separate paragraph.
+   * @param {string} [request.cachedContent]
+   *   Optional. The name of the cached content used as context to serve the
+   *   prediction. Note: only used in explicit caching, where users can have
+   *   control over caching (e.g. what content to cache) and enjoy guaranteed cost
+   *   savings. Format:
+   *   `projects/{project}/locations/{location}/cachedContents/{cachedContent}`
    * @param {number[]} [request.tools]
    *   Optional. A list of `Tools` the model may use to generate the next
    *   response.
@@ -1566,6 +1635,43 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.streamGenerateContent(request, options);
+  }
+
+  /**
+   * Exposes an OpenAI-compatible endpoint for chat completions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/openapi`
+   * @param {google.api.HttpBody} [request.httpBody]
+   *   Optional. The prediction input. Supports HTTP headers and arbitrary data
+   *   payload.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits {@link protos.google.api.HttpBody|HttpBody} on 'data' event.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/prediction_service.chat_completions.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_PredictionService_ChatCompletions_async
+   */
+  chatCompletions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IChatCompletionsRequest,
+    options?: CallOptions
+  ): gax.CancellableStream {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        endpoint: request.endpoint ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.chatCompletions(request, options);
   }
 
   /**
@@ -2076,6 +2182,58 @@ export class PredictionServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**

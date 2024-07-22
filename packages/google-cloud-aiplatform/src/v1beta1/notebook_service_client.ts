@@ -150,6 +150,9 @@ export class NotebookServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -222,6 +225,9 @@ export class NotebookServiceClient {
       ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      cachedContentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cachedContents/{cached_content}'
       ),
       contextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
@@ -594,6 +600,12 @@ export class NotebookServiceClient {
           post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
           additional_bindings: [
             {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
@@ -678,6 +690,15 @@ export class NotebookServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -712,6 +733,12 @@ export class NotebookServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
@@ -798,6 +825,15 @@ export class NotebookServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -845,6 +881,8 @@ export class NotebookServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -952,6 +990,18 @@ export class NotebookServiceClient {
             },
             {
               delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1011,6 +1061,14 @@ export class NotebookServiceClient {
                 '/ui/{name=projects/*/locations/*/featureOnlineStores/*/featureViews/*/operations/*}',
             },
             {delete: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}',
+            },
             {
               delete:
                 '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -1129,6 +1187,18 @@ export class NotebookServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1209,6 +1279,8 @@ export class NotebookServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
@@ -1289,6 +1361,15 @@ export class NotebookServiceClient {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}'},
@@ -1330,6 +1411,10 @@ export class NotebookServiceClient {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}',
             },
             {get: '/v1beta1/{name=projects/*/locations/*/operations/*}'},
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}',
+            },
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}',
             },
@@ -1418,6 +1503,15 @@ export class NotebookServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
             },
             {
@@ -1480,6 +1574,8 @@ export class NotebookServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
@@ -1548,6 +1644,15 @@ export class NotebookServiceClient {
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
             {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1590,6 +1695,8 @@ export class NotebookServiceClient {
               get: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {get: '/v1beta1/{name=projects/*/locations/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/v1beta1/{name=projects/*/locations/*/apps/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/datasets/*}/operations',
             },
@@ -1676,6 +1783,15 @@ export class NotebookServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
@@ -1738,6 +1854,12 @@ export class NotebookServiceClient {
           selector: 'google.longrunning.Operations.WaitOperation',
           post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
           additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1823,6 +1945,15 @@ export class NotebookServiceClient {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
             },
             {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
             },
             {
@@ -1868,6 +1999,12 @@ export class NotebookServiceClient {
               post: '/ui/{name=projects/*/locations/*/featureGroups/*/features/*/operations/*}:wait',
             },
             {post: '/v1beta1/{name=projects/*/locations/*/operations/*}:wait'},
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/v1beta1/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1954,6 +2091,15 @@ export class NotebookServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
@@ -2052,6 +2198,12 @@ export class NotebookServiceClient {
     const startNotebookRuntimeMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeOperationMetadata'
     ) as gax.protobuf.Type;
+    const createNotebookExecutionJobResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.NotebookExecutionJob'
+    ) as gax.protobuf.Type;
+    const createNotebookExecutionJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteNotebookExecutionJobResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -2105,6 +2257,15 @@ export class NotebookServiceClient {
         this.operationsClient,
         startNotebookRuntimeResponse.decode.bind(startNotebookRuntimeResponse),
         startNotebookRuntimeMetadata.decode.bind(startNotebookRuntimeMetadata)
+      ),
+      createNotebookExecutionJob: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createNotebookExecutionJobResponse.decode.bind(
+          createNotebookExecutionJobResponse
+        ),
+        createNotebookExecutionJobMetadata.decode.bind(
+          createNotebookExecutionJobMetadata
+        )
       ),
       deleteNotebookExecutionJob: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2171,12 +2332,14 @@ export class NotebookServiceClient {
       'getNotebookRuntimeTemplate',
       'listNotebookRuntimeTemplates',
       'deleteNotebookRuntimeTemplate',
+      'updateNotebookRuntimeTemplate',
       'assignNotebookRuntime',
       'getNotebookRuntime',
       'listNotebookRuntimes',
       'deleteNotebookRuntime',
       'upgradeNotebookRuntime',
       'startNotebookRuntime',
+      'createNotebookExecutionJob',
       'getNotebookExecutionJob',
       'listNotebookExecutionJobs',
       'deleteNotebookExecutionJob',
@@ -2394,6 +2557,114 @@ export class NotebookServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getNotebookRuntimeTemplate(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Updates a NotebookRuntimeTemplate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate} request.notebookRuntimeTemplate
+   *   Required. The NotebookRuntimeTemplate to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource.
+   *   For the `FieldMask` definition, see
+   *   {@link protos.google.protobuf.FieldMask|google.protobuf.FieldMask}. Input format:
+   *   `{paths: "${updated_filed}"}` Updatable fields:
+   *
+   *     * `encryption_spec.kms_key_name`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.aiplatform.v1beta1.NotebookRuntimeTemplate|NotebookRuntimeTemplate}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.update_notebook_runtime_template.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_UpdateNotebookRuntimeTemplate_async
+   */
+  updateNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateNotebookRuntimeTemplate(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateNotebookRuntimeTemplate(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+          | protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+      | protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.INotebookRuntimeTemplate,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IUpdateNotebookRuntimeTemplateRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'notebook_runtime_template.name':
+          request.notebookRuntimeTemplate!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateNotebookRuntimeTemplate(
       request,
       options,
       callback
@@ -3453,6 +3724,151 @@ export class NotebookServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeResponse,
       protos.google.cloud.aiplatform.v1beta1.StartNotebookRuntimeOperationMetadata
+    >;
+  }
+  /**
+   * Creates a NotebookExecutionJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the
+   *   NotebookExecutionJob. Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1beta1.NotebookExecutionJob} request.notebookExecutionJob
+   *   Required. The NotebookExecutionJob to create.
+   * @param {string} [request.notebookExecutionJobId]
+   *   Optional. User specified ID for the NotebookExecutionJob.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_CreateNotebookExecutionJob_async
+   */
+  createNotebookExecutionJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+        protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createNotebookExecutionJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+        protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNotebookExecutionJob(
+    request: protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+        protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createNotebookExecutionJob(
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+            protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+        protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.INotebookExecutionJob,
+        protos.google.cloud.aiplatform.v1beta1.ICreateNotebookExecutionJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createNotebookExecutionJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `createNotebookExecutionJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/notebook_service.create_notebook_execution_job.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_NotebookService_CreateNotebookExecutionJob_async
+   */
+  async checkCreateNotebookExecutionJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.NotebookExecutionJob,
+      protos.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createNotebookExecutionJob,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.NotebookExecutionJob,
+      protos.google.cloud.aiplatform.v1beta1.CreateNotebookExecutionJobOperationMetadata
     >;
   }
   /**
@@ -5216,6 +5632,58 @@ export class NotebookServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified cachedContent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} cached_content
+   * @returns {string} Resource name string.
+   */
+  cachedContentPath(project: string, location: string, cachedContent: string) {
+    return this.pathTemplates.cachedContentPathTemplate.render({
+      project: project,
+      location: location,
+      cached_content: cachedContent,
+    });
+  }
+
+  /**
+   * Parse the project from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .location;
+  }
+
+  /**
+   * Parse the cached_content from CachedContent resource.
+   *
+   * @param {string} cachedContentName
+   *   A fully-qualified path representing CachedContent resource.
+   * @returns {string} A string representing the cached_content.
+   */
+  matchCachedContentFromCachedContentName(cachedContentName: string) {
+    return this.pathTemplates.cachedContentPathTemplate.match(cachedContentName)
+      .cached_content;
   }
 
   /**

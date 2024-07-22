@@ -203,9 +203,12 @@ export class CloudTasksClient {
     );
 
     // Determine the client header string.
+    // Add ESM headers
+    const isEsm = true;
+    const isEsmString = isEsm ? '-esm' : '-cjs';
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
-      clientHeader.push(`gl-node/${process.versions.node}`);
+      clientHeader.push(`gl-node/${process.versions.node}${isEsmString}`);
     } else {
       clientHeader.push(`gl-web/${this._gaxModule.version}`);
     }
@@ -216,11 +219,6 @@ export class CloudTasksClient {
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
-    }
-    // Add ESM headers
-    const isEsm = true;
-    if ((opts.libVersion || version) && isEsm) {
-      clientHeader.push(`${opts.libVersion ?? version}-esm`);
     }
 
     // Load the applicable protos.

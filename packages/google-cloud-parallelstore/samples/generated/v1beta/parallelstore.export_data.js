@@ -54,6 +54,14 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. User-specified Service Account (SA) credentials to be used when
+   *  performing the transfer.
+   *  Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *  If unspecified, the Parallelstore service agent is used:
+   *  service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+   */
+  // const serviceAccount = 'abc123'
 
   // Imports the Parallelstore library
   const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;

@@ -29,7 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Format: organizations/{organization}/locations/{location}/partner
+   *  Required. Format:
+   *  `organizations/{organization}/locations/{location}/partner`
    */
   // const name = 'abc123'
 

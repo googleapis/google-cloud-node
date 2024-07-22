@@ -2853,6 +2853,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
@@ -2869,6 +2870,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.createConversionEvent =
         stubSimpleCall(expectedResponse);
       const [response] = await client.createConversionEvent(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createConversionEvent as SinonStub
@@ -2886,6 +2888,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
@@ -2917,6 +2920,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.createConversionEvent as SinonStub
@@ -2934,6 +2938,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
@@ -2953,6 +2958,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         client.createConversionEvent(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.createConversionEvent as SinonStub
       ).getCall(0).args[0];
@@ -2969,6 +2975,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
@@ -2984,6 +2991,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         client.createConversionEvent(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -2994,6 +3002,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
@@ -3011,6 +3020,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.updateConversionEvent =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateConversionEvent(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateConversionEvent as SinonStub
@@ -3028,6 +3038,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
@@ -3060,6 +3071,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.updateConversionEvent as SinonStub
@@ -3077,6 +3089,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
@@ -3097,6 +3110,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         client.updateConversionEvent(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.updateConversionEvent as SinonStub
       ).getCall(0).args[0];
@@ -3113,6 +3127,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.UpdateConversionEventRequest()
@@ -3129,6 +3144,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         client.updateConversionEvent(request),
         expectedError
       );
+      assert(stub.calledOnce);
     });
   });
 
@@ -3139,6 +3155,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
@@ -3155,6 +3172,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.getConversionEvent =
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConversionEvent(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getConversionEvent as SinonStub
@@ -3172,6 +3190,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
@@ -3203,6 +3222,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.getConversionEvent as SinonStub
@@ -3220,6 +3240,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
@@ -3236,6 +3257,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.getConversionEvent(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.getConversionEvent as SinonStub
       ).getCall(0).args[0];
@@ -3252,6 +3274,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
@@ -3264,6 +3287,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConversionEvent(request), expectedError);
+      assert(stub.calledOnce);
     });
   });
 
@@ -3274,6 +3298,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
@@ -3290,6 +3315,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.deleteConversionEvent =
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteConversionEvent(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteConversionEvent as SinonStub
@@ -3307,6 +3333,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
@@ -3338,6 +3365,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.deleteConversionEvent as SinonStub
@@ -3355,6 +3383,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
@@ -3374,6 +3403,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         client.deleteConversionEvent(request),
         expectedError
       );
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.deleteConversionEvent as SinonStub
       ).getCall(0).args[0];
@@ -3390,6 +3420,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
@@ -3405,6 +3436,547 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         client.deleteConversionEvent(request),
         expectedError
       );
+      assert(stub.calledOnce);
+    });
+  });
+
+  describe('createKeyEvent', () => {
+    it('invokes createKeyEvent without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.CreateKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateKeyEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.KeyEvent()
+      );
+      client.innerApiCalls.createKeyEvent = stubSimpleCall(expectedResponse);
+      const [response] = await client.createKeyEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createKeyEvent without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.CreateKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateKeyEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.KeyEvent()
+      );
+      client.innerApiCalls.createKeyEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createKeyEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1beta.IKeyEvent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createKeyEvent with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.CreateKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateKeyEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createKeyEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createKeyEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createKeyEvent with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.CreateKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateKeyEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.createKeyEvent(request), expectedError);
+    });
+  });
+
+  describe('updateKeyEvent', () => {
+    it('invokes updateKeyEvent without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateKeyEventRequest()
+      );
+      request.keyEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateKeyEventRequest',
+        ['keyEvent', 'name']
+      );
+      request.keyEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `key_event.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.KeyEvent()
+      );
+      client.innerApiCalls.updateKeyEvent = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateKeyEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateKeyEvent without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateKeyEventRequest()
+      );
+      request.keyEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateKeyEventRequest',
+        ['keyEvent', 'name']
+      );
+      request.keyEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `key_event.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.KeyEvent()
+      );
+      client.innerApiCalls.updateKeyEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateKeyEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1beta.IKeyEvent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateKeyEvent with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateKeyEventRequest()
+      );
+      request.keyEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateKeyEventRequest',
+        ['keyEvent', 'name']
+      );
+      request.keyEvent.name = defaultValue1;
+      const expectedHeaderRequestParams = `key_event.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateKeyEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateKeyEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateKeyEvent with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.UpdateKeyEventRequest()
+      );
+      request.keyEvent ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateKeyEventRequest',
+        ['keyEvent', 'name']
+      );
+      request.keyEvent.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.updateKeyEvent(request), expectedError);
+    });
+  });
+
+  describe('getKeyEvent', () => {
+    it('invokes getKeyEvent without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.GetKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.KeyEvent()
+      );
+      client.innerApiCalls.getKeyEvent = stubSimpleCall(expectedResponse);
+      const [response] = await client.getKeyEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getKeyEvent without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.GetKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.KeyEvent()
+      );
+      client.innerApiCalls.getKeyEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getKeyEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1beta.IKeyEvent | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getKeyEvent with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.GetKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getKeyEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getKeyEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getKeyEvent with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.GetKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getKeyEvent(request), expectedError);
+    });
+  });
+
+  describe('deleteKeyEvent', () => {
+    it('invokes deleteKeyEvent without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.DeleteKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteKeyEvent = stubSimpleCall(expectedResponse);
+      const [response] = await client.deleteKeyEvent(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteKeyEvent without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.DeleteKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.deleteKeyEvent =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteKeyEvent(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteKeyEvent with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.DeleteKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteKeyEvent = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteKeyEvent(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteKeyEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKeyEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteKeyEvent with closed client', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.DeleteKeyEventRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteKeyEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.deleteKeyEvent(request), expectedError);
     });
   });
 
@@ -7616,6 +8188,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7640,6 +8213,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listConversionEvents =
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConversionEvents(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listConversionEvents as SinonStub
@@ -7657,6 +8231,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7698,6 +8273,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
         client.innerApiCalls.listConversionEvents as SinonStub
@@ -7715,6 +8291,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7731,6 +8308,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.listConversionEvents(request), expectedError);
+      assert(stub.calledOnce);
       const actualRequest = (
         client.innerApiCalls.listConversionEvents as SinonStub
       ).getCall(0).args[0];
@@ -7747,6 +8325,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7788,6 +8367,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listConversionEvents.createStream as SinonStub)
@@ -7809,6 +8389,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7840,6 +8421,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listConversionEvents.createStream as SinonStub)
           .getCall(0)
@@ -7860,6 +8442,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7889,6 +8472,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -7911,6 +8495,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
@@ -7932,6 +8517,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listConversionEvents.asyncIterate as SinonStub
@@ -7940,6 +8526,338 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       assert(
         (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listKeyEvents', () => {
+    it('invokes listKeyEvents without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+      ];
+      client.innerApiCalls.listKeyEvents = stubSimpleCall(expectedResponse);
+      const [response] = await client.listKeyEvents(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listKeyEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listKeyEvents without error using callback', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+      ];
+      client.innerApiCalls.listKeyEvents =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listKeyEvents(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.admin.v1beta.IKeyEvent[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listKeyEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listKeyEvents with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listKeyEvents = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listKeyEvents(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listKeyEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listKeyEventsStream without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+      ];
+      client.descriptors.page.listKeyEvents.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listKeyEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1beta.KeyEvent[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1beta.KeyEvent) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listKeyEvents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listKeyEvents, request)
+      );
+      assert(
+        (client.descriptors.page.listKeyEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listKeyEventsStream with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listKeyEvents.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listKeyEventsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.analytics.admin.v1beta.KeyEvent[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.analytics.admin.v1beta.KeyEvent) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listKeyEvents.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listKeyEvents, request)
+      );
+      assert(
+        (client.descriptors.page.listKeyEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listKeyEvents without error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+        generateSampleMessage(
+          new protos.google.analytics.admin.v1beta.KeyEvent()
+        ),
+      ];
+      client.descriptors.page.listKeyEvents.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.analytics.admin.v1beta.IKeyEvent[] = [];
+      const iterable = client.listKeyEventsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listKeyEvents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listKeyEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listKeyEvents with error', async () => {
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.admin.v1beta.ListKeyEventsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListKeyEventsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listKeyEvents.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listKeyEventsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.analytics.admin.v1beta.IKeyEvent[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listKeyEvents.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listKeyEvents.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -9441,6 +10359,56 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         assert.strictEqual(result, 'googleAdsLinkValue');
         assert(
           (client.pathTemplates.googleAdsLinkPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('keyEvent', () => {
+      const fakePath = '/rendered/path/keyEvent';
+      const expectedParameters = {
+        property: 'propertyValue',
+        key_event: 'keyEventValue',
+      };
+      const client =
+        new analyticsadminserviceModule.v1beta.AnalyticsAdminServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.keyEventPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.keyEventPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('keyEventPath', () => {
+        const result = client.keyEventPath('propertyValue', 'keyEventValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.keyEventPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchPropertyFromKeyEventName', () => {
+        const result = client.matchPropertyFromKeyEventName(fakePath);
+        assert.strictEqual(result, 'propertyValue');
+        assert(
+          (client.pathTemplates.keyEventPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchKeyEventFromKeyEventName', () => {
+        const result = client.matchKeyEventFromKeyEventName(fakePath);
+        assert.strictEqual(result, 'keyEventValue');
+        assert(
+          (client.pathTemplates.keyEventPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

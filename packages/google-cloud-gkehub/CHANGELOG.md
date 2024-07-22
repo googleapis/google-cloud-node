@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.4.0...gke-hub-v4.5.0) (2024-06-26)
+
+
+### Features
+
+* [gkehub] add a new field `PENDING` under `DeploymentState` enum ([#5472](https://github.com/googleapis/google-cloud-node/issues/5472)) ([dc87003](https://github.com/googleapis/google-cloud-node/commit/dc87003cc97da35701fca6127f41cfc088c5a99d))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/gke-hub-v4.3.0...gke-hub-v4.4.0) (2024-05-23)
 
 

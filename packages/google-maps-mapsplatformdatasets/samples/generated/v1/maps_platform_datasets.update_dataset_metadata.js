@@ -29,14 +29,13 @@ function main(dataset) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The dataset to update. The dataset's name is used to identify the
-   *  dataset to be updated. The name has the format:
-   *  projects/{project}/datasets/{dataset_id}
+   *  Required. Resource name of the dataset to update.
+   *  Format: projects/{project}/datasets/{dataset_id}
    */
   // const dataset = {}
   /**
-   *  The list of fields to be updated. Support the value "*" for full
-   *  replacement.
+   *  The list of fields to be updated.
+   *  The value "*" is used for full replacement (default).
    */
   // const updateMask = {}
 

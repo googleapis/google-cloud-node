@@ -836,6 +836,22 @@
                             return AnalyticsHubService;
                         })();
     
+                        /**
+                         * DiscoveryType enum.
+                         * @name google.cloud.bigquery.analyticshub.v1.DiscoveryType
+                         * @enum {number}
+                         * @property {number} DISCOVERY_TYPE_UNSPECIFIED=0 DISCOVERY_TYPE_UNSPECIFIED value
+                         * @property {number} DISCOVERY_TYPE_PRIVATE=1 DISCOVERY_TYPE_PRIVATE value
+                         * @property {number} DISCOVERY_TYPE_PUBLIC=2 DISCOVERY_TYPE_PUBLIC value
+                         */
+                        v1.DiscoveryType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DISCOVERY_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DISCOVERY_TYPE_PRIVATE"] = 1;
+                            values[valuesById[2] = "DISCOVERY_TYPE_PUBLIC"] = 2;
+                            return values;
+                        })();
+    
                         v1.DataExchange = (function() {
     
                             /**
@@ -850,6 +866,7 @@
                              * @property {number|null} [listingCount] DataExchange listingCount
                              * @property {Uint8Array|null} [icon] DataExchange icon
                              * @property {google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig|null} [sharingEnvironmentConfig] DataExchange sharingEnvironmentConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] DataExchange discoveryType
                              */
     
                             /**
@@ -932,6 +949,28 @@
                             DataExchange.prototype.sharingEnvironmentConfig = null;
     
                             /**
+                             * DataExchange discoveryType.
+                             * @member {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null|undefined} discoveryType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DataExchange
+                             * @instance
+                             */
+                            DataExchange.prototype.discoveryType = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * DataExchange _discoveryType.
+                             * @member {"discoveryType"|undefined} _discoveryType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.DataExchange
+                             * @instance
+                             */
+                            Object.defineProperty(DataExchange.prototype, "_discoveryType", {
+                                get: $util.oneOfGetter($oneOfFields = ["discoveryType"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
                              * Creates a new DataExchange instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.analyticshub.v1.DataExchange
@@ -971,6 +1010,8 @@
                                     writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.icon);
                                 if (message.sharingEnvironmentConfig != null && Object.hasOwnProperty.call(message, "sharingEnvironmentConfig"))
                                     $root.google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.encode(message.sharingEnvironmentConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.discoveryType != null && Object.hasOwnProperty.call(message, "discoveryType"))
+                                    writer.uint32(/* id 9, wireType 0 =*/72).int32(message.discoveryType);
                                 return writer;
                             };
     
@@ -1037,6 +1078,10 @@
                                             message.sharingEnvironmentConfig = $root.google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 9: {
+                                            message.discoveryType = reader.int32();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -1072,6 +1117,7 @@
                             DataExchange.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -1097,6 +1143,17 @@
                                     var error = $root.google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.verify(message.sharingEnvironmentConfig);
                                     if (error)
                                         return "sharingEnvironmentConfig." + error;
+                                }
+                                if (message.discoveryType != null && message.hasOwnProperty("discoveryType")) {
+                                    properties._discoveryType = 1;
+                                    switch (message.discoveryType) {
+                                    default:
+                                        return "discoveryType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 }
                                 return null;
                             };
@@ -1134,6 +1191,26 @@
                                     if (typeof object.sharingEnvironmentConfig !== "object")
                                         throw TypeError(".google.cloud.bigquery.analyticshub.v1.DataExchange.sharingEnvironmentConfig: object expected");
                                     message.sharingEnvironmentConfig = $root.google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.fromObject(object.sharingEnvironmentConfig);
+                                }
+                                switch (object.discoveryType) {
+                                default:
+                                    if (typeof object.discoveryType === "number") {
+                                        message.discoveryType = object.discoveryType;
+                                        break;
+                                    }
+                                    break;
+                                case "DISCOVERY_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.discoveryType = 0;
+                                    break;
+                                case "DISCOVERY_TYPE_PRIVATE":
+                                case 1:
+                                    message.discoveryType = 1;
+                                    break;
+                                case "DISCOVERY_TYPE_PUBLIC":
+                                case 2:
+                                    message.discoveryType = 2;
+                                    break;
                                 }
                                 return message;
                             };
@@ -1183,6 +1260,11 @@
                                     object.icon = options.bytes === String ? $util.base64.encode(message.icon, 0, message.icon.length) : options.bytes === Array ? Array.prototype.slice.call(message.icon) : message.icon;
                                 if (message.sharingEnvironmentConfig != null && message.hasOwnProperty("sharingEnvironmentConfig"))
                                     object.sharingEnvironmentConfig = $root.google.cloud.bigquery.analyticshub.v1.SharingEnvironmentConfig.toObject(message.sharingEnvironmentConfig, options);
+                                if (message.discoveryType != null && message.hasOwnProperty("discoveryType")) {
+                                    object.discoveryType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] === undefined ? message.discoveryType : $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] : message.discoveryType;
+                                    if (options.oneofs)
+                                        object._discoveryType = "discoveryType";
+                                }
                                 return object;
                             };
     
@@ -2958,6 +3040,7 @@
                              * @property {google.cloud.bigquery.analyticshub.v1.IPublisher|null} [publisher] Listing publisher
                              * @property {string|null} [requestAccess] Listing requestAccess
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null} [restrictedExportConfig] Listing restrictedExportConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] Listing discoveryType
                              */
     
                             /**
@@ -3080,6 +3163,14 @@
                              */
                             Listing.prototype.restrictedExportConfig = null;
     
+                            /**
+                             * Listing discoveryType.
+                             * @member {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null|undefined} discoveryType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.discoveryType = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -3091,6 +3182,17 @@
                              */
                             Object.defineProperty(Listing.prototype, "source", {
                                 get: $util.oneOfGetter($oneOfFields = ["bigqueryDataset"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Listing _discoveryType.
+                             * @member {"discoveryType"|undefined} _discoveryType
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Object.defineProperty(Listing.prototype, "_discoveryType", {
+                                get: $util.oneOfGetter($oneOfFields = ["discoveryType"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -3148,6 +3250,8 @@
                                     writer.uint32(/* id 12, wireType 2 =*/98).string(message.requestAccess);
                                 if (message.restrictedExportConfig != null && Object.hasOwnProperty.call(message, "restrictedExportConfig"))
                                     $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.encode(message.restrictedExportConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.discoveryType != null && Object.hasOwnProperty.call(message, "discoveryType"))
+                                    writer.uint32(/* id 14, wireType 0 =*/112).int32(message.discoveryType);
                                 return writer;
                             };
     
@@ -3239,6 +3343,10 @@
                                         }
                                     case 13: {
                                             message.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 14: {
+                                            message.discoveryType = reader.int32();
                                             break;
                                         }
                                     default:
@@ -3358,6 +3466,17 @@
                                     var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.verify(message.restrictedExportConfig);
                                     if (error)
                                         return "restrictedExportConfig." + error;
+                                }
+                                if (message.discoveryType != null && message.hasOwnProperty("discoveryType")) {
+                                    properties._discoveryType = 1;
+                                    switch (message.discoveryType) {
+                                    default:
+                                        return "discoveryType: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 }
                                 return null;
                             };
@@ -3520,6 +3639,26 @@
                                         throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.restrictedExportConfig: object expected");
                                     message.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.fromObject(object.restrictedExportConfig);
                                 }
+                                switch (object.discoveryType) {
+                                default:
+                                    if (typeof object.discoveryType === "number") {
+                                        message.discoveryType = object.discoveryType;
+                                        break;
+                                    }
+                                    break;
+                                case "DISCOVERY_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.discoveryType = 0;
+                                    break;
+                                case "DISCOVERY_TYPE_PRIVATE":
+                                case 1:
+                                    message.discoveryType = 1;
+                                    break;
+                                case "DISCOVERY_TYPE_PUBLIC":
+                                case 2:
+                                    message.discoveryType = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -3589,6 +3728,11 @@
                                     object.requestAccess = message.requestAccess;
                                 if (message.restrictedExportConfig != null && message.hasOwnProperty("restrictedExportConfig"))
                                     object.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.toObject(message.restrictedExportConfig, options);
+                                if (message.discoveryType != null && message.hasOwnProperty("discoveryType")) {
+                                    object.discoveryType = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] === undefined ? message.discoveryType : $root.google.cloud.bigquery.analyticshub.v1.DiscoveryType[message.discoveryType] : message.discoveryType;
+                                    if (options.oneofs)
+                                        object._discoveryType = "discoveryType";
+                                }
                                 return object;
                             };
     
@@ -3626,6 +3770,7 @@
                                  * @interface IBigQueryDatasetSource
                                  * @property {string|null} [dataset] BigQueryDatasetSource dataset
                                  * @property {Array.<google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.ISelectedResource>|null} [selectedResources] BigQueryDatasetSource selectedResources
+                                 * @property {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy|null} [restrictedExportPolicy] BigQueryDatasetSource restrictedExportPolicy
                                  */
     
                                 /**
@@ -3661,6 +3806,14 @@
                                 BigQueryDatasetSource.prototype.selectedResources = $util.emptyArray;
     
                                 /**
+                                 * BigQueryDatasetSource restrictedExportPolicy.
+                                 * @member {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy|null|undefined} restrictedExportPolicy
+                                 * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                 * @instance
+                                 */
+                                BigQueryDatasetSource.prototype.restrictedExportPolicy = null;
+    
+                                /**
                                  * Creates a new BigQueryDatasetSource instance using the specified properties.
                                  * @function create
                                  * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
@@ -3689,6 +3842,8 @@
                                     if (message.selectedResources != null && message.selectedResources.length)
                                         for (var i = 0; i < message.selectedResources.length; ++i)
                                             $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource.encode(message.selectedResources[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                    if (message.restrictedExportPolicy != null && Object.hasOwnProperty.call(message, "restrictedExportPolicy"))
+                                        $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.encode(message.restrictedExportPolicy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -3731,6 +3886,10 @@
                                                 if (!(message.selectedResources && message.selectedResources.length))
                                                     message.selectedResources = [];
                                                 message.selectedResources.push($root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource.decode(reader, reader.uint32()));
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.decode(reader, reader.uint32());
                                                 break;
                                             }
                                         default:
@@ -3780,6 +3939,11 @@
                                                 return "selectedResources." + error;
                                         }
                                     }
+                                    if (message.restrictedExportPolicy != null && message.hasOwnProperty("restrictedExportPolicy")) {
+                                        var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.verify(message.restrictedExportPolicy);
+                                        if (error)
+                                            return "restrictedExportPolicy." + error;
+                                    }
                                     return null;
                                 };
     
@@ -3807,6 +3971,11 @@
                                             message.selectedResources[i] = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource.fromObject(object.selectedResources[i]);
                                         }
                                     }
+                                    if (object.restrictedExportPolicy != null) {
+                                        if (typeof object.restrictedExportPolicy !== "object")
+                                            throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.restrictedExportPolicy: object expected");
+                                        message.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.fromObject(object.restrictedExportPolicy);
+                                    }
                                     return message;
                                 };
     
@@ -3825,8 +3994,10 @@
                                     var object = {};
                                     if (options.arrays || options.defaults)
                                         object.selectedResources = [];
-                                    if (options.defaults)
+                                    if (options.defaults) {
                                         object.dataset = "";
+                                        object.restrictedExportPolicy = null;
+                                    }
                                     if (message.dataset != null && message.hasOwnProperty("dataset"))
                                         object.dataset = message.dataset;
                                     if (message.selectedResources && message.selectedResources.length) {
@@ -3834,6 +4005,8 @@
                                         for (var j = 0; j < message.selectedResources.length; ++j)
                                             object.selectedResources[j] = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.SelectedResource.toObject(message.selectedResources[j], options);
                                     }
+                                    if (message.restrictedExportPolicy != null && message.hasOwnProperty("restrictedExportPolicy"))
+                                        object.restrictedExportPolicy = $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.toObject(message.restrictedExportPolicy, options);
                                     return object;
                                 };
     
@@ -4082,6 +4255,271 @@
                                     };
     
                                     return SelectedResource;
+                                })();
+    
+                                BigQueryDatasetSource.RestrictedExportPolicy = (function() {
+    
+                                    /**
+                                     * Properties of a RestrictedExportPolicy.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                     * @interface IRestrictedExportPolicy
+                                     * @property {google.protobuf.IBoolValue|null} [enabled] RestrictedExportPolicy enabled
+                                     * @property {google.protobuf.IBoolValue|null} [restrictDirectTableAccess] RestrictedExportPolicy restrictDirectTableAccess
+                                     * @property {google.protobuf.IBoolValue|null} [restrictQueryResult] RestrictedExportPolicy restrictQueryResult
+                                     */
+    
+                                    /**
+                                     * Constructs a new RestrictedExportPolicy.
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource
+                                     * @classdesc Represents a RestrictedExportPolicy.
+                                     * @implements IRestrictedExportPolicy
+                                     * @constructor
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy=} [properties] Properties to set
+                                     */
+                                    function RestrictedExportPolicy(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * RestrictedExportPolicy enabled.
+                                     * @member {google.protobuf.IBoolValue|null|undefined} enabled
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @instance
+                                     */
+                                    RestrictedExportPolicy.prototype.enabled = null;
+    
+                                    /**
+                                     * RestrictedExportPolicy restrictDirectTableAccess.
+                                     * @member {google.protobuf.IBoolValue|null|undefined} restrictDirectTableAccess
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @instance
+                                     */
+                                    RestrictedExportPolicy.prototype.restrictDirectTableAccess = null;
+    
+                                    /**
+                                     * RestrictedExportPolicy restrictQueryResult.
+                                     * @member {google.protobuf.IBoolValue|null|undefined} restrictQueryResult
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @instance
+                                     */
+                                    RestrictedExportPolicy.prototype.restrictQueryResult = null;
+    
+                                    /**
+                                     * Creates a new RestrictedExportPolicy instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy=} [properties] Properties to set
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy} RestrictedExportPolicy instance
+                                     */
+                                    RestrictedExportPolicy.create = function create(properties) {
+                                        return new RestrictedExportPolicy(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RestrictedExportPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy} message RestrictedExportPolicy message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RestrictedExportPolicy.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                            $root.google.protobuf.BoolValue.encode(message.enabled, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                        if (message.restrictDirectTableAccess != null && Object.hasOwnProperty.call(message, "restrictDirectTableAccess"))
+                                            $root.google.protobuf.BoolValue.encode(message.restrictDirectTableAccess, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                        if (message.restrictQueryResult != null && Object.hasOwnProperty.call(message, "restrictQueryResult"))
+                                            $root.google.protobuf.BoolValue.encode(message.restrictQueryResult, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified RestrictedExportPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy} message RestrictedExportPolicy message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    RestrictedExportPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a RestrictedExportPolicy message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy} RestrictedExportPolicy
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RestrictedExportPolicy.decode = function decode(reader, length) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.enabled = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.restrictDirectTableAccess = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            case 3: {
+                                                    message.restrictQueryResult = $root.google.protobuf.BoolValue.decode(reader, reader.uint32());
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a RestrictedExportPolicy message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy} RestrictedExportPolicy
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    RestrictedExportPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a RestrictedExportPolicy message.
+                                     * @function verify
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    RestrictedExportPolicy.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.enabled != null && message.hasOwnProperty("enabled")) {
+                                            var error = $root.google.protobuf.BoolValue.verify(message.enabled);
+                                            if (error)
+                                                return "enabled." + error;
+                                        }
+                                        if (message.restrictDirectTableAccess != null && message.hasOwnProperty("restrictDirectTableAccess")) {
+                                            var error = $root.google.protobuf.BoolValue.verify(message.restrictDirectTableAccess);
+                                            if (error)
+                                                return "restrictDirectTableAccess." + error;
+                                        }
+                                        if (message.restrictQueryResult != null && message.hasOwnProperty("restrictQueryResult")) {
+                                            var error = $root.google.protobuf.BoolValue.verify(message.restrictQueryResult);
+                                            if (error)
+                                                return "restrictQueryResult." + error;
+                                        }
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a RestrictedExportPolicy message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy} RestrictedExportPolicy
+                                     */
+                                    RestrictedExportPolicy.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy)
+                                            return object;
+                                        var message = new $root.google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy();
+                                        if (object.enabled != null) {
+                                            if (typeof object.enabled !== "object")
+                                                throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.enabled: object expected");
+                                            message.enabled = $root.google.protobuf.BoolValue.fromObject(object.enabled);
+                                        }
+                                        if (object.restrictDirectTableAccess != null) {
+                                            if (typeof object.restrictDirectTableAccess !== "object")
+                                                throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.restrictDirectTableAccess: object expected");
+                                            message.restrictDirectTableAccess = $root.google.protobuf.BoolValue.fromObject(object.restrictDirectTableAccess);
+                                        }
+                                        if (object.restrictQueryResult != null) {
+                                            if (typeof object.restrictQueryResult !== "object")
+                                                throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.restrictQueryResult: object expected");
+                                            message.restrictQueryResult = $root.google.protobuf.BoolValue.fromObject(object.restrictQueryResult);
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a RestrictedExportPolicy message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy} message RestrictedExportPolicy
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    RestrictedExportPolicy.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.enabled = null;
+                                            object.restrictDirectTableAccess = null;
+                                            object.restrictQueryResult = null;
+                                        }
+                                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                            object.enabled = $root.google.protobuf.BoolValue.toObject(message.enabled, options);
+                                        if (message.restrictDirectTableAccess != null && message.hasOwnProperty("restrictDirectTableAccess"))
+                                            object.restrictDirectTableAccess = $root.google.protobuf.BoolValue.toObject(message.restrictDirectTableAccess, options);
+                                        if (message.restrictQueryResult != null && message.hasOwnProperty("restrictQueryResult"))
+                                            object.restrictQueryResult = $root.google.protobuf.BoolValue.toObject(message.restrictQueryResult, options);
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this RestrictedExportPolicy to JSON.
+                                     * @function toJSON
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    RestrictedExportPolicy.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for RestrictedExportPolicy
+                                     * @function getTypeUrl
+                                     * @memberof google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    RestrictedExportPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy";
+                                    };
+    
+                                    return RestrictedExportPolicy;
                                 })();
     
                                 return BigQueryDatasetSource;

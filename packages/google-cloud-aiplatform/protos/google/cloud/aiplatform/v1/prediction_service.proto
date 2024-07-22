@@ -39,7 +39,8 @@ option ruby_package = "Google::Cloud::AIPlatform::V1";
 service PredictionService {
   option (google.api.default_host) = "aiplatform.googleapis.com";
   option (google.api.oauth_scopes) =
-      "https://www.googleapis.com/auth/cloud-platform";
+      "https://www.googleapis.com/auth/cloud-platform,"
+      "https://www.googleapis.com/auth/cloud-platform.read-only";
 
   // Perform an online prediction.
   rpc Predict(PredictRequest) returns (PredictResponse) {
@@ -661,6 +662,10 @@ message GenerateContentRequest {
   // external systems to perform an action, or set of actions, outside of
   // knowledge and scope of the model.
   repeated Tool tools = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Tool config. This config is shared for all tools provided in the
+  // request.
+  ToolConfig tool_config = 7 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Per request settings for blocking unsafe content.
   // Enforced on GenerateContentResponse.candidates.

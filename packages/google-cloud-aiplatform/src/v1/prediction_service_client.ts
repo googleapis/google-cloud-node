@@ -145,6 +145,9 @@ export class PredictionServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -566,7 +569,10 @@ export class PredictionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform.read-only',
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -1149,6 +1155,9 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1.ToolConfig} [request.toolConfig]
+   *   Optional. Tool config. This config is shared for all tools provided in the
+   *   request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1418,6 +1427,9 @@ export class PredictionServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1.ToolConfig} [request.toolConfig]
+   *   Optional. Tool config. This config is shared for all tools provided in the
+   *   request.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.

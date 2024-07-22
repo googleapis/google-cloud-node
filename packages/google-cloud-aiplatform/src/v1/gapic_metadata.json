@@ -20,6 +20,11 @@
                 "updateDataset"
               ]
             },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
+              ]
+            },
             "GetDatasetVersion": {
               "methods": [
                 "getDatasetVersion"
@@ -125,6 +130,11 @@
             "UpdateDataset": {
               "methods": [
                 "updateDataset"
+              ]
+            },
+            "UpdateDatasetVersion": {
+              "methods": [
+                "updateDatasetVersion"
               ]
             },
             "GetDatasetVersion": {
@@ -238,6 +248,11 @@
                 "createDeploymentResourcePool"
               ]
             },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "updateDeploymentResourcePool"
+              ]
+            },
             "DeleteDeploymentResourcePool": {
               "methods": [
                 "deleteDeploymentResourcePool"
@@ -270,6 +285,11 @@
             "CreateDeploymentResourcePool": {
               "methods": [
                 "createDeploymentResourcePool"
+              ]
+            },
+            "UpdateDeploymentResourcePool": {
+              "methods": [
+                "updateDeploymentResourcePool"
               ]
             },
             "DeleteDeploymentResourcePool": {
@@ -2328,6 +2348,11 @@
                 "getNotebookRuntimeTemplate"
               ]
             },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "updateNotebookRuntimeTemplate"
+              ]
+            },
             "GetNotebookRuntime": {
               "methods": [
                 "getNotebookRuntime"
@@ -2385,6 +2410,11 @@
             "GetNotebookRuntimeTemplate": {
               "methods": [
                 "getNotebookRuntimeTemplate"
+              ]
+            },
+            "UpdateNotebookRuntimeTemplate": {
+              "methods": [
+                "updateNotebookRuntimeTemplate"
               ]
             },
             "GetNotebookRuntime": {

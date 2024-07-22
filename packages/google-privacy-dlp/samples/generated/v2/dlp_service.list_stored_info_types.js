@@ -33,9 +33,9 @@ function main(parent) {
    *  The format of this value varies depending on the scope of the request
    *  (project or organization) and whether you have specified a processing
    *  location (https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
-   *  + Projects scope, location specified:<br/>
+   *  + Projects scope, location specified:
    *    `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
-   *  + Projects scope, no location specified (defaults to global):<br/>
+   *  + Projects scope, no location specified (defaults to global):
    *    `projects/`<var>PROJECT_ID</var>
    *  The following example `parent` string specifies a parent project with the
    *  identifier `example-project`, and specifies the `europe-west3` location
@@ -54,7 +54,7 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Comma separated list of fields to order by,
+   *  Comma-separated list of fields to order by,
    *  followed by `asc` or `desc` postfix. This list is case insensitive. The
    *  default sorting order is ascending. Redundant space characters are
    *  insignificant.

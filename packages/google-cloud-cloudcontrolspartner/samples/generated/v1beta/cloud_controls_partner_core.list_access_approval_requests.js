@@ -31,7 +31,7 @@ function main(parent) {
   /**
    *  Required. Parent resource
    *  Format:
-   *  organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}
+   *  `organizations/{organization}/locations/{location}/customers/{customer}/workloads/{workload}`
    */
   // const parent = 'abc123'
   /**

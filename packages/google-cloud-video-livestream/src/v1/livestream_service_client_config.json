@@ -112,6 +112,22 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ListClips": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetClip": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateClip": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteClip": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateAsset": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

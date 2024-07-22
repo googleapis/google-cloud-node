@@ -150,6 +150,9 @@ export class FeaturestoreServiceClient {
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
       opts['scopes'] = staticMembers.scopes;
@@ -544,6 +547,12 @@ export class FeaturestoreServiceClient {
           post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',
           additional_bindings: [
             {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:cancel',
+            },
+            {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',
             },
             {
@@ -626,6 +635,15 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
             },
             {
               post: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
@@ -734,6 +752,15 @@ export class FeaturestoreServiceClient {
               post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:cancel',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:cancel',
+            },
+            {
               post: '/v1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
             },
             {
@@ -772,6 +799,8 @@ export class FeaturestoreServiceClient {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {delete: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {delete: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {
               delete:
                 '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',
@@ -876,6 +905,18 @@ export class FeaturestoreServiceClient {
             {
               delete:
                 '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
             },
             {
               delete:
@@ -1029,6 +1070,18 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              delete:
+                '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1093,6 +1146,8 @@ export class FeaturestoreServiceClient {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/ui/{name=projects/*/locations/*/operations/*}',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*/operations/*}'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*/operations/*}'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',
@@ -1171,6 +1226,15 @@ export class FeaturestoreServiceClient {
             {get: '/ui/{name=projects/*/locations/*/models/*/operations/*}'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
             },
             {
               get: '/ui/{name=projects/*/locations/*/persistentResources/*/operations/*}',
@@ -1278,6 +1342,15 @@ export class FeaturestoreServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}',
+            },
             {get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',
@@ -1325,6 +1398,8 @@ export class FeaturestoreServiceClient {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/ui/{name=projects/*/locations/*}/operations',
           additional_bindings: [
+            {get: '/ui/{name=projects/*/locations/*/agents/*}/operations'},
+            {get: '/ui/{name=projects/*/locations/*/apps/*}/operations'},
             {get: '/ui/{name=projects/*/locations/*/datasets/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*}/operations',
@@ -1392,6 +1467,15 @@ export class FeaturestoreServiceClient {
             {get: '/ui/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
             },
             {get: '/ui/{name=projects/*/locations/*/studies/*}/operations'},
             {
@@ -1495,6 +1579,15 @@ export class FeaturestoreServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimes/*}/operations',
+            },
+            {
+              get: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*}/operations',
+            },
             {get: '/v1/{name=projects/*/locations/*/studies/*}/operations'},
             {
               get: '/v1/{name=projects/*/locations/*/studies/*/trials/*}/operations',
@@ -1542,6 +1635,12 @@ export class FeaturestoreServiceClient {
           selector: 'google.longrunning.Operations.WaitOperation',
           post: '/ui/{name=projects/*/locations/*/operations/*}:wait',
           additional_bindings: [
+            {
+              post: '/ui/{name=projects/*/locations/*/agents/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/apps/*/operations/*}:wait',
+            },
             {
               post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:wait',
             },
@@ -1625,6 +1724,15 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/ui/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
             },
             {
               post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:wait',
@@ -1740,6 +1848,15 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookExecutionJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimes/*/operations/*}:wait',
+            },
+            {
+              post: '/v1/{name=projects/*/locations/*/notebookRuntimeTemplates/*/operations/*}:wait',
             },
             {
               post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:wait',

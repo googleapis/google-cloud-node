@@ -20,8 +20,8 @@
 const mapsplatformdatasets = require('@googlemaps/maps-platform-datasets');
 
 function main() {
-  const mapsPlatformDatasetsV1AlphaClient =
-    new mapsplatformdatasets.MapsPlatformDatasetsV1AlphaClient();
+  const mapsPlatformDatasetsClient =
+    new mapsplatformdatasets.MapsPlatformDatasetsClient();
 }
 
 main();

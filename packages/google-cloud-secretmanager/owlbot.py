@@ -112,7 +112,7 @@ s.replace('packages/google-cloud-secretmanager/src/v1/secret_manager_service_cli
   matchSecretVersionFromSecretVersionName(secretVersionName: string) {
     return this.pathTemplates.secretVersionPathTemplate.match(secretVersionName)
       .secret_version;
-  
+  }
 }
 """)
 

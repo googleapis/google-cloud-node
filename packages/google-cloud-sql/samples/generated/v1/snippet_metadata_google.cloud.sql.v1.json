@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-sql",
-        "version": "0.11.0",
+        "version": "0.16.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1307,14 +1307,14 @@
             "regionTag": "sqladmin_v1_generated_SqlInstancesService_PromoteReplica_async",
             "title": "SqlAvailableDatabaseVersionsService promoteReplica Sample",
             "origin": "API_DEFINITION",
-            "description": " Promotes the read replica instance to be a stand-alone Cloud SQL instance. Using this operation might cause your instance to restart.",
+            "description": " Promotes the read replica instance to be an independent Cloud SQL primary instance. Using this operation might cause your instance to restart.",
             "canonical": true,
             "file": "sql_instances_service.promote_replica.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 62,
+                    "end": 66,
                     "type": "FULL"
                 }
             ],
@@ -1355,7 +1355,7 @@
             "regionTag": "sqladmin_v1_generated_SqlInstancesService_Switchover_async",
             "title": "SqlAvailableDatabaseVersionsService switchover Sample",
             "origin": "API_DEFINITION",
-            "description": " Switches over from the primary instance to the replica instance.",
+            "description": " Switches over from the primary instance to the designated DR replica instance.",
             "canonical": true,
             "file": "sql_instances_service.switchover.js",
             "language": "JAVASCRIPT",
@@ -1874,7 +1874,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 83,
                     "type": "FULL"
                 }
             ],
@@ -1942,7 +1942,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 79,
                     "type": "FULL"
                 }
             ],

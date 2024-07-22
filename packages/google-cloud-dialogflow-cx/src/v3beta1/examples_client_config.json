@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -21,23 +24,28 @@
       },
       "methods": {
         "CreateExample": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "DeleteExample": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "ListExamples": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "GetExample": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "UpdateExample": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         }
       }

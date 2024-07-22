@@ -30,7 +30,7 @@ function main(parent, dataset) {
    */
   /**
    *  Required. Parent project that will own the dataset.
-   *  Format: projects/{$project}
+   *  Format: projects/{project}
    */
   // const parent = 'abc123'
   /**

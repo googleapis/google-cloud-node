@@ -202,9 +202,6 @@ export class SecurityCenterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      attackPathPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
-      ),
       folderAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/assets/{asset}/securityMarks'
       ),
@@ -273,9 +270,40 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/notificationConfigs/{notification_config}'
         ),
+      organizationLocationResourceValueConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/resourceValueConfigs/{resource_value_config}'
+        ),
+      organizationLocationSimluationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/simulations/{simluation}'
+        ),
+      organizationLocationSimluationValuedResourcePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/simulations/{simluation}/valuedResources/{valued_resource}'
+        ),
+      organizationLocationSimulationValuedResourceAttackPathPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
+        ),
       organizationMuteConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/muteConfigs/{mute_config}'
       ),
+      organizationResourceValueConfigPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/resourceValueConfigs/{resource_value_config}'
+        ),
+      organizationSimulationPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/simulations/{simulation}'
+      ),
+      organizationSimulationValuedResourcePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}'
+        ),
+      organizationSimulationValuedResourceAttackPathPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}/attackPaths/{attack_path}'
+        ),
       organizationSourcePathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/sources/{source}'
       ),
@@ -347,15 +375,6 @@ export class SecurityCenterClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/sources/{source}/locations/{location}/findings/{finding}/securityMarks'
         ),
-      resourceValueConfigPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/resourceValueConfigs/{resource_value_config}'
-      ),
-      simulationPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/simulations/{simulation}'
-      ),
-      valuedResourcePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}'
-      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -3569,6 +3588,10 @@ export class SecurityCenterClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The list of fields to be updated.
    *   If empty all mutable fields will be updated.
+   *
+   *   To update nested fields, include the top level field in the mask
+   *   For example, to update gcp_metadata.resource_type, include the
+   *   "gcp_metadata" field mask
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4122,14 +4145,6 @@ export class SecurityCenterClient {
    *   Required. Expression that defines what assets fields to use for grouping.
    *   The string value should follow SQL syntax: comma separated list of fields.
    *   For example: "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   *   * severity
    * @param {string} request.pageToken
    *   The value returned by the last `GroupFindingsResponse`; indicates
    *   that this is a continuation of a prior `GroupFindings` call, and
@@ -4302,14 +4317,6 @@ export class SecurityCenterClient {
    *   Required. Expression that defines what assets fields to use for grouping.
    *   The string value should follow SQL syntax: comma separated list of fields.
    *   For example: "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   *   * severity
    * @param {string} request.pageToken
    *   The value returned by the last `GroupFindingsResponse`; indicates
    *   that this is a continuation of a prior `GroupFindings` call, and
@@ -4430,14 +4437,6 @@ export class SecurityCenterClient {
    *   Required. Expression that defines what assets fields to use for grouping.
    *   The string value should follow SQL syntax: comma separated list of fields.
    *   For example: "parent,resource_name".
-   *
-   *   The following fields are supported:
-   *
-   *   * resource_name
-   *   * category
-   *   * state
-   *   * parent
-   *   * severity
    * @param {string} request.pageToken
    *   The value returned by the last `GroupFindingsResponse`; indicates
    *   that this is a continuation of a prior `GroupFindings` call, and
@@ -6846,77 +6845,6 @@ export class SecurityCenterClient {
   // --------------------
 
   /**
-   * Return a fully-qualified attackPath resource name string.
-   *
-   * @param {string} organization
-   * @param {string} simulation
-   * @param {string} valued_resource
-   * @param {string} attack_path
-   * @returns {string} Resource name string.
-   */
-  attackPathPath(
-    organization: string,
-    simulation: string,
-    valuedResource: string,
-    attackPath: string
-  ) {
-    return this.pathTemplates.attackPathPathTemplate.render({
-      organization: organization,
-      simulation: simulation,
-      valued_resource: valuedResource,
-      attack_path: attackPath,
-    });
-  }
-
-  /**
-   * Parse the organization from AttackPath resource.
-   *
-   * @param {string} attackPathName
-   *   A fully-qualified path representing AttackPath resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromAttackPathName(attackPathName: string) {
-    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
-      .organization;
-  }
-
-  /**
-   * Parse the simulation from AttackPath resource.
-   *
-   * @param {string} attackPathName
-   *   A fully-qualified path representing AttackPath resource.
-   * @returns {string} A string representing the simulation.
-   */
-  matchSimulationFromAttackPathName(attackPathName: string) {
-    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
-      .simulation;
-  }
-
-  /**
-   * Parse the valued_resource from AttackPath resource.
-   *
-   * @param {string} attackPathName
-   *   A fully-qualified path representing AttackPath resource.
-   * @returns {string} A string representing the valued_resource.
-   */
-  matchValuedResourceFromAttackPathName(attackPathName: string) {
-    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
-      .valued_resource;
-  }
-
-  /**
-   * Parse the attack_path from AttackPath resource.
-   *
-   * @param {string} attackPathName
-   *   A fully-qualified path representing AttackPath resource.
-   * @returns {string} A string representing the attack_path.
-   */
-  matchAttackPathFromAttackPathName(attackPathName: string) {
-    return this.pathTemplates.attackPathPathTemplate.match(attackPathName)
-      .attack_path;
-  }
-
-  /**
    * Return a fully-qualified folderAssetSecurityMarks resource name string.
    *
    * @param {string} folder
@@ -8105,6 +8033,328 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationResourceValueConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} resource_value_config
+   * @returns {string} Resource name string.
+   */
+  organizationLocationResourceValueConfigPath(
+    organization: string,
+    location: string,
+    resourceValueConfig: string
+  ) {
+    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        resource_value_config: resourceValueConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationResourceValueConfig resource.
+   *
+   * @param {string} organizationLocationResourceValueConfigName
+   *   A fully-qualified path representing organization_location_resource_value_config resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationResourceValueConfigName(
+    organizationLocationResourceValueConfigName: string
+  ) {
+    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match(
+      organizationLocationResourceValueConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationResourceValueConfig resource.
+   *
+   * @param {string} organizationLocationResourceValueConfigName
+   *   A fully-qualified path representing organization_location_resource_value_config resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationResourceValueConfigName(
+    organizationLocationResourceValueConfigName: string
+  ) {
+    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match(
+      organizationLocationResourceValueConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the resource_value_config from OrganizationLocationResourceValueConfig resource.
+   *
+   * @param {string} organizationLocationResourceValueConfigName
+   *   A fully-qualified path representing organization_location_resource_value_config resource.
+   * @returns {string} A string representing the resource_value_config.
+   */
+  matchResourceValueConfigFromOrganizationLocationResourceValueConfigName(
+    organizationLocationResourceValueConfigName: string
+  ) {
+    return this.pathTemplates.organizationLocationResourceValueConfigPathTemplate.match(
+      organizationLocationResourceValueConfigName
+    ).resource_value_config;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSimluation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} simluation
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSimluationPath(
+    organization: string,
+    location: string,
+    simluation: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        simluation: simluation,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSimluation resource.
+   *
+   * @param {string} organizationLocationSimluationName
+   *   A fully-qualified path representing organization_location_simluation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSimluationName(
+    organizationLocationSimluationName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationPathTemplate.match(
+      organizationLocationSimluationName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSimluation resource.
+   *
+   * @param {string} organizationLocationSimluationName
+   *   A fully-qualified path representing organization_location_simluation resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSimluationName(
+    organizationLocationSimluationName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationPathTemplate.match(
+      organizationLocationSimluationName
+    ).location;
+  }
+
+  /**
+   * Parse the simluation from OrganizationLocationSimluation resource.
+   *
+   * @param {string} organizationLocationSimluationName
+   *   A fully-qualified path representing organization_location_simluation resource.
+   * @returns {string} A string representing the simluation.
+   */
+  matchSimluationFromOrganizationLocationSimluationName(
+    organizationLocationSimluationName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationPathTemplate.match(
+      organizationLocationSimluationName
+    ).simluation;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSimluationValuedResource resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} simluation
+   * @param {string} valued_resource
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSimluationValuedResourcePath(
+    organization: string,
+    location: string,
+    simluation: string,
+    valuedResource: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        simluation: simluation,
+        valued_resource: valuedResource,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSimluationValuedResource resource.
+   *
+   * @param {string} organizationLocationSimluationValuedResourceName
+   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSimluationValuedResourceName(
+    organizationLocationSimluationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
+      organizationLocationSimluationValuedResourceName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSimluationValuedResource resource.
+   *
+   * @param {string} organizationLocationSimluationValuedResourceName
+   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSimluationValuedResourceName(
+    organizationLocationSimluationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
+      organizationLocationSimluationValuedResourceName
+    ).location;
+  }
+
+  /**
+   * Parse the simluation from OrganizationLocationSimluationValuedResource resource.
+   *
+   * @param {string} organizationLocationSimluationValuedResourceName
+   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @returns {string} A string representing the simluation.
+   */
+  matchSimluationFromOrganizationLocationSimluationValuedResourceName(
+    organizationLocationSimluationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
+      organizationLocationSimluationValuedResourceName
+    ).simluation;
+  }
+
+  /**
+   * Parse the valued_resource from OrganizationLocationSimluationValuedResource resource.
+   *
+   * @param {string} organizationLocationSimluationValuedResourceName
+   *   A fully-qualified path representing organization_location_simluation_valued_resource resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromOrganizationLocationSimluationValuedResourceName(
+    organizationLocationSimluationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimluationValuedResourcePathTemplate.match(
+      organizationLocationSimluationValuedResourceName
+    ).valued_resource;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationSimulationValuedResourceAttackPath resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} simulation
+   * @param {string} valued_resource
+   * @param {string} attack_path
+   * @returns {string} Resource name string.
+   */
+  organizationLocationSimulationValuedResourceAttackPathPath(
+    organization: string,
+    location: string,
+    simulation: string,
+    valuedResource: string,
+    attackPath: string
+  ) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        simulation: simulation,
+        valued_resource: valuedResource,
+        attack_path: attackPath,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationSimulationValuedResourceAttackPathName(
+    organizationLocationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationLocationSimulationValuedResourceAttackPathName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationSimulationValuedResourceAttackPathName(
+    organizationLocationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationLocationSimulationValuedResourceAttackPathName
+    ).location;
+  }
+
+  /**
+   * Parse the simulation from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationLocationSimulationValuedResourceAttackPathName(
+    organizationLocationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationLocationSimulationValuedResourceAttackPathName
+    ).simulation;
+  }
+
+  /**
+   * Parse the valued_resource from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromOrganizationLocationSimulationValuedResourceAttackPathName(
+    organizationLocationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationLocationSimulationValuedResourceAttackPathName
+    ).valued_resource;
+  }
+
+  /**
+   * Parse the attack_path from OrganizationLocationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationLocationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_location_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the attack_path.
+   */
+  matchAttackPathFromOrganizationLocationSimulationValuedResourceAttackPathName(
+    organizationLocationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationLocationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationLocationSimulationValuedResourceAttackPathName
+    ).attack_path;
+  }
+
+  /**
    * Return a fully-qualified organizationMuteConfig resource name string.
    *
    * @param {string} organization
@@ -8146,6 +8396,251 @@ export class SecurityCenterClient {
     return this.pathTemplates.organizationMuteConfigPathTemplate.match(
       organizationMuteConfigName
     ).mute_config;
+  }
+
+  /**
+   * Return a fully-qualified organizationResourceValueConfig resource name string.
+   *
+   * @param {string} organization
+   * @param {string} resource_value_config
+   * @returns {string} Resource name string.
+   */
+  organizationResourceValueConfigPath(
+    organization: string,
+    resourceValueConfig: string
+  ) {
+    return this.pathTemplates.organizationResourceValueConfigPathTemplate.render(
+      {
+        organization: organization,
+        resource_value_config: resourceValueConfig,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationResourceValueConfig resource.
+   *
+   * @param {string} organizationResourceValueConfigName
+   *   A fully-qualified path representing organization_resource_value_config resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationResourceValueConfigName(
+    organizationResourceValueConfigName: string
+  ) {
+    return this.pathTemplates.organizationResourceValueConfigPathTemplate.match(
+      organizationResourceValueConfigName
+    ).organization;
+  }
+
+  /**
+   * Parse the resource_value_config from OrganizationResourceValueConfig resource.
+   *
+   * @param {string} organizationResourceValueConfigName
+   *   A fully-qualified path representing organization_resource_value_config resource.
+   * @returns {string} A string representing the resource_value_config.
+   */
+  matchResourceValueConfigFromOrganizationResourceValueConfigName(
+    organizationResourceValueConfigName: string
+  ) {
+    return this.pathTemplates.organizationResourceValueConfigPathTemplate.match(
+      organizationResourceValueConfigName
+    ).resource_value_config;
+  }
+
+  /**
+   * Return a fully-qualified organizationSimulation resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @returns {string} Resource name string.
+   */
+  organizationSimulationPath(organization: string, simulation: string) {
+    return this.pathTemplates.organizationSimulationPathTemplate.render({
+      organization: organization,
+      simulation: simulation,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSimulation resource.
+   *
+   * @param {string} organizationSimulationName
+   *   A fully-qualified path representing organization_simulation resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSimulationName(
+    organizationSimulationName: string
+  ) {
+    return this.pathTemplates.organizationSimulationPathTemplate.match(
+      organizationSimulationName
+    ).organization;
+  }
+
+  /**
+   * Parse the simulation from OrganizationSimulation resource.
+   *
+   * @param {string} organizationSimulationName
+   *   A fully-qualified path representing organization_simulation resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationSimulationName(
+    organizationSimulationName: string
+  ) {
+    return this.pathTemplates.organizationSimulationPathTemplate.match(
+      organizationSimulationName
+    ).simulation;
+  }
+
+  /**
+   * Return a fully-qualified organizationSimulationValuedResource resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @param {string} valued_resource
+   * @returns {string} Resource name string.
+   */
+  organizationSimulationValuedResourcePath(
+    organization: string,
+    simulation: string,
+    valuedResource: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.render(
+      {
+        organization: organization,
+        simulation: simulation,
+        valued_resource: valuedResource,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationSimulationValuedResource resource.
+   *
+   * @param {string} organizationSimulationValuedResourceName
+   *   A fully-qualified path representing organization_simulation_valued_resource resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSimulationValuedResourceName(
+    organizationSimulationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.match(
+      organizationSimulationValuedResourceName
+    ).organization;
+  }
+
+  /**
+   * Parse the simulation from OrganizationSimulationValuedResource resource.
+   *
+   * @param {string} organizationSimulationValuedResourceName
+   *   A fully-qualified path representing organization_simulation_valued_resource resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationSimulationValuedResourceName(
+    organizationSimulationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.match(
+      organizationSimulationValuedResourceName
+    ).simulation;
+  }
+
+  /**
+   * Parse the valued_resource from OrganizationSimulationValuedResource resource.
+   *
+   * @param {string} organizationSimulationValuedResourceName
+   *   A fully-qualified path representing organization_simulation_valued_resource resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromOrganizationSimulationValuedResourceName(
+    organizationSimulationValuedResourceName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourcePathTemplate.match(
+      organizationSimulationValuedResourceName
+    ).valued_resource;
+  }
+
+  /**
+   * Return a fully-qualified organizationSimulationValuedResourceAttackPath resource name string.
+   *
+   * @param {string} organization
+   * @param {string} simulation
+   * @param {string} valued_resource
+   * @param {string} attack_path
+   * @returns {string} Resource name string.
+   */
+  organizationSimulationValuedResourceAttackPathPath(
+    organization: string,
+    simulation: string,
+    valuedResource: string,
+    attackPath: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.render(
+      {
+        organization: organization,
+        simulation: simulation,
+        valued_resource: valuedResource,
+        attack_path: attackPath,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSimulationValuedResourceAttackPathName(
+    organizationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationSimulationValuedResourceAttackPathName
+    ).organization;
+  }
+
+  /**
+   * Parse the simulation from OrganizationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the simulation.
+   */
+  matchSimulationFromOrganizationSimulationValuedResourceAttackPathName(
+    organizationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationSimulationValuedResourceAttackPathName
+    ).simulation;
+  }
+
+  /**
+   * Parse the valued_resource from OrganizationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the valued_resource.
+   */
+  matchValuedResourceFromOrganizationSimulationValuedResourceAttackPathName(
+    organizationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationSimulationValuedResourceAttackPathName
+    ).valued_resource;
+  }
+
+  /**
+   * Parse the attack_path from OrganizationSimulationValuedResourceAttackPath resource.
+   *
+   * @param {string} organizationSimulationValuedResourceAttackPathName
+   *   A fully-qualified path representing organization_simulation_valued_resource_attack_path resource.
+   * @returns {string} A string representing the attack_path.
+   */
+  matchAttackPathFromOrganizationSimulationValuedResourceAttackPathName(
+    organizationSimulationValuedResourceAttackPathName: string
+  ) {
+    return this.pathTemplates.organizationSimulationValuedResourceAttackPathPathTemplate.match(
+      organizationSimulationValuedResourceAttackPathName
+    ).attack_path;
   }
 
   /**
@@ -9511,147 +10006,6 @@ export class SecurityCenterClient {
     return this.pathTemplates.projectSourceLocationFindingSecurityMarksPathTemplate.match(
       projectSourceLocationFindingSecurityMarksName
     ).finding;
-  }
-
-  /**
-   * Return a fully-qualified resourceValueConfig resource name string.
-   *
-   * @param {string} organization
-   * @param {string} resource_value_config
-   * @returns {string} Resource name string.
-   */
-  resourceValueConfigPath(organization: string, resourceValueConfig: string) {
-    return this.pathTemplates.resourceValueConfigPathTemplate.render({
-      organization: organization,
-      resource_value_config: resourceValueConfig,
-    });
-  }
-
-  /**
-   * Parse the organization from ResourceValueConfig resource.
-   *
-   * @param {string} resourceValueConfigName
-   *   A fully-qualified path representing ResourceValueConfig resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromResourceValueConfigName(
-    resourceValueConfigName: string
-  ) {
-    return this.pathTemplates.resourceValueConfigPathTemplate.match(
-      resourceValueConfigName
-    ).organization;
-  }
-
-  /**
-   * Parse the resource_value_config from ResourceValueConfig resource.
-   *
-   * @param {string} resourceValueConfigName
-   *   A fully-qualified path representing ResourceValueConfig resource.
-   * @returns {string} A string representing the resource_value_config.
-   */
-  matchResourceValueConfigFromResourceValueConfigName(
-    resourceValueConfigName: string
-  ) {
-    return this.pathTemplates.resourceValueConfigPathTemplate.match(
-      resourceValueConfigName
-    ).resource_value_config;
-  }
-
-  /**
-   * Return a fully-qualified simulation resource name string.
-   *
-   * @param {string} organization
-   * @param {string} simulation
-   * @returns {string} Resource name string.
-   */
-  simulationPath(organization: string, simulation: string) {
-    return this.pathTemplates.simulationPathTemplate.render({
-      organization: organization,
-      simulation: simulation,
-    });
-  }
-
-  /**
-   * Parse the organization from Simulation resource.
-   *
-   * @param {string} simulationName
-   *   A fully-qualified path representing Simulation resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromSimulationName(simulationName: string) {
-    return this.pathTemplates.simulationPathTemplate.match(simulationName)
-      .organization;
-  }
-
-  /**
-   * Parse the simulation from Simulation resource.
-   *
-   * @param {string} simulationName
-   *   A fully-qualified path representing Simulation resource.
-   * @returns {string} A string representing the simulation.
-   */
-  matchSimulationFromSimulationName(simulationName: string) {
-    return this.pathTemplates.simulationPathTemplate.match(simulationName)
-      .simulation;
-  }
-
-  /**
-   * Return a fully-qualified valuedResource resource name string.
-   *
-   * @param {string} organization
-   * @param {string} simulation
-   * @param {string} valued_resource
-   * @returns {string} Resource name string.
-   */
-  valuedResourcePath(
-    organization: string,
-    simulation: string,
-    valuedResource: string
-  ) {
-    return this.pathTemplates.valuedResourcePathTemplate.render({
-      organization: organization,
-      simulation: simulation,
-      valued_resource: valuedResource,
-    });
-  }
-
-  /**
-   * Parse the organization from ValuedResource resource.
-   *
-   * @param {string} valuedResourceName
-   *   A fully-qualified path representing ValuedResource resource.
-   * @returns {string} A string representing the organization.
-   */
-  matchOrganizationFromValuedResourceName(valuedResourceName: string) {
-    return this.pathTemplates.valuedResourcePathTemplate.match(
-      valuedResourceName
-    ).organization;
-  }
-
-  /**
-   * Parse the simulation from ValuedResource resource.
-   *
-   * @param {string} valuedResourceName
-   *   A fully-qualified path representing ValuedResource resource.
-   * @returns {string} A string representing the simulation.
-   */
-  matchSimulationFromValuedResourceName(valuedResourceName: string) {
-    return this.pathTemplates.valuedResourcePathTemplate.match(
-      valuedResourceName
-    ).simulation;
-  }
-
-  /**
-   * Parse the valued_resource from ValuedResource resource.
-   *
-   * @param {string} valuedResourceName
-   *   A fully-qualified path representing ValuedResource resource.
-   * @returns {string} A string representing the valued_resource.
-   */
-  matchValuedResourceFromValuedResourceName(valuedResourceName: string) {
-    return this.pathTemplates.valuedResourcePathTemplate.match(
-      valuedResourceName
-    ).valued_resource;
   }
 
   /**

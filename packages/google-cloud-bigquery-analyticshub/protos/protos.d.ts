@@ -515,6 +515,13 @@ export namespace google {
                         type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
                     }
 
+                    /** DiscoveryType enum. */
+                    enum DiscoveryType {
+                        DISCOVERY_TYPE_UNSPECIFIED = 0,
+                        DISCOVERY_TYPE_PRIVATE = 1,
+                        DISCOVERY_TYPE_PUBLIC = 2
+                    }
+
                     /** Properties of a DataExchange. */
                     interface IDataExchange {
 
@@ -541,6 +548,9 @@ export namespace google {
 
                         /** DataExchange sharingEnvironmentConfig */
                         sharingEnvironmentConfig?: (google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig|null);
+
+                        /** DataExchange discoveryType */
+                        discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
                     }
 
                     /** Represents a DataExchange. */
@@ -575,6 +585,12 @@ export namespace google {
 
                         /** DataExchange sharingEnvironmentConfig. */
                         public sharingEnvironmentConfig?: (google.cloud.bigquery.analyticshub.v1.ISharingEnvironmentConfig|null);
+
+                        /** DataExchange discoveryType. */
+                        public discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
+
+                        /** DataExchange _discoveryType. */
+                        public _discoveryType?: "discoveryType";
 
                         /**
                          * Creates a new DataExchange instance using the specified properties.
@@ -1434,6 +1450,9 @@ export namespace google {
 
                         /** Listing restrictedExportConfig */
                         restrictedExportConfig?: (google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null);
+
+                        /** Listing discoveryType */
+                        discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
                     }
 
                     /** Represents a Listing. */
@@ -1484,8 +1503,14 @@ export namespace google {
                         /** Listing restrictedExportConfig. */
                         public restrictedExportConfig?: (google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null);
 
+                        /** Listing discoveryType. */
+                        public discoveryType?: (google.cloud.bigquery.analyticshub.v1.DiscoveryType|keyof typeof google.cloud.bigquery.analyticshub.v1.DiscoveryType|null);
+
                         /** Listing source. */
                         public source?: "bigqueryDataset";
+
+                        /** Listing _discoveryType. */
+                        public _discoveryType?: "discoveryType";
 
                         /**
                          * Creates a new Listing instance using the specified properties.
@@ -1575,6 +1600,9 @@ export namespace google {
 
                             /** BigQueryDatasetSource selectedResources */
                             selectedResources?: (google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.ISelectedResource[]|null);
+
+                            /** BigQueryDatasetSource restrictedExportPolicy */
+                            restrictedExportPolicy?: (google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy|null);
                         }
 
                         /** Represents a BigQueryDatasetSource. */
@@ -1591,6 +1619,9 @@ export namespace google {
 
                             /** BigQueryDatasetSource selectedResources. */
                             public selectedResources: google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.ISelectedResource[];
+
+                            /** BigQueryDatasetSource restrictedExportPolicy. */
+                            public restrictedExportPolicy?: (google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy|null);
 
                             /**
                              * Creates a new BigQueryDatasetSource instance using the specified properties.
@@ -1766,6 +1797,115 @@ export namespace google {
 
                                 /**
                                  * Gets the default type url for SelectedResource
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+
+                            /** Properties of a RestrictedExportPolicy. */
+                            interface IRestrictedExportPolicy {
+
+                                /** RestrictedExportPolicy enabled */
+                                enabled?: (google.protobuf.IBoolValue|null);
+
+                                /** RestrictedExportPolicy restrictDirectTableAccess */
+                                restrictDirectTableAccess?: (google.protobuf.IBoolValue|null);
+
+                                /** RestrictedExportPolicy restrictQueryResult */
+                                restrictQueryResult?: (google.protobuf.IBoolValue|null);
+                            }
+
+                            /** Represents a RestrictedExportPolicy. */
+                            class RestrictedExportPolicy implements IRestrictedExportPolicy {
+
+                                /**
+                                 * Constructs a new RestrictedExportPolicy.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy);
+
+                                /** RestrictedExportPolicy enabled. */
+                                public enabled?: (google.protobuf.IBoolValue|null);
+
+                                /** RestrictedExportPolicy restrictDirectTableAccess. */
+                                public restrictDirectTableAccess?: (google.protobuf.IBoolValue|null);
+
+                                /** RestrictedExportPolicy restrictQueryResult. */
+                                public restrictQueryResult?: (google.protobuf.IBoolValue|null);
+
+                                /**
+                                 * Creates a new RestrictedExportPolicy instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns RestrictedExportPolicy instance
+                                 */
+                                public static create(properties?: google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy): google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy;
+
+                                /**
+                                 * Encodes the specified RestrictedExportPolicy message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.verify|verify} messages.
+                                 * @param message RestrictedExportPolicy message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified RestrictedExportPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy.verify|verify} messages.
+                                 * @param message RestrictedExportPolicy message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.IRestrictedExportPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a RestrictedExportPolicy message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns RestrictedExportPolicy
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy;
+
+                                /**
+                                 * Decodes a RestrictedExportPolicy message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns RestrictedExportPolicy
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy;
+
+                                /**
+                                 * Verifies a RestrictedExportPolicy message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a RestrictedExportPolicy message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns RestrictedExportPolicy
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy;
+
+                                /**
+                                 * Creates a plain object from a RestrictedExportPolicy message. Also converts values to other types if specified.
+                                 * @param message RestrictedExportPolicy
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.cloud.bigquery.analyticshub.v1.Listing.BigQueryDatasetSource.RestrictedExportPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this RestrictedExportPolicy to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for RestrictedExportPolicy
                                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                                  * @returns The default type url
                                  */
