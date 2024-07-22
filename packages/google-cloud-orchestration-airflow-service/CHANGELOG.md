@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.4.0...orchestration-airflow-v3.5.0) (2024-07-22)
+
+
+### Features
+
+* [orchestration] add `airflow_database_retention_days` and `airflow_metadata_retention_config` to message `DataRetentionConfig` ([#5537](https://github.com/googleapis/google-cloud-node/issues/5537)) ([5ed36be](https://github.com/googleapis/google-cloud-node/commit/5ed36be19d66d18562c6a41441558cba4d84aa5f))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.3.0...orchestration-airflow-v3.4.0) (2024-05-21)
 
 

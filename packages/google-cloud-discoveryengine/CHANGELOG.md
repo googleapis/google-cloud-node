@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.11.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.10.0...discoveryengine-v1.11.0) (2024-07-22)
+
+
+### Features
+
+* [discoveryengine] add sample query set APIs ([#5552](https://github.com/googleapis/google-cloud-node/issues/5552)) ([8a0e59f](https://github.com/googleapis/google-cloud-node/commit/8a0e59fe0213105c5fd065f1255d2f1bf5b4138c))
+
+
+### Bug Fixes
+
+* [discoveryengine] update sample query, sample query set patterns ([#5558](https://github.com/googleapis/google-cloud-node/issues/5558)) ([2c4325f](https://github.com/googleapis/google-cloud-node/commit/2c4325f28954f48538cdf113b2a8330dabf08680))
+
 ## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.9.0...discoveryengine-v1.10.0) (2024-07-10)
 
 

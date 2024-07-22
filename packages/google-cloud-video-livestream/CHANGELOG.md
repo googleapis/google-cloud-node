@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.3.0...livestream-v1.4.0) (2024-07-22)
+
+
+### Features
+
+* [video] added RetentionConfig for enabling retention of output media segments ([#5544](https://github.com/googleapis/google-cloud-node/issues/5544)) ([f1b1eed](https://github.com/googleapis/google-cloud-node/commit/f1b1eedafc5295513fba09c4132389489640fe23))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/livestream-v1.2.0...livestream-v1.3.0) (2024-05-21)
 
 

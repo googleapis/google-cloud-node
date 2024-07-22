@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.6.0...chat-v0.7.0) (2024-07-22)
+
+
+### Features
+
+* [chat] add GetSpaceEvent and ListSpaceEvents APIs ([#5546](https://github.com/googleapis/google-cloud-node/issues/5546)) ([40e0811](https://github.com/googleapis/google-cloud-node/commit/40e0811598fbf2c92eee5875b2ab2c3e2be18064))
+
 ## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.5.0...chat-v0.6.0) (2024-07-10)
 
 
