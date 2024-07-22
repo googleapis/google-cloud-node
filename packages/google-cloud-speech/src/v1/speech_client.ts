@@ -317,7 +317,7 @@ export class SpeechClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
+                const stream = new PassThrough();
                 setImmediate(() => {
                   stream.emit(
                     'error',

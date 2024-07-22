@@ -62,7 +62,7 @@ function main(recognizer) {
   // const configMask = {}
   /**
    *  Audio files with file metadata for ASR.
-   *  The maximum number of files allowed to be specified is 5.
+   *  The maximum number of files allowed to be specified is 15.
    */
   // const files = [1,2,3,4]
   /**

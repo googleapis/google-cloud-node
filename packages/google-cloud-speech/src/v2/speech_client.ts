@@ -534,7 +534,7 @@ export class SpeechClient {
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({objectMode: true});
+                const stream = new PassThrough();
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -1847,7 +1847,7 @@ export class SpeechClient {
    *   request.
    * @param {number[]} request.files
    *   Audio files with file metadata for ASR.
-   *   The maximum number of files allowed to be specified is 5.
+   *   The maximum number of files allowed to be specified is 15.
    * @param {google.cloud.speech.v2.RecognitionOutputConfig} request.recognitionOutputConfig
    *   Configuration options for where to output the transcripts of each file.
    * @param {google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy} request.processingStrategy

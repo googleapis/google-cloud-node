@@ -31215,6 +31215,7 @@
                          * Properties of a RecognitionResponseMetadata.
                          * @memberof google.cloud.speech.v2
                          * @interface IRecognitionResponseMetadata
+                         * @property {string|null} [requestId] RecognitionResponseMetadata requestId
                          * @property {google.protobuf.IDuration|null} [totalBilledDuration] RecognitionResponseMetadata totalBilledDuration
                          */
     
@@ -31232,6 +31233,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * RecognitionResponseMetadata requestId.
+                         * @member {string} requestId
+                         * @memberof google.cloud.speech.v2.RecognitionResponseMetadata
+                         * @instance
+                         */
+                        RecognitionResponseMetadata.prototype.requestId = "";
     
                         /**
                          * RecognitionResponseMetadata totalBilledDuration.
@@ -31267,6 +31276,8 @@
                                 writer = $Writer.create();
                             if (message.totalBilledDuration != null && Object.hasOwnProperty.call(message, "totalBilledDuration"))
                                 $root.google.protobuf.Duration.encode(message.totalBilledDuration, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.requestId);
                             return writer;
                         };
     
@@ -31301,6 +31312,10 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 9: {
+                                        message.requestId = reader.string();
+                                        break;
+                                    }
                                 case 6: {
                                         message.totalBilledDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                         break;
@@ -31340,6 +31355,9 @@
                         RecognitionResponseMetadata.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                if (!$util.isString(message.requestId))
+                                    return "requestId: string expected";
                             if (message.totalBilledDuration != null && message.hasOwnProperty("totalBilledDuration")) {
                                 var error = $root.google.protobuf.Duration.verify(message.totalBilledDuration);
                                 if (error)
@@ -31360,6 +31378,8 @@
                             if (object instanceof $root.google.cloud.speech.v2.RecognitionResponseMetadata)
                                 return object;
                             var message = new $root.google.cloud.speech.v2.RecognitionResponseMetadata();
+                            if (object.requestId != null)
+                                message.requestId = String(object.requestId);
                             if (object.totalBilledDuration != null) {
                                 if (typeof object.totalBilledDuration !== "object")
                                     throw TypeError(".google.cloud.speech.v2.RecognitionResponseMetadata.totalBilledDuration: object expected");
@@ -31381,10 +31401,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.totalBilledDuration = null;
+                                object.requestId = "";
+                            }
                             if (message.totalBilledDuration != null && message.hasOwnProperty("totalBilledDuration"))
                                 object.totalBilledDuration = $root.google.protobuf.Duration.toObject(message.totalBilledDuration, options);
+                            if (message.requestId != null && message.hasOwnProperty("requestId"))
+                                object.requestId = message.requestId;
                             return object;
                         };
     
@@ -44276,6 +44300,1420 @@
                         return UndeletePhraseSetRequest;
                     })();
     
+                    v2.ModelFeature = (function() {
+    
+                        /**
+                         * Properties of a ModelFeature.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IModelFeature
+                         * @property {string|null} [feature] ModelFeature feature
+                         * @property {string|null} [releaseState] ModelFeature releaseState
+                         */
+    
+                        /**
+                         * Constructs a new ModelFeature.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a ModelFeature.
+                         * @implements IModelFeature
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IModelFeature=} [properties] Properties to set
+                         */
+                        function ModelFeature(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModelFeature feature.
+                         * @member {string} feature
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @instance
+                         */
+                        ModelFeature.prototype.feature = "";
+    
+                        /**
+                         * ModelFeature releaseState.
+                         * @member {string} releaseState
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @instance
+                         */
+                        ModelFeature.prototype.releaseState = "";
+    
+                        /**
+                         * Creates a new ModelFeature instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelFeature=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.ModelFeature} ModelFeature instance
+                         */
+                        ModelFeature.create = function create(properties) {
+                            return new ModelFeature(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModelFeature message. Does not implicitly {@link google.cloud.speech.v2.ModelFeature.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelFeature} message ModelFeature message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelFeature.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.feature != null && Object.hasOwnProperty.call(message, "feature"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.feature);
+                            if (message.releaseState != null && Object.hasOwnProperty.call(message, "releaseState"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.releaseState);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModelFeature message, length delimited. Does not implicitly {@link google.cloud.speech.v2.ModelFeature.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelFeature} message ModelFeature message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModelFeature message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.ModelFeature} ModelFeature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelFeature.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.ModelFeature();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.feature = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.releaseState = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModelFeature message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.ModelFeature} ModelFeature
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelFeature.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModelFeature message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModelFeature.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.feature != null && message.hasOwnProperty("feature"))
+                                if (!$util.isString(message.feature))
+                                    return "feature: string expected";
+                            if (message.releaseState != null && message.hasOwnProperty("releaseState"))
+                                if (!$util.isString(message.releaseState))
+                                    return "releaseState: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModelFeature message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.ModelFeature} ModelFeature
+                         */
+                        ModelFeature.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.ModelFeature)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.ModelFeature();
+                            if (object.feature != null)
+                                message.feature = String(object.feature);
+                            if (object.releaseState != null)
+                                message.releaseState = String(object.releaseState);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModelFeature message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {google.cloud.speech.v2.ModelFeature} message ModelFeature
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModelFeature.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.feature = "";
+                                object.releaseState = "";
+                            }
+                            if (message.feature != null && message.hasOwnProperty("feature"))
+                                object.feature = message.feature;
+                            if (message.releaseState != null && message.hasOwnProperty("releaseState"))
+                                object.releaseState = message.releaseState;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModelFeature to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModelFeature.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModelFeature
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.ModelFeature
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModelFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.ModelFeature";
+                        };
+    
+                        return ModelFeature;
+                    })();
+    
+                    v2.ModelFeatures = (function() {
+    
+                        /**
+                         * Properties of a ModelFeatures.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IModelFeatures
+                         * @property {Array.<google.cloud.speech.v2.IModelFeature>|null} [modelFeature] ModelFeatures modelFeature
+                         */
+    
+                        /**
+                         * Constructs a new ModelFeatures.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a ModelFeatures.
+                         * @implements IModelFeatures
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IModelFeatures=} [properties] Properties to set
+                         */
+                        function ModelFeatures(properties) {
+                            this.modelFeature = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModelFeatures modelFeature.
+                         * @member {Array.<google.cloud.speech.v2.IModelFeature>} modelFeature
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @instance
+                         */
+                        ModelFeatures.prototype.modelFeature = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ModelFeatures instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelFeatures=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.ModelFeatures} ModelFeatures instance
+                         */
+                        ModelFeatures.create = function create(properties) {
+                            return new ModelFeatures(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModelFeatures message. Does not implicitly {@link google.cloud.speech.v2.ModelFeatures.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelFeatures} message ModelFeatures message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelFeatures.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.modelFeature != null && message.modelFeature.length)
+                                for (var i = 0; i < message.modelFeature.length; ++i)
+                                    $root.google.cloud.speech.v2.ModelFeature.encode(message.modelFeature[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModelFeatures message, length delimited. Does not implicitly {@link google.cloud.speech.v2.ModelFeatures.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelFeatures} message ModelFeatures message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModelFeatures message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.ModelFeatures} ModelFeatures
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelFeatures.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.ModelFeatures();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.modelFeature && message.modelFeature.length))
+                                            message.modelFeature = [];
+                                        message.modelFeature.push($root.google.cloud.speech.v2.ModelFeature.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModelFeatures message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.ModelFeatures} ModelFeatures
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelFeatures.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModelFeatures message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModelFeatures.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.modelFeature != null && message.hasOwnProperty("modelFeature")) {
+                                if (!Array.isArray(message.modelFeature))
+                                    return "modelFeature: array expected";
+                                for (var i = 0; i < message.modelFeature.length; ++i) {
+                                    var error = $root.google.cloud.speech.v2.ModelFeature.verify(message.modelFeature[i]);
+                                    if (error)
+                                        return "modelFeature." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModelFeatures message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.ModelFeatures} ModelFeatures
+                         */
+                        ModelFeatures.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.ModelFeatures)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.ModelFeatures();
+                            if (object.modelFeature) {
+                                if (!Array.isArray(object.modelFeature))
+                                    throw TypeError(".google.cloud.speech.v2.ModelFeatures.modelFeature: array expected");
+                                message.modelFeature = [];
+                                for (var i = 0; i < object.modelFeature.length; ++i) {
+                                    if (typeof object.modelFeature[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v2.ModelFeatures.modelFeature: object expected");
+                                    message.modelFeature[i] = $root.google.cloud.speech.v2.ModelFeature.fromObject(object.modelFeature[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModelFeatures message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {google.cloud.speech.v2.ModelFeatures} message ModelFeatures
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModelFeatures.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.modelFeature = [];
+                            if (message.modelFeature && message.modelFeature.length) {
+                                object.modelFeature = [];
+                                for (var j = 0; j < message.modelFeature.length; ++j)
+                                    object.modelFeature[j] = $root.google.cloud.speech.v2.ModelFeature.toObject(message.modelFeature[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModelFeatures to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModelFeatures.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModelFeatures
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.ModelFeatures
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModelFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.ModelFeatures";
+                        };
+    
+                        return ModelFeatures;
+                    })();
+    
+                    v2.ModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a ModelMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IModelMetadata
+                         * @property {Object.<string,google.cloud.speech.v2.IModelFeatures>|null} [modelFeatures] ModelMetadata modelFeatures
+                         */
+    
+                        /**
+                         * Constructs a new ModelMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a ModelMetadata.
+                         * @implements IModelMetadata
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IModelMetadata=} [properties] Properties to set
+                         */
+                        function ModelMetadata(properties) {
+                            this.modelFeatures = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ModelMetadata modelFeatures.
+                         * @member {Object.<string,google.cloud.speech.v2.IModelFeatures>} modelFeatures
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @instance
+                         */
+                        ModelMetadata.prototype.modelFeatures = $util.emptyObject;
+    
+                        /**
+                         * Creates a new ModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.ModelMetadata} ModelMetadata instance
+                         */
+                        ModelMetadata.create = function create(properties) {
+                            return new ModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ModelMetadata message. Does not implicitly {@link google.cloud.speech.v2.ModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelMetadata} message ModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.modelFeatures != null && Object.hasOwnProperty.call(message, "modelFeatures"))
+                                for (var keys = Object.keys(message.modelFeatures), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.speech.v2.ModelFeatures.encode(message.modelFeatures[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ModelMetadata message, length delimited. Does not implicitly {@link google.cloud.speech.v2.ModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.IModelMetadata} message ModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.ModelMetadata} ModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.ModelMetadata(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.modelFeatures === $util.emptyObject)
+                                            message.modelFeatures = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.speech.v2.ModelFeatures.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.modelFeatures[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.ModelMetadata} ModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.modelFeatures != null && message.hasOwnProperty("modelFeatures")) {
+                                if (!$util.isObject(message.modelFeatures))
+                                    return "modelFeatures: object expected";
+                                var key = Object.keys(message.modelFeatures);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.speech.v2.ModelFeatures.verify(message.modelFeatures[key[i]]);
+                                    if (error)
+                                        return "modelFeatures." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.ModelMetadata} ModelMetadata
+                         */
+                        ModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.ModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.ModelMetadata();
+                            if (object.modelFeatures) {
+                                if (typeof object.modelFeatures !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.ModelMetadata.modelFeatures: object expected");
+                                message.modelFeatures = {};
+                                for (var keys = Object.keys(object.modelFeatures), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.modelFeatures[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.speech.v2.ModelMetadata.modelFeatures: object expected");
+                                    message.modelFeatures[keys[i]] = $root.google.cloud.speech.v2.ModelFeatures.fromObject(object.modelFeatures[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ModelMetadata} message ModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.modelFeatures = {};
+                            var keys2;
+                            if (message.modelFeatures && (keys2 = Object.keys(message.modelFeatures)).length) {
+                                object.modelFeatures = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.modelFeatures[keys2[j]] = $root.google.cloud.speech.v2.ModelFeatures.toObject(message.modelFeatures[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ModelMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.ModelMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ModelMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.ModelMetadata";
+                        };
+    
+                        return ModelMetadata;
+                    })();
+    
+                    v2.LanguageMetadata = (function() {
+    
+                        /**
+                         * Properties of a LanguageMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ILanguageMetadata
+                         * @property {Object.<string,google.cloud.speech.v2.IModelMetadata>|null} [models] LanguageMetadata models
+                         */
+    
+                        /**
+                         * Constructs a new LanguageMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a LanguageMetadata.
+                         * @implements ILanguageMetadata
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ILanguageMetadata=} [properties] Properties to set
+                         */
+                        function LanguageMetadata(properties) {
+                            this.models = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LanguageMetadata models.
+                         * @member {Object.<string,google.cloud.speech.v2.IModelMetadata>} models
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @instance
+                         */
+                        LanguageMetadata.prototype.models = $util.emptyObject;
+    
+                        /**
+                         * Creates a new LanguageMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ILanguageMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.LanguageMetadata} LanguageMetadata instance
+                         */
+                        LanguageMetadata.create = function create(properties) {
+                            return new LanguageMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LanguageMetadata message. Does not implicitly {@link google.cloud.speech.v2.LanguageMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ILanguageMetadata} message LanguageMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LanguageMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.models != null && Object.hasOwnProperty.call(message, "models"))
+                                for (var keys = Object.keys(message.models), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 1, wireType 2 =*/10).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.speech.v2.ModelMetadata.encode(message.models[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LanguageMetadata message, length delimited. Does not implicitly {@link google.cloud.speech.v2.LanguageMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ILanguageMetadata} message LanguageMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LanguageMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LanguageMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.LanguageMetadata} LanguageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LanguageMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.LanguageMetadata(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (message.models === $util.emptyObject)
+                                            message.models = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = null;
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = $root.google.cloud.speech.v2.ModelMetadata.decode(reader, reader.uint32());
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.models[key] = value;
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LanguageMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.LanguageMetadata} LanguageMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LanguageMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LanguageMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LanguageMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.models != null && message.hasOwnProperty("models")) {
+                                if (!$util.isObject(message.models))
+                                    return "models: object expected";
+                                var key = Object.keys(message.models);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.speech.v2.ModelMetadata.verify(message.models[key[i]]);
+                                    if (error)
+                                        return "models." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LanguageMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.LanguageMetadata} LanguageMetadata
+                         */
+                        LanguageMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.LanguageMetadata)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.LanguageMetadata();
+                            if (object.models) {
+                                if (typeof object.models !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.LanguageMetadata.models: object expected");
+                                message.models = {};
+                                for (var keys = Object.keys(object.models), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.models[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.speech.v2.LanguageMetadata.models: object expected");
+                                    message.models[keys[i]] = $root.google.cloud.speech.v2.ModelMetadata.fromObject(object.models[keys[i]]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LanguageMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.LanguageMetadata} message LanguageMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LanguageMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.models = {};
+                            var keys2;
+                            if (message.models && (keys2 = Object.keys(message.models)).length) {
+                                object.models = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.models[keys2[j]] = $root.google.cloud.speech.v2.ModelMetadata.toObject(message.models[keys2[j]], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LanguageMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LanguageMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LanguageMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.LanguageMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LanguageMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.LanguageMetadata";
+                        };
+    
+                        return LanguageMetadata;
+                    })();
+    
+                    v2.AccessMetadata = (function() {
+    
+                        /**
+                         * Properties of an AccessMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @interface IAccessMetadata
+                         * @property {google.cloud.speech.v2.AccessMetadata.ConstraintType|null} [constraintType] AccessMetadata constraintType
+                         */
+    
+                        /**
+                         * Constructs a new AccessMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents an AccessMetadata.
+                         * @implements IAccessMetadata
+                         * @constructor
+                         * @param {google.cloud.speech.v2.IAccessMetadata=} [properties] Properties to set
+                         */
+                        function AccessMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AccessMetadata constraintType.
+                         * @member {google.cloud.speech.v2.AccessMetadata.ConstraintType} constraintType
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @instance
+                         */
+                        AccessMetadata.prototype.constraintType = 0;
+    
+                        /**
+                         * Creates a new AccessMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.IAccessMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.AccessMetadata} AccessMetadata instance
+                         */
+                        AccessMetadata.create = function create(properties) {
+                            return new AccessMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AccessMetadata message. Does not implicitly {@link google.cloud.speech.v2.AccessMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.IAccessMetadata} message AccessMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.constraintType != null && Object.hasOwnProperty.call(message, "constraintType"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.constraintType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AccessMetadata message, length delimited. Does not implicitly {@link google.cloud.speech.v2.AccessMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.IAccessMetadata} message AccessMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AccessMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AccessMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.AccessMetadata} AccessMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.AccessMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.constraintType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AccessMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.AccessMetadata} AccessMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AccessMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AccessMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AccessMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.constraintType != null && message.hasOwnProperty("constraintType"))
+                                switch (message.constraintType) {
+                                default:
+                                    return "constraintType: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AccessMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.AccessMetadata} AccessMetadata
+                         */
+                        AccessMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.AccessMetadata)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.AccessMetadata();
+                            switch (object.constraintType) {
+                            default:
+                                if (typeof object.constraintType === "number") {
+                                    message.constraintType = object.constraintType;
+                                    break;
+                                }
+                                break;
+                            case "CONSTRAINT_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.constraintType = 0;
+                                break;
+                            case "RESOURCE_LOCATIONS_ORG_POLICY_CREATE_CONSTRAINT":
+                            case 1:
+                                message.constraintType = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AccessMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.AccessMetadata} message AccessMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AccessMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.constraintType = options.enums === String ? "CONSTRAINT_TYPE_UNSPECIFIED" : 0;
+                            if (message.constraintType != null && message.hasOwnProperty("constraintType"))
+                                object.constraintType = options.enums === String ? $root.google.cloud.speech.v2.AccessMetadata.ConstraintType[message.constraintType] === undefined ? message.constraintType : $root.google.cloud.speech.v2.AccessMetadata.ConstraintType[message.constraintType] : message.constraintType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AccessMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AccessMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AccessMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.AccessMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AccessMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.AccessMetadata";
+                        };
+    
+                        /**
+                         * ConstraintType enum.
+                         * @name google.cloud.speech.v2.AccessMetadata.ConstraintType
+                         * @enum {number}
+                         * @property {number} CONSTRAINT_TYPE_UNSPECIFIED=0 CONSTRAINT_TYPE_UNSPECIFIED value
+                         * @property {number} RESOURCE_LOCATIONS_ORG_POLICY_CREATE_CONSTRAINT=1 RESOURCE_LOCATIONS_ORG_POLICY_CREATE_CONSTRAINT value
+                         */
+                        AccessMetadata.ConstraintType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CONSTRAINT_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RESOURCE_LOCATIONS_ORG_POLICY_CREATE_CONSTRAINT"] = 1;
+                            return values;
+                        })();
+    
+                        return AccessMetadata;
+                    })();
+    
+                    v2.LocationsMetadata = (function() {
+    
+                        /**
+                         * Properties of a LocationsMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @interface ILocationsMetadata
+                         * @property {google.cloud.speech.v2.ILanguageMetadata|null} [languages] LocationsMetadata languages
+                         * @property {google.cloud.speech.v2.IAccessMetadata|null} [accessMetadata] LocationsMetadata accessMetadata
+                         */
+    
+                        /**
+                         * Constructs a new LocationsMetadata.
+                         * @memberof google.cloud.speech.v2
+                         * @classdesc Represents a LocationsMetadata.
+                         * @implements ILocationsMetadata
+                         * @constructor
+                         * @param {google.cloud.speech.v2.ILocationsMetadata=} [properties] Properties to set
+                         */
+                        function LocationsMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LocationsMetadata languages.
+                         * @member {google.cloud.speech.v2.ILanguageMetadata|null|undefined} languages
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @instance
+                         */
+                        LocationsMetadata.prototype.languages = null;
+    
+                        /**
+                         * LocationsMetadata accessMetadata.
+                         * @member {google.cloud.speech.v2.IAccessMetadata|null|undefined} accessMetadata
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @instance
+                         */
+                        LocationsMetadata.prototype.accessMetadata = null;
+    
+                        /**
+                         * Creates a new LocationsMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ILocationsMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v2.LocationsMetadata} LocationsMetadata instance
+                         */
+                        LocationsMetadata.create = function create(properties) {
+                            return new LocationsMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LocationsMetadata message. Does not implicitly {@link google.cloud.speech.v2.LocationsMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ILocationsMetadata} message LocationsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationsMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.languages != null && Object.hasOwnProperty.call(message, "languages"))
+                                $root.google.cloud.speech.v2.LanguageMetadata.encode(message.languages, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.accessMetadata != null && Object.hasOwnProperty.call(message, "accessMetadata"))
+                                $root.google.cloud.speech.v2.AccessMetadata.encode(message.accessMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LocationsMetadata message, length delimited. Does not implicitly {@link google.cloud.speech.v2.LocationsMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.ILocationsMetadata} message LocationsMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LocationsMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LocationsMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v2.LocationsMetadata} LocationsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationsMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v2.LocationsMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.languages = $root.google.cloud.speech.v2.LanguageMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.accessMetadata = $root.google.cloud.speech.v2.AccessMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LocationsMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v2.LocationsMetadata} LocationsMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LocationsMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LocationsMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LocationsMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.languages != null && message.hasOwnProperty("languages")) {
+                                var error = $root.google.cloud.speech.v2.LanguageMetadata.verify(message.languages);
+                                if (error)
+                                    return "languages." + error;
+                            }
+                            if (message.accessMetadata != null && message.hasOwnProperty("accessMetadata")) {
+                                var error = $root.google.cloud.speech.v2.AccessMetadata.verify(message.accessMetadata);
+                                if (error)
+                                    return "accessMetadata." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LocationsMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v2.LocationsMetadata} LocationsMetadata
+                         */
+                        LocationsMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v2.LocationsMetadata)
+                                return object;
+                            var message = new $root.google.cloud.speech.v2.LocationsMetadata();
+                            if (object.languages != null) {
+                                if (typeof object.languages !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.LocationsMetadata.languages: object expected");
+                                message.languages = $root.google.cloud.speech.v2.LanguageMetadata.fromObject(object.languages);
+                            }
+                            if (object.accessMetadata != null) {
+                                if (typeof object.accessMetadata !== "object")
+                                    throw TypeError(".google.cloud.speech.v2.LocationsMetadata.accessMetadata: object expected");
+                                message.accessMetadata = $root.google.cloud.speech.v2.AccessMetadata.fromObject(object.accessMetadata);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LocationsMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {google.cloud.speech.v2.LocationsMetadata} message LocationsMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LocationsMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.languages = null;
+                                object.accessMetadata = null;
+                            }
+                            if (message.languages != null && message.hasOwnProperty("languages"))
+                                object.languages = $root.google.cloud.speech.v2.LanguageMetadata.toObject(message.languages, options);
+                            if (message.accessMetadata != null && message.hasOwnProperty("accessMetadata"))
+                                object.accessMetadata = $root.google.cloud.speech.v2.AccessMetadata.toObject(message.accessMetadata, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LocationsMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LocationsMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for LocationsMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.speech.v2.LocationsMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        LocationsMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.speech.v2.LocationsMetadata";
+                        };
+    
+                        return LocationsMetadata;
+                    })();
+    
                     return v2;
                 })();
     
@@ -49896,6 +51334,263 @@
                 };
     
                 return ResourceReference;
+            })();
+    
+            api.FieldInfo = (function() {
+    
+                /**
+                 * Properties of a FieldInfo.
+                 * @memberof google.api
+                 * @interface IFieldInfo
+                 * @property {google.api.FieldInfo.Format|null} [format] FieldInfo format
+                 */
+    
+                /**
+                 * Constructs a new FieldInfo.
+                 * @memberof google.api
+                 * @classdesc Represents a FieldInfo.
+                 * @implements IFieldInfo
+                 * @constructor
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 */
+                function FieldInfo(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldInfo format.
+                 * @member {google.api.FieldInfo.Format} format
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 */
+                FieldInfo.prototype.format = 0;
+    
+                /**
+                 * Creates a new FieldInfo instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo=} [properties] Properties to set
+                 * @returns {google.api.FieldInfo} FieldInfo instance
+                 */
+                FieldInfo.create = function create(properties) {
+                    return new FieldInfo(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.format != null && Object.hasOwnProperty.call(message, "format"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.format);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.IFieldInfo} message FieldInfo message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.FieldInfo();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.format = reader.int32();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldInfo.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldInfo message.
+                 * @function verify
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldInfo.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        switch (message.format) {
+                        default:
+                            return "format: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            break;
+                        }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.FieldInfo} FieldInfo
+                 */
+                FieldInfo.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.FieldInfo)
+                        return object;
+                    var message = new $root.google.api.FieldInfo();
+                    switch (object.format) {
+                    default:
+                        if (typeof object.format === "number") {
+                            message.format = object.format;
+                            break;
+                        }
+                        break;
+                    case "FORMAT_UNSPECIFIED":
+                    case 0:
+                        message.format = 0;
+                        break;
+                    case "UUID4":
+                    case 1:
+                        message.format = 1;
+                        break;
+                    case "IPV4":
+                    case 2:
+                        message.format = 2;
+                        break;
+                    case "IPV6":
+                    case 3:
+                        message.format = 3;
+                        break;
+                    case "IPV4_OR_IPV6":
+                    case 4:
+                        message.format = 4;
+                        break;
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {google.api.FieldInfo} message FieldInfo
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldInfo.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults)
+                        object.format = options.enums === String ? "FORMAT_UNSPECIFIED" : 0;
+                    if (message.format != null && message.hasOwnProperty("format"))
+                        object.format = options.enums === String ? $root.google.api.FieldInfo.Format[message.format] === undefined ? message.format : $root.google.api.FieldInfo.Format[message.format] : message.format;
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldInfo to JSON.
+                 * @function toJSON
+                 * @memberof google.api.FieldInfo
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldInfo.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldInfo
+                 * @function getTypeUrl
+                 * @memberof google.api.FieldInfo
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.FieldInfo";
+                };
+    
+                /**
+                 * Format enum.
+                 * @name google.api.FieldInfo.Format
+                 * @enum {number}
+                 * @property {number} FORMAT_UNSPECIFIED=0 FORMAT_UNSPECIFIED value
+                 * @property {number} UUID4=1 UUID4 value
+                 * @property {number} IPV4=2 IPV4 value
+                 * @property {number} IPV6=3 IPV6 value
+                 * @property {number} IPV4_OR_IPV6=4 IPV4_OR_IPV6 value
+                 */
+                FieldInfo.Format = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "FORMAT_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "UUID4"] = 1;
+                    values[valuesById[2] = "IPV4"] = 2;
+                    values[valuesById[3] = "IPV6"] = 3;
+                    values[valuesById[4] = "IPV4_OR_IPV6"] = 4;
+                    return values;
+                })();
+    
+                return FieldInfo;
             })();
     
             return api;
@@ -56072,6 +57767,7 @@
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
+                 * @property {google.api.IFieldInfo|null} [".google.api.fieldInfo"] FieldOptions .google.api.fieldInfo
                  */
     
                 /**
@@ -56214,6 +57910,14 @@
                 FieldOptions.prototype[".google.api.resourceReference"] = null;
     
                 /**
+                 * FieldOptions .google.api.fieldInfo.
+                 * @member {google.api.IFieldInfo|null|undefined} .google.api.fieldInfo
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.api.fieldInfo"] = null;
+    
+                /**
                  * Creates a new FieldOptions instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FieldOptions
@@ -56274,6 +57978,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.api.fieldInfo"] != null && Object.hasOwnProperty.call(message, ".google.api.fieldInfo"))
+                        $root.google.api.FieldInfo.encode(message[".google.api.fieldInfo"], writer.uint32(/* id 291403980, wireType 2 =*/2331231842).fork()).ldelim();
                     return writer;
                 };
     
@@ -56384,6 +58090,10 @@
                             }
                         case 1055: {
                                 message[".google.api.resourceReference"] = $root.google.api.ResourceReference.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 291403980: {
+                                message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -56532,6 +58242,11 @@
                         var error = $root.google.api.ResourceReference.verify(message[".google.api.resourceReference"]);
                         if (error)
                             return ".google.api.resourceReference." + error;
+                    }
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo")) {
+                        var error = $root.google.api.FieldInfo.verify(message[".google.api.fieldInfo"]);
+                        if (error)
+                            return ".google.api.fieldInfo." + error;
                     }
                     return null;
                 };
@@ -56752,6 +58467,11 @@
                             throw TypeError(".google.protobuf.FieldOptions..google.api.resourceReference: object expected");
                         message[".google.api.resourceReference"] = $root.google.api.ResourceReference.fromObject(object[".google.api.resourceReference"]);
                     }
+                    if (object[".google.api.fieldInfo"] != null) {
+                        if (typeof object[".google.api.fieldInfo"] !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions..google.api.fieldInfo: object expected");
+                        message[".google.api.fieldInfo"] = $root.google.api.FieldInfo.fromObject(object[".google.api.fieldInfo"]);
+                    }
                     return message;
                 };
     
@@ -56786,6 +58506,7 @@
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.api.fieldInfo"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
                         object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
@@ -56829,6 +58550,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.api.fieldInfo"] != null && message.hasOwnProperty(".google.api.fieldInfo"))
+                        object[".google.api.fieldInfo"] = $root.google.api.FieldInfo.toObject(message[".google.api.fieldInfo"], options);
                     return object;
                 };
     
