@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v1.3.0...vmwareengine-v1.4.0) (2024-07-22)
+
+
+### Features
+
+* [vmwareengine] Adding autoscaling settings ([#5554](https://github.com/googleapis/google-cloud-node/issues/5554)) ([09fd87c](https://github.com/googleapis/google-cloud-node/commit/09fd87c52171a57e8caf5e95f91a958223104109))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/vmwareengine-v1.2.0...vmwareengine-v1.3.0) (2024-05-21)
 
 

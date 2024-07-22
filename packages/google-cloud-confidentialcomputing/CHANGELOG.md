@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.5.0...confidentialcomputing-v1.6.0) (2024-07-22)
+
+
+### Features
+
+* [confidentialcomputing] Add a new field `tee_attestation` to `VerifyAttestationRequest` message proto for SEV SNP and TDX attestations ([#5538](https://github.com/googleapis/google-cloud-node/issues/5538)) ([6368c02](https://github.com/googleapis/google-cloud-node/commit/6368c02be96b2cf6ad0e514a0c176374c38ba2f1))
+
 ## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/confidentialcomputing-v1.4.0...confidentialcomputing-v1.5.0) (2024-05-21)
 
 

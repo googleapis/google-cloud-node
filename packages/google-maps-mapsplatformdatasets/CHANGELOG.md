@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v2.0.0...maps-platform-datasets-v2.1.0) (2024-07-22)
+
+
+### Features
+
+* [mapsplatformdatasets] added a new API FetchDatasetErrors ([#5547](https://github.com/googleapis/google-cloud-node/issues/5547)) ([09bc034](https://github.com/googleapis/google-cloud-node/commit/09bc034537c6f2d5a8c3dc23c3d2efd207f01aac))
+
 ## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/maps-platform-datasets-v1.3.0...maps-platform-datasets-v2.0.0) (2024-06-04)
 
 

@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.16.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.1...container-v5.16.0) (2024-07-22)
+
+
+### Features
+
+* [container] A new field `ray_operator_config` is added to message `.google.container.v1beta1.AddonsConfig` ([#5553](https://github.com/googleapis/google-cloud-node/issues/5553)) ([a884c76](https://github.com/googleapis/google-cloud-node/commit/a884c766ff86127abe6a8159f23158de4badf09f))
+
+
+### Bug Fixes
+
+* [container] Deprecate "EXPERIMENTAL" option for Gateway API (this value has never been supported) ([#5535](https://github.com/googleapis/google-cloud-node/issues/5535)) ([c06cdc7](https://github.com/googleapis/google-cloud-node/commit/c06cdc758d01ae296455757fba12eed47a8d5c06))
+
 ## [5.15.1](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.0...container-v5.15.1) (2024-07-10)
 
 
