@@ -926,6 +926,15 @@ export class DataStoreServiceClient {
    *   If the data store is not configured as site
    *   search (GENERIC vertical and PUBLIC_WEBSITE content_config), this flag will
    *   be ignored.
+   * @param {boolean} request.skipDefaultSchemaCreation
+   *   A boolean flag indicating whether to skip the default schema creation for
+   *   the data store. Only enable this flag if you are certain that the default
+   *   schema is incompatible with your use case.
+   *
+   *   If set to true, you must manually create a schema for the data store before
+   *   any documents can be ingested.
+   *
+   *   This flag cannot be specified if `data_store.starting_schema` is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
