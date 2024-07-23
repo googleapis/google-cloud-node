@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.7.0...deploy-v3.8.0) (2024-07-22)
+
+
+### Features
+
+* [deploy] added support for deploy policies ([#5549](https://github.com/googleapis/google-cloud-node/issues/5549)) ([cfe9a27](https://github.com/googleapis/google-cloud-node/commit/cfe9a2755ad17e3d8f01b7381ea1d957e6c3f3e3))
+* [deploy] added support for new custom target type and deploy policy platform logs ([#5561](https://github.com/googleapis/google-cloud-node/issues/5561)) ([6deeeed](https://github.com/googleapis/google-cloud-node/commit/6deeeeda34ef933fba078769a8977095bef84f71))
+
 ## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.6.0...deploy-v3.7.0) (2024-05-21)
 
 

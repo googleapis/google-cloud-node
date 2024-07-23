@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.4.0...admin-v7.5.0) (2024-07-22)
+
+
+### Features
+
+* [analytics-admin] add `GetKeyEvent`, `CreateKeyEvent`, `ListKeyEvents`, `UpdateKeyEvent`, `DeleteKeyEvent` methods to the Admin API v1beta ([#5556](https://github.com/googleapis/google-cloud-node/issues/5556)) ([f0403d5](https://github.com/googleapis/google-cloud-node/commit/f0403d546bbc3775b9d4b7dd15df74b6809084e7))
+
 ## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/admin-v7.3.0...admin-v7.4.0) (2024-05-21)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.3.0...bigquery-migration-v1.4.0) (2024-07-22)
+
+
+### Features
+
+* Update MS API stubs with Unified API ([#5548](https://github.com/googleapis/google-cloud-node/issues/5548)) ([9bd3923](https://github.com/googleapis/google-cloud-node/commit/9bd3923bbac93975828f73b24efce9d513d6e201))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-migration-v1.2.0...bigquery-migration-v1.3.0) (2024-05-21)
 
 

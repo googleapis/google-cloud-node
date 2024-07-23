@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.7.0...dlp-v5.8.0) (2024-07-22)
+
+
+### Features
+
+* [dlp] add Cloud Storage discovery support ([#5545](https://github.com/googleapis/google-cloud-node/issues/5545)) ([00296ee](https://github.com/googleapis/google-cloud-node/commit/00296eea9db6120a9d7054687397b554b65a6e66))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.6.0...dlp-v5.7.0) (2024-06-03)
 
 
