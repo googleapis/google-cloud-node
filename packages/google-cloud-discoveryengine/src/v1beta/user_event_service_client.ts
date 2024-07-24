@@ -462,6 +462,12 @@ export class UserEventServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const purgeUserEventsResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.PurgeUserEventsResponse'
+    ) as gax.protobuf.Type;
+    const purgeUserEventsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1beta.PurgeUserEventsMetadata'
+    ) as gax.protobuf.Type;
     const importUserEventsResponse = protoFilesRoot.lookup(
       '.google.cloud.discoveryengine.v1beta.ImportUserEventsResponse'
     ) as gax.protobuf.Type;
@@ -470,6 +476,11 @@ export class UserEventServiceClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      purgeUserEvents: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeUserEventsResponse.decode.bind(purgeUserEventsResponse),
+        purgeUserEventsMetadata.decode.bind(purgeUserEventsMetadata)
+      ),
       importUserEvents: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importUserEventsResponse.decode.bind(importUserEventsResponse),
@@ -530,6 +541,7 @@ export class UserEventServiceClient {
     const userEventServiceStubMethods = [
       'writeUserEvent',
       'collectUserEvent',
+      'purgeUserEvents',
       'importUserEvents',
     ];
     for (const methodName of userEventServiceStubMethods) {
@@ -869,6 +881,180 @@ export class UserEventServiceClient {
     return this.innerApiCalls.collectUserEvent(request, options, callback);
   }
 
+  /**
+   * Deletes permanently all user events specified by the filter provided.
+   * Depending on the number of events specified by the filter, this operation
+   * could take hours or days to complete. To test a filter, use the list
+   * command first.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the catalog under which the events are
+   *   created. The format is
+   *   `projects/${projectId}/locations/global/collections/{$collectionId}/dataStores/${dataStoreId}`
+   * @param {string} request.filter
+   *   Required. The filter string to specify the events to be deleted with a
+   *   length limit of 5,000 characters. The eligible fields for filtering are:
+   *
+   *   * `eventType`: Double quoted
+   *   {@link protos.google.cloud.discoveryengine.v1beta.UserEvent.event_type|UserEvent.event_type}
+   *   string.
+   *   * `eventTime`: in ISO 8601 "zulu" format.
+   *   * `userPseudoId`: Double quoted string. Specifying this will delete all
+   *     events associated with a visitor.
+   *   * `userId`: Double quoted string. Specifying this will delete all events
+   *     associated with a user.
+   *
+   *   Examples:
+   *
+   *   * Deleting all events in a time range:
+   *     `eventTime > "2012-04-23T18:25:43.511Z"
+   *     eventTime < "2012-04-23T18:30:43.511Z"`
+   *   * Deleting specific eventType:
+   *     `eventType = "search"`
+   *   * Deleting all events for a specific visitor:
+   *     `userPseudoId = "visitor1024"`
+   *   * Deleting all events inside a DataStore:
+   *     `*`
+   *
+   *   The filtering fields are assumed to have an implicit AND.
+   * @param {boolean} request.force
+   *   The `force` field is currently not supported. Purge user event requests
+   *   will permanently delete all purgeable events. Once the development is
+   *   complete:
+   *   If `force` is set to false, the method will return the expected
+   *   purge count without deleting any user events. This field will default to
+   *   false if not included in the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/user_event_service.purge_user_events.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_UserEventService_PurgeUserEvents_async
+   */
+  purgeUserEvents(
+    request?: protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  purgeUserEvents(
+    request: protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeUserEvents(
+    request: protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeUserEvents(
+    request?: protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsResponse,
+            protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsResponse,
+        protos.google.cloud.discoveryengine.v1beta.IPurgeUserEventsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeUserEvents(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeUserEvents()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/user_event_service.purge_user_events.js</caption>
+   * region_tag:discoveryengine_v1beta_generated_UserEventService_PurgeUserEvents_async
+   */
+  async checkPurgeUserEventsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1beta.PurgeUserEventsResponse,
+      protos.google.cloud.discoveryengine.v1beta.PurgeUserEventsMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.purgeUserEvents,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1beta.PurgeUserEventsResponse,
+      protos.google.cloud.discoveryengine.v1beta.PurgeUserEventsMetadata
+    >;
+  }
   /**
    * Bulk import of user events. Request processing might be
    * synchronous. Events that already exist are skipped.
