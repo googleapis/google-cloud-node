@@ -4918,7 +4918,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.field_behavior)": "IDENTIFIER",
                             "(google.api.resource_reference).type": "datacatalog.googleapis.com/EntryGroup"
                           }
                         },
@@ -4993,7 +4993,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -5565,7 +5568,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "template": {
                           "type": "string",
@@ -5662,7 +5668,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "displayName": {
                           "type": "string",
@@ -5674,6 +5683,21 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dataplexTransferStatus": {
+                          "type": "DataplexTransferStatus",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DataplexTransferStatus": {
+                          "values": {
+                            "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED": 0,
+                            "MIGRATED": 1
                           }
                         }
                       }
