@@ -21119,6 +21119,9 @@ export namespace google {
 
                     /** TagTemplate fields */
                     fields?: ({ [k: string]: google.cloud.datacatalog.v1beta1.ITagTemplateField }|null);
+
+                    /** TagTemplate dataplexTransferStatus */
+                    dataplexTransferStatus?: (google.cloud.datacatalog.v1beta1.TagTemplate.DataplexTransferStatus|keyof typeof google.cloud.datacatalog.v1beta1.TagTemplate.DataplexTransferStatus|null);
                 }
 
                 /** Represents a TagTemplate. */
@@ -21138,6 +21141,9 @@ export namespace google {
 
                     /** TagTemplate fields. */
                     public fields: { [k: string]: google.cloud.datacatalog.v1beta1.ITagTemplateField };
+
+                    /** TagTemplate dataplexTransferStatus. */
+                    public dataplexTransferStatus: (google.cloud.datacatalog.v1beta1.TagTemplate.DataplexTransferStatus|keyof typeof google.cloud.datacatalog.v1beta1.TagTemplate.DataplexTransferStatus);
 
                     /**
                      * Creates a new TagTemplate instance using the specified properties.
@@ -21215,6 +21221,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace TagTemplate {
+
+                    /** DataplexTransferStatus enum. */
+                    enum DataplexTransferStatus {
+                        DATAPLEX_TRANSFER_STATUS_UNSPECIFIED = 0,
+                        MIGRATED = 1
+                    }
                 }
 
                 /** Properties of a TagTemplateField. */

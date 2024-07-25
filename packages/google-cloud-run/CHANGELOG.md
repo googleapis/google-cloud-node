@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.3.0...run-v1.4.0) (2024-07-22)
+
+
+### Features
+
+* [run]support update_mask in Cloud Run UpdateService ([#5532](https://github.com/googleapis/google-cloud-node/issues/5532)) ([62bc6bf](https://github.com/googleapis/google-cloud-node/commit/62bc6bf8546f247e346ca364560c130bfa0da0f1))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/run-v1.2.0...run-v1.3.0) (2024-05-21)
 
 

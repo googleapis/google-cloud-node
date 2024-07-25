@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.10.0",
+        "version": "1.11.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -148,6 +148,102 @@
                 "method": {
                     "shortName": "PurgeSuggestionDenyListEntries",
                     "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.PurgeSuggestionDenyListEntries",
+                    "service": {
+                        "shortName": "CompletionService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.CompletionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_CompletionService_ImportCompletionSuggestions_async",
+            "title": "CompletionService importCompletionSuggestions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports [CompletionSuggestion][google.cloud.discoveryengine.v1beta.CompletionSuggestion]s for a DataStore.",
+            "canonical": true,
+            "file": "completion_service.import_completion_suggestions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportCompletionSuggestions",
+                "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.ImportCompletionSuggestions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "inline_source",
+                        "type": ".google.cloud.discoveryengine.v1beta.ImportCompletionSuggestionsRequest.InlineSource"
+                    },
+                    {
+                        "name": "gcs_source",
+                        "type": ".google.cloud.discoveryengine.v1beta.GcsSource"
+                    },
+                    {
+                        "name": "bigquery_source",
+                        "type": ".google.cloud.discoveryengine.v1beta.BigQuerySource"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "error_config",
+                        "type": ".google.cloud.discoveryengine.v1beta.ImportErrorConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CompletionServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportCompletionSuggestions",
+                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.ImportCompletionSuggestions",
+                    "service": {
+                        "shortName": "CompletionService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.CompletionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_CompletionService_PurgeCompletionSuggestions_async",
+            "title": "CompletionService purgeCompletionSuggestions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Permanently deletes all [CompletionSuggestion][google.cloud.discoveryengine.v1beta.CompletionSuggestion]s for a DataStore.",
+            "canonical": true,
+            "file": "completion_service.purge_completion_suggestions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PurgeCompletionSuggestions",
+                "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.PurgeCompletionSuggestions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CompletionServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionServiceClient"
+                },
+                "method": {
+                    "shortName": "PurgeCompletionSuggestions",
+                    "fullName": "google.cloud.discoveryengine.v1beta.CompletionService.PurgeCompletionSuggestions",
                     "service": {
                         "shortName": "CompletionService",
                         "fullName": "google.cloud.discoveryengine.v1beta.CompletionService"
@@ -686,7 +782,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 129,
                     "type": "FULL"
                 }
             ],
@@ -734,6 +830,10 @@
                     {
                         "name": "user_pseudo_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1beta.AnswerQueryResponse",
@@ -1026,7 +1126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -1049,6 +1149,10 @@
                     },
                     {
                         "name": "create_advanced_site_search",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_default_schema_creation",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -1478,7 +1582,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 159,
+                    "end": 163,
                     "type": "FULL"
                 }
             ],
@@ -1514,6 +1618,10 @@
                     {
                         "name": "firestore_source",
                         "type": ".google.cloud.discoveryengine.v1beta.FirestoreSource"
+                    },
+                    {
+                        "name": "alloy_db_source",
+                        "type": ".google.cloud.discoveryengine.v1beta.AlloyDbSource"
                     },
                     {
                         "name": "bigtable_source",
@@ -3090,7 +3198,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 268,
+                    "end": 323,
                     "type": "FULL"
                 }
             ],
@@ -3148,6 +3256,14 @@
                         "type": ".google.cloud.discoveryengine.v1beta.UserInfo"
                     },
                     {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
                         "name": "facet_specs",
                         "type": "TYPE_MESSAGE[]"
                     },
@@ -3190,6 +3306,22 @@
                     {
                         "name": "user_labels",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "natural_language_query_understanding_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec"
+                    },
+                    {
+                        "name": "search_as_you_type_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec"
+                    },
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session_spec",
+                        "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1beta.SearchResponse",
@@ -4036,6 +4168,54 @@
                 "method": {
                     "shortName": "CollectUserEvent",
                     "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.CollectUserEvent",
+                    "service": {
+                        "shortName": "UserEventService",
+                        "fullName": "google.cloud.discoveryengine.v1beta.UserEventService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1beta_generated_UserEventService_PurgeUserEvents_async",
+            "title": "CompletionService purgeUserEvents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes permanently all user events specified by the filter provided. Depending on the number of events specified by the filter, this operation could take hours or days to complete. To test a filter, use the list command first.",
+            "canonical": true,
+            "file": "user_event_service.purge_user_events.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 90,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PurgeUserEvents",
+                "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.PurgeUserEvents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "UserEventServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventServiceClient"
+                },
+                "method": {
+                    "shortName": "PurgeUserEvents",
+                    "fullName": "google.cloud.discoveryengine.v1beta.UserEventService.PurgeUserEvents",
                     "service": {
                         "shortName": "UserEventService",
                         "fullName": "google.cloud.discoveryengine.v1beta.UserEventService"

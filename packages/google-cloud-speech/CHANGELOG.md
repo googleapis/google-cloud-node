@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/speech-v6.6.1...speech-v6.7.0) (2024-07-22)
+
+
+### Features
+
+* Add locations metadata proto file ([#5565](https://github.com/googleapis/google-cloud-node/issues/5565)) ([910c9d4](https://github.com/googleapis/google-cloud-node/commit/910c9d4d2f80be5bf8f8604634322fd8e50ac360))
+
 ## [6.6.1](https://github.com/googleapis/google-cloud-node/compare/speech-v6.6.0...speech-v6.6.1) (2024-06-21)
 
 

@@ -2718,6 +2718,9 @@ export namespace google {
 
                         /** GatewayServiceMesh stableCutbackDuration */
                         stableCutbackDuration?: (google.protobuf.IDuration|null);
+
+                        /** GatewayServiceMesh podSelectorLabel */
+                        podSelectorLabel?: (string|null);
                     }
 
                     /** Represents a GatewayServiceMesh. */
@@ -2743,6 +2746,9 @@ export namespace google {
 
                         /** GatewayServiceMesh stableCutbackDuration. */
                         public stableCutbackDuration?: (google.protobuf.IDuration|null);
+
+                        /** GatewayServiceMesh podSelectorLabel. */
+                        public podSelectorLabel: string;
 
                         /**
                          * Creates a new GatewayServiceMesh instance using the specified properties.
@@ -2833,6 +2839,9 @@ export namespace google {
 
                         /** ServiceNetworking disablePodOverprovisioning */
                         disablePodOverprovisioning?: (boolean|null);
+
+                        /** ServiceNetworking podSelectorLabel */
+                        podSelectorLabel?: (string|null);
                     }
 
                     /** Represents a ServiceNetworking. */
@@ -2852,6 +2861,9 @@ export namespace google {
 
                         /** ServiceNetworking disablePodOverprovisioning. */
                         public disablePodOverprovisioning: boolean;
+
+                        /** ServiceNetworking podSelectorLabel. */
+                        public podSelectorLabel: string;
 
                         /**
                          * Creates a new ServiceNetworking instance using the specified properties.
@@ -17507,14 +17519,8 @@ export namespace google {
                     /** RepairRolloutRule id */
                     id?: (string|null);
 
-                    /** RepairRolloutRule sourcePhases */
-                    sourcePhases?: (string[]|null);
-
                     /** RepairRolloutRule jobs */
                     jobs?: (string[]|null);
-
-                    /** RepairRolloutRule repairModes */
-                    repairModes?: (google.cloud.deploy.v1.IRepairMode[]|null);
 
                     /** RepairRolloutRule condition */
                     condition?: (google.cloud.deploy.v1.IAutomationRuleCondition|null);
@@ -17532,14 +17538,8 @@ export namespace google {
                     /** RepairRolloutRule id. */
                     public id: string;
 
-                    /** RepairRolloutRule sourcePhases. */
-                    public sourcePhases: string[];
-
                     /** RepairRolloutRule jobs. */
                     public jobs: string[];
-
-                    /** RepairRolloutRule repairModes. */
-                    public repairModes: google.cloud.deploy.v1.IRepairMode[];
 
                     /** RepairRolloutRule condition. */
                     public condition?: (google.cloud.deploy.v1.IAutomationRuleCondition|null);
@@ -17616,318 +17616,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RepairRolloutRule
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a RepairMode. */
-                interface IRepairMode {
-
-                    /** RepairMode retry */
-                    retry?: (google.cloud.deploy.v1.IRetry|null);
-
-                    /** RepairMode rollback */
-                    rollback?: (google.cloud.deploy.v1.IRollback|null);
-                }
-
-                /** Represents a RepairMode. */
-                class RepairMode implements IRepairMode {
-
-                    /**
-                     * Constructs a new RepairMode.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.deploy.v1.IRepairMode);
-
-                    /** RepairMode retry. */
-                    public retry?: (google.cloud.deploy.v1.IRetry|null);
-
-                    /** RepairMode rollback. */
-                    public rollback?: (google.cloud.deploy.v1.IRollback|null);
-
-                    /** RepairMode mode. */
-                    public mode?: ("retry"|"rollback");
-
-                    /**
-                     * Creates a new RepairMode instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns RepairMode instance
-                     */
-                    public static create(properties?: google.cloud.deploy.v1.IRepairMode): google.cloud.deploy.v1.RepairMode;
-
-                    /**
-                     * Encodes the specified RepairMode message. Does not implicitly {@link google.cloud.deploy.v1.RepairMode.verify|verify} messages.
-                     * @param message RepairMode message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.deploy.v1.IRepairMode, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified RepairMode message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RepairMode.verify|verify} messages.
-                     * @param message RepairMode message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.deploy.v1.IRepairMode, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a RepairMode message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns RepairMode
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.RepairMode;
-
-                    /**
-                     * Decodes a RepairMode message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns RepairMode
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.RepairMode;
-
-                    /**
-                     * Verifies a RepairMode message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a RepairMode message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns RepairMode
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.RepairMode;
-
-                    /**
-                     * Creates a plain object from a RepairMode message. Also converts values to other types if specified.
-                     * @param message RepairMode
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.deploy.v1.RepairMode, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this RepairMode to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for RepairMode
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Retry. */
-                interface IRetry {
-
-                    /** Retry attempts */
-                    attempts?: (number|Long|string|null);
-
-                    /** Retry wait */
-                    wait?: (google.protobuf.IDuration|null);
-
-                    /** Retry backoffMode */
-                    backoffMode?: (google.cloud.deploy.v1.BackoffMode|keyof typeof google.cloud.deploy.v1.BackoffMode|null);
-                }
-
-                /** Represents a Retry. */
-                class Retry implements IRetry {
-
-                    /**
-                     * Constructs a new Retry.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.deploy.v1.IRetry);
-
-                    /** Retry attempts. */
-                    public attempts: (number|Long|string);
-
-                    /** Retry wait. */
-                    public wait?: (google.protobuf.IDuration|null);
-
-                    /** Retry backoffMode. */
-                    public backoffMode: (google.cloud.deploy.v1.BackoffMode|keyof typeof google.cloud.deploy.v1.BackoffMode);
-
-                    /**
-                     * Creates a new Retry instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Retry instance
-                     */
-                    public static create(properties?: google.cloud.deploy.v1.IRetry): google.cloud.deploy.v1.Retry;
-
-                    /**
-                     * Encodes the specified Retry message. Does not implicitly {@link google.cloud.deploy.v1.Retry.verify|verify} messages.
-                     * @param message Retry message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.deploy.v1.IRetry, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Retry message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Retry.verify|verify} messages.
-                     * @param message Retry message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.deploy.v1.IRetry, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Retry message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Retry
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Retry;
-
-                    /**
-                     * Decodes a Retry message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Retry
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Retry;
-
-                    /**
-                     * Verifies a Retry message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Retry message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Retry
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Retry;
-
-                    /**
-                     * Creates a plain object from a Retry message. Also converts values to other types if specified.
-                     * @param message Retry
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.deploy.v1.Retry, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Retry to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Retry
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a Rollback. */
-                interface IRollback {
-
-                    /** Rollback destinationPhase */
-                    destinationPhase?: (string|null);
-                }
-
-                /** Represents a Rollback. */
-                class Rollback implements IRollback {
-
-                    /**
-                     * Constructs a new Rollback.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.deploy.v1.IRollback);
-
-                    /** Rollback destinationPhase. */
-                    public destinationPhase: string;
-
-                    /**
-                     * Creates a new Rollback instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Rollback instance
-                     */
-                    public static create(properties?: google.cloud.deploy.v1.IRollback): google.cloud.deploy.v1.Rollback;
-
-                    /**
-                     * Encodes the specified Rollback message. Does not implicitly {@link google.cloud.deploy.v1.Rollback.verify|verify} messages.
-                     * @param message Rollback message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.deploy.v1.IRollback, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Rollback message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Rollback.verify|verify} messages.
-                     * @param message Rollback message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.deploy.v1.IRollback, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Rollback message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Rollback
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Rollback;
-
-                    /**
-                     * Decodes a Rollback message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Rollback
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Rollback;
-
-                    /**
-                     * Verifies a Rollback message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Rollback message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Rollback
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Rollback;
-
-                    /**
-                     * Creates a plain object from a Rollback message. Also converts values to other types if specified.
-                     * @param message Rollback
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.deploy.v1.Rollback, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Rollback to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Rollback
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -19167,11 +18855,14 @@ export namespace google {
                     /** RepairRolloutOperation rollout */
                     rollout?: (string|null);
 
-                    /** RepairRolloutOperation currentRepairModeIndex */
-                    currentRepairModeIndex?: (number|Long|string|null);
-
                     /** RepairRolloutOperation repairPhases */
                     repairPhases?: (google.cloud.deploy.v1.IRepairPhase[]|null);
+
+                    /** RepairRolloutOperation phaseId */
+                    phaseId?: (string|null);
+
+                    /** RepairRolloutOperation jobId */
+                    jobId?: (string|null);
                 }
 
                 /** Represents a RepairRolloutOperation. */
@@ -19186,11 +18877,14 @@ export namespace google {
                     /** RepairRolloutOperation rollout. */
                     public rollout: string;
 
-                    /** RepairRolloutOperation currentRepairModeIndex. */
-                    public currentRepairModeIndex: (number|Long|string);
-
                     /** RepairRolloutOperation repairPhases. */
                     public repairPhases: google.cloud.deploy.v1.IRepairPhase[];
+
+                    /** RepairRolloutOperation phaseId. */
+                    public phaseId: string;
+
+                    /** RepairRolloutOperation jobId. */
+                    public jobId: string;
 
                     /**
                      * Creates a new RepairRolloutOperation instance using the specified properties.
@@ -19385,12 +19079,6 @@ export namespace google {
                     /** RetryPhase backoffMode */
                     backoffMode?: (google.cloud.deploy.v1.BackoffMode|keyof typeof google.cloud.deploy.v1.BackoffMode|null);
 
-                    /** RetryPhase phaseId */
-                    phaseId?: (string|null);
-
-                    /** RetryPhase jobId */
-                    jobId?: (string|null);
-
                     /** RetryPhase attempts */
                     attempts?: (google.cloud.deploy.v1.IRetryAttempt[]|null);
                 }
@@ -19409,12 +19097,6 @@ export namespace google {
 
                     /** RetryPhase backoffMode. */
                     public backoffMode: (google.cloud.deploy.v1.BackoffMode|keyof typeof google.cloud.deploy.v1.BackoffMode);
-
-                    /** RetryPhase phaseId. */
-                    public phaseId: string;
-
-                    /** RetryPhase jobId. */
-                    public jobId: string;
 
                     /** RetryPhase attempts. */
                     public attempts: google.cloud.deploy.v1.IRetryAttempt[];
@@ -20265,7 +19947,7 @@ export namespace google {
                     REPAIR_STATE_FAILED = 3,
                     REPAIR_STATE_IN_PROGRESS = 4,
                     REPAIR_STATE_PENDING = 5,
-                    REPAIR_STATE_SKIPPED = 6
+                    REPAIR_STATE_ABORTED = 7
                 }
 
                 /** Properties of a CustomTargetTypeNotificationEvent. */

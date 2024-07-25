@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.4.0...tasks-v5.5.0) (2024-07-22)
+
+
+### Features
+
+* Capture esm usage in Cloud Tasks ([#5541](https://github.com/googleapis/google-cloud-node/issues/5541)) ([685a710](https://github.com/googleapis/google-cloud-node/commit/685a710c5a091b3626c2e59219faf26515e92a30))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/tasks-v5.3.0...tasks-v5.4.0) (2024-05-21)
 
 

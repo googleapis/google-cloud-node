@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.16.0...sql-v0.17.0) (2024-07-22)
+
+
+### Features
+
+* [sql] add EXTENSIONS_NOT_ENABLED_IN_REPLICA error type ([#5533](https://github.com/googleapis/google-cloud-node/issues/5533)) ([eafdb74](https://github.com/googleapis/google-cloud-node/commit/eafdb749a89fd01f17930e48c03aefc004be0a83))
+
 ## [0.16.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.15.0...sql-v0.16.0) (2024-07-10)
 
 

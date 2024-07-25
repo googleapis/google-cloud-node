@@ -24,6 +24,16 @@
               "methods": [
                 "purgeSuggestionDenyListEntries"
               ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
+              ]
             }
           }
         },
@@ -43,6 +53,16 @@
             "PurgeSuggestionDenyListEntries": {
               "methods": [
                 "purgeSuggestionDenyListEntries"
+              ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
               ]
             }
           }
@@ -1162,6 +1182,11 @@
                 "collectUserEvent"
               ]
             },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
+              ]
+            },
             "ImportUserEvents": {
               "methods": [
                 "importUserEvents"
@@ -1180,6 +1205,11 @@
             "CollectUserEvent": {
               "methods": [
                 "collectUserEvent"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
               ]
             },
             "ImportUserEvents": {

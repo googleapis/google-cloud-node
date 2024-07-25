@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.2.0...securesourcemanager-v0.3.0) (2024-07-22)
+
+
+### Features
+
+* [securesourcemanager] add field `private_config` to message `.google.cloud.securesourcemanager.v1.Instance` ([#5534](https://github.com/googleapis/google-cloud-node/issues/5534)) ([d43007b](https://github.com/googleapis/google-cloud-node/commit/d43007bf645222cac88491b6a16ff9b273e2063f))
+
 ## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/securesourcemanager-v0.1.0...securesourcemanager-v0.2.0) (2024-05-21)
 
 
