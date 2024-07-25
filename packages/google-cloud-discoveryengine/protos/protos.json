@@ -21446,6 +21446,13 @@
                           }
                         },
                         "SessionSpec": {
+                          "oneofs": {
+                            "_searchResultPersistenceCount": {
+                              "oneof": [
+                                "searchResultPersistenceCount"
+                              ]
+                            }
+                          },
                           "fields": {
                             "queryId": {
                               "type": "string",
@@ -21453,7 +21460,10 @@
                             },
                             "searchResultPersistenceCount": {
                               "type": "int32",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         }
