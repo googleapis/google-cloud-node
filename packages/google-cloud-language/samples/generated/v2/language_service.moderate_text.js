@@ -32,6 +32,10 @@ function main(document) {
    *  Required. Input document.
    */
   // const document = {}
+  /**
+   *  Optional. The model version to use for ModerateText.
+   */
+  // const modelVersion = {}
 
   // Imports the Language library
   const {LanguageServiceClient} = require('@google-cloud/language').v2;

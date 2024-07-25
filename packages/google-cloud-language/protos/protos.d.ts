@@ -7909,6 +7909,9 @@ export namespace google {
 
                     /** ClassificationCategory confidence */
                     confidence?: (number|null);
+
+                    /** ClassificationCategory severity */
+                    severity?: (number|null);
                 }
 
                 /** Represents a ClassificationCategory. */
@@ -7925,6 +7928,9 @@ export namespace google {
 
                     /** ClassificationCategory confidence. */
                     public confidence: number;
+
+                    /** ClassificationCategory severity. */
+                    public severity: number;
 
                     /**
                      * Creates a new ClassificationCategory instance using the specified properties.
@@ -8645,6 +8651,9 @@ export namespace google {
 
                     /** ModerateTextRequest document */
                     document?: (google.cloud.language.v2.IDocument|null);
+
+                    /** ModerateTextRequest modelVersion */
+                    modelVersion?: (google.cloud.language.v2.ModerateTextRequest.ModelVersion|keyof typeof google.cloud.language.v2.ModerateTextRequest.ModelVersion|null);
                 }
 
                 /** Represents a ModerateTextRequest. */
@@ -8658,6 +8667,9 @@ export namespace google {
 
                     /** ModerateTextRequest document. */
                     public document?: (google.cloud.language.v2.IDocument|null);
+
+                    /** ModerateTextRequest modelVersion. */
+                    public modelVersion: (google.cloud.language.v2.ModerateTextRequest.ModelVersion|keyof typeof google.cloud.language.v2.ModerateTextRequest.ModelVersion);
 
                     /**
                      * Creates a new ModerateTextRequest instance using the specified properties.
@@ -8735,6 +8747,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ModerateTextRequest {
+
+                    /** ModelVersion enum. */
+                    enum ModelVersion {
+                        MODEL_VERSION_UNSPECIFIED = 0,
+                        MODEL_VERSION_1 = 1,
+                        MODEL_VERSION_2 = 2
+                    }
                 }
 
                 /** Properties of a ModerateTextResponse. */
