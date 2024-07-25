@@ -629,6 +629,17 @@ export class SearchServiceClient {
    *   Highly recommended for analytics.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
+   * @param {string} request.languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). This field
+   *   helps to better interpret the query. If a value isn't specified, the query
+   *   language code is automatically detected, which may not be accurate.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of a location, such as "US" and
+   *   "419". For more information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). If set,
+   *   then results will be boosted based on the region_code provided.
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
@@ -736,6 +747,44 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *   natural language query understanding will be done.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+   *   Search as you type configuration. Only supported for the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+   *   vertical.
+   * @param {string} request.session
+   *   The session resource name. Optional.
+   *
+   *   Session allows users to do multi-turn /search API calls or coordination
+   *   between /search API calls and /answer API calls.
+   *
+   *   Example #1 (multi-turn /search API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /search API with the session ID generated in the first call.
+   *        Here, the previous search query gets considered in query
+   *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *        and the current query is "How about 2023?", the current query will
+   *        be interpreted as "How did Alphabet do in 2023?".
+   *
+   *   Example #2 (coordination between /search API calls and /answer API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /answer API with the session ID generated in the first call.
+   *        Here, the answer generation happens in the context of the search
+   *        results from the first search call.
+   *
+   *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *   gets automatically created. Otherwise, users can use the create-session API
+   *   to create a session manually.
+   *
+   *   Multi-turn Search feature is currently at private GA stage. Please use
+   *   v1alpha or v1beta version instead before we launch this feature to public
+   *   GA. Or ask for allowlisting through Google Support team.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
+   *   Session specification.
+   *
+   *   Can be used only when `session` is set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -921,6 +970,17 @@ export class SearchServiceClient {
    *   Highly recommended for analytics.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
+   * @param {string} request.languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). This field
+   *   helps to better interpret the query. If a value isn't specified, the query
+   *   language code is automatically detected, which may not be accurate.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of a location, such as "US" and
+   *   "419". For more information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). If set,
+   *   then results will be boosted based on the region_code provided.
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
@@ -1028,6 +1088,44 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *   natural language query understanding will be done.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+   *   Search as you type configuration. Only supported for the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+   *   vertical.
+   * @param {string} request.session
+   *   The session resource name. Optional.
+   *
+   *   Session allows users to do multi-turn /search API calls or coordination
+   *   between /search API calls and /answer API calls.
+   *
+   *   Example #1 (multi-turn /search API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /search API with the session ID generated in the first call.
+   *        Here, the previous search query gets considered in query
+   *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *        and the current query is "How about 2023?", the current query will
+   *        be interpreted as "How did Alphabet do in 2023?".
+   *
+   *   Example #2 (coordination between /search API calls and /answer API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /answer API with the session ID generated in the first call.
+   *        Here, the answer generation happens in the context of the search
+   *        results from the first search call.
+   *
+   *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *   gets automatically created. Otherwise, users can use the create-session API
+   *   to create a session manually.
+   *
+   *   Multi-turn Search feature is currently at private GA stage. Please use
+   *   v1alpha or v1beta version instead before we launch this feature to public
+   *   GA. Or ask for allowlisting through Google Support team.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
+   *   Session specification.
+   *
+   *   Can be used only when `session` is set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1161,6 +1259,17 @@ export class SearchServiceClient {
    *   Highly recommended for analytics.
    *   {@link protos.google.cloud.discoveryengine.v1beta.UserInfo.user_agent|UserInfo.user_agent}
    *   is used to deduce `device_type` for analytics.
+   * @param {string} request.languageCode
+   *   The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *   information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). This field
+   *   helps to better interpret the query. If a value isn't specified, the query
+   *   language code is automatically detected, which may not be accurate.
+   * @param {string} request.regionCode
+   *   The Unicode country/region code (CLDR) of a location, such as "US" and
+   *   "419". For more information, see [Standard
+   *   fields](https://cloud.google.com/apis/design/standard_fields). If set,
+   *   then results will be boosted based on the region_code provided.
    * @param {number[]} request.facetSpecs
    *   Facet specifications for faceted search. If empty, no facets are returned.
    *
@@ -1268,6 +1377,44 @@ export class SearchServiceClient {
    *   See [Google Cloud
    *   Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
    *   for more details.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.NaturalLanguageQueryUnderstandingSpec} request.naturalLanguageQueryUnderstandingSpec
+   *   If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *   natural language query understanding will be done.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SearchAsYouTypeSpec} request.searchAsYouTypeSpec
+   *   Search as you type configuration. Only supported for the
+   *   {@link protos.google.cloud.discoveryengine.v1beta.IndustryVertical.MEDIA|IndustryVertical.MEDIA}
+   *   vertical.
+   * @param {string} request.session
+   *   The session resource name. Optional.
+   *
+   *   Session allows users to do multi-turn /search API calls or coordination
+   *   between /search API calls and /answer API calls.
+   *
+   *   Example #1 (multi-turn /search API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /search API with the session ID generated in the first call.
+   *        Here, the previous search query gets considered in query
+   *        standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *        and the current query is "How about 2023?", the current query will
+   *        be interpreted as "How did Alphabet do in 2023?".
+   *
+   *   Example #2 (coordination between /search API calls and /answer API calls):
+   *     1. Call /search API with the auto-session mode (see below).
+   *     2. Call /answer API with the session ID generated in the first call.
+   *        Here, the answer generation happens in the context of the search
+   *        results from the first search call.
+   *
+   *   Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *   gets automatically created. Otherwise, users can use the create-session API
+   *   to create a session manually.
+   *
+   *   Multi-turn Search feature is currently at private GA stage. Please use
+   *   v1alpha or v1beta version instead before we launch this feature to public
+   *   GA. Or ask for allowlisting through Google Support team.
+   * @param {google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec} request.sessionSpec
+   *   Session specification.
+   *
+   *   Can be used only when `session` is set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

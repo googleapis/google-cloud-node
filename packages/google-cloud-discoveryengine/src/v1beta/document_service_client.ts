@@ -1152,6 +1152,8 @@ export class DocumentServiceClient {
    *   Cloud SQL input source.
    * @param {google.cloud.discoveryengine.v1beta.FirestoreSource} request.firestoreSource
    *   Firestore input source.
+   * @param {google.cloud.discoveryengine.v1beta.AlloyDbSource} request.alloyDbSource
+   *   AlloyDB input source.
    * @param {google.cloud.discoveryengine.v1beta.BigtableSource} request.bigtableSource
    *   Cloud Bigtable input source.
    * @param {string} request.parent
