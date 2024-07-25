@@ -1448,6 +1448,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "podSelectorLabel": {
+                              "type": "string",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -1470,6 +1477,13 @@
                             "disablePodOverprovisioning": {
                               "type": "bool",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "podSelectorLabel": {
+                              "type": "string",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -5388,14 +5402,6 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
-                        "sourcePhases": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "jobs": {
                           "rule": "repeated",
                           "type": "string",
@@ -5404,81 +5410,11 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "repairModes": {
-                          "rule": "repeated",
-                          "type": "RepairMode",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
                         "condition": {
                           "type": "AutomationRuleCondition",
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "RepairMode": {
-                      "oneofs": {
-                        "mode": {
-                          "oneof": [
-                            "retry",
-                            "rollback"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "retry": {
-                          "type": "Retry",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "rollback": {
-                          "type": "Rollback",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "Retry": {
-                      "fields": {
-                        "attempts": {
-                          "type": "int64",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "wait": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "backoffMode": {
-                          "type": "BackoffMode",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "Rollback": {
-                      "fields": {
-                        "destinationPhase": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -5893,17 +5829,24 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
-                        "currentRepairModeIndex": {
-                          "type": "int64",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
                         "repairPhases": {
                           "rule": "repeated",
                           "type": "RepairPhase",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "phaseId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "jobId": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -5948,20 +5891,6 @@
                         "backoffMode": {
                           "type": "BackoffMode",
                           "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "phaseId": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "jobId": {
-                          "type": "string",
-                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -6136,7 +6065,7 @@
                         "REPAIR_STATE_FAILED": 3,
                         "REPAIR_STATE_IN_PROGRESS": 4,
                         "REPAIR_STATE_PENDING": 5,
-                        "REPAIR_STATE_SKIPPED": 6
+                        "REPAIR_STATE_ABORTED": 7
                       }
                     },
                     "CustomTargetTypeNotificationEvent": {
