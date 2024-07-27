@@ -61,8 +61,8 @@ function main(parent) {
   // const orderBy = 'abc123'
   /**
    *  Optional. The IETF BCP-47 language code representing the language in which
-   *  the publisher models' text information should be written in (see go/bcp47).
-   *  If not set, by default English (en).
+   *  the publisher models' text information should be written in. If not set, by
+   *  default English (en).
    */
   // const languageCode = 'abc123'
 

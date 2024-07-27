@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(endpoint, model, instances, contents) {
+function main(endpoint) {
   // [START aiplatform_v1beta1_generated_PredictionService_CountTokens_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -35,20 +35,34 @@ function main(endpoint, model, instances, contents) {
    */
   // const endpoint = 'abc123'
   /**
-   *  Required. The name of the publisher model requested to serve the
+   *  Optional. The name of the publisher model requested to serve the
    *  prediction. Format:
    *  `projects/{project}/locations/{location}/publishers/* /models/*`
    */
   // const model = 'abc123'
   /**
-   *  Required. The instances that are the input to token counting call.
+   *  Optional. The instances that are the input to token counting call.
    *  Schema is identical to the prediction schema of the underlying model.
    */
   // const instances = [1,2,3,4]
   /**
-   *  Required. Input content.
+   *  Optional. Input content.
    */
   // const contents = [1,2,3,4]
+  /**
+   *  Optional. The user provided system instructions for the model.
+   *  Note: only text should be used in parts and content in each part will be in
+   *  a separate paragraph.
+   */
+  // const systemInstruction = {}
+  /**
+   *  Optional. A list of `Tools` the model may use to generate the next
+   *  response.
+   *  A `Tool` is a piece of code that enables the system to interact with
+   *  external systems to perform an action, or set of actions, outside of
+   *  knowledge and scope of the model.
+   */
+  // const tools = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1beta1;
@@ -60,9 +74,6 @@ function main(endpoint, model, instances, contents) {
     // Construct request
     const request = {
       endpoint,
-      model,
-      instances,
-      contents,
     };
 
     // Run request

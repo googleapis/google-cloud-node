@@ -2358,6 +2358,11 @@
                 "getNotebookRuntime"
               ]
             },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "getNotebookExecutionJob"
+              ]
+            },
             "CreateNotebookRuntimeTemplate": {
               "methods": [
                 "createNotebookRuntimeTemplate"
@@ -2388,6 +2393,16 @@
                 "startNotebookRuntime"
               ]
             },
+            "CreateNotebookExecutionJob": {
+              "methods": [
+                "createNotebookExecutionJob"
+              ]
+            },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "deleteNotebookExecutionJob"
+              ]
+            },
             "ListNotebookRuntimeTemplates": {
               "methods": [
                 "listNotebookRuntimeTemplates",
@@ -2400,6 +2415,13 @@
                 "listNotebookRuntimes",
                 "listNotebookRuntimesStream",
                 "listNotebookRuntimesAsync"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "listNotebookExecutionJobs",
+                "listNotebookExecutionJobsStream",
+                "listNotebookExecutionJobsAsync"
               ]
             }
           }
@@ -2422,6 +2444,11 @@
                 "getNotebookRuntime"
               ]
             },
+            "GetNotebookExecutionJob": {
+              "methods": [
+                "getNotebookExecutionJob"
+              ]
+            },
             "CreateNotebookRuntimeTemplate": {
               "methods": [
                 "createNotebookRuntimeTemplate"
@@ -2452,6 +2479,16 @@
                 "startNotebookRuntime"
               ]
             },
+            "CreateNotebookExecutionJob": {
+              "methods": [
+                "createNotebookExecutionJob"
+              ]
+            },
+            "DeleteNotebookExecutionJob": {
+              "methods": [
+                "deleteNotebookExecutionJob"
+              ]
+            },
             "ListNotebookRuntimeTemplates": {
               "methods": [
                 "listNotebookRuntimeTemplates",
@@ -2464,6 +2501,13 @@
                 "listNotebookRuntimes",
                 "listNotebookRuntimesStream",
                 "listNotebookRuntimesAsync"
+              ]
+            },
+            "ListNotebookExecutionJobs": {
+              "methods": [
+                "listNotebookExecutionJobs",
+                "listNotebookExecutionJobsStream",
+                "listNotebookExecutionJobsAsync"
               ]
             }
           }
