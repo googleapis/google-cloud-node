@@ -270,6 +270,9 @@ export class LlmUtilityServiceClient {
       nasTrialDetailPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}'
       ),
+      notebookExecutionJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/notebookExecutionJobs/{notebook_execution_job}'
+      ),
       notebookRuntimePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/notebookRuntimes/{notebook_runtime}'
       ),
@@ -486,15 +489,26 @@ export class LlmUtilityServiceClient {
  *   Required. The name of the Endpoint requested to perform token counting.
  *   Format:
  *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
- * @param {string} request.model
- *   Required. The name of the publisher model requested to serve the
+ * @param {string} [request.model]
+ *   Optional. The name of the publisher model requested to serve the
  *   prediction. Format:
  *   `projects/{project}/locations/{location}/publishers/* /models/*`
- * @param {number[]} request.instances
- *   Required. The instances that are the input to token counting call.
+ * @param {number[]} [request.instances]
+ *   Optional. The instances that are the input to token counting call.
  *   Schema is identical to the prediction schema of the underlying model.
- * @param {number[]} request.contents
- *   Required. Input content.
+ * @param {number[]} [request.contents]
+ *   Optional. Input content.
+ * @param {google.cloud.aiplatform.v1.Content} [request.systemInstruction]
+ *   Optional. The user provided system instructions for the model.
+ *   Note: only text should be used in parts and content in each part will be in
+ *   a separate paragraph.
+ * @param {number[]} [request.tools]
+ *   Optional. A list of `Tools` the model may use to generate the next
+ *   response.
+ *
+ *   A `Tool` is a piece of code that enables the system to interact with
+ *   external systems to perform an action, or set of actions, outside of
+ *   knowledge and scope of the model.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2487,6 +2501,55 @@ export class LlmUtilityServiceClient {
    */
   matchNasTrialDetailFromNasTrialDetailName(nasTrialDetailName: string) {
     return this.pathTemplates.nasTrialDetailPathTemplate.match(nasTrialDetailName).nas_trial_detail;
+  }
+
+  /**
+   * Return a fully-qualified notebookExecutionJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} notebook_execution_job
+   * @returns {string} Resource name string.
+   */
+  notebookExecutionJobPath(project:string,location:string,notebookExecutionJob:string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.render({
+      project: project,
+      location: location,
+      notebook_execution_job: notebookExecutionJob,
+    });
+  }
+
+  /**
+   * Parse the project from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).project;
+  }
+
+  /**
+   * Parse the location from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).location;
+  }
+
+  /**
+   * Parse the notebook_execution_job from NotebookExecutionJob resource.
+   *
+   * @param {string} notebookExecutionJobName
+   *   A fully-qualified path representing NotebookExecutionJob resource.
+   * @returns {string} A string representing the notebook_execution_job.
+   */
+  matchNotebookExecutionJobFromNotebookExecutionJobName(notebookExecutionJobName: string) {
+    return this.pathTemplates.notebookExecutionJobPathTemplate.match(notebookExecutionJobName).notebook_execution_job;
   }
 
   /**
