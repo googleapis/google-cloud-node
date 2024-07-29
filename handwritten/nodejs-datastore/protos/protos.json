@@ -611,7 +611,7 @@
             "v1": {
               "options": {
                 "csharp_namespace": "Google.Cloud.Datastore.V1",
-                "go_package": "google.golang.org/genproto/googleapis/datastore/v1;datastore",
+                "go_package": "cloud.google.com/go/datastore/apiv1/datastorepb;datastorepb",
                 "java_multiple_files": true,
                 "java_outer_classname": "QueryProfileProto",
                 "java_package": "com.google.datastore.v1",
