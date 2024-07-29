@@ -2986,10 +2986,11 @@ export class FeatureOnlineStoreAdminServiceClient {
    *
    *   Updatable fields:
    *
-   *     * `big_query_source`
-   *     * `bigtable`
    *     * `labels`
-   *     * `sync_config`
+   *     * `description`
+   *     * `bigtable`
+   *     * `bigtable.auto_scaling`
+   *     * `bigtable.enable_multi_region_replica`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3444,7 +3445,14 @@ export class FeatureOnlineStoreAdminServiceClient {
    *   Updatable fields:
    *
    *     * `labels`
-   *     * `serviceAgentType`
+   *     * `service_agent_type`
+   *     * `big_query_source`
+   *     * `big_query_source.uri`
+   *     * `big_query_source.entity_id_columns`
+   *     * `feature_registry_source`
+   *     * `feature_registry_source.feature_groups`
+   *     * `sync_config`
+   *     * `sync_config.cron`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

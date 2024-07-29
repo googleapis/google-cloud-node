@@ -2924,7 +2924,8 @@ export class FeaturestoreServiceClient {
    *
    *     * `description`
    *     * `labels`
-   *     * `disable_monitoring` (Not supported for FeatureRegistry Feature)
+   *     * `disable_monitoring` (Not supported for FeatureRegistryService Feature)
+   *     * `point_of_contact` (Not supported for FeaturestoreService FeatureStore)
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

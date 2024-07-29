@@ -2,6 +2,7 @@
   "../../protos/google/cloud/aiplatform/v1beta1/accelerator_type.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/annotation.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/annotation_spec.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/api_auth.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/artifact.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/batch_prediction_job.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/cached_content.proto",

@@ -9029,6 +9029,87 @@ describe('v1.MetadataServiceClient', () => {
       });
     });
 
+    describe('notebookExecutionJob', () => {
+      const fakePath = '/rendered/path/notebookExecutionJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        notebook_execution_job: 'notebookExecutionJobValue',
+      };
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.notebookExecutionJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.notebookExecutionJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('notebookExecutionJobPath', () => {
+        const result = client.notebookExecutionJobPath(
+          'projectValue',
+          'locationValue',
+          'notebookExecutionJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromNotebookExecutionJobName', () => {
+        const result =
+          client.matchProjectFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromNotebookExecutionJobName', () => {
+        const result =
+          client.matchLocationFromNotebookExecutionJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchNotebookExecutionJobFromNotebookExecutionJobName', () => {
+        const result =
+          client.matchNotebookExecutionJobFromNotebookExecutionJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'notebookExecutionJobValue');
+        assert(
+          (
+            client.pathTemplates.notebookExecutionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('notebookRuntime', () => {
       const fakePath = '/rendered/path/notebookRuntime';
       const expectedParameters = {

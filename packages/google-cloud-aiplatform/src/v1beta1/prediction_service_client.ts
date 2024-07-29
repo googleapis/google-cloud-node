@@ -1196,15 +1196,26 @@ export class PredictionServiceClient {
    *   Required. The name of the Endpoint requested to perform token counting.
    *   Format:
    *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {string} request.model
-   *   Required. The name of the publisher model requested to serve the
+   * @param {string} [request.model]
+   *   Optional. The name of the publisher model requested to serve the
    *   prediction. Format:
    *   `projects/{project}/locations/{location}/publishers/* /models/*`
-   * @param {number[]} request.instances
-   *   Required. The instances that are the input to token counting call.
+   * @param {number[]} [request.instances]
+   *   Optional. The instances that are the input to token counting call.
    *   Schema is identical to the prediction schema of the underlying model.
-   * @param {number[]} request.contents
-   *   Required. Input content.
+   * @param {number[]} [request.contents]
+   *   Optional. Input content.
+   * @param {google.cloud.aiplatform.v1beta1.Content} [request.systemInstruction]
+   *   Optional. The user provided system instructions for the model.
+   *   Note: only text should be used in parts and content in each part will be in
+   *   a separate paragraph.
+   * @param {number[]} [request.tools]
+   *   Optional. A list of `Tools` the model may use to generate the next
+   *   response.
+   *
+   *   A `Tool` is a piece of code that enables the system to interact with
+   *   external systems to perform an action, or set of actions, outside of
+   *   knowledge and scope of the model.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

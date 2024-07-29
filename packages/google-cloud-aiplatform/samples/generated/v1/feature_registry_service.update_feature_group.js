@@ -44,6 +44,9 @@ function main(featureGroup) {
    *  fields.
    *  Updatable fields:
    *    * `labels`
+   *    * `description`
+   *    * `big_query`
+   *    * `big_query.entity_id_columns`
    */
   // const updateMask = {}
 
