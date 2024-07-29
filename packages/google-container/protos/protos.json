@@ -1589,15 +1589,24 @@
                     },
                     "clusterCaCertificate": {
                       "type": "string",
-                      "id": 100
+                      "id": 100,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "clientCertificate": {
                       "type": "string",
-                      "id": 101
+                      "id": 101,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "clientKey": {
                       "type": "string",
-                      "id": 102
+                      "id": 102,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -1738,15 +1747,24 @@
                     },
                     "privateEndpoint": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "publicEndpoint": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "peeringName": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "masterGlobalAccessConfig": {
                       "type": "PrivateClusterMasterGlobalAccessConfig",
@@ -2249,18 +2267,25 @@
                     },
                     "selfLink": {
                       "type": "string",
-                      "id": 100
+                      "id": 100,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "zone": {
                       "type": "string",
                       "id": 101,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "endpoint": {
                       "type": "string",
-                      "id": 102
+                      "id": 102,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "initialClusterVersion": {
                       "type": "string",
@@ -2268,60 +2293,85 @@
                     },
                     "currentMasterVersion": {
                       "type": "string",
-                      "id": 104
+                      "id": 104,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "currentNodeVersion": {
                       "type": "string",
                       "id": 105,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "createTime": {
                       "type": "string",
-                      "id": 106
+                      "id": 106,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "status": {
                       "type": "Status",
-                      "id": 107
+                      "id": 107,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "statusMessage": {
                       "type": "string",
                       "id": 108,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "nodeIpv4CidrSize": {
                       "type": "int32",
-                      "id": 109
+                      "id": 109,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "servicesIpv4Cidr": {
                       "type": "string",
-                      "id": 110
+                      "id": 110,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "instanceGroupUrls": {
                       "rule": "repeated",
                       "type": "string",
                       "id": 111,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "currentNodeCount": {
                       "type": "int32",
                       "id": 112,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "expireTime": {
                       "type": "string",
-                      "id": 113
+                      "id": 113,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "location": {
                       "type": "string",
-                      "id": 114
+                      "id": 114,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "enableTpu": {
                       "type": "bool",
@@ -2329,7 +2379,10 @@
                     },
                     "tpuIpv4CidrBlock": {
                       "type": "string",
-                      "id": 116
+                      "id": 116,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "conditions": {
                       "rule": "repeated",
@@ -2828,26 +2881,39 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "operationType": {
                       "type": "Type",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "status": {
                       "type": "Status",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "detail": {
                       "type": "string",
-                      "id": 8
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "statusMessage": {
                       "type": "string",
@@ -2859,23 +2925,38 @@
                     },
                     "selfLink": {
                       "type": "string",
-                      "id": 6
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "targetLink": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "location": {
                       "type": "string",
-                      "id": 9
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "startTime": {
                       "type": "string",
-                      "id": 10
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "endTime": {
                       "type": "string",
-                      "id": 11
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "progress": {
                       "type": "OperationProgress",
@@ -3996,7 +4077,10 @@
                     },
                     "selfLink": {
                       "type": "string",
-                      "id": 100
+                      "id": 100,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "version": {
                       "type": "string",
@@ -4005,17 +4089,24 @@
                     "instanceGroupUrls": {
                       "rule": "repeated",
                       "type": "string",
-                      "id": 102
+                      "id": 102,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "status": {
                       "type": "Status",
-                      "id": 103
+                      "id": 103,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "statusMessage": {
                       "type": "string",
                       "id": 104,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "autoscaling": {
@@ -4037,7 +4128,10 @@
                     },
                     "podIpv4CidrSize": {
                       "type": "int32",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "upgradeSettings": {
                       "type": "UpgradeSettings",
@@ -4236,11 +4330,17 @@
                   "fields": {
                     "autoUpgradeStartTime": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "description": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -4341,7 +4441,10 @@
                     },
                     "duration": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -5027,11 +5130,17 @@
                   "fields": {
                     "network": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "subnetwork": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "enableIntraNodeVisibility": {
                       "type": "bool",
@@ -6044,11 +6153,17 @@
                     },
                     "membership": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "preRegistered": {
                       "type": "bool",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -7815,15 +7930,24 @@
                     },
                     "clusterCaCertificate": {
                       "type": "string",
-                      "id": 100
+                      "id": 100,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "clientCertificate": {
                       "type": "string",
-                      "id": 101
+                      "id": 101,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "clientKey": {
                       "type": "string",
-                      "id": 102
+                      "id": 102,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -8059,15 +8183,24 @@
                     },
                     "privateEndpoint": {
                       "type": "string",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "publicEndpoint": {
                       "type": "string",
-                      "id": 5
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "peeringName": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "masterGlobalAccessConfig": {
                       "type": "PrivateClusterMasterGlobalAccessConfig",
@@ -8639,18 +8772,25 @@
                     },
                     "selfLink": {
                       "type": "string",
-                      "id": 100
+                      "id": 100,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "zone": {
                       "type": "string",
                       "id": 101,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "endpoint": {
                       "type": "string",
-                      "id": 102
+                      "id": 102,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "initialClusterVersion": {
                       "type": "string",
@@ -8658,60 +8798,85 @@
                     },
                     "currentMasterVersion": {
                       "type": "string",
-                      "id": 104
+                      "id": 104,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "currentNodeVersion": {
                       "type": "string",
                       "id": 105,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "createTime": {
                       "type": "string",
-                      "id": 106
+                      "id": 106,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "status": {
                       "type": "Status",
-                      "id": 107
+                      "id": 107,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "statusMessage": {
                       "type": "string",
                       "id": 108,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "nodeIpv4CidrSize": {
                       "type": "int32",
-                      "id": 109
+                      "id": 109,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "servicesIpv4Cidr": {
                       "type": "string",
-                      "id": 110
+                      "id": 110,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "instanceGroupUrls": {
                       "rule": "repeated",
                       "type": "string",
                       "id": 111,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "currentNodeCount": {
                       "type": "int32",
                       "id": 112,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "expireTime": {
                       "type": "string",
-                      "id": 113
+                      "id": 113,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "location": {
                       "type": "string",
-                      "id": 114
+                      "id": 114,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "enableTpu": {
                       "type": "bool",
@@ -8719,7 +8884,10 @@
                     },
                     "tpuIpv4CidrBlock": {
                       "type": "string",
-                      "id": 116
+                      "id": 116,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "databaseEncryption": {
                       "type": "DatabaseEncryption",
@@ -9428,26 +9596,39 @@
                   "fields": {
                     "name": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "zone": {
                       "type": "string",
                       "id": 2,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "operationType": {
                       "type": "Type",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "status": {
                       "type": "Status",
-                      "id": 4
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "detail": {
                       "type": "string",
-                      "id": 8
+                      "id": 8,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "statusMessage": {
                       "type": "string",
@@ -9459,23 +9640,38 @@
                     },
                     "selfLink": {
                       "type": "string",
-                      "id": 6
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "targetLink": {
                       "type": "string",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "location": {
                       "type": "string",
-                      "id": 9
+                      "id": 9,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "startTime": {
                       "type": "string",
-                      "id": 10
+                      "id": 10,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "endTime": {
                       "type": "string",
-                      "id": 11
+                      "id": 11,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "progress": {
                       "type": "OperationProgress",
@@ -10736,7 +10932,10 @@
                     },
                     "selfLink": {
                       "type": "string",
-                      "id": 100
+                      "id": 100,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "version": {
                       "type": "string",
@@ -10745,17 +10944,24 @@
                     "instanceGroupUrls": {
                       "rule": "repeated",
                       "type": "string",
-                      "id": 102
+                      "id": 102,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "status": {
                       "type": "Status",
-                      "id": 103
+                      "id": 103,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "statusMessage": {
                       "type": "string",
                       "id": 104,
                       "options": {
-                        "deprecated": true
+                        "deprecated": true,
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
                     "autoscaling": {
@@ -10777,7 +10983,10 @@
                     },
                     "podIpv4CidrSize": {
                       "type": "int32",
-                      "id": 7
+                      "id": 7,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "upgradeSettings": {
                       "type": "UpgradeSettings",
@@ -10962,11 +11171,17 @@
                   "fields": {
                     "autoUpgradeStartTime": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "description": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -11067,7 +11282,10 @@
                     },
                     "duration": {
                       "type": "string",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
@@ -11862,11 +12080,17 @@
                   "fields": {
                     "network": {
                       "type": "string",
-                      "id": 1
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "subnetwork": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "enableIntraNodeVisibility": {
                       "type": "bool",
@@ -12956,11 +13180,17 @@
                     },
                     "membership": {
                       "type": "string",
-                      "id": 2
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     },
                     "preRegistered": {
                       "type": "bool",
-                      "id": 3
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
                 },
