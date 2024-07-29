@@ -28,6 +28,10 @@
                               "type": "GcsDestination",
                               "id": 2
                             },
+                            "speechSettings": {
+                              "type": "SpeechSettings",
+                              "id": 3
+                            },
                             "dtmfSettings": {
                               "type": "DtmfSettings",
                               "id": 5
@@ -38,6 +42,27 @@
                             }
                           },
                           "nested": {
+                            "SpeechSettings": {
+                              "fields": {
+                                "endpointerSensitivity": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "noSpeechTimeout": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 2
+                                },
+                                "useTimeoutBasedEndpointing": {
+                                  "type": "bool",
+                                  "id": 3
+                                },
+                                "models": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 5
+                                }
+                              }
+                            },
                             "DtmfSettings": {
                               "fields": {
                                 "enabled": {
@@ -51,6 +76,14 @@
                                 "finishDigit": {
                                   "type": "string",
                                   "id": 3
+                                },
+                                "interdigitTimeoutDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 6
+                                },
+                                "endpointingTimeoutDuration": {
+                                  "type": "google.protobuf.Duration",
+                                  "id": 7
                                 }
                               }
                             },
@@ -63,6 +96,10 @@
                                 "enableInteractionLogging": {
                                   "type": "bool",
                                   "id": 3
+                                },
+                                "enableConsentBasedRedaction": {
+                                  "type": "bool",
+                                  "id": 4
                                 }
                               }
                             }
@@ -390,6 +427,13 @@
                               "type": "bool",
                               "id": 20
                             },
+                            "enableMultiLanguageTraining": {
+                              "type": "bool",
+                              "id": 40,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "locked": {
                               "type": "bool",
                               "id": 27
@@ -416,6 +460,13 @@
                             "answerFeedbackSettings": {
                               "type": "AnswerFeedbackSettings",
                               "id": 38,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "personalizationSettings": {
+                              "type": "PersonalizationSettings",
+                              "id": 42,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -479,6 +530,17 @@
                               "fields": {
                                 "enableAnswerFeedback": {
                                   "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "PersonalizationSettings": {
+                              "fields": {
+                                "defaultEndUserMetadata": {
+                                  "type": "google.protobuf.Struct",
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
@@ -1288,6 +1350,38 @@
                               "id": 18,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "multiLanguageSettings": {
+                              "type": "MultiLanguageSettings",
+                              "id": 28,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "locked": {
+                              "type": "bool",
+                              "id": 30
+                            }
+                          },
+                          "nested": {
+                            "MultiLanguageSettings": {
+                              "fields": {
+                                "enableMultiLanguageDetection": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "supportedResponseLanguageCodes": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
                               }
                             }
                           }
@@ -2101,6 +2195,215 @@
                             "PUBLIC_WEB": 1,
                             "UNSTRUCTURED": 2,
                             "STRUCTURED": 3
+                          }
+                        },
+                        "DataStoreConnectionSignals": {
+                          "fields": {
+                            "rewriterModelCallSignals": {
+                              "type": "RewriterModelCallSignals",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "rewrittenQuery": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "searchSnippets": {
+                              "rule": "repeated",
+                              "type": "SearchSnippet",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "answerGenerationModelCallSignals": {
+                              "type": "AnswerGenerationModelCallSignals",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "answer": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "answerParts": {
+                              "rule": "repeated",
+                              "type": "AnswerPart",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "citedSnippets": {
+                              "rule": "repeated",
+                              "type": "CitedSnippet",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "groundingSignals": {
+                              "type": "GroundingSignals",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "safetySignals": {
+                              "type": "SafetySignals",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RewriterModelCallSignals": {
+                              "fields": {
+                                "renderedPrompt": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "modelOutput": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "SearchSnippet": {
+                              "fields": {
+                                "documentTitle": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "documentUri": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "text": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "AnswerGenerationModelCallSignals": {
+                              "fields": {
+                                "renderedPrompt": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "modelOutput": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "model": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            },
+                            "AnswerPart": {
+                              "fields": {
+                                "text": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "supportingIndices": {
+                                  "rule": "repeated",
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "CitedSnippet": {
+                              "fields": {
+                                "searchSnippet": {
+                                  "type": "SearchSnippet",
+                                  "id": 1
+                                },
+                                "snippetIndex": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "GroundingSignals": {
+                              "fields": {
+                                "decision": {
+                                  "type": "GroundingDecision",
+                                  "id": 1
+                                },
+                                "score": {
+                                  "type": "GroundingScoreBucket",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "GroundingDecision": {
+                                  "values": {
+                                    "GROUNDING_DECISION_UNSPECIFIED": 0,
+                                    "ACCEPTED_BY_GROUNDING": 1,
+                                    "REJECTED_BY_GROUNDING": 2
+                                  }
+                                },
+                                "GroundingScoreBucket": {
+                                  "values": {
+                                    "GROUNDING_SCORE_BUCKET_UNSPECIFIED": 0,
+                                    "VERY_LOW": 1,
+                                    "LOW": 3,
+                                    "MEDIUM": 4,
+                                    "HIGH": 5,
+                                    "VERY_HIGH": 6
+                                  }
+                                }
+                              }
+                            },
+                            "SafetySignals": {
+                              "fields": {
+                                "decision": {
+                                  "type": "SafetyDecision",
+                                  "id": 1
+                                },
+                                "bannedPhraseMatch": {
+                                  "type": "BannedPhraseMatch",
+                                  "id": 2
+                                },
+                                "matchedBannedPhrase": {
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "SafetyDecision": {
+                                  "values": {
+                                    "SAFETY_DECISION_UNSPECIFIED": 0,
+                                    "ACCEPTED_BY_SAFETY_CHECK": 1,
+                                    "REJECTED_BY_SAFETY_CHECK": 2
+                                  }
+                                },
+                                "BannedPhraseMatch": {
+                                  "values": {
+                                    "BANNED_PHRASE_MATCH_UNSPECIFIED": 0,
+                                    "BANNED_PHRASE_MATCH_NONE": 1,
+                                    "BANNED_PHRASE_MATCH_QUERY": 2,
+                                    "BANNED_PHRASE_MATCH_RESPONSE": 3
+                                  }
+                                }
+                              }
+                            }
                           }
                         },
                         "Fulfillment": {
@@ -6136,6 +6439,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "populateDataStoreConnectionSignals": {
+                              "type": "bool",
+                              "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -6394,6 +6704,13 @@
                             "allowAnswerFeedback": {
                               "type": "bool",
                               "id": 32
+                            },
+                            "dataStoreConnectionSignals": {
+                              "type": "DataStoreConnectionSignals",
+                              "id": 35,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -6491,7 +6808,9 @@
                                 "PARAMETER_FILLING": 3,
                                 "NO_MATCH": 4,
                                 "NO_INPUT": 5,
-                                "EVENT": 6
+                                "EVENT": 6,
+                                "KNOWLEDGE_CONNECTOR": 8,
+                                "PLAYBOOK": 9
                               }
                             }
                           }
@@ -7313,6 +7632,20 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
+                                "oauthConfig": {
+                                  "type": "OAuthConfig",
+                                  "id": 11,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "serviceAgentAuth": {
+                                  "type": "ServiceAgentAuth",
+                                  "id": 12,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
                                 "webhookType": {
                                   "type": "WebhookType",
                                   "id": 6,
@@ -7344,6 +7677,47 @@
                                 }
                               },
                               "nested": {
+                                "OAuthConfig": {
+                                  "fields": {
+                                    "clientId": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "clientSecret": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "tokenEndpoint": {
+                                      "type": "string",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "scopes": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                },
+                                "ServiceAgentAuth": {
+                                  "values": {
+                                    "SERVICE_AGENT_AUTH_UNSPECIFIED": 0,
+                                    "NONE": 1,
+                                    "ID_TOKEN": 2,
+                                    "ACCESS_TOKEN": 3
+                                  }
+                                },
                                 "WebhookType": {
                                   "values": {
                                     "WEBHOOK_TYPE_UNSPECIFIED": 0,
@@ -7550,6 +7924,10 @@
                             "sentimentAnalysisResult": {
                               "type": "SentimentAnalysisResult",
                               "id": 9
+                            },
+                            "languageInfo": {
+                              "type": "LanguageInfo",
+                              "id": 18
                             }
                           },
                           "nested": {
@@ -7758,6 +8136,22 @@
                               "keyType": "string",
                               "type": "google.protobuf.Value",
                               "id": 2
+                            }
+                          }
+                        },
+                        "LanguageInfo": {
+                          "fields": {
+                            "inputLanguageCode": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "resolvedLanguageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "confidenceScore": {
+                              "type": "float",
+                              "id": 3
                             }
                           }
                         },
@@ -8904,6 +9298,10 @@
                                 "audioFormat": {
                                   "type": "AudioFormat",
                                   "id": 4
+                                },
+                                "storeTtsAudio": {
+                                  "type": "bool",
+                                  "id": 6
                                 }
                               },
                               "nested": {
