@@ -21181,6 +21181,7 @@
                          * @interface IClassificationCategory
                          * @property {string|null} [name] ClassificationCategory name
                          * @property {number|null} [confidence] ClassificationCategory confidence
+                         * @property {number|null} [severity] ClassificationCategory severity
                          */
     
                         /**
@@ -21215,6 +21216,14 @@
                         ClassificationCategory.prototype.confidence = 0;
     
                         /**
+                         * ClassificationCategory severity.
+                         * @member {number} severity
+                         * @memberof google.cloud.language.v2.ClassificationCategory
+                         * @instance
+                         */
+                        ClassificationCategory.prototype.severity = 0;
+    
+                        /**
                          * Creates a new ClassificationCategory instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.language.v2.ClassificationCategory
@@ -21242,6 +21251,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.confidence != null && Object.hasOwnProperty.call(message, "confidence"))
                                 writer.uint32(/* id 2, wireType 5 =*/21).float(message.confidence);
+                            if (message.severity != null && Object.hasOwnProperty.call(message, "severity"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.severity);
                             return writer;
                         };
     
@@ -21282,6 +21293,10 @@
                                     }
                                 case 2: {
                                         message.confidence = reader.float();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.severity = reader.float();
                                         break;
                                     }
                                 default:
@@ -21325,6 +21340,9 @@
                             if (message.confidence != null && message.hasOwnProperty("confidence"))
                                 if (typeof message.confidence !== "number")
                                     return "confidence: number expected";
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                if (typeof message.severity !== "number")
+                                    return "severity: number expected";
                             return null;
                         };
     
@@ -21344,6 +21362,8 @@
                                 message.name = String(object.name);
                             if (object.confidence != null)
                                 message.confidence = Number(object.confidence);
+                            if (object.severity != null)
+                                message.severity = Number(object.severity);
                             return message;
                         };
     
@@ -21363,11 +21383,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.confidence = 0;
+                                object.severity = 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.confidence != null && message.hasOwnProperty("confidence"))
                                 object.confidence = options.json && !isFinite(message.confidence) ? String(message.confidence) : message.confidence;
+                            if (message.severity != null && message.hasOwnProperty("severity"))
+                                object.severity = options.json && !isFinite(message.severity) ? String(message.severity) : message.severity;
                             return object;
                         };
     
@@ -22981,6 +23004,7 @@
                          * @memberof google.cloud.language.v2
                          * @interface IModerateTextRequest
                          * @property {google.cloud.language.v2.IDocument|null} [document] ModerateTextRequest document
+                         * @property {google.cloud.language.v2.ModerateTextRequest.ModelVersion|null} [modelVersion] ModerateTextRequest modelVersion
                          */
     
                         /**
@@ -23005,6 +23029,14 @@
                          * @instance
                          */
                         ModerateTextRequest.prototype.document = null;
+    
+                        /**
+                         * ModerateTextRequest modelVersion.
+                         * @member {google.cloud.language.v2.ModerateTextRequest.ModelVersion} modelVersion
+                         * @memberof google.cloud.language.v2.ModerateTextRequest
+                         * @instance
+                         */
+                        ModerateTextRequest.prototype.modelVersion = 0;
     
                         /**
                          * Creates a new ModerateTextRequest instance using the specified properties.
@@ -23032,6 +23064,8 @@
                                 writer = $Writer.create();
                             if (message.document != null && Object.hasOwnProperty.call(message, "document"))
                                 $root.google.cloud.language.v2.Document.encode(message.document, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.modelVersion != null && Object.hasOwnProperty.call(message, "modelVersion"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.modelVersion);
                             return writer;
                         };
     
@@ -23068,6 +23102,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.document = $root.google.cloud.language.v2.Document.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.modelVersion = reader.int32();
                                         break;
                                     }
                                 default:
@@ -23110,6 +23148,15 @@
                                 if (error)
                                     return "document." + error;
                             }
+                            if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
+                                switch (message.modelVersion) {
+                                default:
+                                    return "modelVersion: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -23130,6 +23177,26 @@
                                     throw TypeError(".google.cloud.language.v2.ModerateTextRequest.document: object expected");
                                 message.document = $root.google.cloud.language.v2.Document.fromObject(object.document);
                             }
+                            switch (object.modelVersion) {
+                            default:
+                                if (typeof object.modelVersion === "number") {
+                                    message.modelVersion = object.modelVersion;
+                                    break;
+                                }
+                                break;
+                            case "MODEL_VERSION_UNSPECIFIED":
+                            case 0:
+                                message.modelVersion = 0;
+                                break;
+                            case "MODEL_VERSION_1":
+                            case 1:
+                                message.modelVersion = 1;
+                                break;
+                            case "MODEL_VERSION_2":
+                            case 2:
+                                message.modelVersion = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -23146,10 +23213,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.document = null;
+                                object.modelVersion = options.enums === String ? "MODEL_VERSION_UNSPECIFIED" : 0;
+                            }
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v2.Document.toObject(message.document, options);
+                            if (message.modelVersion != null && message.hasOwnProperty("modelVersion"))
+                                object.modelVersion = options.enums === String ? $root.google.cloud.language.v2.ModerateTextRequest.ModelVersion[message.modelVersion] === undefined ? message.modelVersion : $root.google.cloud.language.v2.ModerateTextRequest.ModelVersion[message.modelVersion] : message.modelVersion;
                             return object;
                         };
     
@@ -23178,6 +23249,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.language.v2.ModerateTextRequest";
                         };
+    
+                        /**
+                         * ModelVersion enum.
+                         * @name google.cloud.language.v2.ModerateTextRequest.ModelVersion
+                         * @enum {number}
+                         * @property {number} MODEL_VERSION_UNSPECIFIED=0 MODEL_VERSION_UNSPECIFIED value
+                         * @property {number} MODEL_VERSION_1=1 MODEL_VERSION_1 value
+                         * @property {number} MODEL_VERSION_2=2 MODEL_VERSION_2 value
+                         */
+                        ModerateTextRequest.ModelVersion = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MODEL_VERSION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MODEL_VERSION_1"] = 1;
+                            values[valuesById[2] = "MODEL_VERSION_2"] = 2;
+                            return values;
+                        })();
     
                         return ModerateTextRequest;
                     })();

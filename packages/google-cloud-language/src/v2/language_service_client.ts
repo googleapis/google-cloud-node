@@ -630,6 +630,8 @@ export class LanguageServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.language.v2.Document} request.document
    *   Required. Input document.
+   * @param {google.cloud.language.v2.ModerateTextRequest.ModelVersion} [request.modelVersion]
+   *   Optional. The model version to use for ModerateText.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
