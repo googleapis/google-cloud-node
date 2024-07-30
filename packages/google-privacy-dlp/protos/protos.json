@@ -7620,7 +7620,7 @@
                     "Connection": {
                       "options": {
                         "(google.api.resource).type": "dlp.googleapis.com/Connection",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/connections/{connection}"
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/connections/{connection}"
                       },
                       "oneofs": {
                         "properties": {
