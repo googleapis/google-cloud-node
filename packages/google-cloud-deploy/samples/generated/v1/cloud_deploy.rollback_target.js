@@ -62,11 +62,6 @@ function main(name, targetId, rolloutId) {
    *  with a `RollbackTargetResponse`.
    */
   // const validateOnly = true
-  /**
-   *  Optional. Deploy policies to override. Format is
-   *  `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
-   */
-  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;
