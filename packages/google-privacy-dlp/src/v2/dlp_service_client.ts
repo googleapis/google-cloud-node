@@ -639,9 +639,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -759,9 +759,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -875,9 +875,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -1008,9 +1008,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -1138,7 +1138,7 @@ export class DlpServiceClient {
    *
    *   The format of this value is as follows:
    *
-   *       locations/<var>LOCATION_ID</var>
+   *       `locations/{location_id}`
    * @param {string} request.languageCode
    *   BCP-47 language code for localized infoType friendly
    *   names. If omitted, or if localized strings are not available,
@@ -1240,13 +1240,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -1651,13 +1651,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -2076,9 +2076,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -2640,9 +2640,9 @@ export class DlpServiceClient {
    *   (project or organization):
    *
    *   + Projects scope:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Organizations scope:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -3038,9 +3038,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -3415,13 +3415,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -4560,9 +4560,9 @@ export class DlpServiceClient {
    *   (project or organization):
    *
    *   + Projects scope:
-   *     `projects/PROJECT_ID/locations/LOCATION_ID`
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Organizations scope:
-   *     `organizations/ORG_ID/locations/LOCATION_ID`
+   *     `organizations/{org_id}/locations/{location_id}`
    * @param {google.privacy.dlp.v2.Connection} request.connection
    *   Required. The connection resource.
    * @param {object} [options]
@@ -4916,13 +4916,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5050,13 +5050,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5132,13 +5132,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5216,13 +5216,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5354,13 +5354,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5436,13 +5436,13 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *   + Organizations scope, location specified:
-   *     `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `organizations/{org_id}/locations/{location_id}`
    *   + Organizations scope, no location specified (defaults to global):
-   *     `organizations/`<var>ORG_ID</var>
+   *     `organizations/{org_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5520,9 +5520,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5673,9 +5673,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5780,9 +5780,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -5882,7 +5882,7 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value is as follows:
-   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   `projects/{project_id}/locations/{location_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6003,7 +6003,7 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value is as follows:
-   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   `projects/{project_id}/locations/{location_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6072,7 +6072,7 @@ export class DlpServiceClient {
    *   Required. Parent resource name.
    *
    *   The format of this value is as follows:
-   *   `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *   `projects/{project_id}/locations/{location_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6149,9 +6149,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6300,9 +6300,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6407,9 +6407,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6516,9 +6516,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6647,9 +6647,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location
@@ -6726,9 +6726,9 @@ export class DlpServiceClient {
    *   location](https://cloud.google.com/sensitive-data-protection/docs/specifying-location):
    *
    *   + Projects scope, location specified:
-   *     `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
+   *     `projects/{project_id}/locations/{location_id}`
    *   + Projects scope, no location specified (defaults to global):
-   *     `projects/`<var>PROJECT_ID</var>
+   *     `projects/{project_id}`
    *
    *   The following example `parent` string specifies a parent project with the
    *   identifier `example-project`, and specifies the `europe-west3` location

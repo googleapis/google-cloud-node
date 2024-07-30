@@ -33,9 +33,9 @@ function main(parent, connection) {
    *  The format of this value varies depending on the scope of the request
    *  (project or organization):
    *  + Projects scope:
-   *    `projects/PROJECT_ID/locations/LOCATION_ID`
+   *    `projects/{project_id}/locations/{location_id}`
    *  + Organizations scope:
-   *    `organizations/ORG_ID/locations/LOCATION_ID`
+   *    `organizations/{org_id}/locations/{location_id}`
    */
   // const parent = 'abc123'
   /**
