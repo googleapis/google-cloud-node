@@ -1,0 +1,9 @@
+[
+  "../../protos/google/geo/type/viewport.proto",
+  "../../protos/google/maps/fleetengine/delivery/v1/common.proto",
+  "../../protos/google/maps/fleetengine/delivery/v1/delivery_api.proto",
+  "../../protos/google/maps/fleetengine/delivery/v1/delivery_vehicles.proto",
+  "../../protos/google/maps/fleetengine/delivery/v1/header.proto",
+  "../../protos/google/maps/fleetengine/delivery/v1/task_tracking_info.proto",
+  "../../protos/google/maps/fleetengine/delivery/v1/tasks.proto"
+]
