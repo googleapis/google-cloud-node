@@ -214,9 +214,6 @@ export class DlpServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      connectionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/connections/{connection}'
-      ),
       discoveryConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/discoveryConfigs/{discovery_config}'
       ),
@@ -242,6 +239,10 @@ export class DlpServiceClient {
       organizationLocationColumnDataProfilePathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/locations/{location}/columnDataProfiles/{column_data_profile}'
+        ),
+      organizationLocationConnectionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/connections/{connection}'
         ),
       organizationLocationDeidentifyTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
@@ -292,6 +293,9 @@ export class DlpServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/columnDataProfiles/{column_data_profile}'
         ),
+      projectLocationConnectionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/connections/{connection}'
+      ),
       projectLocationDeidentifyTemplatePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}'
@@ -4550,8 +4554,15 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent resource name in the format:
-   *   `projects/{project}/locations/{location}`.
+   *   Required. Parent resource name.
+   *
+   *   The format of this value varies depending on the scope of the request
+   *   (project or organization):
+   *
+   *   + Projects scope:
+   *     `projects/PROJECT_ID/locations/LOCATION_ID`
+   *   + Organizations scope:
+   *     `organizations/ORG_ID/locations/LOCATION_ID`
    * @param {google.privacy.dlp.v2.Connection} request.connection
    *   Required. The connection resource.
    * @param {object} [options]
@@ -8140,13 +8151,15 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IFileStoreDataProfile>;
   }
   /**
-   * Lists Connections in a parent.
+   * Lists Connections in a parent. Use SearchConnections to see all connections
+   * within an organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent name, for example:
-   *   `projects/project-id/locations/global`.
+   *   Required. Resource name of the organization or project, for
+   *   example, `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
    * @param {number} [request.pageSize]
    *   Optional. Number of results per page, max 1000.
    * @param {string} [request.pageToken]
@@ -8240,8 +8253,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent name, for example:
-   *   `projects/project-id/locations/global`.
+   *   Required. Resource name of the organization or project, for
+   *   example, `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
    * @param {number} [request.pageSize]
    *   Optional. Number of results per page, max 1000.
    * @param {string} [request.pageToken]
@@ -8289,8 +8303,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent name, for example:
-   *   `projects/project-id/locations/global`.
+   *   Required. Resource name of the organization or project, for
+   *   example, `organizations/433245324/locations/europe` or
+   *   `projects/project-id/locations/asia`.
    * @param {number} [request.pageSize]
    *   Optional. Number of results per page, max 1000.
    * @param {string} [request.pageToken]
@@ -8337,8 +8352,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent name, typically an organization, without location.
-   *   For example: `organizations/12345678`.
+   *   Required. Resource name of the organization or project with a wildcard
+   *   location, for example, `organizations/433245324/locations/-` or
+   *   `projects/project-id/locations/-`.
    * @param {number} [request.pageSize]
    *   Optional. Number of results per page, max 1000.
    * @param {string} [request.pageToken]
@@ -8438,8 +8454,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent name, typically an organization, without location.
-   *   For example: `organizations/12345678`.
+   *   Required. Resource name of the organization or project with a wildcard
+   *   location, for example, `organizations/433245324/locations/-` or
+   *   `projects/project-id/locations/-`.
    * @param {number} [request.pageSize]
    *   Optional. Number of results per page, max 1000.
    * @param {string} [request.pageToken]
@@ -8487,8 +8504,9 @@ export class DlpServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Parent name, typically an organization, without location.
-   *   For example: `organizations/12345678`.
+   *   Required. Resource name of the organization or project with a wildcard
+   *   location, for example, `organizations/433245324/locations/-` or
+   *   `projects/project-id/locations/-`.
    * @param {number} [request.pageSize]
    *   Optional. Number of results per page, max 1000.
    * @param {string} [request.pageToken]
@@ -8610,58 +8628,6 @@ export class DlpServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified connection resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} connection
-   * @returns {string} Resource name string.
-   */
-  connectionPath(project: string, location: string, connection: string) {
-    return this.pathTemplates.connectionPathTemplate.render({
-      project: project,
-      location: location,
-      connection: connection,
-    });
-  }
-
-  /**
-   * Parse the project from Connection resource.
-   *
-   * @param {string} connectionName
-   *   A fully-qualified path representing Connection resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Connection resource.
-   *
-   * @param {string} connectionName
-   *   A fully-qualified path representing Connection resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .location;
-  }
-
-  /**
-   * Parse the connection from Connection resource.
-   *
-   * @param {string} connectionName
-   *   A fully-qualified path representing Connection resource.
-   * @returns {string} A string representing the connection.
-   */
-  matchConnectionFromConnectionName(connectionName: string) {
-    return this.pathTemplates.connectionPathTemplate.match(connectionName)
-      .connection;
-  }
 
   /**
    * Return a fully-qualified discoveryConfig resource name string.
@@ -9034,6 +9000,73 @@ export class DlpServiceClient {
     return this.pathTemplates.organizationLocationColumnDataProfilePathTemplate.match(
       organizationLocationColumnDataProfileName
     ).column_data_profile;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationConnection resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} connection
+   * @returns {string} Resource name string.
+   */
+  organizationLocationConnectionPath(
+    organization: string,
+    location: string,
+    connection: string
+  ) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        connection: connection,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationConnection resource.
+   *
+   * @param {string} organizationLocationConnectionName
+   *   A fully-qualified path representing organization_location_connection resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationConnectionName(
+    organizationLocationConnectionName: string
+  ) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(
+      organizationLocationConnectionName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationConnection resource.
+   *
+   * @param {string} organizationLocationConnectionName
+   *   A fully-qualified path representing organization_location_connection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationConnectionName(
+    organizationLocationConnectionName: string
+  ) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(
+      organizationLocationConnectionName
+    ).location;
+  }
+
+  /**
+   * Parse the connection from OrganizationLocationConnection resource.
+   *
+   * @param {string} organizationLocationConnectionName
+   *   A fully-qualified path representing organization_location_connection resource.
+   * @returns {string} A string representing the connection.
+   */
+  matchConnectionFromOrganizationLocationConnectionName(
+    organizationLocationConnectionName: string
+  ) {
+    return this.pathTemplates.organizationLocationConnectionPathTemplate.match(
+      organizationLocationConnectionName
+    ).connection;
   }
 
   /**
@@ -9761,6 +9794,71 @@ export class DlpServiceClient {
     return this.pathTemplates.projectLocationColumnDataProfilePathTemplate.match(
       projectLocationColumnDataProfileName
     ).column_data_profile;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationConnection resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} connection
+   * @returns {string} Resource name string.
+   */
+  projectLocationConnectionPath(
+    project: string,
+    location: string,
+    connection: string
+  ) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.render({
+      project: project,
+      location: location,
+      connection: connection,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationConnection resource.
+   *
+   * @param {string} projectLocationConnectionName
+   *   A fully-qualified path representing project_location_connection resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationConnectionName(
+    projectLocationConnectionName: string
+  ) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.match(
+      projectLocationConnectionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationConnection resource.
+   *
+   * @param {string} projectLocationConnectionName
+   *   A fully-qualified path representing project_location_connection resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationConnectionName(
+    projectLocationConnectionName: string
+  ) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.match(
+      projectLocationConnectionName
+    ).location;
+  }
+
+  /**
+   * Parse the connection from ProjectLocationConnection resource.
+   *
+   * @param {string} projectLocationConnectionName
+   *   A fully-qualified path representing project_location_connection resource.
+   * @returns {string} A string representing the connection.
+   */
+  matchConnectionFromProjectLocationConnectionName(
+    projectLocationConnectionName: string
+  ) {
+    return this.pathTemplates.projectLocationConnectionPathTemplate.match(
+      projectLocationConnectionName
+    ).connection;
   }
 
   /**

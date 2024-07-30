@@ -29,8 +29,13 @@ function main(parent, connection) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent resource name in the format:
-   *  `projects/{project}/locations/{location}`.
+   *  Required. Parent resource name.
+   *  The format of this value varies depending on the scope of the request
+   *  (project or organization):
+   *  + Projects scope:
+   *    `projects/PROJECT_ID/locations/LOCATION_ID`
+   *  + Organizations scope:
+   *    `organizations/ORG_ID/locations/LOCATION_ID`
    */
   // const parent = 'abc123'
   /**

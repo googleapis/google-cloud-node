@@ -139,16 +139,16 @@
                           "requestType": "CreateInspectTemplateRequest",
                           "responseType": "InspectTemplate",
                           "options": {
-                            "(google.api.http).post": "/v2/{parent=organizations/*}/inspectTemplates",
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=organizations/*}/inspectTemplates",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,inspect_template"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "post": "/v2/{parent=organizations/*}/inspectTemplates",
+                                "post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                                 "body": "*",
                                 "additional_bindings": [
                                   {
@@ -160,7 +160,7 @@
                                     "body": "*"
                                   },
                                   {
-                                    "post": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
+                                    "post": "/v2/{parent=organizations/*}/inspectTemplates",
                                     "body": "*"
                                   }
                                 ]
@@ -175,16 +175,16 @@
                           "requestType": "UpdateInspectTemplateRequest",
                           "responseType": "InspectTemplate",
                           "options": {
-                            "(google.api.http).patch": "/v2/{name=organizations/*/inspectTemplates/*}",
+                            "(google.api.http).patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,inspect_template,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "patch": "/v2/{name=organizations/*/inspectTemplates/*}",
+                                "patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                                 "body": "*",
                                 "additional_bindings": [
                                   {
@@ -196,7 +196,7 @@
                                     "body": "*"
                                   },
                                   {
-                                    "patch": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                                    "patch": "/v2/{name=organizations/*/inspectTemplates/*}",
                                     "body": "*"
                                   }
                                 ]
@@ -211,14 +211,14 @@
                           "requestType": "GetInspectTemplateRequest",
                           "responseType": "InspectTemplate",
                           "options": {
-                            "(google.api.http).get": "/v2/{name=organizations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=organizations/*/inspectTemplates/*}",
+                                "get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                                 "additional_bindings": [
                                   {
                                     "get": "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
@@ -227,7 +227,7 @@
                                     "get": "/v2/{name=projects/*/inspectTemplates/*}"
                                   },
                                   {
-                                    "get": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+                                    "get": "/v2/{name=organizations/*/inspectTemplates/*}"
                                   }
                                 ]
                               }
@@ -241,14 +241,14 @@
                           "requestType": "ListInspectTemplatesRequest",
                           "responseType": "ListInspectTemplatesResponse",
                           "options": {
-                            "(google.api.http).get": "/v2/{parent=organizations/*}/inspectTemplates",
-                            "(google.api.http).additional_bindings.get": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*}/inspectTemplates",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=organizations/*}/inspectTemplates",
+                                "get": "/v2/{parent=projects/*/locations/*}/inspectTemplates",
                                 "additional_bindings": [
                                   {
                                     "get": "/v2/{parent=organizations/*/locations/*}/inspectTemplates"
@@ -257,7 +257,7 @@
                                     "get": "/v2/{parent=projects/*}/inspectTemplates"
                                   },
                                   {
-                                    "get": "/v2/{parent=projects/*/locations/*}/inspectTemplates"
+                                    "get": "/v2/{parent=organizations/*}/inspectTemplates"
                                   }
                                 ]
                               }
@@ -271,14 +271,14 @@
                           "requestType": "DeleteInspectTemplateRequest",
                           "responseType": "google.protobuf.Empty",
                           "options": {
-                            "(google.api.http).delete": "/v2/{name=organizations/*/inspectTemplates/*}",
-                            "(google.api.http).additional_bindings.delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.http).delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=organizations/*/inspectTemplates/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=organizations/*/inspectTemplates/*}",
+                                "delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}",
                                 "additional_bindings": [
                                   {
                                     "delete": "/v2/{name=organizations/*/locations/*/inspectTemplates/*}"
@@ -287,7 +287,7 @@
                                     "delete": "/v2/{name=projects/*/inspectTemplates/*}"
                                   },
                                   {
-                                    "delete": "/v2/{name=projects/*/locations/*/inspectTemplates/*}"
+                                    "delete": "/v2/{name=organizations/*/inspectTemplates/*}"
                                   }
                                 ]
                               }
@@ -1310,13 +1310,19 @@
                           "options": {
                             "(google.api.http).post": "/v2/{parent=projects/*/locations/*}/connections",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v2/{parent=organizations/*/locations/*}/connections",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent, connection"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v2/{parent=projects/*/locations/*}/connections",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v2/{parent=organizations/*/locations/*}/connections",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -1329,12 +1335,16 @@
                           "responseType": "Connection",
                           "options": {
                             "(google.api.http).get": "/v2/{name=projects/*/locations/*/connections/*}",
+                            "(google.api.http).additional_bindings.get": "/v2/{name=organizations/*/locations/*/connections/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{name=projects/*/locations/*/connections/*}"
+                                "get": "/v2/{name=projects/*/locations/*/connections/*}",
+                                "additional_bindings": {
+                                  "get": "/v2/{name=organizations/*/locations/*/connections/*}"
+                                }
                               }
                             },
                             {
@@ -1347,12 +1357,16 @@
                           "responseType": "ListConnectionsResponse",
                           "options": {
                             "(google.api.http).get": "/v2/{parent=projects/*/locations/*}/connections",
+                            "(google.api.http).additional_bindings.get": "/v2/{parent=organizations/*/locations/*}/connections",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v2/{parent=projects/*/locations/*}/connections"
+                                "get": "/v2/{parent=projects/*/locations/*}/connections",
+                                "additional_bindings": {
+                                  "get": "/v2/{parent=organizations/*/locations/*}/connections"
+                                }
                               }
                             },
                             {
@@ -1387,12 +1401,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v2/{name=projects/*/locations/*/connections/*}",
+                            "(google.api.http).additional_bindings.delete": "/v2/{name=organizations/*/locations/*/connections/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v2/{name=projects/*/locations/*/connections/*}"
+                                "delete": "/v2/{name=projects/*/locations/*/connections/*}",
+                                "additional_bindings": {
+                                  "delete": "/v2/{name=organizations/*/locations/*/connections/*}"
+                                }
                               }
                             },
                             {
@@ -1406,13 +1424,19 @@
                           "options": {
                             "(google.api.http).patch": "/v2/{name=projects/*/locations/*/connections/*}",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.patch": "/v2/{name=organizations/*/locations/*/connections/*}",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v2/{name=projects/*/locations/*/connections/*}",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "patch": "/v2/{name=organizations/*/locations/*/connections/*}",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -5349,6 +5373,10 @@
                         "inspectTemplateModifiedCadence": {
                           "type": "DiscoveryInspectTemplateModifiedCadence",
                           "id": 3
+                        },
+                        "refreshFrequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 4
                         }
                       }
                     },

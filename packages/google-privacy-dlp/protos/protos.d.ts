@@ -22120,6 +22120,9 @@ export namespace google {
 
                     /** DiscoveryGenerationCadence inspectTemplateModifiedCadence */
                     inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
                 }
 
                 /** Represents a DiscoveryGenerationCadence. */
@@ -22139,6 +22142,9 @@ export namespace google {
 
                     /** DiscoveryGenerationCadence inspectTemplateModifiedCadence. */
                     public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
 
                     /**
                      * Creates a new DiscoveryGenerationCadence instance using the specified properties.
