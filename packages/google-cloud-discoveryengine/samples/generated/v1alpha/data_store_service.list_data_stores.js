@@ -58,7 +58,7 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter by solution type.
+   *  Filter by solution type .
    *  For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
    */
   // const filter = 'abc123'

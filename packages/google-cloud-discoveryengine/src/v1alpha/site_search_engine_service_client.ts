@@ -431,6 +431,9 @@ export class SiteSearchEngineServiceClient {
             {
               get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
             },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+            },
             {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
             {
               get: '/v1alpha/{name=projects/*/locations/*/sampleQuerySets/*/operations/*}',
@@ -474,6 +477,9 @@ export class SiteSearchEngineServiceClient {
             },
             {
               get: '/v1alpha/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
             },
             {get: '/v1alpha/{name=projects/*/locations/*}/operations'},
             {get: '/v1alpha/{name=projects/*}/operations'},
@@ -532,6 +538,12 @@ export class SiteSearchEngineServiceClient {
     const batchVerifyTargetSitesMetadata = protoFilesRoot.lookup(
       '.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesMetadata'
     ) as gax.protobuf.Type;
+    const setUriPatternDocumentDataResponse = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataResponse'
+    ) as gax.protobuf.Type;
+    const setUriPatternDocumentDataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createTargetSite: new this._gaxModule.LongrunningDescriptor(
@@ -588,6 +600,15 @@ export class SiteSearchEngineServiceClient {
         ),
         batchVerifyTargetSitesMetadata.decode.bind(
           batchVerifyTargetSitesMetadata
+        )
+      ),
+      setUriPatternDocumentData: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        setUriPatternDocumentDataResponse.decode.bind(
+          setUriPatternDocumentDataResponse
+        ),
+        setUriPatternDocumentDataMetadata.decode.bind(
+          setUriPatternDocumentDataMetadata
         )
       ),
     };
@@ -655,6 +676,8 @@ export class SiteSearchEngineServiceClient {
       'recrawlUris',
       'batchVerifyTargetSites',
       'fetchDomainVerificationStatus',
+      'setUriPatternDocumentData',
+      'getUriPatternDocumentData',
     ];
     for (const methodName of siteSearchEngineServiceStubMethods) {
       const callPromise = this.siteSearchEngineServiceStub.then(
@@ -981,6 +1004,110 @@ export class SiteSearchEngineServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getTargetSite(request, options, callback);
+  }
+  /**
+   * Gets the URI Pattern to Document data mapping for an Advanced Site Search
+   * DataStore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. Full resource name of the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine|SiteSearchEngine},
+   *   such as
+   *   `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataResponse|GetUriPatternDocumentDataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_SiteSearchEngineService_GetUriPatternDocumentData_async
+   */
+  getUriPatternDocumentData(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getUriPatternDocumentData(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getUriPatternDocumentData(
+    request: protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getUriPatternDocumentData(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse,
+          | protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse,
+      | protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getUriPatternDocumentData(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -2130,6 +2257,183 @@ export class SiteSearchEngineServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesResponse,
       protos.google.cloud.discoveryengine.v1alpha.BatchVerifyTargetSitesMetadata
+    >;
+  }
+  /**
+   * Sets the URI Pattern to Document data mapping for an Advanced Site Search
+   * DataStore.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.siteSearchEngine
+   *   Required. Full resource name of the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SiteSearchEngine|SiteSearchEngine},
+   *   such as
+   *   `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine`.
+   * @param {number[]} request.documentDataMap
+   *   Document data keyed by URI pattern. Each entry must be consistent with
+   *   the {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}. For example:
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} = {
+   *   "type": "object",
+   *   "properties": {
+   *     "Categories": {
+   *       "type": "array",
+   *       "items": {
+   *         "retrievable": true,
+   *         "type": "string"
+   *       }
+   *     }
+   *   }
+   *
+   *   document_data_map = {
+   *     "www.url1.com/*": {
+   *       "Categories": ["category1", "category2"]
+   *     },
+   *     "www.url2.com/*": {
+   *       "Categories": ["category3"]
+   *     }
+   *   }
+   * @param {boolean} request.emptyDocumentDataMap
+   *   If true, clears the document data map. If true,
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest.document_data_map|SetUriPatternDocumentDataRequest.document_data_map}
+   *   must be empty.
+   * @param {google.protobuf.Struct} request.schema
+   *   Optional. If not provided, the current
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema} is used. If provided,
+   *   validates and updates the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Schema|Schema}. If validation fails,
+   *   an error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_SiteSearchEngineService_SetUriPatternDocumentData_async
+   */
+  setUriPatternDocumentData(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  setUriPatternDocumentData(
+    request: protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setUriPatternDocumentData(
+    request: protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setUriPatternDocumentData(
+    request?: protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+            protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        site_search_engine: request.siteSearchEngine ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setUriPatternDocumentData(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `setUriPatternDocumentData()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_SiteSearchEngineService_SetUriPatternDocumentData_async
+   */
+  async checkSetUriPatternDocumentDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataResponse,
+      protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.setUriPatternDocumentData,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataResponse,
+      protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataMetadata
     >;
   }
   /**
