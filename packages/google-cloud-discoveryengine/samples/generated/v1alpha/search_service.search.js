@@ -123,8 +123,12 @@ function main(servingConfig) {
    *  a field in an Document google.cloud.discoveryengine.v1alpha.Document 
    *  object. Leave it unset if ordered by relevance. `order_by` expression is
    *  case-sensitive.
-   *  For more information on ordering for retail search, see
-   *  Ordering (https://cloud.google.com/retail/docs/filter-and-order#order)
+   *  For more information on ordering the website search results, see
+   *  Order web search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *  For more information on ordering the healthcare search results, see
+   *  Order healthcare search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *  If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    */
   // const orderBy = 'abc123'
@@ -135,6 +139,21 @@ function main(servingConfig) {
    *  is used to deduce `device_type` for analytics.
    */
   // const userInfo = {}
+  /**
+   *  The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+   *  information, see Standard
+   *  fields (https://cloud.google.com/apis/design/standard_fields). This field
+   *  helps to better interpret the query. If a value isn't specified, the query
+   *  language code is automatically detected, which may not be accurate.
+   */
+  // const languageCode = 'abc123'
+  /**
+   *  The Unicode country/region code (CLDR) of a location, such as "US" and
+   *  "419". For more information, see Standard
+   *  fields (https://cloud.google.com/apis/design/standard_fields). If set,
+   *  then results will be boosted based on the region_code provided.
+   */
+  // const regionCode = 'abc123'
   /**
    *  Facet specifications for faceted search. If empty, no facets are returned.
    *  A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
@@ -206,17 +225,17 @@ function main(servingConfig) {
    *  documents. This overrides
    *  ServingConfig.ranking_expression google.cloud.discoveryengine.v1alpha.ServingConfig.ranking_expression.
    *  The ranking expression is a single function or multiple functions that are
-   *  joint by "+".
+   *  joined by "+".
    *    * ranking_expression = function, { " + ", function };
    *  Supported functions:
    *    * double * relevance_score
    *    * double * dotProduct(embedding_field_path)
    *  Function variables:
-   *    `relevance_score`: pre-defined keywords, used for measure relevance
+   *    * `relevance_score`: pre-defined keywords, used for measure relevance
    *    between query and document.
-   *    `embedding_field_path`: the document embedding field
+   *    * `embedding_field_path`: the document embedding field
    *    used with query embedding vector.
-   *    `dotProduct`: embedding function between embedding_field_path and query
+   *    * `dotProduct`: embedding function between embedding_field_path and query
    *    embedding vector.
    *   Example ranking expression:
    *     If document has an embedding field doc_embedding, the ranking expression
@@ -247,9 +266,58 @@ function main(servingConfig) {
    */
   // const userLabels = [1,2,3,4]
   /**
+   *  If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+   *  natural language query understanding will be done.
+   */
+  // const naturalLanguageQueryUnderstandingSpec = {}
+  /**
+   *  Search as you type configuration. Only supported for the
+   *  IndustryVertical.MEDIA google.cloud.discoveryengine.v1alpha.IndustryVertical.MEDIA 
+   *  vertical.
+   */
+  // const searchAsYouTypeSpec = {}
+  /**
    *  Custom fine tuning configs.
+   *  If set, it has higher priority than the configs set in
+   *  ServingConfig.custom_fine_tuning_spec google.cloud.discoveryengine.v1alpha.ServingConfig.custom_fine_tuning_spec.
    */
   // const customFineTuningSpec = {}
+  /**
+   *  The session resource name. Optional.
+   *  Session allows users to do multi-turn /search API calls or coordination
+   *  between /search API calls and /answer API calls.
+   *  Example #1 (multi-turn /search API calls):
+   *    1. Call /search API with the auto-session mode (see below).
+   *    2. Call /search API with the session ID generated in the first call.
+   *       Here, the previous search query gets considered in query
+   *       standing. I.e., if the first query is "How did Alphabet do in 2022?"
+   *       and the current query is "How about 2023?", the current query will
+   *       be interpreted as "How did Alphabet do in 2023?".
+   *  Example #2 (coordination between /search API calls and /answer API calls):
+   *    1. Call /search API with the auto-session mode (see below).
+   *    2. Call /answer API with the session ID generated in the first call.
+   *       Here, the answer generation happens in the context of the search
+   *       results from the first search call.
+   *  Auto-session mode: when `projects/.../sessions/-` is used, a new session
+   *  gets automatically created. Otherwise, users can use the create-session API
+   *  to create a session manually.
+   *  Multi-turn Search feature is currently at private GA stage. Please use
+   *  v1alpha or v1beta version instead before we launch this feature to public
+   *  GA. Or ask for allowlisting through Google Support team.
+   */
+  // const session = 'abc123'
+  /**
+   *  Session specification.
+   *  Can be used only when `session` is set.
+   */
+  // const sessionSpec = {}
+  /**
+   *  The relevance threshold of the search results.
+   *  Default to Google defined threshold, leveraging a balance of
+   *  precision and recall to deliver both highly accurate results and
+   *  comprehensive coverage of relevant information.
+   */
+  // const relevanceThreshold = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1alpha;
