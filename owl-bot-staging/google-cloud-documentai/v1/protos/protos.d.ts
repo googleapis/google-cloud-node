@@ -8545,6 +8545,9 @@ export namespace google {
 
                     /** ProcessRequest labels */
                     labels?: ({ [k: string]: string }|null);
+
+                    /** ProcessRequest imagelessMode */
+                    imagelessMode?: (boolean|null);
                 }
 
                 /** Represents a ProcessRequest. */
@@ -8579,6 +8582,9 @@ export namespace google {
 
                     /** ProcessRequest labels. */
                     public labels: { [k: string]: string };
+
+                    /** ProcessRequest imagelessMode. */
+                    public imagelessMode: boolean;
 
                     /** ProcessRequest source. */
                     public source?: ("inlineDocument"|"rawDocument"|"gcsDocument");
@@ -15660,6 +15666,9 @@ export namespace google {
 
                     /** ProcessorVersion satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** ProcessorVersion genAiModelInfo */
+                    genAiModelInfo?: (google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo|null);
                 }
 
                 /** Represents a ProcessorVersion. */
@@ -15709,6 +15718,9 @@ export namespace google {
 
                     /** ProcessorVersion satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** ProcessorVersion genAiModelInfo. */
+                    public genAiModelInfo?: (google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo|null);
 
                     /**
                      * Creates a new ProcessorVersion instance using the specified properties.
@@ -15891,6 +15903,331 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GenAiModelInfo. */
+                    interface IGenAiModelInfo {
+
+                        /** GenAiModelInfo foundationGenAiModelInfo */
+                        foundationGenAiModelInfo?: (google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo|null);
+
+                        /** GenAiModelInfo customGenAiModelInfo */
+                        customGenAiModelInfo?: (google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo|null);
+                    }
+
+                    /** Represents a GenAiModelInfo. */
+                    class GenAiModelInfo implements IGenAiModelInfo {
+
+                        /**
+                         * Constructs a new GenAiModelInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo);
+
+                        /** GenAiModelInfo foundationGenAiModelInfo. */
+                        public foundationGenAiModelInfo?: (google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo|null);
+
+                        /** GenAiModelInfo customGenAiModelInfo. */
+                        public customGenAiModelInfo?: (google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo|null);
+
+                        /** GenAiModelInfo modelInfo. */
+                        public modelInfo?: ("foundationGenAiModelInfo"|"customGenAiModelInfo");
+
+                        /**
+                         * Creates a new GenAiModelInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenAiModelInfo instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo;
+
+                        /**
+                         * Encodes the specified GenAiModelInfo message. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.verify|verify} messages.
+                         * @param message GenAiModelInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenAiModelInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.verify|verify} messages.
+                         * @param message GenAiModelInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenAiModelInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenAiModelInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo;
+
+                        /**
+                         * Decodes a GenAiModelInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenAiModelInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo;
+
+                        /**
+                         * Verifies a GenAiModelInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenAiModelInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenAiModelInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo;
+
+                        /**
+                         * Creates a plain object from a GenAiModelInfo message. Also converts values to other types if specified.
+                         * @param message GenAiModelInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenAiModelInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenAiModelInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GenAiModelInfo {
+
+                        /** Properties of a FoundationGenAiModelInfo. */
+                        interface IFoundationGenAiModelInfo {
+
+                            /** FoundationGenAiModelInfo finetuningAllowed */
+                            finetuningAllowed?: (boolean|null);
+
+                            /** FoundationGenAiModelInfo minTrainLabeledDocuments */
+                            minTrainLabeledDocuments?: (number|null);
+                        }
+
+                        /** Represents a FoundationGenAiModelInfo. */
+                        class FoundationGenAiModelInfo implements IFoundationGenAiModelInfo {
+
+                            /**
+                             * Constructs a new FoundationGenAiModelInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo);
+
+                            /** FoundationGenAiModelInfo finetuningAllowed. */
+                            public finetuningAllowed: boolean;
+
+                            /** FoundationGenAiModelInfo minTrainLabeledDocuments. */
+                            public minTrainLabeledDocuments: number;
+
+                            /**
+                             * Creates a new FoundationGenAiModelInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns FoundationGenAiModelInfo instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo;
+
+                            /**
+                             * Encodes the specified FoundationGenAiModelInfo message. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.verify|verify} messages.
+                             * @param message FoundationGenAiModelInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified FoundationGenAiModelInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.verify|verify} messages.
+                             * @param message FoundationGenAiModelInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a FoundationGenAiModelInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns FoundationGenAiModelInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo;
+
+                            /**
+                             * Decodes a FoundationGenAiModelInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns FoundationGenAiModelInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo;
+
+                            /**
+                             * Verifies a FoundationGenAiModelInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a FoundationGenAiModelInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns FoundationGenAiModelInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo;
+
+                            /**
+                             * Creates a plain object from a FoundationGenAiModelInfo message. Also converts values to other types if specified.
+                             * @param message FoundationGenAiModelInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this FoundationGenAiModelInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for FoundationGenAiModelInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a CustomGenAiModelInfo. */
+                        interface ICustomGenAiModelInfo {
+
+                            /** CustomGenAiModelInfo customModelType */
+                            customModelType?: (google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType|keyof typeof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType|null);
+
+                            /** CustomGenAiModelInfo baseProcessorVersionId */
+                            baseProcessorVersionId?: (string|null);
+                        }
+
+                        /** Represents a CustomGenAiModelInfo. */
+                        class CustomGenAiModelInfo implements ICustomGenAiModelInfo {
+
+                            /**
+                             * Constructs a new CustomGenAiModelInfo.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo);
+
+                            /** CustomGenAiModelInfo customModelType. */
+                            public customModelType: (google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType|keyof typeof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType);
+
+                            /** CustomGenAiModelInfo baseProcessorVersionId. */
+                            public baseProcessorVersionId: string;
+
+                            /**
+                             * Creates a new CustomGenAiModelInfo instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomGenAiModelInfo instance
+                             */
+                            public static create(properties?: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo;
+
+                            /**
+                             * Encodes the specified CustomGenAiModelInfo message. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.verify|verify} messages.
+                             * @param message CustomGenAiModelInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomGenAiModelInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.verify|verify} messages.
+                             * @param message CustomGenAiModelInfo message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomGenAiModelInfo message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomGenAiModelInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo;
+
+                            /**
+                             * Decodes a CustomGenAiModelInfo message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomGenAiModelInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo;
+
+                            /**
+                             * Verifies a CustomGenAiModelInfo message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomGenAiModelInfo message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomGenAiModelInfo
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo;
+
+                            /**
+                             * Creates a plain object from a CustomGenAiModelInfo message. Also converts values to other types if specified.
+                             * @param message CustomGenAiModelInfo
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomGenAiModelInfo to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomGenAiModelInfo
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace CustomGenAiModelInfo {
+
+                            /** CustomModelType enum. */
+                            enum CustomModelType {
+                                CUSTOM_MODEL_TYPE_UNSPECIFIED = 0,
+                                VERSIONED_FOUNDATION = 1,
+                                FINE_TUNED = 2
+                            }
+                        }
                     }
 
                     /** State enum. */

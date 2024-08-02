@@ -517,6 +517,8 @@ export class DocumentProcessorServiceClient {
  *   (Unicode codepoints) and can only contain lowercase letters, numeric
  *   characters, underscores, and dashes. International characters are allowed.
  *   Label values are optional. Label keys must start with a letter.
+ * @param {boolean} [request.imagelessMode]
+ *   Optional. Option to remove images from the document.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

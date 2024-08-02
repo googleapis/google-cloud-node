@@ -21381,6 +21381,7 @@
                          * @property {google.protobuf.IFieldMask|null} [fieldMask] ProcessRequest fieldMask
                          * @property {google.cloud.documentai.v1.IProcessOptions|null} [processOptions] ProcessRequest processOptions
                          * @property {Object.<string,string>|null} [labels] ProcessRequest labels
+                         * @property {boolean|null} [imagelessMode] ProcessRequest imagelessMode
                          */
     
                         /**
@@ -21463,6 +21464,14 @@
                          */
                         ProcessRequest.prototype.labels = $util.emptyObject;
     
+                        /**
+                         * ProcessRequest imagelessMode.
+                         * @member {boolean} imagelessMode
+                         * @memberof google.cloud.documentai.v1.ProcessRequest
+                         * @instance
+                         */
+                        ProcessRequest.prototype.imagelessMode = false;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -21518,6 +21527,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.imagelessMode != null && Object.hasOwnProperty.call(message, "imagelessMode"))
+                                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.imagelessMode);
                             return writer;
                         };
     
@@ -21601,6 +21612,10 @@
                                             }
                                         }
                                         message.labels[key] = value;
+                                        break;
+                                    }
+                                case 11: {
+                                        message.imagelessMode = reader.bool();
                                         break;
                                     }
                                 default:
@@ -21691,6 +21706,9 @@
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
                             }
+                            if (message.imagelessMode != null && message.hasOwnProperty("imagelessMode"))
+                                if (typeof message.imagelessMode !== "boolean")
+                                    return "imagelessMode: boolean expected";
                             return null;
                         };
     
@@ -21742,6 +21760,8 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.imagelessMode != null)
+                                message.imagelessMode = Boolean(object.imagelessMode);
                             return message;
                         };
     
@@ -21765,6 +21785,7 @@
                                 object.skipHumanReview = false;
                                 object.fieldMask = null;
                                 object.processOptions = null;
+                                object.imagelessMode = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -21795,6 +21816,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.imagelessMode != null && message.hasOwnProperty("imagelessMode"))
+                                object.imagelessMode = message.imagelessMode;
                             return object;
                         };
     
@@ -38147,6 +38170,7 @@
                          * @property {google.cloud.documentai.v1.ProcessorVersion.ModelType|null} [modelType] ProcessorVersion modelType
                          * @property {boolean|null} [satisfiesPzs] ProcessorVersion satisfiesPzs
                          * @property {boolean|null} [satisfiesPzi] ProcessorVersion satisfiesPzi
+                         * @property {google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo|null} [genAiModelInfo] ProcessorVersion genAiModelInfo
                          */
     
                         /**
@@ -38269,6 +38293,14 @@
                         ProcessorVersion.prototype.satisfiesPzi = false;
     
                         /**
+                         * ProcessorVersion genAiModelInfo.
+                         * @member {google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo|null|undefined} genAiModelInfo
+                         * @memberof google.cloud.documentai.v1.ProcessorVersion
+                         * @instance
+                         */
+                        ProcessorVersion.prototype.genAiModelInfo = null;
+    
+                        /**
                          * Creates a new ProcessorVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.documentai.v1.ProcessorVersion
@@ -38318,6 +38350,8 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).bool(message.satisfiesPzs);
                             if (message.satisfiesPzi != null && Object.hasOwnProperty.call(message, "satisfiesPzi"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.satisfiesPzi);
+                            if (message.genAiModelInfo != null && Object.hasOwnProperty.call(message, "genAiModelInfo"))
+                                $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.encode(message.genAiModelInfo, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             return writer;
                         };
     
@@ -38402,6 +38436,10 @@
                                     }
                                 case 17: {
                                         message.satisfiesPzi = reader.bool();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.genAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -38504,6 +38542,11 @@
                             if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
                                 if (typeof message.satisfiesPzi !== "boolean")
                                     return "satisfiesPzi: boolean expected";
+                            if (message.genAiModelInfo != null && message.hasOwnProperty("genAiModelInfo")) {
+                                var error = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.verify(message.genAiModelInfo);
+                                if (error)
+                                    return "genAiModelInfo." + error;
+                            }
                             return null;
                         };
     
@@ -38617,6 +38660,11 @@
                                 message.satisfiesPzs = Boolean(object.satisfiesPzs);
                             if (object.satisfiesPzi != null)
                                 message.satisfiesPzi = Boolean(object.satisfiesPzi);
+                            if (object.genAiModelInfo != null) {
+                                if (typeof object.genAiModelInfo !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1.ProcessorVersion.genAiModelInfo: object expected");
+                                message.genAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.fromObject(object.genAiModelInfo);
+                            }
                             return message;
                         };
     
@@ -38647,6 +38695,7 @@
                                 object.modelType = options.enums === String ? "MODEL_TYPE_UNSPECIFIED" : 0;
                                 object.satisfiesPzs = false;
                                 object.satisfiesPzi = false;
+                                object.genAiModelInfo = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -38674,6 +38723,8 @@
                                 object.satisfiesPzs = message.satisfiesPzs;
                             if (message.satisfiesPzi != null && message.hasOwnProperty("satisfiesPzi"))
                                 object.satisfiesPzi = message.satisfiesPzi;
+                            if (message.genAiModelInfo != null && message.hasOwnProperty("genAiModelInfo"))
+                                object.genAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.toObject(message.genAiModelInfo, options);
                             return object;
                         };
     
@@ -38933,6 +38984,762 @@
                             };
     
                             return DeprecationInfo;
+                        })();
+    
+                        ProcessorVersion.GenAiModelInfo = (function() {
+    
+                            /**
+                             * Properties of a GenAiModelInfo.
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion
+                             * @interface IGenAiModelInfo
+                             * @property {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo|null} [foundationGenAiModelInfo] GenAiModelInfo foundationGenAiModelInfo
+                             * @property {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo|null} [customGenAiModelInfo] GenAiModelInfo customGenAiModelInfo
+                             */
+    
+                            /**
+                             * Constructs a new GenAiModelInfo.
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion
+                             * @classdesc Represents a GenAiModelInfo.
+                             * @implements IGenAiModelInfo
+                             * @constructor
+                             * @param {google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo=} [properties] Properties to set
+                             */
+                            function GenAiModelInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GenAiModelInfo foundationGenAiModelInfo.
+                             * @member {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo|null|undefined} foundationGenAiModelInfo
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @instance
+                             */
+                            GenAiModelInfo.prototype.foundationGenAiModelInfo = null;
+    
+                            /**
+                             * GenAiModelInfo customGenAiModelInfo.
+                             * @member {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo|null|undefined} customGenAiModelInfo
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @instance
+                             */
+                            GenAiModelInfo.prototype.customGenAiModelInfo = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * GenAiModelInfo modelInfo.
+                             * @member {"foundationGenAiModelInfo"|"customGenAiModelInfo"|undefined} modelInfo
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @instance
+                             */
+                            Object.defineProperty(GenAiModelInfo.prototype, "modelInfo", {
+                                get: $util.oneOfGetter($oneOfFields = ["foundationGenAiModelInfo", "customGenAiModelInfo"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new GenAiModelInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo=} [properties] Properties to set
+                             * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo} GenAiModelInfo instance
+                             */
+                            GenAiModelInfo.create = function create(properties) {
+                                return new GenAiModelInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GenAiModelInfo message. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo} message GenAiModelInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GenAiModelInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.foundationGenAiModelInfo != null && Object.hasOwnProperty.call(message, "foundationGenAiModelInfo"))
+                                    $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.encode(message.foundationGenAiModelInfo, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.customGenAiModelInfo != null && Object.hasOwnProperty.call(message, "customGenAiModelInfo"))
+                                    $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.encode(message.customGenAiModelInfo, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GenAiModelInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {google.cloud.documentai.v1.ProcessorVersion.IGenAiModelInfo} message GenAiModelInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GenAiModelInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GenAiModelInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo} GenAiModelInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GenAiModelInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.foundationGenAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.customGenAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GenAiModelInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo} GenAiModelInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GenAiModelInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GenAiModelInfo message.
+                             * @function verify
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GenAiModelInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.foundationGenAiModelInfo != null && message.hasOwnProperty("foundationGenAiModelInfo")) {
+                                    properties.modelInfo = 1;
+                                    {
+                                        var error = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.verify(message.foundationGenAiModelInfo);
+                                        if (error)
+                                            return "foundationGenAiModelInfo." + error;
+                                    }
+                                }
+                                if (message.customGenAiModelInfo != null && message.hasOwnProperty("customGenAiModelInfo")) {
+                                    if (properties.modelInfo === 1)
+                                        return "modelInfo: multiple values";
+                                    properties.modelInfo = 1;
+                                    {
+                                        var error = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.verify(message.customGenAiModelInfo);
+                                        if (error)
+                                            return "customGenAiModelInfo." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GenAiModelInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo} GenAiModelInfo
+                             */
+                            GenAiModelInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo)
+                                    return object;
+                                var message = new $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo();
+                                if (object.foundationGenAiModelInfo != null) {
+                                    if (typeof object.foundationGenAiModelInfo !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.foundationGenAiModelInfo: object expected");
+                                    message.foundationGenAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.fromObject(object.foundationGenAiModelInfo);
+                                }
+                                if (object.customGenAiModelInfo != null) {
+                                    if (typeof object.customGenAiModelInfo !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.customGenAiModelInfo: object expected");
+                                    message.customGenAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.fromObject(object.customGenAiModelInfo);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GenAiModelInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo} message GenAiModelInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GenAiModelInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.foundationGenAiModelInfo != null && message.hasOwnProperty("foundationGenAiModelInfo")) {
+                                    object.foundationGenAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.toObject(message.foundationGenAiModelInfo, options);
+                                    if (options.oneofs)
+                                        object.modelInfo = "foundationGenAiModelInfo";
+                                }
+                                if (message.customGenAiModelInfo != null && message.hasOwnProperty("customGenAiModelInfo")) {
+                                    object.customGenAiModelInfo = $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.toObject(message.customGenAiModelInfo, options);
+                                    if (options.oneofs)
+                                        object.modelInfo = "customGenAiModelInfo";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GenAiModelInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GenAiModelInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GenAiModelInfo
+                             * @function getTypeUrl
+                             * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GenAiModelInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo";
+                            };
+    
+                            GenAiModelInfo.FoundationGenAiModelInfo = (function() {
+    
+                                /**
+                                 * Properties of a FoundationGenAiModelInfo.
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                                 * @interface IFoundationGenAiModelInfo
+                                 * @property {boolean|null} [finetuningAllowed] FoundationGenAiModelInfo finetuningAllowed
+                                 * @property {number|null} [minTrainLabeledDocuments] FoundationGenAiModelInfo minTrainLabeledDocuments
+                                 */
+    
+                                /**
+                                 * Constructs a new FoundationGenAiModelInfo.
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                                 * @classdesc Represents a FoundationGenAiModelInfo.
+                                 * @implements IFoundationGenAiModelInfo
+                                 * @constructor
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo=} [properties] Properties to set
+                                 */
+                                function FoundationGenAiModelInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * FoundationGenAiModelInfo finetuningAllowed.
+                                 * @member {boolean} finetuningAllowed
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @instance
+                                 */
+                                FoundationGenAiModelInfo.prototype.finetuningAllowed = false;
+    
+                                /**
+                                 * FoundationGenAiModelInfo minTrainLabeledDocuments.
+                                 * @member {number} minTrainLabeledDocuments
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @instance
+                                 */
+                                FoundationGenAiModelInfo.prototype.minTrainLabeledDocuments = 0;
+    
+                                /**
+                                 * Creates a new FoundationGenAiModelInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo} FoundationGenAiModelInfo instance
+                                 */
+                                FoundationGenAiModelInfo.create = function create(properties) {
+                                    return new FoundationGenAiModelInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified FoundationGenAiModelInfo message. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo} message FoundationGenAiModelInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FoundationGenAiModelInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.finetuningAllowed != null && Object.hasOwnProperty.call(message, "finetuningAllowed"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).bool(message.finetuningAllowed);
+                                    if (message.minTrainLabeledDocuments != null && Object.hasOwnProperty.call(message, "minTrainLabeledDocuments"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minTrainLabeledDocuments);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified FoundationGenAiModelInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.IFoundationGenAiModelInfo} message FoundationGenAiModelInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                FoundationGenAiModelInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a FoundationGenAiModelInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo} FoundationGenAiModelInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FoundationGenAiModelInfo.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.finetuningAllowed = reader.bool();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.minTrainLabeledDocuments = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a FoundationGenAiModelInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo} FoundationGenAiModelInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                FoundationGenAiModelInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a FoundationGenAiModelInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                FoundationGenAiModelInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.finetuningAllowed != null && message.hasOwnProperty("finetuningAllowed"))
+                                        if (typeof message.finetuningAllowed !== "boolean")
+                                            return "finetuningAllowed: boolean expected";
+                                    if (message.minTrainLabeledDocuments != null && message.hasOwnProperty("minTrainLabeledDocuments"))
+                                        if (!$util.isInteger(message.minTrainLabeledDocuments))
+                                            return "minTrainLabeledDocuments: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a FoundationGenAiModelInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo} FoundationGenAiModelInfo
+                                 */
+                                FoundationGenAiModelInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo();
+                                    if (object.finetuningAllowed != null)
+                                        message.finetuningAllowed = Boolean(object.finetuningAllowed);
+                                    if (object.minTrainLabeledDocuments != null)
+                                        message.minTrainLabeledDocuments = object.minTrainLabeledDocuments | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a FoundationGenAiModelInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo} message FoundationGenAiModelInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                FoundationGenAiModelInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.finetuningAllowed = false;
+                                        object.minTrainLabeledDocuments = 0;
+                                    }
+                                    if (message.finetuningAllowed != null && message.hasOwnProperty("finetuningAllowed"))
+                                        object.finetuningAllowed = message.finetuningAllowed;
+                                    if (message.minTrainLabeledDocuments != null && message.hasOwnProperty("minTrainLabeledDocuments"))
+                                        object.minTrainLabeledDocuments = message.minTrainLabeledDocuments;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this FoundationGenAiModelInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                FoundationGenAiModelInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for FoundationGenAiModelInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                FoundationGenAiModelInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo";
+                                };
+    
+                                return FoundationGenAiModelInfo;
+                            })();
+    
+                            GenAiModelInfo.CustomGenAiModelInfo = (function() {
+    
+                                /**
+                                 * Properties of a CustomGenAiModelInfo.
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                                 * @interface ICustomGenAiModelInfo
+                                 * @property {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType|null} [customModelType] CustomGenAiModelInfo customModelType
+                                 * @property {string|null} [baseProcessorVersionId] CustomGenAiModelInfo baseProcessorVersionId
+                                 */
+    
+                                /**
+                                 * Constructs a new CustomGenAiModelInfo.
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo
+                                 * @classdesc Represents a CustomGenAiModelInfo.
+                                 * @implements ICustomGenAiModelInfo
+                                 * @constructor
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo=} [properties] Properties to set
+                                 */
+                                function CustomGenAiModelInfo(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CustomGenAiModelInfo customModelType.
+                                 * @member {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType} customModelType
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @instance
+                                 */
+                                CustomGenAiModelInfo.prototype.customModelType = 0;
+    
+                                /**
+                                 * CustomGenAiModelInfo baseProcessorVersionId.
+                                 * @member {string} baseProcessorVersionId
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @instance
+                                 */
+                                CustomGenAiModelInfo.prototype.baseProcessorVersionId = "";
+    
+                                /**
+                                 * Creates a new CustomGenAiModelInfo instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo=} [properties] Properties to set
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo} CustomGenAiModelInfo instance
+                                 */
+                                CustomGenAiModelInfo.create = function create(properties) {
+                                    return new CustomGenAiModelInfo(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CustomGenAiModelInfo message. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo} message CustomGenAiModelInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CustomGenAiModelInfo.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.customModelType != null && Object.hasOwnProperty.call(message, "customModelType"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.customModelType);
+                                    if (message.baseProcessorVersionId != null && Object.hasOwnProperty.call(message, "baseProcessorVersionId"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.baseProcessorVersionId);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CustomGenAiModelInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.ICustomGenAiModelInfo} message CustomGenAiModelInfo message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CustomGenAiModelInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CustomGenAiModelInfo message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo} CustomGenAiModelInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CustomGenAiModelInfo.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.customModelType = reader.int32();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.baseProcessorVersionId = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CustomGenAiModelInfo message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo} CustomGenAiModelInfo
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CustomGenAiModelInfo.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CustomGenAiModelInfo message.
+                                 * @function verify
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CustomGenAiModelInfo.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.customModelType != null && message.hasOwnProperty("customModelType"))
+                                        switch (message.customModelType) {
+                                        default:
+                                            return "customModelType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                            break;
+                                        }
+                                    if (message.baseProcessorVersionId != null && message.hasOwnProperty("baseProcessorVersionId"))
+                                        if (!$util.isString(message.baseProcessorVersionId))
+                                            return "baseProcessorVersionId: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CustomGenAiModelInfo message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo} CustomGenAiModelInfo
+                                 */
+                                CustomGenAiModelInfo.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo)
+                                        return object;
+                                    var message = new $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo();
+                                    switch (object.customModelType) {
+                                    default:
+                                        if (typeof object.customModelType === "number") {
+                                            message.customModelType = object.customModelType;
+                                            break;
+                                        }
+                                        break;
+                                    case "CUSTOM_MODEL_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.customModelType = 0;
+                                        break;
+                                    case "VERSIONED_FOUNDATION":
+                                    case 1:
+                                        message.customModelType = 1;
+                                        break;
+                                    case "FINE_TUNED":
+                                    case 2:
+                                        message.customModelType = 2;
+                                        break;
+                                    }
+                                    if (object.baseProcessorVersionId != null)
+                                        message.baseProcessorVersionId = String(object.baseProcessorVersionId);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CustomGenAiModelInfo message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo} message CustomGenAiModelInfo
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CustomGenAiModelInfo.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.customModelType = options.enums === String ? "CUSTOM_MODEL_TYPE_UNSPECIFIED" : 0;
+                                        object.baseProcessorVersionId = "";
+                                    }
+                                    if (message.customModelType != null && message.hasOwnProperty("customModelType"))
+                                        object.customModelType = options.enums === String ? $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType[message.customModelType] === undefined ? message.customModelType : $root.google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType[message.customModelType] : message.customModelType;
+                                    if (message.baseProcessorVersionId != null && message.hasOwnProperty("baseProcessorVersionId"))
+                                        object.baseProcessorVersionId = message.baseProcessorVersionId;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CustomGenAiModelInfo to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CustomGenAiModelInfo.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CustomGenAiModelInfo
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CustomGenAiModelInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo";
+                                };
+    
+                                /**
+                                 * CustomModelType enum.
+                                 * @name google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo.CustomModelType
+                                 * @enum {number}
+                                 * @property {number} CUSTOM_MODEL_TYPE_UNSPECIFIED=0 CUSTOM_MODEL_TYPE_UNSPECIFIED value
+                                 * @property {number} VERSIONED_FOUNDATION=1 VERSIONED_FOUNDATION value
+                                 * @property {number} FINE_TUNED=2 FINE_TUNED value
+                                 */
+                                CustomGenAiModelInfo.CustomModelType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "CUSTOM_MODEL_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "VERSIONED_FOUNDATION"] = 1;
+                                    values[valuesById[2] = "FINE_TUNED"] = 2;
+                                    return values;
+                                })();
+    
+                                return CustomGenAiModelInfo;
+                            })();
+    
+                            return GenAiModelInfo;
                         })();
     
                         /**
