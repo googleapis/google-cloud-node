@@ -9537,7 +9537,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -10091,6 +10094,13 @@
                           "type": "Mute",
                           "id": 15
                         },
+                        "muteInfo": {
+                          "type": "MuteInfo",
+                          "id": 53,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "findingClass": {
                           "type": "FindingClass",
                           "id": 16
@@ -10283,6 +10293,45 @@
                             "MUTED": 1,
                             "UNMUTED": 2,
                             "UNDEFINED": 3
+                          }
+                        },
+                        "MuteInfo": {
+                          "fields": {
+                            "staticMute": {
+                              "type": "StaticMute",
+                              "id": 1
+                            },
+                            "dynamicMuteRecords": {
+                              "rule": "repeated",
+                              "type": "DynamicMuteRecord",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "StaticMute": {
+                              "fields": {
+                                "state": {
+                                  "type": "Mute",
+                                  "id": 1
+                                },
+                                "applyTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "DynamicMuteRecord": {
+                              "fields": {
+                                "muteConfig": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "matchTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2
+                                }
+                              }
+                            }
                           }
                         },
                         "FindingClass": {
@@ -10792,8 +10841,10 @@
                             "COMMAND_AND_SCRIPTING_INTERPRETER": 6,
                             "UNIX_SHELL": 7,
                             "PYTHON": 59,
+                            "EXPLOITATION_FOR_PRIVILEGE_ESCALATION": 63,
                             "PERMISSION_GROUPS_DISCOVERY": 18,
                             "CLOUD_GROUPS": 19,
+                            "INDICATOR_REMOVAL_FILE_DELETION": 64,
                             "APPLICATION_LAYER_PROTOCOL": 45,
                             "DNS": 46,
                             "SOFTWARE_DEPLOYMENT_TOOLS": 47,
@@ -11083,6 +11134,10 @@
                         "zeroDay": {
                           "type": "bool",
                           "id": 8
+                        },
+                        "exploitReleaseDate": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
                         }
                       },
                       "nested": {
@@ -11265,7 +11320,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -11305,13 +11363,21 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "expiryTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
                         "MuteConfigType": {
                           "values": {
                             "MUTE_CONFIG_TYPE_UNSPECIFIED": 0,
-                            "STATIC": 1
+                            "STATIC": 1,
+                            "DYNAMIC": 2
                           }
                         }
                       }
@@ -11333,7 +11399,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "description": {
                           "type": "string",
@@ -11642,7 +11711,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
                         },
                         "resourceValue": {
                           "type": "ResourceValue",
@@ -11651,10 +11723,7 @@
                         "tagValues": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 3
                         },
                         "resourceType": {
                           "type": "string",
@@ -13108,6 +13177,22 @@
                         "filter": {
                           "type": "string",
                           "id": 2
+                        },
+                        "muteState": {
+                          "type": "MuteState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MuteState": {
+                          "values": {
+                            "MUTE_STATE_UNSPECIFIED": 0,
+                            "MUTED": 1,
+                            "UNDEFINED": 2
+                          }
                         }
                       }
                     },
