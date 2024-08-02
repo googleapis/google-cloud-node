@@ -217,6 +217,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "administrators": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "securityOperators": {
                           "rule": "repeated",
                           "type": "string",
@@ -3296,6 +3304,20 @@
                             "deprecated": true,
                             "proto3_optional": true
                           }
+                        },
+                        "replicaZone": {
+                          "type": "string",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3767,11 +3789,39 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "largeCapacity": {
+                          "type": "bool",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multipleEndpoints": {
+                          "type": "bool",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "tieringPolicy": {
                           "type": "TieringPolicy",
                           "id": 34,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "replicaZone": {
+                          "type": "string",
+                          "id": 36,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 37,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
