@@ -43,18 +43,9 @@ function main(parent) {
    */
   // const pageToken = 'abc123'
   /**
-   *  A filter expression that filters conversations listed in the response. In
-   *  general, the expression must specify the field name, a comparison operator,
-   *  and the value to use for filtering:
-   *  <ul>
-   *    <li>The value must be a string, a number, or a boolean.</li>
-   *    <li>The comparison operator must be either `=`,`!=`, `>`, or `<`.</li>
-   *    <li>To filter on multiple expressions, separate the
-   *        expressions with `AND` or `OR` (omitting both implies `AND`).</li>
-   *    <li>For clarity, expressions can be enclosed in parentheses.</li>
-   *  </ul>
-   *  Only `lifecycle_state` can be filtered on in this way. For example,
-   *  the following expression only returns `COMPLETED` conversations:
+   *  Optional. A filter expression that filters conversations listed in the
+   *  response. Only `lifecycle_state` can be filtered on in this way. For
+   *  example, the following expression only returns `COMPLETED` conversations:
    *  `lifecycle_state = "COMPLETED"`
    *  For more information about filtering, see
    *  API Filtering (https://aip.dev/160).
