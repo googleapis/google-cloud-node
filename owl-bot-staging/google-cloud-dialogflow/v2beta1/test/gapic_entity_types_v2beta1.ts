@@ -2149,6 +2149,90 @@ describe('v2beta1.EntityTypesClient', () => {
 
     describe('Path templates', () => {
 
+        describe('encryptionSpec', () => {
+            const fakePath = "/rendered/path/encryptionSpec";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+            };
+            const client = new entitytypesModule.v2beta1.EntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.encryptionSpecPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.encryptionSpecPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('encryptionSpecPath', () => {
+                const result = client.encryptionSpecPath("projectValue", "locationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.encryptionSpecPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEncryptionSpecName', () => {
+                const result = client.matchProjectFromEncryptionSpecName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.encryptionSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEncryptionSpecName', () => {
+                const result = client.matchLocationFromEncryptionSpecName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.encryptionSpecPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('generator', () => {
+            const fakePath = "/rendered/path/generator";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                generator: "generatorValue",
+            };
+            const client = new entitytypesModule.v2beta1.EntityTypesClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.generatorPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.generatorPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('generatorPath', () => {
+                const result = client.generatorPath("projectValue", "locationValue", "generatorValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.generatorPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGeneratorName', () => {
+                const result = client.matchProjectFromGeneratorName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGeneratorName', () => {
+                const result = client.matchLocationFromGeneratorName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGeneratorFromGeneratorName', () => {
+                const result = client.matchGeneratorFromGeneratorName(fakePath);
+                assert.strictEqual(result, "generatorValue");
+                assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
