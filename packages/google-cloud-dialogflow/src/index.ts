@@ -35,12 +35,16 @@ const ConversationsClient = v2.ConversationsClient;
 type ConversationsClient = v2.ConversationsClient;
 const DocumentsClient = v2.DocumentsClient;
 type DocumentsClient = v2.DocumentsClient;
+const EncryptionSpecServiceClient = v2.EncryptionSpecServiceClient;
+type EncryptionSpecServiceClient = v2.EncryptionSpecServiceClient;
 const EntityTypesClient = v2.EntityTypesClient;
 type EntityTypesClient = v2.EntityTypesClient;
 const EnvironmentsClient = v2.EnvironmentsClient;
 type EnvironmentsClient = v2.EnvironmentsClient;
 const FulfillmentsClient = v2.FulfillmentsClient;
 type FulfillmentsClient = v2.FulfillmentsClient;
+const GeneratorsClient = v2.GeneratorsClient;
+type GeneratorsClient = v2.GeneratorsClient;
 const IntentsClient = v2.IntentsClient;
 type IntentsClient = v2.IntentsClient;
 const KnowledgeBasesClient = v2.KnowledgeBasesClient;
@@ -65,9 +69,11 @@ export {
   ConversationProfilesClient,
   ConversationsClient,
   DocumentsClient,
+  EncryptionSpecServiceClient,
   EntityTypesClient,
   EnvironmentsClient,
   FulfillmentsClient,
+  GeneratorsClient,
   IntentsClient,
   KnowledgeBasesClient,
   ParticipantsClient,
@@ -86,9 +92,11 @@ export default {
   ConversationProfilesClient,
   ConversationsClient,
   DocumentsClient,
+  EncryptionSpecServiceClient,
   EntityTypesClient,
   EnvironmentsClient,
   FulfillmentsClient,
+  GeneratorsClient,
   IntentsClient,
   KnowledgeBasesClient,
   ParticipantsClient,

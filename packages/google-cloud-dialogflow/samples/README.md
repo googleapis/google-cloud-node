@@ -52,6 +52,7 @@
   * [Conversation_profiles.update_conversation_profile](#conversation_profiles.update_conversation_profile)
   * [Conversations.complete_conversation](#conversations.complete_conversation)
   * [Conversations.create_conversation](#conversations.create_conversation)
+  * [Conversations.generate_stateless_suggestion](#conversations.generate_stateless_suggestion)
   * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
   * [Conversations.get_conversation](#conversations.get_conversation)
   * [Conversations.list_conversations](#conversations.list_conversations)
@@ -66,6 +67,8 @@
   * [Documents.list_documents](#documents.list_documents)
   * [Documents.reload_document](#documents.reload_document)
   * [Documents.update_document](#documents.update_document)
+  * [Encryption_spec_service.get_encryption_spec](#encryption_spec_service.get_encryption_spec)
+  * [Encryption_spec_service.initialize_encryption_spec](#encryption_spec_service.initialize_encryption_spec)
   * [Entity_types.batch_create_entities](#entity_types.batch_create_entities)
   * [Entity_types.batch_delete_entities](#entity_types.batch_delete_entities)
   * [Entity_types.batch_delete_entity_types](#entity_types.batch_delete_entity_types)
@@ -84,6 +87,11 @@
   * [Environments.update_environment](#environments.update_environment)
   * [Fulfillments.get_fulfillment](#fulfillments.get_fulfillment)
   * [Fulfillments.update_fulfillment](#fulfillments.update_fulfillment)
+  * [Generators.create_generator](#generators.create_generator)
+  * [Generators.delete_generator](#generators.delete_generator)
+  * [Generators.get_generator](#generators.get_generator)
+  * [Generators.list_generators](#generators.list_generators)
+  * [Generators.update_generator](#generators.update_generator)
   * [Intents.batch_delete_intents](#intents.batch_delete_intents)
   * [Intents.batch_update_intents](#intents.batch_update_intents)
   * [Intents.create_intent](#intents.create_intent)
@@ -103,6 +111,7 @@
   * [Participants.streaming_analyze_content](#participants.streaming_analyze_content)
   * [Participants.suggest_articles](#participants.suggest_articles)
   * [Participants.suggest_faq_answers](#participants.suggest_faq_answers)
+  * [Participants.suggest_knowledge_assist](#participants.suggest_knowledge_assist)
   * [Participants.suggest_smart_replies](#participants.suggest_smart_replies)
   * [Participants.update_participant](#participants.update_participant)
   * [Session_entity_types.create_session_entity_type](#session_entity_types.create_session_entity_type)
@@ -145,6 +154,7 @@
   * [Conversations.batch_create_messages](#conversations.batch_create_messages)
   * [Conversations.complete_conversation](#conversations.complete_conversation)
   * [Conversations.create_conversation](#conversations.create_conversation)
+  * [Conversations.generate_stateless_suggestion](#conversations.generate_stateless_suggestion)
   * [Conversations.generate_stateless_summary](#conversations.generate_stateless_summary)
   * [Conversations.get_conversation](#conversations.get_conversation)
   * [Conversations.list_conversations](#conversations.list_conversations)
@@ -158,6 +168,8 @@
   * [Documents.list_documents](#documents.list_documents)
   * [Documents.reload_document](#documents.reload_document)
   * [Documents.update_document](#documents.update_document)
+  * [Encryption_spec_service.get_encryption_spec](#encryption_spec_service.get_encryption_spec)
+  * [Encryption_spec_service.initialize_encryption_spec](#encryption_spec_service.initialize_encryption_spec)
   * [Entity_types.batch_create_entities](#entity_types.batch_create_entities)
   * [Entity_types.batch_delete_entities](#entity_types.batch_delete_entities)
   * [Entity_types.batch_delete_entity_types](#entity_types.batch_delete_entity_types)
@@ -176,6 +188,11 @@
   * [Environments.update_environment](#environments.update_environment)
   * [Fulfillments.get_fulfillment](#fulfillments.get_fulfillment)
   * [Fulfillments.update_fulfillment](#fulfillments.update_fulfillment)
+  * [Generators.create_generator](#generators.create_generator)
+  * [Generators.delete_generator](#generators.delete_generator)
+  * [Generators.get_generator](#generators.get_generator)
+  * [Generators.list_generators](#generators.list_generators)
+  * [Generators.update_generator](#generators.update_generator)
   * [Intents.batch_delete_intents](#intents.batch_delete_intents)
   * [Intents.batch_update_intents](#intents.batch_update_intents)
   * [Intents.create_intent](#intents.create_intent)
@@ -197,6 +214,7 @@
   * [Participants.streaming_analyze_content](#participants.streaming_analyze_content)
   * [Participants.suggest_articles](#participants.suggest_articles)
   * [Participants.suggest_faq_answers](#participants.suggest_faq_answers)
+  * [Participants.suggest_knowledge_assist](#participants.suggest_knowledge_assist)
   * [Participants.suggest_smart_replies](#participants.suggest_smart_replies)
   * [Participants.update_participant](#participants.update_participant)
   * [Session_entity_types.create_session_entity_type](#session_entity_types.create_session_entity_type)
@@ -908,6 +926,23 @@ __Usage:__
 
 
 
+### Conversations.generate_stateless_suggestion
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_suggestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_suggestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_suggestion.js`
+
+
+-----
+
+
+
+
 ### Conversations.generate_stateless_summary
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/conversations.generate_stateless_summary.js).
@@ -1139,6 +1174,40 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2/documents.update_document.js`
+
+
+-----
+
+
+
+
+### Encryption_spec_service.get_encryption_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/encryption_spec_service.get_encryption_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/encryption_spec_service.get_encryption_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/encryption_spec_service.get_encryption_spec.js`
+
+
+-----
+
+
+
+
+### Encryption_spec_service.initialize_encryption_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/encryption_spec_service.initialize_encryption_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/encryption_spec_service.initialize_encryption_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/encryption_spec_service.initialize_encryption_spec.js`
 
 
 -----
@@ -1445,6 +1514,91 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2/fulfillments.update_fulfillment.js`
+
+
+-----
+
+
+
+
+### Generators.create_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/generators.create_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/generators.create_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/generators.create_generator.js`
+
+
+-----
+
+
+
+
+### Generators.delete_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/generators.delete_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/generators.delete_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/generators.delete_generator.js`
+
+
+-----
+
+
+
+
+### Generators.get_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/generators.get_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/generators.get_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/generators.get_generator.js`
+
+
+-----
+
+
+
+
+### Generators.list_generators
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/generators.list_generators.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/generators.list_generators.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/generators.list_generators.js`
+
+
+-----
+
+
+
+
+### Generators.update_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/generators.update_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/generators.update_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/generators.update_generator.js`
 
 
 -----
@@ -1768,6 +1922,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_faq_answers.js`
+
+
+-----
+
+
+
+
+### Participants.suggest_knowledge_assist
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_knowledge_assist.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_knowledge_assist.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2/participants.suggest_knowledge_assist.js`
 
 
 -----
@@ -2489,6 +2660,23 @@ __Usage:__
 
 
 
+### Conversations.generate_stateless_suggestion
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_suggestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_suggestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_suggestion.js`
+
+
+-----
+
+
+
+
 ### Conversations.generate_stateless_summary
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/conversations.generate_stateless_summary.js).
@@ -2703,6 +2891,40 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/documents.update_document.js`
+
+
+-----
+
+
+
+
+### Encryption_spec_service.get_encryption_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/encryption_spec_service.get_encryption_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/encryption_spec_service.get_encryption_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/encryption_spec_service.get_encryption_spec.js`
+
+
+-----
+
+
+
+
+### Encryption_spec_service.initialize_encryption_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/encryption_spec_service.initialize_encryption_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/encryption_spec_service.initialize_encryption_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/encryption_spec_service.initialize_encryption_spec.js`
 
 
 -----
@@ -3009,6 +3231,91 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/fulfillments.update_fulfillment.js`
+
+
+-----
+
+
+
+
+### Generators.create_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.create_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.create_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.create_generator.js`
+
+
+-----
+
+
+
+
+### Generators.delete_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.delete_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.delete_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.delete_generator.js`
+
+
+-----
+
+
+
+
+### Generators.get_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.get_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.get_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.get_generator.js`
+
+
+-----
+
+
+
+
+### Generators.list_generators
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.list_generators.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.list_generators.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.list_generators.js`
+
+
+-----
+
+
+
+
+### Generators.update_generator
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.update_generator.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.update_generator.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/generators.update_generator.js`
 
 
 -----
@@ -3366,6 +3673,23 @@ __Usage:__
 
 
 `node packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_faq_answers.js`
+
+
+-----
+
+
+
+
+### Participants.suggest_knowledge_assist
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_knowledge_assist.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_knowledge_assist.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-dialogflow/samples/generated/v2beta1/participants.suggest_knowledge_assist.js`
 
 
 -----
