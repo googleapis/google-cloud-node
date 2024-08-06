@@ -1369,6 +1369,13 @@
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
+                        },
+                        "reservationAffinity": {
+                          "type": "ReservationAffinity",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1401,6 +1408,13 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "spot": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1528,6 +1542,43 @@
                         "enableSecureBoot": {
                           "type": "bool",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ReservationAffinity": {
+                      "fields": {
+                        "reservationAffinityType": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Reservation"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "NO_RESERVATION": 1,
+                            "ANY_RESERVATION": 2,
+                            "SPECIFIC_RESERVATION": 3
+                          }
                         }
                       }
                     },
@@ -3565,10 +3616,17 @@
                       },
                       "nested": {
                         "Strategy": {
+                          "valuesOptions": {
+                            "LOW_COST": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "STRATEGY_UNSPECIFIED": 0,
                             "ON_DEMAND": 1,
-                            "LOW_COST": 2
+                            "LOW_COST": 2,
+                            "STANDARD": 3,
+                            "SPOT": 4
                           }
                         }
                       }
