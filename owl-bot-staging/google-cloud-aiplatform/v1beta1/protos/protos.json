@@ -7841,6 +7841,8 @@
                             "questionAnsweringRelevanceInput",
                             "questionAnsweringHelpfulnessInput",
                             "questionAnsweringCorrectnessInput",
+                            "pointwiseMetricInput",
+                            "pairwiseMetricInput",
                             "toolCallValidInput",
                             "toolNameMatchInput",
                             "toolParameterKeyMatchInput",
@@ -7917,6 +7919,14 @@
                           "type": "QuestionAnsweringCorrectnessInput",
                           "id": 18
                         },
+                        "pointwiseMetricInput": {
+                          "type": "PointwiseMetricInput",
+                          "id": 28
+                        },
+                        "pairwiseMetricInput": {
+                          "type": "PairwiseMetricInput",
+                          "id": 29
+                        },
                         "toolCallValidInput": {
                           "type": "ToolCallValidInput",
                           "id": 19
@@ -7964,6 +7974,8 @@
                             "questionAnsweringRelevanceResult",
                             "questionAnsweringHelpfulnessResult",
                             "questionAnsweringCorrectnessResult",
+                            "pointwiseMetricResult",
+                            "pairwiseMetricResult",
                             "toolCallValidResults",
                             "toolNameMatchResults",
                             "toolParameterKeyMatchResults",
@@ -8039,6 +8051,14 @@
                         "questionAnsweringCorrectnessResult": {
                           "type": "QuestionAnsweringCorrectnessResult",
                           "id": 17
+                        },
+                        "pointwiseMetricResult": {
+                          "type": "PointwiseMetricResult",
+                          "id": 27
+                        },
+                        "pairwiseMetricResult": {
+                          "type": "PairwiseMetricResult",
+                          "id": 28
                         },
                         "toolCallValidResults": {
                           "type": "ToolCallValidResults",
@@ -10011,6 +10031,154 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PointwiseMetricInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "PointwiseMetricSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "PointwiseMetricInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PointwiseMetricInstance": {
+                      "oneofs": {
+                        "instance": {
+                          "oneof": [
+                            "jsonInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "jsonInstance": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PointwiseMetricSpec": {
+                      "oneofs": {
+                        "_metricPromptTemplate": {
+                          "oneof": [
+                            "metricPromptTemplate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "metricPromptTemplate": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PointwiseMetricResult": {
+                      "oneofs": {
+                        "_score": {
+                          "oneof": [
+                            "score"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "score": {
+                          "type": "float",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PairwiseMetricInput": {
+                      "fields": {
+                        "metricSpec": {
+                          "type": "PairwiseMetricSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "PairwiseMetricInstance",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PairwiseMetricInstance": {
+                      "oneofs": {
+                        "instance": {
+                          "oneof": [
+                            "jsonInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "jsonInstance": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PairwiseMetricSpec": {
+                      "oneofs": {
+                        "_metricPromptTemplate": {
+                          "oneof": [
+                            "metricPromptTemplate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "metricPromptTemplate": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PairwiseMetricResult": {
+                      "fields": {
+                        "pairwiseChoice": {
+                          "type": "PairwiseChoice",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "explanation": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }

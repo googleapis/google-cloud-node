@@ -102,6 +102,14 @@ function main(location) {
    */
   // const questionAnsweringCorrectnessInput = {}
   /**
+   *  Input for pointwise metric.
+   */
+  // const pointwiseMetricInput = {}
+  /**
+   *  Input for pairwise metric.
+   */
+  // const pairwiseMetricInput = {}
+  /**
    *  Tool call metric instances.
    *  Input for tool call valid metric.
    */
