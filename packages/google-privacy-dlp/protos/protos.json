@@ -4950,12 +4950,20 @@
                         }
                       }
                     },
+                    "ProfileGeneration": {
+                      "values": {
+                        "PROFILE_GENERATION_UNSPECIFIED": 0,
+                        "PROFILE_GENERATION_NEW": 1,
+                        "PROFILE_GENERATION_UPDATE": 2
+                      }
+                    },
                     "DataProfileAction": {
                       "oneofs": {
                         "action": {
                           "oneof": [
                             "exportData",
-                            "pubSubNotification"
+                            "pubSubNotification",
+                            "tagResources"
                           ]
                         }
                       },
@@ -4967,6 +4975,10 @@
                         "pubSubNotification": {
                           "type": "PubSubNotification",
                           "id": 2
+                        },
+                        "tagResources": {
+                          "type": "TagResources",
+                          "id": 8
                         }
                       },
                       "nested": {
@@ -5015,6 +5027,60 @@
                             "CHANGED_PROFILE": 2,
                             "SCORE_INCREASED": 3,
                             "ERROR_CHANGED": 4
+                          }
+                        },
+                        "TagResources": {
+                          "fields": {
+                            "tagConditions": {
+                              "rule": "repeated",
+                              "type": "TagCondition",
+                              "id": 1
+                            },
+                            "profileGenerationsToTag": {
+                              "rule": "repeated",
+                              "type": "ProfileGeneration",
+                              "id": 2
+                            },
+                            "lowerDataRiskToLow": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "TagCondition": {
+                              "oneofs": {
+                                "type": {
+                                  "oneof": [
+                                    "sensitivityScore"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "tag": {
+                                  "type": "TagValue",
+                                  "id": 1
+                                },
+                                "sensitivityScore": {
+                                  "type": "SensitivityScore",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "TagValue": {
+                              "oneofs": {
+                                "format": {
+                                  "oneof": [
+                                    "namespacedValue"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "namespacedValue": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
                           }
                         }
                       }
