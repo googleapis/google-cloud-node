@@ -5224,6 +5224,8 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/datasets",
                             "(google.api.http).body": "dataset",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/datasets",
+                            "(google.api.http).additional_bindings.body": "dataset",
                             "(google.api.method_signature)": "parent,dataset",
                             "(google.longrunning.operation_info).response_type": "Dataset",
                             "(google.longrunning.operation_info).metadata_type": "CreateDatasetOperationMetadata"
@@ -5232,7 +5234,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{parent=projects/*/locations/*}/datasets",
-                                "body": "dataset"
+                                "body": "dataset",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/datasets",
+                                  "body": "dataset"
+                                }
                               }
                             },
                             {
@@ -5251,12 +5257,16 @@
                           "responseType": "Dataset",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=datasets/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*}"
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*}",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{name=datasets/*}"
+                                }
                               }
                             },
                             {
@@ -5270,13 +5280,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{dataset.name=projects/*/locations/*/datasets/*}",
                             "(google.api.http).body": "dataset",
+                            "(google.api.http).additional_bindings.patch": "/v1beta1/{dataset.name=datasets/*}",
+                            "(google.api.http).additional_bindings.body": "dataset",
                             "(google.api.method_signature)": "dataset,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1beta1/{dataset.name=projects/*/locations/*/datasets/*}",
-                                "body": "dataset"
+                                "body": "dataset",
+                                "additional_bindings": {
+                                  "patch": "/v1beta1/{dataset.name=datasets/*}",
+                                  "body": "dataset"
+                                }
                               }
                             },
                             {
@@ -5289,12 +5305,16 @@
                           "responseType": "ListDatasetsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*}/datasets",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/datasets",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*}/datasets"
+                                "get": "/v1beta1/{parent=projects/*/locations/*}/datasets",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/datasets"
+                                }
                               }
                             },
                             {
@@ -5307,6 +5327,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/datasets/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1beta1/{name=datasets/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
@@ -5314,7 +5335,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/locations/*/datasets/*}"
+                                "delete": "/v1beta1/{name=projects/*/locations/*/datasets/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1beta1/{name=datasets/*}"
+                                }
                               }
                             },
                             {
@@ -5390,6 +5414,8 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
                             "(google.api.http).body": "dataset_version",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{parent=datasets/*}/datasetVersions",
+                            "(google.api.http).additional_bindings.body": "dataset_version",
                             "(google.api.method_signature)": "parent,dataset_version",
                             "(google.longrunning.operation_info).response_type": "DatasetVersion",
                             "(google.longrunning.operation_info).metadata_type": "CreateDatasetVersionOperationMetadata"
@@ -5398,7 +5424,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
-                                "body": "dataset_version"
+                                "body": "dataset_version",
+                                "additional_bindings": {
+                                  "post": "/v1beta1/{parent=datasets/*}/datasetVersions",
+                                  "body": "dataset_version"
+                                }
                               }
                             },
                             {
@@ -5418,13 +5448,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1beta1/{dataset_version.name=projects/*/locations/*/datasets/*/datasetVersions/*}",
                             "(google.api.http).body": "dataset_version",
+                            "(google.api.http).additional_bindings.patch": "/v1beta1/{dataset_version.name=datasets/*/datasetVersions/*}",
+                            "(google.api.http).additional_bindings.body": "dataset_version",
                             "(google.api.method_signature)": "dataset_version,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1beta1/{dataset_version.name=projects/*/locations/*/datasets/*/datasetVersions/*}",
-                                "body": "dataset_version"
+                                "body": "dataset_version",
+                                "additional_bindings": {
+                                  "patch": "/v1beta1/{dataset_version.name=datasets/*/datasetVersions/*}",
+                                  "body": "dataset_version"
+                                }
                               }
                             },
                             {
@@ -5437,6 +5473,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1beta1/{name=datasets/*/datasetVersions/*}",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                             "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
@@ -5444,7 +5481,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+                                "delete": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1beta1/{name=datasets/*/datasetVersions/*}"
+                                }
                               }
                             },
                             {
@@ -5463,12 +5503,16 @@
                           "responseType": "DatasetVersion",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=datasets/*/datasetVersions/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}"
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{name=datasets/*/datasetVersions/*}"
+                                }
                               }
                             },
                             {
@@ -5481,12 +5525,16 @@
                           "responseType": "ListDatasetVersionsResponse",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{parent=datasets/*}/datasetVersions",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/datasetVersions"
+                                "get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/datasetVersions",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{parent=datasets/*}/datasetVersions"
+                                }
                               }
                             },
                             {
@@ -5499,6 +5547,7 @@
                           "responseType": "google.longrunning.Operation",
                           "options": {
                             "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}:restore",
+                            "(google.api.http).additional_bindings.get": "/v1beta1/{name=datasets/*/datasetVersions/*}:restore",
                             "(google.api.method_signature)": "name",
                             "(google.longrunning.operation_info).response_type": "DatasetVersion",
                             "(google.longrunning.operation_info).metadata_type": "RestoreDatasetVersionOperationMetadata"
@@ -5506,7 +5555,10 @@
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}:restore"
+                                "get": "/v1beta1/{name=projects/*/locations/*/datasets/*/datasetVersions/*}:restore",
+                                "additional_bindings": {
+                                  "get": "/v1beta1/{name=datasets/*/datasetVersions/*}:restore"
+                                }
                               }
                             },
                             {
@@ -21008,7 +21060,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:computeTokens",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:computeTokens",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=publishers/*/models/*}:computeTokens",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "endpoint,instances"
                           },
@@ -21017,10 +21069,20 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:computeTokens",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:computeTokens",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:computeTokens",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{endpoint=endpoints/*}:computeTokens",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{endpoint=publishers/*/models/*}:computeTokens",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -30114,7 +30176,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{endpoint=publishers/*/models/*}:countTokens",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "endpoint,instances"
                           },
@@ -30123,10 +30185,20 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{endpoint=projects/*/locations/*/endpoints/*}:countTokens",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{endpoint=projects/*/locations/*/publishers/*/models/*}:countTokens",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{endpoint=endpoints/*}:countTokens",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{endpoint=publishers/*/models/*}:countTokens",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -30140,7 +30212,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:generateContent",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=publishers/*/models/*}:generateContent",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "model,contents"
                           },
@@ -30149,10 +30221,20 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:generateContent",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:generateContent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{model=endpoints/*}:generateContent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{model=publishers/*/models/*}:generateContent",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -30167,7 +30249,7 @@
                           "options": {
                             "(google.api.http).post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:streamGenerateContent",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
+                            "(google.api.http).additional_bindings.post": "/v1beta1/{model=publishers/*/models/*}:streamGenerateContent",
                             "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "model,contents"
                           },
@@ -30176,10 +30258,20 @@
                               "(google.api.http)": {
                                 "post": "/v1beta1/{model=projects/*/locations/*/endpoints/*}:streamGenerateContent",
                                 "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
-                                  "body": "*"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1beta1/{model=projects/*/locations/*/publishers/*/models/*}:streamGenerateContent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{model=endpoints/*}:streamGenerateContent",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1beta1/{model=publishers/*/models/*}:streamGenerateContent",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
