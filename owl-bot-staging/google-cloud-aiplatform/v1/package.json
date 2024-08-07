@@ -24,6 +24,7 @@
     "dataset service",
     "deployment resource pool service",
     "endpoint service",
+    "evaluation service",
     "feature online store admin service",
     "feature online store service",
     "feature registry service",

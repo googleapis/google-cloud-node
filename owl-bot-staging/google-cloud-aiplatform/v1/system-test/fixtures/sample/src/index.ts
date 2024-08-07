@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
+import {DatasetServiceClient, DeploymentResourcePoolServiceClient, EndpointServiceClient, EvaluationServiceClient, FeatureOnlineStoreAdminServiceClient, FeatureOnlineStoreServiceClient, FeatureRegistryServiceClient, FeaturestoreOnlineServingServiceClient, FeaturestoreServiceClient, GenAiTuningServiceClient, IndexEndpointServiceClient, IndexServiceClient, JobServiceClient, LlmUtilityServiceClient, MatchServiceClient, MetadataServiceClient, MigrationServiceClient, ModelGardenServiceClient, ModelServiceClient, NotebookServiceClient, PersistentResourceServiceClient, PipelineServiceClient, PredictionServiceClient, ScheduleServiceClient, SpecialistPoolServiceClient, TensorboardServiceClient, VizierServiceClient} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
@@ -26,6 +26,9 @@ function doStuffWithDeploymentResourcePoolServiceClient(client: DeploymentResour
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithEvaluationServiceClient(client: EvaluationServiceClient) {
   client.close();
 }
 function doStuffWithFeatureOnlineStoreAdminServiceClient(client: FeatureOnlineStoreAdminServiceClient) {
@@ -108,6 +111,9 @@ function main() {
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
+  // check that the client instance can be created
+  const evaluationServiceClient = new EvaluationServiceClient();
+  doStuffWithEvaluationServiceClient(evaluationServiceClient);
   // check that the client instance can be created
   const featureOnlineStoreAdminServiceClient = new FeatureOnlineStoreAdminServiceClient();
   doStuffWithFeatureOnlineStoreAdminServiceClient(featureOnlineStoreAdminServiceClient);

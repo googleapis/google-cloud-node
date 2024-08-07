@@ -24,6 +24,7 @@ function main() {
   const datasetServiceClient = new aiplatform.DatasetServiceClient();
   const deploymentResourcePoolServiceClient = new aiplatform.DeploymentResourcePoolServiceClient();
   const endpointServiceClient = new aiplatform.EndpointServiceClient();
+  const evaluationServiceClient = new aiplatform.EvaluationServiceClient();
   const featureOnlineStoreAdminServiceClient = new aiplatform.FeatureOnlineStoreAdminServiceClient();
   const featureOnlineStoreServiceClient = new aiplatform.FeatureOnlineStoreServiceClient();
   const featureRegistryServiceClient = new aiplatform.FeatureRegistryServiceClient();
