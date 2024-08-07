@@ -672,6 +672,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "postgresExportOptions": {
+                              "type": "PostgresExportOptions",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -680,6 +687,24 @@
                                 "masterData": {
                                   "type": "google.protobuf.Int32Value",
                                   "id": 1
+                                }
+                              }
+                            },
+                            "PostgresExportOptions": {
+                              "fields": {
+                                "clean": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "ifExists": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             }
@@ -767,6 +792,33 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "postgresImportOptions": {
+                              "type": "PostgresImportOptions",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PostgresImportOptions": {
+                              "fields": {
+                                "clean": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "ifExists": {
+                                  "type": "google.protobuf.BoolValue",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
                               }
                             }
                           }

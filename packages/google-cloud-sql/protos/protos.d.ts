@@ -2821,6 +2821,9 @@ export namespace google {
 
                         /** SqlExportOptions parallel */
                         parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlExportOptions postgresExportOptions */
+                        postgresExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions|null);
                     }
 
                     /** Represents a SqlExportOptions. */
@@ -2846,6 +2849,9 @@ export namespace google {
 
                         /** SqlExportOptions parallel. */
                         public parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlExportOptions postgresExportOptions. */
+                        public postgresExportOptions?: (google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions|null);
 
                         /**
                          * Creates a new SqlExportOptions instance using the specified properties.
@@ -3018,6 +3024,109 @@ export namespace google {
 
                             /**
                              * Gets the default type url for MysqlExportOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PostgresExportOptions. */
+                        interface IPostgresExportOptions {
+
+                            /** PostgresExportOptions clean */
+                            clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresExportOptions ifExists */
+                            ifExists?: (google.protobuf.IBoolValue|null);
+                        }
+
+                        /** Represents a PostgresExportOptions. */
+                        class PostgresExportOptions implements IPostgresExportOptions {
+
+                            /**
+                             * Constructs a new PostgresExportOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions);
+
+                            /** PostgresExportOptions clean. */
+                            public clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresExportOptions ifExists. */
+                            public ifExists?: (google.protobuf.IBoolValue|null);
+
+                            /**
+                             * Creates a new PostgresExportOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PostgresExportOptions instance
+                             */
+                            public static create(properties?: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Encodes the specified PostgresExportOptions message. Does not implicitly {@link google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions.verify|verify} messages.
+                             * @param message PostgresExportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PostgresExportOptions message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions.verify|verify} messages.
+                             * @param message PostgresExportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.sql.v1.ExportContext.SqlExportOptions.IPostgresExportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PostgresExportOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PostgresExportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Decodes a PostgresExportOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PostgresExportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Verifies a PostgresExportOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PostgresExportOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PostgresExportOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions;
+
+                            /**
+                             * Creates a plain object from a PostgresExportOptions message. Also converts values to other types if specified.
+                             * @param message PostgresExportOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.sql.v1.ExportContext.SqlExportOptions.PostgresExportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PostgresExportOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PostgresExportOptions
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -3296,6 +3405,9 @@ export namespace google {
 
                         /** SqlImportOptions parallel */
                         parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlImportOptions postgresImportOptions */
+                        postgresImportOptions?: (google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions|null);
                     }
 
                     /** Represents a SqlImportOptions. */
@@ -3312,6 +3424,9 @@ export namespace google {
 
                         /** SqlImportOptions parallel. */
                         public parallel?: (google.protobuf.IBoolValue|null);
+
+                        /** SqlImportOptions postgresImportOptions. */
+                        public postgresImportOptions?: (google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions|null);
 
                         /**
                          * Creates a new SqlImportOptions instance using the specified properties.
@@ -3389,6 +3504,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SqlImportOptions {
+
+                        /** Properties of a PostgresImportOptions. */
+                        interface IPostgresImportOptions {
+
+                            /** PostgresImportOptions clean */
+                            clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresImportOptions ifExists */
+                            ifExists?: (google.protobuf.IBoolValue|null);
+                        }
+
+                        /** Represents a PostgresImportOptions. */
+                        class PostgresImportOptions implements IPostgresImportOptions {
+
+                            /**
+                             * Constructs a new PostgresImportOptions.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions);
+
+                            /** PostgresImportOptions clean. */
+                            public clean?: (google.protobuf.IBoolValue|null);
+
+                            /** PostgresImportOptions ifExists. */
+                            public ifExists?: (google.protobuf.IBoolValue|null);
+
+                            /**
+                             * Creates a new PostgresImportOptions instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PostgresImportOptions instance
+                             */
+                            public static create(properties?: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Encodes the specified PostgresImportOptions message. Does not implicitly {@link google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions.verify|verify} messages.
+                             * @param message PostgresImportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PostgresImportOptions message, length delimited. Does not implicitly {@link google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions.verify|verify} messages.
+                             * @param message PostgresImportOptions message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.sql.v1.ImportContext.SqlImportOptions.IPostgresImportOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PostgresImportOptions message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PostgresImportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Decodes a PostgresImportOptions message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PostgresImportOptions
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Verifies a PostgresImportOptions message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PostgresImportOptions message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PostgresImportOptions
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions;
+
+                            /**
+                             * Creates a plain object from a PostgresImportOptions message. Also converts values to other types if specified.
+                             * @param message PostgresImportOptions
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.sql.v1.ImportContext.SqlImportOptions.PostgresImportOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PostgresImportOptions to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PostgresImportOptions
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a SqlCsvImportOptions. */
