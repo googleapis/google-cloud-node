@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, dataset, content) {
-  // [START translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
+function main(name) {
+  // [START translate_v3_generated_TranslationService_DeleteGlossaryEntry_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,29 +29,9 @@ function main(parent, dataset, content) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Location to make a regional call.
-   *  Format: `projects/{project-number-or-id}/locations/{location-id}`.
+   *  Required. The resource name of the glossary entry to delete
    */
-  // const parent = 'abc123'
-  /**
-   *  Required. The resource name for the dataset to use for adaptive MT.
-   *  `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
-   */
-  // const dataset = 'abc123'
-  /**
-   *  Required. The content of the input in string format.
-   */
-  // const content = ['abc','def']
-  /**
-   *  Configuration for caller provided reference sentences.
-   */
-  // const referenceSentenceConfig = {}
-  /**
-   *  Optional. Glossary to be applied. The glossary must be
-   *  within the same region (have the same location-id) as the model, otherwise
-   *  an INVALID_ARGUMENT (400) error is returned.
-   */
-  // const glossaryConfig = {}
+  // const name = 'abc123'
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;
@@ -59,21 +39,19 @@ function main(parent, dataset, content) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function callAdaptiveMtTranslate() {
+  async function callDeleteGlossaryEntry() {
     // Construct request
     const request = {
-      parent,
-      dataset,
-      content,
+      name,
     };
 
     // Run request
-    const response = await translationClient.adaptiveMtTranslate(request);
+    const response = await translationClient.deleteGlossaryEntry(request);
     console.log(response);
   }
 
-  callAdaptiveMtTranslate();
-  // [END translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
+  callDeleteGlossaryEntry();
+  // [END translate_v3_generated_TranslationService_DeleteGlossaryEntry_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, dataset, content) {
-  // [START translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
+function main(parent, contents) {
+  // [START translate_v3_generated_TranslationService_RomanizeText_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,29 +29,25 @@ function main(parent, dataset, content) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Location to make a regional call.
-   *  Format: `projects/{project-number-or-id}/locations/{location-id}`.
+   *  Required. Project or location to make a call. Must refer to a caller's
+   *  project.
+   *  Format: `projects/{project-number-or-id}/locations/{location-id}` or
+   *  `projects/{project-number-or-id}`.
+   *  For global calls, use `projects/{project-number-or-id}/locations/global` or
+   *  `projects/{project-number-or-id}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The resource name for the dataset to use for adaptive MT.
-   *  `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
-   */
-  // const dataset = 'abc123'
-  /**
    *  Required. The content of the input in string format.
    */
-  // const content = ['abc','def']
+  // const contents = ['abc','def']
   /**
-   *  Configuration for caller provided reference sentences.
+   *  Optional. The ISO-639 language code of the input text if
+   *  known, for example, "hi" or "zh". If the source language isn't specified,
+   *  the API attempts to identify the source language automatically and returns
+   *  the source language for each content in the response.
    */
-  // const referenceSentenceConfig = {}
-  /**
-   *  Optional. Glossary to be applied. The glossary must be
-   *  within the same region (have the same location-id) as the model, otherwise
-   *  an INVALID_ARGUMENT (400) error is returned.
-   */
-  // const glossaryConfig = {}
+  // const sourceLanguageCode = 'abc123'
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;
@@ -59,21 +55,20 @@ function main(parent, dataset, content) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function callAdaptiveMtTranslate() {
+  async function callRomanizeText() {
     // Construct request
     const request = {
       parent,
-      dataset,
-      content,
+      contents,
     };
 
     // Run request
-    const response = await translationClient.adaptiveMtTranslate(request);
+    const response = await translationClient.romanizeText(request);
     console.log(response);
   }
 
-  callAdaptiveMtTranslate();
-  // [END translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
+  callRomanizeText();
+  // [END translate_v3_generated_TranslationService_RomanizeText_async]
 }
 
 process.on('unhandledRejection', err => {

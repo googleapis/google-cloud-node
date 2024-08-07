@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, dataset, content) {
-  // [START translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
+function main(parent) {
+  // [START translate_v3_generated_TranslationService_ListGlossaryEntries_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,29 +29,22 @@ function main(parent, dataset, content) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Location to make a regional call.
-   *  Format: `projects/{project-number-or-id}/locations/{location-id}`.
+   *  Required. The parent glossary resource name for listing the glossary's
+   *  entries.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The resource name for the dataset to use for adaptive MT.
-   *  `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
+   *  Optional. Requested page size. The server may return fewer glossary entries
+   *  than requested. If unspecified, the server picks an appropriate default.
    */
-  // const dataset = 'abc123'
+  // const pageSize = 1234
   /**
-   *  Required. The content of the input in string format.
+   *  Optional. A token identifying a page of results the server should return.
+   *  Typically, this is the value of
+   *  ListGlossaryEntriesResponse.next_page_token  returned from the previous
+   *  call. The first page is returned if `page_token`is empty or missing.
    */
-  // const content = ['abc','def']
-  /**
-   *  Configuration for caller provided reference sentences.
-   */
-  // const referenceSentenceConfig = {}
-  /**
-   *  Optional. Glossary to be applied. The glossary must be
-   *  within the same region (have the same location-id) as the model, otherwise
-   *  an INVALID_ARGUMENT (400) error is returned.
-   */
-  // const glossaryConfig = {}
+  // const pageToken = 'abc123'
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;
@@ -59,21 +52,21 @@ function main(parent, dataset, content) {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
 
-  async function callAdaptiveMtTranslate() {
+  async function callListGlossaryEntries() {
     // Construct request
     const request = {
       parent,
-      dataset,
-      content,
     };
 
     // Run request
-    const response = await translationClient.adaptiveMtTranslate(request);
-    console.log(response);
+    const iterable = translationClient.listGlossaryEntriesAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callAdaptiveMtTranslate();
-  // [END translate_v3_generated_TranslationService_AdaptiveMtTranslate_async]
+  callListGlossaryEntries();
+  // [END translate_v3_generated_TranslationService_ListGlossaryEntries_async]
 }
 
 process.on('unhandledRejection', err => {
