@@ -57,6 +57,12 @@ function main(parent) {
    *  of findings based on the filter.
    */
   // const muteAnnotation = 'abc123'
+  /**
+   *  Optional. All findings matching the given filter will have their mute state
+   *  set to this value. The default value is `MUTED`. Setting this to
+   *  `UNDEFINED` will clear the mute state on all matching findings.
+   */
+  // const muteState = {}
 
   // Imports the Securitycenter library
   const {SecurityCenterClient} = require('@google-cloud/security-center').v1;

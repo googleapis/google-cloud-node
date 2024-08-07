@@ -4373,6 +4373,11 @@
                           "rule": "repeated",
                           "type": "MetricMetadata",
                           "id": 2
+                        },
+                        "comparisons": {
+                          "rule": "repeated",
+                          "type": "ComparisonMetadata",
+                          "id": 4
                         }
                       }
                     },
@@ -4438,6 +4443,14 @@
                         "returnPropertyQuota": {
                           "type": "bool",
                           "id": 14
+                        },
+                        "comparisons": {
+                          "rule": "repeated",
+                          "type": "Comparison",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -4540,6 +4553,14 @@
                         "returnPropertyQuota": {
                           "type": "bool",
                           "id": 11
+                        },
+                        "comparisons": {
+                          "rule": "repeated",
+                          "type": "Comparison",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -5166,6 +5187,38 @@
                         },
                         "invisible": {
                           "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Comparison": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "oneComparison": {
+                          "oneof": [
+                            "dimensionFilter",
+                            "comparison"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "dimensionFilter": {
+                          "type": "FilterExpression",
+                          "id": 2
+                        },
+                        "comparison": {
+                          "type": "string",
                           "id": 3
                         }
                       }
@@ -5869,6 +5922,22 @@
                             "NO_REVENUE_METRICS": 1,
                             "NO_COST_METRICS": 2
                           }
+                        }
+                      }
+                    },
+                    "ComparisonMetadata": {
+                      "fields": {
+                        "apiName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uiName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },

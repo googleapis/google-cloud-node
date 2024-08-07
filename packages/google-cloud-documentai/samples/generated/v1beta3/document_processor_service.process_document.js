@@ -84,6 +84,10 @@ function main(name) {
    *  Label values are optional. Label keys must start with a letter.
    */
   // const labels = [1,2,3,4]
+  /**
+   *  Optional. Option to remove images from the document.
+   */
+  // const imagelessMode = true
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;

@@ -33,9 +33,10 @@ function main(parent, storagePoolId, storagePool) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Id of the requesting storage pool
-   *  If auto-generating Id server-side, remove this field and
-   *  id from the method_signature of Create RPC
+   *  Required. Id of the requesting storage pool. Must be unique within the
+   *  parent resource. Must contain only letters, numbers, underscore and hyphen,
+   *  with the first character a letter or underscore, the last a letter or
+   *  underscore or a number, and a 63 character maximum.
    */
   // const storagePoolId = 'abc123'
   /**

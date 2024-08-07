@@ -1586,6 +1586,8 @@
                          * @property {string|null} [parent] AdaptiveMtTranslateRequest parent
                          * @property {string|null} [dataset] AdaptiveMtTranslateRequest dataset
                          * @property {Array.<string>|null} [content] AdaptiveMtTranslateRequest content
+                         * @property {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null} [referenceSentenceConfig] AdaptiveMtTranslateRequest referenceSentenceConfig
+                         * @property {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null} [glossaryConfig] AdaptiveMtTranslateRequest glossaryConfig
                          */
     
                         /**
@@ -1629,6 +1631,47 @@
                         AdaptiveMtTranslateRequest.prototype.content = $util.emptyArray;
     
                         /**
+                         * AdaptiveMtTranslateRequest referenceSentenceConfig.
+                         * @member {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null|undefined} referenceSentenceConfig
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.referenceSentenceConfig = null;
+    
+                        /**
+                         * AdaptiveMtTranslateRequest glossaryConfig.
+                         * @member {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null|undefined} glossaryConfig
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        AdaptiveMtTranslateRequest.prototype.glossaryConfig = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AdaptiveMtTranslateRequest _referenceSentenceConfig.
+                         * @member {"referenceSentenceConfig"|undefined} _referenceSentenceConfig
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        Object.defineProperty(AdaptiveMtTranslateRequest.prototype, "_referenceSentenceConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["referenceSentenceConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * AdaptiveMtTranslateRequest _glossaryConfig.
+                         * @member {"glossaryConfig"|undefined} _glossaryConfig
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                         * @instance
+                         */
+                        Object.defineProperty(AdaptiveMtTranslateRequest.prototype, "_glossaryConfig", {
+                            get: $util.oneOfGetter($oneOfFields = ["glossaryConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new AdaptiveMtTranslateRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
@@ -1659,6 +1702,10 @@
                             if (message.content != null && message.content.length)
                                 for (var i = 0; i < message.content.length; ++i)
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.content[i]);
+                            if (message.referenceSentenceConfig != null && Object.hasOwnProperty.call(message, "referenceSentenceConfig"))
+                                $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.encode(message.referenceSentenceConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.glossaryConfig != null && Object.hasOwnProperty.call(message, "glossaryConfig"))
+                                $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.encode(message.glossaryConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -1707,6 +1754,14 @@
                                         message.content.push(reader.string());
                                         break;
                                     }
+                                case 6: {
+                                        message.referenceSentenceConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.glossaryConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1742,6 +1797,7 @@
                         AdaptiveMtTranslateRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -1754,6 +1810,22 @@
                                 for (var i = 0; i < message.content.length; ++i)
                                     if (!$util.isString(message.content[i]))
                                         return "content: string[] expected";
+                            }
+                            if (message.referenceSentenceConfig != null && message.hasOwnProperty("referenceSentenceConfig")) {
+                                properties._referenceSentenceConfig = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.verify(message.referenceSentenceConfig);
+                                    if (error)
+                                        return "referenceSentenceConfig." + error;
+                                }
+                            }
+                            if (message.glossaryConfig != null && message.hasOwnProperty("glossaryConfig")) {
+                                properties._glossaryConfig = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.verify(message.glossaryConfig);
+                                    if (error)
+                                        return "glossaryConfig." + error;
+                                }
                             }
                             return null;
                         };
@@ -1780,6 +1852,16 @@
                                 message.content = [];
                                 for (var i = 0; i < object.content.length; ++i)
                                     message.content[i] = String(object.content[i]);
+                            }
+                            if (object.referenceSentenceConfig != null) {
+                                if (typeof object.referenceSentenceConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.referenceSentenceConfig: object expected");
+                                message.referenceSentenceConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.fromObject(object.referenceSentenceConfig);
+                            }
+                            if (object.glossaryConfig != null) {
+                                if (typeof object.glossaryConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.glossaryConfig: object expected");
+                                message.glossaryConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.fromObject(object.glossaryConfig);
                             }
                             return message;
                         };
@@ -1812,6 +1894,16 @@
                                 for (var j = 0; j < message.content.length; ++j)
                                     object.content[j] = message.content[j];
                             }
+                            if (message.referenceSentenceConfig != null && message.hasOwnProperty("referenceSentenceConfig")) {
+                                object.referenceSentenceConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.toObject(message.referenceSentenceConfig, options);
+                                if (options.oneofs)
+                                    object._referenceSentenceConfig = "referenceSentenceConfig";
+                            }
+                            if (message.glossaryConfig != null && message.hasOwnProperty("glossaryConfig")) {
+                                object.glossaryConfig = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.toObject(message.glossaryConfig, options);
+                                if (options.oneofs)
+                                    object._glossaryConfig = "glossaryConfig";
+                            }
                             return object;
                         };
     
@@ -1840,6 +1932,956 @@
                             }
                             return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateRequest";
                         };
+    
+                        AdaptiveMtTranslateRequest.ReferenceSentencePair = (function() {
+    
+                            /**
+                             * Properties of a ReferenceSentencePair.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @interface IReferenceSentencePair
+                             * @property {string|null} [sourceSentence] ReferenceSentencePair sourceSentence
+                             * @property {string|null} [targetSentence] ReferenceSentencePair targetSentence
+                             */
+    
+                            /**
+                             * Constructs a new ReferenceSentencePair.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @classdesc Represents a ReferenceSentencePair.
+                             * @implements IReferenceSentencePair
+                             * @constructor
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair=} [properties] Properties to set
+                             */
+                            function ReferenceSentencePair(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReferenceSentencePair sourceSentence.
+                             * @member {string} sourceSentence
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @instance
+                             */
+                            ReferenceSentencePair.prototype.sourceSentence = "";
+    
+                            /**
+                             * ReferenceSentencePair targetSentence.
+                             * @member {string} targetSentence
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @instance
+                             */
+                            ReferenceSentencePair.prototype.targetSentence = "";
+    
+                            /**
+                             * Creates a new ReferenceSentencePair instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair} ReferenceSentencePair instance
+                             */
+                            ReferenceSentencePair.create = function create(properties) {
+                                return new ReferenceSentencePair(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReferenceSentencePair message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair} message ReferenceSentencePair message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReferenceSentencePair.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sourceSentence != null && Object.hasOwnProperty.call(message, "sourceSentence"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceSentence);
+                                if (message.targetSentence != null && Object.hasOwnProperty.call(message, "targetSentence"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetSentence);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReferenceSentencePair message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair} message ReferenceSentencePair message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReferenceSentencePair.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReferenceSentencePair message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair} ReferenceSentencePair
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReferenceSentencePair.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.sourceSentence = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetSentence = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReferenceSentencePair message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair} ReferenceSentencePair
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReferenceSentencePair.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReferenceSentencePair message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReferenceSentencePair.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sourceSentence != null && message.hasOwnProperty("sourceSentence"))
+                                    if (!$util.isString(message.sourceSentence))
+                                        return "sourceSentence: string expected";
+                                if (message.targetSentence != null && message.hasOwnProperty("targetSentence"))
+                                    if (!$util.isString(message.targetSentence))
+                                        return "targetSentence: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReferenceSentencePair message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair} ReferenceSentencePair
+                             */
+                            ReferenceSentencePair.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair();
+                                if (object.sourceSentence != null)
+                                    message.sourceSentence = String(object.sourceSentence);
+                                if (object.targetSentence != null)
+                                    message.targetSentence = String(object.targetSentence);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReferenceSentencePair message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair} message ReferenceSentencePair
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReferenceSentencePair.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.sourceSentence = "";
+                                    object.targetSentence = "";
+                                }
+                                if (message.sourceSentence != null && message.hasOwnProperty("sourceSentence"))
+                                    object.sourceSentence = message.sourceSentence;
+                                if (message.targetSentence != null && message.hasOwnProperty("targetSentence"))
+                                    object.targetSentence = message.targetSentence;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReferenceSentencePair to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReferenceSentencePair.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReferenceSentencePair
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReferenceSentencePair.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair";
+                            };
+    
+                            return ReferenceSentencePair;
+                        })();
+    
+                        AdaptiveMtTranslateRequest.ReferenceSentencePairList = (function() {
+    
+                            /**
+                             * Properties of a ReferenceSentencePairList.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @interface IReferenceSentencePairList
+                             * @property {Array.<google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair>|null} [referenceSentencePairs] ReferenceSentencePairList referenceSentencePairs
+                             */
+    
+                            /**
+                             * Constructs a new ReferenceSentencePairList.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @classdesc Represents a ReferenceSentencePairList.
+                             * @implements IReferenceSentencePairList
+                             * @constructor
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList=} [properties] Properties to set
+                             */
+                            function ReferenceSentencePairList(properties) {
+                                this.referenceSentencePairs = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReferenceSentencePairList referenceSentencePairs.
+                             * @member {Array.<google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair>} referenceSentencePairs
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @instance
+                             */
+                            ReferenceSentencePairList.prototype.referenceSentencePairs = $util.emptyArray;
+    
+                            /**
+                             * Creates a new ReferenceSentencePairList instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList} ReferenceSentencePairList instance
+                             */
+                            ReferenceSentencePairList.create = function create(properties) {
+                                return new ReferenceSentencePairList(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReferenceSentencePairList message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList} message ReferenceSentencePairList message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReferenceSentencePairList.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.referenceSentencePairs != null && message.referenceSentencePairs.length)
+                                    for (var i = 0; i < message.referenceSentencePairs.length; ++i)
+                                        $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.encode(message.referenceSentencePairs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReferenceSentencePairList message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList} message ReferenceSentencePairList message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReferenceSentencePairList.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReferenceSentencePairList message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList} ReferenceSentencePairList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReferenceSentencePairList.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.referenceSentencePairs && message.referenceSentencePairs.length))
+                                                message.referenceSentencePairs = [];
+                                            message.referenceSentencePairs.push($root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReferenceSentencePairList message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList} ReferenceSentencePairList
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReferenceSentencePairList.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReferenceSentencePairList message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReferenceSentencePairList.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.referenceSentencePairs != null && message.hasOwnProperty("referenceSentencePairs")) {
+                                    if (!Array.isArray(message.referenceSentencePairs))
+                                        return "referenceSentencePairs: array expected";
+                                    for (var i = 0; i < message.referenceSentencePairs.length; ++i) {
+                                        var error = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.verify(message.referenceSentencePairs[i]);
+                                        if (error)
+                                            return "referenceSentencePairs." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReferenceSentencePairList message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList} ReferenceSentencePairList
+                             */
+                            ReferenceSentencePairList.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList();
+                                if (object.referenceSentencePairs) {
+                                    if (!Array.isArray(object.referenceSentencePairs))
+                                        throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.referenceSentencePairs: array expected");
+                                    message.referenceSentencePairs = [];
+                                    for (var i = 0; i < object.referenceSentencePairs.length; ++i) {
+                                        if (typeof object.referenceSentencePairs[i] !== "object")
+                                            throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.referenceSentencePairs: object expected");
+                                        message.referenceSentencePairs[i] = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.fromObject(object.referenceSentencePairs[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReferenceSentencePairList message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList} message ReferenceSentencePairList
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReferenceSentencePairList.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.referenceSentencePairs = [];
+                                if (message.referenceSentencePairs && message.referenceSentencePairs.length) {
+                                    object.referenceSentencePairs = [];
+                                    for (var j = 0; j < message.referenceSentencePairs.length; ++j)
+                                        object.referenceSentencePairs[j] = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.toObject(message.referenceSentencePairs[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReferenceSentencePairList to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReferenceSentencePairList.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReferenceSentencePairList
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReferenceSentencePairList.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList";
+                            };
+    
+                            return ReferenceSentencePairList;
+                        })();
+    
+                        AdaptiveMtTranslateRequest.ReferenceSentenceConfig = (function() {
+    
+                            /**
+                             * Properties of a ReferenceSentenceConfig.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @interface IReferenceSentenceConfig
+                             * @property {Array.<google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList>|null} [referenceSentencePairLists] ReferenceSentenceConfig referenceSentencePairLists
+                             * @property {string|null} [sourceLanguageCode] ReferenceSentenceConfig sourceLanguageCode
+                             * @property {string|null} [targetLanguageCode] ReferenceSentenceConfig targetLanguageCode
+                             */
+    
+                            /**
+                             * Constructs a new ReferenceSentenceConfig.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @classdesc Represents a ReferenceSentenceConfig.
+                             * @implements IReferenceSentenceConfig
+                             * @constructor
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig=} [properties] Properties to set
+                             */
+                            function ReferenceSentenceConfig(properties) {
+                                this.referenceSentencePairLists = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReferenceSentenceConfig referenceSentencePairLists.
+                             * @member {Array.<google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList>} referenceSentencePairLists
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @instance
+                             */
+                            ReferenceSentenceConfig.prototype.referenceSentencePairLists = $util.emptyArray;
+    
+                            /**
+                             * ReferenceSentenceConfig sourceLanguageCode.
+                             * @member {string} sourceLanguageCode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @instance
+                             */
+                            ReferenceSentenceConfig.prototype.sourceLanguageCode = "";
+    
+                            /**
+                             * ReferenceSentenceConfig targetLanguageCode.
+                             * @member {string} targetLanguageCode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @instance
+                             */
+                            ReferenceSentenceConfig.prototype.targetLanguageCode = "";
+    
+                            /**
+                             * Creates a new ReferenceSentenceConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} ReferenceSentenceConfig instance
+                             */
+                            ReferenceSentenceConfig.create = function create(properties) {
+                                return new ReferenceSentenceConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReferenceSentenceConfig message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig} message ReferenceSentenceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReferenceSentenceConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.referenceSentencePairLists != null && message.referenceSentencePairLists.length)
+                                    for (var i = 0; i < message.referenceSentencePairLists.length; ++i)
+                                        $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.encode(message.referenceSentencePairLists[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLanguageCode);
+                                if (message.targetLanguageCode != null && Object.hasOwnProperty.call(message, "targetLanguageCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetLanguageCode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReferenceSentenceConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig} message ReferenceSentenceConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReferenceSentenceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReferenceSentenceConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} ReferenceSentenceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReferenceSentenceConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.referenceSentencePairLists && message.referenceSentencePairLists.length))
+                                                message.referenceSentencePairLists = [];
+                                            message.referenceSentencePairLists.push($root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.sourceLanguageCode = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.targetLanguageCode = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReferenceSentenceConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} ReferenceSentenceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReferenceSentenceConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReferenceSentenceConfig message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReferenceSentenceConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.referenceSentencePairLists != null && message.hasOwnProperty("referenceSentencePairLists")) {
+                                    if (!Array.isArray(message.referenceSentencePairLists))
+                                        return "referenceSentencePairLists: array expected";
+                                    for (var i = 0; i < message.referenceSentencePairLists.length; ++i) {
+                                        var error = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.verify(message.referenceSentencePairLists[i]);
+                                        if (error)
+                                            return "referenceSentencePairLists." + error;
+                                    }
+                                }
+                                if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                    if (!$util.isString(message.sourceLanguageCode))
+                                        return "sourceLanguageCode: string expected";
+                                if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                    if (!$util.isString(message.targetLanguageCode))
+                                        return "targetLanguageCode: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReferenceSentenceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} ReferenceSentenceConfig
+                             */
+                            ReferenceSentenceConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig();
+                                if (object.referenceSentencePairLists) {
+                                    if (!Array.isArray(object.referenceSentencePairLists))
+                                        throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.referenceSentencePairLists: array expected");
+                                    message.referenceSentencePairLists = [];
+                                    for (var i = 0; i < object.referenceSentencePairLists.length; ++i) {
+                                        if (typeof object.referenceSentencePairLists[i] !== "object")
+                                            throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.referenceSentencePairLists: object expected");
+                                        message.referenceSentencePairLists[i] = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.fromObject(object.referenceSentencePairLists[i]);
+                                    }
+                                }
+                                if (object.sourceLanguageCode != null)
+                                    message.sourceLanguageCode = String(object.sourceLanguageCode);
+                                if (object.targetLanguageCode != null)
+                                    message.targetLanguageCode = String(object.targetLanguageCode);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReferenceSentenceConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} message ReferenceSentenceConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReferenceSentenceConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.referenceSentencePairLists = [];
+                                if (options.defaults) {
+                                    object.sourceLanguageCode = "";
+                                    object.targetLanguageCode = "";
+                                }
+                                if (message.referenceSentencePairLists && message.referenceSentencePairLists.length) {
+                                    object.referenceSentencePairLists = [];
+                                    for (var j = 0; j < message.referenceSentencePairLists.length; ++j)
+                                        object.referenceSentencePairLists[j] = $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.toObject(message.referenceSentencePairLists[j], options);
+                                }
+                                if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                    object.sourceLanguageCode = message.sourceLanguageCode;
+                                if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                    object.targetLanguageCode = message.targetLanguageCode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReferenceSentenceConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReferenceSentenceConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReferenceSentenceConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReferenceSentenceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig";
+                            };
+    
+                            return ReferenceSentenceConfig;
+                        })();
+    
+                        AdaptiveMtTranslateRequest.GlossaryConfig = (function() {
+    
+                            /**
+                             * Properties of a GlossaryConfig.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @interface IGlossaryConfig
+                             * @property {string|null} [glossary] GlossaryConfig glossary
+                             * @property {boolean|null} [ignoreCase] GlossaryConfig ignoreCase
+                             */
+    
+                            /**
+                             * Constructs a new GlossaryConfig.
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest
+                             * @classdesc Represents a GlossaryConfig.
+                             * @implements IGlossaryConfig
+                             * @constructor
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig=} [properties] Properties to set
+                             */
+                            function GlossaryConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GlossaryConfig glossary.
+                             * @member {string} glossary
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @instance
+                             */
+                            GlossaryConfig.prototype.glossary = "";
+    
+                            /**
+                             * GlossaryConfig ignoreCase.
+                             * @member {boolean} ignoreCase
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @instance
+                             */
+                            GlossaryConfig.prototype.ignoreCase = false;
+    
+                            /**
+                             * Creates a new GlossaryConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} GlossaryConfig instance
+                             */
+                            GlossaryConfig.create = function create(properties) {
+                                return new GlossaryConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GlossaryConfig message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig} message GlossaryConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlossaryConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.glossary != null && Object.hasOwnProperty.call(message, "glossary"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.glossary);
+                                if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ignoreCase);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GlossaryConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig} message GlossaryConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlossaryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GlossaryConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} GlossaryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlossaryConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.glossary = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.ignoreCase = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GlossaryConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} GlossaryConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlossaryConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GlossaryConfig message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GlossaryConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.glossary != null && message.hasOwnProperty("glossary"))
+                                    if (!$util.isString(message.glossary))
+                                        return "glossary: string expected";
+                                if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
+                                    if (typeof message.ignoreCase !== "boolean")
+                                        return "ignoreCase: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GlossaryConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} GlossaryConfig
+                             */
+                            GlossaryConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig();
+                                if (object.glossary != null)
+                                    message.glossary = String(object.glossary);
+                                if (object.ignoreCase != null)
+                                    message.ignoreCase = Boolean(object.ignoreCase);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GlossaryConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} message GlossaryConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GlossaryConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.glossary = "";
+                                    object.ignoreCase = false;
+                                }
+                                if (message.glossary != null && message.hasOwnProperty("glossary"))
+                                    object.glossary = message.glossary;
+                                if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
+                                    object.ignoreCase = message.ignoreCase;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GlossaryConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GlossaryConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GlossaryConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GlossaryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig";
+                            };
+    
+                            return GlossaryConfig;
+                        })();
     
                         return AdaptiveMtTranslateRequest;
                     })();
@@ -2055,6 +3097,7 @@
                          * @interface IAdaptiveMtTranslateResponse
                          * @property {Array.<google.cloud.translation.v3.IAdaptiveMtTranslation>|null} [translations] AdaptiveMtTranslateResponse translations
                          * @property {string|null} [languageCode] AdaptiveMtTranslateResponse languageCode
+                         * @property {Array.<google.cloud.translation.v3.IAdaptiveMtTranslation>|null} [glossaryTranslations] AdaptiveMtTranslateResponse glossaryTranslations
                          */
     
                         /**
@@ -2067,6 +3110,7 @@
                          */
                         function AdaptiveMtTranslateResponse(properties) {
                             this.translations = [];
+                            this.glossaryTranslations = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -2088,6 +3132,14 @@
                          * @instance
                          */
                         AdaptiveMtTranslateResponse.prototype.languageCode = "";
+    
+                        /**
+                         * AdaptiveMtTranslateResponse glossaryTranslations.
+                         * @member {Array.<google.cloud.translation.v3.IAdaptiveMtTranslation>} glossaryTranslations
+                         * @memberof google.cloud.translation.v3.AdaptiveMtTranslateResponse
+                         * @instance
+                         */
+                        AdaptiveMtTranslateResponse.prototype.glossaryTranslations = $util.emptyArray;
     
                         /**
                          * Creates a new AdaptiveMtTranslateResponse instance using the specified properties.
@@ -2118,6 +3170,9 @@
                                     $root.google.cloud.translation.v3.AdaptiveMtTranslation.encode(message.translations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.languageCode);
+                            if (message.glossaryTranslations != null && message.glossaryTranslations.length)
+                                for (var i = 0; i < message.glossaryTranslations.length; ++i)
+                                    $root.google.cloud.translation.v3.AdaptiveMtTranslation.encode(message.glossaryTranslations[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -2160,6 +3215,12 @@
                                     }
                                 case 2: {
                                         message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.glossaryTranslations && message.glossaryTranslations.length))
+                                            message.glossaryTranslations = [];
+                                        message.glossaryTranslations.push($root.google.cloud.translation.v3.AdaptiveMtTranslation.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -2209,6 +3270,15 @@
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 if (!$util.isString(message.languageCode))
                                     return "languageCode: string expected";
+                            if (message.glossaryTranslations != null && message.hasOwnProperty("glossaryTranslations")) {
+                                if (!Array.isArray(message.glossaryTranslations))
+                                    return "glossaryTranslations: array expected";
+                                for (var i = 0; i < message.glossaryTranslations.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.AdaptiveMtTranslation.verify(message.glossaryTranslations[i]);
+                                    if (error)
+                                        return "glossaryTranslations." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -2236,6 +3306,16 @@
                             }
                             if (object.languageCode != null)
                                 message.languageCode = String(object.languageCode);
+                            if (object.glossaryTranslations) {
+                                if (!Array.isArray(object.glossaryTranslations))
+                                    throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateResponse.glossaryTranslations: array expected");
+                                message.glossaryTranslations = [];
+                                for (var i = 0; i < object.glossaryTranslations.length; ++i) {
+                                    if (typeof object.glossaryTranslations[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.AdaptiveMtTranslateResponse.glossaryTranslations: object expected");
+                                    message.glossaryTranslations[i] = $root.google.cloud.translation.v3.AdaptiveMtTranslation.fromObject(object.glossaryTranslations[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -2252,8 +3332,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.translations = [];
+                                object.glossaryTranslations = [];
+                            }
                             if (options.defaults)
                                 object.languageCode = "";
                             if (message.translations && message.translations.length) {
@@ -2263,6 +3345,11 @@
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
+                            if (message.glossaryTranslations && message.glossaryTranslations.length) {
+                                object.glossaryTranslations = [];
+                                for (var j = 0; j < message.glossaryTranslations.length; ++j)
+                                    object.glossaryTranslations[j] = $root.google.cloud.translation.v3.AdaptiveMtTranslation.toObject(message.glossaryTranslations[j], options);
+                            }
                             return object;
                         };
     
@@ -5468,6 +6555,8564 @@
                         return GcsOutputDestination;
                     })();
     
+                    /**
+                     * OperationState enum.
+                     * @name google.cloud.translation.v3.OperationState
+                     * @enum {number}
+                     * @property {number} OPERATION_STATE_UNSPECIFIED=0 OPERATION_STATE_UNSPECIFIED value
+                     * @property {number} OPERATION_STATE_RUNNING=1 OPERATION_STATE_RUNNING value
+                     * @property {number} OPERATION_STATE_SUCCEEDED=2 OPERATION_STATE_SUCCEEDED value
+                     * @property {number} OPERATION_STATE_FAILED=3 OPERATION_STATE_FAILED value
+                     * @property {number} OPERATION_STATE_CANCELLING=4 OPERATION_STATE_CANCELLING value
+                     * @property {number} OPERATION_STATE_CANCELLED=5 OPERATION_STATE_CANCELLED value
+                     */
+                    v3.OperationState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATION_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "OPERATION_STATE_RUNNING"] = 1;
+                        values[valuesById[2] = "OPERATION_STATE_SUCCEEDED"] = 2;
+                        values[valuesById[3] = "OPERATION_STATE_FAILED"] = 3;
+                        values[valuesById[4] = "OPERATION_STATE_CANCELLING"] = 4;
+                        values[valuesById[5] = "OPERATION_STATE_CANCELLED"] = 5;
+                        return values;
+                    })();
+    
+                    v3.GlossaryEntry = (function() {
+    
+                        /**
+                         * Properties of a GlossaryEntry.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGlossaryEntry
+                         * @property {string|null} [name] GlossaryEntry name
+                         * @property {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair|null} [termsPair] GlossaryEntry termsPair
+                         * @property {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet|null} [termsSet] GlossaryEntry termsSet
+                         * @property {string|null} [description] GlossaryEntry description
+                         */
+    
+                        /**
+                         * Constructs a new GlossaryEntry.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GlossaryEntry.
+                         * @implements IGlossaryEntry
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGlossaryEntry=} [properties] Properties to set
+                         */
+                        function GlossaryEntry(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GlossaryEntry name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @instance
+                         */
+                        GlossaryEntry.prototype.name = "";
+    
+                        /**
+                         * GlossaryEntry termsPair.
+                         * @member {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair|null|undefined} termsPair
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @instance
+                         */
+                        GlossaryEntry.prototype.termsPair = null;
+    
+                        /**
+                         * GlossaryEntry termsSet.
+                         * @member {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet|null|undefined} termsSet
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @instance
+                         */
+                        GlossaryEntry.prototype.termsSet = null;
+    
+                        /**
+                         * GlossaryEntry description.
+                         * @member {string} description
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @instance
+                         */
+                        GlossaryEntry.prototype.description = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * GlossaryEntry data.
+                         * @member {"termsPair"|"termsSet"|undefined} data
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @instance
+                         */
+                        Object.defineProperty(GlossaryEntry.prototype, "data", {
+                            get: $util.oneOfGetter($oneOfFields = ["termsPair", "termsSet"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new GlossaryEntry instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {google.cloud.translation.v3.IGlossaryEntry=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GlossaryEntry} GlossaryEntry instance
+                         */
+                        GlossaryEntry.create = function create(properties) {
+                            return new GlossaryEntry(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GlossaryEntry message. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {google.cloud.translation.v3.IGlossaryEntry} message GlossaryEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GlossaryEntry.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.termsPair != null && Object.hasOwnProperty.call(message, "termsPair"))
+                                $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.encode(message.termsPair, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.termsSet != null && Object.hasOwnProperty.call(message, "termsSet"))
+                                $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.encode(message.termsSet, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GlossaryEntry message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {google.cloud.translation.v3.IGlossaryEntry} message GlossaryEntry message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GlossaryEntry.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GlossaryEntry message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GlossaryEntry} GlossaryEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GlossaryEntry.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GlossaryEntry();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.termsPair = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.termsSet = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GlossaryEntry message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GlossaryEntry} GlossaryEntry
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GlossaryEntry.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GlossaryEntry message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GlossaryEntry.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.termsPair != null && message.hasOwnProperty("termsPair")) {
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.verify(message.termsPair);
+                                    if (error)
+                                        return "termsPair." + error;
+                                }
+                            }
+                            if (message.termsSet != null && message.hasOwnProperty("termsSet")) {
+                                if (properties.data === 1)
+                                    return "data: multiple values";
+                                properties.data = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.verify(message.termsSet);
+                                    if (error)
+                                        return "termsSet." + error;
+                                }
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GlossaryEntry message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GlossaryEntry} GlossaryEntry
+                         */
+                        GlossaryEntry.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GlossaryEntry)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GlossaryEntry();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.termsPair != null) {
+                                if (typeof object.termsPair !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.GlossaryEntry.termsPair: object expected");
+                                message.termsPair = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.fromObject(object.termsPair);
+                            }
+                            if (object.termsSet != null) {
+                                if (typeof object.termsSet !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.GlossaryEntry.termsSet: object expected");
+                                message.termsSet = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.fromObject(object.termsSet);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GlossaryEntry message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {google.cloud.translation.v3.GlossaryEntry} message GlossaryEntry
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GlossaryEntry.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.termsPair != null && message.hasOwnProperty("termsPair")) {
+                                object.termsPair = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.toObject(message.termsPair, options);
+                                if (options.oneofs)
+                                    object.data = "termsPair";
+                            }
+                            if (message.termsSet != null && message.hasOwnProperty("termsSet")) {
+                                object.termsSet = $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.toObject(message.termsSet, options);
+                                if (options.oneofs)
+                                    object.data = "termsSet";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GlossaryEntry to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GlossaryEntry.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GlossaryEntry
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GlossaryEntry
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GlossaryEntry.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GlossaryEntry";
+                        };
+    
+                        GlossaryEntry.GlossaryTermsPair = (function() {
+    
+                            /**
+                             * Properties of a GlossaryTermsPair.
+                             * @memberof google.cloud.translation.v3.GlossaryEntry
+                             * @interface IGlossaryTermsPair
+                             * @property {google.cloud.translation.v3.IGlossaryTerm|null} [sourceTerm] GlossaryTermsPair sourceTerm
+                             * @property {google.cloud.translation.v3.IGlossaryTerm|null} [targetTerm] GlossaryTermsPair targetTerm
+                             */
+    
+                            /**
+                             * Constructs a new GlossaryTermsPair.
+                             * @memberof google.cloud.translation.v3.GlossaryEntry
+                             * @classdesc Represents a GlossaryTermsPair.
+                             * @implements IGlossaryTermsPair
+                             * @constructor
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair=} [properties] Properties to set
+                             */
+                            function GlossaryTermsPair(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GlossaryTermsPair sourceTerm.
+                             * @member {google.cloud.translation.v3.IGlossaryTerm|null|undefined} sourceTerm
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @instance
+                             */
+                            GlossaryTermsPair.prototype.sourceTerm = null;
+    
+                            /**
+                             * GlossaryTermsPair targetTerm.
+                             * @member {google.cloud.translation.v3.IGlossaryTerm|null|undefined} targetTerm
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @instance
+                             */
+                            GlossaryTermsPair.prototype.targetTerm = null;
+    
+                            /**
+                             * Creates a new GlossaryTermsPair instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair} GlossaryTermsPair instance
+                             */
+                            GlossaryTermsPair.create = function create(properties) {
+                                return new GlossaryTermsPair(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GlossaryTermsPair message. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair} message GlossaryTermsPair message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlossaryTermsPair.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.sourceTerm != null && Object.hasOwnProperty.call(message, "sourceTerm"))
+                                    $root.google.cloud.translation.v3.GlossaryTerm.encode(message.sourceTerm, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.targetTerm != null && Object.hasOwnProperty.call(message, "targetTerm"))
+                                    $root.google.cloud.translation.v3.GlossaryTerm.encode(message.targetTerm, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GlossaryTermsPair message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair} message GlossaryTermsPair message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlossaryTermsPair.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GlossaryTermsPair message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair} GlossaryTermsPair
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlossaryTermsPair.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.sourceTerm = $root.google.cloud.translation.v3.GlossaryTerm.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.targetTerm = $root.google.cloud.translation.v3.GlossaryTerm.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GlossaryTermsPair message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair} GlossaryTermsPair
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlossaryTermsPair.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GlossaryTermsPair message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GlossaryTermsPair.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.sourceTerm != null && message.hasOwnProperty("sourceTerm")) {
+                                    var error = $root.google.cloud.translation.v3.GlossaryTerm.verify(message.sourceTerm);
+                                    if (error)
+                                        return "sourceTerm." + error;
+                                }
+                                if (message.targetTerm != null && message.hasOwnProperty("targetTerm")) {
+                                    var error = $root.google.cloud.translation.v3.GlossaryTerm.verify(message.targetTerm);
+                                    if (error)
+                                        return "targetTerm." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GlossaryTermsPair message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair} GlossaryTermsPair
+                             */
+                            GlossaryTermsPair.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair();
+                                if (object.sourceTerm != null) {
+                                    if (typeof object.sourceTerm !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.sourceTerm: object expected");
+                                    message.sourceTerm = $root.google.cloud.translation.v3.GlossaryTerm.fromObject(object.sourceTerm);
+                                }
+                                if (object.targetTerm != null) {
+                                    if (typeof object.targetTerm !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.targetTerm: object expected");
+                                    message.targetTerm = $root.google.cloud.translation.v3.GlossaryTerm.fromObject(object.targetTerm);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GlossaryTermsPair message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair} message GlossaryTermsPair
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GlossaryTermsPair.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.sourceTerm = null;
+                                    object.targetTerm = null;
+                                }
+                                if (message.sourceTerm != null && message.hasOwnProperty("sourceTerm"))
+                                    object.sourceTerm = $root.google.cloud.translation.v3.GlossaryTerm.toObject(message.sourceTerm, options);
+                                if (message.targetTerm != null && message.hasOwnProperty("targetTerm"))
+                                    object.targetTerm = $root.google.cloud.translation.v3.GlossaryTerm.toObject(message.targetTerm, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GlossaryTermsPair to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GlossaryTermsPair.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GlossaryTermsPair
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GlossaryTermsPair.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair";
+                            };
+    
+                            return GlossaryTermsPair;
+                        })();
+    
+                        GlossaryEntry.GlossaryTermsSet = (function() {
+    
+                            /**
+                             * Properties of a GlossaryTermsSet.
+                             * @memberof google.cloud.translation.v3.GlossaryEntry
+                             * @interface IGlossaryTermsSet
+                             * @property {Array.<google.cloud.translation.v3.IGlossaryTerm>|null} [terms] GlossaryTermsSet terms
+                             */
+    
+                            /**
+                             * Constructs a new GlossaryTermsSet.
+                             * @memberof google.cloud.translation.v3.GlossaryEntry
+                             * @classdesc Represents a GlossaryTermsSet.
+                             * @implements IGlossaryTermsSet
+                             * @constructor
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet=} [properties] Properties to set
+                             */
+                            function GlossaryTermsSet(properties) {
+                                this.terms = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GlossaryTermsSet terms.
+                             * @member {Array.<google.cloud.translation.v3.IGlossaryTerm>} terms
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @instance
+                             */
+                            GlossaryTermsSet.prototype.terms = $util.emptyArray;
+    
+                            /**
+                             * Creates a new GlossaryTermsSet instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet} GlossaryTermsSet instance
+                             */
+                            GlossaryTermsSet.create = function create(properties) {
+                                return new GlossaryTermsSet(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GlossaryTermsSet message. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet} message GlossaryTermsSet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlossaryTermsSet.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.terms != null && message.terms.length)
+                                    for (var i = 0; i < message.terms.length; ++i)
+                                        $root.google.cloud.translation.v3.GlossaryTerm.encode(message.terms[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GlossaryTermsSet message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet} message GlossaryTermsSet message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GlossaryTermsSet.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GlossaryTermsSet message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet} GlossaryTermsSet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlossaryTermsSet.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.terms && message.terms.length))
+                                                message.terms = [];
+                                            message.terms.push($root.google.cloud.translation.v3.GlossaryTerm.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GlossaryTermsSet message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet} GlossaryTermsSet
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GlossaryTermsSet.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GlossaryTermsSet message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GlossaryTermsSet.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.terms != null && message.hasOwnProperty("terms")) {
+                                    if (!Array.isArray(message.terms))
+                                        return "terms: array expected";
+                                    for (var i = 0; i < message.terms.length; ++i) {
+                                        var error = $root.google.cloud.translation.v3.GlossaryTerm.verify(message.terms[i]);
+                                        if (error)
+                                            return "terms." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GlossaryTermsSet message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet} GlossaryTermsSet
+                             */
+                            GlossaryTermsSet.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet();
+                                if (object.terms) {
+                                    if (!Array.isArray(object.terms))
+                                        throw TypeError(".google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.terms: array expected");
+                                    message.terms = [];
+                                    for (var i = 0; i < object.terms.length; ++i) {
+                                        if (typeof object.terms[i] !== "object")
+                                            throw TypeError(".google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.terms: object expected");
+                                        message.terms[i] = $root.google.cloud.translation.v3.GlossaryTerm.fromObject(object.terms[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GlossaryTermsSet message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet} message GlossaryTermsSet
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GlossaryTermsSet.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.terms = [];
+                                if (message.terms && message.terms.length) {
+                                    object.terms = [];
+                                    for (var j = 0; j < message.terms.length; ++j)
+                                        object.terms[j] = $root.google.cloud.translation.v3.GlossaryTerm.toObject(message.terms[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GlossaryTermsSet to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GlossaryTermsSet.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GlossaryTermsSet
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GlossaryTermsSet.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet";
+                            };
+    
+                            return GlossaryTermsSet;
+                        })();
+    
+                        return GlossaryEntry;
+                    })();
+    
+                    v3.GlossaryTerm = (function() {
+    
+                        /**
+                         * Properties of a GlossaryTerm.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGlossaryTerm
+                         * @property {string|null} [languageCode] GlossaryTerm languageCode
+                         * @property {string|null} [text] GlossaryTerm text
+                         */
+    
+                        /**
+                         * Constructs a new GlossaryTerm.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GlossaryTerm.
+                         * @implements IGlossaryTerm
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGlossaryTerm=} [properties] Properties to set
+                         */
+                        function GlossaryTerm(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GlossaryTerm languageCode.
+                         * @member {string} languageCode
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @instance
+                         */
+                        GlossaryTerm.prototype.languageCode = "";
+    
+                        /**
+                         * GlossaryTerm text.
+                         * @member {string} text
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @instance
+                         */
+                        GlossaryTerm.prototype.text = "";
+    
+                        /**
+                         * Creates a new GlossaryTerm instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.translation.v3.IGlossaryTerm=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GlossaryTerm} GlossaryTerm instance
+                         */
+                        GlossaryTerm.create = function create(properties) {
+                            return new GlossaryTerm(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GlossaryTerm message. Does not implicitly {@link google.cloud.translation.v3.GlossaryTerm.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.translation.v3.IGlossaryTerm} message GlossaryTerm message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GlossaryTerm.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.languageCode);
+                            if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.text);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GlossaryTerm message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryTerm.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.translation.v3.IGlossaryTerm} message GlossaryTerm message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GlossaryTerm.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GlossaryTerm message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GlossaryTerm} GlossaryTerm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GlossaryTerm.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GlossaryTerm();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.languageCode = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.text = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GlossaryTerm message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GlossaryTerm} GlossaryTerm
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GlossaryTerm.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GlossaryTerm message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GlossaryTerm.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                if (!$util.isString(message.languageCode))
+                                    return "languageCode: string expected";
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                if (!$util.isString(message.text))
+                                    return "text: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GlossaryTerm message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GlossaryTerm} GlossaryTerm
+                         */
+                        GlossaryTerm.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GlossaryTerm)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GlossaryTerm();
+                            if (object.languageCode != null)
+                                message.languageCode = String(object.languageCode);
+                            if (object.text != null)
+                                message.text = String(object.text);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GlossaryTerm message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {google.cloud.translation.v3.GlossaryTerm} message GlossaryTerm
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GlossaryTerm.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.languageCode = "";
+                                object.text = "";
+                            }
+                            if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                object.languageCode = message.languageCode;
+                            if (message.text != null && message.hasOwnProperty("text"))
+                                object.text = message.text;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GlossaryTerm to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GlossaryTerm.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GlossaryTerm
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GlossaryTerm
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GlossaryTerm.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GlossaryTerm";
+                        };
+    
+                        return GlossaryTerm;
+                    })();
+    
+                    v3.ImportDataRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportDataRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IImportDataRequest
+                         * @property {string|null} [dataset] ImportDataRequest dataset
+                         * @property {google.cloud.translation.v3.IDatasetInputConfig|null} [inputConfig] ImportDataRequest inputConfig
+                         */
+    
+                        /**
+                         * Constructs a new ImportDataRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an ImportDataRequest.
+                         * @implements IImportDataRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IImportDataRequest=} [properties] Properties to set
+                         */
+                        function ImportDataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportDataRequest dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.dataset = "";
+    
+                        /**
+                         * ImportDataRequest inputConfig.
+                         * @member {google.cloud.translation.v3.IDatasetInputConfig|null|undefined} inputConfig
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @instance
+                         */
+                        ImportDataRequest.prototype.inputConfig = null;
+    
+                        /**
+                         * Creates a new ImportDataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportDataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ImportDataRequest} ImportDataRequest instance
+                         */
+                        ImportDataRequest.create = function create(properties) {
+                            return new ImportDataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportDataRequest message. Does not implicitly {@link google.cloud.translation.v3.ImportDataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportDataRequest} message ImportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportDataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                            if (message.inputConfig != null && Object.hasOwnProperty.call(message, "inputConfig"))
+                                $root.google.cloud.translation.v3.DatasetInputConfig.encode(message.inputConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportDataRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportDataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportDataRequest} message ImportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportDataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportDataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ImportDataRequest} ImportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportDataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ImportDataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataset = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.inputConfig = $root.google.cloud.translation.v3.DatasetInputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportDataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ImportDataRequest} ImportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportDataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportDataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportDataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.inputConfig != null && message.hasOwnProperty("inputConfig")) {
+                                var error = $root.google.cloud.translation.v3.DatasetInputConfig.verify(message.inputConfig);
+                                if (error)
+                                    return "inputConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportDataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ImportDataRequest} ImportDataRequest
+                         */
+                        ImportDataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ImportDataRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ImportDataRequest();
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.inputConfig != null) {
+                                if (typeof object.inputConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportDataRequest.inputConfig: object expected");
+                                message.inputConfig = $root.google.cloud.translation.v3.DatasetInputConfig.fromObject(object.inputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportDataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ImportDataRequest} message ImportDataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportDataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataset = "";
+                                object.inputConfig = null;
+                            }
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.inputConfig != null && message.hasOwnProperty("inputConfig"))
+                                object.inputConfig = $root.google.cloud.translation.v3.DatasetInputConfig.toObject(message.inputConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportDataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportDataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportDataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ImportDataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportDataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ImportDataRequest";
+                        };
+    
+                        return ImportDataRequest;
+                    })();
+    
+                    v3.DatasetInputConfig = (function() {
+    
+                        /**
+                         * Properties of a DatasetInputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDatasetInputConfig
+                         * @property {Array.<google.cloud.translation.v3.DatasetInputConfig.IInputFile>|null} [inputFiles] DatasetInputConfig inputFiles
+                         */
+    
+                        /**
+                         * Constructs a new DatasetInputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DatasetInputConfig.
+                         * @implements IDatasetInputConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDatasetInputConfig=} [properties] Properties to set
+                         */
+                        function DatasetInputConfig(properties) {
+                            this.inputFiles = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatasetInputConfig inputFiles.
+                         * @member {Array.<google.cloud.translation.v3.DatasetInputConfig.IInputFile>} inputFiles
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @instance
+                         */
+                        DatasetInputConfig.prototype.inputFiles = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DatasetInputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDatasetInputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DatasetInputConfig} DatasetInputConfig instance
+                         */
+                        DatasetInputConfig.create = function create(properties) {
+                            return new DatasetInputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatasetInputConfig message. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDatasetInputConfig} message DatasetInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasetInputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.inputFiles != null && message.inputFiles.length)
+                                for (var i = 0; i < message.inputFiles.length; ++i)
+                                    $root.google.cloud.translation.v3.DatasetInputConfig.InputFile.encode(message.inputFiles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatasetInputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDatasetInputConfig} message DatasetInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasetInputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatasetInputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DatasetInputConfig} DatasetInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasetInputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DatasetInputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.inputFiles && message.inputFiles.length))
+                                            message.inputFiles = [];
+                                        message.inputFiles.push($root.google.cloud.translation.v3.DatasetInputConfig.InputFile.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatasetInputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DatasetInputConfig} DatasetInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasetInputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatasetInputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatasetInputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.inputFiles != null && message.hasOwnProperty("inputFiles")) {
+                                if (!Array.isArray(message.inputFiles))
+                                    return "inputFiles: array expected";
+                                for (var i = 0; i < message.inputFiles.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.DatasetInputConfig.InputFile.verify(message.inputFiles[i]);
+                                    if (error)
+                                        return "inputFiles." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatasetInputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DatasetInputConfig} DatasetInputConfig
+                         */
+                        DatasetInputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DatasetInputConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DatasetInputConfig();
+                            if (object.inputFiles) {
+                                if (!Array.isArray(object.inputFiles))
+                                    throw TypeError(".google.cloud.translation.v3.DatasetInputConfig.inputFiles: array expected");
+                                message.inputFiles = [];
+                                for (var i = 0; i < object.inputFiles.length; ++i) {
+                                    if (typeof object.inputFiles[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.DatasetInputConfig.inputFiles: object expected");
+                                    message.inputFiles[i] = $root.google.cloud.translation.v3.DatasetInputConfig.InputFile.fromObject(object.inputFiles[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatasetInputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.DatasetInputConfig} message DatasetInputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatasetInputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.inputFiles = [];
+                            if (message.inputFiles && message.inputFiles.length) {
+                                object.inputFiles = [];
+                                for (var j = 0; j < message.inputFiles.length; ++j)
+                                    object.inputFiles[j] = $root.google.cloud.translation.v3.DatasetInputConfig.InputFile.toObject(message.inputFiles[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatasetInputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatasetInputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatasetInputConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DatasetInputConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatasetInputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DatasetInputConfig";
+                        };
+    
+                        DatasetInputConfig.InputFile = (function() {
+    
+                            /**
+                             * Properties of an InputFile.
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig
+                             * @interface IInputFile
+                             * @property {string|null} [usage] InputFile usage
+                             * @property {google.cloud.translation.v3.IGcsInputSource|null} [gcsSource] InputFile gcsSource
+                             */
+    
+                            /**
+                             * Constructs a new InputFile.
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig
+                             * @classdesc Represents an InputFile.
+                             * @implements IInputFile
+                             * @constructor
+                             * @param {google.cloud.translation.v3.DatasetInputConfig.IInputFile=} [properties] Properties to set
+                             */
+                            function InputFile(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InputFile usage.
+                             * @member {string} usage
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @instance
+                             */
+                            InputFile.prototype.usage = "";
+    
+                            /**
+                             * InputFile gcsSource.
+                             * @member {google.cloud.translation.v3.IGcsInputSource|null|undefined} gcsSource
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @instance
+                             */
+                            InputFile.prototype.gcsSource = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * InputFile source.
+                             * @member {"gcsSource"|undefined} source
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @instance
+                             */
+                            Object.defineProperty(InputFile.prototype, "source", {
+                                get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new InputFile instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {google.cloud.translation.v3.DatasetInputConfig.IInputFile=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.DatasetInputConfig.InputFile} InputFile instance
+                             */
+                            InputFile.create = function create(properties) {
+                                return new InputFile(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InputFile message. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.InputFile.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {google.cloud.translation.v3.DatasetInputConfig.IInputFile} message InputFile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputFile.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.usage != null && Object.hasOwnProperty.call(message, "usage"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.usage);
+                                if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                    $root.google.cloud.translation.v3.GcsInputSource.encode(message.gcsSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InputFile message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.InputFile.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {google.cloud.translation.v3.DatasetInputConfig.IInputFile} message InputFile message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputFile.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InputFile message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.DatasetInputConfig.InputFile} InputFile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputFile.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DatasetInputConfig.InputFile();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2: {
+                                            message.usage = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.gcsSource = $root.google.cloud.translation.v3.GcsInputSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InputFile message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.DatasetInputConfig.InputFile} InputFile
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputFile.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InputFile message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InputFile.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.usage != null && message.hasOwnProperty("usage"))
+                                    if (!$util.isString(message.usage))
+                                        return "usage: string expected";
+                                if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.translation.v3.GcsInputSource.verify(message.gcsSource);
+                                        if (error)
+                                            return "gcsSource." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InputFile message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.DatasetInputConfig.InputFile} InputFile
+                             */
+                            InputFile.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.DatasetInputConfig.InputFile)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.DatasetInputConfig.InputFile();
+                                if (object.usage != null)
+                                    message.usage = String(object.usage);
+                                if (object.gcsSource != null) {
+                                    if (typeof object.gcsSource !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.DatasetInputConfig.InputFile.gcsSource: object expected");
+                                    message.gcsSource = $root.google.cloud.translation.v3.GcsInputSource.fromObject(object.gcsSource);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InputFile message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {google.cloud.translation.v3.DatasetInputConfig.InputFile} message InputFile
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InputFile.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.usage = "";
+                                if (message.usage != null && message.hasOwnProperty("usage"))
+                                    object.usage = message.usage;
+                                if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                    object.gcsSource = $root.google.cloud.translation.v3.GcsInputSource.toObject(message.gcsSource, options);
+                                    if (options.oneofs)
+                                        object.source = "gcsSource";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InputFile to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InputFile.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for InputFile
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.DatasetInputConfig.InputFile
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            InputFile.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.DatasetInputConfig.InputFile";
+                            };
+    
+                            return InputFile;
+                        })();
+    
+                        return DatasetInputConfig;
+                    })();
+    
+                    v3.ImportDataMetadata = (function() {
+    
+                        /**
+                         * Properties of an ImportDataMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IImportDataMetadata
+                         * @property {google.cloud.translation.v3.OperationState|null} [state] ImportDataMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ImportDataMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ImportDataMetadata updateTime
+                         * @property {google.rpc.IStatus|null} [error] ImportDataMetadata error
+                         */
+    
+                        /**
+                         * Constructs a new ImportDataMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an ImportDataMetadata.
+                         * @implements IImportDataMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IImportDataMetadata=} [properties] Properties to set
+                         */
+                        function ImportDataMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportDataMetadata state.
+                         * @member {google.cloud.translation.v3.OperationState} state
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.state = 0;
+    
+                        /**
+                         * ImportDataMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ImportDataMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * ImportDataMetadata error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @instance
+                         */
+                        ImportDataMetadata.prototype.error = null;
+    
+                        /**
+                         * Creates a new ImportDataMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportDataMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ImportDataMetadata} ImportDataMetadata instance
+                         */
+                        ImportDataMetadata.create = function create(properties) {
+                            return new ImportDataMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportDataMetadata message. Does not implicitly {@link google.cloud.translation.v3.ImportDataMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportDataMetadata} message ImportDataMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportDataMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportDataMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IImportDataMetadata} message ImportDataMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportDataMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportDataMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ImportDataMetadata} ImportDataMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportDataMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ImportDataMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportDataMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ImportDataMetadata} ImportDataMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportDataMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportDataMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportDataMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ImportDataMetadata} ImportDataMetadata
+                         */
+                        ImportDataMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ImportDataMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ImportDataMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "OPERATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OPERATION_STATE_RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "OPERATION_STATE_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "OPERATION_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "OPERATION_STATE_CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "OPERATION_STATE_CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportDataMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportDataMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ImportDataMetadata.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportDataMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ImportDataMetadata} message ImportDataMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportDataMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "OPERATION_STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.error = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.OperationState[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.OperationState[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportDataMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportDataMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportDataMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ImportDataMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportDataMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ImportDataMetadata";
+                        };
+    
+                        return ImportDataMetadata;
+                    })();
+    
+                    v3.ExportDataRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportDataRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IExportDataRequest
+                         * @property {string|null} [dataset] ExportDataRequest dataset
+                         * @property {google.cloud.translation.v3.IDatasetOutputConfig|null} [outputConfig] ExportDataRequest outputConfig
+                         */
+    
+                        /**
+                         * Constructs a new ExportDataRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an ExportDataRequest.
+                         * @implements IExportDataRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IExportDataRequest=} [properties] Properties to set
+                         */
+                        function ExportDataRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportDataRequest dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.dataset = "";
+    
+                        /**
+                         * ExportDataRequest outputConfig.
+                         * @member {google.cloud.translation.v3.IDatasetOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @instance
+                         */
+                        ExportDataRequest.prototype.outputConfig = null;
+    
+                        /**
+                         * Creates a new ExportDataRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IExportDataRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ExportDataRequest} ExportDataRequest instance
+                         */
+                        ExportDataRequest.create = function create(properties) {
+                            return new ExportDataRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataRequest message. Does not implicitly {@link google.cloud.translation.v3.ExportDataRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IExportDataRequest} message ExportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.translation.v3.DatasetOutputConfig.encode(message.outputConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ExportDataRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IExportDataRequest} message ExportDataRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportDataRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ExportDataRequest} ExportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ExportDataRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.dataset = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.outputConfig = $root.google.cloud.translation.v3.DatasetOutputConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportDataRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ExportDataRequest} ExportDataRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportDataRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportDataRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.translation.v3.DatasetOutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportDataRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ExportDataRequest} ExportDataRequest
+                         */
+                        ExportDataRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ExportDataRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ExportDataRequest();
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ExportDataRequest.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.translation.v3.DatasetOutputConfig.fromObject(object.outputConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportDataRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ExportDataRequest} message ExportDataRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportDataRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dataset = "";
+                                object.outputConfig = null;
+                            }
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.translation.v3.DatasetOutputConfig.toObject(message.outputConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportDataRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportDataRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportDataRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ExportDataRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportDataRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ExportDataRequest";
+                        };
+    
+                        return ExportDataRequest;
+                    })();
+    
+                    v3.DatasetOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a DatasetOutputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDatasetOutputConfig
+                         * @property {google.cloud.translation.v3.IGcsOutputDestination|null} [gcsDestination] DatasetOutputConfig gcsDestination
+                         */
+    
+                        /**
+                         * Constructs a new DatasetOutputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DatasetOutputConfig.
+                         * @implements IDatasetOutputConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDatasetOutputConfig=} [properties] Properties to set
+                         */
+                        function DatasetOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DatasetOutputConfig gcsDestination.
+                         * @member {google.cloud.translation.v3.IGcsOutputDestination|null|undefined} gcsDestination
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @instance
+                         */
+                        DatasetOutputConfig.prototype.gcsDestination = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DatasetOutputConfig destination.
+                         * @member {"gcsDestination"|undefined} destination
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DatasetOutputConfig.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DatasetOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDatasetOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DatasetOutputConfig} DatasetOutputConfig instance
+                         */
+                        DatasetOutputConfig.create = function create(properties) {
+                            return new DatasetOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DatasetOutputConfig message. Does not implicitly {@link google.cloud.translation.v3.DatasetOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDatasetOutputConfig} message DatasetOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasetOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
+                                $root.google.cloud.translation.v3.GcsOutputDestination.encode(message.gcsDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DatasetOutputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DatasetOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDatasetOutputConfig} message DatasetOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DatasetOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DatasetOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DatasetOutputConfig} DatasetOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasetOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DatasetOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.gcsDestination = $root.google.cloud.translation.v3.GcsOutputDestination.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DatasetOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DatasetOutputConfig} DatasetOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DatasetOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DatasetOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DatasetOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GcsOutputDestination.verify(message.gcsDestination);
+                                    if (error)
+                                        return "gcsDestination." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DatasetOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DatasetOutputConfig} DatasetOutputConfig
+                         */
+                        DatasetOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DatasetOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DatasetOutputConfig();
+                            if (object.gcsDestination != null) {
+                                if (typeof object.gcsDestination !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DatasetOutputConfig.gcsDestination: object expected");
+                                message.gcsDestination = $root.google.cloud.translation.v3.GcsOutputDestination.fromObject(object.gcsDestination);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DatasetOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.DatasetOutputConfig} message DatasetOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DatasetOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                object.gcsDestination = $root.google.cloud.translation.v3.GcsOutputDestination.toObject(message.gcsDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "gcsDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DatasetOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DatasetOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DatasetOutputConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DatasetOutputConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DatasetOutputConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DatasetOutputConfig";
+                        };
+    
+                        return DatasetOutputConfig;
+                    })();
+    
+                    v3.ExportDataMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportDataMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IExportDataMetadata
+                         * @property {google.cloud.translation.v3.OperationState|null} [state] ExportDataMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ExportDataMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] ExportDataMetadata updateTime
+                         * @property {google.rpc.IStatus|null} [error] ExportDataMetadata error
+                         */
+    
+                        /**
+                         * Constructs a new ExportDataMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an ExportDataMetadata.
+                         * @implements IExportDataMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IExportDataMetadata=} [properties] Properties to set
+                         */
+                        function ExportDataMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportDataMetadata state.
+                         * @member {google.cloud.translation.v3.OperationState} state
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.state = 0;
+    
+                        /**
+                         * ExportDataMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ExportDataMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * ExportDataMetadata error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @instance
+                         */
+                        ExportDataMetadata.prototype.error = null;
+    
+                        /**
+                         * Creates a new ExportDataMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IExportDataMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ExportDataMetadata} ExportDataMetadata instance
+                         */
+                        ExportDataMetadata.create = function create(properties) {
+                            return new ExportDataMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataMetadata message. Does not implicitly {@link google.cloud.translation.v3.ExportDataMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IExportDataMetadata} message ExportDataMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ExportDataMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IExportDataMetadata} message ExportDataMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportDataMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportDataMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ExportDataMetadata} ExportDataMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ExportDataMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportDataMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ExportDataMetadata} ExportDataMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportDataMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportDataMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportDataMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ExportDataMetadata} ExportDataMetadata
+                         */
+                        ExportDataMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ExportDataMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ExportDataMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "OPERATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OPERATION_STATE_RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "OPERATION_STATE_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "OPERATION_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "OPERATION_STATE_CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "OPERATION_STATE_CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ExportDataMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ExportDataMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.ExportDataMetadata.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportDataMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ExportDataMetadata} message ExportDataMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportDataMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "OPERATION_STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.error = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.OperationState[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.OperationState[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportDataMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportDataMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportDataMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ExportDataMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportDataMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ExportDataMetadata";
+                        };
+    
+                        return ExportDataMetadata;
+                    })();
+    
+                    v3.DeleteDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteDatasetRequest
+                         * @property {string|null} [name] DeleteDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteDatasetRequest.
+                         * @implements IDeleteDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteDatasetRequest=} [properties] Properties to set
+                         */
+                        function DeleteDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @instance
+                         */
+                        DeleteDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteDatasetRequest} DeleteDatasetRequest instance
+                         */
+                        DeleteDatasetRequest.create = function create(properties) {
+                            return new DeleteDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteDatasetRequest} message DeleteDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteDatasetRequest} message DeleteDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteDatasetRequest} DeleteDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteDatasetRequest} DeleteDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteDatasetRequest} DeleteDatasetRequest
+                         */
+                        DeleteDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteDatasetRequest} message DeleteDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteDatasetRequest";
+                        };
+    
+                        return DeleteDatasetRequest;
+                    })();
+    
+                    v3.DeleteDatasetMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteDatasetMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteDatasetMetadata
+                         * @property {google.cloud.translation.v3.OperationState|null} [state] DeleteDatasetMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeleteDatasetMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeleteDatasetMetadata updateTime
+                         * @property {google.rpc.IStatus|null} [error] DeleteDatasetMetadata error
+                         */
+    
+                        /**
+                         * Constructs a new DeleteDatasetMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteDatasetMetadata.
+                         * @implements IDeleteDatasetMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteDatasetMetadata=} [properties] Properties to set
+                         */
+                        function DeleteDatasetMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteDatasetMetadata state.
+                         * @member {google.cloud.translation.v3.OperationState} state
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @instance
+                         */
+                        DeleteDatasetMetadata.prototype.state = 0;
+    
+                        /**
+                         * DeleteDatasetMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @instance
+                         */
+                        DeleteDatasetMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeleteDatasetMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @instance
+                         */
+                        DeleteDatasetMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * DeleteDatasetMetadata error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @instance
+                         */
+                        DeleteDatasetMetadata.prototype.error = null;
+    
+                        /**
+                         * Creates a new DeleteDatasetMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteDatasetMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteDatasetMetadata} DeleteDatasetMetadata instance
+                         */
+                        DeleteDatasetMetadata.create = function create(properties) {
+                            return new DeleteDatasetMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetMetadata message. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteDatasetMetadata} message DeleteDatasetMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteDatasetMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteDatasetMetadata} message DeleteDatasetMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteDatasetMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteDatasetMetadata} DeleteDatasetMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteDatasetMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteDatasetMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteDatasetMetadata} DeleteDatasetMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteDatasetMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteDatasetMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteDatasetMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteDatasetMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteDatasetMetadata} DeleteDatasetMetadata
+                         */
+                        DeleteDatasetMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteDatasetMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteDatasetMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "OPERATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OPERATION_STATE_RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "OPERATION_STATE_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "OPERATION_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "OPERATION_STATE_CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "OPERATION_STATE_CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DeleteDatasetMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DeleteDatasetMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DeleteDatasetMetadata.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteDatasetMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteDatasetMetadata} message DeleteDatasetMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteDatasetMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "OPERATION_STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.error = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.OperationState[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.OperationState[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteDatasetMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteDatasetMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteDatasetMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteDatasetMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteDatasetMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteDatasetMetadata";
+                        };
+    
+                        return DeleteDatasetMetadata;
+                    })();
+    
+                    v3.GetDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a GetDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGetDatasetRequest
+                         * @property {string|null} [name] GetDatasetRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GetDatasetRequest.
+                         * @implements IGetDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGetDatasetRequest=} [properties] Properties to set
+                         */
+                        function GetDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetDatasetRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @instance
+                         */
+                        GetDatasetRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GetDatasetRequest} GetDatasetRequest instance
+                         */
+                        GetDatasetRequest.create = function create(properties) {
+                            return new GetDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.GetDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetDatasetRequest} message GetDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetDatasetRequest} message GetDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GetDatasetRequest} GetDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GetDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GetDatasetRequest} GetDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GetDatasetRequest} GetDatasetRequest
+                         */
+                        GetDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GetDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GetDatasetRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.GetDatasetRequest} message GetDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GetDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GetDatasetRequest";
+                        };
+    
+                        return GetDatasetRequest;
+                    })();
+    
+                    v3.ListDatasetsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetsRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListDatasetsRequest
+                         * @property {string|null} [parent] ListDatasetsRequest parent
+                         * @property {number|null} [pageSize] ListDatasetsRequest pageSize
+                         * @property {string|null} [pageToken] ListDatasetsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetsRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListDatasetsRequest.
+                         * @implements IListDatasetsRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListDatasetsRequest=} [properties] Properties to set
+                         */
+                        function ListDatasetsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListDatasetsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListDatasetsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @instance
+                         */
+                        ListDatasetsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListDatasetsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListDatasetsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListDatasetsRequest} ListDatasetsRequest instance
+                         */
+                        ListDatasetsRequest.create = function create(properties) {
+                            return new ListDatasetsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsRequest message. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListDatasetsRequest} message ListDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListDatasetsRequest} message ListDatasetsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListDatasetsRequest} ListDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListDatasetsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListDatasetsRequest} ListDatasetsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListDatasetsRequest} ListDatasetsRequest
+                         */
+                        ListDatasetsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListDatasetsRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListDatasetsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListDatasetsRequest} message ListDatasetsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDatasetsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListDatasetsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDatasetsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListDatasetsRequest";
+                        };
+    
+                        return ListDatasetsRequest;
+                    })();
+    
+                    v3.ListDatasetsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListDatasetsResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListDatasetsResponse
+                         * @property {Array.<google.cloud.translation.v3.IDataset>|null} [datasets] ListDatasetsResponse datasets
+                         * @property {string|null} [nextPageToken] ListDatasetsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListDatasetsResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListDatasetsResponse.
+                         * @implements IListDatasetsResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListDatasetsResponse=} [properties] Properties to set
+                         */
+                        function ListDatasetsResponse(properties) {
+                            this.datasets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListDatasetsResponse datasets.
+                         * @member {Array.<google.cloud.translation.v3.IDataset>} datasets
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @instance
+                         */
+                        ListDatasetsResponse.prototype.datasets = $util.emptyArray;
+    
+                        /**
+                         * ListDatasetsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @instance
+                         */
+                        ListDatasetsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListDatasetsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListDatasetsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListDatasetsResponse} ListDatasetsResponse instance
+                         */
+                        ListDatasetsResponse.create = function create(properties) {
+                            return new ListDatasetsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsResponse message. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListDatasetsResponse} message ListDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.datasets != null && message.datasets.length)
+                                for (var i = 0; i < message.datasets.length; ++i)
+                                    $root.google.cloud.translation.v3.Dataset.encode(message.datasets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListDatasetsResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListDatasetsResponse} message ListDatasetsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListDatasetsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListDatasetsResponse} ListDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListDatasetsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.datasets && message.datasets.length))
+                                            message.datasets = [];
+                                        message.datasets.push($root.google.cloud.translation.v3.Dataset.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListDatasetsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListDatasetsResponse} ListDatasetsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListDatasetsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListDatasetsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListDatasetsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.datasets != null && message.hasOwnProperty("datasets")) {
+                                if (!Array.isArray(message.datasets))
+                                    return "datasets: array expected";
+                                for (var i = 0; i < message.datasets.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.Dataset.verify(message.datasets[i]);
+                                    if (error)
+                                        return "datasets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListDatasetsResponse} ListDatasetsResponse
+                         */
+                        ListDatasetsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListDatasetsResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListDatasetsResponse();
+                            if (object.datasets) {
+                                if (!Array.isArray(object.datasets))
+                                    throw TypeError(".google.cloud.translation.v3.ListDatasetsResponse.datasets: array expected");
+                                message.datasets = [];
+                                for (var i = 0; i < object.datasets.length; ++i) {
+                                    if (typeof object.datasets[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListDatasetsResponse.datasets: object expected");
+                                    message.datasets[i] = $root.google.cloud.translation.v3.Dataset.fromObject(object.datasets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListDatasetsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListDatasetsResponse} message ListDatasetsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListDatasetsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.datasets = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.datasets && message.datasets.length) {
+                                object.datasets = [];
+                                for (var j = 0; j < message.datasets.length; ++j)
+                                    object.datasets[j] = $root.google.cloud.translation.v3.Dataset.toObject(message.datasets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListDatasetsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListDatasetsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListDatasetsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListDatasetsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListDatasetsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListDatasetsResponse";
+                        };
+    
+                        return ListDatasetsResponse;
+                    })();
+    
+                    v3.CreateDatasetRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ICreateDatasetRequest
+                         * @property {string|null} [parent] CreateDatasetRequest parent
+                         * @property {google.cloud.translation.v3.IDataset|null} [dataset] CreateDatasetRequest dataset
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatasetRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a CreateDatasetRequest.
+                         * @implements ICreateDatasetRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ICreateDatasetRequest=} [properties] Properties to set
+                         */
+                        function CreateDatasetRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatasetRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @instance
+                         */
+                        CreateDatasetRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateDatasetRequest dataset.
+                         * @member {google.cloud.translation.v3.IDataset|null|undefined} dataset
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @instance
+                         */
+                        CreateDatasetRequest.prototype.dataset = null;
+    
+                        /**
+                         * Creates a new CreateDatasetRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateDatasetRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.CreateDatasetRequest} CreateDatasetRequest instance
+                         */
+                        CreateDatasetRequest.create = function create(properties) {
+                            return new CreateDatasetRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateDatasetRequest} message CreateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                $root.google.cloud.translation.v3.Dataset.encode(message.dataset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateDatasetRequest} message CreateDatasetRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.CreateDatasetRequest} CreateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.CreateDatasetRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.dataset = $root.google.cloud.translation.v3.Dataset.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.CreateDatasetRequest} CreateDatasetRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatasetRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatasetRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset")) {
+                                var error = $root.google.cloud.translation.v3.Dataset.verify(message.dataset);
+                                if (error)
+                                    return "dataset." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.CreateDatasetRequest} CreateDatasetRequest
+                         */
+                        CreateDatasetRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.CreateDatasetRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.CreateDatasetRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.dataset != null) {
+                                if (typeof object.dataset !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateDatasetRequest.dataset: object expected");
+                                message.dataset = $root.google.cloud.translation.v3.Dataset.fromObject(object.dataset);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatasetRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.CreateDatasetRequest} message CreateDatasetRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatasetRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.dataset = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = $root.google.cloud.translation.v3.Dataset.toObject(message.dataset, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatasetRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatasetRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDatasetRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.CreateDatasetRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDatasetRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.CreateDatasetRequest";
+                        };
+    
+                        return CreateDatasetRequest;
+                    })();
+    
+                    v3.CreateDatasetMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateDatasetMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ICreateDatasetMetadata
+                         * @property {google.cloud.translation.v3.OperationState|null} [state] CreateDatasetMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CreateDatasetMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CreateDatasetMetadata updateTime
+                         * @property {google.rpc.IStatus|null} [error] CreateDatasetMetadata error
+                         */
+    
+                        /**
+                         * Constructs a new CreateDatasetMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a CreateDatasetMetadata.
+                         * @implements ICreateDatasetMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ICreateDatasetMetadata=} [properties] Properties to set
+                         */
+                        function CreateDatasetMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateDatasetMetadata state.
+                         * @member {google.cloud.translation.v3.OperationState} state
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @instance
+                         */
+                        CreateDatasetMetadata.prototype.state = 0;
+    
+                        /**
+                         * CreateDatasetMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @instance
+                         */
+                        CreateDatasetMetadata.prototype.createTime = null;
+    
+                        /**
+                         * CreateDatasetMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @instance
+                         */
+                        CreateDatasetMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * CreateDatasetMetadata error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @instance
+                         */
+                        CreateDatasetMetadata.prototype.error = null;
+    
+                        /**
+                         * Creates a new CreateDatasetMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateDatasetMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.CreateDatasetMetadata} CreateDatasetMetadata instance
+                         */
+                        CreateDatasetMetadata.create = function create(properties) {
+                            return new CreateDatasetMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetMetadata message. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateDatasetMetadata} message CreateDatasetMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateDatasetMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateDatasetMetadata} message CreateDatasetMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateDatasetMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.CreateDatasetMetadata} CreateDatasetMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.CreateDatasetMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateDatasetMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.CreateDatasetMetadata} CreateDatasetMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateDatasetMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateDatasetMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateDatasetMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateDatasetMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.CreateDatasetMetadata} CreateDatasetMetadata
+                         */
+                        CreateDatasetMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.CreateDatasetMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.CreateDatasetMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "OPERATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OPERATION_STATE_RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "OPERATION_STATE_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "OPERATION_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "OPERATION_STATE_CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "OPERATION_STATE_CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateDatasetMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateDatasetMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateDatasetMetadata.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateDatasetMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.CreateDatasetMetadata} message CreateDatasetMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateDatasetMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "OPERATION_STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.error = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.OperationState[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.OperationState[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateDatasetMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateDatasetMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateDatasetMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.CreateDatasetMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateDatasetMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.CreateDatasetMetadata";
+                        };
+    
+                        return CreateDatasetMetadata;
+                    })();
+    
+                    v3.ListExamplesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListExamplesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListExamplesRequest
+                         * @property {string|null} [parent] ListExamplesRequest parent
+                         * @property {string|null} [filter] ListExamplesRequest filter
+                         * @property {number|null} [pageSize] ListExamplesRequest pageSize
+                         * @property {string|null} [pageToken] ListExamplesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListExamplesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListExamplesRequest.
+                         * @implements IListExamplesRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListExamplesRequest=} [properties] Properties to set
+                         */
+                        function ListExamplesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListExamplesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @instance
+                         */
+                        ListExamplesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListExamplesRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @instance
+                         */
+                        ListExamplesRequest.prototype.filter = "";
+    
+                        /**
+                         * ListExamplesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @instance
+                         */
+                        ListExamplesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListExamplesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @instance
+                         */
+                        ListExamplesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListExamplesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListExamplesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListExamplesRequest} ListExamplesRequest instance
+                         */
+                        ListExamplesRequest.create = function create(properties) {
+                            return new ListExamplesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListExamplesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListExamplesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListExamplesRequest} message ListExamplesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListExamplesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.filter);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListExamplesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListExamplesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListExamplesRequest} message ListExamplesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListExamplesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListExamplesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListExamplesRequest} ListExamplesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListExamplesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListExamplesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListExamplesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListExamplesRequest} ListExamplesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListExamplesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListExamplesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListExamplesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListExamplesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListExamplesRequest} ListExamplesRequest
+                         */
+                        ListExamplesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListExamplesRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListExamplesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListExamplesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListExamplesRequest} message ListExamplesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListExamplesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.filter = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListExamplesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListExamplesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListExamplesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListExamplesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListExamplesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListExamplesRequest";
+                        };
+    
+                        return ListExamplesRequest;
+                    })();
+    
+                    v3.ListExamplesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListExamplesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListExamplesResponse
+                         * @property {Array.<google.cloud.translation.v3.IExample>|null} [examples] ListExamplesResponse examples
+                         * @property {string|null} [nextPageToken] ListExamplesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListExamplesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListExamplesResponse.
+                         * @implements IListExamplesResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListExamplesResponse=} [properties] Properties to set
+                         */
+                        function ListExamplesResponse(properties) {
+                            this.examples = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListExamplesResponse examples.
+                         * @member {Array.<google.cloud.translation.v3.IExample>} examples
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @instance
+                         */
+                        ListExamplesResponse.prototype.examples = $util.emptyArray;
+    
+                        /**
+                         * ListExamplesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @instance
+                         */
+                        ListExamplesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListExamplesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListExamplesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListExamplesResponse} ListExamplesResponse instance
+                         */
+                        ListExamplesResponse.create = function create(properties) {
+                            return new ListExamplesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListExamplesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListExamplesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListExamplesResponse} message ListExamplesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListExamplesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.examples != null && message.examples.length)
+                                for (var i = 0; i < message.examples.length; ++i)
+                                    $root.google.cloud.translation.v3.Example.encode(message.examples[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListExamplesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListExamplesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListExamplesResponse} message ListExamplesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListExamplesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListExamplesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListExamplesResponse} ListExamplesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListExamplesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListExamplesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.examples && message.examples.length))
+                                            message.examples = [];
+                                        message.examples.push($root.google.cloud.translation.v3.Example.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListExamplesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListExamplesResponse} ListExamplesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListExamplesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListExamplesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListExamplesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.examples != null && message.hasOwnProperty("examples")) {
+                                if (!Array.isArray(message.examples))
+                                    return "examples: array expected";
+                                for (var i = 0; i < message.examples.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.Example.verify(message.examples[i]);
+                                    if (error)
+                                        return "examples." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListExamplesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListExamplesResponse} ListExamplesResponse
+                         */
+                        ListExamplesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListExamplesResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListExamplesResponse();
+                            if (object.examples) {
+                                if (!Array.isArray(object.examples))
+                                    throw TypeError(".google.cloud.translation.v3.ListExamplesResponse.examples: array expected");
+                                message.examples = [];
+                                for (var i = 0; i < object.examples.length; ++i) {
+                                    if (typeof object.examples[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListExamplesResponse.examples: object expected");
+                                    message.examples[i] = $root.google.cloud.translation.v3.Example.fromObject(object.examples[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListExamplesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListExamplesResponse} message ListExamplesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListExamplesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.examples = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.examples && message.examples.length) {
+                                object.examples = [];
+                                for (var j = 0; j < message.examples.length; ++j)
+                                    object.examples[j] = $root.google.cloud.translation.v3.Example.toObject(message.examples[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListExamplesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListExamplesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListExamplesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListExamplesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListExamplesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListExamplesResponse";
+                        };
+    
+                        return ListExamplesResponse;
+                    })();
+    
+                    v3.Example = (function() {
+    
+                        /**
+                         * Properties of an Example.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IExample
+                         * @property {string|null} [name] Example name
+                         * @property {string|null} [sourceText] Example sourceText
+                         * @property {string|null} [targetText] Example targetText
+                         * @property {string|null} [usage] Example usage
+                         */
+    
+                        /**
+                         * Constructs a new Example.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an Example.
+                         * @implements IExample
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IExample=} [properties] Properties to set
+                         */
+                        function Example(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Example name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.Example
+                         * @instance
+                         */
+                        Example.prototype.name = "";
+    
+                        /**
+                         * Example sourceText.
+                         * @member {string} sourceText
+                         * @memberof google.cloud.translation.v3.Example
+                         * @instance
+                         */
+                        Example.prototype.sourceText = "";
+    
+                        /**
+                         * Example targetText.
+                         * @member {string} targetText
+                         * @memberof google.cloud.translation.v3.Example
+                         * @instance
+                         */
+                        Example.prototype.targetText = "";
+    
+                        /**
+                         * Example usage.
+                         * @member {string} usage
+                         * @memberof google.cloud.translation.v3.Example
+                         * @instance
+                         */
+                        Example.prototype.usage = "";
+    
+                        /**
+                         * Creates a new Example instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {google.cloud.translation.v3.IExample=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.Example} Example instance
+                         */
+                        Example.create = function create(properties) {
+                            return new Example(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Example message. Does not implicitly {@link google.cloud.translation.v3.Example.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {google.cloud.translation.v3.IExample} message Example message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Example.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.sourceText != null && Object.hasOwnProperty.call(message, "sourceText"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceText);
+                            if (message.targetText != null && Object.hasOwnProperty.call(message, "targetText"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetText);
+                            if (message.usage != null && Object.hasOwnProperty.call(message, "usage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.usage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Example message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Example.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {google.cloud.translation.v3.IExample} message Example message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Example.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Example message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.Example} Example
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Example.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.Example();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceText = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.targetText = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.usage = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Example message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.Example} Example
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Example.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Example message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Example.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.sourceText != null && message.hasOwnProperty("sourceText"))
+                                if (!$util.isString(message.sourceText))
+                                    return "sourceText: string expected";
+                            if (message.targetText != null && message.hasOwnProperty("targetText"))
+                                if (!$util.isString(message.targetText))
+                                    return "targetText: string expected";
+                            if (message.usage != null && message.hasOwnProperty("usage"))
+                                if (!$util.isString(message.usage))
+                                    return "usage: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Example message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.Example} Example
+                         */
+                        Example.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.Example)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.Example();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.sourceText != null)
+                                message.sourceText = String(object.sourceText);
+                            if (object.targetText != null)
+                                message.targetText = String(object.targetText);
+                            if (object.usage != null)
+                                message.usage = String(object.usage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Example message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {google.cloud.translation.v3.Example} message Example
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Example.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.sourceText = "";
+                                object.targetText = "";
+                                object.usage = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.sourceText != null && message.hasOwnProperty("sourceText"))
+                                object.sourceText = message.sourceText;
+                            if (message.targetText != null && message.hasOwnProperty("targetText"))
+                                object.targetText = message.targetText;
+                            if (message.usage != null && message.hasOwnProperty("usage"))
+                                object.usage = message.usage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Example to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.Example
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Example.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Example
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.Example
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Example.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.Example";
+                        };
+    
+                        return Example;
+                    })();
+    
+                    v3.BatchTransferResourcesResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchTransferResourcesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IBatchTransferResourcesResponse
+                         * @property {Array.<google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse>|null} [responses] BatchTransferResourcesResponse responses
+                         */
+    
+                        /**
+                         * Constructs a new BatchTransferResourcesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a BatchTransferResourcesResponse.
+                         * @implements IBatchTransferResourcesResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IBatchTransferResourcesResponse=} [properties] Properties to set
+                         */
+                        function BatchTransferResourcesResponse(properties) {
+                            this.responses = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchTransferResourcesResponse responses.
+                         * @member {Array.<google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse>} responses
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @instance
+                         */
+                        BatchTransferResourcesResponse.prototype.responses = $util.emptyArray;
+    
+                        /**
+                         * Creates a new BatchTransferResourcesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTransferResourcesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse} BatchTransferResourcesResponse instance
+                         */
+                        BatchTransferResourcesResponse.create = function create(properties) {
+                            return new BatchTransferResourcesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTransferResourcesResponse message. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTransferResourcesResponse} message BatchTransferResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTransferResourcesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.responses != null && message.responses.length)
+                                for (var i = 0; i < message.responses.length; ++i)
+                                    $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.encode(message.responses[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTransferResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTransferResourcesResponse} message BatchTransferResourcesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTransferResourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchTransferResourcesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse} BatchTransferResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTransferResourcesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTransferResourcesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.responses && message.responses.length))
+                                            message.responses = [];
+                                        message.responses.push($root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchTransferResourcesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse} BatchTransferResourcesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTransferResourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchTransferResourcesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchTransferResourcesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.responses != null && message.hasOwnProperty("responses")) {
+                                if (!Array.isArray(message.responses))
+                                    return "responses: array expected";
+                                for (var i = 0; i < message.responses.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.verify(message.responses[i]);
+                                    if (error)
+                                        return "responses." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchTransferResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse} BatchTransferResourcesResponse
+                         */
+                        BatchTransferResourcesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.BatchTransferResourcesResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.BatchTransferResourcesResponse();
+                            if (object.responses) {
+                                if (!Array.isArray(object.responses))
+                                    throw TypeError(".google.cloud.translation.v3.BatchTransferResourcesResponse.responses: array expected");
+                                message.responses = [];
+                                for (var i = 0; i < object.responses.length; ++i) {
+                                    if (typeof object.responses[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.BatchTransferResourcesResponse.responses: object expected");
+                                    message.responses[i] = $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.fromObject(object.responses[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchTransferResourcesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.BatchTransferResourcesResponse} message BatchTransferResourcesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchTransferResourcesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.responses = [];
+                            if (message.responses && message.responses.length) {
+                                object.responses = [];
+                                for (var j = 0; j < message.responses.length; ++j)
+                                    object.responses[j] = $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.toObject(message.responses[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchTransferResourcesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchTransferResourcesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for BatchTransferResourcesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        BatchTransferResourcesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.BatchTransferResourcesResponse";
+                        };
+    
+                        BatchTransferResourcesResponse.TransferResourceResponse = (function() {
+    
+                            /**
+                             * Properties of a TransferResourceResponse.
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                             * @interface ITransferResourceResponse
+                             * @property {string|null} [source] TransferResourceResponse source
+                             * @property {string|null} [target] TransferResourceResponse target
+                             * @property {google.rpc.IStatus|null} [error] TransferResourceResponse error
+                             */
+    
+                            /**
+                             * Constructs a new TransferResourceResponse.
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse
+                             * @classdesc Represents a TransferResourceResponse.
+                             * @implements ITransferResourceResponse
+                             * @constructor
+                             * @param {google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse=} [properties] Properties to set
+                             */
+                            function TransferResourceResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TransferResourceResponse source.
+                             * @member {string} source
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @instance
+                             */
+                            TransferResourceResponse.prototype.source = "";
+    
+                            /**
+                             * TransferResourceResponse target.
+                             * @member {string} target
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @instance
+                             */
+                            TransferResourceResponse.prototype.target = "";
+    
+                            /**
+                             * TransferResourceResponse error.
+                             * @member {google.rpc.IStatus|null|undefined} error
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @instance
+                             */
+                            TransferResourceResponse.prototype.error = null;
+    
+                            /**
+                             * Creates a new TransferResourceResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse=} [properties] Properties to set
+                             * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse} TransferResourceResponse instance
+                             */
+                            TransferResourceResponse.create = function create(properties) {
+                                return new TransferResourceResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TransferResourceResponse message. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse} message TransferResourceResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TransferResourceResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.source);
+                                if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.target);
+                                if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                    $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TransferResourceResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse} message TransferResourceResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TransferResourceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TransferResourceResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse} TransferResourceResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TransferResourceResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.source = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.target = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TransferResourceResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse} TransferResourceResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TransferResourceResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TransferResourceResponse message.
+                             * @function verify
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TransferResourceResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    if (!$util.isString(message.source))
+                                        return "source: string expected";
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    if (!$util.isString(message.target))
+                                        return "target: string expected";
+                                if (message.error != null && message.hasOwnProperty("error")) {
+                                    var error = $root.google.rpc.Status.verify(message.error);
+                                    if (error)
+                                        return "error." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TransferResourceResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse} TransferResourceResponse
+                             */
+                            TransferResourceResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse)
+                                    return object;
+                                var message = new $root.google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse();
+                                if (object.source != null)
+                                    message.source = String(object.source);
+                                if (object.target != null)
+                                    message.target = String(object.target);
+                                if (object.error != null) {
+                                    if (typeof object.error !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.error: object expected");
+                                    message.error = $root.google.rpc.Status.fromObject(object.error);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TransferResourceResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse} message TransferResourceResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TransferResourceResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.source = "";
+                                    object.target = "";
+                                    object.error = null;
+                                }
+                                if (message.source != null && message.hasOwnProperty("source"))
+                                    object.source = message.source;
+                                if (message.target != null && message.hasOwnProperty("target"))
+                                    object.target = message.target;
+                                if (message.error != null && message.hasOwnProperty("error"))
+                                    object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TransferResourceResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TransferResourceResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for TransferResourceResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            TransferResourceResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse";
+                            };
+    
+                            return TransferResourceResponse;
+                        })();
+    
+                        return BatchTransferResourcesResponse;
+                    })();
+    
+                    v3.Dataset = (function() {
+    
+                        /**
+                         * Properties of a Dataset.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDataset
+                         * @property {string|null} [name] Dataset name
+                         * @property {string|null} [displayName] Dataset displayName
+                         * @property {string|null} [sourceLanguageCode] Dataset sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] Dataset targetLanguageCode
+                         * @property {number|null} [exampleCount] Dataset exampleCount
+                         * @property {number|null} [trainExampleCount] Dataset trainExampleCount
+                         * @property {number|null} [validateExampleCount] Dataset validateExampleCount
+                         * @property {number|null} [testExampleCount] Dataset testExampleCount
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Dataset createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Dataset updateTime
+                         */
+    
+                        /**
+                         * Constructs a new Dataset.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a Dataset.
+                         * @implements IDataset
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDataset=} [properties] Properties to set
+                         */
+                        function Dataset(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Dataset name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.name = "";
+    
+                        /**
+                         * Dataset displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.displayName = "";
+    
+                        /**
+                         * Dataset sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * Dataset targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * Dataset exampleCount.
+                         * @member {number} exampleCount
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.exampleCount = 0;
+    
+                        /**
+                         * Dataset trainExampleCount.
+                         * @member {number} trainExampleCount
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.trainExampleCount = 0;
+    
+                        /**
+                         * Dataset validateExampleCount.
+                         * @member {number} validateExampleCount
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.validateExampleCount = 0;
+    
+                        /**
+                         * Dataset testExampleCount.
+                         * @member {number} testExampleCount
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.testExampleCount = 0;
+    
+                        /**
+                         * Dataset createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.createTime = null;
+    
+                        /**
+                         * Dataset updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         */
+                        Dataset.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new Dataset instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {google.cloud.translation.v3.IDataset=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.Dataset} Dataset instance
+                         */
+                        Dataset.create = function create(properties) {
+                            return new Dataset(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Dataset message. Does not implicitly {@link google.cloud.translation.v3.Dataset.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {google.cloud.translation.v3.IDataset} message Dataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dataset.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && Object.hasOwnProperty.call(message, "targetLanguageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.targetLanguageCode);
+                            if (message.exampleCount != null && Object.hasOwnProperty.call(message, "exampleCount"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.exampleCount);
+                            if (message.trainExampleCount != null && Object.hasOwnProperty.call(message, "trainExampleCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.trainExampleCount);
+                            if (message.validateExampleCount != null && Object.hasOwnProperty.call(message, "validateExampleCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.validateExampleCount);
+                            if (message.testExampleCount != null && Object.hasOwnProperty.call(message, "testExampleCount"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.testExampleCount);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Dataset message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Dataset.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {google.cloud.translation.v3.IDataset} message Dataset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Dataset.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Dataset message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.Dataset} Dataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dataset.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.Dataset();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.sourceLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.targetLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.exampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.trainExampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.validateExampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.testExampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 9: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Dataset message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.Dataset} Dataset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Dataset.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Dataset message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Dataset.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                if (!$util.isInteger(message.exampleCount))
+                                    return "exampleCount: integer expected";
+                            if (message.trainExampleCount != null && message.hasOwnProperty("trainExampleCount"))
+                                if (!$util.isInteger(message.trainExampleCount))
+                                    return "trainExampleCount: integer expected";
+                            if (message.validateExampleCount != null && message.hasOwnProperty("validateExampleCount"))
+                                if (!$util.isInteger(message.validateExampleCount))
+                                    return "validateExampleCount: integer expected";
+                            if (message.testExampleCount != null && message.hasOwnProperty("testExampleCount"))
+                                if (!$util.isInteger(message.testExampleCount))
+                                    return "testExampleCount: integer expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Dataset message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.Dataset} Dataset
+                         */
+                        Dataset.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.Dataset)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.Dataset();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            if (object.exampleCount != null)
+                                message.exampleCount = object.exampleCount | 0;
+                            if (object.trainExampleCount != null)
+                                message.trainExampleCount = object.trainExampleCount | 0;
+                            if (object.validateExampleCount != null)
+                                message.validateExampleCount = object.validateExampleCount | 0;
+                            if (object.testExampleCount != null)
+                                message.testExampleCount = object.testExampleCount | 0;
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.Dataset.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.Dataset.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Dataset message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {google.cloud.translation.v3.Dataset} message Dataset
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Dataset.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                                object.exampleCount = 0;
+                                object.trainExampleCount = 0;
+                                object.validateExampleCount = 0;
+                                object.testExampleCount = 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            if (message.exampleCount != null && message.hasOwnProperty("exampleCount"))
+                                object.exampleCount = message.exampleCount;
+                            if (message.trainExampleCount != null && message.hasOwnProperty("trainExampleCount"))
+                                object.trainExampleCount = message.trainExampleCount;
+                            if (message.validateExampleCount != null && message.hasOwnProperty("validateExampleCount"))
+                                object.validateExampleCount = message.validateExampleCount;
+                            if (message.testExampleCount != null && message.hasOwnProperty("testExampleCount"))
+                                object.testExampleCount = message.testExampleCount;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Dataset to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Dataset.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Dataset
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.Dataset
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Dataset.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.Dataset";
+                        };
+    
+                        return Dataset;
+                    })();
+    
+                    v3.CreateModelRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateModelRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ICreateModelRequest
+                         * @property {string|null} [parent] CreateModelRequest parent
+                         * @property {google.cloud.translation.v3.IModel|null} [model] CreateModelRequest model
+                         */
+    
+                        /**
+                         * Constructs a new CreateModelRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a CreateModelRequest.
+                         * @implements ICreateModelRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ICreateModelRequest=} [properties] Properties to set
+                         */
+                        function CreateModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateModelRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @instance
+                         */
+                        CreateModelRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateModelRequest model.
+                         * @member {google.cloud.translation.v3.IModel|null|undefined} model
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @instance
+                         */
+                        CreateModelRequest.prototype.model = null;
+    
+                        /**
+                         * Creates a new CreateModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.CreateModelRequest} CreateModelRequest instance
+                         */
+                        CreateModelRequest.create = function create(properties) {
+                            return new CreateModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateModelRequest} message CreateModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                $root.google.cloud.translation.v3.Model.encode(message.model, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateModelRequest} message CreateModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.CreateModelRequest} CreateModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.CreateModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.model = $root.google.cloud.translation.v3.Model.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.CreateModelRequest} CreateModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.model != null && message.hasOwnProperty("model")) {
+                                var error = $root.google.cloud.translation.v3.Model.verify(message.model);
+                                if (error)
+                                    return "model." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.CreateModelRequest} CreateModelRequest
+                         */
+                        CreateModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.CreateModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.CreateModelRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.model != null) {
+                                if (typeof object.model !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateModelRequest.model: object expected");
+                                message.model = $root.google.cloud.translation.v3.Model.fromObject(object.model);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.CreateModelRequest} message CreateModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.model = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = $root.google.cloud.translation.v3.Model.toObject(message.model, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateModelRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.CreateModelRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateModelRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.CreateModelRequest";
+                        };
+    
+                        return CreateModelRequest;
+                    })();
+    
+                    v3.CreateModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateModelMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ICreateModelMetadata
+                         * @property {google.cloud.translation.v3.OperationState|null} [state] CreateModelMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CreateModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] CreateModelMetadata updateTime
+                         * @property {google.rpc.IStatus|null} [error] CreateModelMetadata error
+                         */
+    
+                        /**
+                         * Constructs a new CreateModelMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a CreateModelMetadata.
+                         * @implements ICreateModelMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ICreateModelMetadata=} [properties] Properties to set
+                         */
+                        function CreateModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateModelMetadata state.
+                         * @member {google.cloud.translation.v3.OperationState} state
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @instance
+                         */
+                        CreateModelMetadata.prototype.state = 0;
+    
+                        /**
+                         * CreateModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @instance
+                         */
+                        CreateModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * CreateModelMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @instance
+                         */
+                        CreateModelMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * CreateModelMetadata error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @instance
+                         */
+                        CreateModelMetadata.prototype.error = null;
+    
+                        /**
+                         * Creates a new CreateModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.CreateModelMetadata} CreateModelMetadata instance
+                         */
+                        CreateModelMetadata.create = function create(properties) {
+                            return new CreateModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelMetadata message. Does not implicitly {@link google.cloud.translation.v3.CreateModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateModelMetadata} message CreateModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateModelMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateModelMetadata} message CreateModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.CreateModelMetadata} CreateModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.CreateModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.CreateModelMetadata} CreateModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.CreateModelMetadata} CreateModelMetadata
+                         */
+                        CreateModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.CreateModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.CreateModelMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "OPERATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OPERATION_STATE_RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "OPERATION_STATE_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "OPERATION_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "OPERATION_STATE_CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "OPERATION_STATE_CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateModelMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateModelMetadata.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.CreateModelMetadata} message CreateModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "OPERATION_STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.error = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.OperationState[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.OperationState[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateModelMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.CreateModelMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateModelMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.CreateModelMetadata";
+                        };
+    
+                        return CreateModelMetadata;
+                    })();
+    
+                    v3.ListModelsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListModelsRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListModelsRequest
+                         * @property {string|null} [parent] ListModelsRequest parent
+                         * @property {string|null} [filter] ListModelsRequest filter
+                         * @property {number|null} [pageSize] ListModelsRequest pageSize
+                         * @property {string|null} [pageToken] ListModelsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListModelsRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListModelsRequest.
+                         * @implements IListModelsRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListModelsRequest=} [properties] Properties to set
+                         */
+                        function ListModelsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListModelsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListModelsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListModelsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListModelsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @instance
+                         */
+                        ListModelsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListModelsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListModelsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListModelsRequest} ListModelsRequest instance
+                         */
+                        ListModelsRequest.create = function create(properties) {
+                            return new ListModelsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsRequest message. Does not implicitly {@link google.cloud.translation.v3.ListModelsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListModelsRequest} message ListModelsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListModelsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListModelsRequest} message ListModelsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListModelsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListModelsRequest} ListModelsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListModelsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListModelsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListModelsRequest} ListModelsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListModelsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListModelsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListModelsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListModelsRequest} ListModelsRequest
+                         */
+                        ListModelsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListModelsRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListModelsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListModelsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListModelsRequest} message ListModelsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListModelsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListModelsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListModelsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListModelsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListModelsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListModelsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListModelsRequest";
+                        };
+    
+                        return ListModelsRequest;
+                    })();
+    
+                    v3.ListModelsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListModelsResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListModelsResponse
+                         * @property {Array.<google.cloud.translation.v3.IModel>|null} [models] ListModelsResponse models
+                         * @property {string|null} [nextPageToken] ListModelsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListModelsResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListModelsResponse.
+                         * @implements IListModelsResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListModelsResponse=} [properties] Properties to set
+                         */
+                        function ListModelsResponse(properties) {
+                            this.models = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListModelsResponse models.
+                         * @member {Array.<google.cloud.translation.v3.IModel>} models
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @instance
+                         */
+                        ListModelsResponse.prototype.models = $util.emptyArray;
+    
+                        /**
+                         * ListModelsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @instance
+                         */
+                        ListModelsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListModelsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListModelsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListModelsResponse} ListModelsResponse instance
+                         */
+                        ListModelsResponse.create = function create(properties) {
+                            return new ListModelsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsResponse message. Does not implicitly {@link google.cloud.translation.v3.ListModelsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListModelsResponse} message ListModelsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.models != null && message.models.length)
+                                for (var i = 0; i < message.models.length; ++i)
+                                    $root.google.cloud.translation.v3.Model.encode(message.models[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListModelsResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListModelsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListModelsResponse} message ListModelsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListModelsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListModelsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListModelsResponse} ListModelsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListModelsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.models && message.models.length))
+                                            message.models = [];
+                                        message.models.push($root.google.cloud.translation.v3.Model.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListModelsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListModelsResponse} ListModelsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListModelsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListModelsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListModelsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.models != null && message.hasOwnProperty("models")) {
+                                if (!Array.isArray(message.models))
+                                    return "models: array expected";
+                                for (var i = 0; i < message.models.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.Model.verify(message.models[i]);
+                                    if (error)
+                                        return "models." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListModelsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListModelsResponse} ListModelsResponse
+                         */
+                        ListModelsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListModelsResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListModelsResponse();
+                            if (object.models) {
+                                if (!Array.isArray(object.models))
+                                    throw TypeError(".google.cloud.translation.v3.ListModelsResponse.models: array expected");
+                                message.models = [];
+                                for (var i = 0; i < object.models.length; ++i) {
+                                    if (typeof object.models[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListModelsResponse.models: object expected");
+                                    message.models[i] = $root.google.cloud.translation.v3.Model.fromObject(object.models[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListModelsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListModelsResponse} message ListModelsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListModelsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.models = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.models && message.models.length) {
+                                object.models = [];
+                                for (var j = 0; j < message.models.length; ++j)
+                                    object.models[j] = $root.google.cloud.translation.v3.Model.toObject(message.models[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListModelsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListModelsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListModelsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListModelsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListModelsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListModelsResponse";
+                        };
+    
+                        return ListModelsResponse;
+                    })();
+    
+                    v3.GetModelRequest = (function() {
+    
+                        /**
+                         * Properties of a GetModelRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGetModelRequest
+                         * @property {string|null} [name] GetModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetModelRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GetModelRequest.
+                         * @implements IGetModelRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGetModelRequest=} [properties] Properties to set
+                         */
+                        function GetModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @instance
+                         */
+                        GetModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GetModelRequest} GetModelRequest instance
+                         */
+                        GetModelRequest.create = function create(properties) {
+                            return new GetModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.translation.v3.GetModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetModelRequest} message GetModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetModelRequest} message GetModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GetModelRequest} GetModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GetModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GetModelRequest} GetModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GetModelRequest} GetModelRequest
+                         */
+                        GetModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GetModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GetModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.GetModelRequest} message GetModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetModelRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GetModelRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetModelRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GetModelRequest";
+                        };
+    
+                        return GetModelRequest;
+                    })();
+    
+                    v3.DeleteModelRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteModelRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteModelRequest
+                         * @property {string|null} [name] DeleteModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteModelRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteModelRequest.
+                         * @implements IDeleteModelRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteModelRequest=} [properties] Properties to set
+                         */
+                        function DeleteModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @instance
+                         */
+                        DeleteModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteModelRequest} DeleteModelRequest instance
+                         */
+                        DeleteModelRequest.create = function create(properties) {
+                            return new DeleteModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteModelRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteModelRequest} message DeleteModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteModelRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteModelRequest} message DeleteModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteModelRequest} DeleteModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteModelRequest} DeleteModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteModelRequest} DeleteModelRequest
+                         */
+                        DeleteModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteModelRequest} message DeleteModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteModelRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteModelRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteModelRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteModelRequest";
+                        };
+    
+                        return DeleteModelRequest;
+                    })();
+    
+                    v3.DeleteModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteModelMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteModelMetadata
+                         * @property {google.cloud.translation.v3.OperationState|null} [state] DeleteModelMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeleteModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] DeleteModelMetadata updateTime
+                         * @property {google.rpc.IStatus|null} [error] DeleteModelMetadata error
+                         */
+    
+                        /**
+                         * Constructs a new DeleteModelMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteModelMetadata.
+                         * @implements IDeleteModelMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteModelMetadata=} [properties] Properties to set
+                         */
+                        function DeleteModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteModelMetadata state.
+                         * @member {google.cloud.translation.v3.OperationState} state
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @instance
+                         */
+                        DeleteModelMetadata.prototype.state = 0;
+    
+                        /**
+                         * DeleteModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @instance
+                         */
+                        DeleteModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeleteModelMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @instance
+                         */
+                        DeleteModelMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * DeleteModelMetadata error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @instance
+                         */
+                        DeleteModelMetadata.prototype.error = null;
+    
+                        /**
+                         * Creates a new DeleteModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteModelMetadata} DeleteModelMetadata instance
+                         */
+                        DeleteModelMetadata.create = function create(properties) {
+                            return new DeleteModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteModelMetadata message. Does not implicitly {@link google.cloud.translation.v3.DeleteModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteModelMetadata} message DeleteModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteModelMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteModelMetadata} message DeleteModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteModelMetadata} DeleteModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteModelMetadata} DeleteModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                var error = $root.google.rpc.Status.verify(message.error);
+                                if (error)
+                                    return "error." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteModelMetadata} DeleteModelMetadata
+                         */
+                        DeleteModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteModelMetadata();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "OPERATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OPERATION_STATE_RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "OPERATION_STATE_SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "OPERATION_STATE_FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "OPERATION_STATE_CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "OPERATION_STATE_CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DeleteModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DeleteModelMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DeleteModelMetadata.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteModelMetadata} message DeleteModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "OPERATION_STATE_UNSPECIFIED" : 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.error = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.OperationState[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.OperationState[message.state] : message.state;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.error != null && message.hasOwnProperty("error"))
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteModelMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteModelMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteModelMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteModelMetadata";
+                        };
+    
+                        return DeleteModelMetadata;
+                    })();
+    
+                    v3.Model = (function() {
+    
+                        /**
+                         * Properties of a Model.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IModel
+                         * @property {string|null} [name] Model name
+                         * @property {string|null} [displayName] Model displayName
+                         * @property {string|null} [dataset] Model dataset
+                         * @property {string|null} [sourceLanguageCode] Model sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] Model targetLanguageCode
+                         * @property {number|null} [trainExampleCount] Model trainExampleCount
+                         * @property {number|null} [validateExampleCount] Model validateExampleCount
+                         * @property {number|null} [testExampleCount] Model testExampleCount
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Model createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Model updateTime
+                         */
+    
+                        /**
+                         * Constructs a new Model.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a Model.
+                         * @implements IModel
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IModel=} [properties] Properties to set
+                         */
+                        function Model(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Model name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.name = "";
+    
+                        /**
+                         * Model displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.displayName = "";
+    
+                        /**
+                         * Model dataset.
+                         * @member {string} dataset
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.dataset = "";
+    
+                        /**
+                         * Model sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * Model targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * Model trainExampleCount.
+                         * @member {number} trainExampleCount
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.trainExampleCount = 0;
+    
+                        /**
+                         * Model validateExampleCount.
+                         * @member {number} validateExampleCount
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.validateExampleCount = 0;
+    
+                        /**
+                         * Model testExampleCount.
+                         * @member {number} testExampleCount
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.testExampleCount = 0;
+    
+                        /**
+                         * Model createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.createTime = null;
+    
+                        /**
+                         * Model updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         */
+                        Model.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new Model instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {google.cloud.translation.v3.IModel=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.Model} Model instance
+                         */
+                        Model.create = function create(properties) {
+                            return new Model(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Model message. Does not implicitly {@link google.cloud.translation.v3.Model.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {google.cloud.translation.v3.IModel} message Model message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Model.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.dataset != null && Object.hasOwnProperty.call(message, "dataset"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataset);
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && Object.hasOwnProperty.call(message, "targetLanguageCode"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetLanguageCode);
+                            if (message.trainExampleCount != null && Object.hasOwnProperty.call(message, "trainExampleCount"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.trainExampleCount);
+                            if (message.validateExampleCount != null && Object.hasOwnProperty.call(message, "validateExampleCount"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.validateExampleCount);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.testExampleCount != null && Object.hasOwnProperty.call(message, "testExampleCount"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.testExampleCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Model message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Model.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {google.cloud.translation.v3.IModel} message Model message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Model.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Model message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.Model} Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Model.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.Model();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.displayName = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.dataset = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.sourceLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.targetLanguageCode = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.trainExampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.validateExampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 12: {
+                                        message.testExampleCount = reader.int32();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Model message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.Model} Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Model.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Model message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Model.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                if (!$util.isString(message.dataset))
+                                    return "dataset: string expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            if (message.trainExampleCount != null && message.hasOwnProperty("trainExampleCount"))
+                                if (!$util.isInteger(message.trainExampleCount))
+                                    return "trainExampleCount: integer expected";
+                            if (message.validateExampleCount != null && message.hasOwnProperty("validateExampleCount"))
+                                if (!$util.isInteger(message.validateExampleCount))
+                                    return "validateExampleCount: integer expected";
+                            if (message.testExampleCount != null && message.hasOwnProperty("testExampleCount"))
+                                if (!$util.isInteger(message.testExampleCount))
+                                    return "testExampleCount: integer expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Model message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.Model} Model
+                         */
+                        Model.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.Model)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.Model();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.dataset != null)
+                                message.dataset = String(object.dataset);
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            if (object.trainExampleCount != null)
+                                message.trainExampleCount = object.trainExampleCount | 0;
+                            if (object.validateExampleCount != null)
+                                message.validateExampleCount = object.validateExampleCount | 0;
+                            if (object.testExampleCount != null)
+                                message.testExampleCount = object.testExampleCount | 0;
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.Model.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.Model.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Model message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {google.cloud.translation.v3.Model} message Model
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Model.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.dataset = "";
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                                object.trainExampleCount = 0;
+                                object.validateExampleCount = 0;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.testExampleCount = 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.dataset != null && message.hasOwnProperty("dataset"))
+                                object.dataset = message.dataset;
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            if (message.trainExampleCount != null && message.hasOwnProperty("trainExampleCount"))
+                                object.trainExampleCount = message.trainExampleCount;
+                            if (message.validateExampleCount != null && message.hasOwnProperty("validateExampleCount"))
+                                object.validateExampleCount = message.validateExampleCount;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.testExampleCount != null && message.hasOwnProperty("testExampleCount"))
+                                object.testExampleCount = message.testExampleCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Model to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.Model
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Model.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Model
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.Model
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Model.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.Model";
+                        };
+    
+                        return Model;
+                    })();
+    
                     v3.TranslationService = (function() {
     
                         /**
@@ -5530,6 +15175,39 @@
                          * @instance
                          * @param {google.cloud.translation.v3.ITranslateTextRequest} request TranslateTextRequest message or plain object
                          * @returns {Promise<google.cloud.translation.v3.TranslateTextResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|romanizeText}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef RomanizeTextCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.RomanizeTextResponse} [response] RomanizeTextResponse
+                         */
+    
+                        /**
+                         * Calls RomanizeText.
+                         * @function romanizeText
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IRomanizeTextRequest} request RomanizeTextRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.RomanizeTextCallback} callback Node-style callback called with the error, if any, and RomanizeTextResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.romanizeText = function romanizeText(request, callback) {
+                            return this.rpcCall(romanizeText, $root.google.cloud.translation.v3.RomanizeTextRequest, $root.google.cloud.translation.v3.RomanizeTextResponse, request, callback);
+                        }, "name", { value: "RomanizeText" });
+    
+                        /**
+                         * Calls RomanizeText.
+                         * @function romanizeText
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IRomanizeTextRequest} request RomanizeTextRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.RomanizeTextResponse>} Promise
                          * @variation 2
                          */
     
@@ -5732,6 +15410,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|updateGlossary}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef UpdateGlossaryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateGlossary.
+                         * @function updateGlossary
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryRequest} request UpdateGlossaryRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.UpdateGlossaryCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.updateGlossary = function updateGlossary(request, callback) {
+                            return this.rpcCall(updateGlossary, $root.google.cloud.translation.v3.UpdateGlossaryRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateGlossary" });
+    
+                        /**
+                         * Calls UpdateGlossary.
+                         * @function updateGlossary
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryRequest} request UpdateGlossaryRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.translation.v3.TranslationService|listGlossaries}.
                          * @memberof google.cloud.translation.v3.TranslationService
                          * @typedef ListGlossariesCallback
@@ -5826,6 +15537,303 @@
                          * @memberof google.cloud.translation.v3.TranslationService
                          * @instance
                          * @param {google.cloud.translation.v3.IDeleteGlossaryRequest} request DeleteGlossaryRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|getGlossaryEntry}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef GetGlossaryEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.GlossaryEntry} [response] GlossaryEntry
+                         */
+    
+                        /**
+                         * Calls GetGlossaryEntry.
+                         * @function getGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetGlossaryEntryRequest} request GetGlossaryEntryRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.GetGlossaryEntryCallback} callback Node-style callback called with the error, if any, and GlossaryEntry
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.getGlossaryEntry = function getGlossaryEntry(request, callback) {
+                            return this.rpcCall(getGlossaryEntry, $root.google.cloud.translation.v3.GetGlossaryEntryRequest, $root.google.cloud.translation.v3.GlossaryEntry, request, callback);
+                        }, "name", { value: "GetGlossaryEntry" });
+    
+                        /**
+                         * Calls GetGlossaryEntry.
+                         * @function getGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetGlossaryEntryRequest} request GetGlossaryEntryRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.GlossaryEntry>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listGlossaryEntries}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListGlossaryEntriesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListGlossaryEntriesResponse} [response] ListGlossaryEntriesResponse
+                         */
+    
+                        /**
+                         * Calls ListGlossaryEntries.
+                         * @function listGlossaryEntries
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesRequest} request ListGlossaryEntriesRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListGlossaryEntriesCallback} callback Node-style callback called with the error, if any, and ListGlossaryEntriesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listGlossaryEntries = function listGlossaryEntries(request, callback) {
+                            return this.rpcCall(listGlossaryEntries, $root.google.cloud.translation.v3.ListGlossaryEntriesRequest, $root.google.cloud.translation.v3.ListGlossaryEntriesResponse, request, callback);
+                        }, "name", { value: "ListGlossaryEntries" });
+    
+                        /**
+                         * Calls ListGlossaryEntries.
+                         * @function listGlossaryEntries
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesRequest} request ListGlossaryEntriesRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListGlossaryEntriesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|createGlossaryEntry}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef CreateGlossaryEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.GlossaryEntry} [response] GlossaryEntry
+                         */
+    
+                        /**
+                         * Calls CreateGlossaryEntry.
+                         * @function createGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateGlossaryEntryRequest} request CreateGlossaryEntryRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.CreateGlossaryEntryCallback} callback Node-style callback called with the error, if any, and GlossaryEntry
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.createGlossaryEntry = function createGlossaryEntry(request, callback) {
+                            return this.rpcCall(createGlossaryEntry, $root.google.cloud.translation.v3.CreateGlossaryEntryRequest, $root.google.cloud.translation.v3.GlossaryEntry, request, callback);
+                        }, "name", { value: "CreateGlossaryEntry" });
+    
+                        /**
+                         * Calls CreateGlossaryEntry.
+                         * @function createGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateGlossaryEntryRequest} request CreateGlossaryEntryRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.GlossaryEntry>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|updateGlossaryEntry}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef UpdateGlossaryEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.GlossaryEntry} [response] GlossaryEntry
+                         */
+    
+                        /**
+                         * Calls UpdateGlossaryEntry.
+                         * @function updateGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryEntryRequest} request UpdateGlossaryEntryRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.UpdateGlossaryEntryCallback} callback Node-style callback called with the error, if any, and GlossaryEntry
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.updateGlossaryEntry = function updateGlossaryEntry(request, callback) {
+                            return this.rpcCall(updateGlossaryEntry, $root.google.cloud.translation.v3.UpdateGlossaryEntryRequest, $root.google.cloud.translation.v3.GlossaryEntry, request, callback);
+                        }, "name", { value: "UpdateGlossaryEntry" });
+    
+                        /**
+                         * Calls UpdateGlossaryEntry.
+                         * @function updateGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryEntryRequest} request UpdateGlossaryEntryRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.GlossaryEntry>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteGlossaryEntry}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef DeleteGlossaryEntryCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteGlossaryEntry.
+                         * @function deleteGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteGlossaryEntryRequest} request DeleteGlossaryEntryRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.DeleteGlossaryEntryCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.deleteGlossaryEntry = function deleteGlossaryEntry(request, callback) {
+                            return this.rpcCall(deleteGlossaryEntry, $root.google.cloud.translation.v3.DeleteGlossaryEntryRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteGlossaryEntry" });
+    
+                        /**
+                         * Calls DeleteGlossaryEntry.
+                         * @function deleteGlossaryEntry
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteGlossaryEntryRequest} request DeleteGlossaryEntryRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|createDataset}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef CreateDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateDataset.
+                         * @function createDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateDatasetRequest} request CreateDatasetRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.CreateDatasetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.createDataset = function createDataset(request, callback) {
+                            return this.rpcCall(createDataset, $root.google.cloud.translation.v3.CreateDatasetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateDataset" });
+    
+                        /**
+                         * Calls CreateDataset.
+                         * @function createDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateDatasetRequest} request CreateDatasetRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|getDataset}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef GetDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.Dataset} [response] Dataset
+                         */
+    
+                        /**
+                         * Calls GetDataset.
+                         * @function getDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetDatasetRequest} request GetDatasetRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.GetDatasetCallback} callback Node-style callback called with the error, if any, and Dataset
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.getDataset = function getDataset(request, callback) {
+                            return this.rpcCall(getDataset, $root.google.cloud.translation.v3.GetDatasetRequest, $root.google.cloud.translation.v3.Dataset, request, callback);
+                        }, "name", { value: "GetDataset" });
+    
+                        /**
+                         * Calls GetDataset.
+                         * @function getDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetDatasetRequest} request GetDatasetRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.Dataset>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listDatasets}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListDatasetsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListDatasetsResponse} [response] ListDatasetsResponse
+                         */
+    
+                        /**
+                         * Calls ListDatasets.
+                         * @function listDatasets
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListDatasetsRequest} request ListDatasetsRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListDatasetsCallback} callback Node-style callback called with the error, if any, and ListDatasetsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listDatasets = function listDatasets(request, callback) {
+                            return this.rpcCall(listDatasets, $root.google.cloud.translation.v3.ListDatasetsRequest, $root.google.cloud.translation.v3.ListDatasetsResponse, request, callback);
+                        }, "name", { value: "ListDatasets" });
+    
+                        /**
+                         * Calls ListDatasets.
+                         * @function listDatasets
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListDatasetsRequest} request ListDatasetsRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListDatasetsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteDataset}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef DeleteDatasetCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteDataset.
+                         * @function deleteDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteDatasetRequest} request DeleteDatasetRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.DeleteDatasetCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.deleteDataset = function deleteDataset(request, callback) {
+                            return this.rpcCall(deleteDataset, $root.google.cloud.translation.v3.DeleteDatasetRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteDataset" });
+    
+                        /**
+                         * Calls DeleteDataset.
+                         * @function deleteDataset
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteDatasetRequest} request DeleteDatasetRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -6160,28 +16168,258 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|importData}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ImportDataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ImportData.
+                         * @function importData
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IImportDataRequest} request ImportDataRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ImportDataCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.importData = function importData(request, callback) {
+                            return this.rpcCall(importData, $root.google.cloud.translation.v3.ImportDataRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ImportData" });
+    
+                        /**
+                         * Calls ImportData.
+                         * @function importData
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IImportDataRequest} request ImportDataRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|exportData}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ExportDataCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportData.
+                         * @function exportData
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IExportDataRequest} request ExportDataRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ExportDataCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.exportData = function exportData(request, callback) {
+                            return this.rpcCall(exportData, $root.google.cloud.translation.v3.ExportDataRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportData" });
+    
+                        /**
+                         * Calls ExportData.
+                         * @function exportData
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IExportDataRequest} request ExportDataRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listExamples}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListExamplesCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListExamplesResponse} [response] ListExamplesResponse
+                         */
+    
+                        /**
+                         * Calls ListExamples.
+                         * @function listExamples
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListExamplesRequest} request ListExamplesRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListExamplesCallback} callback Node-style callback called with the error, if any, and ListExamplesResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listExamples = function listExamples(request, callback) {
+                            return this.rpcCall(listExamples, $root.google.cloud.translation.v3.ListExamplesRequest, $root.google.cloud.translation.v3.ListExamplesResponse, request, callback);
+                        }, "name", { value: "ListExamples" });
+    
+                        /**
+                         * Calls ListExamples.
+                         * @function listExamples
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListExamplesRequest} request ListExamplesRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListExamplesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|createModel}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef CreateModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateModel.
+                         * @function createModel
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateModelRequest} request CreateModelRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.CreateModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.createModel = function createModel(request, callback) {
+                            return this.rpcCall(createModel, $root.google.cloud.translation.v3.CreateModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateModel" });
+    
+                        /**
+                         * Calls CreateModel.
+                         * @function createModel
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ICreateModelRequest} request CreateModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|listModels}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef ListModelsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.ListModelsResponse} [response] ListModelsResponse
+                         */
+    
+                        /**
+                         * Calls ListModels.
+                         * @function listModels
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListModelsRequest} request ListModelsRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.ListModelsCallback} callback Node-style callback called with the error, if any, and ListModelsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.listModels = function listModels(request, callback) {
+                            return this.rpcCall(listModels, $root.google.cloud.translation.v3.ListModelsRequest, $root.google.cloud.translation.v3.ListModelsResponse, request, callback);
+                        }, "name", { value: "ListModels" });
+    
+                        /**
+                         * Calls ListModels.
+                         * @function listModels
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IListModelsRequest} request ListModelsRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.ListModelsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|getModel}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef GetModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.Model} [response] Model
+                         */
+    
+                        /**
+                         * Calls GetModel.
+                         * @function getModel
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetModelRequest} request GetModelRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.GetModelCallback} callback Node-style callback called with the error, if any, and Model
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.getModel = function getModel(request, callback) {
+                            return this.rpcCall(getModel, $root.google.cloud.translation.v3.GetModelRequest, $root.google.cloud.translation.v3.Model, request, callback);
+                        }, "name", { value: "GetModel" });
+    
+                        /**
+                         * Calls GetModel.
+                         * @function getModel
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IGetModelRequest} request GetModelRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.Model>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteModel}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef DeleteModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteModel.
+                         * @function deleteModel
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteModelRequest} request DeleteModelRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.DeleteModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.deleteModel = function deleteModel(request, callback) {
+                            return this.rpcCall(deleteModel, $root.google.cloud.translation.v3.DeleteModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteModel" });
+    
+                        /**
+                         * Calls DeleteModel.
+                         * @function deleteModel
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IDeleteModelRequest} request DeleteModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
                         return TranslationService;
                     })();
     
-                    v3.TranslateTextGlossaryConfig = (function() {
+                    v3.TransliterationConfig = (function() {
     
                         /**
-                         * Properties of a TranslateTextGlossaryConfig.
+                         * Properties of a TransliterationConfig.
                          * @memberof google.cloud.translation.v3
-                         * @interface ITranslateTextGlossaryConfig
-                         * @property {string|null} [glossary] TranslateTextGlossaryConfig glossary
-                         * @property {boolean|null} [ignoreCase] TranslateTextGlossaryConfig ignoreCase
+                         * @interface ITransliterationConfig
+                         * @property {boolean|null} [enableTransliteration] TransliterationConfig enableTransliteration
                          */
     
                         /**
-                         * Constructs a new TranslateTextGlossaryConfig.
+                         * Constructs a new TransliterationConfig.
                          * @memberof google.cloud.translation.v3
-                         * @classdesc Represents a TranslateTextGlossaryConfig.
-                         * @implements ITranslateTextGlossaryConfig
+                         * @classdesc Represents a TransliterationConfig.
+                         * @implements ITransliterationConfig
                          * @constructor
-                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig=} [properties] Properties to set
+                         * @param {google.cloud.translation.v3.ITransliterationConfig=} [properties] Properties to set
                          */
-                        function TranslateTextGlossaryConfig(properties) {
+                        function TransliterationConfig(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6189,89 +16427,75 @@
                         }
     
                         /**
-                         * TranslateTextGlossaryConfig glossary.
-                         * @member {string} glossary
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * TransliterationConfig enableTransliteration.
+                         * @member {boolean} enableTransliteration
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @instance
                          */
-                        TranslateTextGlossaryConfig.prototype.glossary = "";
+                        TransliterationConfig.prototype.enableTransliteration = false;
     
                         /**
-                         * TranslateTextGlossaryConfig ignoreCase.
-                         * @member {boolean} ignoreCase
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
-                         * @instance
-                         */
-                        TranslateTextGlossaryConfig.prototype.ignoreCase = false;
-    
-                        /**
-                         * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
+                         * Creates a new TransliterationConfig instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
-                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig=} [properties] Properties to set
-                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig instance
+                         * @param {google.cloud.translation.v3.ITransliterationConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.TransliterationConfig} TransliterationConfig instance
                          */
-                        TranslateTextGlossaryConfig.create = function create(properties) {
-                            return new TranslateTextGlossaryConfig(properties);
+                        TransliterationConfig.create = function create(properties) {
+                            return new TransliterationConfig(properties);
                         };
     
                         /**
-                         * Encodes the specified TranslateTextGlossaryConfig message. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
+                         * Encodes the specified TransliterationConfig message. Does not implicitly {@link google.cloud.translation.v3.TransliterationConfig.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
-                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig} message TranslateTextGlossaryConfig message or plain object to encode
+                         * @param {google.cloud.translation.v3.ITransliterationConfig} message TransliterationConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        TranslateTextGlossaryConfig.encode = function encode(message, writer) {
+                        TransliterationConfig.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.glossary != null && Object.hasOwnProperty.call(message, "glossary"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.glossary);
-                            if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ignoreCase);
+                            if (message.enableTransliteration != null && Object.hasOwnProperty.call(message, "enableTransliteration"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableTransliteration);
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified TranslateTextGlossaryConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
+                         * Encodes the specified TransliterationConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TransliterationConfig.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
-                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig} message TranslateTextGlossaryConfig message or plain object to encode
+                         * @param {google.cloud.translation.v3.ITransliterationConfig} message TransliterationConfig message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        TranslateTextGlossaryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        TransliterationConfig.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer.
+                         * Decodes a TransliterationConfig message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig
+                         * @returns {google.cloud.translation.v3.TransliterationConfig} TransliterationConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TranslateTextGlossaryConfig.decode = function decode(reader, length) {
+                        TransliterationConfig.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TranslateTextGlossaryConfig();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TransliterationConfig();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1: {
-                                        message.glossary = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.ignoreCase = reader.bool();
+                                        message.enableTransliteration = reader.bool();
                                         break;
                                     }
                                 default:
@@ -6283,111 +16507,102 @@
                         };
     
                         /**
-                         * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer, length delimited.
+                         * Decodes a TransliterationConfig message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig
+                         * @returns {google.cloud.translation.v3.TransliterationConfig} TransliterationConfig
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        TranslateTextGlossaryConfig.decodeDelimited = function decodeDelimited(reader) {
+                        TransliterationConfig.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a TranslateTextGlossaryConfig message.
+                         * Verifies a TransliterationConfig message.
                          * @function verify
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        TranslateTextGlossaryConfig.verify = function verify(message) {
+                        TransliterationConfig.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.glossary != null && message.hasOwnProperty("glossary"))
-                                if (!$util.isString(message.glossary))
-                                    return "glossary: string expected";
-                            if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
-                                if (typeof message.ignoreCase !== "boolean")
-                                    return "ignoreCase: boolean expected";
+                            if (message.enableTransliteration != null && message.hasOwnProperty("enableTransliteration"))
+                                if (typeof message.enableTransliteration !== "boolean")
+                                    return "enableTransliteration: boolean expected";
                             return null;
                         };
     
                         /**
-                         * Creates a TranslateTextGlossaryConfig message from a plain object. Also converts values to their respective internal types.
+                         * Creates a TransliterationConfig message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig
+                         * @returns {google.cloud.translation.v3.TransliterationConfig} TransliterationConfig
                          */
-                        TranslateTextGlossaryConfig.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.translation.v3.TranslateTextGlossaryConfig)
+                        TransliterationConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.TransliterationConfig)
                                 return object;
-                            var message = new $root.google.cloud.translation.v3.TranslateTextGlossaryConfig();
-                            if (object.glossary != null)
-                                message.glossary = String(object.glossary);
-                            if (object.ignoreCase != null)
-                                message.ignoreCase = Boolean(object.ignoreCase);
+                            var message = new $root.google.cloud.translation.v3.TransliterationConfig();
+                            if (object.enableTransliteration != null)
+                                message.enableTransliteration = Boolean(object.enableTransliteration);
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a TranslateTextGlossaryConfig message. Also converts values to other types if specified.
+                         * Creates a plain object from a TransliterationConfig message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
-                         * @param {google.cloud.translation.v3.TranslateTextGlossaryConfig} message TranslateTextGlossaryConfig
+                         * @param {google.cloud.translation.v3.TransliterationConfig} message TransliterationConfig
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        TranslateTextGlossaryConfig.toObject = function toObject(message, options) {
+                        TransliterationConfig.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults) {
-                                object.glossary = "";
-                                object.ignoreCase = false;
-                            }
-                            if (message.glossary != null && message.hasOwnProperty("glossary"))
-                                object.glossary = message.glossary;
-                            if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
-                                object.ignoreCase = message.ignoreCase;
+                            if (options.defaults)
+                                object.enableTransliteration = false;
+                            if (message.enableTransliteration != null && message.hasOwnProperty("enableTransliteration"))
+                                object.enableTransliteration = message.enableTransliteration;
                             return object;
                         };
     
                         /**
-                         * Converts this TranslateTextGlossaryConfig to JSON.
+                         * Converts this TransliterationConfig to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        TranslateTextGlossaryConfig.prototype.toJSON = function toJSON() {
+                        TransliterationConfig.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
                         /**
-                         * Gets the default type url for TranslateTextGlossaryConfig
+                         * Gets the default type url for TransliterationConfig
                          * @function getTypeUrl
-                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @memberof google.cloud.translation.v3.TransliterationConfig
                          * @static
                          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns {string} The default type url
                          */
-                        TranslateTextGlossaryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        TransliterationConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
                             if (typeUrlPrefix === undefined) {
                                 typeUrlPrefix = "type.googleapis.com";
                             }
-                            return typeUrlPrefix + "/google.cloud.translation.v3.TranslateTextGlossaryConfig";
+                            return typeUrlPrefix + "/google.cloud.translation.v3.TransliterationConfig";
                         };
     
-                        return TranslateTextGlossaryConfig;
+                        return TransliterationConfig;
                     })();
     
                     v3.TranslateTextRequest = (function() {
@@ -6403,6 +16618,7 @@
                          * @property {string|null} [parent] TranslateTextRequest parent
                          * @property {string|null} [model] TranslateTextRequest model
                          * @property {google.cloud.translation.v3.ITranslateTextGlossaryConfig|null} [glossaryConfig] TranslateTextRequest glossaryConfig
+                         * @property {google.cloud.translation.v3.ITransliterationConfig|null} [transliterationConfig] TranslateTextRequest transliterationConfig
                          * @property {Object.<string,string>|null} [labels] TranslateTextRequest labels
                          */
     
@@ -6480,6 +16696,14 @@
                         TranslateTextRequest.prototype.glossaryConfig = null;
     
                         /**
+                         * TranslateTextRequest transliterationConfig.
+                         * @member {google.cloud.translation.v3.ITransliterationConfig|null|undefined} transliterationConfig
+                         * @memberof google.cloud.translation.v3.TranslateTextRequest
+                         * @instance
+                         */
+                        TranslateTextRequest.prototype.transliterationConfig = null;
+    
+                        /**
                          * TranslateTextRequest labels.
                          * @member {Object.<string,string>} labels
                          * @memberof google.cloud.translation.v3.TranslateTextRequest
@@ -6529,6 +16753,8 @@
                             if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
                                 for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.transliterationConfig != null && Object.hasOwnProperty.call(message, "transliterationConfig"))
+                                $root.google.cloud.translation.v3.TransliterationConfig.encode(message.transliterationConfig, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -6591,6 +16817,10 @@
                                     }
                                 case 7: {
                                         message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 13: {
+                                        message.transliterationConfig = $root.google.cloud.translation.v3.TransliterationConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 10: {
@@ -6678,6 +16908,11 @@
                                 if (error)
                                     return "glossaryConfig." + error;
                             }
+                            if (message.transliterationConfig != null && message.hasOwnProperty("transliterationConfig")) {
+                                var error = $root.google.cloud.translation.v3.TransliterationConfig.verify(message.transliterationConfig);
+                                if (error)
+                                    return "transliterationConfig." + error;
+                            }
                             if (message.labels != null && message.hasOwnProperty("labels")) {
                                 if (!$util.isObject(message.labels))
                                     return "labels: object expected";
@@ -6723,6 +16958,11 @@
                                     throw TypeError(".google.cloud.translation.v3.TranslateTextRequest.glossaryConfig: object expected");
                                 message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.fromObject(object.glossaryConfig);
                             }
+                            if (object.transliterationConfig != null) {
+                                if (typeof object.transliterationConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateTextRequest.transliterationConfig: object expected");
+                                message.transliterationConfig = $root.google.cloud.translation.v3.TransliterationConfig.fromObject(object.transliterationConfig);
+                            }
                             if (object.labels) {
                                 if (typeof object.labels !== "object")
                                     throw TypeError(".google.cloud.translation.v3.TranslateTextRequest.labels: object expected");
@@ -6757,6 +16997,7 @@
                                 object.model = "";
                                 object.glossaryConfig = null;
                                 object.parent = "";
+                                object.transliterationConfig = null;
                             }
                             if (message.contents && message.contents.length) {
                                 object.contents = [];
@@ -6781,6 +17022,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.labels[keys2[j]] = message.labels[keys2[j]];
                             }
+                            if (message.transliterationConfig != null && message.hasOwnProperty("transliterationConfig"))
+                                object.transliterationConfig = $root.google.cloud.translation.v3.TransliterationConfig.toObject(message.transliterationConfig, options);
                             return object;
                         };
     
@@ -7358,6 +17601,724 @@
                         };
     
                         return Translation;
+                    })();
+    
+                    v3.RomanizeTextRequest = (function() {
+    
+                        /**
+                         * Properties of a RomanizeTextRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IRomanizeTextRequest
+                         * @property {string|null} [parent] RomanizeTextRequest parent
+                         * @property {Array.<string>|null} [contents] RomanizeTextRequest contents
+                         * @property {string|null} [sourceLanguageCode] RomanizeTextRequest sourceLanguageCode
+                         */
+    
+                        /**
+                         * Constructs a new RomanizeTextRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a RomanizeTextRequest.
+                         * @implements IRomanizeTextRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IRomanizeTextRequest=} [properties] Properties to set
+                         */
+                        function RomanizeTextRequest(properties) {
+                            this.contents = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RomanizeTextRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @instance
+                         */
+                        RomanizeTextRequest.prototype.parent = "";
+    
+                        /**
+                         * RomanizeTextRequest contents.
+                         * @member {Array.<string>} contents
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @instance
+                         */
+                        RomanizeTextRequest.prototype.contents = $util.emptyArray;
+    
+                        /**
+                         * RomanizeTextRequest sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @instance
+                         */
+                        RomanizeTextRequest.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * Creates a new RomanizeTextRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanizeTextRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.RomanizeTextRequest} RomanizeTextRequest instance
+                         */
+                        RomanizeTextRequest.create = function create(properties) {
+                            return new RomanizeTextRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RomanizeTextRequest message. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanizeTextRequest} message RomanizeTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RomanizeTextRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.contents != null && message.contents.length)
+                                for (var i = 0; i < message.contents.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.contents[i]);
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLanguageCode);
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RomanizeTextRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanizeTextRequest} message RomanizeTextRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RomanizeTextRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RomanizeTextRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.RomanizeTextRequest} RomanizeTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RomanizeTextRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.RomanizeTextRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 1: {
+                                        if (!(message.contents && message.contents.length))
+                                            message.contents = [];
+                                        message.contents.push(reader.string());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.sourceLanguageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RomanizeTextRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.RomanizeTextRequest} RomanizeTextRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RomanizeTextRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RomanizeTextRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RomanizeTextRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.contents != null && message.hasOwnProperty("contents")) {
+                                if (!Array.isArray(message.contents))
+                                    return "contents: array expected";
+                                for (var i = 0; i < message.contents.length; ++i)
+                                    if (!$util.isString(message.contents[i]))
+                                        return "contents: string[] expected";
+                            }
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RomanizeTextRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.RomanizeTextRequest} RomanizeTextRequest
+                         */
+                        RomanizeTextRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.RomanizeTextRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.RomanizeTextRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.contents) {
+                                if (!Array.isArray(object.contents))
+                                    throw TypeError(".google.cloud.translation.v3.RomanizeTextRequest.contents: array expected");
+                                message.contents = [];
+                                for (var i = 0; i < object.contents.length; ++i)
+                                    message.contents[i] = String(object.contents[i]);
+                            }
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RomanizeTextRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.RomanizeTextRequest} message RomanizeTextRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RomanizeTextRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.contents = [];
+                            if (options.defaults) {
+                                object.sourceLanguageCode = "";
+                                object.parent = "";
+                            }
+                            if (message.contents && message.contents.length) {
+                                object.contents = [];
+                                for (var j = 0; j < message.contents.length; ++j)
+                                    object.contents[j] = message.contents[j];
+                            }
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RomanizeTextRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RomanizeTextRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RomanizeTextRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.RomanizeTextRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RomanizeTextRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.RomanizeTextRequest";
+                        };
+    
+                        return RomanizeTextRequest;
+                    })();
+    
+                    v3.Romanization = (function() {
+    
+                        /**
+                         * Properties of a Romanization.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IRomanization
+                         * @property {string|null} [romanizedText] Romanization romanizedText
+                         * @property {string|null} [detectedLanguageCode] Romanization detectedLanguageCode
+                         */
+    
+                        /**
+                         * Constructs a new Romanization.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a Romanization.
+                         * @implements IRomanization
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IRomanization=} [properties] Properties to set
+                         */
+                        function Romanization(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Romanization romanizedText.
+                         * @member {string} romanizedText
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @instance
+                         */
+                        Romanization.prototype.romanizedText = "";
+    
+                        /**
+                         * Romanization detectedLanguageCode.
+                         * @member {string} detectedLanguageCode
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @instance
+                         */
+                        Romanization.prototype.detectedLanguageCode = "";
+    
+                        /**
+                         * Creates a new Romanization instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanization=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.Romanization} Romanization instance
+                         */
+                        Romanization.create = function create(properties) {
+                            return new Romanization(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Romanization message. Does not implicitly {@link google.cloud.translation.v3.Romanization.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanization} message Romanization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Romanization.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.romanizedText != null && Object.hasOwnProperty.call(message, "romanizedText"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.romanizedText);
+                            if (message.detectedLanguageCode != null && Object.hasOwnProperty.call(message, "detectedLanguageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.detectedLanguageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Romanization message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Romanization.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanization} message Romanization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Romanization.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Romanization message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.Romanization} Romanization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Romanization.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.Romanization();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.romanizedText = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.detectedLanguageCode = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Romanization message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.Romanization} Romanization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Romanization.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Romanization message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Romanization.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.romanizedText != null && message.hasOwnProperty("romanizedText"))
+                                if (!$util.isString(message.romanizedText))
+                                    return "romanizedText: string expected";
+                            if (message.detectedLanguageCode != null && message.hasOwnProperty("detectedLanguageCode"))
+                                if (!$util.isString(message.detectedLanguageCode))
+                                    return "detectedLanguageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Romanization message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.Romanization} Romanization
+                         */
+                        Romanization.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.Romanization)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.Romanization();
+                            if (object.romanizedText != null)
+                                message.romanizedText = String(object.romanizedText);
+                            if (object.detectedLanguageCode != null)
+                                message.detectedLanguageCode = String(object.detectedLanguageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Romanization message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {google.cloud.translation.v3.Romanization} message Romanization
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Romanization.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.romanizedText = "";
+                                object.detectedLanguageCode = "";
+                            }
+                            if (message.romanizedText != null && message.hasOwnProperty("romanizedText"))
+                                object.romanizedText = message.romanizedText;
+                            if (message.detectedLanguageCode != null && message.hasOwnProperty("detectedLanguageCode"))
+                                object.detectedLanguageCode = message.detectedLanguageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Romanization to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Romanization.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Romanization
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.Romanization
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Romanization.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.Romanization";
+                        };
+    
+                        return Romanization;
+                    })();
+    
+                    v3.RomanizeTextResponse = (function() {
+    
+                        /**
+                         * Properties of a RomanizeTextResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IRomanizeTextResponse
+                         * @property {Array.<google.cloud.translation.v3.IRomanization>|null} [romanizations] RomanizeTextResponse romanizations
+                         */
+    
+                        /**
+                         * Constructs a new RomanizeTextResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a RomanizeTextResponse.
+                         * @implements IRomanizeTextResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IRomanizeTextResponse=} [properties] Properties to set
+                         */
+                        function RomanizeTextResponse(properties) {
+                            this.romanizations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RomanizeTextResponse romanizations.
+                         * @member {Array.<google.cloud.translation.v3.IRomanization>} romanizations
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @instance
+                         */
+                        RomanizeTextResponse.prototype.romanizations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RomanizeTextResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanizeTextResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.RomanizeTextResponse} RomanizeTextResponse instance
+                         */
+                        RomanizeTextResponse.create = function create(properties) {
+                            return new RomanizeTextResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RomanizeTextResponse message. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanizeTextResponse} message RomanizeTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RomanizeTextResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.romanizations != null && message.romanizations.length)
+                                for (var i = 0; i < message.romanizations.length; ++i)
+                                    $root.google.cloud.translation.v3.Romanization.encode(message.romanizations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RomanizeTextResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IRomanizeTextResponse} message RomanizeTextResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RomanizeTextResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RomanizeTextResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.RomanizeTextResponse} RomanizeTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RomanizeTextResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.RomanizeTextResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.romanizations && message.romanizations.length))
+                                            message.romanizations = [];
+                                        message.romanizations.push($root.google.cloud.translation.v3.Romanization.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RomanizeTextResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.RomanizeTextResponse} RomanizeTextResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RomanizeTextResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RomanizeTextResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RomanizeTextResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.romanizations != null && message.hasOwnProperty("romanizations")) {
+                                if (!Array.isArray(message.romanizations))
+                                    return "romanizations: array expected";
+                                for (var i = 0; i < message.romanizations.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.Romanization.verify(message.romanizations[i]);
+                                    if (error)
+                                        return "romanizations." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RomanizeTextResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.RomanizeTextResponse} RomanizeTextResponse
+                         */
+                        RomanizeTextResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.RomanizeTextResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.RomanizeTextResponse();
+                            if (object.romanizations) {
+                                if (!Array.isArray(object.romanizations))
+                                    throw TypeError(".google.cloud.translation.v3.RomanizeTextResponse.romanizations: array expected");
+                                message.romanizations = [];
+                                for (var i = 0; i < object.romanizations.length; ++i) {
+                                    if (typeof object.romanizations[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.RomanizeTextResponse.romanizations: object expected");
+                                    message.romanizations[i] = $root.google.cloud.translation.v3.Romanization.fromObject(object.romanizations[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RomanizeTextResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.RomanizeTextResponse} message RomanizeTextResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RomanizeTextResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.romanizations = [];
+                            if (message.romanizations && message.romanizations.length) {
+                                object.romanizations = [];
+                                for (var j = 0; j < message.romanizations.length; ++j)
+                                    object.romanizations[j] = $root.google.cloud.translation.v3.Romanization.toObject(message.romanizations[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RomanizeTextResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RomanizeTextResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RomanizeTextResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.RomanizeTextResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RomanizeTextResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.RomanizeTextResponse";
+                        };
+    
+                        return RomanizeTextResponse;
                     })();
     
                     v3.DetectLanguageRequest = (function() {
@@ -13988,6 +24949,243 @@
                         return CreateGlossaryRequest;
                     })();
     
+                    v3.UpdateGlossaryRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateGlossaryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IUpdateGlossaryRequest
+                         * @property {google.cloud.translation.v3.IGlossary|null} [glossary] UpdateGlossaryRequest glossary
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateGlossaryRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateGlossaryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an UpdateGlossaryRequest.
+                         * @implements IUpdateGlossaryRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryRequest=} [properties] Properties to set
+                         */
+                        function UpdateGlossaryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateGlossaryRequest glossary.
+                         * @member {google.cloud.translation.v3.IGlossary|null|undefined} glossary
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @instance
+                         */
+                        UpdateGlossaryRequest.prototype.glossary = null;
+    
+                        /**
+                         * UpdateGlossaryRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @instance
+                         */
+                        UpdateGlossaryRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateGlossaryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryRequest} UpdateGlossaryRequest instance
+                         */
+                        UpdateGlossaryRequest.create = function create(properties) {
+                            return new UpdateGlossaryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGlossaryRequest message. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryRequest} message UpdateGlossaryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGlossaryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.glossary != null && Object.hasOwnProperty.call(message, "glossary"))
+                                $root.google.cloud.translation.v3.Glossary.encode(message.glossary, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGlossaryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryRequest} message UpdateGlossaryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGlossaryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateGlossaryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryRequest} UpdateGlossaryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGlossaryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.UpdateGlossaryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.glossary = $root.google.cloud.translation.v3.Glossary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateGlossaryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryRequest} UpdateGlossaryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGlossaryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateGlossaryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateGlossaryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.glossary != null && message.hasOwnProperty("glossary")) {
+                                var error = $root.google.cloud.translation.v3.Glossary.verify(message.glossary);
+                                if (error)
+                                    return "glossary." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateGlossaryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryRequest} UpdateGlossaryRequest
+                         */
+                        UpdateGlossaryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.UpdateGlossaryRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.UpdateGlossaryRequest();
+                            if (object.glossary != null) {
+                                if (typeof object.glossary !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.UpdateGlossaryRequest.glossary: object expected");
+                                message.glossary = $root.google.cloud.translation.v3.Glossary.fromObject(object.glossary);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.UpdateGlossaryRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateGlossaryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.UpdateGlossaryRequest} message UpdateGlossaryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateGlossaryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.glossary = null;
+                                object.updateMask = null;
+                            }
+                            if (message.glossary != null && message.hasOwnProperty("glossary"))
+                                object.glossary = $root.google.cloud.translation.v3.Glossary.toObject(message.glossary, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateGlossaryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateGlossaryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateGlossaryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateGlossaryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.UpdateGlossaryRequest";
+                        };
+    
+                        return UpdateGlossaryRequest;
+                    })();
+    
                     v3.GetGlossaryRequest = (function() {
     
                         /**
@@ -14915,6 +26113,1350 @@
                         return ListGlossariesResponse;
                     })();
     
+                    v3.GetGlossaryEntryRequest = (function() {
+    
+                        /**
+                         * Properties of a GetGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IGetGlossaryEntryRequest
+                         * @property {string|null} [name] GetGlossaryEntryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a GetGlossaryEntryRequest.
+                         * @implements IGetGlossaryEntryRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IGetGlossaryEntryRequest=} [properties] Properties to set
+                         */
+                        function GetGlossaryEntryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetGlossaryEntryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @instance
+                         */
+                        GetGlossaryEntryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetGlossaryEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetGlossaryEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.GetGlossaryEntryRequest} GetGlossaryEntryRequest instance
+                         */
+                        GetGlossaryEntryRequest.create = function create(properties) {
+                            return new GetGlossaryEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.GetGlossaryEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetGlossaryEntryRequest} message GetGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGlossaryEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetGlossaryEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IGetGlossaryEntryRequest} message GetGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGlossaryEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetGlossaryEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.GetGlossaryEntryRequest} GetGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGlossaryEntryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.GetGlossaryEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.GetGlossaryEntryRequest} GetGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGlossaryEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetGlossaryEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetGlossaryEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.GetGlossaryEntryRequest} GetGlossaryEntryRequest
+                         */
+                        GetGlossaryEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.GetGlossaryEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.GetGlossaryEntryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetGlossaryEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.GetGlossaryEntryRequest} message GetGlossaryEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetGlossaryEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetGlossaryEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetGlossaryEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetGlossaryEntryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.GetGlossaryEntryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetGlossaryEntryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.GetGlossaryEntryRequest";
+                        };
+    
+                        return GetGlossaryEntryRequest;
+                    })();
+    
+                    v3.DeleteGlossaryEntryRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDeleteGlossaryEntryRequest
+                         * @property {string|null} [name] DeleteGlossaryEntryRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DeleteGlossaryEntryRequest.
+                         * @implements IDeleteGlossaryEntryRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDeleteGlossaryEntryRequest=} [properties] Properties to set
+                         */
+                        function DeleteGlossaryEntryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteGlossaryEntryRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @instance
+                         */
+                        DeleteGlossaryEntryRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteGlossaryEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteGlossaryEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DeleteGlossaryEntryRequest} DeleteGlossaryEntryRequest instance
+                         */
+                        DeleteGlossaryEntryRequest.create = function create(properties) {
+                            return new DeleteGlossaryEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteGlossaryEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteGlossaryEntryRequest} message DeleteGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteGlossaryEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteGlossaryEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IDeleteGlossaryEntryRequest} message DeleteGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteGlossaryEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteGlossaryEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DeleteGlossaryEntryRequest} DeleteGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteGlossaryEntryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DeleteGlossaryEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DeleteGlossaryEntryRequest} DeleteGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteGlossaryEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteGlossaryEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteGlossaryEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DeleteGlossaryEntryRequest} DeleteGlossaryEntryRequest
+                         */
+                        DeleteGlossaryEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DeleteGlossaryEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DeleteGlossaryEntryRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteGlossaryEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.DeleteGlossaryEntryRequest} message DeleteGlossaryEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteGlossaryEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteGlossaryEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteGlossaryEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteGlossaryEntryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.DeleteGlossaryEntryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteGlossaryEntryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.DeleteGlossaryEntryRequest";
+                        };
+    
+                        return DeleteGlossaryEntryRequest;
+                    })();
+    
+                    v3.ListGlossaryEntriesRequest = (function() {
+    
+                        /**
+                         * Properties of a ListGlossaryEntriesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListGlossaryEntriesRequest
+                         * @property {string|null} [parent] ListGlossaryEntriesRequest parent
+                         * @property {number|null} [pageSize] ListGlossaryEntriesRequest pageSize
+                         * @property {string|null} [pageToken] ListGlossaryEntriesRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListGlossaryEntriesRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListGlossaryEntriesRequest.
+                         * @implements IListGlossaryEntriesRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesRequest=} [properties] Properties to set
+                         */
+                        function ListGlossaryEntriesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGlossaryEntriesRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @instance
+                         */
+                        ListGlossaryEntriesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListGlossaryEntriesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @instance
+                         */
+                        ListGlossaryEntriesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListGlossaryEntriesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @instance
+                         */
+                        ListGlossaryEntriesRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListGlossaryEntriesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesRequest} ListGlossaryEntriesRequest instance
+                         */
+                        ListGlossaryEntriesRequest.create = function create(properties) {
+                            return new ListGlossaryEntriesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGlossaryEntriesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesRequest} message ListGlossaryEntriesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGlossaryEntriesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGlossaryEntriesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesRequest} message ListGlossaryEntriesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGlossaryEntriesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGlossaryEntriesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesRequest} ListGlossaryEntriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGlossaryEntriesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListGlossaryEntriesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGlossaryEntriesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesRequest} ListGlossaryEntriesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGlossaryEntriesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGlossaryEntriesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGlossaryEntriesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGlossaryEntriesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesRequest} ListGlossaryEntriesRequest
+                         */
+                        ListGlossaryEntriesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListGlossaryEntriesRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListGlossaryEntriesRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGlossaryEntriesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ListGlossaryEntriesRequest} message ListGlossaryEntriesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGlossaryEntriesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGlossaryEntriesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGlossaryEntriesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGlossaryEntriesRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGlossaryEntriesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListGlossaryEntriesRequest";
+                        };
+    
+                        return ListGlossaryEntriesRequest;
+                    })();
+    
+                    v3.ListGlossaryEntriesResponse = (function() {
+    
+                        /**
+                         * Properties of a ListGlossaryEntriesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IListGlossaryEntriesResponse
+                         * @property {Array.<google.cloud.translation.v3.IGlossaryEntry>|null} [glossaryEntries] ListGlossaryEntriesResponse glossaryEntries
+                         * @property {string|null} [nextPageToken] ListGlossaryEntriesResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListGlossaryEntriesResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a ListGlossaryEntriesResponse.
+                         * @implements IListGlossaryEntriesResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesResponse=} [properties] Properties to set
+                         */
+                        function ListGlossaryEntriesResponse(properties) {
+                            this.glossaryEntries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListGlossaryEntriesResponse glossaryEntries.
+                         * @member {Array.<google.cloud.translation.v3.IGlossaryEntry>} glossaryEntries
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @instance
+                         */
+                        ListGlossaryEntriesResponse.prototype.glossaryEntries = $util.emptyArray;
+    
+                        /**
+                         * ListGlossaryEntriesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @instance
+                         */
+                        ListGlossaryEntriesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListGlossaryEntriesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesResponse} ListGlossaryEntriesResponse instance
+                         */
+                        ListGlossaryEntriesResponse.create = function create(properties) {
+                            return new ListGlossaryEntriesResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListGlossaryEntriesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesResponse} message ListGlossaryEntriesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGlossaryEntriesResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.glossaryEntries != null && message.glossaryEntries.length)
+                                for (var i = 0; i < message.glossaryEntries.length; ++i)
+                                    $root.google.cloud.translation.v3.GlossaryEntry.encode(message.glossaryEntries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListGlossaryEntriesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IListGlossaryEntriesResponse} message ListGlossaryEntriesResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListGlossaryEntriesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListGlossaryEntriesResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesResponse} ListGlossaryEntriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGlossaryEntriesResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.ListGlossaryEntriesResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.glossaryEntries && message.glossaryEntries.length))
+                                            message.glossaryEntries = [];
+                                        message.glossaryEntries.push($root.google.cloud.translation.v3.GlossaryEntry.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListGlossaryEntriesResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesResponse} ListGlossaryEntriesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListGlossaryEntriesResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListGlossaryEntriesResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListGlossaryEntriesResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.glossaryEntries != null && message.hasOwnProperty("glossaryEntries")) {
+                                if (!Array.isArray(message.glossaryEntries))
+                                    return "glossaryEntries: array expected";
+                                for (var i = 0; i < message.glossaryEntries.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.GlossaryEntry.verify(message.glossaryEntries[i]);
+                                    if (error)
+                                        return "glossaryEntries." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListGlossaryEntriesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.ListGlossaryEntriesResponse} ListGlossaryEntriesResponse
+                         */
+                        ListGlossaryEntriesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.ListGlossaryEntriesResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.ListGlossaryEntriesResponse();
+                            if (object.glossaryEntries) {
+                                if (!Array.isArray(object.glossaryEntries))
+                                    throw TypeError(".google.cloud.translation.v3.ListGlossaryEntriesResponse.glossaryEntries: array expected");
+                                message.glossaryEntries = [];
+                                for (var i = 0; i < object.glossaryEntries.length; ++i) {
+                                    if (typeof object.glossaryEntries[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.ListGlossaryEntriesResponse.glossaryEntries: object expected");
+                                    message.glossaryEntries[i] = $root.google.cloud.translation.v3.GlossaryEntry.fromObject(object.glossaryEntries[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListGlossaryEntriesResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ListGlossaryEntriesResponse} message ListGlossaryEntriesResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListGlossaryEntriesResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.glossaryEntries = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.glossaryEntries && message.glossaryEntries.length) {
+                                object.glossaryEntries = [];
+                                for (var j = 0; j < message.glossaryEntries.length; ++j)
+                                    object.glossaryEntries[j] = $root.google.cloud.translation.v3.GlossaryEntry.toObject(message.glossaryEntries[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListGlossaryEntriesResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListGlossaryEntriesResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListGlossaryEntriesResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.ListGlossaryEntriesResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListGlossaryEntriesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.ListGlossaryEntriesResponse";
+                        };
+    
+                        return ListGlossaryEntriesResponse;
+                    })();
+    
+                    v3.CreateGlossaryEntryRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ICreateGlossaryEntryRequest
+                         * @property {string|null} [parent] CreateGlossaryEntryRequest parent
+                         * @property {google.cloud.translation.v3.IGlossaryEntry|null} [glossaryEntry] CreateGlossaryEntryRequest glossaryEntry
+                         */
+    
+                        /**
+                         * Constructs a new CreateGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a CreateGlossaryEntryRequest.
+                         * @implements ICreateGlossaryEntryRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ICreateGlossaryEntryRequest=} [properties] Properties to set
+                         */
+                        function CreateGlossaryEntryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateGlossaryEntryRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @instance
+                         */
+                        CreateGlossaryEntryRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateGlossaryEntryRequest glossaryEntry.
+                         * @member {google.cloud.translation.v3.IGlossaryEntry|null|undefined} glossaryEntry
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @instance
+                         */
+                        CreateGlossaryEntryRequest.prototype.glossaryEntry = null;
+    
+                        /**
+                         * Creates a new CreateGlossaryEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateGlossaryEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.CreateGlossaryEntryRequest} CreateGlossaryEntryRequest instance
+                         */
+                        CreateGlossaryEntryRequest.create = function create(properties) {
+                            return new CreateGlossaryEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateGlossaryEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateGlossaryEntryRequest} message CreateGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateGlossaryEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.glossaryEntry != null && Object.hasOwnProperty.call(message, "glossaryEntry"))
+                                $root.google.cloud.translation.v3.GlossaryEntry.encode(message.glossaryEntry, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateGlossaryEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ICreateGlossaryEntryRequest} message CreateGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateGlossaryEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateGlossaryEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.CreateGlossaryEntryRequest} CreateGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateGlossaryEntryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.CreateGlossaryEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.glossaryEntry = $root.google.cloud.translation.v3.GlossaryEntry.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.CreateGlossaryEntryRequest} CreateGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateGlossaryEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateGlossaryEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateGlossaryEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.glossaryEntry != null && message.hasOwnProperty("glossaryEntry")) {
+                                var error = $root.google.cloud.translation.v3.GlossaryEntry.verify(message.glossaryEntry);
+                                if (error)
+                                    return "glossaryEntry." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.CreateGlossaryEntryRequest} CreateGlossaryEntryRequest
+                         */
+                        CreateGlossaryEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.CreateGlossaryEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.CreateGlossaryEntryRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.glossaryEntry != null) {
+                                if (typeof object.glossaryEntry !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.CreateGlossaryEntryRequest.glossaryEntry: object expected");
+                                message.glossaryEntry = $root.google.cloud.translation.v3.GlossaryEntry.fromObject(object.glossaryEntry);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateGlossaryEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.CreateGlossaryEntryRequest} message CreateGlossaryEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateGlossaryEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.glossaryEntry = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.glossaryEntry != null && message.hasOwnProperty("glossaryEntry"))
+                                object.glossaryEntry = $root.google.cloud.translation.v3.GlossaryEntry.toObject(message.glossaryEntry, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateGlossaryEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateGlossaryEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateGlossaryEntryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.CreateGlossaryEntryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateGlossaryEntryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.CreateGlossaryEntryRequest";
+                        };
+    
+                        return CreateGlossaryEntryRequest;
+                    })();
+    
+                    v3.UpdateGlossaryEntryRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IUpdateGlossaryEntryRequest
+                         * @property {google.cloud.translation.v3.IGlossaryEntry|null} [glossaryEntry] UpdateGlossaryEntryRequest glossaryEntry
+                         */
+    
+                        /**
+                         * Constructs a new UpdateGlossaryEntryRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an UpdateGlossaryEntryRequest.
+                         * @implements IUpdateGlossaryEntryRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryEntryRequest=} [properties] Properties to set
+                         */
+                        function UpdateGlossaryEntryRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateGlossaryEntryRequest glossaryEntry.
+                         * @member {google.cloud.translation.v3.IGlossaryEntry|null|undefined} glossaryEntry
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @instance
+                         */
+                        UpdateGlossaryEntryRequest.prototype.glossaryEntry = null;
+    
+                        /**
+                         * Creates a new UpdateGlossaryEntryRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryEntryRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryEntryRequest} UpdateGlossaryEntryRequest instance
+                         */
+                        UpdateGlossaryEntryRequest.create = function create(properties) {
+                            return new UpdateGlossaryEntryRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryEntryRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryEntryRequest} message UpdateGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGlossaryEntryRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.glossaryEntry != null && Object.hasOwnProperty.call(message, "glossaryEntry"))
+                                $root.google.cloud.translation.v3.GlossaryEntry.encode(message.glossaryEntry, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryEntryRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryEntryRequest} message UpdateGlossaryEntryRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGlossaryEntryRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateGlossaryEntryRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryEntryRequest} UpdateGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGlossaryEntryRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.UpdateGlossaryEntryRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.glossaryEntry = $root.google.cloud.translation.v3.GlossaryEntry.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryEntryRequest} UpdateGlossaryEntryRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGlossaryEntryRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateGlossaryEntryRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateGlossaryEntryRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.glossaryEntry != null && message.hasOwnProperty("glossaryEntry")) {
+                                var error = $root.google.cloud.translation.v3.GlossaryEntry.verify(message.glossaryEntry);
+                                if (error)
+                                    return "glossaryEntry." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryEntryRequest} UpdateGlossaryEntryRequest
+                         */
+                        UpdateGlossaryEntryRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.UpdateGlossaryEntryRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.UpdateGlossaryEntryRequest();
+                            if (object.glossaryEntry != null) {
+                                if (typeof object.glossaryEntry !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.UpdateGlossaryEntryRequest.glossaryEntry: object expected");
+                                message.glossaryEntry = $root.google.cloud.translation.v3.GlossaryEntry.fromObject(object.glossaryEntry);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateGlossaryEntryRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.UpdateGlossaryEntryRequest} message UpdateGlossaryEntryRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateGlossaryEntryRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.glossaryEntry = null;
+                            if (message.glossaryEntry != null && message.hasOwnProperty("glossaryEntry"))
+                                object.glossaryEntry = $root.google.cloud.translation.v3.GlossaryEntry.toObject(message.glossaryEntry, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateGlossaryEntryRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateGlossaryEntryRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateGlossaryEntryRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryEntryRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateGlossaryEntryRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.UpdateGlossaryEntryRequest";
+                        };
+    
+                        return UpdateGlossaryEntryRequest;
+                    })();
+    
                     v3.CreateGlossaryMetadata = (function() {
     
                         /**
@@ -15229,6 +27771,327 @@
                         })();
     
                         return CreateGlossaryMetadata;
+                    })();
+    
+                    v3.UpdateGlossaryMetadata = (function() {
+    
+                        /**
+                         * Properties of an UpdateGlossaryMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IUpdateGlossaryMetadata
+                         * @property {google.cloud.translation.v3.IGlossary|null} [glossary] UpdateGlossaryMetadata glossary
+                         * @property {google.cloud.translation.v3.UpdateGlossaryMetadata.State|null} [state] UpdateGlossaryMetadata state
+                         * @property {google.protobuf.ITimestamp|null} [submitTime] UpdateGlossaryMetadata submitTime
+                         */
+    
+                        /**
+                         * Constructs a new UpdateGlossaryMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents an UpdateGlossaryMetadata.
+                         * @implements IUpdateGlossaryMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryMetadata=} [properties] Properties to set
+                         */
+                        function UpdateGlossaryMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateGlossaryMetadata glossary.
+                         * @member {google.cloud.translation.v3.IGlossary|null|undefined} glossary
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @instance
+                         */
+                        UpdateGlossaryMetadata.prototype.glossary = null;
+    
+                        /**
+                         * UpdateGlossaryMetadata state.
+                         * @member {google.cloud.translation.v3.UpdateGlossaryMetadata.State} state
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @instance
+                         */
+                        UpdateGlossaryMetadata.prototype.state = 0;
+    
+                        /**
+                         * UpdateGlossaryMetadata submitTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} submitTime
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @instance
+                         */
+                        UpdateGlossaryMetadata.prototype.submitTime = null;
+    
+                        /**
+                         * Creates a new UpdateGlossaryMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryMetadata} UpdateGlossaryMetadata instance
+                         */
+                        UpdateGlossaryMetadata.create = function create(properties) {
+                            return new UpdateGlossaryMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGlossaryMetadata message. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryMetadata} message UpdateGlossaryMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGlossaryMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.glossary != null && Object.hasOwnProperty.call(message, "glossary"))
+                                $root.google.cloud.translation.v3.Glossary.encode(message.glossary, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                            if (message.submitTime != null && Object.hasOwnProperty.call(message, "submitTime"))
+                                $root.google.protobuf.Timestamp.encode(message.submitTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGlossaryMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IUpdateGlossaryMetadata} message UpdateGlossaryMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGlossaryMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateGlossaryMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryMetadata} UpdateGlossaryMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGlossaryMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.UpdateGlossaryMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.glossary = $root.google.cloud.translation.v3.Glossary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.submitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateGlossaryMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryMetadata} UpdateGlossaryMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGlossaryMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateGlossaryMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateGlossaryMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.glossary != null && message.hasOwnProperty("glossary")) {
+                                var error = $root.google.cloud.translation.v3.Glossary.verify(message.glossary);
+                                if (error)
+                                    return "glossary." + error;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.submitTime != null && message.hasOwnProperty("submitTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.submitTime);
+                                if (error)
+                                    return "submitTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateGlossaryMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.UpdateGlossaryMetadata} UpdateGlossaryMetadata
+                         */
+                        UpdateGlossaryMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.UpdateGlossaryMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.UpdateGlossaryMetadata();
+                            if (object.glossary != null) {
+                                if (typeof object.glossary !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.UpdateGlossaryMetadata.glossary: object expected");
+                                message.glossary = $root.google.cloud.translation.v3.Glossary.fromObject(object.glossary);
+                            }
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.submitTime != null) {
+                                if (typeof object.submitTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.UpdateGlossaryMetadata.submitTime: object expected");
+                                message.submitTime = $root.google.protobuf.Timestamp.fromObject(object.submitTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateGlossaryMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.UpdateGlossaryMetadata} message UpdateGlossaryMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateGlossaryMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.glossary = null;
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.submitTime = null;
+                            }
+                            if (message.glossary != null && message.hasOwnProperty("glossary"))
+                                object.glossary = $root.google.cloud.translation.v3.Glossary.toObject(message.glossary, options);
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.UpdateGlossaryMetadata.State[message.state] === undefined ? message.state : $root.google.cloud.translation.v3.UpdateGlossaryMetadata.State[message.state] : message.state;
+                            if (message.submitTime != null && message.hasOwnProperty("submitTime"))
+                                object.submitTime = $root.google.protobuf.Timestamp.toObject(message.submitTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateGlossaryMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateGlossaryMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateGlossaryMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.UpdateGlossaryMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateGlossaryMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.UpdateGlossaryMetadata";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.translation.v3.UpdateGlossaryMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} CANCELLING=4 CANCELLING value
+                         * @property {number} CANCELLED=5 CANCELLED value
+                         */
+                        UpdateGlossaryMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "CANCELLING"] = 4;
+                            values[valuesById[5] = "CANCELLED"] = 5;
+                            return values;
+                        })();
+    
+                        return UpdateGlossaryMetadata;
                     })();
     
                     v3.DeleteGlossaryMetadata = (function() {
@@ -17971,6 +30834,233 @@
                         })();
     
                         return BatchTranslateDocumentMetadata;
+                    })();
+    
+                    v3.TranslateTextGlossaryConfig = (function() {
+    
+                        /**
+                         * Properties of a TranslateTextGlossaryConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ITranslateTextGlossaryConfig
+                         * @property {string|null} [glossary] TranslateTextGlossaryConfig glossary
+                         * @property {boolean|null} [ignoreCase] TranslateTextGlossaryConfig ignoreCase
+                         */
+    
+                        /**
+                         * Constructs a new TranslateTextGlossaryConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a TranslateTextGlossaryConfig.
+                         * @implements ITranslateTextGlossaryConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig=} [properties] Properties to set
+                         */
+                        function TranslateTextGlossaryConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslateTextGlossaryConfig glossary.
+                         * @member {string} glossary
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @instance
+                         */
+                        TranslateTextGlossaryConfig.prototype.glossary = "";
+    
+                        /**
+                         * TranslateTextGlossaryConfig ignoreCase.
+                         * @member {boolean} ignoreCase
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @instance
+                         */
+                        TranslateTextGlossaryConfig.prototype.ignoreCase = false;
+    
+                        /**
+                         * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig instance
+                         */
+                        TranslateTextGlossaryConfig.create = function create(properties) {
+                            return new TranslateTextGlossaryConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslateTextGlossaryConfig message. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig} message TranslateTextGlossaryConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslateTextGlossaryConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.glossary != null && Object.hasOwnProperty.call(message, "glossary"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.glossary);
+                            if (message.ignoreCase != null && Object.hasOwnProperty.call(message, "ignoreCase"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.ignoreCase);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslateTextGlossaryConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateTextGlossaryConfig} message TranslateTextGlossaryConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslateTextGlossaryConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslateTextGlossaryConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TranslateTextGlossaryConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.glossary = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.ignoreCase = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslateTextGlossaryConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslateTextGlossaryConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslateTextGlossaryConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.glossary != null && message.hasOwnProperty("glossary"))
+                                if (!$util.isString(message.glossary))
+                                    return "glossary: string expected";
+                            if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
+                                if (typeof message.ignoreCase !== "boolean")
+                                    return "ignoreCase: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslateTextGlossaryConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.TranslateTextGlossaryConfig} TranslateTextGlossaryConfig
+                         */
+                        TranslateTextGlossaryConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.TranslateTextGlossaryConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.TranslateTextGlossaryConfig();
+                            if (object.glossary != null)
+                                message.glossary = String(object.glossary);
+                            if (object.ignoreCase != null)
+                                message.ignoreCase = Boolean(object.ignoreCase);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslateTextGlossaryConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.TranslateTextGlossaryConfig} message TranslateTextGlossaryConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslateTextGlossaryConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.glossary = "";
+                                object.ignoreCase = false;
+                            }
+                            if (message.glossary != null && message.hasOwnProperty("glossary"))
+                                object.glossary = message.glossary;
+                            if (message.ignoreCase != null && message.hasOwnProperty("ignoreCase"))
+                                object.ignoreCase = message.ignoreCase;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslateTextGlossaryConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslateTextGlossaryConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TranslateTextGlossaryConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.translation.v3.TranslateTextGlossaryConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TranslateTextGlossaryConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.translation.v3.TranslateTextGlossaryConfig";
+                        };
+    
+                        return TranslateTextGlossaryConfig;
                     })();
     
                     return v3;
@@ -48028,6 +61118,242 @@
                 return Timestamp;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.type_url = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.value = reader.bytes();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length >= 0)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Any
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Any";
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -48269,242 +61595,6 @@
                 return Duration;
             })();
     
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.type_url = reader.string();
-                                break;
-                            }
-                        case 2: {
-                                message.value = reader.bytes();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length >= 0)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Any
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Any.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Any";
-                };
-    
-                return Any;
-            })();
-    
             protobuf.Empty = (function() {
     
                 /**
@@ -48680,7 +61770,510 @@
                 return Empty;
             })();
     
+            protobuf.FieldMask = (function() {
+    
+                /**
+                 * Properties of a FieldMask.
+                 * @memberof google.protobuf
+                 * @interface IFieldMask
+                 * @property {Array.<string>|null} [paths] FieldMask paths
+                 */
+    
+                /**
+                 * Constructs a new FieldMask.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a FieldMask.
+                 * @implements IFieldMask
+                 * @constructor
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 */
+                function FieldMask(properties) {
+                    this.paths = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * FieldMask paths.
+                 * @member {Array.<string>} paths
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 */
+                FieldMask.prototype.paths = $util.emptyArray;
+    
+                /**
+                 * Creates a new FieldMask instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask=} [properties] Properties to set
+                 * @returns {google.protobuf.FieldMask} FieldMask instance
+                 */
+                FieldMask.create = function create(properties) {
+                    return new FieldMask(properties);
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.paths != null && message.paths.length)
+                        for (var i = 0; i < message.paths.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.paths[i]);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.IFieldMask} message FieldMask message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                FieldMask.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldMask();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.paths && message.paths.length))
+                                    message.paths = [];
+                                message.paths.push(reader.string());
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                FieldMask.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a FieldMask message.
+                 * @function verify
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                FieldMask.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.paths != null && message.hasOwnProperty("paths")) {
+                        if (!Array.isArray(message.paths))
+                            return "paths: array expected";
+                        for (var i = 0; i < message.paths.length; ++i)
+                            if (!$util.isString(message.paths[i]))
+                                return "paths: string[] expected";
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.FieldMask} FieldMask
+                 */
+                FieldMask.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.FieldMask)
+                        return object;
+                    var message = new $root.google.protobuf.FieldMask();
+                    if (object.paths) {
+                        if (!Array.isArray(object.paths))
+                            throw TypeError(".google.protobuf.FieldMask.paths: array expected");
+                        message.paths = [];
+                        for (var i = 0; i < object.paths.length; ++i)
+                            message.paths[i] = String(object.paths[i]);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {google.protobuf.FieldMask} message FieldMask
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                FieldMask.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.paths = [];
+                    if (message.paths && message.paths.length) {
+                        object.paths = [];
+                        for (var j = 0; j < message.paths.length; ++j)
+                            object.paths[j] = message.paths[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this FieldMask to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.FieldMask
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                FieldMask.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for FieldMask
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.FieldMask
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                FieldMask.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.FieldMask";
+                };
+    
+                return FieldMask;
+            })();
+    
             return protobuf;
+        })();
+    
+        google.rpc = (function() {
+    
+            /**
+             * Namespace rpc.
+             * @memberof google
+             * @namespace
+             */
+            var rpc = {};
+    
+            rpc.Status = (function() {
+    
+                /**
+                 * Properties of a Status.
+                 * @memberof google.rpc
+                 * @interface IStatus
+                 * @property {number|null} [code] Status code
+                 * @property {string|null} [message] Status message
+                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
+                 */
+    
+                /**
+                 * Constructs a new Status.
+                 * @memberof google.rpc
+                 * @classdesc Represents a Status.
+                 * @implements IStatus
+                 * @constructor
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 */
+                function Status(properties) {
+                    this.details = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Status code.
+                 * @member {number} code
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.code = 0;
+    
+                /**
+                 * Status message.
+                 * @member {string} message
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.message = "";
+    
+                /**
+                 * Status details.
+                 * @member {Array.<google.protobuf.IAny>} details
+                 * @memberof google.rpc.Status
+                 * @instance
+                 */
+                Status.prototype.details = $util.emptyArray;
+    
+                /**
+                 * Creates a new Status instance using the specified properties.
+                 * @function create
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus=} [properties] Properties to set
+                 * @returns {google.rpc.Status} Status instance
+                 */
+                Status.create = function create(properties) {
+                    return new Status(properties);
+                };
+    
+                /**
+                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                    if (message.details != null && message.details.length)
+                        for (var i = 0; i < message.details.length; ++i)
+                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.IStatus} message Status message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Status.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.code = reader.int32();
+                                break;
+                            }
+                        case 2: {
+                                message.message = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                if (!(message.details && message.details.length))
+                                    message.details = [];
+                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Status message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.rpc.Status} Status
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Status.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Status message.
+                 * @function verify
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Status.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        if (!$util.isInteger(message.code))
+                            return "code: integer expected";
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        if (!$util.isString(message.message))
+                            return "message: string expected";
+                    if (message.details != null && message.hasOwnProperty("details")) {
+                        if (!Array.isArray(message.details))
+                            return "details: array expected";
+                        for (var i = 0; i < message.details.length; ++i) {
+                            var error = $root.google.protobuf.Any.verify(message.details[i]);
+                            if (error)
+                                return "details." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.rpc.Status} Status
+                 */
+                Status.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.rpc.Status)
+                        return object;
+                    var message = new $root.google.rpc.Status();
+                    if (object.code != null)
+                        message.code = object.code | 0;
+                    if (object.message != null)
+                        message.message = String(object.message);
+                    if (object.details) {
+                        if (!Array.isArray(object.details))
+                            throw TypeError(".google.rpc.Status.details: array expected");
+                        message.details = [];
+                        for (var i = 0; i < object.details.length; ++i) {
+                            if (typeof object.details[i] !== "object")
+                                throw TypeError(".google.rpc.Status.details: object expected");
+                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Status message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {google.rpc.Status} message Status
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Status.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.details = [];
+                    if (options.defaults) {
+                        object.code = 0;
+                        object.message = "";
+                    }
+                    if (message.code != null && message.hasOwnProperty("code"))
+                        object.code = message.code;
+                    if (message.message != null && message.hasOwnProperty("message"))
+                        object.message = message.message;
+                    if (message.details && message.details.length) {
+                        object.details = [];
+                        for (var j = 0; j < message.details.length; ++j)
+                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Status to JSON.
+                 * @function toJSON
+                 * @memberof google.rpc.Status
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Status.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Status
+                 * @function getTypeUrl
+                 * @memberof google.rpc.Status
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.rpc.Status";
+                };
+    
+                return Status;
+            })();
+    
+            return rpc;
         })();
     
         google.longrunning = (function() {
@@ -50820,290 +64413,6 @@
             })();
     
             return longrunning;
-        })();
-    
-        google.rpc = (function() {
-    
-            /**
-             * Namespace rpc.
-             * @memberof google
-             * @namespace
-             */
-            var rpc = {};
-    
-            rpc.Status = (function() {
-    
-                /**
-                 * Properties of a Status.
-                 * @memberof google.rpc
-                 * @interface IStatus
-                 * @property {number|null} [code] Status code
-                 * @property {string|null} [message] Status message
-                 * @property {Array.<google.protobuf.IAny>|null} [details] Status details
-                 */
-    
-                /**
-                 * Constructs a new Status.
-                 * @memberof google.rpc
-                 * @classdesc Represents a Status.
-                 * @implements IStatus
-                 * @constructor
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 */
-                function Status(properties) {
-                    this.details = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Status code.
-                 * @member {number} code
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.code = 0;
-    
-                /**
-                 * Status message.
-                 * @member {string} message
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.message = "";
-    
-                /**
-                 * Status details.
-                 * @member {Array.<google.protobuf.IAny>} details
-                 * @memberof google.rpc.Status
-                 * @instance
-                 */
-                Status.prototype.details = $util.emptyArray;
-    
-                /**
-                 * Creates a new Status instance using the specified properties.
-                 * @function create
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus=} [properties] Properties to set
-                 * @returns {google.rpc.Status} Status instance
-                 */
-                Status.create = function create(properties) {
-                    return new Status(properties);
-                };
-    
-                /**
-                 * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.code != null && Object.hasOwnProperty.call(message, "code"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
-                    if (message.message != null && Object.hasOwnProperty.call(message, "message"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
-                    if (message.details != null && message.details.length)
-                        for (var i = 0; i < message.details.length; ++i)
-                            $root.google.protobuf.Any.encode(message.details[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.IStatus} message Status message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Status.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.rpc.Status();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1: {
-                                message.code = reader.int32();
-                                break;
-                            }
-                        case 2: {
-                                message.message = reader.string();
-                                break;
-                            }
-                        case 3: {
-                                if (!(message.details && message.details.length))
-                                    message.details = [];
-                                message.details.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Status message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.rpc.Status} Status
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Status.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Status message.
-                 * @function verify
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Status.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        if (!$util.isInteger(message.code))
-                            return "code: integer expected";
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        if (!$util.isString(message.message))
-                            return "message: string expected";
-                    if (message.details != null && message.hasOwnProperty("details")) {
-                        if (!Array.isArray(message.details))
-                            return "details: array expected";
-                        for (var i = 0; i < message.details.length; ++i) {
-                            var error = $root.google.protobuf.Any.verify(message.details[i]);
-                            if (error)
-                                return "details." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a Status message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.rpc.Status} Status
-                 */
-                Status.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.rpc.Status)
-                        return object;
-                    var message = new $root.google.rpc.Status();
-                    if (object.code != null)
-                        message.code = object.code | 0;
-                    if (object.message != null)
-                        message.message = String(object.message);
-                    if (object.details) {
-                        if (!Array.isArray(object.details))
-                            throw TypeError(".google.rpc.Status.details: array expected");
-                        message.details = [];
-                        for (var i = 0; i < object.details.length; ++i) {
-                            if (typeof object.details[i] !== "object")
-                                throw TypeError(".google.rpc.Status.details: object expected");
-                            message.details[i] = $root.google.protobuf.Any.fromObject(object.details[i]);
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Status message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {google.rpc.Status} message Status
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Status.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.details = [];
-                    if (options.defaults) {
-                        object.code = 0;
-                        object.message = "";
-                    }
-                    if (message.code != null && message.hasOwnProperty("code"))
-                        object.code = message.code;
-                    if (message.message != null && message.hasOwnProperty("message"))
-                        object.message = message.message;
-                    if (message.details && message.details.length) {
-                        object.details = [];
-                        for (var j = 0; j < message.details.length; ++j)
-                            object.details[j] = $root.google.protobuf.Any.toObject(message.details[j], options);
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this Status to JSON.
-                 * @function toJSON
-                 * @memberof google.rpc.Status
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Status.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Status
-                 * @function getTypeUrl
-                 * @memberof google.rpc.Status
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Status.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.rpc.Status";
-                };
-    
-                return Status;
-            })();
-    
-            return rpc;
         })();
     
         return google;

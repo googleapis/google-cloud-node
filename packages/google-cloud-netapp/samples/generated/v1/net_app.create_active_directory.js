@@ -37,7 +37,10 @@ function main(parent, activeDirectory, activeDirectoryId) {
    */
   // const activeDirectory = {}
   /**
-   *  Required. ID of the active directory to create.
+   *  Required. ID of the active directory to create. Must be unique within the
+   *  parent resource. Must contain only letters, numbers, underscore and hyphen,
+   *  with the first character a letter or underscore, the last a letter or
+   *  underscore or a number, and a 63 character maximum.
    */
   // const activeDirectoryId = 'abc123'
 

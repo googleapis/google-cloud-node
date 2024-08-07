@@ -1766,9 +1766,10 @@ export class NetAppClient {
    * @param {string} request.parent
    *   Required. Value for parent.
    * @param {string} request.storagePoolId
-   *   Required. Id of the requesting storage pool
-   *   If auto-generating Id server-side, remove this field and
-   *   id from the method_signature of Create RPC
+   *   Required. Id of the requesting storage pool. Must be unique within the
+   *   parent resource. Must contain only letters, numbers, underscore and hyphen,
+   *   with the first character a letter or underscore, the last a letter or
+   *   underscore or a number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.StoragePool} request.storagePool
    *   Required. The required parameters to create a new storage pool.
    * @param {object} [options]
@@ -2186,9 +2187,10 @@ export class NetAppClient {
    * @param {string} request.parent
    *   Required. Value for parent.
    * @param {string} request.volumeId
-   *   Required. Id of the requesting volume
-   *   If auto-generating Id server-side, remove this field and
-   *   Id from the method_signature of Create RPC
+   *   Required. Id of the requesting volume. Must be unique within the parent
+   *   resource. Must contain only letters, numbers, underscore and hyphen, with
+   *   the first character a letter or underscore, the last a letter or underscore
+   *   or a number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.Volume} request.volume
    *   Required. The volume being created.
    * @param {object} [options]
@@ -2756,9 +2758,10 @@ export class NetAppClient {
    * @param {google.cloud.netapp.v1.Snapshot} request.snapshot
    *   Required. A snapshot resource
    * @param {string} request.snapshotId
-   *   Required. ID of the snapshot to create.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *   Required. ID of the snapshot to create. Must be unique within the parent
+   *   resource. Must contain only letters, numbers, underscore and hyphen, with
+   *   the first character a letter or underscore, the last a letter or underscore
+   *   or a number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3175,7 +3178,10 @@ export class NetAppClient {
    * @param {google.cloud.netapp.v1.ActiveDirectory} request.activeDirectory
    *   Required. Fields of the to be created active directory.
    * @param {string} request.activeDirectoryId
-   *   Required. ID of the active directory to create.
+   *   Required. ID of the active directory to create. Must be unique within the
+   *   parent resource. Must contain only letters, numbers, underscore and hyphen,
+   *   with the first character a letter or underscore, the last a letter or
+   *   underscore or a number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3591,9 +3597,10 @@ export class NetAppClient {
    * @param {string} request.parent
    *   Required. Value for parent.
    * @param {string} request.kmsConfigId
-   *   Required. Id of the requesting KmsConfig
-   *   If auto-generating Id server-side, remove this field and
-   *   id from the method_signature of Create RPC
+   *   Required. Id of the requesting KmsConfig. Must be unique within the parent
+   *   resource. Must contain only letters, numbers, underscore and hyphen, with
+   *   the first character a letter or underscore, the last a letter or underscore
+   *   or a number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.KmsConfig} request.kmsConfig
    *   Required. The required parameters to create a new KmsConfig.
    * @param {object} [options]
@@ -4151,9 +4158,10 @@ export class NetAppClient {
    * @param {google.cloud.netapp.v1.Replication} request.replication
    *   Required. A replication resource
    * @param {string} request.replicationId
-   *   Required. ID of the replication to create.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *   Required. ID of the replication to create. Must be unique within the parent
+   *   resource. Must contain only letters, numbers, underscore and hyphen, with
+   *   the first character a letter or underscore, the last a letter or underscore
+   *   or a number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4993,11 +5001,9 @@ export class NetAppClient {
    * @param {string} request.backupVaultId
    *   Required. The ID to use for the backupVault.
    *   The ID must be unique within the specified location.
-   *   The max supported length is 63 characters.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-   *   Values that do not match this pattern will trigger an INVALID_ARGUMENT
-   *   error.
+   *   Must contain only letters, numbers, underscore and hyphen, with the first
+   *   character a letter or underscore, the last a letter or underscore or a
+   *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.BackupVault} request.backupVault
    *   Required. A backupVault resource
    * @param {object} [options]
@@ -5422,10 +5428,9 @@ export class NetAppClient {
    * @param {string} request.backupId
    *   Required. The ID to use for the backup.
    *   The ID must be unique within the specified backupVault.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
-   *   Values that do not match this pattern will trigger an INVALID_ARGUMENT
-   *   error.
+   *   Must contain only letters, numbers, underscore and hyphen, with the first
+   *   character a letter or underscore, the last a letter or underscore or a
+   *   number, and a 63 character maximum.
    * @param {google.cloud.netapp.v1.Backup} request.backup
    *   Required. A backup resource
    * @param {object} [options]
@@ -5849,8 +5854,9 @@ export class NetAppClient {
    * @param {string} request.backupPolicyId
    *   Required. The ID to use for the backup policy.
    *   The ID must be unique within the specified location.
-   *   This value must start with a lowercase letter followed by up to 62
-   *   lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+   *   Must contain only letters, numbers, underscore and hyphen, with the first
+   *   character a letter or underscore, the last a letter or underscore or a
+   *   number, and a 63 character maximum.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

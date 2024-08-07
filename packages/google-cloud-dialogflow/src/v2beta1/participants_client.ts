@@ -207,6 +207,12 @@ export class ParticipantsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/encryptionSpec'
+      ),
+      generatorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/generators/{generator}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -416,6 +422,7 @@ export class ParticipantsClient {
       'suggestArticles',
       'suggestFaqAnswers',
       'suggestSmartReplies',
+      'suggestKnowledgeAssist',
       'listSuggestions',
       'compileSuggestion',
     ];
@@ -1342,6 +1349,123 @@ export class ParticipantsClient {
     return this.innerApiCalls.suggestSmartReplies(request, options, callback);
   }
   /**
+   * Gets knowledge assist suggestions based on historical messages.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the participant to fetch suggestions for.
+   *   Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+   * @param {string} [request.latestMessage]
+   *   Optional. The name of the latest conversation message to compile
+   *   suggestions for. If empty, it will be the latest message of the
+   *   conversation. Format: `projects/<Project ID>/locations/<Location
+   *   ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+   * @param {number} [request.contextSize]
+   *   Optional. Max number of messages prior to and including
+   *   {@link protos.google.cloud.dialogflow.v2beta1.SuggestKnowledgeAssistRequest.latest_message|latest_message}
+   *   to use as context when compiling the suggestion. The context size is by
+   *   default 100 and at most 100.
+   * @param {string} [request.previousSuggestedQuery]
+   *   Optional. The previously suggested query for the given conversation. This
+   *   helps identify whether the next suggestion we generate is resonably
+   *   different from the previous one. This is useful to avoid similar
+   *   suggestions within the conversation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.v2beta1.SuggestKnowledgeAssistResponse|SuggestKnowledgeAssistResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/participants.suggest_knowledge_assist.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_Participants_SuggestKnowledgeAssist_async
+   */
+  suggestKnowledgeAssist(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  suggestKnowledgeAssist(
+    request: protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+      | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestKnowledgeAssist(
+    request: protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+      | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  suggestKnowledgeAssist(
+    request?: protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+          | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+      | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistResponse,
+      (
+        | protos.google.cloud.dialogflow.v2beta1.ISuggestKnowledgeAssistRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.suggestKnowledgeAssist(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Deprecated. use
    * {@link protos.google.cloud.dialogflow.v2beta1.Participants.SuggestArticles|SuggestArticles}
    * and
@@ -2038,6 +2162,98 @@ export class ParticipantsClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified encryptionSpec resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  encryptionSpecPath(project: string, location: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the location from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified generator resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generator
+   * @returns {string} Resource name string.
+   */
+  generatorPath(project: string, location: string, generator: string) {
+    return this.pathTemplates.generatorPathTemplate.render({
+      project: project,
+      location: location,
+      generator: generator,
+    });
+  }
+
+  /**
+   * Parse the project from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .location;
+  }
+
+  /**
+   * Parse the generator from Generator resource.
+   *
+   * @param {string} generatorName
+   *   A fully-qualified path representing Generator resource.
+   * @returns {string} A string representing the generator.
+   */
+  matchGeneratorFromGeneratorName(generatorName: string) {
+    return this.pathTemplates.generatorPathTemplate.match(generatorName)
+      .generator;
+  }
 
   /**
    * Return a fully-qualified project resource name string.
