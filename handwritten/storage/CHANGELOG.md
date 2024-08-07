@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.12.1](https://github.com/googleapis/nodejs-storage/compare/v7.12.0...v7.12.1) (2024-08-07)
+
+
+### Bug Fixes
+
+* **deps:** Update fast-xml-parser to 4.4.1 due to security vulnerability ([#2505](https://github.com/googleapis/nodejs-storage/issues/2505)) ([b97d474](https://github.com/googleapis/nodejs-storage/commit/b97d474445efbcde91e690f6ea4160cfc9fd1ed4))
+
 ## [7.12.0](https://github.com/googleapis/nodejs-storage/compare/v7.11.3...v7.12.0) (2024-07-15)
 
 
