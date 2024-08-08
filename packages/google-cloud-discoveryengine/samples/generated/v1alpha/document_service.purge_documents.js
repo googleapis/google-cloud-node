@@ -36,6 +36,10 @@ function main(parent, filter) {
    */
   // const gcsSource = {}
   /**
+   *  Inline source for the input content for purge.
+   */
+  // const inlineSource = {}
+  /**
    *  Required. The parent resource name, such as
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    */

@@ -57,6 +57,10 @@ function main(parent) {
    */
   // const firestoreSource = {}
   /**
+   *  AlloyDB input source.
+   */
+  // const alloyDbSource = {}
+  /**
    *  Cloud Bigtable input source.
    */
   // const bigtableSource = {}

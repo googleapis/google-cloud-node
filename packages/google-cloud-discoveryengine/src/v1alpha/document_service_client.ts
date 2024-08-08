@@ -435,6 +435,9 @@ export class DocumentServiceClient {
             {
               get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
             },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+            },
             {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
             {
               get: '/v1alpha/{name=projects/*/locations/*/sampleQuerySets/*/operations/*}',
@@ -478,6 +481,9 @@ export class DocumentServiceClient {
             },
             {
               get: '/v1alpha/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
             },
             {get: '/v1alpha/{name=projects/*/locations/*}/operations'},
             {get: '/v1alpha/{name=projects/*}/operations'},
@@ -1267,6 +1273,8 @@ export class DocumentServiceClient {
    *   Cloud SQL input source.
    * @param {google.cloud.discoveryengine.v1alpha.FirestoreSource} request.firestoreSource
    *   Firestore input source.
+   * @param {google.cloud.discoveryengine.v1alpha.AlloyDbSource} request.alloyDbSource
+   *   AlloyDB input source.
    * @param {google.cloud.discoveryengine.v1alpha.BigtableSource} request.bigtableSource
    *   Cloud Bigtable input source.
    * @param {string} request.parent
@@ -1498,6 +1506,8 @@ export class DocumentServiceClient {
    *   Supported `data_schema`:
    *   * `document_id`: One valid
    *   {@link protos.google.cloud.discoveryengine.v1alpha.Document.id|Document.id} per line.
+   * @param {google.cloud.discoveryengine.v1alpha.PurgeDocumentsRequest.InlineSource} request.inlineSource
+   *   Inline source for the input content for purge.
    * @param {string} request.parent
    *   Required. The parent resource name, such as
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.

@@ -658,6 +658,155 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
     });
   });
 
+  describe('getUriPatternDocumentData', () => {
+    it('invokes getUriPatternDocumentData without error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataResponse()
+      );
+      client.innerApiCalls.getUriPatternDocumentData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getUriPatternDocumentData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUriPatternDocumentData without error using callback', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataResponse()
+      );
+      client.innerApiCalls.getUriPatternDocumentData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getUriPatternDocumentData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.IGetUriPatternDocumentDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUriPatternDocumentData with error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getUriPatternDocumentData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getUriPatternDocumentData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.getUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getUriPatternDocumentData with closed client', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.getUriPatternDocumentData(request),
+        expectedError
+      );
+    });
+  });
+
   describe('createTargetSite', () => {
     it('invokes createTargetSite without error', async () => {
       const client =
@@ -2362,6 +2511,222 @@ describe('v1alpha.SiteSearchEngineServiceClient', () => {
       );
       await assert.rejects(
         client.checkBatchVerifyTargetSitesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('setUriPatternDocumentData', () => {
+    it('invokes setUriPatternDocumentData without error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.setUriPatternDocumentData =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.setUriPatternDocumentData(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setUriPatternDocumentData without error using callback', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.setUriPatternDocumentData =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setUriPatternDocumentData(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+              protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataResponse,
+        protos.google.cloud.discoveryengine.v1alpha.ISetUriPatternDocumentDataMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setUriPatternDocumentData with call error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setUriPatternDocumentData = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.setUriPatternDocumentData(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setUriPatternDocumentData with LRO error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.SetUriPatternDocumentDataRequest',
+        ['siteSearchEngine']
+      );
+      request.siteSearchEngine = defaultValue1;
+      const expectedHeaderRequestParams = `site_search_engine=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setUriPatternDocumentData = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.setUriPatternDocumentData(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setUriPatternDocumentData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkSetUriPatternDocumentDataProgress without error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkSetUriPatternDocumentDataProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkSetUriPatternDocumentDataProgress with error', async () => {
+      const client =
+        new sitesearchengineserviceModule.v1alpha.SiteSearchEngineServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkSetUriPatternDocumentDataProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));

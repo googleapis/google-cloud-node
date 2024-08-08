@@ -82,7 +82,9 @@
   * [Chunk_service.get_chunk](#chunk_service.get_chunk)
   * [Chunk_service.list_chunks](#chunk_service.list_chunks)
   * [Completion_service.complete_query](#completion_service.complete_query)
+  * [Completion_service.import_completion_suggestions](#completion_service.import_completion_suggestions)
   * [Completion_service.import_suggestion_deny_list_entries](#completion_service.import_suggestion_deny_list_entries)
+  * [Completion_service.purge_completion_suggestions](#completion_service.purge_completion_suggestions)
   * [Completion_service.purge_suggestion_deny_list_entries](#completion_service.purge_suggestion_deny_list_entries)
   * [Control_service.create_control](#control_service.create_control)
   * [Control_service.delete_control](#control_service.delete_control)
@@ -167,8 +169,10 @@
   * [Site_search_engine_service.fetch_domain_verification_status](#site_search_engine_service.fetch_domain_verification_status)
   * [Site_search_engine_service.get_site_search_engine](#site_search_engine_service.get_site_search_engine)
   * [Site_search_engine_service.get_target_site](#site_search_engine_service.get_target_site)
+  * [Site_search_engine_service.get_uri_pattern_document_data](#site_search_engine_service.get_uri_pattern_document_data)
   * [Site_search_engine_service.list_target_sites](#site_search_engine_service.list_target_sites)
   * [Site_search_engine_service.recrawl_uris](#site_search_engine_service.recrawl_uris)
+  * [Site_search_engine_service.set_uri_pattern_document_data](#site_search_engine_service.set_uri_pattern_document_data)
   * [Site_search_engine_service.update_target_site](#site_search_engine_service.update_target_site)
   * [User_event_service.collect_user_event](#user_event_service.collect_user_event)
   * [User_event_service.import_user_events](#user_event_service.import_user_events)
@@ -1470,6 +1474,23 @@ __Usage:__
 
 
 
+### Completion_service.import_completion_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_completion_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_completion_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_completion_suggestions.js`
+
+
+-----
+
+
+
+
 ### Completion_service.import_suggestion_deny_list_entries
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js).
@@ -1480,6 +1501,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.import_suggestion_deny_list_entries.js`
+
+
+-----
+
+
+
+
+### Completion_service.purge_completion_suggestions
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_completion_suggestions.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_completion_suggestions.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/completion_service.purge_completion_suggestions.js`
 
 
 -----
@@ -2915,6 +2953,23 @@ __Usage:__
 
 
 
+### Site_search_engine_service.get_uri_pattern_document_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.get_uri_pattern_document_data.js`
+
+
+-----
+
+
+
+
 ### Site_search_engine_service.list_target_sites
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.list_target_sites.js).
@@ -2942,6 +2997,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.recrawl_uris.js`
+
+
+-----
+
+
+
+
+### Site_search_engine_service.set_uri_pattern_document_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/site_search_engine_service.set_uri_pattern_document_data.js`
 
 
 -----
