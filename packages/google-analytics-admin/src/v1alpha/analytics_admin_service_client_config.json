@@ -228,6 +228,31 @@
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
+        "CreateKeyEvent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateKeyEvent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "GetKeyEvent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteKeyEvent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListKeyEvents": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
         "GetDisplayVideo360AdvertiserLink": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
@@ -538,12 +563,27 @@
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
+        "CreateBigQueryLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
         "GetBigQueryLink": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
         "ListBigQueryLinks": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteBigQueryLink": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateBigQueryLink": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
@@ -623,6 +663,36 @@
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
+        "GetEventEditRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ListEventEditRules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "CreateEventEditRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "UpdateEventEditRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "DeleteEventEditRule": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
+        "ReorderEventEditRules": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unknown_unavailable",
+          "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
+        },
         "UpdateDataRedactionSettings": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
@@ -683,7 +753,7 @@
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
         },
-        "CreateSubproperty": {
+        "ProvisionSubproperty": {
           "timeout_millis": 60000,
           "retry_codes_name": "unknown_unavailable",
           "retry_params_name": "01d6d956b4dadd7e38ee9dec12ed8720e6e6f90c"
