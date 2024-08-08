@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent name, for example:
-   *  `projects/project-id/locations/global`.
+   *  Required. Resource name of the organization or project, for
+   *  example, `organizations/433245324/locations/europe` or
+   *  `projects/project-id/locations/asia`.
    */
   // const parent = 'abc123'
   /**
