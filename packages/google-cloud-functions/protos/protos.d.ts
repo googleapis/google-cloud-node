@@ -388,6 +388,9 @@ export namespace google {
 
                     /** CloudFunction onDeployUpdatePolicy */
                     onDeployUpdatePolicy?: (google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy|null);
+
+                    /** CloudFunction buildServiceAccount */
+                    buildServiceAccount?: (string|null);
                 }
 
                 /** Represents a CloudFunction. */
@@ -503,6 +506,9 @@ export namespace google {
 
                     /** CloudFunction onDeployUpdatePolicy. */
                     public onDeployUpdatePolicy?: (google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy|null);
+
+                    /** CloudFunction buildServiceAccount. */
+                    public buildServiceAccount: string;
 
                     /** CloudFunction sourceCode. */
                     public sourceCode?: ("sourceArchiveUrl"|"sourceRepository"|"sourceUploadUrl");

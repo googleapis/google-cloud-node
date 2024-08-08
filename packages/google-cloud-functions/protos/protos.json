@@ -435,6 +435,10 @@
                         "onDeployUpdatePolicy": {
                           "type": "OnDeployUpdatePolicy",
                           "id": 41
+                        },
+                        "buildServiceAccount": {
+                          "type": "string",
+                          "id": 43
                         }
                       },
                       "nested": {

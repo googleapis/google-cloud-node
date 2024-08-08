@@ -505,6 +505,7 @@
                          * @property {google.cloud.functions.v1.CloudFunction.DockerRegistry|null} [dockerRegistry] CloudFunction dockerRegistry
                          * @property {google.cloud.functions.v1.CloudFunction.IAutomaticUpdatePolicy|null} [automaticUpdatePolicy] CloudFunction automaticUpdatePolicy
                          * @property {google.cloud.functions.v1.CloudFunction.IOnDeployUpdatePolicy|null} [onDeployUpdatePolicy] CloudFunction onDeployUpdatePolicy
+                         * @property {string|null} [buildServiceAccount] CloudFunction buildServiceAccount
                          */
     
                         /**
@@ -807,6 +808,14 @@
                          */
                         CloudFunction.prototype.onDeployUpdatePolicy = null;
     
+                        /**
+                         * CloudFunction buildServiceAccount.
+                         * @member {string} buildServiceAccount
+                         * @memberof google.cloud.functions.v1.CloudFunction
+                         * @instance
+                         */
+                        CloudFunction.prototype.buildServiceAccount = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -942,6 +951,8 @@
                                 $root.google.cloud.functions.v1.CloudFunction.AutomaticUpdatePolicy.encode(message.automaticUpdatePolicy, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.onDeployUpdatePolicy != null && Object.hasOwnProperty.call(message, "onDeployUpdatePolicy"))
                                 $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.encode(message.onDeployUpdatePolicy, writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.buildServiceAccount != null && Object.hasOwnProperty.call(message, "buildServiceAccount"))
+                                writer.uint32(/* id 43, wireType 2 =*/346).string(message.buildServiceAccount);
                             return writer;
                         };
     
@@ -1175,6 +1186,10 @@
                                     }
                                 case 41: {
                                         message.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 43: {
+                                        message.buildServiceAccount = reader.string();
                                         break;
                                     }
                                 default:
@@ -1414,6 +1429,9 @@
                                         return "onDeployUpdatePolicy." + error;
                                 }
                             }
+                            if (message.buildServiceAccount != null && message.hasOwnProperty("buildServiceAccount"))
+                                if (!$util.isString(message.buildServiceAccount))
+                                    return "buildServiceAccount: string expected";
                             return null;
                         };
     
@@ -1646,6 +1664,8 @@
                                     throw TypeError(".google.cloud.functions.v1.CloudFunction.onDeployUpdatePolicy: object expected");
                                 message.onDeployUpdatePolicy = $root.google.cloud.functions.v1.CloudFunction.OnDeployUpdatePolicy.fromObject(object.onDeployUpdatePolicy);
                             }
+                            if (object.buildServiceAccount != null)
+                                message.buildServiceAccount = String(object.buildServiceAccount);
                             return message;
                         };
     
@@ -1699,6 +1719,7 @@
                                 object.buildName = "";
                                 object.dockerRepository = "";
                                 object.dockerRegistry = options.enums === String ? "DOCKER_REGISTRY_UNSPECIFIED" : 0;
+                                object.buildServiceAccount = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1810,6 +1831,8 @@
                                 if (options.oneofs)
                                     object.runtimeUpdatePolicy = "onDeployUpdatePolicy";
                             }
+                            if (message.buildServiceAccount != null && message.hasOwnProperty("buildServiceAccount"))
+                                object.buildServiceAccount = message.buildServiceAccount;
                             return object;
                         };
     
