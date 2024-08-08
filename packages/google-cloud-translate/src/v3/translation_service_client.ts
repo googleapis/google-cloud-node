@@ -27,6 +27,10 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
@@ -64,6 +68,8 @@ export class TranslationServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   translationServiceStub?: Promise<{[name: string]: Function}>;
@@ -179,6 +185,12 @@ export class TranslationServiceClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -211,11 +223,23 @@ export class TranslationServiceClient {
       adaptiveMtSentencePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}/adaptiveMtSentences/{sentence}'
       ),
+      datasetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}'
+      ),
+      examplePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/examples/{example}'
+      ),
       glossaryPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/glossaries/{glossary}'
       ),
+      glossaryEntryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/glossaries/{glossary}/glossaryEntries/{glossary_entry}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/models/{model}'
       ),
     };
 
@@ -227,6 +251,16 @@ export class TranslationServiceClient {
         'pageToken',
         'nextPageToken',
         'glossaries'
+      ),
+      listGlossaryEntries: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'glossaryEntries'
+      ),
+      listDatasets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'datasets'
       ),
       listAdaptiveMtDatasets: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -242,6 +276,16 @@ export class TranslationServiceClient {
         'pageToken',
         'nextPageToken',
         'adaptiveMtSentences'
+      ),
+      listExamples: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'examples'
+      ),
+      listModels: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'models'
       ),
     };
 
@@ -309,11 +353,53 @@ export class TranslationServiceClient {
     const createGlossaryMetadata = protoFilesRoot.lookup(
       '.google.cloud.translation.v3.CreateGlossaryMetadata'
     ) as gax.protobuf.Type;
+    const updateGlossaryResponse = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.Glossary'
+    ) as gax.protobuf.Type;
+    const updateGlossaryMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.UpdateGlossaryMetadata'
+    ) as gax.protobuf.Type;
     const deleteGlossaryResponse = protoFilesRoot.lookup(
       '.google.cloud.translation.v3.DeleteGlossaryResponse'
     ) as gax.protobuf.Type;
     const deleteGlossaryMetadata = protoFilesRoot.lookup(
       '.google.cloud.translation.v3.DeleteGlossaryMetadata'
+    ) as gax.protobuf.Type;
+    const createDatasetResponse = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.Dataset'
+    ) as gax.protobuf.Type;
+    const createDatasetMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.CreateDatasetMetadata'
+    ) as gax.protobuf.Type;
+    const deleteDatasetResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteDatasetMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.DeleteDatasetMetadata'
+    ) as gax.protobuf.Type;
+    const importDataResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const importDataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.ImportDataMetadata'
+    ) as gax.protobuf.Type;
+    const exportDataResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const exportDataMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.ExportDataMetadata'
+    ) as gax.protobuf.Type;
+    const createModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.Model'
+    ) as gax.protobuf.Type;
+    const createModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.CreateModelMetadata'
+    ) as gax.protobuf.Type;
+    const deleteModelResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.translation.v3.DeleteModelMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -336,10 +422,45 @@ export class TranslationServiceClient {
         createGlossaryResponse.decode.bind(createGlossaryResponse),
         createGlossaryMetadata.decode.bind(createGlossaryMetadata)
       ),
+      updateGlossary: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateGlossaryResponse.decode.bind(updateGlossaryResponse),
+        updateGlossaryMetadata.decode.bind(updateGlossaryMetadata)
+      ),
       deleteGlossary: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteGlossaryResponse.decode.bind(deleteGlossaryResponse),
         deleteGlossaryMetadata.decode.bind(deleteGlossaryMetadata)
+      ),
+      createDataset: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDatasetResponse.decode.bind(createDatasetResponse),
+        createDatasetMetadata.decode.bind(createDatasetMetadata)
+      ),
+      deleteDataset: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteDatasetResponse.decode.bind(deleteDatasetResponse),
+        deleteDatasetMetadata.decode.bind(deleteDatasetMetadata)
+      ),
+      importData: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importDataResponse.decode.bind(importDataResponse),
+        importDataMetadata.decode.bind(importDataMetadata)
+      ),
+      exportData: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportDataResponse.decode.bind(exportDataResponse),
+        exportDataMetadata.decode.bind(exportDataMetadata)
+      ),
+      createModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createModelResponse.decode.bind(createModelResponse),
+        createModelMetadata.decode.bind(createModelMetadata)
+      ),
+      deleteModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteModelResponse.decode.bind(deleteModelResponse),
+        deleteModelMetadata.decode.bind(deleteModelMetadata)
       ),
     };
 
@@ -394,15 +515,26 @@ export class TranslationServiceClient {
     // and create an API call method for each.
     const translationServiceStubMethods = [
       'translateText',
+      'romanizeText',
       'detectLanguage',
       'getSupportedLanguages',
       'translateDocument',
       'batchTranslateText',
       'batchTranslateDocument',
       'createGlossary',
+      'updateGlossary',
       'listGlossaries',
       'getGlossary',
       'deleteGlossary',
+      'getGlossaryEntry',
+      'listGlossaryEntries',
+      'createGlossaryEntry',
+      'updateGlossaryEntry',
+      'deleteGlossaryEntry',
+      'createDataset',
+      'getDataset',
+      'listDatasets',
+      'deleteDataset',
       'createAdaptiveMtDataset',
       'deleteAdaptiveMtDataset',
       'getAdaptiveMtDataset',
@@ -413,6 +545,13 @@ export class TranslationServiceClient {
       'importAdaptiveMtFile',
       'listAdaptiveMtFiles',
       'listAdaptiveMtSentences',
+      'importData',
+      'exportData',
+      'listExamples',
+      'createModel',
+      'listModels',
+      'getModel',
+      'deleteModel',
     ];
     for (const methodName of translationServiceStubMethods) {
       const callPromise = this.translationServiceStub.then(
@@ -580,6 +719,8 @@ export class TranslationServiceClient {
    *   - General (built-in) models:
    *     `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
    *
+   *   - Translation LLM models:
+   *     `projects/{project-number-or-id}/locations/{location-id}/models/general/translation-llm`,
    *
    *   For global (non-regionalized) requests, use `location-id` `global`.
    *   For example,
@@ -590,6 +731,8 @@ export class TranslationServiceClient {
    *   Optional. Glossary to be applied. The glossary must be
    *   within the same region (have the same location-id) as the model, otherwise
    *   an INVALID_ARGUMENT (400) error is returned.
+   * @param {google.cloud.translation.v3.TransliterationConfig} [request.transliterationConfig]
+   *   Optional. Transliteration to be applied.
    * @param {number[]} [request.labels]
    *   Optional. The labels with user-defined metadata for the request.
    *
@@ -682,6 +825,110 @@ export class TranslationServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.translateText(request, options, callback);
+  }
+  /**
+   * Romanize input text written in non-Latin scripts to Latin text.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Project or location to make a call. Must refer to a caller's
+   *   project.
+   *
+   *   Format: `projects/{project-number-or-id}/locations/{location-id}` or
+   *   `projects/{project-number-or-id}`.
+   *
+   *   For global calls, use `projects/{project-number-or-id}/locations/global` or
+   *   `projects/{project-number-or-id}`.
+   * @param {string[]} request.contents
+   *   Required. The content of the input in string format.
+   * @param {string} [request.sourceLanguageCode]
+   *   Optional. The ISO-639 language code of the input text if
+   *   known, for example, "hi" or "zh". If the source language isn't specified,
+   *   the API attempts to identify the source language automatically and returns
+   *   the source language for each content in the response.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.RomanizeTextResponse|RomanizeTextResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.romanize_text.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_RomanizeText_async
+   */
+  romanizeText(
+    request?: protos.google.cloud.translation.v3.IRomanizeTextRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IRomanizeTextResponse,
+      protos.google.cloud.translation.v3.IRomanizeTextRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  romanizeText(
+    request: protos.google.cloud.translation.v3.IRomanizeTextRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IRomanizeTextResponse,
+      | protos.google.cloud.translation.v3.IRomanizeTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  romanizeText(
+    request: protos.google.cloud.translation.v3.IRomanizeTextRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IRomanizeTextResponse,
+      | protos.google.cloud.translation.v3.IRomanizeTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  romanizeText(
+    request?: protos.google.cloud.translation.v3.IRomanizeTextRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IRomanizeTextResponse,
+          | protos.google.cloud.translation.v3.IRomanizeTextRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IRomanizeTextResponse,
+      | protos.google.cloud.translation.v3.IRomanizeTextRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IRomanizeTextResponse,
+      protos.google.cloud.translation.v3.IRomanizeTextRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.romanizeText(request, options, callback);
   }
   /**
    * Detects the language of text within a request.
@@ -1183,6 +1430,470 @@ export class TranslationServiceClient {
     return this.innerApiCalls.getGlossary(request, options, callback);
   }
   /**
+   * Gets a single glossary entry by the given id.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the glossary entry to get
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.GlossaryEntry|GlossaryEntry}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.get_glossary_entry.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_GetGlossaryEntry_async
+   */
+  getGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.IGetGlossaryEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      protos.google.cloud.translation.v3.IGetGlossaryEntryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getGlossaryEntry(
+    request: protos.google.cloud.translation.v3.IGetGlossaryEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.IGetGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGlossaryEntry(
+    request: protos.google.cloud.translation.v3.IGetGlossaryEntryRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.IGetGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.IGetGlossaryEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          | protos.google.cloud.translation.v3.IGetGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.IGetGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      protos.google.cloud.translation.v3.IGetGlossaryEntryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getGlossaryEntry(request, options, callback);
+  }
+  /**
+   * Creates a glossary entry.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the glossary to create the entry under.
+   * @param {google.cloud.translation.v3.GlossaryEntry} request.glossaryEntry
+   *   Required. The glossary entry to create
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.GlossaryEntry|GlossaryEntry}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.create_glossary_entry.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_CreateGlossaryEntry_async
+   */
+  createGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      (
+        | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createGlossaryEntry(
+    request: protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createGlossaryEntry(
+    request: protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      (
+        | protos.google.cloud.translation.v3.ICreateGlossaryEntryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createGlossaryEntry(request, options, callback);
+  }
+  /**
+   * Updates a glossary entry.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.translation.v3.GlossaryEntry} request.glossaryEntry
+   *   Required. The glossary entry to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.GlossaryEntry|GlossaryEntry}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.update_glossary_entry.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_UpdateGlossaryEntry_async
+   */
+  updateGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      (
+        | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateGlossaryEntry(
+    request: protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGlossaryEntry(
+    request: protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IGlossaryEntry,
+          | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry,
+      (
+        | protos.google.cloud.translation.v3.IUpdateGlossaryEntryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'glossary_entry.name': request.glossaryEntry!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateGlossaryEntry(request, options, callback);
+  }
+  /**
+   * Deletes a single entry from the glossary
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the glossary entry to delete
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_glossary_entry.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteGlossaryEntry_async
+   */
+  deleteGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  deleteGlossaryEntry(
+    request: protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteGlossaryEntry(
+    request: protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteGlossaryEntry(
+    request?: protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.translation.v3.IDeleteGlossaryEntryRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteGlossaryEntry(request, options, callback);
+  }
+  /**
+   * Gets a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the dataset to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.Dataset|Dataset}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.get_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_GetDataset_async
+   */
+  getDataset(
+    request?: protos.google.cloud.translation.v3.IGetDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IDataset,
+      protos.google.cloud.translation.v3.IGetDatasetRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDataset(
+    request: protos.google.cloud.translation.v3.IGetDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IDataset,
+      protos.google.cloud.translation.v3.IGetDatasetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDataset(
+    request: protos.google.cloud.translation.v3.IGetDatasetRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IDataset,
+      protos.google.cloud.translation.v3.IGetDatasetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDataset(
+    request?: protos.google.cloud.translation.v3.IGetDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IDataset,
+          | protos.google.cloud.translation.v3.IGetDatasetRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IDataset,
+      protos.google.cloud.translation.v3.IGetDatasetRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IDataset,
+      protos.google.cloud.translation.v3.IGetDatasetRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDataset(request, options, callback);
+  }
+  /**
    * Creates an Adaptive MT dataset.
    *
    * @param {Object} request
@@ -1498,7 +2209,12 @@ export class TranslationServiceClient {
    *   `projects/{project}/locations/{location-id}/adaptiveMtDatasets/{dataset}`
    * @param {string[]} request.content
    *   Required. The content of the input in string format.
-   *   For now only one sentence per request is supported.
+   * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig} request.referenceSentenceConfig
+   *   Configuration for caller provided reference sentences.
+   * @param {google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig} [request.glossaryConfig]
+   *   Optional. Glossary to be applied. The glossary must be
+   *   within the same region (have the same location-id) as the model, otherwise
+   *   an INVALID_ARGUMENT (400) error is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1877,6 +2593,90 @@ export class TranslationServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.importAdaptiveMtFile(request, options, callback);
+  }
+  /**
+   * Gets a model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model to retrieve.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3.Model|Model}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.get_model.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_GetModel_async
+   */
+  getModel(
+    request?: protos.google.cloud.translation.v3.IGetModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IModel,
+      protos.google.cloud.translation.v3.IGetModelRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getModel(
+    request: protos.google.cloud.translation.v3.IGetModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IModel,
+      protos.google.cloud.translation.v3.IGetModelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getModel(
+    request: protos.google.cloud.translation.v3.IGetModelRequest,
+    callback: Callback<
+      protos.google.cloud.translation.v3.IModel,
+      protos.google.cloud.translation.v3.IGetModelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getModel(
+    request?: protos.google.cloud.translation.v3.IGetModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.translation.v3.IModel,
+          | protos.google.cloud.translation.v3.IGetModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.translation.v3.IModel,
+      protos.google.cloud.translation.v3.IGetModelRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IModel,
+      protos.google.cloud.translation.v3.IGetModelRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getModel(request, options, callback);
   }
 
   /**
@@ -2422,6 +3222,146 @@ export class TranslationServiceClient {
     >;
   }
   /**
+   * Updates a glossary. A LRO is used since the update can be async if the
+   * glossary's entry file is updated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.translation.v3.Glossary} request.glossary
+   *   Required. The glossary entry to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated. Currently only `display_name` and
+   *   'input_config'
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.update_glossary.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_UpdateGlossary_async
+   */
+  updateGlossary(
+    request?: protos.google.cloud.translation.v3.IUpdateGlossaryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.translation.v3.IGlossary,
+        protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateGlossary(
+    request: protos.google.cloud.translation.v3.IUpdateGlossaryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IGlossary,
+        protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGlossary(
+    request: protos.google.cloud.translation.v3.IUpdateGlossaryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IGlossary,
+        protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGlossary(
+    request?: protos.google.cloud.translation.v3.IUpdateGlossaryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IGlossary,
+            protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IGlossary,
+        protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.translation.v3.IGlossary,
+        protos.google.cloud.translation.v3.IUpdateGlossaryMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'glossary.name': request.glossary!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateGlossary(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateGlossary()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.update_glossary.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_UpdateGlossary_async
+   */
+  async checkUpdateGlossaryProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.translation.v3.Glossary,
+      protos.google.cloud.translation.v3.UpdateGlossaryMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateGlossary,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.translation.v3.Glossary,
+      protos.google.cloud.translation.v3.UpdateGlossaryMetadata
+    >;
+  }
+  /**
    * Deletes a glossary, or cancels glossary construction
    * if the glossary isn't created yet.
    * Returns NOT_FOUND, if the glossary doesn't exist.
@@ -2557,6 +3497,833 @@ export class TranslationServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.translation.v3.DeleteGlossaryResponse,
       protos.google.cloud.translation.v3.DeleteGlossaryMetadata
+    >;
+  }
+  /**
+   * Creates a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project name.
+   * @param {google.cloud.translation.v3.Dataset} request.dataset
+   *   Required. The Dataset to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.create_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_CreateDataset_async
+   */
+  createDataset(
+    request?: protos.google.cloud.translation.v3.ICreateDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.translation.v3.IDataset,
+        protos.google.cloud.translation.v3.ICreateDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createDataset(
+    request: protos.google.cloud.translation.v3.ICreateDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IDataset,
+        protos.google.cloud.translation.v3.ICreateDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDataset(
+    request: protos.google.cloud.translation.v3.ICreateDatasetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IDataset,
+        protos.google.cloud.translation.v3.ICreateDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createDataset(
+    request?: protos.google.cloud.translation.v3.ICreateDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IDataset,
+            protos.google.cloud.translation.v3.ICreateDatasetMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IDataset,
+        protos.google.cloud.translation.v3.ICreateDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.translation.v3.IDataset,
+        protos.google.cloud.translation.v3.ICreateDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createDataset(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createDataset()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.create_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_CreateDataset_async
+   */
+  async checkCreateDatasetProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.translation.v3.Dataset,
+      protos.google.cloud.translation.v3.CreateDatasetMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDataset,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.translation.v3.Dataset,
+      protos.google.cloud.translation.v3.CreateDatasetMetadata
+    >;
+  }
+  /**
+   * Deletes a dataset and all of its contents.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the dataset to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteDataset_async
+   */
+  deleteDataset(
+    request?: protos.google.cloud.translation.v3.IDeleteDatasetRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteDataset(
+    request: protos.google.cloud.translation.v3.IDeleteDatasetRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDataset(
+    request: protos.google.cloud.translation.v3.IDeleteDatasetRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteDataset(
+    request?: protos.google.cloud.translation.v3.IDeleteDatasetRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteDatasetMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteDataset(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteDataset()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_dataset.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteDataset_async
+   */
+  async checkDeleteDatasetProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.DeleteDatasetMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDataset,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.DeleteDatasetMetadata
+    >;
+  }
+  /**
+   * Import sentence pairs into translation Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. Name of the dataset. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/datasets/{dataset-id}`
+   * @param {google.cloud.translation.v3.DatasetInputConfig} request.inputConfig
+   *   Required. The config for the input content.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.import_data.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ImportData_async
+   */
+  importData(
+    request?: protos.google.cloud.translation.v3.IImportDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importData(
+    request: protos.google.cloud.translation.v3.IImportDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importData(
+    request: protos.google.cloud.translation.v3.IImportDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importData(
+    request?: protos.google.cloud.translation.v3.IImportDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IImportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IImportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importData(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importData()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.import_data.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ImportData_async
+   */
+  async checkImportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.ImportDataMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importData,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.ImportDataMetadata
+    >;
+  }
+  /**
+   * Exports dataset's data to the provided output location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.dataset
+   *   Required. Name of the dataset. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/datasets/{dataset-id}`
+   * @param {google.cloud.translation.v3.DatasetOutputConfig} request.outputConfig
+   *   Required. The config for the output content.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.export_data.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ExportData_async
+   */
+  exportData(
+    request?: protos.google.cloud.translation.v3.IExportDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportData(
+    request: protos.google.cloud.translation.v3.IExportDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportData(
+    request: protos.google.cloud.translation.v3.IExportDataRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportData(
+    request?: protos.google.cloud.translation.v3.IExportDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IExportDataMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IExportDataMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportData(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportData()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.export_data.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ExportData_async
+   */
+  async checkExportDataProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.ExportDataMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportData,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.ExportDataMetadata
+    >;
+  }
+  /**
+   * Creates a Model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project name, in form of
+   *   `projects/{project}/locations/{location}`
+   * @param {google.cloud.translation.v3.Model} request.model
+   *   Required. The Model to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.create_model.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_CreateModel_async
+   */
+  createModel(
+    request?: protos.google.cloud.translation.v3.ICreateModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.translation.v3.IModel,
+        protos.google.cloud.translation.v3.ICreateModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createModel(
+    request: protos.google.cloud.translation.v3.ICreateModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IModel,
+        protos.google.cloud.translation.v3.ICreateModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createModel(
+    request: protos.google.cloud.translation.v3.ICreateModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IModel,
+        protos.google.cloud.translation.v3.ICreateModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createModel(
+    request?: protos.google.cloud.translation.v3.ICreateModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.translation.v3.IModel,
+            protos.google.cloud.translation.v3.ICreateModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.translation.v3.IModel,
+        protos.google.cloud.translation.v3.ICreateModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.translation.v3.IModel,
+        protos.google.cloud.translation.v3.ICreateModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.create_model.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_CreateModel_async
+   */
+  async checkCreateModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.translation.v3.Model,
+      protos.google.cloud.translation.v3.CreateModelMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.translation.v3.Model,
+      protos.google.cloud.translation.v3.CreateModelMetadata
+    >;
+  }
+  /**
+   * Deletes a model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the model to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_model.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteModel_async
+   */
+  deleteModel(
+    request?: protos.google.cloud.translation.v3.IDeleteModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteModel(
+    request: protos.google.cloud.translation.v3.IDeleteModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModel(
+    request: protos.google.cloud.translation.v3.IDeleteModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModel(
+    request?: protos.google.cloud.translation.v3.IDeleteModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.translation.v3.IDeleteModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.translation.v3.IDeleteModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.delete_model.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_DeleteModel_async
+   */
+  async checkDeleteModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.DeleteModelMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.translation.v3.DeleteModelMetadata
     >;
   }
   /**
@@ -2808,6 +4575,405 @@ export class TranslationServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.translation.v3.IGlossary>;
+  }
+  /**
+   * List the entries for the glossary.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent glossary resource name for listing the glossary's
+   *   entries.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer glossary entries
+   *   than requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   [ListGlossaryEntriesResponse.next_page_token] returned from the previous
+   *   call. The first page is returned if `page_token`is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.GlossaryEntry|GlossaryEntry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listGlossaryEntriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGlossaryEntries(
+    request?: protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry[],
+      protos.google.cloud.translation.v3.IListGlossaryEntriesRequest | null,
+      protos.google.cloud.translation.v3.IListGlossaryEntriesResponse,
+    ]
+  >;
+  listGlossaryEntries(
+    request: protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+      | protos.google.cloud.translation.v3.IListGlossaryEntriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IGlossaryEntry
+    >
+  ): void;
+  listGlossaryEntries(
+    request: protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+      | protos.google.cloud.translation.v3.IListGlossaryEntriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IGlossaryEntry
+    >
+  ): void;
+  listGlossaryEntries(
+    request?: protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+          | protos.google.cloud.translation.v3.IListGlossaryEntriesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IGlossaryEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+      | protos.google.cloud.translation.v3.IListGlossaryEntriesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IGlossaryEntry
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IGlossaryEntry[],
+      protos.google.cloud.translation.v3.IListGlossaryEntriesRequest | null,
+      protos.google.cloud.translation.v3.IListGlossaryEntriesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listGlossaryEntries(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent glossary resource name for listing the glossary's
+   *   entries.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer glossary entries
+   *   than requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   [ListGlossaryEntriesResponse.next_page_token] returned from the previous
+   *   call. The first page is returned if `page_token`is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.GlossaryEntry|GlossaryEntry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listGlossaryEntriesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listGlossaryEntriesStream(
+    request?: protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGlossaryEntries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listGlossaryEntries.createStream(
+      this.innerApiCalls.listGlossaryEntries as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listGlossaryEntries`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent glossary resource name for listing the glossary's
+   *   entries.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server may return fewer glossary entries
+   *   than requested. If unspecified, the server picks an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   *   Typically, this is the value of
+   *   [ListGlossaryEntriesResponse.next_page_token] returned from the previous
+   *   call. The first page is returned if `page_token`is empty or missing.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.GlossaryEntry|GlossaryEntry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_glossary_entries.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListGlossaryEntries_async
+   */
+  listGlossaryEntriesAsync(
+    request?: protos.google.cloud.translation.v3.IListGlossaryEntriesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IGlossaryEntry> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listGlossaryEntries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listGlossaryEntries.asyncIterate(
+      this.innerApiCalls['listGlossaryEntries'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IGlossaryEntry>;
+  }
+  /**
+   * Lists datasets.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListDatasets call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.Dataset|Dataset}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatasets(
+    request?: protos.google.cloud.translation.v3.IListDatasetsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IDataset[],
+      protos.google.cloud.translation.v3.IListDatasetsRequest | null,
+      protos.google.cloud.translation.v3.IListDatasetsResponse,
+    ]
+  >;
+  listDatasets(
+    request: protos.google.cloud.translation.v3.IListDatasetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListDatasetsRequest,
+      | protos.google.cloud.translation.v3.IListDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IDataset
+    >
+  ): void;
+  listDatasets(
+    request: protos.google.cloud.translation.v3.IListDatasetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListDatasetsRequest,
+      | protos.google.cloud.translation.v3.IListDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IDataset
+    >
+  ): void;
+  listDatasets(
+    request?: protos.google.cloud.translation.v3.IListDatasetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListDatasetsRequest,
+          | protos.google.cloud.translation.v3.IListDatasetsResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IDataset
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListDatasetsRequest,
+      | protos.google.cloud.translation.v3.IListDatasetsResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IDataset
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IDataset[],
+      protos.google.cloud.translation.v3.IListDatasetsRequest | null,
+      protos.google.cloud.translation.v3.IListDatasetsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listDatasets(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListDatasets call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.Dataset|Dataset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDatasetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDatasetsStream(
+    request?: protos.google.cloud.translation.v3.IListDatasetsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatasets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatasets.createStream(
+      this.innerApiCalls.listDatasets as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listDatasets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListDatasets call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.Dataset|Dataset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_datasets.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListDatasets_async
+   */
+  listDatasetsAsync(
+    request?: protos.google.cloud.translation.v3.IListDatasetsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IDataset> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDatasets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listDatasets.asyncIterate(
+      this.innerApiCalls['listDatasets'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IDataset>;
   }
   /**
    * Lists all Adaptive MT datasets for which the caller has read permission.
@@ -3441,6 +5607,811 @@ export class TranslationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.translation.v3.IAdaptiveMtSentence>;
   }
+  /**
+   * Lists sentence pairs in the dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent dataset. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/datasets/{dataset-id}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the examples that will be returned.
+   *   Example filter:
+   *   * `usage=TRAIN`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListExamples call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.Example|Example}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExamplesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExamples(
+    request?: protos.google.cloud.translation.v3.IListExamplesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IExample[],
+      protos.google.cloud.translation.v3.IListExamplesRequest | null,
+      protos.google.cloud.translation.v3.IListExamplesResponse,
+    ]
+  >;
+  listExamples(
+    request: protos.google.cloud.translation.v3.IListExamplesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListExamplesRequest,
+      | protos.google.cloud.translation.v3.IListExamplesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IExample
+    >
+  ): void;
+  listExamples(
+    request: protos.google.cloud.translation.v3.IListExamplesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListExamplesRequest,
+      | protos.google.cloud.translation.v3.IListExamplesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IExample
+    >
+  ): void;
+  listExamples(
+    request?: protos.google.cloud.translation.v3.IListExamplesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListExamplesRequest,
+          | protos.google.cloud.translation.v3.IListExamplesResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IExample
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListExamplesRequest,
+      | protos.google.cloud.translation.v3.IListExamplesResponse
+      | null
+      | undefined,
+      protos.google.cloud.translation.v3.IExample
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IExample[],
+      protos.google.cloud.translation.v3.IListExamplesRequest | null,
+      protos.google.cloud.translation.v3.IListExamplesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listExamples(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent dataset. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/datasets/{dataset-id}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the examples that will be returned.
+   *   Example filter:
+   *   * `usage=TRAIN`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListExamples call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.Example|Example} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExamplesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExamplesStream(
+    request?: protos.google.cloud.translation.v3.IListExamplesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExamples'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExamples.createStream(
+      this.innerApiCalls.listExamples as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listExamples`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent dataset. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}/datasets/{dataset-id}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the examples that will be returned.
+   *   Example filter:
+   *   * `usage=TRAIN`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListExamples call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.Example|Example}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_examples.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListExamples_async
+   */
+  listExamplesAsync(
+    request?: protos.google.cloud.translation.v3.IListExamplesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IExample> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExamples'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listExamples.asyncIterate(
+      this.innerApiCalls['listExamples'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IExample>;
+  }
+  /**
+   * Lists models.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the models that will be returned.
+   *   Supported filter:
+   *   `dataset_id=${dataset_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListModels call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.translation.v3.Model|Model}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listModels(
+    request?: protos.google.cloud.translation.v3.IListModelsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IModel[],
+      protos.google.cloud.translation.v3.IListModelsRequest | null,
+      protos.google.cloud.translation.v3.IListModelsResponse,
+    ]
+  >;
+  listModels(
+    request: protos.google.cloud.translation.v3.IListModelsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListModelsRequest,
+      protos.google.cloud.translation.v3.IListModelsResponse | null | undefined,
+      protos.google.cloud.translation.v3.IModel
+    >
+  ): void;
+  listModels(
+    request: protos.google.cloud.translation.v3.IListModelsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.translation.v3.IListModelsRequest,
+      protos.google.cloud.translation.v3.IListModelsResponse | null | undefined,
+      protos.google.cloud.translation.v3.IModel
+    >
+  ): void;
+  listModels(
+    request?: protos.google.cloud.translation.v3.IListModelsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.translation.v3.IListModelsRequest,
+          | protos.google.cloud.translation.v3.IListModelsResponse
+          | null
+          | undefined,
+          protos.google.cloud.translation.v3.IModel
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.translation.v3.IListModelsRequest,
+      protos.google.cloud.translation.v3.IListModelsResponse | null | undefined,
+      protos.google.cloud.translation.v3.IModel
+    >
+  ): Promise<
+    [
+      protos.google.cloud.translation.v3.IModel[],
+      protos.google.cloud.translation.v3.IListModelsRequest | null,
+      protos.google.cloud.translation.v3.IListModelsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listModels(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the models that will be returned.
+   *   Supported filter:
+   *   `dataset_id=${dataset_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListModels call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.translation.v3.Model|Model} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listModelsStream(
+    request?: protos.google.cloud.translation.v3.IListModelsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listModels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModels.createStream(
+      this.innerApiCalls.listModels as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listModels`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the parent project. In form of
+   *   `projects/{project-number-or-id}/locations/{location-id}`
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the models that will be returned.
+   *   Supported filter:
+   *   `dataset_id=${dataset_id}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server can return fewer results than
+   *   requested.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results for the server to return.
+   *   Typically obtained from next_page_token field in the response of a
+   *   ListModels call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.translation.v3.Model|Model}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v3/translation_service.list_models.js</caption>
+   * region_tag:translate_v3_generated_TranslationService_ListModels_async
+   */
+  listModelsAsync(
+    request?: protos.google.cloud.translation.v3.IListModelsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.translation.v3.IModel> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listModels'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listModels.asyncIterate(
+      this.innerApiCalls['listModels'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.translation.v3.IModel>;
+  }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    return this.iamClient.testIamPermissions(request, options, callback);
+  }
+
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3667,6 +6638,122 @@ export class TranslationServiceClient {
   }
 
   /**
+   * Return a fully-qualified dataset resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @returns {string} Resource name string.
+   */
+  datasetPath(project: string, location: string, dataset: string) {
+    return this.pathTemplates.datasetPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+    });
+  }
+
+  /**
+   * Parse the project from Dataset resource.
+   *
+   * @param {string} datasetName
+   *   A fully-qualified path representing Dataset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDatasetName(datasetName: string) {
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).project;
+  }
+
+  /**
+   * Parse the location from Dataset resource.
+   *
+   * @param {string} datasetName
+   *   A fully-qualified path representing Dataset resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDatasetName(datasetName: string) {
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).location;
+  }
+
+  /**
+   * Parse the dataset from Dataset resource.
+   *
+   * @param {string} datasetName
+   *   A fully-qualified path representing Dataset resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromDatasetName(datasetName: string) {
+    return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Return a fully-qualified example resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} example
+   * @returns {string} Resource name string.
+   */
+  examplePath(
+    project: string,
+    location: string,
+    dataset: string,
+    example: string
+  ) {
+    return this.pathTemplates.examplePathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      example: example,
+    });
+  }
+
+  /**
+   * Parse the project from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).project;
+  }
+
+  /**
+   * Parse the location from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).location;
+  }
+
+  /**
+   * Parse the dataset from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).dataset;
+  }
+
+  /**
+   * Parse the example from Example resource.
+   *
+   * @param {string} exampleName
+   *   A fully-qualified path representing Example resource.
+   * @returns {string} A string representing the example.
+   */
+  matchExampleFromExampleName(exampleName: string) {
+    return this.pathTemplates.examplePathTemplate.match(exampleName).example;
+  }
+
+  /**
    * Return a fully-qualified glossary resource name string.
    *
    * @param {string} project
@@ -3716,6 +6803,77 @@ export class TranslationServiceClient {
   }
 
   /**
+   * Return a fully-qualified glossaryEntry resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} glossary
+   * @param {string} glossary_entry
+   * @returns {string} Resource name string.
+   */
+  glossaryEntryPath(
+    project: string,
+    location: string,
+    glossary: string,
+    glossaryEntry: string
+  ) {
+    return this.pathTemplates.glossaryEntryPathTemplate.render({
+      project: project,
+      location: location,
+      glossary: glossary,
+      glossary_entry: glossaryEntry,
+    });
+  }
+
+  /**
+   * Parse the project from GlossaryEntry resource.
+   *
+   * @param {string} glossaryEntryName
+   *   A fully-qualified path representing GlossaryEntry resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromGlossaryEntryName(glossaryEntryName: string) {
+    return this.pathTemplates.glossaryEntryPathTemplate.match(glossaryEntryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from GlossaryEntry resource.
+   *
+   * @param {string} glossaryEntryName
+   *   A fully-qualified path representing GlossaryEntry resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromGlossaryEntryName(glossaryEntryName: string) {
+    return this.pathTemplates.glossaryEntryPathTemplate.match(glossaryEntryName)
+      .location;
+  }
+
+  /**
+   * Parse the glossary from GlossaryEntry resource.
+   *
+   * @param {string} glossaryEntryName
+   *   A fully-qualified path representing GlossaryEntry resource.
+   * @returns {string} A string representing the glossary.
+   */
+  matchGlossaryFromGlossaryEntryName(glossaryEntryName: string) {
+    return this.pathTemplates.glossaryEntryPathTemplate.match(glossaryEntryName)
+      .glossary;
+  }
+
+  /**
+   * Parse the glossary_entry from GlossaryEntry resource.
+   *
+   * @param {string} glossaryEntryName
+   *   A fully-qualified path representing GlossaryEntry resource.
+   * @returns {string} A string representing the glossary_entry.
+   */
+  matchGlossaryEntryFromGlossaryEntryName(glossaryEntryName: string) {
+    return this.pathTemplates.glossaryEntryPathTemplate.match(glossaryEntryName)
+      .glossary_entry;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -3752,6 +6910,55 @@ export class TranslationServiceClient {
   }
 
   /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -3762,6 +6969,8 @@ export class TranslationServiceClient {
       return this.translationServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.iamClient.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }

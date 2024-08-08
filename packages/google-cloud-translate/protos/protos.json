@@ -15,7 +15,8 @@
                     "java_outer_classname": "TranslationServiceProto",
                     "java_package": "com.google.cloud.translate.v3",
                     "php_namespace": "Google\\Cloud\\Translate\\V3",
-                    "ruby_package": "Google::Cloud::Translate::V3"
+                    "ruby_package": "Google::Cloud::Translate::V3",
+                    "objc_class_prefix": "CTRL3"
                   },
                   "nested": {
                     "AdaptiveMtDataset": {
@@ -160,6 +161,18 @@
                       }
                     },
                     "AdaptiveMtTranslateRequest": {
+                      "oneofs": {
+                        "_referenceSentenceConfig": {
+                          "oneof": [
+                            "referenceSentenceConfig"
+                          ]
+                        },
+                        "_glossaryConfig": {
+                          "oneof": [
+                            "glossaryConfig"
+                          ]
+                        }
+                      },
                       "fields": {
                         "parent": {
                           "type": "string",
@@ -183,6 +196,80 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "referenceSentenceConfig": {
+                          "type": "ReferenceSentenceConfig",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "glossaryConfig": {
+                          "type": "GlossaryConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ReferenceSentencePair": {
+                          "fields": {
+                            "sourceSentence": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "targetSentence": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ReferenceSentencePairList": {
+                          "fields": {
+                            "referenceSentencePairs": {
+                              "rule": "repeated",
+                              "type": "ReferenceSentencePair",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ReferenceSentenceConfig": {
+                          "fields": {
+                            "referenceSentencePairLists": {
+                              "rule": "repeated",
+                              "type": "ReferenceSentencePairList",
+                              "id": 1
+                            },
+                            "sourceLanguageCode": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "targetLanguageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "GlossaryConfig": {
+                          "fields": {
+                            "glossary": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                              }
+                            },
+                            "ignoreCase": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }
@@ -214,13 +301,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "glossaryTranslations": {
+                          "rule": "repeated",
+                          "type": "AdaptiveMtTranslation",
+                          "id": 4
                         }
                       }
                     },
                     "AdaptiveMtFile": {
                       "options": {
                         "(google.api.resource).type": "translate.googleapis.com/AdaptiveMtFile",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}",
+                        "(google.api.resource).plural": "adaptiveMtFiles",
+                        "(google.api.resource).singular": "adaptiveMtFile"
                       },
                       "fields": {
                         "name": {
@@ -366,7 +460,9 @@
                     "AdaptiveMtSentence": {
                       "options": {
                         "(google.api.resource).type": "translate.googleapis.com/AdaptiveMtSentence",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}/adaptiveMtSentences/{sentence}"
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/adaptiveMtDatasets/{dataset}/adaptiveMtFiles/{file}/adaptiveMtSentences/{sentence}",
+                        "(google.api.resource).plural": "adaptiveMtSentences",
+                        "(google.api.resource).singular": "adaptiveMtSentence"
                       },
                       "fields": {
                         "name": {
@@ -493,6 +589,701 @@
                         }
                       }
                     },
+                    "OperationState": {
+                      "values": {
+                        "OPERATION_STATE_UNSPECIFIED": 0,
+                        "OPERATION_STATE_RUNNING": 1,
+                        "OPERATION_STATE_SUCCEEDED": 2,
+                        "OPERATION_STATE_FAILED": 3,
+                        "OPERATION_STATE_CANCELLING": 4,
+                        "OPERATION_STATE_CANCELLED": 5
+                      }
+                    },
+                    "GlossaryEntry": {
+                      "options": {
+                        "(google.api.resource).type": "translate.googleapis.com/GlossaryEntry",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/glossaries/{glossary}/glossaryEntries/{glossary_entry}",
+                        "(google.api.resource).plural": "glossaryEntries",
+                        "(google.api.resource).singular": "glossaryEntry"
+                      },
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "termsPair",
+                            "termsSet"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "termsPair": {
+                          "type": "GlossaryTermsPair",
+                          "id": 2
+                        },
+                        "termsSet": {
+                          "type": "GlossaryTermsSet",
+                          "id": 3
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "GlossaryTermsPair": {
+                          "fields": {
+                            "sourceTerm": {
+                              "type": "GlossaryTerm",
+                              "id": 1
+                            },
+                            "targetTerm": {
+                              "type": "GlossaryTerm",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "GlossaryTermsSet": {
+                          "fields": {
+                            "terms": {
+                              "rule": "repeated",
+                              "type": "GlossaryTerm",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "GlossaryTerm": {
+                      "fields": {
+                        "languageCode": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "text": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ImportDataRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "inputConfig": {
+                          "type": "DatasetInputConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DatasetInputConfig": {
+                      "fields": {
+                        "inputFiles": {
+                          "rule": "repeated",
+                          "type": "InputFile",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "InputFile": {
+                          "oneofs": {
+                            "source": {
+                              "oneof": [
+                                "gcsSource"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "usage": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "gcsSource": {
+                              "type": "GcsInputSource",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportDataMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "OperationState",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ExportDataRequest": {
+                      "fields": {
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "DatasetOutputConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DatasetOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsOutputDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ExportDataMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "OperationState",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DeleteDatasetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDatasetMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "OperationState",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetDatasetRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Dataset"
+                          }
+                        }
+                      }
+                    },
+                    "ListDatasetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListDatasetsResponse": {
+                      "fields": {
+                        "datasets": {
+                          "rule": "repeated",
+                          "type": "Dataset",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateDatasetRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "dataset": {
+                          "type": "Dataset",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateDatasetMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "OperationState",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListExamplesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Dataset"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListExamplesResponse": {
+                      "fields": {
+                        "examples": {
+                          "rule": "repeated",
+                          "type": "Example",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Example": {
+                      "options": {
+                        "(google.api.resource).type": "translate.googleapis.com/Example",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/examples/{example}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sourceText": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "targetText": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "usage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "BatchTransferResourcesResponse": {
+                      "fields": {
+                        "responses": {
+                          "rule": "repeated",
+                          "type": "TransferResourceResponse",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "TransferResourceResponse": {
+                          "fields": {
+                            "source": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "target": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "error": {
+                              "type": "google.rpc.Status",
+                              "id": 3
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Dataset": {
+                      "options": {
+                        "(google.api.resource).type": "translate.googleapis.com/Dataset",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "exampleCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "trainExampleCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "validateExampleCount": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "testExampleCount": {
+                          "type": "int32",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateModelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "model": {
+                          "type": "Model",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateModelMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "OperationState",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListModelsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListModelsResponse": {
+                      "fields": {
+                        "models": {
+                          "rule": "repeated",
+                          "type": "Model",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteModelMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "OperationState",
+                          "id": 1
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "Model": {
+                      "options": {
+                        "(google.api.resource).type": "translate.googleapis.com/Model",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/models/{model}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "dataset": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "trainExampleCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "validateExampleCount": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "testExampleCount": {
+                          "type": "int32",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "TranslationService": {
                       "options": {
                         "(google.api.default_host)": "translate.googleapis.com",
@@ -525,6 +1316,32 @@
                             },
                             {
                               "(google.api.method_signature)": "parent,model,mime_type,source_language_code,target_language_code,contents"
+                            }
+                          ]
+                        },
+                        "RomanizeText": {
+                          "requestType": "RomanizeTextRequest",
+                          "responseType": "RomanizeTextResponse",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:romanizeText",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v3/{parent=projects/*}:romanizeText",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "parent,contents"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}:romanizeText",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v3/{parent=projects/*}:romanizeText",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,contents"
                             }
                           ]
                         },
@@ -672,6 +1489,34 @@
                             }
                           ]
                         },
+                        "UpdateGlossary": {
+                          "requestType": "UpdateGlossaryRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v3/{glossary.name=projects/*/locations/*/glossaries/*}",
+                            "(google.api.http).body": "glossary",
+                            "(google.api.method_signature)": "glossary,update_mask",
+                            "(google.longrunning.operation_info).response_type": "Glossary",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateGlossaryMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v3/{glossary.name=projects/*/locations/*/glossaries/*}",
+                                "body": "glossary"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "glossary,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Glossary",
+                                "metadata_type": "UpdateGlossaryMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListGlossaries": {
                           "requestType": "ListGlossariesRequest",
                           "responseType": "ListGlossariesResponse",
@@ -730,6 +1575,190 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "DeleteGlossaryResponse",
                                 "metadata_type": "DeleteGlossaryMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetGlossaryEntry": {
+                          "requestType": "GetGlossaryEntryRequest",
+                          "responseType": "GlossaryEntry",
+                          "options": {
+                            "(google.api.http).get": "/v3/{name=projects/*/locations/*/glossaries/*/glossaryEntries/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{name=projects/*/locations/*/glossaries/*/glossaryEntries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListGlossaryEntries": {
+                          "requestType": "ListGlossaryEntriesRequest",
+                          "responseType": "ListGlossaryEntriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=projects/*/locations/*/glossaries/*}/glossaryEntries",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=projects/*/locations/*/glossaries/*}/glossaryEntries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateGlossaryEntry": {
+                          "requestType": "CreateGlossaryEntryRequest",
+                          "responseType": "GlossaryEntry",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*/glossaries/*}/glossaryEntries",
+                            "(google.api.http).body": "glossary_entry",
+                            "(google.api.method_signature)": "parent,glossary_entry"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*/glossaries/*}/glossaryEntries",
+                                "body": "glossary_entry"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,glossary_entry"
+                            }
+                          ]
+                        },
+                        "UpdateGlossaryEntry": {
+                          "requestType": "UpdateGlossaryEntryRequest",
+                          "responseType": "GlossaryEntry",
+                          "options": {
+                            "(google.api.http).patch": "/v3/{glossary_entry.name=projects/*/locations/*/glossaries/*/glossaryEntries/*}",
+                            "(google.api.http).body": "glossary_entry",
+                            "(google.api.method_signature)": "glossary_entry"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v3/{glossary_entry.name=projects/*/locations/*/glossaries/*/glossaryEntries/*}",
+                                "body": "glossary_entry"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "glossary_entry"
+                            }
+                          ]
+                        },
+                        "DeleteGlossaryEntry": {
+                          "requestType": "DeleteGlossaryEntryRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v3/{name=projects/*/locations/*/glossaries/*/glossaryEntries/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v3/{name=projects/*/locations/*/glossaries/*/glossaryEntries/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateDataset": {
+                          "requestType": "CreateDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/datasets",
+                            "(google.api.http).body": "dataset",
+                            "(google.api.method_signature)": "parent,dataset",
+                            "(google.longrunning.operation_info).response_type": "Dataset",
+                            "(google.longrunning.operation_info).metadata_type": "CreateDatasetMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}/datasets",
+                                "body": "dataset"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,dataset"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Dataset",
+                                "metadata_type": "CreateDatasetMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDataset": {
+                          "requestType": "GetDatasetRequest",
+                          "responseType": "Dataset",
+                          "options": {
+                            "(google.api.http).get": "/v3/{name=projects/*/locations/*/datasets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{name=projects/*/locations/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListDatasets": {
+                          "requestType": "ListDatasetsRequest",
+                          "responseType": "ListDatasetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/datasets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=projects/*/locations/*}/datasets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeleteDataset": {
+                          "requestType": "DeleteDatasetRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v3/{name=projects/*/locations/*/datasets/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteDatasetMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v3/{name=projects/*/locations/*/datasets/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteDatasetMetadata"
                               }
                             }
                           ]
@@ -923,24 +1952,178 @@
                               "(google.api.method_signature)": "parent"
                             }
                           ]
+                        },
+                        "ImportData": {
+                          "requestType": "ImportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{dataset=projects/*/locations/*/datasets/*}:importData",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "dataset,input_config",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "ImportDataMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{dataset=projects/*/locations/*/datasets/*}:importData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset,input_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "ImportDataMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ExportData": {
+                          "requestType": "ExportDataRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{dataset=projects/*/locations/*/datasets/*}:exportData",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "dataset,output_config",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "ExportDataMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{dataset=projects/*/locations/*/datasets/*}:exportData",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "dataset,output_config"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "ExportDataMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListExamples": {
+                          "requestType": "ListExamplesRequest",
+                          "responseType": "ListExamplesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=projects/*/locations/*/datasets/*}/examples",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=projects/*/locations/*/datasets/*}/examples"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateModel": {
+                          "requestType": "CreateModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}/models",
+                            "(google.api.http).body": "model",
+                            "(google.api.method_signature)": "parent,model",
+                            "(google.longrunning.operation_info).response_type": "Model",
+                            "(google.longrunning.operation_info).metadata_type": "CreateModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}/models",
+                                "body": "model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Model",
+                                "metadata_type": "CreateModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListModels": {
+                          "requestType": "ListModelsRequest",
+                          "responseType": "ListModelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v3/{parent=projects/*/locations/*}/models",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{parent=projects/*/locations/*}/models"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetModel": {
+                          "requestType": "GetModelRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).get": "/v3/{name=projects/*/locations/*/models/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v3/{name=projects/*/locations/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteModel": {
+                          "requestType": "DeleteModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v3/{name=projects/*/locations/*/models/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v3/{name=projects/*/locations/*/models/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteModelMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
-                    "TranslateTextGlossaryConfig": {
+                    "TransliterationConfig": {
                       "fields": {
-                        "glossary": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "ignoreCase": {
+                        "enableTransliteration": {
                           "type": "bool",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 1
                         }
                       }
                     },
@@ -997,6 +2180,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "transliterationConfig": {
+                          "type": "TransliterationConfig",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "labels": {
                           "keyType": "string",
                           "type": "string",
@@ -1038,6 +2228,54 @@
                         "glossaryConfig": {
                           "type": "TranslateTextGlossaryConfig",
                           "id": 3
+                        }
+                      }
+                    },
+                    "RomanizeTextRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "contents": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Romanization": {
+                      "fields": {
+                        "romanizedText": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "detectedLanguageCode": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RomanizeTextResponse": {
+                      "fields": {
+                        "romanizations": {
+                          "rule": "repeated",
+                          "type": "Romanization",
+                          "id": 1
                         }
                       }
                     },
@@ -1642,6 +2880,21 @@
                         }
                       }
                     },
+                    "UpdateGlossaryRequest": {
+                      "fields": {
+                        "glossary": {
+                          "type": "Glossary",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
                     "GetGlossaryRequest": {
                       "fields": {
                         "name": {
@@ -1712,10 +2965,137 @@
                         }
                       }
                     },
+                    "GetGlossaryEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/GlossaryEntry"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteGlossaryEntryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/GlossaryEntry"
+                          }
+                        }
+                      }
+                    },
+                    "ListGlossaryEntriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListGlossaryEntriesResponse": {
+                      "fields": {
+                        "glossaryEntries": {
+                          "rule": "repeated",
+                          "type": "GlossaryEntry",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CreateGlossaryEntryRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
+                        },
+                        "glossaryEntry": {
+                          "type": "GlossaryEntry",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateGlossaryEntryRequest": {
+                      "fields": {
+                        "glossaryEntry": {
+                          "type": "GlossaryEntry",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "CreateGlossaryMetadata": {
                       "fields": {
                         "name": {
                           "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3,
+                            "CANCELLING": 4,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "UpdateGlossaryMetadata": {
+                      "fields": {
+                        "glossary": {
+                          "type": "Glossary",
                           "id": 1
                         },
                         "state": {
@@ -1997,6 +3377,25 @@
                             "FAILED": 3,
                             "CANCELLING": 4,
                             "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "TranslateTextGlossaryConfig": {
+                      "fields": {
+                        "glossary": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "translate.googleapis.com/Glossary"
+                          }
+                        },
+                        "ignoreCase": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -5102,18 +6501,6 @@
                 }
               }
             },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -5126,8 +6513,58 @@
                 }
               }
             },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
             }
           }
         },
@@ -5342,35 +6779,6 @@
                 "metadataType": {
                   "type": "string",
                   "id": 2
-                }
-              }
-            }
-          }
-        },
-        "rpc": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
-            "java_multiple_files": true,
-            "java_outer_classname": "StatusProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Status": {
-              "fields": {
-                "code": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "details": {
-                  "rule": "repeated",
-                  "type": "google.protobuf.Any",
-                  "id": 3
                 }
               }
             }

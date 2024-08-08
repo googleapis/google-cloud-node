@@ -40,9 +40,18 @@ function main(parent, dataset, content) {
   // const dataset = 'abc123'
   /**
    *  Required. The content of the input in string format.
-   *  For now only one sentence per request is supported.
    */
   // const content = ['abc','def']
+  /**
+   *  Configuration for caller provided reference sentences.
+   */
+  // const referenceSentenceConfig = {}
+  /**
+   *  Optional. Glossary to be applied. The glossary must be
+   *  within the same region (have the same location-id) as the model, otherwise
+   *  an INVALID_ARGUMENT (400) error is returned.
+   */
+  // const glossaryConfig = {}
 
   // Imports the Translation library
   const {TranslationServiceClient} = require('@google-cloud/translate').v3;
