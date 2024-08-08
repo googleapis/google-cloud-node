@@ -35850,6 +35850,14 @@
                         }
                       }
                     },
+                    "RagFileParsingConfig": {
+                      "fields": {
+                        "useAdvancedPdfParsing": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
                     "UploadRagFileConfig": {
                       "fields": {
                         "ragFileChunkingConfig": {
@@ -35889,6 +35897,10 @@
                         "ragFileChunkingConfig": {
                           "type": "RagFileChunkingConfig",
                           "id": 4
+                        },
+                        "ragFileParsingConfig": {
+                          "type": "RagFileParsingConfig",
+                          "id": 8
                         },
                         "maxEmbeddingRequestsPerMin": {
                           "type": "int32",
