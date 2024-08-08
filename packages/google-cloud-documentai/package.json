@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/documentai",
-  "version": "8.8.0",
+  "version": "8.9.0",
   "description": "Document AI client for Node.js",
   "repository": {
     "type": "git",
