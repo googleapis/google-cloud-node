@@ -15862,6 +15862,7 @@
                  * @interface IComplianceOccurrence
                  * @property {Array.<grafeas.v1.INonCompliantFile>|null} [nonCompliantFiles] ComplianceOccurrence nonCompliantFiles
                  * @property {string|null} [nonComplianceReason] ComplianceOccurrence nonComplianceReason
+                 * @property {grafeas.v1.IComplianceVersion|null} [version] ComplianceOccurrence version
                  */
     
                 /**
@@ -15897,6 +15898,14 @@
                 ComplianceOccurrence.prototype.nonComplianceReason = "";
     
                 /**
+                 * ComplianceOccurrence version.
+                 * @member {grafeas.v1.IComplianceVersion|null|undefined} version
+                 * @memberof grafeas.v1.ComplianceOccurrence
+                 * @instance
+                 */
+                ComplianceOccurrence.prototype.version = null;
+    
+                /**
                  * Creates a new ComplianceOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.ComplianceOccurrence
@@ -15925,6 +15934,8 @@
                             $root.grafeas.v1.NonCompliantFile.encode(message.nonCompliantFiles[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.nonComplianceReason != null && Object.hasOwnProperty.call(message, "nonComplianceReason"))
                         writer.uint32(/* id 3, wireType 2 =*/26).string(message.nonComplianceReason);
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        $root.grafeas.v1.ComplianceVersion.encode(message.version, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     return writer;
                 };
     
@@ -15967,6 +15978,10 @@
                             }
                         case 3: {
                                 message.nonComplianceReason = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.version = $root.grafeas.v1.ComplianceVersion.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -16016,6 +16031,11 @@
                     if (message.nonComplianceReason != null && message.hasOwnProperty("nonComplianceReason"))
                         if (!$util.isString(message.nonComplianceReason))
                             return "nonComplianceReason: string expected";
+                    if (message.version != null && message.hasOwnProperty("version")) {
+                        var error = $root.grafeas.v1.ComplianceVersion.verify(message.version);
+                        if (error)
+                            return "version." + error;
+                    }
                     return null;
                 };
     
@@ -16043,6 +16063,11 @@
                     }
                     if (object.nonComplianceReason != null)
                         message.nonComplianceReason = String(object.nonComplianceReason);
+                    if (object.version != null) {
+                        if (typeof object.version !== "object")
+                            throw TypeError(".grafeas.v1.ComplianceOccurrence.version: object expected");
+                        message.version = $root.grafeas.v1.ComplianceVersion.fromObject(object.version);
+                    }
                     return message;
                 };
     
@@ -16061,8 +16086,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.nonCompliantFiles = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.nonComplianceReason = "";
+                        object.version = null;
+                    }
                     if (message.nonCompliantFiles && message.nonCompliantFiles.length) {
                         object.nonCompliantFiles = [];
                         for (var j = 0; j < message.nonCompliantFiles.length; ++j)
@@ -16070,6 +16097,8 @@
                     }
                     if (message.nonComplianceReason != null && message.hasOwnProperty("nonComplianceReason"))
                         object.nonComplianceReason = message.nonComplianceReason;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = $root.grafeas.v1.ComplianceVersion.toObject(message.version, options);
                     return object;
                 };
     
@@ -18948,6 +18977,7 @@
                  * @property {google.protobuf.ITimestamp|null} [lastScanTime] DiscoveryOccurrence lastScanTime
                  * @property {google.protobuf.ITimestamp|null} [archiveTime] DiscoveryOccurrence archiveTime
                  * @property {grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null} [sbomStatus] DiscoveryOccurrence sbomStatus
+                 * @property {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null} [vulnerabilityAttestation] DiscoveryOccurrence vulnerabilityAttestation
                  */
     
                 /**
@@ -19039,6 +19069,14 @@
                 DiscoveryOccurrence.prototype.sbomStatus = null;
     
                 /**
+                 * DiscoveryOccurrence vulnerabilityAttestation.
+                 * @member {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null|undefined} vulnerabilityAttestation
+                 * @memberof grafeas.v1.DiscoveryOccurrence
+                 * @instance
+                 */
+                DiscoveryOccurrence.prototype.vulnerabilityAttestation = null;
+    
+                /**
                  * Creates a new DiscoveryOccurrence instance using the specified properties.
                  * @function create
                  * @memberof grafeas.v1.DiscoveryOccurrence
@@ -19081,6 +19119,8 @@
                             $root.google.rpc.Status.encode(message.analysisError[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                     if (message.sbomStatus != null && Object.hasOwnProperty.call(message, "sbomStatus"))
                         $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.encode(message.sbomStatus, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    if (message.vulnerabilityAttestation != null && Object.hasOwnProperty.call(message, "vulnerabilityAttestation"))
+                        $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.encode(message.vulnerabilityAttestation, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                     return writer;
                 };
     
@@ -19151,6 +19191,10 @@
                             }
                         case 9: {
                                 message.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 10: {
+                                message.vulnerabilityAttestation = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -19246,6 +19290,11 @@
                         var error = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.verify(message.sbomStatus);
                         if (error)
                             return "sbomStatus." + error;
+                    }
+                    if (message.vulnerabilityAttestation != null && message.hasOwnProperty("vulnerabilityAttestation")) {
+                        var error = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.verify(message.vulnerabilityAttestation);
+                        if (error)
+                            return "vulnerabilityAttestation." + error;
                     }
                     return null;
                 };
@@ -19355,6 +19404,11 @@
                             throw TypeError(".grafeas.v1.DiscoveryOccurrence.sbomStatus: object expected");
                         message.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.fromObject(object.sbomStatus);
                     }
+                    if (object.vulnerabilityAttestation != null) {
+                        if (typeof object.vulnerabilityAttestation !== "object")
+                            throw TypeError(".grafeas.v1.DiscoveryOccurrence.vulnerabilityAttestation: object expected");
+                        message.vulnerabilityAttestation = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.fromObject(object.vulnerabilityAttestation);
+                    }
                     return message;
                 };
     
@@ -19382,6 +19436,7 @@
                         object.archiveTime = null;
                         object.analysisCompleted = null;
                         object.sbomStatus = null;
+                        object.vulnerabilityAttestation = null;
                     }
                     if (message.continuousAnalysis != null && message.hasOwnProperty("continuousAnalysis"))
                         object.continuousAnalysis = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] === undefined ? message.continuousAnalysis : $root.grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis[message.continuousAnalysis] : message.continuousAnalysis;
@@ -19404,6 +19459,8 @@
                     }
                     if (message.sbomStatus != null && message.hasOwnProperty("sbomStatus"))
                         object.sbomStatus = $root.grafeas.v1.DiscoveryOccurrence.SBOMStatus.toObject(message.sbomStatus, options);
+                    if (message.vulnerabilityAttestation != null && message.hasOwnProperty("vulnerabilityAttestation"))
+                        object.vulnerabilityAttestation = $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.toObject(message.vulnerabilityAttestation, options);
                     return object;
                 };
     
@@ -19957,6 +20014,301 @@
                     })();
     
                     return SBOMStatus;
+                })();
+    
+                DiscoveryOccurrence.VulnerabilityAttestation = (function() {
+    
+                    /**
+                     * Properties of a VulnerabilityAttestation.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @interface IVulnerabilityAttestation
+                     * @property {google.protobuf.ITimestamp|null} [lastAttemptTime] VulnerabilityAttestation lastAttemptTime
+                     * @property {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState|null} [state] VulnerabilityAttestation state
+                     * @property {string|null} [error] VulnerabilityAttestation error
+                     */
+    
+                    /**
+                     * Constructs a new VulnerabilityAttestation.
+                     * @memberof grafeas.v1.DiscoveryOccurrence
+                     * @classdesc Represents a VulnerabilityAttestation.
+                     * @implements IVulnerabilityAttestation
+                     * @constructor
+                     * @param {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation=} [properties] Properties to set
+                     */
+                    function VulnerabilityAttestation(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * VulnerabilityAttestation lastAttemptTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} lastAttemptTime
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @instance
+                     */
+                    VulnerabilityAttestation.prototype.lastAttemptTime = null;
+    
+                    /**
+                     * VulnerabilityAttestation state.
+                     * @member {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState} state
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @instance
+                     */
+                    VulnerabilityAttestation.prototype.state = 0;
+    
+                    /**
+                     * VulnerabilityAttestation error.
+                     * @member {string} error
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @instance
+                     */
+                    VulnerabilityAttestation.prototype.error = "";
+    
+                    /**
+                     * Creates a new VulnerabilityAttestation instance using the specified properties.
+                     * @function create
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation=} [properties] Properties to set
+                     * @returns {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation} VulnerabilityAttestation instance
+                     */
+                    VulnerabilityAttestation.create = function create(properties) {
+                        return new VulnerabilityAttestation(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VulnerabilityAttestation message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.verify|verify} messages.
+                     * @function encode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation} message VulnerabilityAttestation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VulnerabilityAttestation.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.lastAttemptTime != null && Object.hasOwnProperty.call(message, "lastAttemptTime"))
+                            $root.google.protobuf.Timestamp.encode(message.lastAttemptTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.state);
+                        if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.error);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VulnerabilityAttestation message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation} message VulnerabilityAttestation message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VulnerabilityAttestation.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VulnerabilityAttestation message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation} VulnerabilityAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VulnerabilityAttestation.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.lastAttemptTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 2: {
+                                    message.state = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.error = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VulnerabilityAttestation message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation} VulnerabilityAttestation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VulnerabilityAttestation.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VulnerabilityAttestation message.
+                     * @function verify
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VulnerabilityAttestation.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.lastAttemptTime != null && message.hasOwnProperty("lastAttemptTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.lastAttemptTime);
+                            if (error)
+                                return "lastAttemptTime." + error;
+                        }
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            switch (message.state) {
+                            default:
+                                return "state: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.error != null && message.hasOwnProperty("error"))
+                            if (!$util.isString(message.error))
+                                return "error: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VulnerabilityAttestation message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation} VulnerabilityAttestation
+                     */
+                    VulnerabilityAttestation.fromObject = function fromObject(object) {
+                        if (object instanceof $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation)
+                            return object;
+                        var message = new $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation();
+                        if (object.lastAttemptTime != null) {
+                            if (typeof object.lastAttemptTime !== "object")
+                                throw TypeError(".grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.lastAttemptTime: object expected");
+                            message.lastAttemptTime = $root.google.protobuf.Timestamp.fromObject(object.lastAttemptTime);
+                        }
+                        switch (object.state) {
+                        default:
+                            if (typeof object.state === "number") {
+                                message.state = object.state;
+                                break;
+                            }
+                            break;
+                        case "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED":
+                        case 0:
+                            message.state = 0;
+                            break;
+                        case "SUCCESS":
+                        case 1:
+                            message.state = 1;
+                            break;
+                        case "FAILURE":
+                        case 2:
+                            message.state = 2;
+                            break;
+                        }
+                        if (object.error != null)
+                            message.error = String(object.error);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a VulnerabilityAttestation message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation} message VulnerabilityAttestation
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VulnerabilityAttestation.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.lastAttemptTime = null;
+                            object.state = options.enums === String ? "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED" : 0;
+                            object.error = "";
+                        }
+                        if (message.lastAttemptTime != null && message.hasOwnProperty("lastAttemptTime"))
+                            object.lastAttemptTime = $root.google.protobuf.Timestamp.toObject(message.lastAttemptTime, options);
+                        if (message.state != null && message.hasOwnProperty("state"))
+                            object.state = options.enums === String ? $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState[message.state] === undefined ? message.state : $root.grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState[message.state] : message.state;
+                        if (message.error != null && message.hasOwnProperty("error"))
+                            object.error = message.error;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this VulnerabilityAttestation to JSON.
+                     * @function toJSON
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VulnerabilityAttestation.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VulnerabilityAttestation
+                     * @function getTypeUrl
+                     * @memberof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VulnerabilityAttestation.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation";
+                    };
+    
+                    /**
+                     * VulnerabilityAttestationState enum.
+                     * @name grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState
+                     * @enum {number}
+                     * @property {number} VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED=0 VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED value
+                     * @property {number} SUCCESS=1 SUCCESS value
+                     * @property {number} FAILURE=2 FAILURE value
+                     */
+                    VulnerabilityAttestation.VulnerabilityAttestationState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "SUCCESS"] = 1;
+                        values[valuesById[2] = "FAILURE"] = 2;
+                        return values;
+                    })();
+    
+                    return VulnerabilityAttestation;
                 })();
     
                 return DiscoveryOccurrence;

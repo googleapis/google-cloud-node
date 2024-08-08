@@ -6280,6 +6280,9 @@ export namespace grafeas {
 
             /** ComplianceOccurrence nonComplianceReason */
             nonComplianceReason?: (string|null);
+
+            /** ComplianceOccurrence version */
+            version?: (grafeas.v1.IComplianceVersion|null);
         }
 
         /** Represents a ComplianceOccurrence. */
@@ -6296,6 +6299,9 @@ export namespace grafeas {
 
             /** ComplianceOccurrence nonComplianceReason. */
             public nonComplianceReason: string;
+
+            /** ComplianceOccurrence version. */
+            public version?: (grafeas.v1.IComplianceVersion|null);
 
             /**
              * Creates a new ComplianceOccurrence instance using the specified properties.
@@ -7297,6 +7303,9 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence sbomStatus */
             sbomStatus?: (grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null);
+
+            /** DiscoveryOccurrence vulnerabilityAttestation */
+            vulnerabilityAttestation?: (grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null);
         }
 
         /** Represents a DiscoveryOccurrence. */
@@ -7334,6 +7343,9 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence sbomStatus. */
             public sbomStatus?: (grafeas.v1.DiscoveryOccurrence.ISBOMStatus|null);
+
+            /** DiscoveryOccurrence vulnerabilityAttestation. */
+            public vulnerabilityAttestation?: (grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null);
 
             /**
              * Creates a new DiscoveryOccurrence instance using the specified properties.
@@ -7640,6 +7652,125 @@ export namespace grafeas {
                     SBOM_STATE_UNSPECIFIED = 0,
                     PENDING = 1,
                     COMPLETE = 2
+                }
+            }
+
+            /** Properties of a VulnerabilityAttestation. */
+            interface IVulnerabilityAttestation {
+
+                /** VulnerabilityAttestation lastAttemptTime */
+                lastAttemptTime?: (google.protobuf.ITimestamp|null);
+
+                /** VulnerabilityAttestation state */
+                state?: (grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState|keyof typeof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState|null);
+
+                /** VulnerabilityAttestation error */
+                error?: (string|null);
+            }
+
+            /** Represents a VulnerabilityAttestation. */
+            class VulnerabilityAttestation implements IVulnerabilityAttestation {
+
+                /**
+                 * Constructs a new VulnerabilityAttestation.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation);
+
+                /** VulnerabilityAttestation lastAttemptTime. */
+                public lastAttemptTime?: (google.protobuf.ITimestamp|null);
+
+                /** VulnerabilityAttestation state. */
+                public state: (grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState|keyof typeof grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.VulnerabilityAttestationState);
+
+                /** VulnerabilityAttestation error. */
+                public error: string;
+
+                /**
+                 * Creates a new VulnerabilityAttestation instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VulnerabilityAttestation instance
+                 */
+                public static create(properties?: grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation): grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation;
+
+                /**
+                 * Encodes the specified VulnerabilityAttestation message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.verify|verify} messages.
+                 * @param message VulnerabilityAttestation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VulnerabilityAttestation message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation.verify|verify} messages.
+                 * @param message VulnerabilityAttestation message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VulnerabilityAttestation message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VulnerabilityAttestation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation;
+
+                /**
+                 * Decodes a VulnerabilityAttestation message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VulnerabilityAttestation
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation;
+
+                /**
+                 * Verifies a VulnerabilityAttestation message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VulnerabilityAttestation message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VulnerabilityAttestation
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation;
+
+                /**
+                 * Creates a plain object from a VulnerabilityAttestation message. Also converts values to other types if specified.
+                 * @param message VulnerabilityAttestation
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.DiscoveryOccurrence.VulnerabilityAttestation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VulnerabilityAttestation to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VulnerabilityAttestation
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VulnerabilityAttestation {
+
+                /** VulnerabilityAttestationState enum. */
+                enum VulnerabilityAttestationState {
+                    VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED = 0,
+                    SUCCESS = 1,
+                    FAILURE = 2
                 }
             }
         }
