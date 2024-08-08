@@ -4296,9 +4296,9 @@ export class SecurityCenterClient {
    *
    *   Its format is:
    *
-   *   * "organizations/{organization}/eventThreatDetectionSettings/customModules/{module}".
-   *   * "folders/{folder}/eventThreatDetectionSettings/customModules/{module}".
-   *   * "projects/{project}/eventThreatDetectionSettings/customModules/{module}".
+   *   * `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`.
+   *   * `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`.
+   *   * `projects/{project}/eventThreatDetectionSettings/customModules/{module}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5270,6 +5270,10 @@ export class SecurityCenterClient {
    * @param {string} request.muteAnnotation
    *   This can be a mute configuration name or any identifier for mute/unmute
    *   of findings based on the filter.
+   * @param {google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState} [request.muteState]
+   *   Optional. All findings matching the given filter will have their mute state
+   *   set to this value. The default value is `MUTED`. Setting this to
+   *   `UNDEFINED` will clear the mute state on all matching findings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
