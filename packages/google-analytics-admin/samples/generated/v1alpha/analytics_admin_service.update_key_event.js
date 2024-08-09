@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START dlp_v2_generated_DlpService_ListInfoTypes_async]
+function main(keyEvent, updateMask) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateKeyEvent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,38 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent resource name.
-   *  The format of this value is as follows:
-   *      `locations/{location_id}`
+   *  Required. The Key Event to update.
+   *  The `name` field is used to identify the settings to be updated.
    */
-  // const parent = 'abc123'
+  // const keyEvent = {}
   /**
-   *  BCP-47 language code for localized infoType friendly
-   *  names. If omitted, or if localized strings are not available,
-   *  en-US strings will be returned.
+   *  Required. The list of fields to be updated. Field names must be in snake
+   *  case (e.g., "field_to_update"). Omitted fields will not be updated. To
+   *  replace the entire entity, use one path with the string "*" to match all
+   *  fields.
    */
-  // const languageCode = 'abc123'
-  /**
-   *  filter to only return infoTypes supported by certain parts of the
-   *  API. Defaults to supported_by=INSPECT.
-   */
-  // const filter = 'abc123'
+  // const updateMask = {}
 
-  // Imports the Dlp library
-  const {DlpServiceClient} = require('@google-cloud/dlp').v2;
+  // Imports the Admin library
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
-  const dlpClient = new DlpServiceClient();
+  const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callListInfoTypes() {
+  async function callUpdateKeyEvent() {
     // Construct request
     const request = {
+      keyEvent,
+      updateMask,
     };
 
     // Run request
-    const response = await dlpClient.listInfoTypes(request);
+    const response = await adminClient.updateKeyEvent(request);
     console.log(response);
   }
 
-  callListInfoTypes();
-  // [END dlp_v2_generated_DlpService_ListInfoTypes_async]
+  callUpdateKeyEvent();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateKeyEvent_async]
 }
 
 process.on('unhandledRejection', err => {

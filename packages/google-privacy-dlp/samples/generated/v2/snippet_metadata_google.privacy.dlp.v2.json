@@ -2370,7 +2370,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 59,
+                    "end": 64,
                     "type": "FULL"
                 }
             ],
@@ -2447,14 +2447,14 @@
             "regionTag": "dlp_v2_generated_DlpService_ListConnections_async",
             "title": "DlpService listConnections Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists Connections in a parent.",
+            "description": " Lists Connections in a parent. Use SearchConnections to see all connections within an organization.",
             "canonical": true,
             "file": "dlp_service.list_connections.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -2506,7 +2506,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],

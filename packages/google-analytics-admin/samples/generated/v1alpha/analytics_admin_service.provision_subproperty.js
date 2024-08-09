@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START dlp_v2_generated_DlpService_ListInfoTypes_async]
+function main(subproperty) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ProvisionSubproperty_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,33 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent resource name.
-   *  The format of this value is as follows:
-   *      `locations/{location_id}`
+   *  Required. The subproperty to create.
    */
-  // const parent = 'abc123'
+  // const subproperty = {}
   /**
-   *  BCP-47 language code for localized infoType friendly
-   *  names. If omitted, or if localized strings are not available,
-   *  en-US strings will be returned.
+   *  Optional. The subproperty event filter to create on an ordinary property.
    */
-  // const languageCode = 'abc123'
-  /**
-   *  filter to only return infoTypes supported by certain parts of the
-   *  API. Defaults to supported_by=INSPECT.
-   */
-  // const filter = 'abc123'
+  // const subpropertyEventFilter = {}
 
-  // Imports the Dlp library
-  const {DlpServiceClient} = require('@google-cloud/dlp').v2;
+  // Imports the Admin library
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
-  const dlpClient = new DlpServiceClient();
+  const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callListInfoTypes() {
+  async function callProvisionSubproperty() {
     // Construct request
     const request = {
+      subproperty,
     };
 
     // Run request
-    const response = await dlpClient.listInfoTypes(request);
+    const response = await adminClient.provisionSubproperty(request);
     console.log(response);
   }
 
-  callListInfoTypes();
-  // [END dlp_v2_generated_DlpService_ListInfoTypes_async]
+  callProvisionSubproperty();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ProvisionSubproperty_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START dlp_v2_generated_DlpService_ListInfoTypes_async]
+function main(parent, bigqueryLink) {
+  // [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateBigQueryLink_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,34 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent resource name.
-   *  The format of this value is as follows:
-   *      `locations/{location_id}`
+   *  Required. Example format: properties/1234
    */
   // const parent = 'abc123'
   /**
-   *  BCP-47 language code for localized infoType friendly
-   *  names. If omitted, or if localized strings are not available,
-   *  en-US strings will be returned.
+   *  Required. The BigQueryLink to create.
    */
-  // const languageCode = 'abc123'
-  /**
-   *  filter to only return infoTypes supported by certain parts of the
-   *  API. Defaults to supported_by=INSPECT.
-   */
-  // const filter = 'abc123'
+  // const bigqueryLink = {}
 
-  // Imports the Dlp library
-  const {DlpServiceClient} = require('@google-cloud/dlp').v2;
+  // Imports the Admin library
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1alpha;
 
   // Instantiates a client
-  const dlpClient = new DlpServiceClient();
+  const adminClient = new AnalyticsAdminServiceClient();
 
-  async function callListInfoTypes() {
+  async function callCreateBigQueryLink() {
     // Construct request
     const request = {
+      parent,
+      bigqueryLink,
     };
 
     // Run request
-    const response = await dlpClient.listInfoTypes(request);
+    const response = await adminClient.createBigQueryLink(request);
     console.log(response);
   }
 
-  callListInfoTypes();
-  // [END dlp_v2_generated_DlpService_ListInfoTypes_async]
+  callCreateBigQueryLink();
+  // [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateBigQueryLink_async]
 }
 
 process.on('unhandledRejection', err => {
