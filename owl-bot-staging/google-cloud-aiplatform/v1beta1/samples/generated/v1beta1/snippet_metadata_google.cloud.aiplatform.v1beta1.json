@@ -8834,7 +8834,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 69,
+          "end": 73,
           "type": "FULL"
         }
       ],
@@ -8858,6 +8858,10 @@
           {
             "name": "is_hugging_face_model",
             "type": "TYPE_BOOL"
+          },
+          {
+            "name": "hugging_face_token",
+            "type": "TYPE_STRING"
           }
         ],
         "resultType": ".google.cloud.aiplatform.v1beta1.PublisherModel",
