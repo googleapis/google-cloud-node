@@ -38,25 +38,20 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/reachability_service_client_config.json`.
+ * `src/v1beta1/vpc_flow_logs_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './reachability_service_client_config.json';
+import * as gapicConfig from './vpc_flow_logs_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The Reachability service in the Google Cloud Network Management API provides
- *  services that analyze the reachability within a single Google Virtual Private
- *  Cloud (VPC) network, between peered VPC networks, between VPC and on-premises
- *  networks, or between VPC networks and internet hosts. A reachability analysis
- *  is based on Google Cloud network configurations.
- *
- *  You can use the analysis results to verify these configurations and
- *  to troubleshoot connectivity issues.
+ *  The VPC Flow Logs service in the Google Cloud Network Management API provides
+ *  configurations that generate Flow Logs. The service and the configuration
+ *  resources created using this service are global.
  * @class
  * @memberof v1beta1
  */
-export class ReachabilityServiceClient {
+export class VpcFlowLogsServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -79,10 +74,10 @@ export class ReachabilityServiceClient {
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  reachabilityServiceStub?: Promise<{[name: string]: Function}>;
+  vpcFlowLogsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of ReachabilityServiceClient.
+   * Construct an instance of VpcFlowLogsServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -117,7 +112,7 @@ export class ReachabilityServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new ReachabilityServiceClient({fallback: true}, gax);
+   *     const client = new VpcFlowLogsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -125,7 +120,7 @@ export class ReachabilityServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof ReachabilityServiceClient;
+    const staticMembers = this.constructor as typeof VpcFlowLogsServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -224,6 +219,12 @@ export class ReachabilityServiceClient {
       connectivityTestPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/connectivityTests/{test}'
       ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
       vpcFlowLogsConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
       ),
@@ -233,10 +234,10 @@ export class ReachabilityServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listConnectivityTests: new this._gaxModule.PageDescriptor(
+      listVpcFlowLogsConfigs: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
-        'resources'
+        'vpcFlowLogsConfigs'
       ),
     };
 
@@ -295,71 +296,58 @@ export class ReachabilityServiceClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
-    const createConnectivityTestResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1beta1.ConnectivityTest'
+    const createVpcFlowLogsConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig'
     ) as gax.protobuf.Type;
-    const createConnectivityTestMetadata = protoFilesRoot.lookup(
+    const createVpcFlowLogsConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkmanagement.v1beta1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const updateConnectivityTestResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1beta1.ConnectivityTest'
+    const updateVpcFlowLogsConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig'
     ) as gax.protobuf.Type;
-    const updateConnectivityTestMetadata = protoFilesRoot.lookup(
+    const updateVpcFlowLogsConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkmanagement.v1beta1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const rerunConnectivityTestResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1beta1.ConnectivityTest'
-    ) as gax.protobuf.Type;
-    const rerunConnectivityTestMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkmanagement.v1beta1.OperationMetadata'
-    ) as gax.protobuf.Type;
-    const deleteConnectivityTestResponse = protoFilesRoot.lookup(
+    const deleteVpcFlowLogsConfigResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
-    const deleteConnectivityTestMetadata = protoFilesRoot.lookup(
+    const deleteVpcFlowLogsConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkmanagement.v1beta1.OperationMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
-      createConnectivityTest: new this._gaxModule.LongrunningDescriptor(
+      createVpcFlowLogsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        createConnectivityTestResponse.decode.bind(
-          createConnectivityTestResponse
+        createVpcFlowLogsConfigResponse.decode.bind(
+          createVpcFlowLogsConfigResponse
         ),
-        createConnectivityTestMetadata.decode.bind(
-          createConnectivityTestMetadata
+        createVpcFlowLogsConfigMetadata.decode.bind(
+          createVpcFlowLogsConfigMetadata
         )
       ),
-      updateConnectivityTest: new this._gaxModule.LongrunningDescriptor(
+      updateVpcFlowLogsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        updateConnectivityTestResponse.decode.bind(
-          updateConnectivityTestResponse
+        updateVpcFlowLogsConfigResponse.decode.bind(
+          updateVpcFlowLogsConfigResponse
         ),
-        updateConnectivityTestMetadata.decode.bind(
-          updateConnectivityTestMetadata
+        updateVpcFlowLogsConfigMetadata.decode.bind(
+          updateVpcFlowLogsConfigMetadata
         )
       ),
-      rerunConnectivityTest: new this._gaxModule.LongrunningDescriptor(
+      deleteVpcFlowLogsConfig: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
-        rerunConnectivityTestResponse.decode.bind(
-          rerunConnectivityTestResponse
+        deleteVpcFlowLogsConfigResponse.decode.bind(
+          deleteVpcFlowLogsConfigResponse
         ),
-        rerunConnectivityTestMetadata.decode.bind(rerunConnectivityTestMetadata)
-      ),
-      deleteConnectivityTest: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deleteConnectivityTestResponse.decode.bind(
-          deleteConnectivityTestResponse
-        ),
-        deleteConnectivityTestMetadata.decode.bind(
-          deleteConnectivityTestMetadata
+        deleteVpcFlowLogsConfigMetadata.decode.bind(
+          deleteVpcFlowLogsConfigMetadata
         )
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.networkmanagement.v1beta1.ReachabilityService',
+      'google.cloud.networkmanagement.v1beta1.VpcFlowLogsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -387,36 +375,35 @@ export class ReachabilityServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.reachabilityServiceStub) {
-      return this.reachabilityServiceStub;
+    if (this.vpcFlowLogsServiceStub) {
+      return this.vpcFlowLogsServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.networkmanagement.v1beta1.ReachabilityService.
-    this.reachabilityServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.
+    this.vpcFlowLogsServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.networkmanagement.v1beta1.ReachabilityService'
+            'google.cloud.networkmanagement.v1beta1.VpcFlowLogsService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.networkmanagement.v1beta1
-            .ReachabilityService,
+            .VpcFlowLogsService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const reachabilityServiceStubMethods = [
-      'listConnectivityTests',
-      'getConnectivityTest',
-      'createConnectivityTest',
-      'updateConnectivityTest',
-      'rerunConnectivityTest',
-      'deleteConnectivityTest',
+    const vpcFlowLogsServiceStubMethods = [
+      'listVpcFlowLogsConfigs',
+      'getVpcFlowLogsConfig',
+      'createVpcFlowLogsConfig',
+      'updateVpcFlowLogsConfig',
+      'deleteVpcFlowLogsConfig',
     ];
-    for (const methodName of reachabilityServiceStubMethods) {
-      const callPromise = this.reachabilityServiceStub.then(
+    for (const methodName of vpcFlowLogsServiceStubMethods) {
+      const callPromise = this.vpcFlowLogsServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -444,7 +431,7 @@ export class ReachabilityServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.reachabilityServiceStub;
+    return this.vpcFlowLogsServiceStub;
   }
 
   /**
@@ -532,79 +519,79 @@ export class ReachabilityServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets the details of a specific Connectivity Test.
+   * Gets the details of a specific `VpcFlowLogsConfig`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. `ConnectivityTest` resource name using the form:
-   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+   *   Required. `VpcFlowLogsConfig` resource name using the form:
+   *       `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.get_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_GetConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.get_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_GetVpcFlowLogsConfig_async
    */
-  getConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest,
+  getVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
       (
-        | protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest
+        | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
         | undefined
       ),
       {} | undefined,
     ]
   >;
-  getConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest,
+  getVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-      | protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+      | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest,
+  getVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest,
     callback: Callback<
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-      | protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+      | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  getConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest,
+  getVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-          | protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest
+          protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+          | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-      | protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
+      | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
       (
-        | protos.google.cloud.networkmanagement.v1beta1.IGetConnectivityTestRequest
+        | protos.google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest
         | undefined
       ),
       {} | undefined,
@@ -626,40 +613,34 @@ export class ReachabilityServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.getConnectivityTest(request, options, callback);
+    return this.innerApiCalls.getVpcFlowLogsConfig(request, options, callback);
   }
 
   /**
-   * Creates a new Connectivity Test.
-   * After you create a test, the reachability analysis is performed as part
-   * of the long running operation, which completes when the analysis completes.
-   *
-   * If the endpoint specifications in `ConnectivityTest` are invalid
-   * (for example, containing non-existent resources in the network, or you
-   * don't have read permissions to the network configurations of listed
-   * projects), then the reachability result returns a value of `UNKNOWN`.
-   *
-   * If the endpoint specifications in `ConnectivityTest` are
-   * incomplete, the reachability result returns a value of
-   * <code>AMBIGUOUS</code>. For more information,
-   * see the Connectivity Test documentation.
+   * Creates a new `VpcFlowLogsConfig`.
+   * If a configuration with the exact same settings already exists (even if the
+   * ID is different), the creation fails.
+   * Notes:
+   * 1. Creating a configuration with state=DISABLED will fail.
+   * 2. The following fields are not considrered as `settings` for the purpose
+   * of the check mentioned above, therefore - creating another configuration
+   * with the same fields but different values for the following fields will
+   * fail as well:
+   *   - name
+   *   - create_time
+   *   - update_time
+   *   - labels
+   *   - description
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the Connectivity Test to create:
+   *   Required. The parent resource of the VPC Flow Logs configuration to create:
    *       `projects/{project_id}/locations/global`
-   * @param {string} request.testId
-   *   Required. The logical name of the Connectivity Test in your project
-   *   with the following restrictions:
-   *
-   *   * Must contain only lowercase letters, numbers, and hyphens.
-   *   * Must start with a letter.
-   *   * Must be between 1-40 characters.
-   *   * Must end with a number or a letter.
-   *   * Must be unique within the customer project
-   * @param {google.cloud.networkmanagement.v1beta1.ConnectivityTest} request.resource
-   *   Required. A `ConnectivityTest` resource
+   * @param {string} request.vpcFlowLogsConfigId
+   *   Required. ID of the `VpcFlowLogsConfig`.
+   * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} request.vpcFlowLogsConfig
+   *   Required. A `VpcFlowLogsConfig` resource
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -668,52 +649,52 @@ export class ReachabilityServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.create_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_CreateConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.create_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_async
    */
-  createConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.ICreateConnectivityTestRequest,
+  createVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  createConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.ICreateConnectivityTestRequest,
+  createVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.ICreateConnectivityTestRequest,
+  createVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  createConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.ICreateConnectivityTestRequest,
+  createVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+            protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
             protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -721,7 +702,7 @@ export class ReachabilityServiceClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -730,7 +711,7 @@ export class ReachabilityServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -753,28 +734,28 @@ export class ReachabilityServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.createConnectivityTest(
+    return this.innerApiCalls.createVpcFlowLogsConfig(
       request,
       options,
       callback
     );
   }
   /**
-   * Check the status of the long running operation returned by `createConnectivityTest()`.
+   * Check the status of the long running operation returned by `createVpcFlowLogsConfig()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.create_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_CreateConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.create_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_async
    */
-  async checkCreateConnectivityTestProgress(
+  async checkCreateVpcFlowLogsConfigProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest,
+      protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig,
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >
   > {
@@ -785,36 +766,35 @@ export class ReachabilityServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.createConnectivityTest,
+      this.descriptors.longrunning.createVpcFlowLogsConfig,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest,
+      protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig,
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >;
   }
   /**
-   * Updates the configuration of an existing `ConnectivityTest`.
-   * After you update a test, the reachability analysis is performed as part
-   * of the long running operation, which completes when the analysis completes.
-   * The Reachability state in the test resource is updated with the new result.
-   *
-   * If the endpoint specifications in `ConnectivityTest` are invalid
-   * (for example, they contain non-existent resources in the network, or the
-   * user does not have read permissions to the network configurations of
-   * listed projects), then the reachability result returns a value of
-   * <code>UNKNOWN</code>.
-   *
-   * If the endpoint specifications in `ConnectivityTest` are incomplete, the
-   * reachability result returns a value of `AMBIGUOUS`. See the documentation
-   * in `ConnectivityTest` for for more details.
+   * Updates an existing `VpcFlowLogsConfig`.
+   * If a configuration with the exact same settings already exists (even if the
+   * ID is different), the creation fails.
+   * Notes:
+   * 1. The following fields are not considrered as `settings` for the purpose
+   * of the check mentioned above, therefore - updating another configuration
+   * with the same fields but different values for the following fields will
+   * fail as well:
+   *   - name
+   *   - create_time
+   *   - update_time
+   *   - labels
+   *   - description
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field.
-   * @param {google.cloud.networkmanagement.v1beta1.ConnectivityTest} request.resource
+   * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} request.vpcFlowLogsConfig
    *   Required. Only fields specified in update_mask are updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -824,52 +804,52 @@ export class ReachabilityServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.update_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_UpdateConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.update_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_async
    */
-  updateConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IUpdateConnectivityTestRequest,
+  updateVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
-  updateConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IUpdateConnectivityTestRequest,
+  updateVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IUpdateConnectivityTestRequest,
+  updateVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
-  updateConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IUpdateConnectivityTestRequest,
+  updateVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+            protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
             protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
@@ -877,7 +857,7 @@ export class ReachabilityServiceClient {
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
@@ -886,7 +866,7 @@ export class ReachabilityServiceClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
+        protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig,
         protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
@@ -906,31 +886,31 @@ export class ReachabilityServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'resource.name': request.resource!.name ?? '',
+        'vpc_flow_logs_config.name': request.vpcFlowLogsConfig!.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.updateConnectivityTest(
+    return this.innerApiCalls.updateVpcFlowLogsConfig(
       request,
       options,
       callback
     );
   }
   /**
-   * Check the status of the long running operation returned by `updateConnectivityTest()`.
+   * Check the status of the long running operation returned by `updateVpcFlowLogsConfig()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.update_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_UpdateConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.update_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_async
    */
-  async checkUpdateConnectivityTestProgress(
+  async checkUpdateVpcFlowLogsConfigProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest,
+      protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig,
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >
   > {
@@ -941,33 +921,22 @@ export class ReachabilityServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.updateConnectivityTest,
+      this.descriptors.longrunning.updateVpcFlowLogsConfig,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest,
+      protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig,
       protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
     >;
   }
   /**
-   * Rerun an existing `ConnectivityTest`.
-   * After the user triggers the rerun, the reachability analysis is performed
-   * as part of the long running operation, which completes when the analysis
-   * completes.
-   *
-   * Even though the test configuration remains the same, the reachability
-   * result may change due to underlying network configuration changes.
-   *
-   * If the endpoint specifications in `ConnectivityTest` become invalid (for
-   * example, specified resources are deleted in the network, or you lost
-   * read permissions to the network configurations of listed projects), then
-   * the reachability result returns a value of `UNKNOWN`.
+   * Deletes a specific `VpcFlowLogsConfig`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Connectivity Test resource name using the form:
-   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+   *   Required. `VpcFlowLogsConfig` resource name using the form:
+   *       `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -976,148 +945,11 @@ export class ReachabilityServiceClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_RerunConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_async
    */
-  rerunConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IRerunConnectivityTestRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  >;
-  rerunConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IRerunConnectivityTestRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rerunConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IRerunConnectivityTestRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rerunConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IRerunConnectivityTestRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-            protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest,
-        protos.google.cloud.networkmanagement.v1beta1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined,
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        name: request.name ?? '',
-      });
-    this.initialize();
-    return this.innerApiCalls.rerunConnectivityTest(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `rerunConnectivityTest()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.rerun_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_RerunConnectivityTest_async
-   */
-  async checkRerunConnectivityTestProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest,
-      protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
-    >
-  > {
-    const request =
-      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        {name}
-      );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(
-      operation,
-      this.descriptors.longrunning.rerunConnectivityTest,
-      this._gaxModule.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest,
-      protos.google.cloud.networkmanagement.v1beta1.OperationMetadata
-    >;
-  }
-  /**
-   * Deletes a specific `ConnectivityTest`.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Connectivity Test resource name using the form:
-   *       `projects/{project_id}/locations/global/connectivityTests/{test_id}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.delete_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_DeleteConnectivityTest_async
-   */
-  deleteConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IDeleteConnectivityTestRequest,
+  deleteVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1129,8 +961,8 @@ export class ReachabilityServiceClient {
       {} | undefined,
     ]
   >;
-  deleteConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IDeleteConnectivityTestRequest,
+  deleteVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
@@ -1141,8 +973,8 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): void;
-  deleteConnectivityTest(
-    request: protos.google.cloud.networkmanagement.v1beta1.IDeleteConnectivityTestRequest,
+  deleteVpcFlowLogsConfig(
+    request: protos.google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
@@ -1152,8 +984,8 @@ export class ReachabilityServiceClient {
       {} | null | undefined
     >
   ): void;
-  deleteConnectivityTest(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IDeleteConnectivityTestRequest,
+  deleteVpcFlowLogsConfig(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1198,24 +1030,24 @@ export class ReachabilityServiceClient {
         name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteConnectivityTest(
+    return this.innerApiCalls.deleteVpcFlowLogsConfig(
       request,
       options,
       callback
     );
   }
   /**
-   * Check the status of the long running operation returned by `deleteConnectivityTest()`.
+   * Check the status of the long running operation returned by `deleteVpcFlowLogsConfig()`.
    * @param {String} name
    *   The operation name that will be passed.
    * @returns {Promise} - The promise which resolves to an object.
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.delete_connectivity_test.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_DeleteConnectivityTest_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_async
    */
-  async checkDeleteConnectivityTestProgress(
+  async checkDeleteVpcFlowLogsConfigProgress(
     name: string
   ): Promise<
     LROperation<
@@ -1230,7 +1062,7 @@ export class ReachabilityServiceClient {
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
       operation,
-      this.descriptors.longrunning.deleteConnectivityTest,
+      this.descriptors.longrunning.deleteVpcFlowLogsConfig,
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -1239,104 +1071,90 @@ export class ReachabilityServiceClient {
     >;
   }
   /**
-   * Lists all Connectivity Tests owned by a project.
+   * Lists all `VpcFlowLogsConfigs` in a given project.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the Connectivity Tests:
+   *   Required. The parent resource of the VpcFlowLogsConfig:
    *       `projects/{project_id}/locations/global`
-   * @param {number} request.pageSize
-   *   Number of `ConnectivityTests` to return.
-   * @param {string} request.pageToken
-   *   Page token from an earlier query, as returned in `next_page_token`.
-   * @param {string} request.filter
-   *   Lists the `ConnectivityTests` that match the filter expression. A filter
-   *   expression filters the resources listed in the response. The expression
-   *   must be of the form `<field> <operator> <value>` where operators: `<`, `>`,
-   *   `<=`,
-   *   `>=`,
-   *   `!=`, `=`, `:` are supported (colon `:` represents a HAS operator which is
-   *   roughly synonymous with equality). <field> can refer to a proto or JSON
-   *   field, or a synthetic field. Field names can be camelCase or snake_case.
-   *
-   *   Examples:
-   *   - Filter by name:
-   *     name = "projects/proj-1/locations/global/connectivityTests/test-1
-   *
-   *   - Filter by labels:
-   *     - Resources that have a key called `foo`
-   *       labels.foo:*
-   *     - Resources that have a key called `foo` whose value is `bar`
-   *       labels.foo = bar
-   * @param {string} request.orderBy
-   *   Field to use to sort the list.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest}.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig|VpcFlowLogsConfig}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
-   *   We recommend using `listConnectivityTestsAsync()`
+   *   We recommend using `listVpcFlowLogsConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listConnectivityTests(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
+  listVpcFlowLogsConfigs(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest[],
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest | null,
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse,
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse,
     ]
   >;
-  listConnectivityTests(
-    request: protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
+  listVpcFlowLogsConfigs(
+    request: protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
-      | protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse
       | null
       | undefined,
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig
     >
   ): void;
-  listConnectivityTests(
-    request: protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
+  listVpcFlowLogsConfigs(
+    request: protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
     callback: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
-      | protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse
       | null
       | undefined,
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig
     >
   ): void;
-  listConnectivityTests(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
+  listVpcFlowLogsConfigs(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
-          | protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse
+          protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
+          | protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse
           | null
           | undefined,
-          protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest
+          protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
-      | protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
+      | protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse
       | null
       | undefined,
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig
     >
   ): Promise<
     [
-      protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest[],
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest | null,
-      protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsResponse,
+      protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig[],
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest | null,
+      protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse,
     ]
   > | void {
     request = request || {};
@@ -1355,7 +1173,11 @@ export class ReachabilityServiceClient {
         parent: request.parent ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listConnectivityTests(request, options, callback);
+    return this.innerApiCalls.listVpcFlowLogsConfigs(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
@@ -1363,46 +1185,32 @@ export class ReachabilityServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the Connectivity Tests:
+   *   Required. The parent resource of the VpcFlowLogsConfig:
    *       `projects/{project_id}/locations/global`
-   * @param {number} request.pageSize
-   *   Number of `ConnectivityTests` to return.
-   * @param {string} request.pageToken
-   *   Page token from an earlier query, as returned in `next_page_token`.
-   * @param {string} request.filter
-   *   Lists the `ConnectivityTests` that match the filter expression. A filter
-   *   expression filters the resources listed in the response. The expression
-   *   must be of the form `<field> <operator> <value>` where operators: `<`, `>`,
-   *   `<=`,
-   *   `>=`,
-   *   `!=`, `=`, `:` are supported (colon `:` represents a HAS operator which is
-   *   roughly synonymous with equality). <field> can refer to a proto or JSON
-   *   field, or a synthetic field. Field names can be camelCase or snake_case.
-   *
-   *   Examples:
-   *   - Filter by name:
-   *     name = "projects/proj-1/locations/global/connectivityTests/test-1
-   *
-   *   - Filter by labels:
-   *     - Resources that have a key called `foo`
-   *       labels.foo:*
-   *     - Resources that have a key called `foo` whose value is `bar`
-   *       labels.foo = bar
-   * @param {string} request.orderBy
-   *   Field to use to sort the list.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig|VpcFlowLogsConfig} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listConnectivityTestsAsync()`
+   *   We recommend using `listVpcFlowLogsConfigsAsync()`
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
    */
-  listConnectivityTestsStream(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
+  listVpcFlowLogsConfigsStream(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1413,66 +1221,52 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listConnectivityTests'];
+    const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listConnectivityTests.createStream(
-      this.innerApiCalls.listConnectivityTests as GaxCall,
+    return this.descriptors.page.listVpcFlowLogsConfigs.createStream(
+      this.innerApiCalls.listVpcFlowLogsConfigs as GaxCall,
       request,
       callSettings
     );
   }
 
   /**
-   * Equivalent to `listConnectivityTests`, but returns an iterable object.
+   * Equivalent to `listVpcFlowLogsConfigs`, but returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource of the Connectivity Tests:
+   *   Required. The parent resource of the VpcFlowLogsConfig:
    *       `projects/{project_id}/locations/global`
-   * @param {number} request.pageSize
-   *   Number of `ConnectivityTests` to return.
-   * @param {string} request.pageToken
-   *   Page token from an earlier query, as returned in `next_page_token`.
-   * @param {string} request.filter
-   *   Lists the `ConnectivityTests` that match the filter expression. A filter
-   *   expression filters the resources listed in the response. The expression
-   *   must be of the form `<field> <operator> <value>` where operators: `<`, `>`,
-   *   `<=`,
-   *   `>=`,
-   *   `!=`, `=`, `:` are supported (colon `:` represents a HAS operator which is
-   *   roughly synonymous with equality). <field> can refer to a proto or JSON
-   *   field, or a synthetic field. Field names can be camelCase or snake_case.
-   *
-   *   Examples:
-   *   - Filter by name:
-   *     name = "projects/proj-1/locations/global/connectivityTests/test-1
-   *
-   *   - Filter by labels:
-   *     - Resources that have a key called `foo`
-   *       labels.foo:*
-   *     - Resources that have a key called `foo` whose value is `bar`
-   *       labels.foo = bar
-   * @param {string} request.orderBy
-   *   Field to use to sort the list.
+   * @param {number} [request.pageSize]
+   *   Optional. Number of `VpcFlowLogsConfigs` to return.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token from an earlier query, as returned in
+   *   `next_page_token`.
+   * @param {string} [request.filter]
+   *   Optional. Lists the `VpcFlowLogsConfigs` that match the filter expression.
+   *   A filter expression must use the supported [CEL logic operators]
+   *   (https://cloud.google.com/vpc/docs/about-flow-logs-records#supported_cel_logic_operators).
+   * @param {string} [request.orderBy]
+   *   Optional. Field to use to sort the list.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.networkmanagement.v1beta1.ConnectivityTest|ConnectivityTest}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig|VpcFlowLogsConfig}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta1/reachability_service.list_connectivity_tests.js</caption>
-   * region_tag:networkmanagement_v1beta1_generated_ReachabilityService_ListConnectivityTests_async
+   * @example <caption>include:samples/generated/v1beta1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js</caption>
+   * region_tag:networkmanagement_v1beta1_generated_VpcFlowLogsService_ListVpcFlowLogsConfigs_async
    */
-  listConnectivityTestsAsync(
-    request?: protos.google.cloud.networkmanagement.v1beta1.IListConnectivityTestsRequest,
+  listVpcFlowLogsConfigsAsync(
+    request?: protos.google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest> {
+  ): AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1481,14 +1275,14 @@ export class ReachabilityServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    const defaultCallSettings = this._defaults['listConnectivityTests'];
+    const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listConnectivityTests.asyncIterate(
-      this.innerApiCalls['listConnectivityTests'] as GaxCall,
+    return this.descriptors.page.listVpcFlowLogsConfigs.asyncIterate(
+      this.innerApiCalls['listVpcFlowLogsConfigs'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IConnectivityTest>;
+    ) as AsyncIterable<protos.google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -1926,6 +1720,65 @@ export class ReachabilityServiceClient {
   }
 
   /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
    * Return a fully-qualified vpcFlowLogsConfig resource name string.
    *
    * @param {string} project
@@ -1993,8 +1846,8 @@ export class ReachabilityServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.reachabilityServiceStub && !this._terminated) {
-      return this.reachabilityServiceStub.then(stub => {
+    if (this.vpcFlowLogsServiceStub && !this._terminated) {
+      return this.vpcFlowLogsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
         this.iamClient.close();
