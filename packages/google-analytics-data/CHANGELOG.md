@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.7.0...data-v4.8.0) (2024-08-09)
+
+
+### Features
+
+* [analytics-data] add the `comparisons` field to the `Metadata` resource ([#5600](https://github.com/googleapis/google-cloud-node/issues/5600)) ([e77b934](https://github.com/googleapis/google-cloud-node/commit/e77b9348a198e3a3e60e71474ac3320273d17f6e))
+
 ## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.6.0...data-v4.7.0) (2024-05-21)
 
 

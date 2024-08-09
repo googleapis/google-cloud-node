@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.7.0...dialogflow-cx-v4.8.0) (2024-08-09)
+
+
+### Features
+
+* [dialogflow-cx] exposed DataStoreConnectionSignals ([#5567](https://github.com/googleapis/google-cloud-node/issues/5567)) ([b961ff9](https://github.com/googleapis/google-cloud-node/commit/b961ff9b113f1e6650d3650287d3ec2b0bca0874))
+
 ## [4.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v4.6.0...dialogflow-cx-v4.7.0) (2024-05-21)
 
 

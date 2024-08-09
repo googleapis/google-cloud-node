@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.4.0...datacatalog-v4.5.0) (2024-08-09)
+
+
+### Features
+
+* [datacatalog] add DataplexTransferStatus enum and field to TagTemplate ([#5573](https://github.com/googleapis/google-cloud-node/issues/5573)) ([bebe50e](https://github.com/googleapis/google-cloud-node/commit/bebe50e1a5910e6fc8889e2a682cd0dd2977653e))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/datacatalog-v4.3.0...datacatalog-v4.4.0) (2024-05-21)
 
 

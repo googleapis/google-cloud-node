@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.26.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.25.0...aiplatform-v3.26.0) (2024-08-09)
+
+
+### Features
+
+* A new field `score` is added to message `.google.cloud.aiplatform.v1.Candidate` ([#5577](https://github.com/googleapis/google-cloud-node/issues/5577)) ([1abd9a7](https://github.com/googleapis/google-cloud-node/commit/1abd9a70dfddde93dfd21122dd1e041f9e6a3fb8))
+
 ## [3.25.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.24.0...aiplatform-v3.25.0) (2024-07-10)
 
 

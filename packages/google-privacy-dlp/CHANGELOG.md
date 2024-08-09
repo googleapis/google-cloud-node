@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.8.0...dlp-v5.9.0) (2024-08-09)
+
+
+### Features
+
+* [dlp] add the TagResources API ([#5588](https://github.com/googleapis/google-cloud-node/issues/5588)) ([91df9a7](https://github.com/googleapis/google-cloud-node/commit/91df9a74e2f3573a3620f6641b51112ed6f3f394))
+
 ## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.7.0...dlp-v5.8.0) (2024-07-22)
 
 
