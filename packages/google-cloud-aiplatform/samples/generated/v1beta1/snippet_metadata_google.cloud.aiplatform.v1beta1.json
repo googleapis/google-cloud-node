@@ -1606,7 +1606,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 144,
+                    "end": 152,
                     "type": "FULL"
                 }
             ],
@@ -1682,6 +1682,14 @@
                     {
                         "name": "question_answering_correctness_input",
                         "type": ".google.cloud.aiplatform.v1beta1.QuestionAnsweringCorrectnessInput"
+                    },
+                    {
+                        "name": "pointwise_metric_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PointwiseMetricInput"
+                    },
+                    {
+                        "name": "pairwise_metric_input",
+                        "type": ".google.cloud.aiplatform.v1beta1.PairwiseMetricInput"
                     },
                     {
                         "name": "tool_call_valid_input",
@@ -8826,7 +8834,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -8850,6 +8858,10 @@
                     {
                         "name": "is_hugging_face_model",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "hugging_face_token",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.PublisherModel",

@@ -24,6 +24,7 @@ function main() {
   const deploymentResourcePoolServiceClient =
     new aiplatform.DeploymentResourcePoolServiceClient();
   const endpointServiceClient = new aiplatform.EndpointServiceClient();
+  const evaluationServiceClient = new aiplatform.EvaluationServiceClient();
   const featureOnlineStoreAdminServiceClient =
     new aiplatform.FeatureOnlineStoreAdminServiceClient();
   const featureOnlineStoreServiceClient =

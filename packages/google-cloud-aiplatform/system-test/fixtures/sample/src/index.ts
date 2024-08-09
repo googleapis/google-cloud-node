@@ -20,6 +20,7 @@ import {
   DatasetServiceClient,
   DeploymentResourcePoolServiceClient,
   EndpointServiceClient,
+  EvaluationServiceClient,
   FeatureOnlineStoreAdminServiceClient,
   FeatureOnlineStoreServiceClient,
   FeatureRegistryServiceClient,
@@ -55,6 +56,9 @@ function doStuffWithDeploymentResourcePoolServiceClient(
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithEvaluationServiceClient(client: EvaluationServiceClient) {
   client.close();
 }
 function doStuffWithFeatureOnlineStoreAdminServiceClient(
@@ -156,6 +160,9 @@ function main() {
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
+  // check that the client instance can be created
+  const evaluationServiceClient = new EvaluationServiceClient();
+  doStuffWithEvaluationServiceClient(evaluationServiceClient);
   // check that the client instance can be created
   const featureOnlineStoreAdminServiceClient =
     new FeatureOnlineStoreAdminServiceClient();

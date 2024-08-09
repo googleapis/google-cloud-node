@@ -29,9 +29,12 @@ function main(model, contents) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the publisher model requested to serve the
-   *  prediction. Format:
+   *  Required. The fully qualified name of the publisher model or tuned model
+   *  endpoint to use.
+   *  Publisher model format:
    *  `projects/{project}/locations/{location}/publishers/* /models/*`
+   *  Tuned model endpoint format:
+   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
    */
   // const model = 'abc123'
   /**
