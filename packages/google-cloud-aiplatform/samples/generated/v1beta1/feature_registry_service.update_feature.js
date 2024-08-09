@@ -47,7 +47,8 @@ function main(feature) {
    *  Updatable fields:
    *    * `description`
    *    * `labels`
-   *    * `disable_monitoring` (Not supported for FeatureRegistry Feature)
+   *    * `disable_monitoring` (Not supported for FeatureRegistryService Feature)
+   *    * `point_of_contact` (Not supported for FeaturestoreService FeatureStore)
    */
   // const updateMask = {}
 

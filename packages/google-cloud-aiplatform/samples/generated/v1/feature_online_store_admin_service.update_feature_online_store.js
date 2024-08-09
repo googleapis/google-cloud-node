@@ -43,10 +43,11 @@ function main(featureOnlineStore) {
    *  request will be overwritten. Set the update_mask to `*` to override all
    *  fields.
    *  Updatable fields:
-   *    * `big_query_source`
-   *    * `bigtable`
    *    * `labels`
-   *    * `sync_config`
+   *    * `description`
+   *    * `bigtable`
+   *    * `bigtable.auto_scaling`
+   *    * `bigtable.enable_multi_region_replica`
    */
   // const updateMask = {}
 

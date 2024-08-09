@@ -2203,6 +2203,13 @@
                         "confidence": {
                           "type": "float",
                           "id": 2
+                        },
+                        "severity": {
+                          "type": "float",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2309,6 +2316,22 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "modelVersion": {
+                          "type": "ModelVersion",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ModelVersion": {
+                          "values": {
+                            "MODEL_VERSION_UNSPECIFIED": 0,
+                            "MODEL_VERSION_1": 1,
+                            "MODEL_VERSION_2": 2
                           }
                         }
                       }

@@ -527,6 +527,11 @@
                 "generateStatelessSummary"
               ]
             },
+            "GenerateStatelessSuggestion": {
+              "methods": [
+                "generateStatelessSuggestion"
+              ]
+            },
             "SearchKnowledge": {
               "methods": [
                 "searchKnowledge"
@@ -574,6 +579,11 @@
             "GenerateStatelessSummary": {
               "methods": [
                 "generateStatelessSummary"
+              ]
+            },
+            "GenerateStatelessSuggestion": {
+              "methods": [
+                "generateStatelessSuggestion"
               ]
             },
             "SearchKnowledge": {
@@ -691,6 +701,40 @@
                 "listDocuments",
                 "listDocumentsStream",
                 "listDocumentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "EncryptionSpecService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EncryptionSpecServiceClient",
+          "rpcs": {
+            "GetEncryptionSpec": {
+              "methods": [
+                "getEncryptionSpec"
+              ]
+            },
+            "InitializeEncryptionSpec": {
+              "methods": [
+                "initializeEncryptionSpec"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EncryptionSpecServiceClient",
+          "rpcs": {
+            "GetEncryptionSpec": {
+              "methods": [
+                "getEncryptionSpec"
+              ]
+            },
+            "InitializeEncryptionSpec": {
+              "methods": [
+                "initializeEncryptionSpec"
               ]
             }
           }
@@ -931,6 +975,74 @@
         }
       }
     },
+    "Generators": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GeneratorsClient",
+          "rpcs": {
+            "CreateGenerator": {
+              "methods": [
+                "createGenerator"
+              ]
+            },
+            "GetGenerator": {
+              "methods": [
+                "getGenerator"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "deleteGenerator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "updateGenerator"
+              ]
+            },
+            "ListGenerators": {
+              "methods": [
+                "listGenerators",
+                "listGeneratorsStream",
+                "listGeneratorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GeneratorsClient",
+          "rpcs": {
+            "CreateGenerator": {
+              "methods": [
+                "createGenerator"
+              ]
+            },
+            "GetGenerator": {
+              "methods": [
+                "getGenerator"
+              ]
+            },
+            "DeleteGenerator": {
+              "methods": [
+                "deleteGenerator"
+              ]
+            },
+            "UpdateGenerator": {
+              "methods": [
+                "updateGenerator"
+              ]
+            },
+            "ListGenerators": {
+              "methods": [
+                "listGenerators",
+                "listGeneratorsStream",
+                "listGeneratorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Intents": {
       "clients": {
         "grpc": {
@@ -1127,6 +1239,11 @@
                 "suggestSmartReplies"
               ]
             },
+            "SuggestKnowledgeAssist": {
+              "methods": [
+                "suggestKnowledgeAssist"
+              ]
+            },
             "StreamingAnalyzeContent": {
               "methods": [
                 "streamingAnalyzeContent"
@@ -1177,6 +1294,11 @@
             "SuggestSmartReplies": {
               "methods": [
                 "suggestSmartReplies"
+              ]
+            },
+            "SuggestKnowledgeAssist": {
+              "methods": [
+                "suggestKnowledgeAssist"
               ]
             },
             "ListParticipants": {

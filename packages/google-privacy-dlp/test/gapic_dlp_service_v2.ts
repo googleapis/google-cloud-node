@@ -10134,70 +10134,6 @@ describe('v2.DlpServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('connection', () => {
-      const fakePath = '/rendered/path/connection';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        connection: 'connectionValue',
-      };
-      const client = new dlpserviceModule.v2.DlpServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.connectionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.connectionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('connectionPath', () => {
-        const result = client.connectionPath(
-          'projectValue',
-          'locationValue',
-          'connectionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.connectionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromConnectionName', () => {
-        const result = client.matchProjectFromConnectionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromConnectionName', () => {
-        const result = client.matchLocationFromConnectionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchConnectionFromConnectionName', () => {
-        const result = client.matchConnectionFromConnectionName(fakePath);
-        assert.strictEqual(result, 'connectionValue');
-        assert(
-          (client.pathTemplates.connectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('discoveryConfig', () => {
       const fakePath = '/rendered/path/discoveryConfig';
       const expectedParameters = {
@@ -10685,6 +10621,87 @@ describe('v2.DlpServiceClient', () => {
           (
             client.pathTemplates
               .organizationLocationColumnDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationLocationConnection', () => {
+      const fakePath = '/rendered/path/organizationLocationConnection';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        connection: 'connectionValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationLocationConnectionPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationConnectionPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationConnectionPath', () => {
+        const result = client.organizationLocationConnectionPath(
+          'organizationValue',
+          'locationValue',
+          'connectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationConnectionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationConnectionName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationConnectionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationConnectionName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectionFromOrganizationLocationConnectionName', () => {
+        const result =
+          client.matchConnectionFromOrganizationLocationConnectionName(
+            fakePath
+          );
+        assert.strictEqual(result, 'connectionValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationConnectionPathTemplate
               .match as SinonStub
           )
             .getCall(-1)
@@ -11667,6 +11684,85 @@ describe('v2.DlpServiceClient', () => {
         assert(
           (
             client.pathTemplates.projectLocationColumnDataProfilePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationConnection', () => {
+      const fakePath = '/rendered/path/projectLocationConnection';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        connection: 'connectionValue',
+      };
+      const client = new dlpserviceModule.v2.DlpServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectLocationConnectionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationConnectionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationConnectionPath', () => {
+        const result = client.projectLocationConnectionPath(
+          'projectValue',
+          'locationValue',
+          'connectionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationConnectionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationConnectionName', () => {
+        const result =
+          client.matchProjectFromProjectLocationConnectionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationConnectionName', () => {
+        const result =
+          client.matchLocationFromProjectLocationConnectionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConnectionPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchConnectionFromProjectLocationConnectionName', () => {
+        const result =
+          client.matchConnectionFromProjectLocationConnectionName(fakePath);
+        assert.strictEqual(result, 'connectionValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationConnectionPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -41,11 +41,6 @@ function main(rollout, phaseId, jobId) {
    *  Required. The job ID for the Job to ignore.
    */
   // const jobId = 'abc123'
-  /**
-   *  Optional. Deploy policies to override. Format is
-   *  `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
-   */
-  // const overrideDeployPolicy = ['abc','def']
 
   // Imports the Deploy library
   const {CloudDeployClient} = require('@google-cloud/deploy').v1;

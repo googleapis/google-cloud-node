@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 105,
+                    "end": 109,
                     "type": "FULL"
                 }
             ],
@@ -66,6 +66,10 @@
                     {
                         "name": "labels",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "imageless_mode",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1beta3.ProcessResponse",
@@ -643,7 +647,7 @@
             "regionTag": "documentai_v1beta3_generated_DocumentProcessorService_CreateProcessor_async",
             "title": "DocumentProcessorService createProcessor Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a processor from the [ProcessorType][google.cloud.documentai.v1beta3.ProcessorType] provided. The processor will be at `ENABLED` state by default after its creation.",
+            "description": " Creates a processor from the [ProcessorType][google.cloud.documentai.v1beta3.ProcessorType] provided. The processor will be at `ENABLED` state by default after its creation. Note that this method requires the `documentai.processors.create` permission on the project, which is highly privileged. A user or service account with this permission can create new processors that can interact with any gcs bucket in your project.",
             "canonical": true,
             "file": "document_processor_service.create_processor.js",
             "language": "JAVASCRIPT",
@@ -1091,7 +1095,7 @@
             "regionTag": "documentai_v1beta3_generated_DocumentService_UpdateDataset_async",
             "title": "DocumentProcessorService updateDataset Sample",
             "origin": "API_DEFINITION",
-            "description": " Updates metadata associated with a dataset.",
+            "description": " Updates metadata associated with a dataset. Note that this method requires the `documentai.googleapis.com/datasets.update` permission on the project, which is highly privileged. A user or service account with this permission can create new processors that can interact with any gcs bucket in your project.",
             "canonical": true,
             "file": "document_service.update_dataset.js",
             "language": "JAVASCRIPT",

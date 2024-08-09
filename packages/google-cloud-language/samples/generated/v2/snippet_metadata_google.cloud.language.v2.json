@@ -150,7 +150,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 57,
                     "type": "FULL"
                 }
             ],
@@ -162,6 +162,10 @@
                     {
                         "name": "document",
                         "type": ".google.cloud.language.v2.Document"
+                    },
+                    {
+                        "name": "model_version",
+                        "type": ".google.cloud.language.v2.ModerateTextRequest.ModelVersion"
                     }
                 ],
                 "resultType": ".google.cloud.language.v2.ModerateTextResponse",

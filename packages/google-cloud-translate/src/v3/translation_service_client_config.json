@@ -25,6 +25,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RomanizeText": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "DetectLanguage": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
@@ -55,6 +59,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "UpdateGlossary": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ListGlossaries": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
@@ -68,6 +76,42 @@
         "DeleteGlossary": {
           "timeout_millis": 600000,
           "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "GetGlossaryEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListGlossaryEntries": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateGlossaryEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateGlossaryEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteGlossaryEntry": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateDataset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetDataset": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDatasets": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDataset": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateAdaptiveMtDataset": {
@@ -107,6 +151,34 @@
           "retry_params_name": "default"
         },
         "ListAdaptiveMtSentences": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ImportData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExportData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListExamples": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateModel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListModels": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetModel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteModel": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

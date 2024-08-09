@@ -2201,6 +2201,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "imagelessMode": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3404,6 +3411,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "genAiModelInfo": {
+                          "type": "GenAiModelInfo",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3418,6 +3432,61 @@
                               "id": 2,
                               "options": {
                                 "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                              }
+                            }
+                          }
+                        },
+                        "GenAiModelInfo": {
+                          "oneofs": {
+                            "modelInfo": {
+                              "oneof": [
+                                "foundationGenAiModelInfo",
+                                "customGenAiModelInfo"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "foundationGenAiModelInfo": {
+                              "type": "FoundationGenAiModelInfo",
+                              "id": 1
+                            },
+                            "customGenAiModelInfo": {
+                              "type": "CustomGenAiModelInfo",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "FoundationGenAiModelInfo": {
+                              "fields": {
+                                "finetuningAllowed": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "minTrainLabeledDocuments": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "CustomGenAiModelInfo": {
+                              "fields": {
+                                "customModelType": {
+                                  "type": "CustomModelType",
+                                  "id": 1
+                                },
+                                "baseProcessorVersionId": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "CustomModelType": {
+                                  "values": {
+                                    "CUSTOM_MODEL_TYPE_UNSPECIFIED": 0,
+                                    "VERSIONED_FOUNDATION": 1,
+                                    "FINE_TUNED": 2
+                                  }
+                                }
                               }
                             }
                           }
@@ -6022,6 +6091,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -8612,6 +8695,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "imagelessMode": {
+                          "type": "bool",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -9845,6 +9935,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "genAiModelInfo": {
+                          "type": "GenAiModelInfo",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -9859,6 +9970,61 @@
                               "id": 2,
                               "options": {
                                 "(google.api.resource_reference).type": "documentai.googleapis.com/ProcessorVersion"
+                              }
+                            }
+                          }
+                        },
+                        "GenAiModelInfo": {
+                          "oneofs": {
+                            "modelInfo": {
+                              "oneof": [
+                                "foundationGenAiModelInfo",
+                                "customGenAiModelInfo"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "foundationGenAiModelInfo": {
+                              "type": "FoundationGenAiModelInfo",
+                              "id": 1
+                            },
+                            "customGenAiModelInfo": {
+                              "type": "CustomGenAiModelInfo",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "FoundationGenAiModelInfo": {
+                              "fields": {
+                                "finetuningAllowed": {
+                                  "type": "bool",
+                                  "id": 1
+                                },
+                                "minTrainLabeledDocuments": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            },
+                            "CustomGenAiModelInfo": {
+                              "fields": {
+                                "customModelType": {
+                                  "type": "CustomModelType",
+                                  "id": 1
+                                },
+                                "baseProcessorVersionId": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "CustomModelType": {
+                                  "values": {
+                                    "CUSTOM_MODEL_TYPE_UNSPECIFIED": 0,
+                                    "VERSIONED_FOUNDATION": 1,
+                                    "FINE_TUNED": 2
+                                  }
+                                }
                               }
                             }
                           }
@@ -9957,6 +10123,20 @@
                         "kmsKeyName": {
                           "type": "string",
                           "id": 8
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {

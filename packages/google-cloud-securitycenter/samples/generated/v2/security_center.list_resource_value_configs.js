@@ -31,7 +31,7 @@ function main(parent) {
   /**
    *  Required. The parent, which owns the collection of resource value configs.
    *  Its format is
-   *  "organizations/[organization_id]"
+   *  `organizations/[organization_id]`
    */
   // const parent = 'abc123'
   /**

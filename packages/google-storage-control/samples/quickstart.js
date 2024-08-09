@@ -19,7 +19,6 @@
 'use strict';
 
 function main(bucketName) {
-  // [START storage_control_quickstart_sample]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -53,7 +52,6 @@ function main(bucketName) {
   }
 
   callGetStorageLayout();
-  // [END storage_control_quickstart_sample]
 }
 
 process.on('unhandledRejection', err => {

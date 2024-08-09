@@ -40,11 +40,6 @@
                 "abandonRelease"
               ]
             },
-            "GetDeployPolicy": {
-              "methods": [
-                "getDeployPolicy"
-              ]
-            },
             "ApproveRollout": {
               "methods": [
                 "approveRollout"
@@ -155,21 +150,6 @@
                 "createRelease"
               ]
             },
-            "CreateDeployPolicy": {
-              "methods": [
-                "createDeployPolicy"
-              ]
-            },
-            "UpdateDeployPolicy": {
-              "methods": [
-                "updateDeployPolicy"
-              ]
-            },
-            "DeleteDeployPolicy": {
-              "methods": [
-                "deleteDeployPolicy"
-              ]
-            },
             "CreateRollout": {
               "methods": [
                 "createRollout"
@@ -216,13 +196,6 @@
                 "listReleases",
                 "listReleasesStream",
                 "listReleasesAsync"
-              ]
-            },
-            "ListDeployPolicies": {
-              "methods": [
-                "listDeployPolicies",
-                "listDeployPoliciesStream",
-                "listDeployPoliciesAsync"
               ]
             },
             "ListRollouts": {
@@ -288,11 +261,6 @@
                 "abandonRelease"
               ]
             },
-            "GetDeployPolicy": {
-              "methods": [
-                "getDeployPolicy"
-              ]
-            },
             "ApproveRollout": {
               "methods": [
                 "approveRollout"
@@ -403,21 +371,6 @@
                 "createRelease"
               ]
             },
-            "CreateDeployPolicy": {
-              "methods": [
-                "createDeployPolicy"
-              ]
-            },
-            "UpdateDeployPolicy": {
-              "methods": [
-                "updateDeployPolicy"
-              ]
-            },
-            "DeleteDeployPolicy": {
-              "methods": [
-                "deleteDeployPolicy"
-              ]
-            },
             "CreateRollout": {
               "methods": [
                 "createRollout"
@@ -464,13 +417,6 @@
                 "listReleases",
                 "listReleasesStream",
                 "listReleasesAsync"
-              ]
-            },
-            "ListDeployPolicies": {
-              "methods": [
-                "listDeployPolicies",
-                "listDeployPoliciesStream",
-                "listDeployPoliciesAsync"
               ]
             },
             "ListRollouts": {

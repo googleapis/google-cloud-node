@@ -2194,7 +2194,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -2430,7 +2430,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 69,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -2946,7 +2946,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -3186,7 +3186,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 73,
                     "type": "FULL"
                 }
             ],
@@ -4078,7 +4078,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 71,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -8826,7 +8826,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -8846,6 +8846,10 @@
                     {
                         "name": "view",
                         "type": ".google.cloud.aiplatform.v1beta1.PublisherModelView"
+                    },
+                    {
+                        "name": "is_hugging_face_model",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.PublisherModel",
@@ -12346,7 +12350,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -12369,6 +12373,14 @@
                     },
                     {
                         "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.aiplatform.v1beta1.Content"
+                    },
+                    {
+                        "name": "tools",
                         "type": "TYPE_MESSAGE[]"
                     }
                 ],

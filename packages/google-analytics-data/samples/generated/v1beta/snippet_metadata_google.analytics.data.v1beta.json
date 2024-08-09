@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 144,
+                    "end": 150,
                     "type": "FULL"
                 }
             ],
@@ -86,6 +86,10 @@
                     {
                         "name": "return_property_quota",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "comparisons",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.analytics.data.v1beta.RunReportResponse",
@@ -114,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 121,
+                    "end": 127,
                     "type": "FULL"
                 }
             ],
@@ -166,6 +170,10 @@
                     {
                         "name": "return_property_quota",
                         "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "comparisons",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.analytics.data.v1beta.RunPivotReportResponse",

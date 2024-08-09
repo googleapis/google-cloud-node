@@ -577,9 +577,12 @@ export class ModelGardenServiceClient {
    *   `publishers/{publisher}/models/{publisher_model}`
    * @param {string} [request.languageCode]
    *   Optional. The IETF BCP-47 language code representing the language in which
-   *   the publisher model's text information should be written in (see go/bcp47).
+   *   the publisher model's text information should be written in.
    * @param {google.cloud.aiplatform.v1beta1.PublisherModelView} [request.view]
    *   Optional. PublisherModel view specifying which fields to read.
+   * @param {boolean} [request.isHuggingFaceModel]
+   *   Optional. Boolean indicates whether the requested model is a Hugging Face
+   *   model.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -696,8 +699,8 @@ export class ModelGardenServiceClient {
    *   order. Use "desc" after a field name for descending.
    * @param {string} [request.languageCode]
    *   Optional. The IETF BCP-47 language code representing the language in which
-   *   the publisher models' text information should be written in (see go/bcp47).
-   *   If not set, by default English (en).
+   *   the publisher models' text information should be written in. If not set, by
+   *   default English (en).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -810,8 +813,8 @@ export class ModelGardenServiceClient {
    *   order. Use "desc" after a field name for descending.
    * @param {string} [request.languageCode]
    *   Optional. The IETF BCP-47 language code representing the language in which
-   *   the publisher models' text information should be written in (see go/bcp47).
-   *   If not set, by default English (en).
+   *   the publisher models' text information should be written in. If not set, by
+   *   default English (en).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -872,8 +875,8 @@ export class ModelGardenServiceClient {
    *   order. Use "desc" after a field name for descending.
    * @param {string} [request.languageCode]
    *   Optional. The IETF BCP-47 language code representing the language in which
-   *   the publisher models' text information should be written in (see go/bcp47).
-   *   If not set, by default English (en).
+   *   the publisher models' text information should be written in. If not set, by
+   *   default English (en).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

@@ -525,6 +525,10 @@ export class BetaAnalyticsDataClient {
    * @param {boolean} request.returnPropertyQuota
    *   Toggles whether to return the current state of this Analytics Property's
    *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {number[]} [request.comparisons]
+   *   Optional. The configuration of comparisons requested and displayed. The
+   *   request only requires a comparisons field in order to receive a comparison
+   *   column in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -665,6 +669,10 @@ export class BetaAnalyticsDataClient {
    * @param {boolean} request.returnPropertyQuota
    *   Toggles whether to return the current state of this Analytics Property's
    *   quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {number[]} [request.comparisons]
+   *   Optional. The configuration of comparisons requested and displayed. The
+   *   request requires both a comparisons field and a comparisons dimension to
+   *   receive a comparison column in the response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
