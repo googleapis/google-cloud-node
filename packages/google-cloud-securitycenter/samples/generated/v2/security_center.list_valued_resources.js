@@ -31,9 +31,9 @@ function main(parent) {
   /**
    *  Required. Name of parent to list exposed resources.
    *  Valid formats:
-   *  "organizations/{organization}",
-   *  "organizations/{organization}/simulations/{simulation}"
-   *  "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
+   *  `organizations/{organization}`,
+   *  `organizations/{organization}/simulations/{simulation}`
+   *  `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
    */
   // const parent = 'abc123'
   /**

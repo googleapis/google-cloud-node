@@ -16477,6 +16477,9 @@ export namespace google {
 
                     /** Metadata metrics */
                     metrics?: (google.analytics.data.v1beta.IMetricMetadata[]|null);
+
+                    /** Metadata comparisons */
+                    comparisons?: (google.analytics.data.v1beta.IComparisonMetadata[]|null);
                 }
 
                 /** Represents a Metadata. */
@@ -16496,6 +16499,9 @@ export namespace google {
 
                     /** Metadata metrics. */
                     public metrics: google.analytics.data.v1beta.IMetricMetadata[];
+
+                    /** Metadata comparisons. */
+                    public comparisons: google.analytics.data.v1beta.IComparisonMetadata[];
 
                     /**
                      * Creates a new Metadata instance using the specified properties.
@@ -16619,6 +16625,9 @@ export namespace google {
 
                     /** RunReportRequest returnPropertyQuota */
                     returnPropertyQuota?: (boolean|null);
+
+                    /** RunReportRequest comparisons */
+                    comparisons?: (google.analytics.data.v1beta.IComparison[]|null);
                 }
 
                 /** Represents a RunReportRequest. */
@@ -16671,6 +16680,9 @@ export namespace google {
 
                     /** RunReportRequest returnPropertyQuota. */
                     public returnPropertyQuota: boolean;
+
+                    /** RunReportRequest comparisons. */
+                    public comparisons: google.analytics.data.v1beta.IComparison[];
 
                     /**
                      * Creates a new RunReportRequest instance using the specified properties.
@@ -16936,6 +16948,9 @@ export namespace google {
 
                     /** RunPivotReportRequest returnPropertyQuota */
                     returnPropertyQuota?: (boolean|null);
+
+                    /** RunPivotReportRequest comparisons */
+                    comparisons?: (google.analytics.data.v1beta.IComparison[]|null);
                 }
 
                 /** Represents a RunPivotReportRequest. */
@@ -16979,6 +16994,9 @@ export namespace google {
 
                     /** RunPivotReportRequest returnPropertyQuota. */
                     public returnPropertyQuota: boolean;
+
+                    /** RunPivotReportRequest comparisons. */
+                    public comparisons: google.analytics.data.v1beta.IComparison[];
 
                     /**
                      * Creates a new RunPivotReportRequest instance using the specified properties.
@@ -19948,6 +19966,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Metric
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Comparison. */
+                interface IComparison {
+
+                    /** Comparison name */
+                    name?: (string|null);
+
+                    /** Comparison dimensionFilter */
+                    dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** Comparison comparison */
+                    comparison?: (string|null);
+                }
+
+                /** Represents a Comparison. */
+                class Comparison implements IComparison {
+
+                    /**
+                     * Constructs a new Comparison.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IComparison);
+
+                    /** Comparison name. */
+                    public name?: (string|null);
+
+                    /** Comparison dimensionFilter. */
+                    public dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** Comparison comparison. */
+                    public comparison?: (string|null);
+
+                    /** Comparison _name. */
+                    public _name?: "name";
+
+                    /** Comparison oneComparison. */
+                    public oneComparison?: ("dimensionFilter"|"comparison");
+
+                    /**
+                     * Creates a new Comparison instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Comparison instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IComparison): google.analytics.data.v1beta.Comparison;
+
+                    /**
+                     * Encodes the specified Comparison message. Does not implicitly {@link google.analytics.data.v1beta.Comparison.verify|verify} messages.
+                     * @param message Comparison message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IComparison, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Comparison message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.Comparison.verify|verify} messages.
+                     * @param message Comparison message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IComparison, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Comparison message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Comparison
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.Comparison;
+
+                    /**
+                     * Decodes a Comparison message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Comparison
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.Comparison;
+
+                    /**
+                     * Verifies a Comparison message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Comparison message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Comparison
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.Comparison;
+
+                    /**
+                     * Creates a plain object from a Comparison message. Also converts values to other types if specified.
+                     * @param message Comparison
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.Comparison, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Comparison to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Comparison
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -23623,6 +23756,115 @@ export namespace google {
                         NO_REVENUE_METRICS = 1,
                         NO_COST_METRICS = 2
                     }
+                }
+
+                /** Properties of a ComparisonMetadata. */
+                interface IComparisonMetadata {
+
+                    /** ComparisonMetadata apiName */
+                    apiName?: (string|null);
+
+                    /** ComparisonMetadata uiName */
+                    uiName?: (string|null);
+
+                    /** ComparisonMetadata description */
+                    description?: (string|null);
+                }
+
+                /** Represents a ComparisonMetadata. */
+                class ComparisonMetadata implements IComparisonMetadata {
+
+                    /**
+                     * Constructs a new ComparisonMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IComparisonMetadata);
+
+                    /** ComparisonMetadata apiName. */
+                    public apiName: string;
+
+                    /** ComparisonMetadata uiName. */
+                    public uiName: string;
+
+                    /** ComparisonMetadata description. */
+                    public description: string;
+
+                    /**
+                     * Creates a new ComparisonMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ComparisonMetadata instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IComparisonMetadata): google.analytics.data.v1beta.ComparisonMetadata;
+
+                    /**
+                     * Encodes the specified ComparisonMetadata message. Does not implicitly {@link google.analytics.data.v1beta.ComparisonMetadata.verify|verify} messages.
+                     * @param message ComparisonMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IComparisonMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ComparisonMetadata message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.ComparisonMetadata.verify|verify} messages.
+                     * @param message ComparisonMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IComparisonMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ComparisonMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ComparisonMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.ComparisonMetadata;
+
+                    /**
+                     * Decodes a ComparisonMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ComparisonMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.ComparisonMetadata;
+
+                    /**
+                     * Verifies a ComparisonMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ComparisonMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ComparisonMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.ComparisonMetadata;
+
+                    /**
+                     * Creates a plain object from a ComparisonMetadata message. Also converts values to other types if specified.
+                     * @param message ComparisonMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.ComparisonMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ComparisonMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ComparisonMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a DimensionCompatibility. */

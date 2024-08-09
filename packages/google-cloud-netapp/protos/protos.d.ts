@@ -701,6 +701,9 @@ export namespace google {
                     /** ActiveDirectory backupOperators */
                     backupOperators?: (string[]|null);
 
+                    /** ActiveDirectory administrators */
+                    administrators?: (string[]|null);
+
                     /** ActiveDirectory securityOperators */
                     securityOperators?: (string[]|null);
 
@@ -773,6 +776,9 @@ export namespace google {
 
                     /** ActiveDirectory backupOperators. */
                     public backupOperators: string[];
+
+                    /** ActiveDirectory administrators. */
+                    public administrators: string[];
 
                     /** ActiveDirectory securityOperators. */
                     public securityOperators: string[];
@@ -8527,6 +8533,12 @@ export namespace google {
 
                     /** StoragePool globalAccessAllowed */
                     globalAccessAllowed?: (boolean|null);
+
+                    /** StoragePool replicaZone */
+                    replicaZone?: (string|null);
+
+                    /** StoragePool zone */
+                    zone?: (string|null);
                 }
 
                 /** Represents a StoragePool. */
@@ -8588,6 +8600,12 @@ export namespace google {
 
                     /** StoragePool globalAccessAllowed. */
                     public globalAccessAllowed?: (boolean|null);
+
+                    /** StoragePool replicaZone. */
+                    public replicaZone: string;
+
+                    /** StoragePool zone. */
+                    public zone: string;
 
                     /** StoragePool _globalAccessAllowed. */
                     public _globalAccessAllowed?: "globalAccessAllowed";
@@ -9682,8 +9700,20 @@ export namespace google {
                     /** Volume restrictedActions */
                     restrictedActions?: (google.cloud.netapp.v1.RestrictedAction[]|null);
 
+                    /** Volume largeCapacity */
+                    largeCapacity?: (boolean|null);
+
+                    /** Volume multipleEndpoints */
+                    multipleEndpoints?: (boolean|null);
+
                     /** Volume tieringPolicy */
                     tieringPolicy?: (google.cloud.netapp.v1.ITieringPolicy|null);
+
+                    /** Volume replicaZone */
+                    replicaZone?: (string|null);
+
+                    /** Volume zone */
+                    zone?: (string|null);
                 }
 
                 /** Represents a Volume. */
@@ -9788,8 +9818,20 @@ export namespace google {
                     /** Volume restrictedActions. */
                     public restrictedActions: google.cloud.netapp.v1.RestrictedAction[];
 
+                    /** Volume largeCapacity. */
+                    public largeCapacity: boolean;
+
+                    /** Volume multipleEndpoints. */
+                    public multipleEndpoints: boolean;
+
                     /** Volume tieringPolicy. */
                     public tieringPolicy?: (google.cloud.netapp.v1.ITieringPolicy|null);
+
+                    /** Volume replicaZone. */
+                    public replicaZone: string;
+
+                    /** Volume zone. */
+                    public zone: string;
 
                     /** Volume _backupConfig. */
                     public _backupConfig?: "backupConfig";

@@ -30,9 +30,12 @@ function main() {
     new dialogflow.ConversationProfilesClient();
   const conversationsClient = new dialogflow.ConversationsClient();
   const documentsClient = new dialogflow.DocumentsClient();
+  const encryptionSpecServiceClient =
+    new dialogflow.EncryptionSpecServiceClient();
   const entityTypesClient = new dialogflow.EntityTypesClient();
   const environmentsClient = new dialogflow.EnvironmentsClient();
   const fulfillmentsClient = new dialogflow.FulfillmentsClient();
+  const generatorsClient = new dialogflow.GeneratorsClient();
   const intentsClient = new dialogflow.IntentsClient();
   const knowledgeBasesClient = new dialogflow.KnowledgeBasesClient();
   const participantsClient = new dialogflow.ParticipantsClient();

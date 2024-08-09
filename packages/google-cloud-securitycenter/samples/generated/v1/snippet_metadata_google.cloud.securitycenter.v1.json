@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 79,
+                    "end": 85,
                     "type": "FULL"
                 }
             ],
@@ -42,6 +42,10 @@
                     {
                         "name": "mute_annotation",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "mute_state",
+                        "type": ".google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

@@ -31,10 +31,10 @@ function main(parent) {
   /**
    *  Required. Name of parent to list attack paths.
    *  Valid formats:
-   *  "organizations/{organization}",
-   *  "organizations/{organization}/simulations/{simulation}"
-   *  "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
-   *  "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}"
+   *  `organizations/{organization}`,
+   *  `organizations/{organization}/simulations/{simulation}`
+   *  `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *  `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
    */
   // const parent = 'abc123'
   /**

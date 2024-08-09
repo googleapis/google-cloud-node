@@ -200,6 +200,22 @@
                         "EXPORT": 2
                       }
                     },
+                    "FileStripeLevel": {
+                      "values": {
+                        "FILE_STRIPE_LEVEL_UNSPECIFIED": 0,
+                        "FILE_STRIPE_LEVEL_MIN": 1,
+                        "FILE_STRIPE_LEVEL_BALANCED": 2,
+                        "FILE_STRIPE_LEVEL_MAX": 3
+                      }
+                    },
+                    "DirectoryStripeLevel": {
+                      "values": {
+                        "DIRECTORY_STRIPE_LEVEL_UNSPECIFIED": 0,
+                        "DIRECTORY_STRIPE_LEVEL_MIN": 1,
+                        "DIRECTORY_STRIPE_LEVEL_BALANCED": 2,
+                        "DIRECTORY_STRIPE_LEVEL_MAX": 3
+                      }
+                    },
                     "Instance": {
                       "options": {
                         "(google.api.resource).type": "parallelstore.googleapis.com/Instance",
@@ -295,6 +311,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Address"
+                          }
+                        },
+                        "fileStripeLevel": {
+                          "type": "FileStripeLevel",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "directoryStripeLevel": {
+                          "type": "DirectoryStripeLevel",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },

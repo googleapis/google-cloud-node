@@ -794,9 +794,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the parent resource of the new BigQuery export. Its
-   *   format is "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
+   *   format is `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`, or
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {google.cloud.securitycenter.v2.BigQueryExport} request.bigQueryExport
    *   Required. The BigQuery export being created.
    * @param {string} request.bigQueryExportId
@@ -1003,9 +1003,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new mute configs's parent. Its format is
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
+   *   `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`, or
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {google.cloud.securitycenter.v2.MuteConfig} request.muteConfig
    *   Required. The mute config being created.
    * @param {string} request.muteConfigId
@@ -1144,9 +1144,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new notification config's parent. Its format
-   *   is "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
+   *   is `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`, or
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {string} request.configId
    *   Required.
    *   Unique identifier provided by the client within the parent scope.
@@ -1256,7 +1256,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the new source's parent. Its format should be
-   *   "organizations/[organization_id]".
+   *   `organizations/[organization_id]`.
    * @param {google.cloud.securitycenter.v2.Source} request.source
    *   Required. The Source being created, only the display_name and description
    *   will be used. All other fields will be ignored.
@@ -1918,8 +1918,8 @@ export class SecurityCenterClient {
    *   Required. The organization name or simulation name of this simulation
    *
    *   Valid format:
-   *   "organizations/{organization}/simulations/latest"
-   *   "organizations/{organization}/simulations/{simulation}"
+   *   `organizations/{organization}/simulations/latest`
+   *   `organizations/{organization}/simulations/{simulation}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2012,7 +2012,7 @@ export class SecurityCenterClient {
    *   Required. The name of this valued resource
    *
    *   Valid format:
-   *   "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}"
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2547,7 +2547,7 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Relative resource name of the source. Its format is
-   *   "organizations/[organization_id]/source/[source_id]".
+   *   `organizations/[organization_id]/source/[source_id]`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3924,6 +3924,10 @@ export class SecurityCenterClient {
    *   * string literals in quotes.
    *   * integer literals without quotes.
    *   * boolean literals `true` and `false` without quotes.
+   * @param {google.cloud.securitycenter.v2.BulkMuteFindingsRequest.MuteState} [request.muteState]
+   *   Optional. All findings matching the given filter will have their mute state
+   *   set to this value. The default value is `MUTED`. Setting this to
+   *   `UNDEFINED` will clear the mute state on all matching findings.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4487,10 +4491,10 @@ export class SecurityCenterClient {
    *   Required. Name of parent to list attack paths.
    *
    *   Valid formats:
-   *   "organizations/{organization}",
-   *   "organizations/{organization}/simulations/{simulation}"
-   *   "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
-   *   "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}"
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
    * @param {string} request.filter
    *   The filter expression that filters the attack path in the response.
    *   Supported fields:
@@ -4598,10 +4602,10 @@ export class SecurityCenterClient {
    *   Required. Name of parent to list attack paths.
    *
    *   Valid formats:
-   *   "organizations/{organization}",
-   *   "organizations/{organization}/simulations/{simulation}"
-   *   "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
-   *   "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}"
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
    * @param {string} request.filter
    *   The filter expression that filters the attack path in the response.
    *   Supported fields:
@@ -4657,10 +4661,10 @@ export class SecurityCenterClient {
    *   Required. Name of parent to list attack paths.
    *
    *   Valid formats:
-   *   "organizations/{organization}",
-   *   "organizations/{organization}/simulations/{simulation}"
-   *   "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
-   *   "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}"
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
+   *   `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
    * @param {string} request.filter
    *   The filter expression that filters the attack path in the response.
    *   Supported fields:
@@ -4717,9 +4721,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
+   *   format is `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`, or
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -4823,9 +4827,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
+   *   format is `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`, or
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -4877,9 +4881,9 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of BigQuery exports. Its
-   *   format is "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]", or
-   *   "projects/[project_id]/locations/[location_id]".
+   *   format is `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`, or
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -5404,11 +5408,11 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]",
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]",
-   *   "projects/[project_id]/locations/[location_id]".
+   *   is `organizations/[organization_id]", "folders/[folder_id]`,
+   *   `projects/[project_id]`,
+   *   `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`,
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -5556,11 +5560,11 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]",
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]",
-   *   "projects/[project_id]/locations/[location_id]".
+   *   is `organizations/[organization_id]", "folders/[folder_id]`,
+   *   `projects/[project_id]`,
+   *   `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`,
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -5656,11 +5660,11 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of mute configs. Its format
-   *   is "organizations/[organization_id]", "folders/[folder_id]",
-   *   "projects/[project_id]",
-   *   "organizations/[organization_id]/locations/[location_id]",
-   *   "folders/[folder_id]/locations/[location_id]",
-   *   "projects/[project_id]/locations/[location_id]".
+   *   is `organizations/[organization_id]", "folders/[folder_id]`,
+   *   `projects/[project_id]`,
+   *   `organizations/[organization_id]/locations/[location_id]`,
+   *   `folders/[folder_id]/locations/[location_id]`,
+   *   `projects/[project_id]/locations/[location_id]`.
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -5967,7 +5971,7 @@ export class SecurityCenterClient {
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of resource value configs.
    *   Its format is
-   *   "organizations/[organization_id]"
+   *   `organizations/[organization_id]`
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -6080,7 +6084,7 @@ export class SecurityCenterClient {
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of resource value configs.
    *   Its format is
-   *   "organizations/[organization_id]"
+   *   `organizations/[organization_id]`
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -6137,7 +6141,7 @@ export class SecurityCenterClient {
    * @param {string} request.parent
    *   Required. The parent, which owns the collection of resource value configs.
    *   Its format is
-   *   "organizations/[organization_id]"
+   *   `organizations/[organization_id]`
    * @param {number} request.pageSize
    *   The maximum number of configs to return. The service may return fewer than
    *   this value.
@@ -6192,8 +6196,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6294,8 +6298,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6344,8 +6348,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]", "folders/[folder_id]", or
-   *   "projects/[project_id]".
+   *   be `organizations/[organization_id]`, `folders/[folder_id]`, or
+   *   `projects/[project_id]`.
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -6395,9 +6399,9 @@ export class SecurityCenterClient {
    *   Required. Name of parent to list exposed resources.
    *
    *   Valid formats:
-   *   "organizations/{organization}",
-   *   "organizations/{organization}/simulations/{simulation}"
-   *   "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
    * @param {string} request.filter
    *   The filter expression that filters the valued resources in the response.
    *   Supported fields:
@@ -6523,9 +6527,9 @@ export class SecurityCenterClient {
    *   Required. Name of parent to list exposed resources.
    *
    *   Valid formats:
-   *   "organizations/{organization}",
-   *   "organizations/{organization}/simulations/{simulation}"
-   *   "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
    * @param {string} request.filter
    *   The filter expression that filters the valued resources in the response.
    *   Supported fields:
@@ -6599,9 +6603,9 @@ export class SecurityCenterClient {
    *   Required. Name of parent to list exposed resources.
    *
    *   Valid formats:
-   *   "organizations/{organization}",
-   *   "organizations/{organization}/simulations/{simulation}"
-   *   "organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}"
+   *   `organizations/{organization}`,
+   *   `organizations/{organization}/simulations/{simulation}`
+   *   `organizations/{organization}/simulations/{simulation}/attackExposureResults/{attack_exposure_result_v2}`
    * @param {string} request.filter
    *   The filter expression that filters the valued resources in the response.
    *   Supported fields:
