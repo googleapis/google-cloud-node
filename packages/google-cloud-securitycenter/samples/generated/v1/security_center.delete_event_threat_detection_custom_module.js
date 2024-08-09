@@ -31,9 +31,9 @@ function main(name) {
   /**
    *  Required. Name of the custom module to delete.
    *  Its format is:
-   *  * "organizations/{organization}/eventThreatDetectionSettings/customModules/{module}".
-   *  * "folders/{folder}/eventThreatDetectionSettings/customModules/{module}".
-   *  * "projects/{project}/eventThreatDetectionSettings/customModules/{module}".
+   *  * `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`.
+   *  * `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`.
+   *  * `projects/{project}/eventThreatDetectionSettings/customModules/{module}`.
    */
   // const name = 'abc123'
 

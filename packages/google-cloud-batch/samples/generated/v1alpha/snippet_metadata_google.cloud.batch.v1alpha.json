@@ -152,6 +152,50 @@
             }
         },
         {
+            "regionTag": "batch_v1alpha_generated_BatchService_CancelJob_async",
+            "title": "BatchService cancelJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Cancel a Job.",
+            "canonical": true,
+            "file": "batch_service.cancel_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CancelJob",
+                "fullName": "google.cloud.batch.v1alpha.BatchService.CancelJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "BatchServiceClient",
+                    "fullName": "google.cloud.batch.v1alpha.BatchServiceClient"
+                },
+                "method": {
+                    "shortName": "CancelJob",
+                    "fullName": "google.cloud.batch.v1alpha.BatchService.CancelJob",
+                    "service": {
+                        "shortName": "BatchService",
+                        "fullName": "google.cloud.batch.v1alpha.BatchService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "batch_v1alpha_generated_BatchService_UpdateJob_async",
             "title": "BatchService updateJob Sample",
             "origin": "API_DEFINITION",

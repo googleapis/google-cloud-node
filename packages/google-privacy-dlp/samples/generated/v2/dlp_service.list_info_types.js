@@ -31,7 +31,7 @@ function main() {
   /**
    *  The parent resource name.
    *  The format of this value is as follows:
-   *      locations/<var>LOCATION_ID</var>
+   *      `locations/{location_id}`
    */
   // const parent = 'abc123'
   /**

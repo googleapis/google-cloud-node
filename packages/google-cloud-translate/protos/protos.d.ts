@@ -685,6 +685,12 @@ export namespace google {
 
                     /** AdaptiveMtTranslateRequest content */
                     content?: (string[]|null);
+
+                    /** AdaptiveMtTranslateRequest referenceSentenceConfig */
+                    referenceSentenceConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null);
+
+                    /** AdaptiveMtTranslateRequest glossaryConfig */
+                    glossaryConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null);
                 }
 
                 /** Represents an AdaptiveMtTranslateRequest. */
@@ -704,6 +710,18 @@ export namespace google {
 
                     /** AdaptiveMtTranslateRequest content. */
                     public content: string[];
+
+                    /** AdaptiveMtTranslateRequest referenceSentenceConfig. */
+                    public referenceSentenceConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig|null);
+
+                    /** AdaptiveMtTranslateRequest glossaryConfig. */
+                    public glossaryConfig?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig|null);
+
+                    /** AdaptiveMtTranslateRequest _referenceSentenceConfig. */
+                    public _referenceSentenceConfig?: "referenceSentenceConfig";
+
+                    /** AdaptiveMtTranslateRequest _glossaryConfig. */
+                    public _glossaryConfig?: "glossaryConfig";
 
                     /**
                      * Creates a new AdaptiveMtTranslateRequest instance using the specified properties.
@@ -781,6 +799,421 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AdaptiveMtTranslateRequest {
+
+                    /** Properties of a ReferenceSentencePair. */
+                    interface IReferenceSentencePair {
+
+                        /** ReferenceSentencePair sourceSentence */
+                        sourceSentence?: (string|null);
+
+                        /** ReferenceSentencePair targetSentence */
+                        targetSentence?: (string|null);
+                    }
+
+                    /** Represents a ReferenceSentencePair. */
+                    class ReferenceSentencePair implements IReferenceSentencePair {
+
+                        /**
+                         * Constructs a new ReferenceSentencePair.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair);
+
+                        /** ReferenceSentencePair sourceSentence. */
+                        public sourceSentence: string;
+
+                        /** ReferenceSentencePair targetSentence. */
+                        public targetSentence: string;
+
+                        /**
+                         * Creates a new ReferenceSentencePair instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReferenceSentencePair instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair;
+
+                        /**
+                         * Encodes the specified ReferenceSentencePair message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.verify|verify} messages.
+                         * @param message ReferenceSentencePair message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReferenceSentencePair message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair.verify|verify} messages.
+                         * @param message ReferenceSentencePair message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReferenceSentencePair message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReferenceSentencePair
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair;
+
+                        /**
+                         * Decodes a ReferenceSentencePair message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReferenceSentencePair
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair;
+
+                        /**
+                         * Verifies a ReferenceSentencePair message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReferenceSentencePair message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReferenceSentencePair
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair;
+
+                        /**
+                         * Creates a plain object from a ReferenceSentencePair message. Also converts values to other types if specified.
+                         * @param message ReferenceSentencePair
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReferenceSentencePair to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReferenceSentencePair
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ReferenceSentencePairList. */
+                    interface IReferenceSentencePairList {
+
+                        /** ReferenceSentencePairList referenceSentencePairs */
+                        referenceSentencePairs?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair[]|null);
+                    }
+
+                    /** Represents a ReferenceSentencePairList. */
+                    class ReferenceSentencePairList implements IReferenceSentencePairList {
+
+                        /**
+                         * Constructs a new ReferenceSentencePairList.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList);
+
+                        /** ReferenceSentencePairList referenceSentencePairs. */
+                        public referenceSentencePairs: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePair[];
+
+                        /**
+                         * Creates a new ReferenceSentencePairList instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReferenceSentencePairList instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList;
+
+                        /**
+                         * Encodes the specified ReferenceSentencePairList message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.verify|verify} messages.
+                         * @param message ReferenceSentencePairList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReferenceSentencePairList message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList.verify|verify} messages.
+                         * @param message ReferenceSentencePairList message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReferenceSentencePairList message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReferenceSentencePairList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList;
+
+                        /**
+                         * Decodes a ReferenceSentencePairList message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReferenceSentencePairList
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList;
+
+                        /**
+                         * Verifies a ReferenceSentencePairList message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReferenceSentencePairList message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReferenceSentencePairList
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList;
+
+                        /**
+                         * Creates a plain object from a ReferenceSentencePairList message. Also converts values to other types if specified.
+                         * @param message ReferenceSentencePairList
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReferenceSentencePairList to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReferenceSentencePairList
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ReferenceSentenceConfig. */
+                    interface IReferenceSentenceConfig {
+
+                        /** ReferenceSentenceConfig referenceSentencePairLists */
+                        referenceSentencePairLists?: (google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList[]|null);
+
+                        /** ReferenceSentenceConfig sourceLanguageCode */
+                        sourceLanguageCode?: (string|null);
+
+                        /** ReferenceSentenceConfig targetLanguageCode */
+                        targetLanguageCode?: (string|null);
+                    }
+
+                    /** Represents a ReferenceSentenceConfig. */
+                    class ReferenceSentenceConfig implements IReferenceSentenceConfig {
+
+                        /**
+                         * Constructs a new ReferenceSentenceConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig);
+
+                        /** ReferenceSentenceConfig referenceSentencePairLists. */
+                        public referenceSentencePairLists: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentencePairList[];
+
+                        /** ReferenceSentenceConfig sourceLanguageCode. */
+                        public sourceLanguageCode: string;
+
+                        /** ReferenceSentenceConfig targetLanguageCode. */
+                        public targetLanguageCode: string;
+
+                        /**
+                         * Creates a new ReferenceSentenceConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReferenceSentenceConfig instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig;
+
+                        /**
+                         * Encodes the specified ReferenceSentenceConfig message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.verify|verify} messages.
+                         * @param message ReferenceSentenceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReferenceSentenceConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig.verify|verify} messages.
+                         * @param message ReferenceSentenceConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IReferenceSentenceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReferenceSentenceConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReferenceSentenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig;
+
+                        /**
+                         * Decodes a ReferenceSentenceConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReferenceSentenceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig;
+
+                        /**
+                         * Verifies a ReferenceSentenceConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReferenceSentenceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReferenceSentenceConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig;
+
+                        /**
+                         * Creates a plain object from a ReferenceSentenceConfig message. Also converts values to other types if specified.
+                         * @param message ReferenceSentenceConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReferenceSentenceConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReferenceSentenceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GlossaryConfig. */
+                    interface IGlossaryConfig {
+
+                        /** GlossaryConfig glossary */
+                        glossary?: (string|null);
+
+                        /** GlossaryConfig ignoreCase */
+                        ignoreCase?: (boolean|null);
+                    }
+
+                    /** Represents a GlossaryConfig. */
+                    class GlossaryConfig implements IGlossaryConfig {
+
+                        /**
+                         * Constructs a new GlossaryConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig);
+
+                        /** GlossaryConfig glossary. */
+                        public glossary: string;
+
+                        /** GlossaryConfig ignoreCase. */
+                        public ignoreCase: boolean;
+
+                        /**
+                         * Creates a new GlossaryConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GlossaryConfig instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig): google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig;
+
+                        /**
+                         * Encodes the specified GlossaryConfig message. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.verify|verify} messages.
+                         * @param message GlossaryConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GlossaryConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig.verify|verify} messages.
+                         * @param message GlossaryConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.IGlossaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GlossaryConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GlossaryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig;
+
+                        /**
+                         * Decodes a GlossaryConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GlossaryConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig;
+
+                        /**
+                         * Verifies a GlossaryConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GlossaryConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GlossaryConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig;
+
+                        /**
+                         * Creates a plain object from a GlossaryConfig message. Also converts values to other types if specified.
+                         * @param message GlossaryConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GlossaryConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GlossaryConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an AdaptiveMtTranslation. */
@@ -888,6 +1321,9 @@ export namespace google {
 
                     /** AdaptiveMtTranslateResponse languageCode */
                     languageCode?: (string|null);
+
+                    /** AdaptiveMtTranslateResponse glossaryTranslations */
+                    glossaryTranslations?: (google.cloud.translation.v3.IAdaptiveMtTranslation[]|null);
                 }
 
                 /** Represents an AdaptiveMtTranslateResponse. */
@@ -904,6 +1340,9 @@ export namespace google {
 
                     /** AdaptiveMtTranslateResponse languageCode. */
                     public languageCode: string;
+
+                    /** AdaptiveMtTranslateResponse glossaryTranslations. */
+                    public glossaryTranslations: google.cloud.translation.v3.IAdaptiveMtTranslation[];
 
                     /**
                      * Creates a new AdaptiveMtTranslateResponse instance using the specified properties.
@@ -2355,6 +2794,3510 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** OperationState enum. */
+                enum OperationState {
+                    OPERATION_STATE_UNSPECIFIED = 0,
+                    OPERATION_STATE_RUNNING = 1,
+                    OPERATION_STATE_SUCCEEDED = 2,
+                    OPERATION_STATE_FAILED = 3,
+                    OPERATION_STATE_CANCELLING = 4,
+                    OPERATION_STATE_CANCELLED = 5
+                }
+
+                /** Properties of a GlossaryEntry. */
+                interface IGlossaryEntry {
+
+                    /** GlossaryEntry name */
+                    name?: (string|null);
+
+                    /** GlossaryEntry termsPair */
+                    termsPair?: (google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair|null);
+
+                    /** GlossaryEntry termsSet */
+                    termsSet?: (google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet|null);
+
+                    /** GlossaryEntry description */
+                    description?: (string|null);
+                }
+
+                /** Represents a GlossaryEntry. */
+                class GlossaryEntry implements IGlossaryEntry {
+
+                    /**
+                     * Constructs a new GlossaryEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGlossaryEntry);
+
+                    /** GlossaryEntry name. */
+                    public name: string;
+
+                    /** GlossaryEntry termsPair. */
+                    public termsPair?: (google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair|null);
+
+                    /** GlossaryEntry termsSet. */
+                    public termsSet?: (google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet|null);
+
+                    /** GlossaryEntry description. */
+                    public description: string;
+
+                    /** GlossaryEntry data. */
+                    public data?: ("termsPair"|"termsSet");
+
+                    /**
+                     * Creates a new GlossaryEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GlossaryEntry instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGlossaryEntry): google.cloud.translation.v3.GlossaryEntry;
+
+                    /**
+                     * Encodes the specified GlossaryEntry message. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.verify|verify} messages.
+                     * @param message GlossaryEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGlossaryEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GlossaryEntry message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.verify|verify} messages.
+                     * @param message GlossaryEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGlossaryEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GlossaryEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GlossaryEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GlossaryEntry;
+
+                    /**
+                     * Decodes a GlossaryEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GlossaryEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GlossaryEntry;
+
+                    /**
+                     * Verifies a GlossaryEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GlossaryEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GlossaryEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GlossaryEntry;
+
+                    /**
+                     * Creates a plain object from a GlossaryEntry message. Also converts values to other types if specified.
+                     * @param message GlossaryEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GlossaryEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GlossaryEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GlossaryEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GlossaryEntry {
+
+                    /** Properties of a GlossaryTermsPair. */
+                    interface IGlossaryTermsPair {
+
+                        /** GlossaryTermsPair sourceTerm */
+                        sourceTerm?: (google.cloud.translation.v3.IGlossaryTerm|null);
+
+                        /** GlossaryTermsPair targetTerm */
+                        targetTerm?: (google.cloud.translation.v3.IGlossaryTerm|null);
+                    }
+
+                    /** Represents a GlossaryTermsPair. */
+                    class GlossaryTermsPair implements IGlossaryTermsPair {
+
+                        /**
+                         * Constructs a new GlossaryTermsPair.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair);
+
+                        /** GlossaryTermsPair sourceTerm. */
+                        public sourceTerm?: (google.cloud.translation.v3.IGlossaryTerm|null);
+
+                        /** GlossaryTermsPair targetTerm. */
+                        public targetTerm?: (google.cloud.translation.v3.IGlossaryTerm|null);
+
+                        /**
+                         * Creates a new GlossaryTermsPair instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GlossaryTermsPair instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair;
+
+                        /**
+                         * Encodes the specified GlossaryTermsPair message. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.verify|verify} messages.
+                         * @param message GlossaryTermsPair message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GlossaryTermsPair message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair.verify|verify} messages.
+                         * @param message GlossaryTermsPair message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsPair, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GlossaryTermsPair message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GlossaryTermsPair
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair;
+
+                        /**
+                         * Decodes a GlossaryTermsPair message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GlossaryTermsPair
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair;
+
+                        /**
+                         * Verifies a GlossaryTermsPair message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GlossaryTermsPair message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GlossaryTermsPair
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair;
+
+                        /**
+                         * Creates a plain object from a GlossaryTermsPair message. Also converts values to other types if specified.
+                         * @param message GlossaryTermsPair
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.GlossaryEntry.GlossaryTermsPair, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GlossaryTermsPair to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GlossaryTermsPair
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GlossaryTermsSet. */
+                    interface IGlossaryTermsSet {
+
+                        /** GlossaryTermsSet terms */
+                        terms?: (google.cloud.translation.v3.IGlossaryTerm[]|null);
+                    }
+
+                    /** Represents a GlossaryTermsSet. */
+                    class GlossaryTermsSet implements IGlossaryTermsSet {
+
+                        /**
+                         * Constructs a new GlossaryTermsSet.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet);
+
+                        /** GlossaryTermsSet terms. */
+                        public terms: google.cloud.translation.v3.IGlossaryTerm[];
+
+                        /**
+                         * Creates a new GlossaryTermsSet instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GlossaryTermsSet instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet;
+
+                        /**
+                         * Encodes the specified GlossaryTermsSet message. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.verify|verify} messages.
+                         * @param message GlossaryTermsSet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GlossaryTermsSet message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet.verify|verify} messages.
+                         * @param message GlossaryTermsSet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.GlossaryEntry.IGlossaryTermsSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GlossaryTermsSet message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GlossaryTermsSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet;
+
+                        /**
+                         * Decodes a GlossaryTermsSet message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GlossaryTermsSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet;
+
+                        /**
+                         * Verifies a GlossaryTermsSet message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GlossaryTermsSet message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GlossaryTermsSet
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet;
+
+                        /**
+                         * Creates a plain object from a GlossaryTermsSet message. Also converts values to other types if specified.
+                         * @param message GlossaryTermsSet
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.GlossaryEntry.GlossaryTermsSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GlossaryTermsSet to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GlossaryTermsSet
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a GlossaryTerm. */
+                interface IGlossaryTerm {
+
+                    /** GlossaryTerm languageCode */
+                    languageCode?: (string|null);
+
+                    /** GlossaryTerm text */
+                    text?: (string|null);
+                }
+
+                /** Represents a GlossaryTerm. */
+                class GlossaryTerm implements IGlossaryTerm {
+
+                    /**
+                     * Constructs a new GlossaryTerm.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGlossaryTerm);
+
+                    /** GlossaryTerm languageCode. */
+                    public languageCode: string;
+
+                    /** GlossaryTerm text. */
+                    public text: string;
+
+                    /**
+                     * Creates a new GlossaryTerm instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GlossaryTerm instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGlossaryTerm): google.cloud.translation.v3.GlossaryTerm;
+
+                    /**
+                     * Encodes the specified GlossaryTerm message. Does not implicitly {@link google.cloud.translation.v3.GlossaryTerm.verify|verify} messages.
+                     * @param message GlossaryTerm message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGlossaryTerm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GlossaryTerm message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GlossaryTerm.verify|verify} messages.
+                     * @param message GlossaryTerm message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGlossaryTerm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GlossaryTerm message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GlossaryTerm
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GlossaryTerm;
+
+                    /**
+                     * Decodes a GlossaryTerm message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GlossaryTerm
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GlossaryTerm;
+
+                    /**
+                     * Verifies a GlossaryTerm message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GlossaryTerm message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GlossaryTerm
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GlossaryTerm;
+
+                    /**
+                     * Creates a plain object from a GlossaryTerm message. Also converts values to other types if specified.
+                     * @param message GlossaryTerm
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GlossaryTerm, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GlossaryTerm to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GlossaryTerm
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataRequest. */
+                interface IImportDataRequest {
+
+                    /** ImportDataRequest dataset */
+                    dataset?: (string|null);
+
+                    /** ImportDataRequest inputConfig */
+                    inputConfig?: (google.cloud.translation.v3.IDatasetInputConfig|null);
+                }
+
+                /** Represents an ImportDataRequest. */
+                class ImportDataRequest implements IImportDataRequest {
+
+                    /**
+                     * Constructs a new ImportDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IImportDataRequest);
+
+                    /** ImportDataRequest dataset. */
+                    public dataset: string;
+
+                    /** ImportDataRequest inputConfig. */
+                    public inputConfig?: (google.cloud.translation.v3.IDatasetInputConfig|null);
+
+                    /**
+                     * Creates a new ImportDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IImportDataRequest): google.cloud.translation.v3.ImportDataRequest;
+
+                    /**
+                     * Encodes the specified ImportDataRequest message. Does not implicitly {@link google.cloud.translation.v3.ImportDataRequest.verify|verify} messages.
+                     * @param message ImportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IImportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportDataRequest.verify|verify} messages.
+                     * @param message ImportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IImportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ImportDataRequest;
+
+                    /**
+                     * Decodes an ImportDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ImportDataRequest;
+
+                    /**
+                     * Verifies an ImportDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ImportDataRequest;
+
+                    /**
+                     * Creates a plain object from an ImportDataRequest message. Also converts values to other types if specified.
+                     * @param message ImportDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ImportDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatasetInputConfig. */
+                interface IDatasetInputConfig {
+
+                    /** DatasetInputConfig inputFiles */
+                    inputFiles?: (google.cloud.translation.v3.DatasetInputConfig.IInputFile[]|null);
+                }
+
+                /** Represents a DatasetInputConfig. */
+                class DatasetInputConfig implements IDatasetInputConfig {
+
+                    /**
+                     * Constructs a new DatasetInputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDatasetInputConfig);
+
+                    /** DatasetInputConfig inputFiles. */
+                    public inputFiles: google.cloud.translation.v3.DatasetInputConfig.IInputFile[];
+
+                    /**
+                     * Creates a new DatasetInputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatasetInputConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDatasetInputConfig): google.cloud.translation.v3.DatasetInputConfig;
+
+                    /**
+                     * Encodes the specified DatasetInputConfig message. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.verify|verify} messages.
+                     * @param message DatasetInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDatasetInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatasetInputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.verify|verify} messages.
+                     * @param message DatasetInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDatasetInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatasetInputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatasetInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DatasetInputConfig;
+
+                    /**
+                     * Decodes a DatasetInputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatasetInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DatasetInputConfig;
+
+                    /**
+                     * Verifies a DatasetInputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatasetInputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatasetInputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DatasetInputConfig;
+
+                    /**
+                     * Creates a plain object from a DatasetInputConfig message. Also converts values to other types if specified.
+                     * @param message DatasetInputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DatasetInputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatasetInputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatasetInputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DatasetInputConfig {
+
+                    /** Properties of an InputFile. */
+                    interface IInputFile {
+
+                        /** InputFile usage */
+                        usage?: (string|null);
+
+                        /** InputFile gcsSource */
+                        gcsSource?: (google.cloud.translation.v3.IGcsInputSource|null);
+                    }
+
+                    /** Represents an InputFile. */
+                    class InputFile implements IInputFile {
+
+                        /**
+                         * Constructs a new InputFile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.DatasetInputConfig.IInputFile);
+
+                        /** InputFile usage. */
+                        public usage: string;
+
+                        /** InputFile gcsSource. */
+                        public gcsSource?: (google.cloud.translation.v3.IGcsInputSource|null);
+
+                        /** InputFile source. */
+                        public source?: "gcsSource";
+
+                        /**
+                         * Creates a new InputFile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InputFile instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.DatasetInputConfig.IInputFile): google.cloud.translation.v3.DatasetInputConfig.InputFile;
+
+                        /**
+                         * Encodes the specified InputFile message. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.InputFile.verify|verify} messages.
+                         * @param message InputFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.DatasetInputConfig.IInputFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InputFile message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DatasetInputConfig.InputFile.verify|verify} messages.
+                         * @param message InputFile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.DatasetInputConfig.IInputFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InputFile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InputFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DatasetInputConfig.InputFile;
+
+                        /**
+                         * Decodes an InputFile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InputFile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DatasetInputConfig.InputFile;
+
+                        /**
+                         * Verifies an InputFile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InputFile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InputFile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DatasetInputConfig.InputFile;
+
+                        /**
+                         * Creates a plain object from an InputFile message. Also converts values to other types if specified.
+                         * @param message InputFile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.DatasetInputConfig.InputFile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InputFile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InputFile
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ImportDataMetadata. */
+                interface IImportDataMetadata {
+
+                    /** ImportDataMetadata state */
+                    state?: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState|null);
+
+                    /** ImportDataMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an ImportDataMetadata. */
+                class ImportDataMetadata implements IImportDataMetadata {
+
+                    /**
+                     * Constructs a new ImportDataMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IImportDataMetadata);
+
+                    /** ImportDataMetadata state. */
+                    public state: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState);
+
+                    /** ImportDataMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new ImportDataMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IImportDataMetadata): google.cloud.translation.v3.ImportDataMetadata;
+
+                    /**
+                     * Encodes the specified ImportDataMetadata message. Does not implicitly {@link google.cloud.translation.v3.ImportDataMetadata.verify|verify} messages.
+                     * @param message ImportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IImportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ImportDataMetadata.verify|verify} messages.
+                     * @param message ImportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IImportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ImportDataMetadata;
+
+                    /**
+                     * Decodes an ImportDataMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ImportDataMetadata;
+
+                    /**
+                     * Verifies an ImportDataMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ImportDataMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportDataMetadata message. Also converts values to other types if specified.
+                     * @param message ImportDataMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ImportDataMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataRequest. */
+                interface IExportDataRequest {
+
+                    /** ExportDataRequest dataset */
+                    dataset?: (string|null);
+
+                    /** ExportDataRequest outputConfig */
+                    outputConfig?: (google.cloud.translation.v3.IDatasetOutputConfig|null);
+                }
+
+                /** Represents an ExportDataRequest. */
+                class ExportDataRequest implements IExportDataRequest {
+
+                    /**
+                     * Constructs a new ExportDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IExportDataRequest);
+
+                    /** ExportDataRequest dataset. */
+                    public dataset: string;
+
+                    /** ExportDataRequest outputConfig. */
+                    public outputConfig?: (google.cloud.translation.v3.IDatasetOutputConfig|null);
+
+                    /**
+                     * Creates a new ExportDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IExportDataRequest): google.cloud.translation.v3.ExportDataRequest;
+
+                    /**
+                     * Encodes the specified ExportDataRequest message. Does not implicitly {@link google.cloud.translation.v3.ExportDataRequest.verify|verify} messages.
+                     * @param message ExportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IExportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ExportDataRequest.verify|verify} messages.
+                     * @param message ExportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IExportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ExportDataRequest;
+
+                    /**
+                     * Decodes an ExportDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ExportDataRequest;
+
+                    /**
+                     * Verifies an ExportDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ExportDataRequest;
+
+                    /**
+                     * Creates a plain object from an ExportDataRequest message. Also converts values to other types if specified.
+                     * @param message ExportDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ExportDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatasetOutputConfig. */
+                interface IDatasetOutputConfig {
+
+                    /** DatasetOutputConfig gcsDestination */
+                    gcsDestination?: (google.cloud.translation.v3.IGcsOutputDestination|null);
+                }
+
+                /** Represents a DatasetOutputConfig. */
+                class DatasetOutputConfig implements IDatasetOutputConfig {
+
+                    /**
+                     * Constructs a new DatasetOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDatasetOutputConfig);
+
+                    /** DatasetOutputConfig gcsDestination. */
+                    public gcsDestination?: (google.cloud.translation.v3.IGcsOutputDestination|null);
+
+                    /** DatasetOutputConfig destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new DatasetOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatasetOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDatasetOutputConfig): google.cloud.translation.v3.DatasetOutputConfig;
+
+                    /**
+                     * Encodes the specified DatasetOutputConfig message. Does not implicitly {@link google.cloud.translation.v3.DatasetOutputConfig.verify|verify} messages.
+                     * @param message DatasetOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDatasetOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatasetOutputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DatasetOutputConfig.verify|verify} messages.
+                     * @param message DatasetOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDatasetOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatasetOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatasetOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DatasetOutputConfig;
+
+                    /**
+                     * Decodes a DatasetOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatasetOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DatasetOutputConfig;
+
+                    /**
+                     * Verifies a DatasetOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatasetOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatasetOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DatasetOutputConfig;
+
+                    /**
+                     * Creates a plain object from a DatasetOutputConfig message. Also converts values to other types if specified.
+                     * @param message DatasetOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DatasetOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatasetOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatasetOutputConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataMetadata. */
+                interface IExportDataMetadata {
+
+                    /** ExportDataMetadata state */
+                    state?: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState|null);
+
+                    /** ExportDataMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an ExportDataMetadata. */
+                class ExportDataMetadata implements IExportDataMetadata {
+
+                    /**
+                     * Constructs a new ExportDataMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IExportDataMetadata);
+
+                    /** ExportDataMetadata state. */
+                    public state: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState);
+
+                    /** ExportDataMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new ExportDataMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IExportDataMetadata): google.cloud.translation.v3.ExportDataMetadata;
+
+                    /**
+                     * Encodes the specified ExportDataMetadata message. Does not implicitly {@link google.cloud.translation.v3.ExportDataMetadata.verify|verify} messages.
+                     * @param message ExportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IExportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ExportDataMetadata.verify|verify} messages.
+                     * @param message ExportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IExportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ExportDataMetadata;
+
+                    /**
+                     * Decodes an ExportDataMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ExportDataMetadata;
+
+                    /**
+                     * Verifies an ExportDataMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ExportDataMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportDataMetadata message. Also converts values to other types if specified.
+                     * @param message ExportDataMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ExportDataMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDatasetRequest. */
+                interface IDeleteDatasetRequest {
+
+                    /** DeleteDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDatasetRequest. */
+                class DeleteDatasetRequest implements IDeleteDatasetRequest {
+
+                    /**
+                     * Constructs a new DeleteDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteDatasetRequest);
+
+                    /** DeleteDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteDatasetRequest): google.cloud.translation.v3.DeleteDatasetRequest;
+
+                    /**
+                     * Encodes the specified DeleteDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetRequest.verify|verify} messages.
+                     * @param message DeleteDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetRequest.verify|verify} messages.
+                     * @param message DeleteDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteDatasetRequest;
+
+                    /**
+                     * Decodes a DeleteDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteDatasetRequest;
+
+                    /**
+                     * Verifies a DeleteDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDatasetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDatasetMetadata. */
+                interface IDeleteDatasetMetadata {
+
+                    /** DeleteDatasetMetadata state */
+                    state?: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState|null);
+
+                    /** DeleteDatasetMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteDatasetMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteDatasetMetadata error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents a DeleteDatasetMetadata. */
+                class DeleteDatasetMetadata implements IDeleteDatasetMetadata {
+
+                    /**
+                     * Constructs a new DeleteDatasetMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteDatasetMetadata);
+
+                    /** DeleteDatasetMetadata state. */
+                    public state: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState);
+
+                    /** DeleteDatasetMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteDatasetMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteDatasetMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new DeleteDatasetMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDatasetMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteDatasetMetadata): google.cloud.translation.v3.DeleteDatasetMetadata;
+
+                    /**
+                     * Encodes the specified DeleteDatasetMetadata message. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetMetadata.verify|verify} messages.
+                     * @param message DeleteDatasetMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteDatasetMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDatasetMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteDatasetMetadata.verify|verify} messages.
+                     * @param message DeleteDatasetMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteDatasetMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDatasetMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDatasetMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteDatasetMetadata;
+
+                    /**
+                     * Decodes a DeleteDatasetMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDatasetMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteDatasetMetadata;
+
+                    /**
+                     * Verifies a DeleteDatasetMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDatasetMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDatasetMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteDatasetMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteDatasetMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteDatasetMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteDatasetMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDatasetMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDatasetMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDatasetRequest. */
+                interface IGetDatasetRequest {
+
+                    /** GetDatasetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDatasetRequest. */
+                class GetDatasetRequest implements IGetDatasetRequest {
+
+                    /**
+                     * Constructs a new GetDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGetDatasetRequest);
+
+                    /** GetDatasetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGetDatasetRequest): google.cloud.translation.v3.GetDatasetRequest;
+
+                    /**
+                     * Encodes the specified GetDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.GetDatasetRequest.verify|verify} messages.
+                     * @param message GetDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGetDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetDatasetRequest.verify|verify} messages.
+                     * @param message GetDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGetDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GetDatasetRequest;
+
+                    /**
+                     * Decodes a GetDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GetDatasetRequest;
+
+                    /**
+                     * Verifies a GetDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GetDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a GetDatasetRequest message. Also converts values to other types if specified.
+                     * @param message GetDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GetDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatasetsRequest. */
+                interface IListDatasetsRequest {
+
+                    /** ListDatasetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDatasetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDatasetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDatasetsRequest. */
+                class ListDatasetsRequest implements IListDatasetsRequest {
+
+                    /**
+                     * Constructs a new ListDatasetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListDatasetsRequest);
+
+                    /** ListDatasetsRequest parent. */
+                    public parent: string;
+
+                    /** ListDatasetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDatasetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDatasetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatasetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListDatasetsRequest): google.cloud.translation.v3.ListDatasetsRequest;
+
+                    /**
+                     * Encodes the specified ListDatasetsRequest message. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsRequest.verify|verify} messages.
+                     * @param message ListDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatasetsRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsRequest.verify|verify} messages.
+                     * @param message ListDatasetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListDatasetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatasetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListDatasetsRequest;
+
+                    /**
+                     * Decodes a ListDatasetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatasetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListDatasetsRequest;
+
+                    /**
+                     * Verifies a ListDatasetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatasetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatasetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListDatasetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDatasetsRequest message. Also converts values to other types if specified.
+                     * @param message ListDatasetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListDatasetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatasetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatasetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatasetsResponse. */
+                interface IListDatasetsResponse {
+
+                    /** ListDatasetsResponse datasets */
+                    datasets?: (google.cloud.translation.v3.IDataset[]|null);
+
+                    /** ListDatasetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDatasetsResponse. */
+                class ListDatasetsResponse implements IListDatasetsResponse {
+
+                    /**
+                     * Constructs a new ListDatasetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListDatasetsResponse);
+
+                    /** ListDatasetsResponse datasets. */
+                    public datasets: google.cloud.translation.v3.IDataset[];
+
+                    /** ListDatasetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDatasetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatasetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListDatasetsResponse): google.cloud.translation.v3.ListDatasetsResponse;
+
+                    /**
+                     * Encodes the specified ListDatasetsResponse message. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsResponse.verify|verify} messages.
+                     * @param message ListDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatasetsResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListDatasetsResponse.verify|verify} messages.
+                     * @param message ListDatasetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListDatasetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatasetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListDatasetsResponse;
+
+                    /**
+                     * Decodes a ListDatasetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatasetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListDatasetsResponse;
+
+                    /**
+                     * Verifies a ListDatasetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatasetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatasetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListDatasetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDatasetsResponse message. Also converts values to other types if specified.
+                     * @param message ListDatasetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListDatasetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatasetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatasetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDatasetRequest. */
+                interface ICreateDatasetRequest {
+
+                    /** CreateDatasetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDatasetRequest dataset */
+                    dataset?: (google.cloud.translation.v3.IDataset|null);
+                }
+
+                /** Represents a CreateDatasetRequest. */
+                class CreateDatasetRequest implements ICreateDatasetRequest {
+
+                    /**
+                     * Constructs a new CreateDatasetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ICreateDatasetRequest);
+
+                    /** CreateDatasetRequest parent. */
+                    public parent: string;
+
+                    /** CreateDatasetRequest dataset. */
+                    public dataset?: (google.cloud.translation.v3.IDataset|null);
+
+                    /**
+                     * Creates a new CreateDatasetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDatasetRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ICreateDatasetRequest): google.cloud.translation.v3.CreateDatasetRequest;
+
+                    /**
+                     * Encodes the specified CreateDatasetRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetRequest.verify|verify} messages.
+                     * @param message CreateDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ICreateDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDatasetRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetRequest.verify|verify} messages.
+                     * @param message CreateDatasetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ICreateDatasetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDatasetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.CreateDatasetRequest;
+
+                    /**
+                     * Decodes a CreateDatasetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDatasetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.CreateDatasetRequest;
+
+                    /**
+                     * Verifies a CreateDatasetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDatasetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDatasetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.CreateDatasetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDatasetRequest message. Also converts values to other types if specified.
+                     * @param message CreateDatasetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.CreateDatasetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDatasetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDatasetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDatasetMetadata. */
+                interface ICreateDatasetMetadata {
+
+                    /** CreateDatasetMetadata state */
+                    state?: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState|null);
+
+                    /** CreateDatasetMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateDatasetMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateDatasetMetadata error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents a CreateDatasetMetadata. */
+                class CreateDatasetMetadata implements ICreateDatasetMetadata {
+
+                    /**
+                     * Constructs a new CreateDatasetMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ICreateDatasetMetadata);
+
+                    /** CreateDatasetMetadata state. */
+                    public state: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState);
+
+                    /** CreateDatasetMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateDatasetMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateDatasetMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new CreateDatasetMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDatasetMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ICreateDatasetMetadata): google.cloud.translation.v3.CreateDatasetMetadata;
+
+                    /**
+                     * Encodes the specified CreateDatasetMetadata message. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetMetadata.verify|verify} messages.
+                     * @param message CreateDatasetMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ICreateDatasetMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDatasetMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateDatasetMetadata.verify|verify} messages.
+                     * @param message CreateDatasetMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ICreateDatasetMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDatasetMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDatasetMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.CreateDatasetMetadata;
+
+                    /**
+                     * Decodes a CreateDatasetMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDatasetMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.CreateDatasetMetadata;
+
+                    /**
+                     * Verifies a CreateDatasetMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDatasetMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDatasetMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.CreateDatasetMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateDatasetMetadata message. Also converts values to other types if specified.
+                     * @param message CreateDatasetMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.CreateDatasetMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDatasetMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDatasetMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExamplesRequest. */
+                interface IListExamplesRequest {
+
+                    /** ListExamplesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListExamplesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListExamplesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListExamplesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListExamplesRequest. */
+                class ListExamplesRequest implements IListExamplesRequest {
+
+                    /**
+                     * Constructs a new ListExamplesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListExamplesRequest);
+
+                    /** ListExamplesRequest parent. */
+                    public parent: string;
+
+                    /** ListExamplesRequest filter. */
+                    public filter: string;
+
+                    /** ListExamplesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListExamplesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListExamplesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExamplesRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListExamplesRequest): google.cloud.translation.v3.ListExamplesRequest;
+
+                    /**
+                     * Encodes the specified ListExamplesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListExamplesRequest.verify|verify} messages.
+                     * @param message ListExamplesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListExamplesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExamplesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListExamplesRequest.verify|verify} messages.
+                     * @param message ListExamplesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListExamplesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExamplesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExamplesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListExamplesRequest;
+
+                    /**
+                     * Decodes a ListExamplesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExamplesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListExamplesRequest;
+
+                    /**
+                     * Verifies a ListExamplesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExamplesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExamplesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListExamplesRequest;
+
+                    /**
+                     * Creates a plain object from a ListExamplesRequest message. Also converts values to other types if specified.
+                     * @param message ListExamplesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListExamplesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExamplesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExamplesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExamplesResponse. */
+                interface IListExamplesResponse {
+
+                    /** ListExamplesResponse examples */
+                    examples?: (google.cloud.translation.v3.IExample[]|null);
+
+                    /** ListExamplesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListExamplesResponse. */
+                class ListExamplesResponse implements IListExamplesResponse {
+
+                    /**
+                     * Constructs a new ListExamplesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListExamplesResponse);
+
+                    /** ListExamplesResponse examples. */
+                    public examples: google.cloud.translation.v3.IExample[];
+
+                    /** ListExamplesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListExamplesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExamplesResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListExamplesResponse): google.cloud.translation.v3.ListExamplesResponse;
+
+                    /**
+                     * Encodes the specified ListExamplesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListExamplesResponse.verify|verify} messages.
+                     * @param message ListExamplesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListExamplesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExamplesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListExamplesResponse.verify|verify} messages.
+                     * @param message ListExamplesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListExamplesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExamplesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExamplesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListExamplesResponse;
+
+                    /**
+                     * Decodes a ListExamplesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExamplesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListExamplesResponse;
+
+                    /**
+                     * Verifies a ListExamplesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExamplesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExamplesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListExamplesResponse;
+
+                    /**
+                     * Creates a plain object from a ListExamplesResponse message. Also converts values to other types if specified.
+                     * @param message ListExamplesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListExamplesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExamplesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExamplesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Example. */
+                interface IExample {
+
+                    /** Example name */
+                    name?: (string|null);
+
+                    /** Example sourceText */
+                    sourceText?: (string|null);
+
+                    /** Example targetText */
+                    targetText?: (string|null);
+
+                    /** Example usage */
+                    usage?: (string|null);
+                }
+
+                /** Represents an Example. */
+                class Example implements IExample {
+
+                    /**
+                     * Constructs a new Example.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IExample);
+
+                    /** Example name. */
+                    public name: string;
+
+                    /** Example sourceText. */
+                    public sourceText: string;
+
+                    /** Example targetText. */
+                    public targetText: string;
+
+                    /** Example usage. */
+                    public usage: string;
+
+                    /**
+                     * Creates a new Example instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Example instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IExample): google.cloud.translation.v3.Example;
+
+                    /**
+                     * Encodes the specified Example message. Does not implicitly {@link google.cloud.translation.v3.Example.verify|verify} messages.
+                     * @param message Example message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Example message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Example.verify|verify} messages.
+                     * @param message Example message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IExample, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Example message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Example
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.Example;
+
+                    /**
+                     * Decodes an Example message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Example
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.Example;
+
+                    /**
+                     * Verifies an Example message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Example message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Example
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.Example;
+
+                    /**
+                     * Creates a plain object from an Example message. Also converts values to other types if specified.
+                     * @param message Example
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.Example, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Example to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Example
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BatchTransferResourcesResponse. */
+                interface IBatchTransferResourcesResponse {
+
+                    /** BatchTransferResourcesResponse responses */
+                    responses?: (google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse[]|null);
+                }
+
+                /** Represents a BatchTransferResourcesResponse. */
+                class BatchTransferResourcesResponse implements IBatchTransferResourcesResponse {
+
+                    /**
+                     * Constructs a new BatchTransferResourcesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IBatchTransferResourcesResponse);
+
+                    /** BatchTransferResourcesResponse responses. */
+                    public responses: google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse[];
+
+                    /**
+                     * Creates a new BatchTransferResourcesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchTransferResourcesResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IBatchTransferResourcesResponse): google.cloud.translation.v3.BatchTransferResourcesResponse;
+
+                    /**
+                     * Encodes the specified BatchTransferResourcesResponse message. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.verify|verify} messages.
+                     * @param message BatchTransferResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IBatchTransferResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchTransferResourcesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.verify|verify} messages.
+                     * @param message BatchTransferResourcesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IBatchTransferResourcesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchTransferResourcesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchTransferResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchTransferResourcesResponse;
+
+                    /**
+                     * Decodes a BatchTransferResourcesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchTransferResourcesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchTransferResourcesResponse;
+
+                    /**
+                     * Verifies a BatchTransferResourcesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchTransferResourcesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchTransferResourcesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchTransferResourcesResponse;
+
+                    /**
+                     * Creates a plain object from a BatchTransferResourcesResponse message. Also converts values to other types if specified.
+                     * @param message BatchTransferResourcesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.BatchTransferResourcesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchTransferResourcesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BatchTransferResourcesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BatchTransferResourcesResponse {
+
+                    /** Properties of a TransferResourceResponse. */
+                    interface ITransferResourceResponse {
+
+                        /** TransferResourceResponse source */
+                        source?: (string|null);
+
+                        /** TransferResourceResponse target */
+                        target?: (string|null);
+
+                        /** TransferResourceResponse error */
+                        error?: (google.rpc.IStatus|null);
+                    }
+
+                    /** Represents a TransferResourceResponse. */
+                    class TransferResourceResponse implements ITransferResourceResponse {
+
+                        /**
+                         * Constructs a new TransferResourceResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse);
+
+                        /** TransferResourceResponse source. */
+                        public source: string;
+
+                        /** TransferResourceResponse target. */
+                        public target: string;
+
+                        /** TransferResourceResponse error. */
+                        public error?: (google.rpc.IStatus|null);
+
+                        /**
+                         * Creates a new TransferResourceResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TransferResourceResponse instance
+                         */
+                        public static create(properties?: google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse): google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse;
+
+                        /**
+                         * Encodes the specified TransferResourceResponse message. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.verify|verify} messages.
+                         * @param message TransferResourceResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TransferResourceResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse.verify|verify} messages.
+                         * @param message TransferResourceResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.translation.v3.BatchTransferResourcesResponse.ITransferResourceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TransferResourceResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TransferResourceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse;
+
+                        /**
+                         * Decodes a TransferResourceResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TransferResourceResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse;
+
+                        /**
+                         * Verifies a TransferResourceResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TransferResourceResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TransferResourceResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse;
+
+                        /**
+                         * Creates a plain object from a TransferResourceResponse message. Also converts values to other types if specified.
+                         * @param message TransferResourceResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TransferResourceResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TransferResourceResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Dataset. */
+                interface IDataset {
+
+                    /** Dataset name */
+                    name?: (string|null);
+
+                    /** Dataset displayName */
+                    displayName?: (string|null);
+
+                    /** Dataset sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+
+                    /** Dataset targetLanguageCode */
+                    targetLanguageCode?: (string|null);
+
+                    /** Dataset exampleCount */
+                    exampleCount?: (number|null);
+
+                    /** Dataset trainExampleCount */
+                    trainExampleCount?: (number|null);
+
+                    /** Dataset validateExampleCount */
+                    validateExampleCount?: (number|null);
+
+                    /** Dataset testExampleCount */
+                    testExampleCount?: (number|null);
+
+                    /** Dataset createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Dataset. */
+                class Dataset implements IDataset {
+
+                    /**
+                     * Constructs a new Dataset.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDataset);
+
+                    /** Dataset name. */
+                    public name: string;
+
+                    /** Dataset displayName. */
+                    public displayName: string;
+
+                    /** Dataset sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /** Dataset targetLanguageCode. */
+                    public targetLanguageCode: string;
+
+                    /** Dataset exampleCount. */
+                    public exampleCount: number;
+
+                    /** Dataset trainExampleCount. */
+                    public trainExampleCount: number;
+
+                    /** Dataset validateExampleCount. */
+                    public validateExampleCount: number;
+
+                    /** Dataset testExampleCount. */
+                    public testExampleCount: number;
+
+                    /** Dataset createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Dataset updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Dataset instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dataset instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDataset): google.cloud.translation.v3.Dataset;
+
+                    /**
+                     * Encodes the specified Dataset message. Does not implicitly {@link google.cloud.translation.v3.Dataset.verify|verify} messages.
+                     * @param message Dataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dataset message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Dataset.verify|verify} messages.
+                     * @param message Dataset message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDataset, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dataset message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.Dataset;
+
+                    /**
+                     * Decodes a Dataset message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dataset
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.Dataset;
+
+                    /**
+                     * Verifies a Dataset message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dataset message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dataset
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.Dataset;
+
+                    /**
+                     * Creates a plain object from a Dataset message. Also converts values to other types if specified.
+                     * @param message Dataset
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.Dataset, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dataset to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Dataset
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateModelRequest. */
+                interface ICreateModelRequest {
+
+                    /** CreateModelRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateModelRequest model */
+                    model?: (google.cloud.translation.v3.IModel|null);
+                }
+
+                /** Represents a CreateModelRequest. */
+                class CreateModelRequest implements ICreateModelRequest {
+
+                    /**
+                     * Constructs a new CreateModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ICreateModelRequest);
+
+                    /** CreateModelRequest parent. */
+                    public parent: string;
+
+                    /** CreateModelRequest model. */
+                    public model?: (google.cloud.translation.v3.IModel|null);
+
+                    /**
+                     * Creates a new CreateModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ICreateModelRequest): google.cloud.translation.v3.CreateModelRequest;
+
+                    /**
+                     * Encodes the specified CreateModelRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateModelRequest.verify|verify} messages.
+                     * @param message CreateModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ICreateModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateModelRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateModelRequest.verify|verify} messages.
+                     * @param message CreateModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ICreateModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.CreateModelRequest;
+
+                    /**
+                     * Decodes a CreateModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.CreateModelRequest;
+
+                    /**
+                     * Verifies a CreateModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.CreateModelRequest;
+
+                    /**
+                     * Creates a plain object from a CreateModelRequest message. Also converts values to other types if specified.
+                     * @param message CreateModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.CreateModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateModelMetadata. */
+                interface ICreateModelMetadata {
+
+                    /** CreateModelMetadata state */
+                    state?: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState|null);
+
+                    /** CreateModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateModelMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateModelMetadata error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents a CreateModelMetadata. */
+                class CreateModelMetadata implements ICreateModelMetadata {
+
+                    /**
+                     * Constructs a new CreateModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ICreateModelMetadata);
+
+                    /** CreateModelMetadata state. */
+                    public state: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState);
+
+                    /** CreateModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateModelMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateModelMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new CreateModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ICreateModelMetadata): google.cloud.translation.v3.CreateModelMetadata;
+
+                    /**
+                     * Encodes the specified CreateModelMetadata message. Does not implicitly {@link google.cloud.translation.v3.CreateModelMetadata.verify|verify} messages.
+                     * @param message CreateModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ICreateModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateModelMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateModelMetadata.verify|verify} messages.
+                     * @param message CreateModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ICreateModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.CreateModelMetadata;
+
+                    /**
+                     * Decodes a CreateModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.CreateModelMetadata;
+
+                    /**
+                     * Verifies a CreateModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.CreateModelMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateModelMetadata message. Also converts values to other types if specified.
+                     * @param message CreateModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.CreateModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListModelsRequest. */
+                interface IListModelsRequest {
+
+                    /** ListModelsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListModelsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListModelsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListModelsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListModelsRequest. */
+                class ListModelsRequest implements IListModelsRequest {
+
+                    /**
+                     * Constructs a new ListModelsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListModelsRequest);
+
+                    /** ListModelsRequest parent. */
+                    public parent: string;
+
+                    /** ListModelsRequest filter. */
+                    public filter: string;
+
+                    /** ListModelsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListModelsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListModelsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListModelsRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListModelsRequest): google.cloud.translation.v3.ListModelsRequest;
+
+                    /**
+                     * Encodes the specified ListModelsRequest message. Does not implicitly {@link google.cloud.translation.v3.ListModelsRequest.verify|verify} messages.
+                     * @param message ListModelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListModelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListModelsRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListModelsRequest.verify|verify} messages.
+                     * @param message ListModelsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListModelsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListModelsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListModelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListModelsRequest;
+
+                    /**
+                     * Decodes a ListModelsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListModelsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListModelsRequest;
+
+                    /**
+                     * Verifies a ListModelsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListModelsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListModelsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListModelsRequest;
+
+                    /**
+                     * Creates a plain object from a ListModelsRequest message. Also converts values to other types if specified.
+                     * @param message ListModelsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListModelsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListModelsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListModelsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListModelsResponse. */
+                interface IListModelsResponse {
+
+                    /** ListModelsResponse models */
+                    models?: (google.cloud.translation.v3.IModel[]|null);
+
+                    /** ListModelsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListModelsResponse. */
+                class ListModelsResponse implements IListModelsResponse {
+
+                    /**
+                     * Constructs a new ListModelsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListModelsResponse);
+
+                    /** ListModelsResponse models. */
+                    public models: google.cloud.translation.v3.IModel[];
+
+                    /** ListModelsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListModelsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListModelsResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListModelsResponse): google.cloud.translation.v3.ListModelsResponse;
+
+                    /**
+                     * Encodes the specified ListModelsResponse message. Does not implicitly {@link google.cloud.translation.v3.ListModelsResponse.verify|verify} messages.
+                     * @param message ListModelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListModelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListModelsResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListModelsResponse.verify|verify} messages.
+                     * @param message ListModelsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListModelsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListModelsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListModelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListModelsResponse;
+
+                    /**
+                     * Decodes a ListModelsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListModelsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListModelsResponse;
+
+                    /**
+                     * Verifies a ListModelsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListModelsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListModelsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListModelsResponse;
+
+                    /**
+                     * Creates a plain object from a ListModelsResponse message. Also converts values to other types if specified.
+                     * @param message ListModelsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListModelsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListModelsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListModelsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetModelRequest. */
+                interface IGetModelRequest {
+
+                    /** GetModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetModelRequest. */
+                class GetModelRequest implements IGetModelRequest {
+
+                    /**
+                     * Constructs a new GetModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGetModelRequest);
+
+                    /** GetModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGetModelRequest): google.cloud.translation.v3.GetModelRequest;
+
+                    /**
+                     * Encodes the specified GetModelRequest message. Does not implicitly {@link google.cloud.translation.v3.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetModelRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetModelRequest.verify|verify} messages.
+                     * @param message GetModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGetModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GetModelRequest;
+
+                    /**
+                     * Decodes a GetModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GetModelRequest;
+
+                    /**
+                     * Verifies a GetModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GetModelRequest;
+
+                    /**
+                     * Creates a plain object from a GetModelRequest message. Also converts values to other types if specified.
+                     * @param message GetModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GetModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteModelRequest. */
+                interface IDeleteModelRequest {
+
+                    /** DeleteModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteModelRequest. */
+                class DeleteModelRequest implements IDeleteModelRequest {
+
+                    /**
+                     * Constructs a new DeleteModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteModelRequest);
+
+                    /** DeleteModelRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteModelRequest): google.cloud.translation.v3.DeleteModelRequest;
+
+                    /**
+                     * Encodes the specified DeleteModelRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteModelRequest.verify|verify} messages.
+                     * @param message DeleteModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteModelRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteModelRequest.verify|verify} messages.
+                     * @param message DeleteModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteModelRequest;
+
+                    /**
+                     * Decodes a DeleteModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteModelRequest;
+
+                    /**
+                     * Verifies a DeleteModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteModelRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteModelRequest message. Also converts values to other types if specified.
+                     * @param message DeleteModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteModelMetadata. */
+                interface IDeleteModelMetadata {
+
+                    /** DeleteModelMetadata state */
+                    state?: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState|null);
+
+                    /** DeleteModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteModelMetadata updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteModelMetadata error */
+                    error?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents a DeleteModelMetadata. */
+                class DeleteModelMetadata implements IDeleteModelMetadata {
+
+                    /**
+                     * Constructs a new DeleteModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteModelMetadata);
+
+                    /** DeleteModelMetadata state. */
+                    public state: (google.cloud.translation.v3.OperationState|keyof typeof google.cloud.translation.v3.OperationState);
+
+                    /** DeleteModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteModelMetadata updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DeleteModelMetadata error. */
+                    public error?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new DeleteModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteModelMetadata): google.cloud.translation.v3.DeleteModelMetadata;
+
+                    /**
+                     * Encodes the specified DeleteModelMetadata message. Does not implicitly {@link google.cloud.translation.v3.DeleteModelMetadata.verify|verify} messages.
+                     * @param message DeleteModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteModelMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteModelMetadata.verify|verify} messages.
+                     * @param message DeleteModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteModelMetadata;
+
+                    /**
+                     * Decodes a DeleteModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteModelMetadata;
+
+                    /**
+                     * Verifies a DeleteModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteModelMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteModelMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Model. */
+                interface IModel {
+
+                    /** Model name */
+                    name?: (string|null);
+
+                    /** Model displayName */
+                    displayName?: (string|null);
+
+                    /** Model dataset */
+                    dataset?: (string|null);
+
+                    /** Model sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+
+                    /** Model targetLanguageCode */
+                    targetLanguageCode?: (string|null);
+
+                    /** Model trainExampleCount */
+                    trainExampleCount?: (number|null);
+
+                    /** Model validateExampleCount */
+                    validateExampleCount?: (number|null);
+
+                    /** Model testExampleCount */
+                    testExampleCount?: (number|null);
+
+                    /** Model createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a Model. */
+                class Model implements IModel {
+
+                    /**
+                     * Constructs a new Model.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IModel);
+
+                    /** Model name. */
+                    public name: string;
+
+                    /** Model displayName. */
+                    public displayName: string;
+
+                    /** Model dataset. */
+                    public dataset: string;
+
+                    /** Model sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /** Model targetLanguageCode. */
+                    public targetLanguageCode: string;
+
+                    /** Model trainExampleCount. */
+                    public trainExampleCount: number;
+
+                    /** Model validateExampleCount. */
+                    public validateExampleCount: number;
+
+                    /** Model testExampleCount. */
+                    public testExampleCount: number;
+
+                    /** Model createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Model updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new Model instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Model instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IModel): google.cloud.translation.v3.Model;
+
+                    /**
+                     * Encodes the specified Model message. Does not implicitly {@link google.cloud.translation.v3.Model.verify|verify} messages.
+                     * @param message Model message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Model message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Model.verify|verify} messages.
+                     * @param message Model message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IModel, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Model message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Model
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.Model;
+
+                    /**
+                     * Decodes a Model message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Model
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.Model;
+
+                    /**
+                     * Verifies a Model message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Model message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Model
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.Model;
+
+                    /**
+                     * Creates a plain object from a Model message. Also converts values to other types if specified.
+                     * @param message Model
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Model to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Model
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents a TranslationService */
                 class TranslationService extends $protobuf.rpc.Service {
 
@@ -2388,6 +6331,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public translateText(request: google.cloud.translation.v3.ITranslateTextRequest): Promise<google.cloud.translation.v3.TranslateTextResponse>;
+
+                    /**
+                     * Calls RomanizeText.
+                     * @param request RomanizeTextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RomanizeTextResponse
+                     */
+                    public romanizeText(request: google.cloud.translation.v3.IRomanizeTextRequest, callback: google.cloud.translation.v3.TranslationService.RomanizeTextCallback): void;
+
+                    /**
+                     * Calls RomanizeText.
+                     * @param request RomanizeTextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public romanizeText(request: google.cloud.translation.v3.IRomanizeTextRequest): Promise<google.cloud.translation.v3.RomanizeTextResponse>;
 
                     /**
                      * Calls DetectLanguage.
@@ -2474,6 +6431,20 @@ export namespace google {
                     public createGlossary(request: google.cloud.translation.v3.ICreateGlossaryRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateGlossary.
+                     * @param request UpdateGlossaryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateGlossary(request: google.cloud.translation.v3.IUpdateGlossaryRequest, callback: google.cloud.translation.v3.TranslationService.UpdateGlossaryCallback): void;
+
+                    /**
+                     * Calls UpdateGlossary.
+                     * @param request UpdateGlossaryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGlossary(request: google.cloud.translation.v3.IUpdateGlossaryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListGlossaries.
                      * @param request ListGlossariesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListGlossariesResponse
@@ -2514,6 +6485,132 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteGlossary(request: google.cloud.translation.v3.IDeleteGlossaryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetGlossaryEntry.
+                     * @param request GetGlossaryEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GlossaryEntry
+                     */
+                    public getGlossaryEntry(request: google.cloud.translation.v3.IGetGlossaryEntryRequest, callback: google.cloud.translation.v3.TranslationService.GetGlossaryEntryCallback): void;
+
+                    /**
+                     * Calls GetGlossaryEntry.
+                     * @param request GetGlossaryEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getGlossaryEntry(request: google.cloud.translation.v3.IGetGlossaryEntryRequest): Promise<google.cloud.translation.v3.GlossaryEntry>;
+
+                    /**
+                     * Calls ListGlossaryEntries.
+                     * @param request ListGlossaryEntriesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListGlossaryEntriesResponse
+                     */
+                    public listGlossaryEntries(request: google.cloud.translation.v3.IListGlossaryEntriesRequest, callback: google.cloud.translation.v3.TranslationService.ListGlossaryEntriesCallback): void;
+
+                    /**
+                     * Calls ListGlossaryEntries.
+                     * @param request ListGlossaryEntriesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listGlossaryEntries(request: google.cloud.translation.v3.IListGlossaryEntriesRequest): Promise<google.cloud.translation.v3.ListGlossaryEntriesResponse>;
+
+                    /**
+                     * Calls CreateGlossaryEntry.
+                     * @param request CreateGlossaryEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GlossaryEntry
+                     */
+                    public createGlossaryEntry(request: google.cloud.translation.v3.ICreateGlossaryEntryRequest, callback: google.cloud.translation.v3.TranslationService.CreateGlossaryEntryCallback): void;
+
+                    /**
+                     * Calls CreateGlossaryEntry.
+                     * @param request CreateGlossaryEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createGlossaryEntry(request: google.cloud.translation.v3.ICreateGlossaryEntryRequest): Promise<google.cloud.translation.v3.GlossaryEntry>;
+
+                    /**
+                     * Calls UpdateGlossaryEntry.
+                     * @param request UpdateGlossaryEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GlossaryEntry
+                     */
+                    public updateGlossaryEntry(request: google.cloud.translation.v3.IUpdateGlossaryEntryRequest, callback: google.cloud.translation.v3.TranslationService.UpdateGlossaryEntryCallback): void;
+
+                    /**
+                     * Calls UpdateGlossaryEntry.
+                     * @param request UpdateGlossaryEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateGlossaryEntry(request: google.cloud.translation.v3.IUpdateGlossaryEntryRequest): Promise<google.cloud.translation.v3.GlossaryEntry>;
+
+                    /**
+                     * Calls DeleteGlossaryEntry.
+                     * @param request DeleteGlossaryEntryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteGlossaryEntry(request: google.cloud.translation.v3.IDeleteGlossaryEntryRequest, callback: google.cloud.translation.v3.TranslationService.DeleteGlossaryEntryCallback): void;
+
+                    /**
+                     * Calls DeleteGlossaryEntry.
+                     * @param request DeleteGlossaryEntryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteGlossaryEntry(request: google.cloud.translation.v3.IDeleteGlossaryEntryRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateDataset.
+                     * @param request CreateDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDataset(request: google.cloud.translation.v3.ICreateDatasetRequest, callback: google.cloud.translation.v3.TranslationService.CreateDatasetCallback): void;
+
+                    /**
+                     * Calls CreateDataset.
+                     * @param request CreateDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDataset(request: google.cloud.translation.v3.ICreateDatasetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDataset.
+                     * @param request GetDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dataset
+                     */
+                    public getDataset(request: google.cloud.translation.v3.IGetDatasetRequest, callback: google.cloud.translation.v3.TranslationService.GetDatasetCallback): void;
+
+                    /**
+                     * Calls GetDataset.
+                     * @param request GetDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDataset(request: google.cloud.translation.v3.IGetDatasetRequest): Promise<google.cloud.translation.v3.Dataset>;
+
+                    /**
+                     * Calls ListDatasets.
+                     * @param request ListDatasetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDatasetsResponse
+                     */
+                    public listDatasets(request: google.cloud.translation.v3.IListDatasetsRequest, callback: google.cloud.translation.v3.TranslationService.ListDatasetsCallback): void;
+
+                    /**
+                     * Calls ListDatasets.
+                     * @param request ListDatasetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDatasets(request: google.cloud.translation.v3.IListDatasetsRequest): Promise<google.cloud.translation.v3.ListDatasetsResponse>;
+
+                    /**
+                     * Calls DeleteDataset.
+                     * @param request DeleteDatasetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDataset(request: google.cloud.translation.v3.IDeleteDatasetRequest, callback: google.cloud.translation.v3.TranslationService.DeleteDatasetCallback): void;
+
+                    /**
+                     * Calls DeleteDataset.
+                     * @param request DeleteDatasetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDataset(request: google.cloud.translation.v3.IDeleteDatasetRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls CreateAdaptiveMtDataset.
@@ -2654,6 +6751,104 @@ export namespace google {
                      * @returns Promise
                      */
                     public listAdaptiveMtSentences(request: google.cloud.translation.v3.IListAdaptiveMtSentencesRequest): Promise<google.cloud.translation.v3.ListAdaptiveMtSentencesResponse>;
+
+                    /**
+                     * Calls ImportData.
+                     * @param request ImportDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importData(request: google.cloud.translation.v3.IImportDataRequest, callback: google.cloud.translation.v3.TranslationService.ImportDataCallback): void;
+
+                    /**
+                     * Calls ImportData.
+                     * @param request ImportDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importData(request: google.cloud.translation.v3.IImportDataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportData.
+                     * @param request ExportDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportData(request: google.cloud.translation.v3.IExportDataRequest, callback: google.cloud.translation.v3.TranslationService.ExportDataCallback): void;
+
+                    /**
+                     * Calls ExportData.
+                     * @param request ExportDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportData(request: google.cloud.translation.v3.IExportDataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListExamples.
+                     * @param request ListExamplesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListExamplesResponse
+                     */
+                    public listExamples(request: google.cloud.translation.v3.IListExamplesRequest, callback: google.cloud.translation.v3.TranslationService.ListExamplesCallback): void;
+
+                    /**
+                     * Calls ListExamples.
+                     * @param request ListExamplesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listExamples(request: google.cloud.translation.v3.IListExamplesRequest): Promise<google.cloud.translation.v3.ListExamplesResponse>;
+
+                    /**
+                     * Calls CreateModel.
+                     * @param request CreateModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createModel(request: google.cloud.translation.v3.ICreateModelRequest, callback: google.cloud.translation.v3.TranslationService.CreateModelCallback): void;
+
+                    /**
+                     * Calls CreateModel.
+                     * @param request CreateModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createModel(request: google.cloud.translation.v3.ICreateModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListModels.
+                     * @param request ListModelsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListModelsResponse
+                     */
+                    public listModels(request: google.cloud.translation.v3.IListModelsRequest, callback: google.cloud.translation.v3.TranslationService.ListModelsCallback): void;
+
+                    /**
+                     * Calls ListModels.
+                     * @param request ListModelsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listModels(request: google.cloud.translation.v3.IListModelsRequest): Promise<google.cloud.translation.v3.ListModelsResponse>;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Model
+                     */
+                    public getModel(request: google.cloud.translation.v3.IGetModelRequest, callback: google.cloud.translation.v3.TranslationService.GetModelCallback): void;
+
+                    /**
+                     * Calls GetModel.
+                     * @param request GetModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getModel(request: google.cloud.translation.v3.IGetModelRequest): Promise<google.cloud.translation.v3.Model>;
+
+                    /**
+                     * Calls DeleteModel.
+                     * @param request DeleteModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteModel(request: google.cloud.translation.v3.IDeleteModelRequest, callback: google.cloud.translation.v3.TranslationService.DeleteModelCallback): void;
+
+                    /**
+                     * Calls DeleteModel.
+                     * @param request DeleteModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteModel(request: google.cloud.translation.v3.IDeleteModelRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace TranslationService {
@@ -2664,6 +6859,13 @@ export namespace google {
                      * @param [response] TranslateTextResponse
                      */
                     type TranslateTextCallback = (error: (Error|null), response?: google.cloud.translation.v3.TranslateTextResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|romanizeText}.
+                     * @param error Error, if any
+                     * @param [response] RomanizeTextResponse
+                     */
+                    type RomanizeTextCallback = (error: (Error|null), response?: google.cloud.translation.v3.RomanizeTextResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.translation.v3.TranslationService|detectLanguage}.
@@ -2708,6 +6910,13 @@ export namespace google {
                     type CreateGlossaryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|updateGlossary}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateGlossaryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.translation.v3.TranslationService|listGlossaries}.
                      * @param error Error, if any
                      * @param [response] ListGlossariesResponse
@@ -2727,6 +6936,69 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteGlossaryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|getGlossaryEntry}.
+                     * @param error Error, if any
+                     * @param [response] GlossaryEntry
+                     */
+                    type GetGlossaryEntryCallback = (error: (Error|null), response?: google.cloud.translation.v3.GlossaryEntry) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listGlossaryEntries}.
+                     * @param error Error, if any
+                     * @param [response] ListGlossaryEntriesResponse
+                     */
+                    type ListGlossaryEntriesCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListGlossaryEntriesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|createGlossaryEntry}.
+                     * @param error Error, if any
+                     * @param [response] GlossaryEntry
+                     */
+                    type CreateGlossaryEntryCallback = (error: (Error|null), response?: google.cloud.translation.v3.GlossaryEntry) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|updateGlossaryEntry}.
+                     * @param error Error, if any
+                     * @param [response] GlossaryEntry
+                     */
+                    type UpdateGlossaryEntryCallback = (error: (Error|null), response?: google.cloud.translation.v3.GlossaryEntry) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteGlossaryEntry}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteGlossaryEntryCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|createDataset}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|getDataset}.
+                     * @param error Error, if any
+                     * @param [response] Dataset
+                     */
+                    type GetDatasetCallback = (error: (Error|null), response?: google.cloud.translation.v3.Dataset) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listDatasets}.
+                     * @param error Error, if any
+                     * @param [response] ListDatasetsResponse
+                     */
+                    type ListDatasetsCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListDatasetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteDataset}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDatasetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.translation.v3.TranslationService|createAdaptiveMtDataset}.
@@ -2797,105 +7069,148 @@ export namespace google {
                      * @param [response] ListAdaptiveMtSentencesResponse
                      */
                     type ListAdaptiveMtSentencesCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListAdaptiveMtSentencesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|importData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|exportData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listExamples}.
+                     * @param error Error, if any
+                     * @param [response] ListExamplesResponse
+                     */
+                    type ListExamplesCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListExamplesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|createModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|listModels}.
+                     * @param error Error, if any
+                     * @param [response] ListModelsResponse
+                     */
+                    type ListModelsCallback = (error: (Error|null), response?: google.cloud.translation.v3.ListModelsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|getModel}.
+                     * @param error Error, if any
+                     * @param [response] Model
+                     */
+                    type GetModelCallback = (error: (Error|null), response?: google.cloud.translation.v3.Model) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService|deleteModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
-                /** Properties of a TranslateTextGlossaryConfig. */
-                interface ITranslateTextGlossaryConfig {
+                /** Properties of a TransliterationConfig. */
+                interface ITransliterationConfig {
 
-                    /** TranslateTextGlossaryConfig glossary */
-                    glossary?: (string|null);
-
-                    /** TranslateTextGlossaryConfig ignoreCase */
-                    ignoreCase?: (boolean|null);
+                    /** TransliterationConfig enableTransliteration */
+                    enableTransliteration?: (boolean|null);
                 }
 
-                /** Represents a TranslateTextGlossaryConfig. */
-                class TranslateTextGlossaryConfig implements ITranslateTextGlossaryConfig {
+                /** Represents a TransliterationConfig. */
+                class TransliterationConfig implements ITransliterationConfig {
 
                     /**
-                     * Constructs a new TranslateTextGlossaryConfig.
+                     * Constructs a new TransliterationConfig.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.cloud.translation.v3.ITranslateTextGlossaryConfig);
+                    constructor(properties?: google.cloud.translation.v3.ITransliterationConfig);
 
-                    /** TranslateTextGlossaryConfig glossary. */
-                    public glossary: string;
-
-                    /** TranslateTextGlossaryConfig ignoreCase. */
-                    public ignoreCase: boolean;
+                    /** TransliterationConfig enableTransliteration. */
+                    public enableTransliteration: boolean;
 
                     /**
-                     * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
+                     * Creates a new TransliterationConfig instance using the specified properties.
                      * @param [properties] Properties to set
-                     * @returns TranslateTextGlossaryConfig instance
+                     * @returns TransliterationConfig instance
                      */
-                    public static create(properties?: google.cloud.translation.v3.ITranslateTextGlossaryConfig): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+                    public static create(properties?: google.cloud.translation.v3.ITransliterationConfig): google.cloud.translation.v3.TransliterationConfig;
 
                     /**
-                     * Encodes the specified TranslateTextGlossaryConfig message. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
-                     * @param message TranslateTextGlossaryConfig message or plain object to encode
+                     * Encodes the specified TransliterationConfig message. Does not implicitly {@link google.cloud.translation.v3.TransliterationConfig.verify|verify} messages.
+                     * @param message TransliterationConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.cloud.translation.v3.ITranslateTextGlossaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.cloud.translation.v3.ITransliterationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified TranslateTextGlossaryConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
-                     * @param message TranslateTextGlossaryConfig message or plain object to encode
+                     * Encodes the specified TransliterationConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TransliterationConfig.verify|verify} messages.
+                     * @param message TransliterationConfig message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.cloud.translation.v3.ITranslateTextGlossaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.cloud.translation.v3.ITransliterationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer.
+                     * Decodes a TransliterationConfig message from the specified reader or buffer.
                      * @param reader Reader or buffer to decode from
                      * @param [length] Message length if known beforehand
-                     * @returns TranslateTextGlossaryConfig
+                     * @returns TransliterationConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.TransliterationConfig;
 
                     /**
-                     * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer, length delimited.
+                     * Decodes a TransliterationConfig message from the specified reader or buffer, length delimited.
                      * @param reader Reader or buffer to decode from
-                     * @returns TranslateTextGlossaryConfig
+                     * @returns TransliterationConfig
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.TransliterationConfig;
 
                     /**
-                     * Verifies a TranslateTextGlossaryConfig message.
+                     * Verifies a TransliterationConfig message.
                      * @param message Plain object to verify
                      * @returns `null` if valid, otherwise the reason why it is not
                      */
                     public static verify(message: { [k: string]: any }): (string|null);
 
                     /**
-                     * Creates a TranslateTextGlossaryConfig message from a plain object. Also converts values to their respective internal types.
+                     * Creates a TransliterationConfig message from a plain object. Also converts values to their respective internal types.
                      * @param object Plain object
-                     * @returns TranslateTextGlossaryConfig
+                     * @returns TransliterationConfig
                      */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.TransliterationConfig;
 
                     /**
-                     * Creates a plain object from a TranslateTextGlossaryConfig message. Also converts values to other types if specified.
-                     * @param message TranslateTextGlossaryConfig
+                     * Creates a plain object from a TransliterationConfig message. Also converts values to other types if specified.
+                     * @param message TransliterationConfig
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.cloud.translation.v3.TranslateTextGlossaryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.cloud.translation.v3.TransliterationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
-                     * Converts this TranslateTextGlossaryConfig to JSON.
+                     * Converts this TransliterationConfig to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
 
                     /**
-                     * Gets the default type url for TranslateTextGlossaryConfig
+                     * Gets the default type url for TransliterationConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2925,6 +7240,9 @@ export namespace google {
 
                     /** TranslateTextRequest glossaryConfig */
                     glossaryConfig?: (google.cloud.translation.v3.ITranslateTextGlossaryConfig|null);
+
+                    /** TranslateTextRequest transliterationConfig */
+                    transliterationConfig?: (google.cloud.translation.v3.ITransliterationConfig|null);
 
                     /** TranslateTextRequest labels */
                     labels?: ({ [k: string]: string }|null);
@@ -2959,6 +7277,9 @@ export namespace google {
 
                     /** TranslateTextRequest glossaryConfig. */
                     public glossaryConfig?: (google.cloud.translation.v3.ITranslateTextGlossaryConfig|null);
+
+                    /** TranslateTextRequest transliterationConfig. */
+                    public transliterationConfig?: (google.cloud.translation.v3.ITransliterationConfig|null);
 
                     /** TranslateTextRequest labels. */
                     public labels: { [k: string]: string };
@@ -3253,6 +7574,315 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Translation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RomanizeTextRequest. */
+                interface IRomanizeTextRequest {
+
+                    /** RomanizeTextRequest parent */
+                    parent?: (string|null);
+
+                    /** RomanizeTextRequest contents */
+                    contents?: (string[]|null);
+
+                    /** RomanizeTextRequest sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+                }
+
+                /** Represents a RomanizeTextRequest. */
+                class RomanizeTextRequest implements IRomanizeTextRequest {
+
+                    /**
+                     * Constructs a new RomanizeTextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IRomanizeTextRequest);
+
+                    /** RomanizeTextRequest parent. */
+                    public parent: string;
+
+                    /** RomanizeTextRequest contents. */
+                    public contents: string[];
+
+                    /** RomanizeTextRequest sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /**
+                     * Creates a new RomanizeTextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RomanizeTextRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IRomanizeTextRequest): google.cloud.translation.v3.RomanizeTextRequest;
+
+                    /**
+                     * Encodes the specified RomanizeTextRequest message. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextRequest.verify|verify} messages.
+                     * @param message RomanizeTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IRomanizeTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RomanizeTextRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextRequest.verify|verify} messages.
+                     * @param message RomanizeTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IRomanizeTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RomanizeTextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RomanizeTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.RomanizeTextRequest;
+
+                    /**
+                     * Decodes a RomanizeTextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RomanizeTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.RomanizeTextRequest;
+
+                    /**
+                     * Verifies a RomanizeTextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RomanizeTextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RomanizeTextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.RomanizeTextRequest;
+
+                    /**
+                     * Creates a plain object from a RomanizeTextRequest message. Also converts values to other types if specified.
+                     * @param message RomanizeTextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.RomanizeTextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RomanizeTextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RomanizeTextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Romanization. */
+                interface IRomanization {
+
+                    /** Romanization romanizedText */
+                    romanizedText?: (string|null);
+
+                    /** Romanization detectedLanguageCode */
+                    detectedLanguageCode?: (string|null);
+                }
+
+                /** Represents a Romanization. */
+                class Romanization implements IRomanization {
+
+                    /**
+                     * Constructs a new Romanization.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IRomanization);
+
+                    /** Romanization romanizedText. */
+                    public romanizedText: string;
+
+                    /** Romanization detectedLanguageCode. */
+                    public detectedLanguageCode: string;
+
+                    /**
+                     * Creates a new Romanization instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Romanization instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IRomanization): google.cloud.translation.v3.Romanization;
+
+                    /**
+                     * Encodes the specified Romanization message. Does not implicitly {@link google.cloud.translation.v3.Romanization.verify|verify} messages.
+                     * @param message Romanization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IRomanization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Romanization message, length delimited. Does not implicitly {@link google.cloud.translation.v3.Romanization.verify|verify} messages.
+                     * @param message Romanization message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IRomanization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Romanization message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Romanization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.Romanization;
+
+                    /**
+                     * Decodes a Romanization message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Romanization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.Romanization;
+
+                    /**
+                     * Verifies a Romanization message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Romanization message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Romanization
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.Romanization;
+
+                    /**
+                     * Creates a plain object from a Romanization message. Also converts values to other types if specified.
+                     * @param message Romanization
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.Romanization, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Romanization to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Romanization
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RomanizeTextResponse. */
+                interface IRomanizeTextResponse {
+
+                    /** RomanizeTextResponse romanizations */
+                    romanizations?: (google.cloud.translation.v3.IRomanization[]|null);
+                }
+
+                /** Represents a RomanizeTextResponse. */
+                class RomanizeTextResponse implements IRomanizeTextResponse {
+
+                    /**
+                     * Constructs a new RomanizeTextResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IRomanizeTextResponse);
+
+                    /** RomanizeTextResponse romanizations. */
+                    public romanizations: google.cloud.translation.v3.IRomanization[];
+
+                    /**
+                     * Creates a new RomanizeTextResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RomanizeTextResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IRomanizeTextResponse): google.cloud.translation.v3.RomanizeTextResponse;
+
+                    /**
+                     * Encodes the specified RomanizeTextResponse message. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextResponse.verify|verify} messages.
+                     * @param message RomanizeTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IRomanizeTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RomanizeTextResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.RomanizeTextResponse.verify|verify} messages.
+                     * @param message RomanizeTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IRomanizeTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RomanizeTextResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RomanizeTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.RomanizeTextResponse;
+
+                    /**
+                     * Decodes a RomanizeTextResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RomanizeTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.RomanizeTextResponse;
+
+                    /**
+                     * Verifies a RomanizeTextResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RomanizeTextResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RomanizeTextResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.RomanizeTextResponse;
+
+                    /**
+                     * Creates a plain object from a RomanizeTextResponse message. Also converts values to other types if specified.
+                     * @param message RomanizeTextResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.RomanizeTextResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RomanizeTextResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RomanizeTextResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -5851,6 +10481,109 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateGlossaryRequest. */
+                interface IUpdateGlossaryRequest {
+
+                    /** UpdateGlossaryRequest glossary */
+                    glossary?: (google.cloud.translation.v3.IGlossary|null);
+
+                    /** UpdateGlossaryRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateGlossaryRequest. */
+                class UpdateGlossaryRequest implements IUpdateGlossaryRequest {
+
+                    /**
+                     * Constructs a new UpdateGlossaryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IUpdateGlossaryRequest);
+
+                    /** UpdateGlossaryRequest glossary. */
+                    public glossary?: (google.cloud.translation.v3.IGlossary|null);
+
+                    /** UpdateGlossaryRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateGlossaryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGlossaryRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IUpdateGlossaryRequest): google.cloud.translation.v3.UpdateGlossaryRequest;
+
+                    /**
+                     * Encodes the specified UpdateGlossaryRequest message. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryRequest.verify|verify} messages.
+                     * @param message UpdateGlossaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IUpdateGlossaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGlossaryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryRequest.verify|verify} messages.
+                     * @param message UpdateGlossaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IUpdateGlossaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGlossaryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGlossaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.UpdateGlossaryRequest;
+
+                    /**
+                     * Decodes an UpdateGlossaryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGlossaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.UpdateGlossaryRequest;
+
+                    /**
+                     * Verifies an UpdateGlossaryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGlossaryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGlossaryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.UpdateGlossaryRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGlossaryRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGlossaryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.UpdateGlossaryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGlossaryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateGlossaryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetGlossaryRequest. */
                 interface IGetGlossaryRequest {
 
@@ -6263,6 +10996,612 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetGlossaryEntryRequest. */
+                interface IGetGlossaryEntryRequest {
+
+                    /** GetGlossaryEntryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetGlossaryEntryRequest. */
+                class GetGlossaryEntryRequest implements IGetGlossaryEntryRequest {
+
+                    /**
+                     * Constructs a new GetGlossaryEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IGetGlossaryEntryRequest);
+
+                    /** GetGlossaryEntryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetGlossaryEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetGlossaryEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IGetGlossaryEntryRequest): google.cloud.translation.v3.GetGlossaryEntryRequest;
+
+                    /**
+                     * Encodes the specified GetGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.GetGlossaryEntryRequest.verify|verify} messages.
+                     * @param message GetGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IGetGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.GetGlossaryEntryRequest.verify|verify} messages.
+                     * @param message GetGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IGetGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetGlossaryEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.GetGlossaryEntryRequest;
+
+                    /**
+                     * Decodes a GetGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.GetGlossaryEntryRequest;
+
+                    /**
+                     * Verifies a GetGlossaryEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetGlossaryEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.GetGlossaryEntryRequest;
+
+                    /**
+                     * Creates a plain object from a GetGlossaryEntryRequest message. Also converts values to other types if specified.
+                     * @param message GetGlossaryEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.GetGlossaryEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetGlossaryEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetGlossaryEntryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteGlossaryEntryRequest. */
+                interface IDeleteGlossaryEntryRequest {
+
+                    /** DeleteGlossaryEntryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteGlossaryEntryRequest. */
+                class DeleteGlossaryEntryRequest implements IDeleteGlossaryEntryRequest {
+
+                    /**
+                     * Constructs a new DeleteGlossaryEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDeleteGlossaryEntryRequest);
+
+                    /** DeleteGlossaryEntryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteGlossaryEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteGlossaryEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDeleteGlossaryEntryRequest): google.cloud.translation.v3.DeleteGlossaryEntryRequest;
+
+                    /**
+                     * Encodes the specified DeleteGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.DeleteGlossaryEntryRequest.verify|verify} messages.
+                     * @param message DeleteGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDeleteGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DeleteGlossaryEntryRequest.verify|verify} messages.
+                     * @param message DeleteGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDeleteGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteGlossaryEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DeleteGlossaryEntryRequest;
+
+                    /**
+                     * Decodes a DeleteGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DeleteGlossaryEntryRequest;
+
+                    /**
+                     * Verifies a DeleteGlossaryEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteGlossaryEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DeleteGlossaryEntryRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteGlossaryEntryRequest message. Also converts values to other types if specified.
+                     * @param message DeleteGlossaryEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DeleteGlossaryEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteGlossaryEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteGlossaryEntryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGlossaryEntriesRequest. */
+                interface IListGlossaryEntriesRequest {
+
+                    /** ListGlossaryEntriesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListGlossaryEntriesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListGlossaryEntriesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListGlossaryEntriesRequest. */
+                class ListGlossaryEntriesRequest implements IListGlossaryEntriesRequest {
+
+                    /**
+                     * Constructs a new ListGlossaryEntriesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListGlossaryEntriesRequest);
+
+                    /** ListGlossaryEntriesRequest parent. */
+                    public parent: string;
+
+                    /** ListGlossaryEntriesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListGlossaryEntriesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListGlossaryEntriesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGlossaryEntriesRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListGlossaryEntriesRequest): google.cloud.translation.v3.ListGlossaryEntriesRequest;
+
+                    /**
+                     * Encodes the specified ListGlossaryEntriesRequest message. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesRequest.verify|verify} messages.
+                     * @param message ListGlossaryEntriesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListGlossaryEntriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGlossaryEntriesRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesRequest.verify|verify} messages.
+                     * @param message ListGlossaryEntriesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListGlossaryEntriesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGlossaryEntriesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGlossaryEntriesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListGlossaryEntriesRequest;
+
+                    /**
+                     * Decodes a ListGlossaryEntriesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGlossaryEntriesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListGlossaryEntriesRequest;
+
+                    /**
+                     * Verifies a ListGlossaryEntriesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGlossaryEntriesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGlossaryEntriesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListGlossaryEntriesRequest;
+
+                    /**
+                     * Creates a plain object from a ListGlossaryEntriesRequest message. Also converts values to other types if specified.
+                     * @param message ListGlossaryEntriesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListGlossaryEntriesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGlossaryEntriesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGlossaryEntriesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListGlossaryEntriesResponse. */
+                interface IListGlossaryEntriesResponse {
+
+                    /** ListGlossaryEntriesResponse glossaryEntries */
+                    glossaryEntries?: (google.cloud.translation.v3.IGlossaryEntry[]|null);
+
+                    /** ListGlossaryEntriesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListGlossaryEntriesResponse. */
+                class ListGlossaryEntriesResponse implements IListGlossaryEntriesResponse {
+
+                    /**
+                     * Constructs a new ListGlossaryEntriesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IListGlossaryEntriesResponse);
+
+                    /** ListGlossaryEntriesResponse glossaryEntries. */
+                    public glossaryEntries: google.cloud.translation.v3.IGlossaryEntry[];
+
+                    /** ListGlossaryEntriesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListGlossaryEntriesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListGlossaryEntriesResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IListGlossaryEntriesResponse): google.cloud.translation.v3.ListGlossaryEntriesResponse;
+
+                    /**
+                     * Encodes the specified ListGlossaryEntriesResponse message. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesResponse.verify|verify} messages.
+                     * @param message ListGlossaryEntriesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IListGlossaryEntriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListGlossaryEntriesResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.ListGlossaryEntriesResponse.verify|verify} messages.
+                     * @param message ListGlossaryEntriesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IListGlossaryEntriesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListGlossaryEntriesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListGlossaryEntriesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.ListGlossaryEntriesResponse;
+
+                    /**
+                     * Decodes a ListGlossaryEntriesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListGlossaryEntriesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.ListGlossaryEntriesResponse;
+
+                    /**
+                     * Verifies a ListGlossaryEntriesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListGlossaryEntriesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListGlossaryEntriesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.ListGlossaryEntriesResponse;
+
+                    /**
+                     * Creates a plain object from a ListGlossaryEntriesResponse message. Also converts values to other types if specified.
+                     * @param message ListGlossaryEntriesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.ListGlossaryEntriesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListGlossaryEntriesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListGlossaryEntriesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateGlossaryEntryRequest. */
+                interface ICreateGlossaryEntryRequest {
+
+                    /** CreateGlossaryEntryRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateGlossaryEntryRequest glossaryEntry */
+                    glossaryEntry?: (google.cloud.translation.v3.IGlossaryEntry|null);
+                }
+
+                /** Represents a CreateGlossaryEntryRequest. */
+                class CreateGlossaryEntryRequest implements ICreateGlossaryEntryRequest {
+
+                    /**
+                     * Constructs a new CreateGlossaryEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ICreateGlossaryEntryRequest);
+
+                    /** CreateGlossaryEntryRequest parent. */
+                    public parent: string;
+
+                    /** CreateGlossaryEntryRequest glossaryEntry. */
+                    public glossaryEntry?: (google.cloud.translation.v3.IGlossaryEntry|null);
+
+                    /**
+                     * Creates a new CreateGlossaryEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateGlossaryEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ICreateGlossaryEntryRequest): google.cloud.translation.v3.CreateGlossaryEntryRequest;
+
+                    /**
+                     * Encodes the specified CreateGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.CreateGlossaryEntryRequest.verify|verify} messages.
+                     * @param message CreateGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ICreateGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.CreateGlossaryEntryRequest.verify|verify} messages.
+                     * @param message CreateGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ICreateGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateGlossaryEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.CreateGlossaryEntryRequest;
+
+                    /**
+                     * Decodes a CreateGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.CreateGlossaryEntryRequest;
+
+                    /**
+                     * Verifies a CreateGlossaryEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateGlossaryEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.CreateGlossaryEntryRequest;
+
+                    /**
+                     * Creates a plain object from a CreateGlossaryEntryRequest message. Also converts values to other types if specified.
+                     * @param message CreateGlossaryEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.CreateGlossaryEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateGlossaryEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateGlossaryEntryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateGlossaryEntryRequest. */
+                interface IUpdateGlossaryEntryRequest {
+
+                    /** UpdateGlossaryEntryRequest glossaryEntry */
+                    glossaryEntry?: (google.cloud.translation.v3.IGlossaryEntry|null);
+                }
+
+                /** Represents an UpdateGlossaryEntryRequest. */
+                class UpdateGlossaryEntryRequest implements IUpdateGlossaryEntryRequest {
+
+                    /**
+                     * Constructs a new UpdateGlossaryEntryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IUpdateGlossaryEntryRequest);
+
+                    /** UpdateGlossaryEntryRequest glossaryEntry. */
+                    public glossaryEntry?: (google.cloud.translation.v3.IGlossaryEntry|null);
+
+                    /**
+                     * Creates a new UpdateGlossaryEntryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGlossaryEntryRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IUpdateGlossaryEntryRequest): google.cloud.translation.v3.UpdateGlossaryEntryRequest;
+
+                    /**
+                     * Encodes the specified UpdateGlossaryEntryRequest message. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryEntryRequest.verify|verify} messages.
+                     * @param message UpdateGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IUpdateGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGlossaryEntryRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryEntryRequest.verify|verify} messages.
+                     * @param message UpdateGlossaryEntryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IUpdateGlossaryEntryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGlossaryEntryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.UpdateGlossaryEntryRequest;
+
+                    /**
+                     * Decodes an UpdateGlossaryEntryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGlossaryEntryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.UpdateGlossaryEntryRequest;
+
+                    /**
+                     * Verifies an UpdateGlossaryEntryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGlossaryEntryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGlossaryEntryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.UpdateGlossaryEntryRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateGlossaryEntryRequest message. Also converts values to other types if specified.
+                     * @param message UpdateGlossaryEntryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.UpdateGlossaryEntryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGlossaryEntryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateGlossaryEntryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateGlossaryMetadata. */
                 interface ICreateGlossaryMetadata {
 
@@ -6373,6 +11712,128 @@ export namespace google {
                 }
 
                 namespace CreateGlossaryMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        CANCELLING = 4,
+                        CANCELLED = 5
+                    }
+                }
+
+                /** Properties of an UpdateGlossaryMetadata. */
+                interface IUpdateGlossaryMetadata {
+
+                    /** UpdateGlossaryMetadata glossary */
+                    glossary?: (google.cloud.translation.v3.IGlossary|null);
+
+                    /** UpdateGlossaryMetadata state */
+                    state?: (google.cloud.translation.v3.UpdateGlossaryMetadata.State|keyof typeof google.cloud.translation.v3.UpdateGlossaryMetadata.State|null);
+
+                    /** UpdateGlossaryMetadata submitTime */
+                    submitTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an UpdateGlossaryMetadata. */
+                class UpdateGlossaryMetadata implements IUpdateGlossaryMetadata {
+
+                    /**
+                     * Constructs a new UpdateGlossaryMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IUpdateGlossaryMetadata);
+
+                    /** UpdateGlossaryMetadata glossary. */
+                    public glossary?: (google.cloud.translation.v3.IGlossary|null);
+
+                    /** UpdateGlossaryMetadata state. */
+                    public state: (google.cloud.translation.v3.UpdateGlossaryMetadata.State|keyof typeof google.cloud.translation.v3.UpdateGlossaryMetadata.State);
+
+                    /** UpdateGlossaryMetadata submitTime. */
+                    public submitTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new UpdateGlossaryMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateGlossaryMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IUpdateGlossaryMetadata): google.cloud.translation.v3.UpdateGlossaryMetadata;
+
+                    /**
+                     * Encodes the specified UpdateGlossaryMetadata message. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryMetadata.verify|verify} messages.
+                     * @param message UpdateGlossaryMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IUpdateGlossaryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateGlossaryMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.UpdateGlossaryMetadata.verify|verify} messages.
+                     * @param message UpdateGlossaryMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IUpdateGlossaryMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateGlossaryMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateGlossaryMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.UpdateGlossaryMetadata;
+
+                    /**
+                     * Decodes an UpdateGlossaryMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateGlossaryMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.UpdateGlossaryMetadata;
+
+                    /**
+                     * Verifies an UpdateGlossaryMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateGlossaryMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateGlossaryMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.UpdateGlossaryMetadata;
+
+                    /**
+                     * Creates a plain object from an UpdateGlossaryMetadata message. Also converts values to other types if specified.
+                     * @param message UpdateGlossaryMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.UpdateGlossaryMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateGlossaryMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateGlossaryMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UpdateGlossaryMetadata {
 
                     /** State enum. */
                     enum State {
@@ -7286,6 +12747,109 @@ export namespace google {
                         CANCELLING = 4,
                         CANCELLED = 5
                     }
+                }
+
+                /** Properties of a TranslateTextGlossaryConfig. */
+                interface ITranslateTextGlossaryConfig {
+
+                    /** TranslateTextGlossaryConfig glossary */
+                    glossary?: (string|null);
+
+                    /** TranslateTextGlossaryConfig ignoreCase */
+                    ignoreCase?: (boolean|null);
+                }
+
+                /** Represents a TranslateTextGlossaryConfig. */
+                class TranslateTextGlossaryConfig implements ITranslateTextGlossaryConfig {
+
+                    /**
+                     * Constructs a new TranslateTextGlossaryConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ITranslateTextGlossaryConfig);
+
+                    /** TranslateTextGlossaryConfig glossary. */
+                    public glossary: string;
+
+                    /** TranslateTextGlossaryConfig ignoreCase. */
+                    public ignoreCase: boolean;
+
+                    /**
+                     * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TranslateTextGlossaryConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ITranslateTextGlossaryConfig): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+
+                    /**
+                     * Encodes the specified TranslateTextGlossaryConfig message. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
+                     * @param message TranslateTextGlossaryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ITranslateTextGlossaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TranslateTextGlossaryConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateTextGlossaryConfig.verify|verify} messages.
+                     * @param message TranslateTextGlossaryConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ITranslateTextGlossaryConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TranslateTextGlossaryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+
+                    /**
+                     * Decodes a TranslateTextGlossaryConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TranslateTextGlossaryConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+
+                    /**
+                     * Verifies a TranslateTextGlossaryConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TranslateTextGlossaryConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TranslateTextGlossaryConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.TranslateTextGlossaryConfig;
+
+                    /**
+                     * Creates a plain object from a TranslateTextGlossaryConfig message. Also converts values to other types if specified.
+                     * @param message TranslateTextGlossaryConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.TranslateTextGlossaryConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TranslateTextGlossaryConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TranslateTextGlossaryConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
@@ -18339,109 +23903,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of an Any. */
         interface IAny {
 
@@ -18545,6 +24006,109 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -18630,6 +24194,216 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace rpc. */
+    namespace rpc {
+
+        /** Properties of a Status. */
+        interface IStatus {
+
+            /** Status code */
+            code?: (number|null);
+
+            /** Status message */
+            message?: (string|null);
+
+            /** Status details */
+            details?: (google.protobuf.IAny[]|null);
+        }
+
+        /** Represents a Status. */
+        class Status implements IStatus {
+
+            /**
+             * Constructs a new Status.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.rpc.IStatus);
+
+            /** Status code. */
+            public code: number;
+
+            /** Status message. */
+            public message: string;
+
+            /** Status details. */
+            public details: google.protobuf.IAny[];
+
+            /**
+             * Creates a new Status instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Status instance
+             */
+            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
+
+            /**
+             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
+             * @param message Status message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
+
+            /**
+             * Decodes a Status message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Status
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
+
+            /**
+             * Verifies a Status message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Status message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Status
+             */
+            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
+
+            /**
+             * Creates a plain object from a Status message. Also converts values to other types if specified.
+             * @param message Status
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Status to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -19602,119 +25376,6 @@ export namespace google {
 
             /**
              * Gets the default type url for OperationInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-    }
-
-    /** Namespace rpc. */
-    namespace rpc {
-
-        /** Properties of a Status. */
-        interface IStatus {
-
-            /** Status code */
-            code?: (number|null);
-
-            /** Status message */
-            message?: (string|null);
-
-            /** Status details */
-            details?: (google.protobuf.IAny[]|null);
-        }
-
-        /** Represents a Status. */
-        class Status implements IStatus {
-
-            /**
-             * Constructs a new Status.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.rpc.IStatus);
-
-            /** Status code. */
-            public code: number;
-
-            /** Status message. */
-            public message: string;
-
-            /** Status details. */
-            public details: google.protobuf.IAny[];
-
-            /**
-             * Creates a new Status instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Status instance
-             */
-            public static create(properties?: google.rpc.IStatus): google.rpc.Status;
-
-            /**
-             * Encodes the specified Status message. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Status message, length delimited. Does not implicitly {@link google.rpc.Status.verify|verify} messages.
-             * @param message Status message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.rpc.IStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.rpc.Status;
-
-            /**
-             * Decodes a Status message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Status
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.rpc.Status;
-
-            /**
-             * Verifies a Status message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Status message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Status
-             */
-            public static fromObject(object: { [k: string]: any }): google.rpc.Status;
-
-            /**
-             * Creates a plain object from a Status message. Also converts values to other types if specified.
-             * @param message Status
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.rpc.Status, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Status to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Status
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

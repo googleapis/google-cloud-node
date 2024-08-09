@@ -5657,6 +5657,9 @@ export namespace google {
                     /** Finding muteInitiator */
                     muteInitiator?: (string|null);
 
+                    /** Finding muteInfo */
+                    muteInfo?: (google.cloud.securitycenter.v1.Finding.IMuteInfo|null);
+
                     /** Finding processes */
                     processes?: (google.cloud.securitycenter.v1.IProcess[]|null);
 
@@ -5813,6 +5816,9 @@ export namespace google {
 
                     /** Finding muteInitiator. */
                     public muteInitiator: string;
+
+                    /** Finding muteInfo. */
+                    public muteInfo?: (google.cloud.securitycenter.v1.Finding.IMuteInfo|null);
 
                     /** Finding processes. */
                     public processes: google.cloud.securitycenter.v1.IProcess[];
@@ -6009,6 +6015,318 @@ export namespace google {
                         SCC_ERROR = 5,
                         POSTURE_VIOLATION = 6,
                         TOXIC_COMBINATION = 7
+                    }
+
+                    /** Properties of a MuteInfo. */
+                    interface IMuteInfo {
+
+                        /** MuteInfo staticMute */
+                        staticMute?: (google.cloud.securitycenter.v1.Finding.MuteInfo.IStaticMute|null);
+
+                        /** MuteInfo dynamicMuteRecords */
+                        dynamicMuteRecords?: (google.cloud.securitycenter.v1.Finding.MuteInfo.IDynamicMuteRecord[]|null);
+                    }
+
+                    /** Represents a MuteInfo. */
+                    class MuteInfo implements IMuteInfo {
+
+                        /**
+                         * Constructs a new MuteInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.securitycenter.v1.Finding.IMuteInfo);
+
+                        /** MuteInfo staticMute. */
+                        public staticMute?: (google.cloud.securitycenter.v1.Finding.MuteInfo.IStaticMute|null);
+
+                        /** MuteInfo dynamicMuteRecords. */
+                        public dynamicMuteRecords: google.cloud.securitycenter.v1.Finding.MuteInfo.IDynamicMuteRecord[];
+
+                        /**
+                         * Creates a new MuteInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MuteInfo instance
+                         */
+                        public static create(properties?: google.cloud.securitycenter.v1.Finding.IMuteInfo): google.cloud.securitycenter.v1.Finding.MuteInfo;
+
+                        /**
+                         * Encodes the specified MuteInfo message. Does not implicitly {@link google.cloud.securitycenter.v1.Finding.MuteInfo.verify|verify} messages.
+                         * @param message MuteInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.securitycenter.v1.Finding.IMuteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MuteInfo message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Finding.MuteInfo.verify|verify} messages.
+                         * @param message MuteInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.securitycenter.v1.Finding.IMuteInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MuteInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MuteInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Finding.MuteInfo;
+
+                        /**
+                         * Decodes a MuteInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MuteInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Finding.MuteInfo;
+
+                        /**
+                         * Verifies a MuteInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MuteInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MuteInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Finding.MuteInfo;
+
+                        /**
+                         * Creates a plain object from a MuteInfo message. Also converts values to other types if specified.
+                         * @param message MuteInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.securitycenter.v1.Finding.MuteInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MuteInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MuteInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MuteInfo {
+
+                        /** Properties of a StaticMute. */
+                        interface IStaticMute {
+
+                            /** StaticMute state */
+                            state?: (google.cloud.securitycenter.v1.Finding.Mute|keyof typeof google.cloud.securitycenter.v1.Finding.Mute|null);
+
+                            /** StaticMute applyTime */
+                            applyTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a StaticMute. */
+                        class StaticMute implements IStaticMute {
+
+                            /**
+                             * Constructs a new StaticMute.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.securitycenter.v1.Finding.MuteInfo.IStaticMute);
+
+                            /** StaticMute state. */
+                            public state: (google.cloud.securitycenter.v1.Finding.Mute|keyof typeof google.cloud.securitycenter.v1.Finding.Mute);
+
+                            /** StaticMute applyTime. */
+                            public applyTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new StaticMute instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns StaticMute instance
+                             */
+                            public static create(properties?: google.cloud.securitycenter.v1.Finding.MuteInfo.IStaticMute): google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute;
+
+                            /**
+                             * Encodes the specified StaticMute message. Does not implicitly {@link google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute.verify|verify} messages.
+                             * @param message StaticMute message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.securitycenter.v1.Finding.MuteInfo.IStaticMute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified StaticMute message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute.verify|verify} messages.
+                             * @param message StaticMute message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.securitycenter.v1.Finding.MuteInfo.IStaticMute, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a StaticMute message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns StaticMute
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute;
+
+                            /**
+                             * Decodes a StaticMute message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns StaticMute
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute;
+
+                            /**
+                             * Verifies a StaticMute message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a StaticMute message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns StaticMute
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute;
+
+                            /**
+                             * Creates a plain object from a StaticMute message. Also converts values to other types if specified.
+                             * @param message StaticMute
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.securitycenter.v1.Finding.MuteInfo.StaticMute, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this StaticMute to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for StaticMute
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a DynamicMuteRecord. */
+                        interface IDynamicMuteRecord {
+
+                            /** DynamicMuteRecord muteConfig */
+                            muteConfig?: (string|null);
+
+                            /** DynamicMuteRecord matchTime */
+                            matchTime?: (google.protobuf.ITimestamp|null);
+                        }
+
+                        /** Represents a DynamicMuteRecord. */
+                        class DynamicMuteRecord implements IDynamicMuteRecord {
+
+                            /**
+                             * Constructs a new DynamicMuteRecord.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.securitycenter.v1.Finding.MuteInfo.IDynamicMuteRecord);
+
+                            /** DynamicMuteRecord muteConfig. */
+                            public muteConfig: string;
+
+                            /** DynamicMuteRecord matchTime. */
+                            public matchTime?: (google.protobuf.ITimestamp|null);
+
+                            /**
+                             * Creates a new DynamicMuteRecord instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DynamicMuteRecord instance
+                             */
+                            public static create(properties?: google.cloud.securitycenter.v1.Finding.MuteInfo.IDynamicMuteRecord): google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord;
+
+                            /**
+                             * Encodes the specified DynamicMuteRecord message. Does not implicitly {@link google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord.verify|verify} messages.
+                             * @param message DynamicMuteRecord message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.securitycenter.v1.Finding.MuteInfo.IDynamicMuteRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DynamicMuteRecord message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord.verify|verify} messages.
+                             * @param message DynamicMuteRecord message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.securitycenter.v1.Finding.MuteInfo.IDynamicMuteRecord, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DynamicMuteRecord message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DynamicMuteRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord;
+
+                            /**
+                             * Decodes a DynamicMuteRecord message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DynamicMuteRecord
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord;
+
+                            /**
+                             * Verifies a DynamicMuteRecord message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DynamicMuteRecord message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DynamicMuteRecord
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord;
+
+                            /**
+                             * Creates a plain object from a DynamicMuteRecord message. Also converts values to other types if specified.
+                             * @param message DynamicMuteRecord
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.securitycenter.v1.Finding.MuteInfo.DynamicMuteRecord, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DynamicMuteRecord to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DynamicMuteRecord
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
                 }
 
@@ -8459,8 +8777,10 @@ export namespace google {
                         COMMAND_AND_SCRIPTING_INTERPRETER = 6,
                         UNIX_SHELL = 7,
                         PYTHON = 59,
+                        EXPLOITATION_FOR_PRIVILEGE_ESCALATION = 63,
                         PERMISSION_GROUPS_DISCOVERY = 18,
                         CLOUD_GROUPS = 19,
+                        INDICATOR_REMOVAL_FILE_DELETION = 64,
                         APPLICATION_LAYER_PROTOCOL = 45,
                         DNS = 46,
                         SOFTWARE_DEPLOYMENT_TOOLS = 47,
@@ -9476,6 +9796,9 @@ export namespace google {
 
                     /** Cve zeroDay */
                     zeroDay?: (boolean|null);
+
+                    /** Cve exploitReleaseDate */
+                    exploitReleaseDate?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a Cve. */
@@ -9510,6 +9833,9 @@ export namespace google {
 
                     /** Cve zeroDay. */
                     public zeroDay: boolean;
+
+                    /** Cve exploitReleaseDate. */
+                    public exploitReleaseDate?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new Cve instance using the specified properties.
@@ -10155,6 +10481,12 @@ export namespace google {
 
                     /** MuteConfig mostRecentEditor */
                     mostRecentEditor?: (string|null);
+
+                    /** MuteConfig type */
+                    type?: (google.cloud.securitycenter.v1.MuteConfig.MuteConfigType|keyof typeof google.cloud.securitycenter.v1.MuteConfig.MuteConfigType|null);
+
+                    /** MuteConfig expiryTime */
+                    expiryTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a MuteConfig. */
@@ -10186,6 +10518,12 @@ export namespace google {
 
                     /** MuteConfig mostRecentEditor. */
                     public mostRecentEditor: string;
+
+                    /** MuteConfig type. */
+                    public type: (google.cloud.securitycenter.v1.MuteConfig.MuteConfigType|keyof typeof google.cloud.securitycenter.v1.MuteConfig.MuteConfigType);
+
+                    /** MuteConfig expiryTime. */
+                    public expiryTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new MuteConfig instance using the specified properties.
@@ -10263,6 +10601,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MuteConfig {
+
+                    /** MuteConfigType enum. */
+                    enum MuteConfigType {
+                        MUTE_CONFIG_TYPE_UNSPECIFIED = 0,
+                        STATIC = 1,
+                        DYNAMIC = 2
+                    }
                 }
 
                 /** Properties of a NotificationConfig. */
@@ -13971,6 +14319,9 @@ export namespace google {
 
                     /** BulkMuteFindingsRequest muteAnnotation */
                     muteAnnotation?: (string|null);
+
+                    /** BulkMuteFindingsRequest muteState */
+                    muteState?: (google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState|keyof typeof google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState|null);
                 }
 
                 /** Represents a BulkMuteFindingsRequest. */
@@ -13990,6 +14341,9 @@ export namespace google {
 
                     /** BulkMuteFindingsRequest muteAnnotation. */
                     public muteAnnotation: string;
+
+                    /** BulkMuteFindingsRequest muteState. */
+                    public muteState: (google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState|keyof typeof google.cloud.securitycenter.v1.BulkMuteFindingsRequest.MuteState);
 
                     /**
                      * Creates a new BulkMuteFindingsRequest instance using the specified properties.
@@ -14067,6 +14421,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BulkMuteFindingsRequest {
+
+                    /** MuteState enum. */
+                    enum MuteState {
+                        MUTE_STATE_UNSPECIFIED = 0,
+                        MUTED = 1,
+                        UNDEFINED = 2
+                    }
                 }
 
                 /** Properties of a BulkMuteFindingsResponse. */
