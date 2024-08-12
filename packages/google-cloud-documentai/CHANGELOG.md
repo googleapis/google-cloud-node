@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.8.0...documentai-v8.9.0) (2024-08-09)
+
+
+### Features
+
+* [documentai] A new field `imageless_mode` is added to message `.google.cloud.documentai.v1.ProcessRequest` ([#5593](https://github.com/googleapis/google-cloud-node/issues/5593)) ([2393568](https://github.com/googleapis/google-cloud-node/commit/239356840a3f296f59c4b71c7028b071f3e6653a))
+
 ## [8.8.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.7.0...documentai-v8.8.0) (2024-06-03)
 
 
