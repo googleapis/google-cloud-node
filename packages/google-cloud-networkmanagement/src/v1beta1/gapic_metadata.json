@@ -82,6 +82,74 @@
           }
         }
       }
+    },
+    "VpcFlowLogsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VpcFlowLogsServiceClient",
+          "rpcs": {
+            "GetVpcFlowLogsConfig": {
+              "methods": [
+                "getVpcFlowLogsConfig"
+              ]
+            },
+            "CreateVpcFlowLogsConfig": {
+              "methods": [
+                "createVpcFlowLogsConfig"
+              ]
+            },
+            "UpdateVpcFlowLogsConfig": {
+              "methods": [
+                "updateVpcFlowLogsConfig"
+              ]
+            },
+            "DeleteVpcFlowLogsConfig": {
+              "methods": [
+                "deleteVpcFlowLogsConfig"
+              ]
+            },
+            "ListVpcFlowLogsConfigs": {
+              "methods": [
+                "listVpcFlowLogsConfigs",
+                "listVpcFlowLogsConfigsStream",
+                "listVpcFlowLogsConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VpcFlowLogsServiceClient",
+          "rpcs": {
+            "GetVpcFlowLogsConfig": {
+              "methods": [
+                "getVpcFlowLogsConfig"
+              ]
+            },
+            "CreateVpcFlowLogsConfig": {
+              "methods": [
+                "createVpcFlowLogsConfig"
+              ]
+            },
+            "UpdateVpcFlowLogsConfig": {
+              "methods": [
+                "updateVpcFlowLogsConfig"
+              ]
+            },
+            "DeleteVpcFlowLogsConfig": {
+              "methods": [
+                "deleteVpcFlowLogsConfig"
+              ]
+            },
+            "ListVpcFlowLogsConfigs": {
+              "methods": [
+                "listVpcFlowLogsConfigs",
+                "listVpcFlowLogsConfigsStream",
+                "listVpcFlowLogsConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

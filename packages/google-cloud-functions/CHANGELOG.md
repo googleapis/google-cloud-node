@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/functions-v3.4.0...functions-v3.5.0) (2024-08-09)
+
+
+### Features
+
+* [functions] optional field for specifying a service account to use for the build. This helps navigate the change of historical default on new projects. For more details, see https://cloud.google.com/build/docs/cloud-build-service-account-updates ([#5607](https://github.com/googleapis/google-cloud-node/issues/5607)) ([1e600c2](https://github.com/googleapis/google-cloud-node/commit/1e600c2a0a73c5756e9b3df361f7aa1428f3259e))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/functions-v3.3.0...functions-v3.4.0) (2024-05-21)
 
 

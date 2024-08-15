@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.12.0...batch-v1.13.0) (2024-08-09)
+
+
+### Features
+
+* [batch] add block_project_ssh_keys field to the v1alpha job API to block project level ssh keys access to Batch created VMs ([#5604](https://github.com/googleapis/google-cloud-node/issues/5604)) ([238579a](https://github.com/googleapis/google-cloud-node/commit/238579a0a879085d12a6dafdee42fc80a733a269))
+
 ## [1.12.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.11.0...batch-v1.12.0) (2024-06-26)
 
 

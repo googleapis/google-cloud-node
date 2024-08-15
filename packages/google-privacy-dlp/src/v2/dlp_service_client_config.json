@@ -226,15 +226,18 @@
           "retry_params_name": "default"
         },
         "ListFileStoreDataProfiles": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetFileStoreDataProfile": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "DeleteFileStoreDataProfile": {
-          "retry_codes_name": "non_idempotent",
+          "timeout_millis": 300000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
         "GetTableDataProfile": {

@@ -124,6 +124,12 @@ function main() {
    *  quota. Quota is returned in PropertyQuota (#PropertyQuota).
    */
   // const returnPropertyQuota = true
+  /**
+   *  Optional. The configuration of comparisons requested and displayed. The
+   *  request only requires a comparisons field in order to receive a comparison
+   *  column in the response.
+   */
+  // const comparisons = [1,2,3,4]
 
   // Imports the Data library
   const {BetaAnalyticsDataClient} = require('@google-analytics/data').v1beta;

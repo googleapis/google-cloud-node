@@ -204,6 +204,22 @@ export namespace google {
                     EXPORT = 2
                 }
 
+                /** FileStripeLevel enum. */
+                enum FileStripeLevel {
+                    FILE_STRIPE_LEVEL_UNSPECIFIED = 0,
+                    FILE_STRIPE_LEVEL_MIN = 1,
+                    FILE_STRIPE_LEVEL_BALANCED = 2,
+                    FILE_STRIPE_LEVEL_MAX = 3
+                }
+
+                /** DirectoryStripeLevel enum. */
+                enum DirectoryStripeLevel {
+                    DIRECTORY_STRIPE_LEVEL_UNSPECIFIED = 0,
+                    DIRECTORY_STRIPE_LEVEL_MIN = 1,
+                    DIRECTORY_STRIPE_LEVEL_BALANCED = 2,
+                    DIRECTORY_STRIPE_LEVEL_MAX = 3
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -242,6 +258,12 @@ export namespace google {
 
                     /** Instance effectiveReservedIpRange */
                     effectiveReservedIpRange?: (string|null);
+
+                    /** Instance fileStripeLevel */
+                    fileStripeLevel?: (google.cloud.parallelstore.v1beta.FileStripeLevel|keyof typeof google.cloud.parallelstore.v1beta.FileStripeLevel|null);
+
+                    /** Instance directoryStripeLevel */
+                    directoryStripeLevel?: (google.cloud.parallelstore.v1beta.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1beta.DirectoryStripeLevel|null);
                 }
 
                 /** Represents an Instance. */
@@ -288,6 +310,12 @@ export namespace google {
 
                     /** Instance effectiveReservedIpRange. */
                     public effectiveReservedIpRange: string;
+
+                    /** Instance fileStripeLevel. */
+                    public fileStripeLevel: (google.cloud.parallelstore.v1beta.FileStripeLevel|keyof typeof google.cloud.parallelstore.v1beta.FileStripeLevel);
+
+                    /** Instance directoryStripeLevel. */
+                    public directoryStripeLevel: (google.cloud.parallelstore.v1beta.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1beta.DirectoryStripeLevel);
 
                     /**
                      * Creates a new Instance instance using the specified properties.

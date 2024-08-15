@@ -20095,6 +20095,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ProfileGeneration enum. */
+                enum ProfileGeneration {
+                    PROFILE_GENERATION_UNSPECIFIED = 0,
+                    PROFILE_GENERATION_NEW = 1,
+                    PROFILE_GENERATION_UPDATE = 2
+                }
+
                 /** Properties of a DataProfileAction. */
                 interface IDataProfileAction {
 
@@ -20103,6 +20110,9 @@ export namespace google {
 
                     /** DataProfileAction pubSubNotification */
                     pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
+
+                    /** DataProfileAction tagResources */
+                    tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
                 }
 
                 /** Represents a DataProfileAction. */
@@ -20120,8 +20130,11 @@ export namespace google {
                     /** DataProfileAction pubSubNotification. */
                     public pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
 
+                    /** DataProfileAction tagResources. */
+                    public tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
+
                     /** DataProfileAction action. */
-                    public action?: ("exportData"|"pubSubNotification");
+                    public action?: ("exportData"|"pubSubNotification"|"tagResources");
 
                     /**
                      * Creates a new DataProfileAction instance using the specified properties.
@@ -20433,6 +20446,324 @@ export namespace google {
                         CHANGED_PROFILE = 2,
                         SCORE_INCREASED = 3,
                         ERROR_CHANGED = 4
+                    }
+
+                    /** Properties of a TagResources. */
+                    interface ITagResources {
+
+                        /** TagResources tagConditions */
+                        tagConditions?: (google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition[]|null);
+
+                        /** TagResources profileGenerationsToTag */
+                        profileGenerationsToTag?: (google.privacy.dlp.v2.ProfileGeneration[]|null);
+
+                        /** TagResources lowerDataRiskToLow */
+                        lowerDataRiskToLow?: (boolean|null);
+                    }
+
+                    /** Represents a TagResources. */
+                    class TagResources implements ITagResources {
+
+                        /**
+                         * Constructs a new TagResources.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.ITagResources);
+
+                        /** TagResources tagConditions. */
+                        public tagConditions: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition[];
+
+                        /** TagResources profileGenerationsToTag. */
+                        public profileGenerationsToTag: google.privacy.dlp.v2.ProfileGeneration[];
+
+                        /** TagResources lowerDataRiskToLow. */
+                        public lowerDataRiskToLow: boolean;
+
+                        /**
+                         * Creates a new TagResources instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TagResources instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.ITagResources): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Encodes the specified TagResources message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.verify|verify} messages.
+                         * @param message TagResources message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.ITagResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TagResources message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.verify|verify} messages.
+                         * @param message TagResources message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.ITagResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TagResources message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TagResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Decodes a TagResources message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TagResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Verifies a TagResources message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TagResources message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TagResources
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.TagResources;
+
+                        /**
+                         * Creates a plain object from a TagResources message. Also converts values to other types if specified.
+                         * @param message TagResources
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.TagResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TagResources to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TagResources
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TagResources {
+
+                        /** Properties of a TagCondition. */
+                        interface ITagCondition {
+
+                            /** TagCondition tag */
+                            tag?: (google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue|null);
+
+                            /** TagCondition sensitivityScore */
+                            sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+                        }
+
+                        /** Represents a TagCondition. */
+                        class TagCondition implements ITagCondition {
+
+                            /**
+                             * Constructs a new TagCondition.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition);
+
+                            /** TagCondition tag. */
+                            public tag?: (google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue|null);
+
+                            /** TagCondition sensitivityScore. */
+                            public sensitivityScore?: (google.privacy.dlp.v2.ISensitivityScore|null);
+
+                            /** TagCondition type. */
+                            public type?: "sensitivityScore";
+
+                            /**
+                             * Creates a new TagCondition instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TagCondition instance
+                             */
+                            public static create(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Encodes the specified TagCondition message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition.verify|verify} messages.
+                             * @param message TagCondition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TagCondition message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition.verify|verify} messages.
+                             * @param message TagCondition message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagCondition, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TagCondition message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TagCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Decodes a TagCondition message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TagCondition
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Verifies a TagCondition message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TagCondition message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TagCondition
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition;
+
+                            /**
+                             * Creates a plain object from a TagCondition message. Also converts values to other types if specified.
+                             * @param message TagCondition
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TagCondition to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TagCondition
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a TagValue. */
+                        interface ITagValue {
+
+                            /** TagValue namespacedValue */
+                            namespacedValue?: (string|null);
+                        }
+
+                        /** Represents a TagValue. */
+                        class TagValue implements ITagValue {
+
+                            /**
+                             * Constructs a new TagValue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue);
+
+                            /** TagValue namespacedValue. */
+                            public namespacedValue?: (string|null);
+
+                            /** TagValue format. */
+                            public format?: "namespacedValue";
+
+                            /**
+                             * Creates a new TagValue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns TagValue instance
+                             */
+                            public static create(properties?: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Encodes the specified TagValue message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue.verify|verify} messages.
+                             * @param message TagValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified TagValue message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue.verify|verify} messages.
+                             * @param message TagValue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.TagResources.ITagValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a TagValue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns TagValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Decodes a TagValue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns TagValue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Verifies a TagValue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a TagValue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns TagValue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue;
+
+                            /**
+                             * Creates a plain object from a TagValue message. Also converts values to other types if specified.
+                             * @param message TagValue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this TagValue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for TagValue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
                 }
 
@@ -22120,6 +22451,9 @@ export namespace google {
 
                     /** DiscoveryGenerationCadence inspectTemplateModifiedCadence */
                     inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
                 }
 
                 /** Represents a DiscoveryGenerationCadence. */
@@ -22139,6 +22473,9 @@ export namespace google {
 
                     /** DiscoveryGenerationCadence inspectTemplateModifiedCadence. */
                     public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /** DiscoveryGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
 
                     /**
                      * Creates a new DiscoveryGenerationCadence instance using the specified properties.

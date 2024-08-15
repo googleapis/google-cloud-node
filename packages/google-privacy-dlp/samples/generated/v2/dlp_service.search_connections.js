@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent name, typically an organization, without location.
-   *  For example: `organizations/12345678`.
+   *  Required. Resource name of the organization or project with a wildcard
+   *  location, for example, `organizations/433245324/locations/-` or
+   *  `projects/project-id/locations/-`.
    */
   // const parent = 'abc123'
   /**

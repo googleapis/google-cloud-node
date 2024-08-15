@@ -1,5 +1,6 @@
 [
   "../../protos/google/cloud/translate/v3/adaptive_mt.proto",
+  "../../protos/google/cloud/translate/v3/automl_translation.proto",
   "../../protos/google/cloud/translate/v3/common.proto",
   "../../protos/google/cloud/translate/v3/translation_service.proto"
 ]

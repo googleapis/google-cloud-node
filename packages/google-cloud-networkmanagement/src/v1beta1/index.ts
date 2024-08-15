@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {ReachabilityServiceClient} from './reachability_service_client';
+export {VpcFlowLogsServiceClient} from './vpc_flow_logs_service_client';

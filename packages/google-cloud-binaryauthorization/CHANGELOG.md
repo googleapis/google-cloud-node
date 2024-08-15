@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.6.0...binary-authorization-v3.7.0) (2024-08-09)
+
+
+### Features
+
+* [binaryauthorization] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence` ([#5587](https://github.com/googleapis/google-cloud-node/issues/5587)) ([1526ce6](https://github.com/googleapis/google-cloud-node/commit/1526ce64fee4c45b7a047aa8c1f94719744b68e4))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/binary-authorization-v3.5.0...binary-authorization-v3.6.0) (2024-05-21)
 
 

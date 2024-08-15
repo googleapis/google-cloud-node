@@ -348,6 +348,42 @@
                         return values;
                     })();
     
+                    /**
+                     * FileStripeLevel enum.
+                     * @name google.cloud.parallelstore.v1beta.FileStripeLevel
+                     * @enum {number}
+                     * @property {number} FILE_STRIPE_LEVEL_UNSPECIFIED=0 FILE_STRIPE_LEVEL_UNSPECIFIED value
+                     * @property {number} FILE_STRIPE_LEVEL_MIN=1 FILE_STRIPE_LEVEL_MIN value
+                     * @property {number} FILE_STRIPE_LEVEL_BALANCED=2 FILE_STRIPE_LEVEL_BALANCED value
+                     * @property {number} FILE_STRIPE_LEVEL_MAX=3 FILE_STRIPE_LEVEL_MAX value
+                     */
+                    v1beta.FileStripeLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "FILE_STRIPE_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "FILE_STRIPE_LEVEL_MIN"] = 1;
+                        values[valuesById[2] = "FILE_STRIPE_LEVEL_BALANCED"] = 2;
+                        values[valuesById[3] = "FILE_STRIPE_LEVEL_MAX"] = 3;
+                        return values;
+                    })();
+    
+                    /**
+                     * DirectoryStripeLevel enum.
+                     * @name google.cloud.parallelstore.v1beta.DirectoryStripeLevel
+                     * @enum {number}
+                     * @property {number} DIRECTORY_STRIPE_LEVEL_UNSPECIFIED=0 DIRECTORY_STRIPE_LEVEL_UNSPECIFIED value
+                     * @property {number} DIRECTORY_STRIPE_LEVEL_MIN=1 DIRECTORY_STRIPE_LEVEL_MIN value
+                     * @property {number} DIRECTORY_STRIPE_LEVEL_BALANCED=2 DIRECTORY_STRIPE_LEVEL_BALANCED value
+                     * @property {number} DIRECTORY_STRIPE_LEVEL_MAX=3 DIRECTORY_STRIPE_LEVEL_MAX value
+                     */
+                    v1beta.DirectoryStripeLevel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DIRECTORY_STRIPE_LEVEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DIRECTORY_STRIPE_LEVEL_MIN"] = 1;
+                        values[valuesById[2] = "DIRECTORY_STRIPE_LEVEL_BALANCED"] = 2;
+                        values[valuesById[3] = "DIRECTORY_STRIPE_LEVEL_MAX"] = 3;
+                        return values;
+                    })();
+    
                     v1beta.Instance = (function() {
     
                         /**
@@ -366,6 +402,8 @@
                          * @property {string|null} [network] Instance network
                          * @property {string|null} [reservedIpRange] Instance reservedIpRange
                          * @property {string|null} [effectiveReservedIpRange] Instance effectiveReservedIpRange
+                         * @property {google.cloud.parallelstore.v1beta.FileStripeLevel|null} [fileStripeLevel] Instance fileStripeLevel
+                         * @property {google.cloud.parallelstore.v1beta.DirectoryStripeLevel|null} [directoryStripeLevel] Instance directoryStripeLevel
                          */
     
                         /**
@@ -482,6 +520,22 @@
                         Instance.prototype.effectiveReservedIpRange = "";
     
                         /**
+                         * Instance fileStripeLevel.
+                         * @member {google.cloud.parallelstore.v1beta.FileStripeLevel} fileStripeLevel
+                         * @memberof google.cloud.parallelstore.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.fileStripeLevel = 0;
+    
+                        /**
+                         * Instance directoryStripeLevel.
+                         * @member {google.cloud.parallelstore.v1beta.DirectoryStripeLevel} directoryStripeLevel
+                         * @memberof google.cloud.parallelstore.v1beta.Instance
+                         * @instance
+                         */
+                        Instance.prototype.directoryStripeLevel = 0;
+    
+                        /**
                          * Creates a new Instance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.parallelstore.v1beta.Instance
@@ -531,6 +585,10 @@
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.reservedIpRange);
                             if (message.effectiveReservedIpRange != null && Object.hasOwnProperty.call(message, "effectiveReservedIpRange"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.effectiveReservedIpRange);
+                            if (message.fileStripeLevel != null && Object.hasOwnProperty.call(message, "fileStripeLevel"))
+                                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.fileStripeLevel);
+                            if (message.directoryStripeLevel != null && Object.hasOwnProperty.call(message, "directoryStripeLevel"))
+                                writer.uint32(/* id 16, wireType 0 =*/128).int32(message.directoryStripeLevel);
                             return writer;
                         };
     
@@ -634,6 +692,14 @@
                                         message.effectiveReservedIpRange = reader.string();
                                         break;
                                     }
+                                case 15: {
+                                        message.fileStripeLevel = reader.int32();
+                                        break;
+                                    }
+                                case 16: {
+                                        message.directoryStripeLevel = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -726,6 +792,26 @@
                             if (message.effectiveReservedIpRange != null && message.hasOwnProperty("effectiveReservedIpRange"))
                                 if (!$util.isString(message.effectiveReservedIpRange))
                                     return "effectiveReservedIpRange: string expected";
+                            if (message.fileStripeLevel != null && message.hasOwnProperty("fileStripeLevel"))
+                                switch (message.fileStripeLevel) {
+                                default:
+                                    return "fileStripeLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            if (message.directoryStripeLevel != null && message.hasOwnProperty("directoryStripeLevel"))
+                                switch (message.directoryStripeLevel) {
+                                default:
+                                    return "directoryStripeLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -814,6 +900,54 @@
                                 message.reservedIpRange = String(object.reservedIpRange);
                             if (object.effectiveReservedIpRange != null)
                                 message.effectiveReservedIpRange = String(object.effectiveReservedIpRange);
+                            switch (object.fileStripeLevel) {
+                            default:
+                                if (typeof object.fileStripeLevel === "number") {
+                                    message.fileStripeLevel = object.fileStripeLevel;
+                                    break;
+                                }
+                                break;
+                            case "FILE_STRIPE_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.fileStripeLevel = 0;
+                                break;
+                            case "FILE_STRIPE_LEVEL_MIN":
+                            case 1:
+                                message.fileStripeLevel = 1;
+                                break;
+                            case "FILE_STRIPE_LEVEL_BALANCED":
+                            case 2:
+                                message.fileStripeLevel = 2;
+                                break;
+                            case "FILE_STRIPE_LEVEL_MAX":
+                            case 3:
+                                message.fileStripeLevel = 3;
+                                break;
+                            }
+                            switch (object.directoryStripeLevel) {
+                            default:
+                                if (typeof object.directoryStripeLevel === "number") {
+                                    message.directoryStripeLevel = object.directoryStripeLevel;
+                                    break;
+                                }
+                                break;
+                            case "DIRECTORY_STRIPE_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.directoryStripeLevel = 0;
+                                break;
+                            case "DIRECTORY_STRIPE_LEVEL_MIN":
+                            case 1:
+                                message.directoryStripeLevel = 1;
+                                break;
+                            case "DIRECTORY_STRIPE_LEVEL_BALANCED":
+                            case 2:
+                                message.directoryStripeLevel = 2;
+                                break;
+                            case "DIRECTORY_STRIPE_LEVEL_MAX":
+                            case 3:
+                                message.directoryStripeLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -849,6 +983,8 @@
                                 object.network = "";
                                 object.reservedIpRange = "";
                                 object.effectiveReservedIpRange = "";
+                                object.fileStripeLevel = options.enums === String ? "FILE_STRIPE_LEVEL_UNSPECIFIED" : 0;
+                                object.directoryStripeLevel = options.enums === String ? "DIRECTORY_STRIPE_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -884,6 +1020,10 @@
                                 object.reservedIpRange = message.reservedIpRange;
                             if (message.effectiveReservedIpRange != null && message.hasOwnProperty("effectiveReservedIpRange"))
                                 object.effectiveReservedIpRange = message.effectiveReservedIpRange;
+                            if (message.fileStripeLevel != null && message.hasOwnProperty("fileStripeLevel"))
+                                object.fileStripeLevel = options.enums === String ? $root.google.cloud.parallelstore.v1beta.FileStripeLevel[message.fileStripeLevel] === undefined ? message.fileStripeLevel : $root.google.cloud.parallelstore.v1beta.FileStripeLevel[message.fileStripeLevel] : message.fileStripeLevel;
+                            if (message.directoryStripeLevel != null && message.hasOwnProperty("directoryStripeLevel"))
+                                object.directoryStripeLevel = options.enums === String ? $root.google.cloud.parallelstore.v1beta.DirectoryStripeLevel[message.directoryStripeLevel] === undefined ? message.directoryStripeLevel : $root.google.cloud.parallelstore.v1beta.DirectoryStripeLevel[message.directoryStripeLevel] : message.directoryStripeLevel;
                             return object;
                         };
     

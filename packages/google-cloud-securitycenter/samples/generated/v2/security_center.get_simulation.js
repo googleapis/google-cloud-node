@@ -31,8 +31,8 @@ function main(name) {
   /**
    *  Required. The organization name or simulation name of this simulation
    *  Valid format:
-   *  "organizations/{organization}/simulations/latest"
-   *  "organizations/{organization}/simulations/{simulation}"
+   *  `organizations/{organization}/simulations/latest`
+   *  `organizations/{organization}/simulations/{simulation}`
    */
   // const name = 'abc123'
 

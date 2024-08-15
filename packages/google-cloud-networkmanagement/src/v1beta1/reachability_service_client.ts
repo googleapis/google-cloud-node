@@ -224,6 +224,9 @@ export class ReachabilityServiceClient {
       connectivityTestPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/connectivityTests/{test}'
       ),
+      vpcFlowLogsConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/vpcFlowLogsConfigs/{vpc_flow_logs_config}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1920,6 +1923,67 @@ export class ReachabilityServiceClient {
     return this.pathTemplates.connectivityTestPathTemplate.match(
       connectivityTestName
     ).test;
+  }
+
+  /**
+   * Return a fully-qualified vpcFlowLogsConfig resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} vpc_flow_logs_config
+   * @returns {string} Resource name string.
+   */
+  vpcFlowLogsConfigPath(
+    project: string,
+    location: string,
+    vpcFlowLogsConfig: string
+  ) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.render({
+      project: project,
+      location: location,
+      vpc_flow_logs_config: vpcFlowLogsConfig,
+    });
+  }
+
+  /**
+   * Parse the project from VpcFlowLogsConfig resource.
+   *
+   * @param {string} vpcFlowLogsConfigName
+   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(
+      vpcFlowLogsConfigName
+    ).project;
+  }
+
+  /**
+   * Parse the location from VpcFlowLogsConfig resource.
+   *
+   * @param {string} vpcFlowLogsConfigName
+   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVpcFlowLogsConfigName(vpcFlowLogsConfigName: string) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(
+      vpcFlowLogsConfigName
+    ).location;
+  }
+
+  /**
+   * Parse the vpc_flow_logs_config from VpcFlowLogsConfig resource.
+   *
+   * @param {string} vpcFlowLogsConfigName
+   *   A fully-qualified path representing VpcFlowLogsConfig resource.
+   * @returns {string} A string representing the vpc_flow_logs_config.
+   */
+  matchVpcFlowLogsConfigFromVpcFlowLogsConfigName(
+    vpcFlowLogsConfigName: string
+  ) {
+    return this.pathTemplates.vpcFlowLogsConfigPathTemplate.match(
+      vpcFlowLogsConfigName
+    ).vpc_flow_logs_config;
   }
 
   /**

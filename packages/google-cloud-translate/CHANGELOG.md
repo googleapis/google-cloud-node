@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.3.0...translate-v8.4.0) (2024-08-09)
+
+
+### Features
+
+* [translate] Adds AdaptiveMt HTML/Glossary support ([#5603](https://github.com/googleapis/google-cloud-node/issues/5603)) ([07ab536](https://github.com/googleapis/google-cloud-node/commit/07ab536e89a98ee6e330c293604fbc49d32eb244))
+
 ## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.2.0...translate-v8.3.0) (2024-05-21)
 
 
