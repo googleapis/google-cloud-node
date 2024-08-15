@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.4.0...language-v6.5.0) (2024-08-09)
+
+
+### Features
+
+* [language] add model_version in ModerateTextRequest and expose severity score in ClassificationCategory ([#5580](https://github.com/googleapis/google-cloud-node/issues/5580)) ([cf11f56](https://github.com/googleapis/google-cloud-node/commit/cf11f56c22b481a8e26d30f01357cf5a6d519b3e))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/language-v6.3.0...language-v6.4.0) (2024-05-21)
 
 

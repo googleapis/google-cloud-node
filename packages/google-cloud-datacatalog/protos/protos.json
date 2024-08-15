@@ -5695,6 +5695,11 @@
                       },
                       "nested": {
                         "DataplexTransferStatus": {
+                          "valuesOptions": {
+                            "MIGRATED": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "DATAPLEX_TRANSFER_STATUS_UNSPECIFIED": 0,
                             "MIGRATED": 1

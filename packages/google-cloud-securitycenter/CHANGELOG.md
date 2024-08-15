@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [8.12.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.11.0...security-center-v8.12.0) (2024-08-09)
+
+
+### Features
+
+* [securitycenter] enable Dynamic Mute ([#5599](https://github.com/googleapis/google-cloud-node/issues/5599)) ([749e7e4](https://github.com/googleapis/google-cloud-node/commit/749e7e4db0ab80265c6d7446890b2522916609aa))
+* [securitycenter] enable Dynamic Mute ([#5602](https://github.com/googleapis/google-cloud-node/issues/5602)) ([8e6307c](https://github.com/googleapis/google-cloud-node/commit/8e6307ced48b9bb569c45702c52de91959338eb5))
+
 ## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v8.10.0...security-center-v8.11.0) (2024-07-10)
 
 

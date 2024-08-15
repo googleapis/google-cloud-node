@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.11.0",
+        "version": "1.12.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -316,6 +316,102 @@
                 "method": {
                     "shortName": "PurgeSuggestionDenyListEntries",
                     "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService.PurgeSuggestionDenyListEntries",
+                    "service": {
+                        "shortName": "CompletionService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_CompletionService_ImportCompletionSuggestions_async",
+            "title": "AclConfigService importCompletionSuggestions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports [CompletionSuggestion][google.cloud.discoveryengine.v1alpha.CompletionSuggestion]s for a DataStore.",
+            "canonical": true,
+            "file": "completion_service.import_completion_suggestions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportCompletionSuggestions",
+                "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService.ImportCompletionSuggestions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "inline_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.ImportCompletionSuggestionsRequest.InlineSource"
+                    },
+                    {
+                        "name": "gcs_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.GcsSource"
+                    },
+                    {
+                        "name": "bigquery_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.BigQuerySource"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "error_config",
+                        "type": ".google.cloud.discoveryengine.v1alpha.ImportErrorConfig"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CompletionServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.CompletionServiceClient"
+                },
+                "method": {
+                    "shortName": "ImportCompletionSuggestions",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService.ImportCompletionSuggestions",
+                    "service": {
+                        "shortName": "CompletionService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_CompletionService_PurgeCompletionSuggestions_async",
+            "title": "AclConfigService purgeCompletionSuggestions Sample",
+            "origin": "API_DEFINITION",
+            "description": " Permanently deletes all [CompletionSuggestion][google.cloud.discoveryengine.v1alpha.CompletionSuggestion]s for a DataStore.",
+            "canonical": true,
+            "file": "completion_service.purge_completion_suggestions.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PurgeCompletionSuggestions",
+                "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService.PurgeCompletionSuggestions",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "CompletionServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.CompletionServiceClient"
+                },
+                "method": {
+                    "shortName": "PurgeCompletionSuggestions",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService.PurgeCompletionSuggestions",
                     "service": {
                         "shortName": "CompletionService",
                         "fullName": "google.cloud.discoveryengine.v1alpha.CompletionService"
@@ -854,7 +950,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 111,
+                    "end": 129,
                     "type": "FULL"
                 }
             ],
@@ -902,6 +998,10 @@
                     {
                         "name": "user_pseudo_id",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1alpha.AnswerQueryResponse",
@@ -1194,7 +1294,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 81,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -1217,6 +1317,10 @@
                     },
                     {
                         "name": "create_advanced_site_search",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_default_schema_creation",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -1730,7 +1834,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 159,
+                    "end": 163,
                     "type": "FULL"
                 }
             ],
@@ -1766,6 +1870,10 @@
                     {
                         "name": "firestore_source",
                         "type": ".google.cloud.discoveryengine.v1alpha.FirestoreSource"
+                    },
+                    {
+                        "name": "alloy_db_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.AlloyDbSource"
                     },
                     {
                         "name": "bigtable_source",
@@ -1822,7 +1930,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 78,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -1834,6 +1942,10 @@
                     {
                         "name": "gcs_source",
                         "type": ".google.cloud.discoveryengine.v1alpha.GcsSource"
+                    },
+                    {
+                        "name": "inline_source",
+                        "type": ".google.cloud.discoveryengine.v1alpha.PurgeDocumentsRequest.InlineSource"
                     },
                     {
                         "name": "parent",
@@ -3538,7 +3650,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 273,
+                    "end": 341,
                     "type": "FULL"
                 }
             ],
@@ -3596,6 +3708,14 @@
                         "type": ".google.cloud.discoveryengine.v1alpha.UserInfo"
                     },
                     {
+                        "name": "language_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_code",
+                        "type": "TYPE_STRING"
+                    },
+                    {
                         "name": "facet_specs",
                         "type": "TYPE_MESSAGE[]"
                     },
@@ -3640,8 +3760,28 @@
                         "type": "TYPE_MESSAGE[]"
                     },
                     {
+                        "name": "natural_language_query_understanding_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.SearchRequest.NaturalLanguageQueryUnderstandingSpec"
+                    },
+                    {
+                        "name": "search_as_you_type_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.SearchRequest.SearchAsYouTypeSpec"
+                    },
+                    {
                         "name": "custom_fine_tuning_spec",
                         "type": ".google.cloud.discoveryengine.v1alpha.CustomFineTuningSpec"
+                    },
+                    {
+                        "name": "session",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "session_spec",
+                        "type": ".google.cloud.discoveryengine.v1alpha.SearchRequest.SessionSpec"
+                    },
+                    {
+                        "name": "relevance_threshold",
+                        "type": ".google.cloud.discoveryengine.v1alpha.SearchRequest.RelevanceThreshold"
                     }
                 ],
                 "resultType": ".google.cloud.discoveryengine.v1alpha.SearchResponse",
@@ -4388,6 +4528,98 @@
                 "method": {
                     "shortName": "FetchDomainVerificationStatus",
                     "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.FetchDomainVerificationStatus",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_SetUriPatternDocumentData_async",
+            "title": "AclConfigService setUriPatternDocumentData Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the URI Pattern to Document data mapping for an Advanced Site Search DataStore.",
+            "canonical": true,
+            "file": "site_search_engine_service.set_uri_pattern_document_data.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 95,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetUriPatternDocumentData",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.SetUriPatternDocumentData",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "site_search_engine",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "document_data_map",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "empty_document_data_map",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "schema",
+                        "type": ".google.protobuf.Struct"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "SetUriPatternDocumentData",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.SetUriPatternDocumentData",
+                    "service": {
+                        "shortName": "SiteSearchEngineService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_SiteSearchEngineService_GetUriPatternDocumentData_async",
+            "title": "AclConfigService getUriPatternDocumentData Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the URI Pattern to Document data mapping for an Advanced Site Search DataStore.",
+            "canonical": true,
+            "file": "site_search_engine_service.get_uri_pattern_document_data.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetUriPatternDocumentData",
+                "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.GetUriPatternDocumentData",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "site_search_engine",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.GetUriPatternDocumentDataResponse",
+                "client": {
+                    "shortName": "SiteSearchEngineServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineServiceClient"
+                },
+                "method": {
+                    "shortName": "GetUriPatternDocumentData",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService.GetUriPatternDocumentData",
                     "service": {
                         "shortName": "SiteSearchEngineService",
                         "fullName": "google.cloud.discoveryengine.v1alpha.SiteSearchEngineService"

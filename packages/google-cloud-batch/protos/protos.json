@@ -1367,6 +1367,34 @@
                             }
                           ]
                         },
+                        "CancelJob": {
+                          "requestType": "CancelJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/jobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "CancelJobResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.batch.v1alpha.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/jobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "CancelJobResponse",
+                                "metadata_type": "google.cloud.batch.v1alpha.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "UpdateJob": {
                           "requestType": "UpdateJobRequest",
                           "responseType": "Job",
@@ -1608,6 +1636,29 @@
                           }
                         }
                       }
+                    },
+                    "CancelJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "batch.googleapis.com/Job"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CancelJobResponse": {
+                      "fields": {}
                     },
                     "UpdateJobRequest": {
                       "fields": {
@@ -2438,6 +2489,13 @@
                             "installOpsAgent": {
                               "type": "bool",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "blockProjectSshKeys": {
+                              "type": "bool",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
