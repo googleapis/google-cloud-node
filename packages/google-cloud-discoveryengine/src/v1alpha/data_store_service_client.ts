@@ -429,6 +429,9 @@ export class DataStoreServiceClient {
             {
               get: '/v1alpha/{name=projects/*/locations/*/evaluations/*/operations/*}',
             },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+            },
             {get: '/v1alpha/{name=projects/*/locations/*/operations/*}'},
             {
               get: '/v1alpha/{name=projects/*/locations/*/sampleQuerySets/*/operations/*}',
@@ -472,6 +475,9 @@ export class DataStoreServiceClient {
             },
             {
               get: '/v1alpha/{name=projects/*/locations/*/dataStores/*}/operations',
+            },
+            {
+              get: '/v1alpha/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
             },
             {get: '/v1alpha/{name=projects/*/locations/*}/operations'},
             {get: '/v1alpha/{name=projects/*}/operations'},
@@ -1161,6 +1167,15 @@ export class DataStoreServiceClient {
    *   If the data store is not configured as site
    *   search (GENERIC vertical and PUBLIC_WEBSITE content_config), this flag will
    *   be ignored.
+   * @param {boolean} request.skipDefaultSchemaCreation
+   *   A boolean flag indicating whether to skip the default schema creation for
+   *   the data store. Only enable this flag if you are certain that the default
+   *   schema is incompatible with your use case.
+   *
+   *   If set to true, you must manually create a schema for the data store before
+   *   any documents can be ingested.
+   *
+   *   This flag cannot be specified if `data_store.starting_schema` is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1468,7 +1483,7 @@ export class DataStoreServiceClient {
    *   must match the call that provided the page token. Otherwise, an
    *   INVALID_ARGUMENT error is returned.
    * @param {string} request.filter
-   *   Filter by solution type.
+   *   Filter by solution type .
    *   For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1588,7 +1603,7 @@ export class DataStoreServiceClient {
    *   must match the call that provided the page token. Otherwise, an
    *   INVALID_ARGUMENT error is returned.
    * @param {string} request.filter
-   *   Filter by solution type.
+   *   Filter by solution type .
    *   For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1656,7 +1671,7 @@ export class DataStoreServiceClient {
    *   must match the call that provided the page token. Otherwise, an
    *   INVALID_ARGUMENT error is returned.
    * @param {string} request.filter
-   *   Filter by solution type.
+   *   Filter by solution type .
    *   For example: `filter = 'solution_type:SOLUTION_TYPE_SEARCH'`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
