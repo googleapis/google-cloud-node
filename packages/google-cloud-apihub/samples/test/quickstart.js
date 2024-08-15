@@ -18,9 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {RuntimeProjectAttachmentServiceClient} =
-  require('@google-cloud/apihub').v1;
-const apihubClient = new RuntimeProjectAttachmentServiceClient();
+const {ApiHubClient} = require('@google-cloud/apihub').v1;
+const apihubClient = new ApiHubClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
