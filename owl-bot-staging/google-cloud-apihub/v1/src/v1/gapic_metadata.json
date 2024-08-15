@@ -1,0 +1,731 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.apihub.v1",
+  "libraryPackage": "@google-cloud/apihub",
+  "services": {
+    "ApiHub": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiHubClient",
+          "rpcs": {
+            "CreateApi": {
+              "methods": [
+                "createApi"
+              ]
+            },
+            "GetApi": {
+              "methods": [
+                "getApi"
+              ]
+            },
+            "UpdateApi": {
+              "methods": [
+                "updateApi"
+              ]
+            },
+            "DeleteApi": {
+              "methods": [
+                "deleteApi"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "createVersion"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "updateVersion"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
+              ]
+            },
+            "CreateSpec": {
+              "methods": [
+                "createSpec"
+              ]
+            },
+            "GetSpec": {
+              "methods": [
+                "getSpec"
+              ]
+            },
+            "GetSpecContents": {
+              "methods": [
+                "getSpecContents"
+              ]
+            },
+            "UpdateSpec": {
+              "methods": [
+                "updateSpec"
+              ]
+            },
+            "DeleteSpec": {
+              "methods": [
+                "deleteSpec"
+              ]
+            },
+            "GetApiOperation": {
+              "methods": [
+                "getApiOperation"
+              ]
+            },
+            "GetDefinition": {
+              "methods": [
+                "getDefinition"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "createDeployment"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "updateDeployment"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "deleteDeployment"
+              ]
+            },
+            "CreateAttribute": {
+              "methods": [
+                "createAttribute"
+              ]
+            },
+            "GetAttribute": {
+              "methods": [
+                "getAttribute"
+              ]
+            },
+            "UpdateAttribute": {
+              "methods": [
+                "updateAttribute"
+              ]
+            },
+            "DeleteAttribute": {
+              "methods": [
+                "deleteAttribute"
+              ]
+            },
+            "CreateExternalApi": {
+              "methods": [
+                "createExternalApi"
+              ]
+            },
+            "GetExternalApi": {
+              "methods": [
+                "getExternalApi"
+              ]
+            },
+            "UpdateExternalApi": {
+              "methods": [
+                "updateExternalApi"
+              ]
+            },
+            "DeleteExternalApi": {
+              "methods": [
+                "deleteExternalApi"
+              ]
+            },
+            "ListApis": {
+              "methods": [
+                "listApis",
+                "listApisStream",
+                "listApisAsync"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            },
+            "ListSpecs": {
+              "methods": [
+                "listSpecs",
+                "listSpecsStream",
+                "listSpecsAsync"
+              ]
+            },
+            "ListApiOperations": {
+              "methods": [
+                "listApiOperations",
+                "listApiOperationsStream",
+                "listApiOperationsAsync"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            },
+            "ListAttributes": {
+              "methods": [
+                "listAttributes",
+                "listAttributesStream",
+                "listAttributesAsync"
+              ]
+            },
+            "SearchResources": {
+              "methods": [
+                "searchResources",
+                "searchResourcesStream",
+                "searchResourcesAsync"
+              ]
+            },
+            "ListExternalApis": {
+              "methods": [
+                "listExternalApis",
+                "listExternalApisStream",
+                "listExternalApisAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiHubClient",
+          "rpcs": {
+            "CreateApi": {
+              "methods": [
+                "createApi"
+              ]
+            },
+            "GetApi": {
+              "methods": [
+                "getApi"
+              ]
+            },
+            "UpdateApi": {
+              "methods": [
+                "updateApi"
+              ]
+            },
+            "DeleteApi": {
+              "methods": [
+                "deleteApi"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "createVersion"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "updateVersion"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
+              ]
+            },
+            "CreateSpec": {
+              "methods": [
+                "createSpec"
+              ]
+            },
+            "GetSpec": {
+              "methods": [
+                "getSpec"
+              ]
+            },
+            "GetSpecContents": {
+              "methods": [
+                "getSpecContents"
+              ]
+            },
+            "UpdateSpec": {
+              "methods": [
+                "updateSpec"
+              ]
+            },
+            "DeleteSpec": {
+              "methods": [
+                "deleteSpec"
+              ]
+            },
+            "GetApiOperation": {
+              "methods": [
+                "getApiOperation"
+              ]
+            },
+            "GetDefinition": {
+              "methods": [
+                "getDefinition"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "createDeployment"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "getDeployment"
+              ]
+            },
+            "UpdateDeployment": {
+              "methods": [
+                "updateDeployment"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "deleteDeployment"
+              ]
+            },
+            "CreateAttribute": {
+              "methods": [
+                "createAttribute"
+              ]
+            },
+            "GetAttribute": {
+              "methods": [
+                "getAttribute"
+              ]
+            },
+            "UpdateAttribute": {
+              "methods": [
+                "updateAttribute"
+              ]
+            },
+            "DeleteAttribute": {
+              "methods": [
+                "deleteAttribute"
+              ]
+            },
+            "CreateExternalApi": {
+              "methods": [
+                "createExternalApi"
+              ]
+            },
+            "GetExternalApi": {
+              "methods": [
+                "getExternalApi"
+              ]
+            },
+            "UpdateExternalApi": {
+              "methods": [
+                "updateExternalApi"
+              ]
+            },
+            "DeleteExternalApi": {
+              "methods": [
+                "deleteExternalApi"
+              ]
+            },
+            "ListApis": {
+              "methods": [
+                "listApis",
+                "listApisStream",
+                "listApisAsync"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            },
+            "ListSpecs": {
+              "methods": [
+                "listSpecs",
+                "listSpecsStream",
+                "listSpecsAsync"
+              ]
+            },
+            "ListApiOperations": {
+              "methods": [
+                "listApiOperations",
+                "listApiOperationsStream",
+                "listApiOperationsAsync"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "listDeployments",
+                "listDeploymentsStream",
+                "listDeploymentsAsync"
+              ]
+            },
+            "ListAttributes": {
+              "methods": [
+                "listAttributes",
+                "listAttributesStream",
+                "listAttributesAsync"
+              ]
+            },
+            "SearchResources": {
+              "methods": [
+                "searchResources",
+                "searchResourcesStream",
+                "searchResourcesAsync"
+              ]
+            },
+            "ListExternalApis": {
+              "methods": [
+                "listExternalApis",
+                "listExternalApisStream",
+                "listExternalApisAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubDependencies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiHubDependenciesClient",
+          "rpcs": {
+            "CreateDependency": {
+              "methods": [
+                "createDependency"
+              ]
+            },
+            "GetDependency": {
+              "methods": [
+                "getDependency"
+              ]
+            },
+            "UpdateDependency": {
+              "methods": [
+                "updateDependency"
+              ]
+            },
+            "DeleteDependency": {
+              "methods": [
+                "deleteDependency"
+              ]
+            },
+            "ListDependencies": {
+              "methods": [
+                "listDependencies",
+                "listDependenciesStream",
+                "listDependenciesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiHubDependenciesClient",
+          "rpcs": {
+            "CreateDependency": {
+              "methods": [
+                "createDependency"
+              ]
+            },
+            "GetDependency": {
+              "methods": [
+                "getDependency"
+              ]
+            },
+            "UpdateDependency": {
+              "methods": [
+                "updateDependency"
+              ]
+            },
+            "DeleteDependency": {
+              "methods": [
+                "deleteDependency"
+              ]
+            },
+            "ListDependencies": {
+              "methods": [
+                "listDependencies",
+                "listDependenciesStream",
+                "listDependenciesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ApiHubPlugin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ApiHubPluginClient",
+          "rpcs": {
+            "GetPlugin": {
+              "methods": [
+                "getPlugin"
+              ]
+            },
+            "EnablePlugin": {
+              "methods": [
+                "enablePlugin"
+              ]
+            },
+            "DisablePlugin": {
+              "methods": [
+                "disablePlugin"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ApiHubPluginClient",
+          "rpcs": {
+            "GetPlugin": {
+              "methods": [
+                "getPlugin"
+              ]
+            },
+            "EnablePlugin": {
+              "methods": [
+                "enablePlugin"
+              ]
+            },
+            "DisablePlugin": {
+              "methods": [
+                "disablePlugin"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HostProjectRegistrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HostProjectRegistrationServiceClient",
+          "rpcs": {
+            "CreateHostProjectRegistration": {
+              "methods": [
+                "createHostProjectRegistration"
+              ]
+            },
+            "GetHostProjectRegistration": {
+              "methods": [
+                "getHostProjectRegistration"
+              ]
+            },
+            "ListHostProjectRegistrations": {
+              "methods": [
+                "listHostProjectRegistrations",
+                "listHostProjectRegistrationsStream",
+                "listHostProjectRegistrationsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HostProjectRegistrationServiceClient",
+          "rpcs": {
+            "CreateHostProjectRegistration": {
+              "methods": [
+                "createHostProjectRegistration"
+              ]
+            },
+            "GetHostProjectRegistration": {
+              "methods": [
+                "getHostProjectRegistration"
+              ]
+            },
+            "ListHostProjectRegistrations": {
+              "methods": [
+                "listHostProjectRegistrations",
+                "listHostProjectRegistrationsStream",
+                "listHostProjectRegistrationsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LintingService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LintingServiceClient",
+          "rpcs": {
+            "GetStyleGuide": {
+              "methods": [
+                "getStyleGuide"
+              ]
+            },
+            "UpdateStyleGuide": {
+              "methods": [
+                "updateStyleGuide"
+              ]
+            },
+            "GetStyleGuideContents": {
+              "methods": [
+                "getStyleGuideContents"
+              ]
+            },
+            "LintSpec": {
+              "methods": [
+                "lintSpec"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LintingServiceClient",
+          "rpcs": {
+            "GetStyleGuide": {
+              "methods": [
+                "getStyleGuide"
+              ]
+            },
+            "UpdateStyleGuide": {
+              "methods": [
+                "updateStyleGuide"
+              ]
+            },
+            "GetStyleGuideContents": {
+              "methods": [
+                "getStyleGuideContents"
+              ]
+            },
+            "LintSpec": {
+              "methods": [
+                "lintSpec"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Provisioning": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProvisioningClient",
+          "rpcs": {
+            "GetApiHubInstance": {
+              "methods": [
+                "getApiHubInstance"
+              ]
+            },
+            "LookupApiHubInstance": {
+              "methods": [
+                "lookupApiHubInstance"
+              ]
+            },
+            "CreateApiHubInstance": {
+              "methods": [
+                "createApiHubInstance"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProvisioningClient",
+          "rpcs": {
+            "GetApiHubInstance": {
+              "methods": [
+                "getApiHubInstance"
+              ]
+            },
+            "LookupApiHubInstance": {
+              "methods": [
+                "lookupApiHubInstance"
+              ]
+            },
+            "CreateApiHubInstance": {
+              "methods": [
+                "createApiHubInstance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuntimeProjectAttachmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RuntimeProjectAttachmentServiceClient",
+          "rpcs": {
+            "CreateRuntimeProjectAttachment": {
+              "methods": [
+                "createRuntimeProjectAttachment"
+              ]
+            },
+            "GetRuntimeProjectAttachment": {
+              "methods": [
+                "getRuntimeProjectAttachment"
+              ]
+            },
+            "DeleteRuntimeProjectAttachment": {
+              "methods": [
+                "deleteRuntimeProjectAttachment"
+              ]
+            },
+            "LookupRuntimeProjectAttachment": {
+              "methods": [
+                "lookupRuntimeProjectAttachment"
+              ]
+            },
+            "ListRuntimeProjectAttachments": {
+              "methods": [
+                "listRuntimeProjectAttachments",
+                "listRuntimeProjectAttachmentsStream",
+                "listRuntimeProjectAttachmentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RuntimeProjectAttachmentServiceClient",
+          "rpcs": {
+            "CreateRuntimeProjectAttachment": {
+              "methods": [
+                "createRuntimeProjectAttachment"
+              ]
+            },
+            "GetRuntimeProjectAttachment": {
+              "methods": [
+                "getRuntimeProjectAttachment"
+              ]
+            },
+            "DeleteRuntimeProjectAttachment": {
+              "methods": [
+                "deleteRuntimeProjectAttachment"
+              ]
+            },
+            "LookupRuntimeProjectAttachment": {
+              "methods": [
+                "lookupRuntimeProjectAttachment"
+              ]
+            },
+            "ListRuntimeProjectAttachments": {
+              "methods": [
+                "listRuntimeProjectAttachments",
+                "listRuntimeProjectAttachmentsStream",
+                "listRuntimeProjectAttachmentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
