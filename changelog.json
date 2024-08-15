@@ -5,6 +5,355 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "c73a5040c46cbf2a919a27ae42e0775c8e1328a2",
+          "message": "[parallelstore] add file_stripe_level and directory_stripe_level fields to Instance",
+          "issues": [
+            "5595"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "fe47b7a9-5021-4211-b15e-1ab88938d07e",
+      "createTime": "2024-08-09T20:45:35.154Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "91df9a74e2f3573a3620f6641b51112ed6f3f394",
+          "message": "[dlp] add the TagResources API",
+          "issues": [
+            "5588"
+          ]
+        }
+      ],
+      "version": "5.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "95b7b303-eef5-44ae-adbc-99f9e369a798",
+      "createTime": "2024-08-09T20:45:35.131Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f60f2f901ce9aa4e51237246f359a6acf7f3d5b1",
+          "message": "[containeranalysis] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence`",
+          "issues": [
+            "5586"
+          ]
+        }
+      ],
+      "version": "5.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "1b701ab0-af4e-4d6e-9c1b-d48a9a698cbc",
+      "createTime": "2024-08-09T20:45:35.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "8ba7182f103a8e73bff9f27df351813d45400aa7",
+          "message": "Update dependency redis to ~4.7.0",
+          "issues": [
+            "5589"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "bda0ce6a-4b87-4945-923e-ce0b795a58e7",
+      "createTime": "2024-08-09T20:45:35.098Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "07ab536e89a98ee6e330c293604fbc49d32eb244",
+          "message": "[translate] Adds AdaptiveMt HTML/Glossary support",
+          "issues": [
+            "5603"
+          ]
+        }
+      ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "63120ac0-0d5e-45cc-86a6-b5b2318a14da",
+      "createTime": "2024-08-09T20:45:35.082Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8e6307ced48b9bb569c45702c52de91959338eb5",
+          "message": "[securitycenter] enable Dynamic Mute",
+          "issues": [
+            "5602"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "749e7e4db0ab80265c6d7446890b2522916609aa",
+          "message": "[securitycenter] enable Dynamic Mute",
+          "issues": [
+            "5599"
+          ]
+        }
+      ],
+      "version": "8.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "d0c76ffb-98ec-4414-b178-30e9d85ed07c",
+      "createTime": "2024-08-09T20:45:35.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cf11f56c22b481a8e26d30f01357cf5a6d519b3e",
+          "message": "[language] add model_version in ModerateTextRequest and expose severity score in ClassificationCategory",
+          "issues": [
+            "5580"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "2bbfbddd-eb03-4ad1-bc8d-31abb4207a80",
+      "createTime": "2024-08-09T20:45:35.017Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1e600c2a0a73c5756e9b3df361f7aa1428f3259e",
+          "message": "[functions] optional field for specifying a service account to use for the build. This helps navigate the change of historical default on new projects. For more details, see https://cloud.google.com/build/docs/cloud-build-service-account-updates",
+          "issues": [
+            "5607"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "ee34f14c-a225-4d53-a036-1ee80109e9cc",
+      "createTime": "2024-08-09T20:45:35.001Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "239356840a3f296f59c4b71c7028b071f3e6653a",
+          "message": "[documentai] A new field `imageless_mode` is added to message `.google.cloud.documentai.v1.ProcessRequest`",
+          "issues": [
+            "5593"
+          ]
+        }
+      ],
+      "version": "8.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "499f3038-ad51-4302-bf58-e775d8031473",
+      "createTime": "2024-08-09T20:45:34.979Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "af46d5779f82d7a37c687e1364b8c653bb6369e9",
+          "message": "[discoveryengine] Update SearchService",
+          "issues": [
+            "5578"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "384096fe3bbab56e9f708a2bc422f711cc1d8641",
+          "message": "[discoveryengine] Update CompletionService",
+          "issues": [
+            "5574"
+          ]
+        }
+      ],
+      "version": "1.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "0dc302ab-ec53-46e5-8ad5-7a5b8fc07367",
+      "createTime": "2024-08-09T20:45:34.952Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b961ff9b113f1e6650d3650287d3ec2b0bca0874",
+          "message": "[dialogflow-cx] exposed DataStoreConnectionSignals",
+          "issues": [
+            "5567"
+          ]
+        }
+      ],
+      "version": "4.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "c1b44096-e18b-4ba5-8e67-43b56fc44fa8",
+      "createTime": "2024-08-09T20:45:34.799Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "041f68140326c2cea686e73e5ed7025ce1ca897d",
+          "message": "[dialogflow] Add Proactive Generative Knowledge Assist endpoints and types",
+          "issues": [
+            "5601"
+          ]
+        }
+      ],
+      "version": "6.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "e3dd4780-76ad-425f-8f43-26eab2bce595",
+      "createTime": "2024-08-09T20:45:34.766Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0aacbf6818edaa1776d5e9ba3ca3fc97de2c1d83",
+          "message": "[deploy] remove an API that was mistakenly made public",
+          "issues": [
+            "5582"
+          ],
+          "breakingChangeNote": "[deploy] remove an API that was mistakenly made public ([#5582](https://github.com/googleapis/google-cloud-node/issues/5582))"
+        },
+        {
+          "type": "feat",
+          "sha": "57d684ff8fe7b7cfcf66282d15a1b31287f64ce5",
+          "message": "[deploy] add support for different Pod selector labels when doing canaries",
+          "issues": [
+            "5579"
+          ]
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "7fe2fa3f-9613-41a1-ab3d-d868726c9c34",
+      "createTime": "2024-08-09T20:45:34.749Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "bebe50e1a5910e6fc8889e2a682cd0dd2977653e",
+          "message": "[datacatalog] add DataplexTransferStatus enum and field to TagTemplate",
+          "issues": [
+            "5573"
+          ]
+        }
+      ],
+      "version": "4.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "06bf5c9d-81d4-4c88-99e6-8de673e78995",
+      "createTime": "2024-08-09T20:45:34.734Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1526ce64fee4c45b7a047aa8c1f94719744b68e4",
+          "message": "[binaryauthorization] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence`",
+          "issues": [
+            "5587"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "cce8e41b-0cfb-490f-8c2e-a8850bdf1846",
+      "createTime": "2024-08-09T20:45:34.716Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "238579a0a879085d12a6dafdee42fc80a733a269",
+          "message": "[batch] add block_project_ssh_keys field to the v1alpha job API to block project level ssh keys access to Batch created VMs",
+          "issues": [
+            "5604"
+          ]
+        }
+      ],
+      "version": "1.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "85691f3c-fc66-4d37-9004-164b5b64afb1",
+      "createTime": "2024-08-09T20:45:34.697Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1abd9a70dfddde93dfd21122dd1e041f9e6a3fb8",
+          "message": "A new field `score` is added to message `.google.cloud.aiplatform.v1.Candidate`",
+          "issues": [
+            "5577"
+          ]
+        }
+      ],
+      "version": "3.26.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "e932b129-297d-40a1-894c-30a2f74aa4da",
+      "createTime": "2024-08-09T20:45:34.681Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e77b9348a198e3a3e60e71474ac3320273d17f6e",
+          "message": "[analytics-data] add the `comparisons` field to the `Metadata` resource",
+          "issues": [
+            "5600"
+          ]
+        }
+      ],
+      "version": "4.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "5f5cd537-73d3-4b3d-9d4c-6ed34cdf71e4",
+      "createTime": "2024-08-09T20:45:34.666Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "178789bd72d0303fc369c823bdbd9a6f2fcd723b",
+          "message": "[analytics-admin] add `GetKeyEvent`, `CreateKeyEvent`, `ListKeyEvents`, `UpdateKeyEvent`, and `DeleteKeyEvent` methods",
+          "issues": [
+            "5597"
+          ]
+        }
+      ],
+      "version": "7.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "d0b98255-06ff-4943-ba89-1851de987e59",
+      "createTime": "2024-08-09T20:45:34.650Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "28f75b7605249db8d7eb362b82e7d8053e397839",
           "message": "Add initial files for google.cloud.gdchardwaremanagement.v1alpha",
           "issues": [
@@ -35550,5 +35899,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-07-22T17:56:25.671Z"
+  "updateTime": "2024-08-09T20:45:35.154Z"
 }

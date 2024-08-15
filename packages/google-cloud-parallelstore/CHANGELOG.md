@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.5.0...parallelstore-v0.6.0) (2024-08-09)
+
+
+### Features
+
+* [parallelstore] add file_stripe_level and directory_stripe_level fields to Instance ([#5595](https://github.com/googleapis/google-cloud-node/issues/5595)) ([c73a504](https://github.com/googleapis/google-cloud-node/commit/c73a5040c46cbf2a919a27ae42e0775c8e1328a2))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/parallelstore-v0.4.0...parallelstore-v0.5.0) (2024-07-10)
 
 

@@ -34622,6 +34622,2501 @@
                         return OperationMetadata;
                     })();
     
+                    v1beta1.VpcFlowLogsService = (function() {
+    
+                        /**
+                         * Constructs a new VpcFlowLogsService service.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a VpcFlowLogsService
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function VpcFlowLogsService(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (VpcFlowLogsService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = VpcFlowLogsService;
+    
+                        /**
+                         * Creates new VpcFlowLogsService service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {VpcFlowLogsService} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        VpcFlowLogsService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|listVpcFlowLogsConfigs}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef ListVpcFlowLogsConfigsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} [response] ListVpcFlowLogsConfigsResponse
+                         */
+    
+                        /**
+                         * Calls ListVpcFlowLogsConfigs.
+                         * @function listVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest} request ListVpcFlowLogsConfigsRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.ListVpcFlowLogsConfigsCallback} callback Node-style callback called with the error, if any, and ListVpcFlowLogsConfigsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.listVpcFlowLogsConfigs = function listVpcFlowLogsConfigs(request, callback) {
+                            return this.rpcCall(listVpcFlowLogsConfigs, $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest, $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse, request, callback);
+                        }, "name", { value: "ListVpcFlowLogsConfigs" });
+    
+                        /**
+                         * Calls ListVpcFlowLogsConfigs.
+                         * @function listVpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest} request ListVpcFlowLogsConfigsRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|getVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef GetVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} [response] VpcFlowLogsConfig
+                         */
+    
+                        /**
+                         * Calls GetVpcFlowLogsConfig.
+                         * @function getVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest} request GetVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.GetVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and VpcFlowLogsConfig
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.getVpcFlowLogsConfig = function getVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(getVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest, $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig, request, callback);
+                        }, "name", { value: "GetVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls GetVpcFlowLogsConfig.
+                         * @function getVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest} request GetVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|createVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef CreateVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateVpcFlowLogsConfig.
+                         * @function createVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest} request CreateVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.CreateVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.createVpcFlowLogsConfig = function createVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(createVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls CreateVpcFlowLogsConfig.
+                         * @function createVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest} request CreateVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|updateVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef UpdateVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateVpcFlowLogsConfig.
+                         * @function updateVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest} request UpdateVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.UpdateVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.updateVpcFlowLogsConfig = function updateVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(updateVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls UpdateVpcFlowLogsConfig.
+                         * @function updateVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest} request UpdateVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsService|deleteVpcFlowLogsConfig}.
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @typedef DeleteVpcFlowLogsConfigCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteVpcFlowLogsConfig.
+                         * @function deleteVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest} request DeleteVpcFlowLogsConfigRequest message or plain object
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsService.DeleteVpcFlowLogsConfigCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(VpcFlowLogsService.prototype.deleteVpcFlowLogsConfig = function deleteVpcFlowLogsConfig(request, callback) {
+                            return this.rpcCall(deleteVpcFlowLogsConfig, $root.google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteVpcFlowLogsConfig" });
+    
+                        /**
+                         * Calls DeleteVpcFlowLogsConfig.
+                         * @function deleteVpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsService
+                         * @instance
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest} request DeleteVpcFlowLogsConfigRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        return VpcFlowLogsService;
+                    })();
+    
+                    v1beta1.ListVpcFlowLogsConfigsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListVpcFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IListVpcFlowLogsConfigsRequest
+                         * @property {string|null} [parent] ListVpcFlowLogsConfigsRequest parent
+                         * @property {number|null} [pageSize] ListVpcFlowLogsConfigsRequest pageSize
+                         * @property {string|null} [pageToken] ListVpcFlowLogsConfigsRequest pageToken
+                         * @property {string|null} [filter] ListVpcFlowLogsConfigsRequest filter
+                         * @property {string|null} [orderBy] ListVpcFlowLogsConfigsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListVpcFlowLogsConfigsRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a ListVpcFlowLogsConfigsRequest.
+                         * @implements IListVpcFlowLogsConfigsRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest=} [properties] Properties to set
+                         */
+                        function ListVpcFlowLogsConfigsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListVpcFlowLogsConfigsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListVpcFlowLogsConfigsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListVpcFlowLogsConfigsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListVpcFlowLogsConfigsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListVpcFlowLogsConfigsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListVpcFlowLogsConfigsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest} ListVpcFlowLogsConfigsRequest instance
+                         */
+                        ListVpcFlowLogsConfigsRequest.create = function create(properties) {
+                            return new ListVpcFlowLogsConfigsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListVpcFlowLogsConfigsRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest} message ListVpcFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVpcFlowLogsConfigsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListVpcFlowLogsConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsRequest} message ListVpcFlowLogsConfigsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVpcFlowLogsConfigsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListVpcFlowLogsConfigsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest} ListVpcFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVpcFlowLogsConfigsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListVpcFlowLogsConfigsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest} ListVpcFlowLogsConfigsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVpcFlowLogsConfigsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListVpcFlowLogsConfigsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListVpcFlowLogsConfigsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListVpcFlowLogsConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest} ListVpcFlowLogsConfigsRequest
+                         */
+                        ListVpcFlowLogsConfigsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListVpcFlowLogsConfigsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest} message ListVpcFlowLogsConfigsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListVpcFlowLogsConfigsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListVpcFlowLogsConfigsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListVpcFlowLogsConfigsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListVpcFlowLogsConfigsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListVpcFlowLogsConfigsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsRequest";
+                        };
+    
+                        return ListVpcFlowLogsConfigsRequest;
+                    })();
+    
+                    v1beta1.ListVpcFlowLogsConfigsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListVpcFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IListVpcFlowLogsConfigsResponse
+                         * @property {Array.<google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig>|null} [vpcFlowLogsConfigs] ListVpcFlowLogsConfigsResponse vpcFlowLogsConfigs
+                         * @property {string|null} [nextPageToken] ListVpcFlowLogsConfigsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListVpcFlowLogsConfigsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListVpcFlowLogsConfigsResponse.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a ListVpcFlowLogsConfigsResponse.
+                         * @implements IListVpcFlowLogsConfigsResponse
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse=} [properties] Properties to set
+                         */
+                        function ListVpcFlowLogsConfigsResponse(properties) {
+                            this.vpcFlowLogsConfigs = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListVpcFlowLogsConfigsResponse vpcFlowLogsConfigs.
+                         * @member {Array.<google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig>} vpcFlowLogsConfigs
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsResponse.prototype.vpcFlowLogsConfigs = $util.emptyArray;
+    
+                        /**
+                         * ListVpcFlowLogsConfigsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListVpcFlowLogsConfigsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @instance
+                         */
+                        ListVpcFlowLogsConfigsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListVpcFlowLogsConfigsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} ListVpcFlowLogsConfigsResponse instance
+                         */
+                        ListVpcFlowLogsConfigsResponse.create = function create(properties) {
+                            return new ListVpcFlowLogsConfigsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListVpcFlowLogsConfigsResponse message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse} message ListVpcFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVpcFlowLogsConfigsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vpcFlowLogsConfigs != null && message.vpcFlowLogsConfigs.length)
+                                for (var i = 0; i < message.vpcFlowLogsConfigs.length; ++i)
+                                    $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.encode(message.vpcFlowLogsConfigs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListVpcFlowLogsConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IListVpcFlowLogsConfigsResponse} message ListVpcFlowLogsConfigsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListVpcFlowLogsConfigsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListVpcFlowLogsConfigsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} ListVpcFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVpcFlowLogsConfigsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.vpcFlowLogsConfigs && message.vpcFlowLogsConfigs.length))
+                                            message.vpcFlowLogsConfigs = [];
+                                        message.vpcFlowLogsConfigs.push($root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListVpcFlowLogsConfigsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} ListVpcFlowLogsConfigsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListVpcFlowLogsConfigsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListVpcFlowLogsConfigsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListVpcFlowLogsConfigsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vpcFlowLogsConfigs != null && message.hasOwnProperty("vpcFlowLogsConfigs")) {
+                                if (!Array.isArray(message.vpcFlowLogsConfigs))
+                                    return "vpcFlowLogsConfigs: array expected";
+                                for (var i = 0; i < message.vpcFlowLogsConfigs.length; ++i) {
+                                    var error = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.verify(message.vpcFlowLogsConfigs[i]);
+                                    if (error)
+                                        return "vpcFlowLogsConfigs." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListVpcFlowLogsConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} ListVpcFlowLogsConfigsResponse
+                         */
+                        ListVpcFlowLogsConfigsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse();
+                            if (object.vpcFlowLogsConfigs) {
+                                if (!Array.isArray(object.vpcFlowLogsConfigs))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse.vpcFlowLogsConfigs: array expected");
+                                message.vpcFlowLogsConfigs = [];
+                                for (var i = 0; i < object.vpcFlowLogsConfigs.length; ++i) {
+                                    if (typeof object.vpcFlowLogsConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse.vpcFlowLogsConfigs: object expected");
+                                    message.vpcFlowLogsConfigs[i] = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.fromObject(object.vpcFlowLogsConfigs[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListVpcFlowLogsConfigsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse} message ListVpcFlowLogsConfigsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListVpcFlowLogsConfigsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.vpcFlowLogsConfigs = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.vpcFlowLogsConfigs && message.vpcFlowLogsConfigs.length) {
+                                object.vpcFlowLogsConfigs = [];
+                                for (var j = 0; j < message.vpcFlowLogsConfigs.length; ++j)
+                                    object.vpcFlowLogsConfigs[j] = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.toObject(message.vpcFlowLogsConfigs[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListVpcFlowLogsConfigsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListVpcFlowLogsConfigsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListVpcFlowLogsConfigsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListVpcFlowLogsConfigsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.ListVpcFlowLogsConfigsResponse";
+                        };
+    
+                        return ListVpcFlowLogsConfigsResponse;
+                    })();
+    
+                    v1beta1.GetVpcFlowLogsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a GetVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IGetVpcFlowLogsConfigRequest
+                         * @property {string|null} [name] GetVpcFlowLogsConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a GetVpcFlowLogsConfigRequest.
+                         * @implements IGetVpcFlowLogsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         */
+                        function GetVpcFlowLogsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetVpcFlowLogsConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        GetVpcFlowLogsConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetVpcFlowLogsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest} GetVpcFlowLogsConfigRequest instance
+                         */
+                        GetVpcFlowLogsConfigRequest.create = function create(properties) {
+                            return new GetVpcFlowLogsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetVpcFlowLogsConfigRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest} message GetVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetVpcFlowLogsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetVpcFlowLogsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IGetVpcFlowLogsConfigRequest} message GetVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetVpcFlowLogsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetVpcFlowLogsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest} GetVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetVpcFlowLogsConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetVpcFlowLogsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest} GetVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetVpcFlowLogsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetVpcFlowLogsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetVpcFlowLogsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetVpcFlowLogsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest} GetVpcFlowLogsConfigRequest
+                         */
+                        GetVpcFlowLogsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetVpcFlowLogsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest} message GetVpcFlowLogsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetVpcFlowLogsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetVpcFlowLogsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetVpcFlowLogsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetVpcFlowLogsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetVpcFlowLogsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.GetVpcFlowLogsConfigRequest";
+                        };
+    
+                        return GetVpcFlowLogsConfigRequest;
+                    })();
+    
+                    v1beta1.CreateVpcFlowLogsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface ICreateVpcFlowLogsConfigRequest
+                         * @property {string|null} [parent] CreateVpcFlowLogsConfigRequest parent
+                         * @property {string|null} [vpcFlowLogsConfigId] CreateVpcFlowLogsConfigRequest vpcFlowLogsConfigId
+                         * @property {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig|null} [vpcFlowLogsConfig] CreateVpcFlowLogsConfigRequest vpcFlowLogsConfig
+                         */
+    
+                        /**
+                         * Constructs a new CreateVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a CreateVpcFlowLogsConfigRequest.
+                         * @implements ICreateVpcFlowLogsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         */
+                        function CreateVpcFlowLogsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateVpcFlowLogsConfigRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        CreateVpcFlowLogsConfigRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateVpcFlowLogsConfigRequest vpcFlowLogsConfigId.
+                         * @member {string} vpcFlowLogsConfigId
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        CreateVpcFlowLogsConfigRequest.prototype.vpcFlowLogsConfigId = "";
+    
+                        /**
+                         * CreateVpcFlowLogsConfigRequest vpcFlowLogsConfig.
+                         * @member {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig|null|undefined} vpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        CreateVpcFlowLogsConfigRequest.prototype.vpcFlowLogsConfig = null;
+    
+                        /**
+                         * Creates a new CreateVpcFlowLogsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest} CreateVpcFlowLogsConfigRequest instance
+                         */
+                        CreateVpcFlowLogsConfigRequest.create = function create(properties) {
+                            return new CreateVpcFlowLogsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateVpcFlowLogsConfigRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest} message CreateVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateVpcFlowLogsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.vpcFlowLogsConfigId != null && Object.hasOwnProperty.call(message, "vpcFlowLogsConfigId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.vpcFlowLogsConfigId);
+                            if (message.vpcFlowLogsConfig != null && Object.hasOwnProperty.call(message, "vpcFlowLogsConfig"))
+                                $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.encode(message.vpcFlowLogsConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateVpcFlowLogsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.ICreateVpcFlowLogsConfigRequest} message CreateVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateVpcFlowLogsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateVpcFlowLogsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest} CreateVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateVpcFlowLogsConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vpcFlowLogsConfigId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.vpcFlowLogsConfig = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateVpcFlowLogsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest} CreateVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateVpcFlowLogsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateVpcFlowLogsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateVpcFlowLogsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.vpcFlowLogsConfigId != null && message.hasOwnProperty("vpcFlowLogsConfigId"))
+                                if (!$util.isString(message.vpcFlowLogsConfigId))
+                                    return "vpcFlowLogsConfigId: string expected";
+                            if (message.vpcFlowLogsConfig != null && message.hasOwnProperty("vpcFlowLogsConfig")) {
+                                var error = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.verify(message.vpcFlowLogsConfig);
+                                if (error)
+                                    return "vpcFlowLogsConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateVpcFlowLogsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest} CreateVpcFlowLogsConfigRequest
+                         */
+                        CreateVpcFlowLogsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.vpcFlowLogsConfigId != null)
+                                message.vpcFlowLogsConfigId = String(object.vpcFlowLogsConfigId);
+                            if (object.vpcFlowLogsConfig != null) {
+                                if (typeof object.vpcFlowLogsConfig !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest.vpcFlowLogsConfig: object expected");
+                                message.vpcFlowLogsConfig = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.fromObject(object.vpcFlowLogsConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateVpcFlowLogsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest} message CreateVpcFlowLogsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateVpcFlowLogsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.vpcFlowLogsConfigId = "";
+                                object.vpcFlowLogsConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.vpcFlowLogsConfigId != null && message.hasOwnProperty("vpcFlowLogsConfigId"))
+                                object.vpcFlowLogsConfigId = message.vpcFlowLogsConfigId;
+                            if (message.vpcFlowLogsConfig != null && message.hasOwnProperty("vpcFlowLogsConfig"))
+                                object.vpcFlowLogsConfig = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.toObject(message.vpcFlowLogsConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateVpcFlowLogsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateVpcFlowLogsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateVpcFlowLogsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateVpcFlowLogsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.CreateVpcFlowLogsConfigRequest";
+                        };
+    
+                        return CreateVpcFlowLogsConfigRequest;
+                    })();
+    
+                    v1beta1.UpdateVpcFlowLogsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IUpdateVpcFlowLogsConfigRequest
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateVpcFlowLogsConfigRequest updateMask
+                         * @property {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig|null} [vpcFlowLogsConfig] UpdateVpcFlowLogsConfigRequest vpcFlowLogsConfig
+                         */
+    
+                        /**
+                         * Constructs a new UpdateVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents an UpdateVpcFlowLogsConfigRequest.
+                         * @implements IUpdateVpcFlowLogsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         */
+                        function UpdateVpcFlowLogsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateVpcFlowLogsConfigRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        UpdateVpcFlowLogsConfigRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateVpcFlowLogsConfigRequest vpcFlowLogsConfig.
+                         * @member {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig|null|undefined} vpcFlowLogsConfig
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        UpdateVpcFlowLogsConfigRequest.prototype.vpcFlowLogsConfig = null;
+    
+                        /**
+                         * Creates a new UpdateVpcFlowLogsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest} UpdateVpcFlowLogsConfigRequest instance
+                         */
+                        UpdateVpcFlowLogsConfigRequest.create = function create(properties) {
+                            return new UpdateVpcFlowLogsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateVpcFlowLogsConfigRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest} message UpdateVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateVpcFlowLogsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.vpcFlowLogsConfig != null && Object.hasOwnProperty.call(message, "vpcFlowLogsConfig"))
+                                $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.encode(message.vpcFlowLogsConfig, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateVpcFlowLogsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IUpdateVpcFlowLogsConfigRequest} message UpdateVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateVpcFlowLogsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateVpcFlowLogsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest} UpdateVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateVpcFlowLogsConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.vpcFlowLogsConfig = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateVpcFlowLogsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest} UpdateVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateVpcFlowLogsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateVpcFlowLogsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateVpcFlowLogsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.vpcFlowLogsConfig != null && message.hasOwnProperty("vpcFlowLogsConfig")) {
+                                var error = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.verify(message.vpcFlowLogsConfig);
+                                if (error)
+                                    return "vpcFlowLogsConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateVpcFlowLogsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest} UpdateVpcFlowLogsConfigRequest
+                         */
+                        UpdateVpcFlowLogsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest();
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.vpcFlowLogsConfig != null) {
+                                if (typeof object.vpcFlowLogsConfig !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest.vpcFlowLogsConfig: object expected");
+                                message.vpcFlowLogsConfig = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.fromObject(object.vpcFlowLogsConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateVpcFlowLogsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest} message UpdateVpcFlowLogsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateVpcFlowLogsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.updateMask = null;
+                                object.vpcFlowLogsConfig = null;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.vpcFlowLogsConfig != null && message.hasOwnProperty("vpcFlowLogsConfig"))
+                                object.vpcFlowLogsConfig = $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.toObject(message.vpcFlowLogsConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateVpcFlowLogsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateVpcFlowLogsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateVpcFlowLogsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateVpcFlowLogsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.UpdateVpcFlowLogsConfigRequest";
+                        };
+    
+                        return UpdateVpcFlowLogsConfigRequest;
+                    })();
+    
+                    v1beta1.DeleteVpcFlowLogsConfigRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IDeleteVpcFlowLogsConfigRequest
+                         * @property {string|null} [name] DeleteVpcFlowLogsConfigRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteVpcFlowLogsConfigRequest.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a DeleteVpcFlowLogsConfigRequest.
+                         * @implements IDeleteVpcFlowLogsConfigRequest
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         */
+                        function DeleteVpcFlowLogsConfigRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteVpcFlowLogsConfigRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @instance
+                         */
+                        DeleteVpcFlowLogsConfigRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteVpcFlowLogsConfigRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest} DeleteVpcFlowLogsConfigRequest instance
+                         */
+                        DeleteVpcFlowLogsConfigRequest.create = function create(properties) {
+                            return new DeleteVpcFlowLogsConfigRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteVpcFlowLogsConfigRequest message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest} message DeleteVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteVpcFlowLogsConfigRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteVpcFlowLogsConfigRequest message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IDeleteVpcFlowLogsConfigRequest} message DeleteVpcFlowLogsConfigRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteVpcFlowLogsConfigRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteVpcFlowLogsConfigRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest} DeleteVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteVpcFlowLogsConfigRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteVpcFlowLogsConfigRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest} DeleteVpcFlowLogsConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteVpcFlowLogsConfigRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteVpcFlowLogsConfigRequest message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteVpcFlowLogsConfigRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteVpcFlowLogsConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest} DeleteVpcFlowLogsConfigRequest
+                         */
+                        DeleteVpcFlowLogsConfigRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteVpcFlowLogsConfigRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest} message DeleteVpcFlowLogsConfigRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteVpcFlowLogsConfigRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteVpcFlowLogsConfigRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteVpcFlowLogsConfigRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteVpcFlowLogsConfigRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteVpcFlowLogsConfigRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.DeleteVpcFlowLogsConfigRequest";
+                        };
+    
+                        return DeleteVpcFlowLogsConfigRequest;
+                    })();
+    
+                    v1beta1.VpcFlowLogsConfig = (function() {
+    
+                        /**
+                         * Properties of a VpcFlowLogsConfig.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @interface IVpcFlowLogsConfig
+                         * @property {string|null} [name] VpcFlowLogsConfig name
+                         * @property {string|null} [description] VpcFlowLogsConfig description
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|null} [state] VpcFlowLogsConfig state
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|null} [aggregationInterval] VpcFlowLogsConfig aggregationInterval
+                         * @property {number|null} [flowSampling] VpcFlowLogsConfig flowSampling
+                         * @property {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null} [metadata] VpcFlowLogsConfig metadata
+                         * @property {Array.<string>|null} [metadataFields] VpcFlowLogsConfig metadataFields
+                         * @property {string|null} [filterExpr] VpcFlowLogsConfig filterExpr
+                         * @property {string|null} [interconnectAttachment] VpcFlowLogsConfig interconnectAttachment
+                         * @property {string|null} [vpnTunnel] VpcFlowLogsConfig vpnTunnel
+                         * @property {Object.<string,string>|null} [labels] VpcFlowLogsConfig labels
+                         * @property {google.protobuf.ITimestamp|null} [createTime] VpcFlowLogsConfig createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] VpcFlowLogsConfig updateTime
+                         */
+    
+                        /**
+                         * Constructs a new VpcFlowLogsConfig.
+                         * @memberof google.cloud.networkmanagement.v1beta1
+                         * @classdesc Represents a VpcFlowLogsConfig.
+                         * @implements IVpcFlowLogsConfig
+                         * @constructor
+                         * @param {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig=} [properties] Properties to set
+                         */
+                        function VpcFlowLogsConfig(properties) {
+                            this.metadataFields = [];
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VpcFlowLogsConfig name.
+                         * @member {string} name
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.name = "";
+    
+                        /**
+                         * VpcFlowLogsConfig description.
+                         * @member {string|null|undefined} description
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.description = null;
+    
+                        /**
+                         * VpcFlowLogsConfig state.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State|null|undefined} state
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.state = null;
+    
+                        /**
+                         * VpcFlowLogsConfig aggregationInterval.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval|null|undefined} aggregationInterval
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.aggregationInterval = null;
+    
+                        /**
+                         * VpcFlowLogsConfig flowSampling.
+                         * @member {number|null|undefined} flowSampling
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.flowSampling = null;
+    
+                        /**
+                         * VpcFlowLogsConfig metadata.
+                         * @member {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata|null|undefined} metadata
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.metadata = null;
+    
+                        /**
+                         * VpcFlowLogsConfig metadataFields.
+                         * @member {Array.<string>} metadataFields
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.metadataFields = $util.emptyArray;
+    
+                        /**
+                         * VpcFlowLogsConfig filterExpr.
+                         * @member {string|null|undefined} filterExpr
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.filterExpr = null;
+    
+                        /**
+                         * VpcFlowLogsConfig interconnectAttachment.
+                         * @member {string|null|undefined} interconnectAttachment
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.interconnectAttachment = null;
+    
+                        /**
+                         * VpcFlowLogsConfig vpnTunnel.
+                         * @member {string|null|undefined} vpnTunnel
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.vpnTunnel = null;
+    
+                        /**
+                         * VpcFlowLogsConfig labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * VpcFlowLogsConfig createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.createTime = null;
+    
+                        /**
+                         * VpcFlowLogsConfig updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        VpcFlowLogsConfig.prototype.updateTime = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * VpcFlowLogsConfig _description.
+                         * @member {"description"|undefined} _description
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_description", {
+                            get: $util.oneOfGetter($oneOfFields = ["description"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * VpcFlowLogsConfig _state.
+                         * @member {"state"|undefined} _state
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_state", {
+                            get: $util.oneOfGetter($oneOfFields = ["state"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * VpcFlowLogsConfig _aggregationInterval.
+                         * @member {"aggregationInterval"|undefined} _aggregationInterval
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_aggregationInterval", {
+                            get: $util.oneOfGetter($oneOfFields = ["aggregationInterval"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * VpcFlowLogsConfig _flowSampling.
+                         * @member {"flowSampling"|undefined} _flowSampling
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_flowSampling", {
+                            get: $util.oneOfGetter($oneOfFields = ["flowSampling"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * VpcFlowLogsConfig _metadata.
+                         * @member {"metadata"|undefined} _metadata
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_metadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["metadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * VpcFlowLogsConfig _filterExpr.
+                         * @member {"filterExpr"|undefined} _filterExpr
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "_filterExpr", {
+                            get: $util.oneOfGetter($oneOfFields = ["filterExpr"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * VpcFlowLogsConfig targetResource.
+                         * @member {"interconnectAttachment"|"vpnTunnel"|undefined} targetResource
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         */
+                        Object.defineProperty(VpcFlowLogsConfig.prototype, "targetResource", {
+                            get: $util.oneOfGetter($oneOfFields = ["interconnectAttachment", "vpnTunnel"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new VpcFlowLogsConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig=} [properties] Properties to set
+                         * @returns {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} VpcFlowLogsConfig instance
+                         */
+                        VpcFlowLogsConfig.create = function create(properties) {
+                            return new VpcFlowLogsConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VpcFlowLogsConfig message. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig} message VpcFlowLogsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VpcFlowLogsConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.aggregationInterval != null && Object.hasOwnProperty.call(message, "aggregationInterval"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.aggregationInterval);
+                            if (message.flowSampling != null && Object.hasOwnProperty.call(message, "flowSampling"))
+                                writer.uint32(/* id 5, wireType 5 =*/45).float(message.flowSampling);
+                            if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.metadata);
+                            if (message.metadataFields != null && message.metadataFields.length)
+                                for (var i = 0; i < message.metadataFields.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.metadataFields[i]);
+                            if (message.filterExpr != null && Object.hasOwnProperty.call(message, "filterExpr"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.filterExpr);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 11, wireType 2 =*/90).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.interconnectAttachment != null && Object.hasOwnProperty.call(message, "interconnectAttachment"))
+                                writer.uint32(/* id 102, wireType 2 =*/818).string(message.interconnectAttachment);
+                            if (message.vpnTunnel != null && Object.hasOwnProperty.call(message, "vpnTunnel"))
+                                writer.uint32(/* id 103, wireType 2 =*/826).string(message.vpnTunnel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VpcFlowLogsConfig message, length delimited. Does not implicitly {@link google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.IVpcFlowLogsConfig} message VpcFlowLogsConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VpcFlowLogsConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VpcFlowLogsConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} VpcFlowLogsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VpcFlowLogsConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.aggregationInterval = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.flowSampling = reader.float();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.metadata = reader.int32();
+                                        break;
+                                    }
+                                case 7: {
+                                        if (!(message.metadataFields && message.metadataFields.length))
+                                            message.metadataFields = [];
+                                        message.metadataFields.push(reader.string());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.filterExpr = reader.string();
+                                        break;
+                                    }
+                                case 102: {
+                                        message.interconnectAttachment = reader.string();
+                                        break;
+                                    }
+                                case 103: {
+                                        message.vpnTunnel = reader.string();
+                                        break;
+                                    }
+                                case 11: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 9: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 10: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VpcFlowLogsConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} VpcFlowLogsConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VpcFlowLogsConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VpcFlowLogsConfig message.
+                         * @function verify
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VpcFlowLogsConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                properties._description = 1;
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                properties._state = 1;
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.aggregationInterval != null && message.hasOwnProperty("aggregationInterval")) {
+                                properties._aggregationInterval = 1;
+                                switch (message.aggregationInterval) {
+                                default:
+                                    return "aggregationInterval: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            }
+                            if (message.flowSampling != null && message.hasOwnProperty("flowSampling")) {
+                                properties._flowSampling = 1;
+                                if (typeof message.flowSampling !== "number")
+                                    return "flowSampling: number expected";
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                properties._metadata = 1;
+                                switch (message.metadata) {
+                                default:
+                                    return "metadata: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            }
+                            if (message.metadataFields != null && message.hasOwnProperty("metadataFields")) {
+                                if (!Array.isArray(message.metadataFields))
+                                    return "metadataFields: array expected";
+                                for (var i = 0; i < message.metadataFields.length; ++i)
+                                    if (!$util.isString(message.metadataFields[i]))
+                                        return "metadataFields: string[] expected";
+                            }
+                            if (message.filterExpr != null && message.hasOwnProperty("filterExpr")) {
+                                properties._filterExpr = 1;
+                                if (!$util.isString(message.filterExpr))
+                                    return "filterExpr: string expected";
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.interconnectAttachment))
+                                    return "interconnectAttachment: string expected";
+                            }
+                            if (message.vpnTunnel != null && message.hasOwnProperty("vpnTunnel")) {
+                                if (properties.targetResource === 1)
+                                    return "targetResource: multiple values";
+                                properties.targetResource = 1;
+                                if (!$util.isString(message.vpnTunnel))
+                                    return "vpnTunnel: string expected";
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VpcFlowLogsConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} VpcFlowLogsConfig
+                         */
+                        VpcFlowLogsConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig)
+                                return object;
+                            var message = new $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            switch (object.aggregationInterval) {
+                            default:
+                                if (typeof object.aggregationInterval === "number") {
+                                    message.aggregationInterval = object.aggregationInterval;
+                                    break;
+                                }
+                                break;
+                            case "AGGREGATION_INTERVAL_UNSPECIFIED":
+                            case 0:
+                                message.aggregationInterval = 0;
+                                break;
+                            case "INTERVAL_5_SEC":
+                            case 1:
+                                message.aggregationInterval = 1;
+                                break;
+                            case "INTERVAL_30_SEC":
+                            case 2:
+                                message.aggregationInterval = 2;
+                                break;
+                            case "INTERVAL_1_MIN":
+                            case 3:
+                                message.aggregationInterval = 3;
+                                break;
+                            case "INTERVAL_5_MIN":
+                            case 4:
+                                message.aggregationInterval = 4;
+                                break;
+                            case "INTERVAL_10_MIN":
+                            case 5:
+                                message.aggregationInterval = 5;
+                                break;
+                            case "INTERVAL_15_MIN":
+                            case 6:
+                                message.aggregationInterval = 6;
+                                break;
+                            }
+                            if (object.flowSampling != null)
+                                message.flowSampling = Number(object.flowSampling);
+                            switch (object.metadata) {
+                            default:
+                                if (typeof object.metadata === "number") {
+                                    message.metadata = object.metadata;
+                                    break;
+                                }
+                                break;
+                            case "METADATA_UNSPECIFIED":
+                            case 0:
+                                message.metadata = 0;
+                                break;
+                            case "INCLUDE_ALL_METADATA":
+                            case 1:
+                                message.metadata = 1;
+                                break;
+                            case "EXCLUDE_ALL_METADATA":
+                            case 2:
+                                message.metadata = 2;
+                                break;
+                            case "CUSTOM_METADATA":
+                            case 3:
+                                message.metadata = 3;
+                                break;
+                            }
+                            if (object.metadataFields) {
+                                if (!Array.isArray(object.metadataFields))
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.metadataFields: array expected");
+                                message.metadataFields = [];
+                                for (var i = 0; i < object.metadataFields.length; ++i)
+                                    message.metadataFields[i] = String(object.metadataFields[i]);
+                            }
+                            if (object.filterExpr != null)
+                                message.filterExpr = String(object.filterExpr);
+                            if (object.interconnectAttachment != null)
+                                message.interconnectAttachment = String(object.interconnectAttachment);
+                            if (object.vpnTunnel != null)
+                                message.vpnTunnel = String(object.vpnTunnel);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VpcFlowLogsConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig} message VpcFlowLogsConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VpcFlowLogsConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.metadataFields = [];
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.createTime = null;
+                                object.updateTime = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.description != null && message.hasOwnProperty("description")) {
+                                object.description = message.description;
+                                if (options.oneofs)
+                                    object._description = "description";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                object.state = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State[message.state] === undefined ? message.state : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State[message.state] : message.state;
+                                if (options.oneofs)
+                                    object._state = "state";
+                            }
+                            if (message.aggregationInterval != null && message.hasOwnProperty("aggregationInterval")) {
+                                object.aggregationInterval = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval[message.aggregationInterval] === undefined ? message.aggregationInterval : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval[message.aggregationInterval] : message.aggregationInterval;
+                                if (options.oneofs)
+                                    object._aggregationInterval = "aggregationInterval";
+                            }
+                            if (message.flowSampling != null && message.hasOwnProperty("flowSampling")) {
+                                object.flowSampling = options.json && !isFinite(message.flowSampling) ? String(message.flowSampling) : message.flowSampling;
+                                if (options.oneofs)
+                                    object._flowSampling = "flowSampling";
+                            }
+                            if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                                object.metadata = options.enums === String ? $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata[message.metadata] === undefined ? message.metadata : $root.google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata[message.metadata] : message.metadata;
+                                if (options.oneofs)
+                                    object._metadata = "metadata";
+                            }
+                            if (message.metadataFields && message.metadataFields.length) {
+                                object.metadataFields = [];
+                                for (var j = 0; j < message.metadataFields.length; ++j)
+                                    object.metadataFields[j] = message.metadataFields[j];
+                            }
+                            if (message.filterExpr != null && message.hasOwnProperty("filterExpr")) {
+                                object.filterExpr = message.filterExpr;
+                                if (options.oneofs)
+                                    object._filterExpr = "filterExpr";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.interconnectAttachment != null && message.hasOwnProperty("interconnectAttachment")) {
+                                object.interconnectAttachment = message.interconnectAttachment;
+                                if (options.oneofs)
+                                    object.targetResource = "interconnectAttachment";
+                            }
+                            if (message.vpnTunnel != null && message.hasOwnProperty("vpnTunnel")) {
+                                object.vpnTunnel = message.vpnTunnel;
+                                if (options.oneofs)
+                                    object.targetResource = "vpnTunnel";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VpcFlowLogsConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VpcFlowLogsConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VpcFlowLogsConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VpcFlowLogsConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ENABLED=1 ENABLED value
+                         * @property {number} DISABLED=2 DISABLED value
+                         */
+                        VpcFlowLogsConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ENABLED"] = 1;
+                            values[valuesById[2] = "DISABLED"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * AggregationInterval enum.
+                         * @name google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.AggregationInterval
+                         * @enum {number}
+                         * @property {number} AGGREGATION_INTERVAL_UNSPECIFIED=0 AGGREGATION_INTERVAL_UNSPECIFIED value
+                         * @property {number} INTERVAL_5_SEC=1 INTERVAL_5_SEC value
+                         * @property {number} INTERVAL_30_SEC=2 INTERVAL_30_SEC value
+                         * @property {number} INTERVAL_1_MIN=3 INTERVAL_1_MIN value
+                         * @property {number} INTERVAL_5_MIN=4 INTERVAL_5_MIN value
+                         * @property {number} INTERVAL_10_MIN=5 INTERVAL_10_MIN value
+                         * @property {number} INTERVAL_15_MIN=6 INTERVAL_15_MIN value
+                         */
+                        VpcFlowLogsConfig.AggregationInterval = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "AGGREGATION_INTERVAL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INTERVAL_5_SEC"] = 1;
+                            values[valuesById[2] = "INTERVAL_30_SEC"] = 2;
+                            values[valuesById[3] = "INTERVAL_1_MIN"] = 3;
+                            values[valuesById[4] = "INTERVAL_5_MIN"] = 4;
+                            values[valuesById[5] = "INTERVAL_10_MIN"] = 5;
+                            values[valuesById[6] = "INTERVAL_15_MIN"] = 6;
+                            return values;
+                        })();
+    
+                        /**
+                         * Metadata enum.
+                         * @name google.cloud.networkmanagement.v1beta1.VpcFlowLogsConfig.Metadata
+                         * @enum {number}
+                         * @property {number} METADATA_UNSPECIFIED=0 METADATA_UNSPECIFIED value
+                         * @property {number} INCLUDE_ALL_METADATA=1 INCLUDE_ALL_METADATA value
+                         * @property {number} EXCLUDE_ALL_METADATA=2 EXCLUDE_ALL_METADATA value
+                         * @property {number} CUSTOM_METADATA=3 CUSTOM_METADATA value
+                         */
+                        VpcFlowLogsConfig.Metadata = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METADATA_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INCLUDE_ALL_METADATA"] = 1;
+                            values[valuesById[2] = "EXCLUDE_ALL_METADATA"] = 2;
+                            values[valuesById[3] = "CUSTOM_METADATA"] = 3;
+                            return values;
+                        })();
+    
+                        return VpcFlowLogsConfig;
+                    })();
+    
                     return v1beta1;
                 })();
     

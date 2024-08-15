@@ -1,5 +1,21 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.8.0...deploy-v4.0.0) (2024-08-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* [deploy] remove an API that was mistakenly made public ([#5582](https://github.com/googleapis/google-cloud-node/issues/5582))
+
+### Features
+
+* [deploy] add support for different Pod selector labels when doing canaries ([#5579](https://github.com/googleapis/google-cloud-node/issues/5579)) ([57d684f](https://github.com/googleapis/google-cloud-node/commit/57d684ff8fe7b7cfcf66282d15a1b31287f64ce5))
+
+
+### Bug Fixes
+
+* [deploy] remove an API that was mistakenly made public ([#5582](https://github.com/googleapis/google-cloud-node/issues/5582)) ([0aacbf6](https://github.com/googleapis/google-cloud-node/commit/0aacbf6818edaa1776d5e9ba3ca3fc97de2c1d83))
+
 ## [3.8.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.7.0...deploy-v3.8.0) (2024-07-22)
 
 
