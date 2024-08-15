@@ -78,7 +78,7 @@ npm install @google-cloud/apihub
  *    * `display_name` - The display name of the Deployment. Allowed
  *    comparison operators: `=`.
  *    * `create_time` - The time at which the Deployment was created. The
- *    value should be in the (RFC3339)https://tools.ietf.org/html/rfc3339 
+ *    value should be in the (RFC3339)https://tools.ietf.org/html/rfc3339
  *    format. Allowed comparison operators: `>` and `<`.
  *    * `resource_uri` - A URI to the deployment resource. Allowed
  *    comparison operators: `=`.
@@ -153,7 +153,7 @@ async function callListDeployments() {
   // Run request
   const iterable = apihubClient.listDeploymentsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
