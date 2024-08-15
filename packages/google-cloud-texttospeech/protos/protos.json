@@ -14,6 +14,7 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TextToSpeechLongAudioSynthesisProto",
                     "java_package": "com.google.cloud.texttospeech.v1",
+                    "objc_class_prefix": "CTTS",
                     "php_namespace": "Google\\Cloud\\TextToSpeech\\V1",
                     "ruby_package": "Google::Cloud::TextToSpeech::V1",
                     "(google.api.resource_definition).type": "automl.googleapis.com/Model",
@@ -63,6 +64,12 @@
                               "(google.api.method_signature)": "input,voice,audio_config"
                             }
                           ]
+                        },
+                        "StreamingSynthesize": {
+                          "requestType": "StreamingSynthesizeRequest",
+                          "requestStream": true,
+                          "responseType": "StreamingSynthesizeResponse",
+                          "responseStream": true
                         }
                       }
                     },
@@ -270,6 +277,60 @@
                       }
                     },
                     "SynthesizeSpeechResponse": {
+                      "fields": {
+                        "audioContent": {
+                          "type": "bytes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingSynthesizeConfig": {
+                      "fields": {
+                        "voice": {
+                          "type": "VoiceSelectionParams",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StreamingSynthesisInput": {
+                      "oneofs": {
+                        "inputSource": {
+                          "oneof": [
+                            "text"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "StreamingSynthesizeRequest": {
+                      "oneofs": {
+                        "streamingRequest": {
+                          "oneof": [
+                            "streamingConfig",
+                            "input"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "streamingConfig": {
+                          "type": "StreamingSynthesizeConfig",
+                          "id": 1
+                        },
+                        "input": {
+                          "type": "StreamingSynthesisInput",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "StreamingSynthesizeResponse": {
                       "fields": {
                         "audioContent": {
                           "type": "bytes",

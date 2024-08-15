@@ -73,6 +73,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public synthesizeSpeech(request: google.cloud.texttospeech.v1.ISynthesizeSpeechRequest): Promise<google.cloud.texttospeech.v1.SynthesizeSpeechResponse>;
+
+                    /**
+                     * Calls StreamingSynthesize.
+                     * @param request StreamingSynthesizeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and StreamingSynthesizeResponse
+                     */
+                    public streamingSynthesize(request: google.cloud.texttospeech.v1.IStreamingSynthesizeRequest, callback: google.cloud.texttospeech.v1.TextToSpeech.StreamingSynthesizeCallback): void;
+
+                    /**
+                     * Calls StreamingSynthesize.
+                     * @param request StreamingSynthesizeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public streamingSynthesize(request: google.cloud.texttospeech.v1.IStreamingSynthesizeRequest): Promise<google.cloud.texttospeech.v1.StreamingSynthesizeResponse>;
                 }
 
                 namespace TextToSpeech {
@@ -90,6 +104,13 @@ export namespace google {
                      * @param [response] SynthesizeSpeechResponse
                      */
                     type SynthesizeSpeechCallback = (error: (Error|null), response?: google.cloud.texttospeech.v1.SynthesizeSpeechResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.texttospeech.v1.TextToSpeech|streamingSynthesize}.
+                     * @param error Error, if any
+                     * @param [response] StreamingSynthesizeResponse
+                     */
+                    type StreamingSynthesizeCallback = (error: (Error|null), response?: google.cloud.texttospeech.v1.StreamingSynthesizeResponse) => void;
                 }
 
                 /** SsmlVoiceGender enum. */
@@ -1080,6 +1101,406 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SynthesizeSpeechResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StreamingSynthesizeConfig. */
+                interface IStreamingSynthesizeConfig {
+
+                    /** StreamingSynthesizeConfig voice */
+                    voice?: (google.cloud.texttospeech.v1.IVoiceSelectionParams|null);
+                }
+
+                /** Represents a StreamingSynthesizeConfig. */
+                class StreamingSynthesizeConfig implements IStreamingSynthesizeConfig {
+
+                    /**
+                     * Constructs a new StreamingSynthesizeConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.IStreamingSynthesizeConfig);
+
+                    /** StreamingSynthesizeConfig voice. */
+                    public voice?: (google.cloud.texttospeech.v1.IVoiceSelectionParams|null);
+
+                    /**
+                     * Creates a new StreamingSynthesizeConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingSynthesizeConfig instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.IStreamingSynthesizeConfig): google.cloud.texttospeech.v1.StreamingSynthesizeConfig;
+
+                    /**
+                     * Encodes the specified StreamingSynthesizeConfig message. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesizeConfig.verify|verify} messages.
+                     * @param message StreamingSynthesizeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.IStreamingSynthesizeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingSynthesizeConfig message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesizeConfig.verify|verify} messages.
+                     * @param message StreamingSynthesizeConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.IStreamingSynthesizeConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingSynthesizeConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingSynthesizeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.StreamingSynthesizeConfig;
+
+                    /**
+                     * Decodes a StreamingSynthesizeConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingSynthesizeConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.StreamingSynthesizeConfig;
+
+                    /**
+                     * Verifies a StreamingSynthesizeConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingSynthesizeConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingSynthesizeConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.StreamingSynthesizeConfig;
+
+                    /**
+                     * Creates a plain object from a StreamingSynthesizeConfig message. Also converts values to other types if specified.
+                     * @param message StreamingSynthesizeConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.StreamingSynthesizeConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingSynthesizeConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StreamingSynthesizeConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StreamingSynthesisInput. */
+                interface IStreamingSynthesisInput {
+
+                    /** StreamingSynthesisInput text */
+                    text?: (string|null);
+                }
+
+                /** Represents a StreamingSynthesisInput. */
+                class StreamingSynthesisInput implements IStreamingSynthesisInput {
+
+                    /**
+                     * Constructs a new StreamingSynthesisInput.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.IStreamingSynthesisInput);
+
+                    /** StreamingSynthesisInput text. */
+                    public text?: (string|null);
+
+                    /** StreamingSynthesisInput inputSource. */
+                    public inputSource?: "text";
+
+                    /**
+                     * Creates a new StreamingSynthesisInput instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingSynthesisInput instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.IStreamingSynthesisInput): google.cloud.texttospeech.v1.StreamingSynthesisInput;
+
+                    /**
+                     * Encodes the specified StreamingSynthesisInput message. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesisInput.verify|verify} messages.
+                     * @param message StreamingSynthesisInput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.IStreamingSynthesisInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingSynthesisInput message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesisInput.verify|verify} messages.
+                     * @param message StreamingSynthesisInput message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.IStreamingSynthesisInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingSynthesisInput message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingSynthesisInput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.StreamingSynthesisInput;
+
+                    /**
+                     * Decodes a StreamingSynthesisInput message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingSynthesisInput
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.StreamingSynthesisInput;
+
+                    /**
+                     * Verifies a StreamingSynthesisInput message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingSynthesisInput message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingSynthesisInput
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.StreamingSynthesisInput;
+
+                    /**
+                     * Creates a plain object from a StreamingSynthesisInput message. Also converts values to other types if specified.
+                     * @param message StreamingSynthesisInput
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.StreamingSynthesisInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingSynthesisInput to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StreamingSynthesisInput
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StreamingSynthesizeRequest. */
+                interface IStreamingSynthesizeRequest {
+
+                    /** StreamingSynthesizeRequest streamingConfig */
+                    streamingConfig?: (google.cloud.texttospeech.v1.IStreamingSynthesizeConfig|null);
+
+                    /** StreamingSynthesizeRequest input */
+                    input?: (google.cloud.texttospeech.v1.IStreamingSynthesisInput|null);
+                }
+
+                /** Represents a StreamingSynthesizeRequest. */
+                class StreamingSynthesizeRequest implements IStreamingSynthesizeRequest {
+
+                    /**
+                     * Constructs a new StreamingSynthesizeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.IStreamingSynthesizeRequest);
+
+                    /** StreamingSynthesizeRequest streamingConfig. */
+                    public streamingConfig?: (google.cloud.texttospeech.v1.IStreamingSynthesizeConfig|null);
+
+                    /** StreamingSynthesizeRequest input. */
+                    public input?: (google.cloud.texttospeech.v1.IStreamingSynthesisInput|null);
+
+                    /** StreamingSynthesizeRequest streamingRequest. */
+                    public streamingRequest?: ("streamingConfig"|"input");
+
+                    /**
+                     * Creates a new StreamingSynthesizeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingSynthesizeRequest instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.IStreamingSynthesizeRequest): google.cloud.texttospeech.v1.StreamingSynthesizeRequest;
+
+                    /**
+                     * Encodes the specified StreamingSynthesizeRequest message. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesizeRequest.verify|verify} messages.
+                     * @param message StreamingSynthesizeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.IStreamingSynthesizeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingSynthesizeRequest message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesizeRequest.verify|verify} messages.
+                     * @param message StreamingSynthesizeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.IStreamingSynthesizeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingSynthesizeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingSynthesizeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.StreamingSynthesizeRequest;
+
+                    /**
+                     * Decodes a StreamingSynthesizeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingSynthesizeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.StreamingSynthesizeRequest;
+
+                    /**
+                     * Verifies a StreamingSynthesizeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingSynthesizeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingSynthesizeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.StreamingSynthesizeRequest;
+
+                    /**
+                     * Creates a plain object from a StreamingSynthesizeRequest message. Also converts values to other types if specified.
+                     * @param message StreamingSynthesizeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.StreamingSynthesizeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingSynthesizeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StreamingSynthesizeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StreamingSynthesizeResponse. */
+                interface IStreamingSynthesizeResponse {
+
+                    /** StreamingSynthesizeResponse audioContent */
+                    audioContent?: (Uint8Array|string|null);
+                }
+
+                /** Represents a StreamingSynthesizeResponse. */
+                class StreamingSynthesizeResponse implements IStreamingSynthesizeResponse {
+
+                    /**
+                     * Constructs a new StreamingSynthesizeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.texttospeech.v1.IStreamingSynthesizeResponse);
+
+                    /** StreamingSynthesizeResponse audioContent. */
+                    public audioContent: (Uint8Array|string);
+
+                    /**
+                     * Creates a new StreamingSynthesizeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StreamingSynthesizeResponse instance
+                     */
+                    public static create(properties?: google.cloud.texttospeech.v1.IStreamingSynthesizeResponse): google.cloud.texttospeech.v1.StreamingSynthesizeResponse;
+
+                    /**
+                     * Encodes the specified StreamingSynthesizeResponse message. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesizeResponse.verify|verify} messages.
+                     * @param message StreamingSynthesizeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.texttospeech.v1.IStreamingSynthesizeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StreamingSynthesizeResponse message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1.StreamingSynthesizeResponse.verify|verify} messages.
+                     * @param message StreamingSynthesizeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.texttospeech.v1.IStreamingSynthesizeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StreamingSynthesizeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StreamingSynthesizeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.texttospeech.v1.StreamingSynthesizeResponse;
+
+                    /**
+                     * Decodes a StreamingSynthesizeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StreamingSynthesizeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.texttospeech.v1.StreamingSynthesizeResponse;
+
+                    /**
+                     * Verifies a StreamingSynthesizeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StreamingSynthesizeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StreamingSynthesizeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.texttospeech.v1.StreamingSynthesizeResponse;
+
+                    /**
+                     * Creates a plain object from a StreamingSynthesizeResponse message. Also converts values to other types if specified.
+                     * @param message StreamingSynthesizeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.texttospeech.v1.StreamingSynthesizeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StreamingSynthesizeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StreamingSynthesizeResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
