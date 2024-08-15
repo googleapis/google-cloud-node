@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-functions",
-        "version": "3.4.0",
+        "version": "3.5.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 62,
                     "type": "FULL"
                 }
             ],
@@ -33,6 +33,10 @@
                 "parameters": [
                     {
                         "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "revision",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -166,7 +170,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -243,14 +247,14 @@
             "regionTag": "cloudfunctions_v2_generated_FunctionService_GenerateUploadUrl_async",
             "title": "FunctionService generateUploadUrl Sample",
             "origin": "API_DEFINITION",
-            "description": " Returns a signed URL for uploading a function source code. For more information about the signed URL usage see: https://cloud.google.com/storage/docs/access-control/signed-urls. Once the function source code upload is complete, the used signed URL should be provided in CreateFunction or UpdateFunction request as a reference to the function source code. When uploading source code to the generated signed URL, please follow these restrictions: * Source file type should be a zip file. * No credentials should be attached - the signed URLs provide access to the   target bucket using internal service identity; if credentials were   attached, the identity from the credentials would be used, but that   identity does not have permissions to upload files to the URL. When making a HTTP PUT request, these two headers need to be specified: * `content-type: application/zip` And this header SHOULD NOT be specified: * `Authorization: Bearer YOUR_TOKEN`",
+            "description": " Returns a signed URL for uploading a function source code. For more information about the signed URL usage see: https://cloud.google.com/storage/docs/access-control/signed-urls. Once the function source code upload is complete, the used signed URL should be provided in CreateFunction or UpdateFunction request as a reference to the function source code. When uploading source code to the generated signed URL, please follow these restrictions: * Source file type should be a zip file. * No credentials should be attached - the signed URLs provide access to the   target bucket using internal service identity; if credentials were   attached, the identity from the credentials would be used, but that   identity does not have permissions to upload files to the URL. When making a HTTP PUT request, specify this header: * `content-type: application/zip` Do not specify this header: * `Authorization: Bearer YOUR_TOKEN`",
             "canonical": true,
             "file": "function_service.generate_upload_url.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 70,
+                    "end": 77,
                     "type": "FULL"
                 }
             ],
@@ -266,6 +270,10 @@
                     {
                         "name": "kms_key_name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "environment",
+                        "type": ".google.cloud.functions.v2.Environment"
                     }
                 ],
                 "resultType": ".google.cloud.functions.v2.GenerateUploadUrlResponse",

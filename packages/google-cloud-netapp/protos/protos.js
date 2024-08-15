@@ -1566,6 +1566,7 @@
                          * @property {string|null} [username] ActiveDirectory username
                          * @property {string|null} [password] ActiveDirectory password
                          * @property {Array.<string>|null} [backupOperators] ActiveDirectory backupOperators
+                         * @property {Array.<string>|null} [administrators] ActiveDirectory administrators
                          * @property {Array.<string>|null} [securityOperators] ActiveDirectory securityOperators
                          * @property {string|null} [kdcHostname] ActiveDirectory kdcHostname
                          * @property {string|null} [kdcIp] ActiveDirectory kdcIp
@@ -1587,6 +1588,7 @@
                          */
                         function ActiveDirectory(properties) {
                             this.backupOperators = [];
+                            this.administrators = [];
                             this.securityOperators = [];
                             this.labels = {};
                             if (properties)
@@ -1690,6 +1692,14 @@
                          * @instance
                          */
                         ActiveDirectory.prototype.backupOperators = $util.emptyArray;
+    
+                        /**
+                         * ActiveDirectory administrators.
+                         * @member {Array.<string>} administrators
+                         * @memberof google.cloud.netapp.v1.ActiveDirectory
+                         * @instance
+                         */
+                        ActiveDirectory.prototype.administrators = $util.emptyArray;
     
                         /**
                          * ActiveDirectory securityOperators.
@@ -1832,6 +1842,9 @@
                                     writer.uint32(/* id 20, wireType 2 =*/162).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.stateDetails != null && Object.hasOwnProperty.call(message, "stateDetails"))
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.stateDetails);
+                            if (message.administrators != null && message.administrators.length)
+                                for (var i = 0; i < message.administrators.length; ++i)
+                                    writer.uint32(/* id 22, wireType 2 =*/178).string(message.administrators[i]);
                             return writer;
                         };
     
@@ -1914,6 +1927,12 @@
                                         if (!(message.backupOperators && message.backupOperators.length))
                                             message.backupOperators = [];
                                         message.backupOperators.push(reader.string());
+                                        break;
+                                    }
+                                case 22: {
+                                        if (!(message.administrators && message.administrators.length))
+                                            message.administrators = [];
+                                        message.administrators.push(reader.string());
                                         break;
                                     }
                                 case 13: {
@@ -2060,6 +2079,13 @@
                                     if (!$util.isString(message.backupOperators[i]))
                                         return "backupOperators: string[] expected";
                             }
+                            if (message.administrators != null && message.hasOwnProperty("administrators")) {
+                                if (!Array.isArray(message.administrators))
+                                    return "administrators: array expected";
+                                for (var i = 0; i < message.administrators.length; ++i)
+                                    if (!$util.isString(message.administrators[i]))
+                                        return "administrators: string[] expected";
+                            }
                             if (message.securityOperators != null && message.hasOwnProperty("securityOperators")) {
                                 if (!Array.isArray(message.securityOperators))
                                     return "securityOperators: array expected";
@@ -2177,6 +2203,13 @@
                                 for (var i = 0; i < object.backupOperators.length; ++i)
                                     message.backupOperators[i] = String(object.backupOperators[i]);
                             }
+                            if (object.administrators) {
+                                if (!Array.isArray(object.administrators))
+                                    throw TypeError(".google.cloud.netapp.v1.ActiveDirectory.administrators: array expected");
+                                message.administrators = [];
+                                for (var i = 0; i < object.administrators.length; ++i)
+                                    message.administrators[i] = String(object.administrators[i]);
+                            }
                             if (object.securityOperators) {
                                 if (!Array.isArray(object.securityOperators))
                                     throw TypeError(".google.cloud.netapp.v1.ActiveDirectory.securityOperators: array expected");
@@ -2224,6 +2257,7 @@
                             if (options.arrays || options.defaults) {
                                 object.backupOperators = [];
                                 object.securityOperators = [];
+                                object.administrators = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -2299,6 +2333,11 @@
                             }
                             if (message.stateDetails != null && message.hasOwnProperty("stateDetails"))
                                 object.stateDetails = message.stateDetails;
+                            if (message.administrators && message.administrators.length) {
+                                object.administrators = [];
+                                for (var j = 0; j < message.administrators.length; ++j)
+                                    object.administrators[j] = message.administrators[j];
+                            }
                             return object;
                         };
     
@@ -20325,6 +20364,8 @@
                          * @property {string|null} [psaRange] StoragePool psaRange
                          * @property {google.cloud.netapp.v1.EncryptionType|null} [encryptionType] StoragePool encryptionType
                          * @property {boolean|null} [globalAccessAllowed] StoragePool globalAccessAllowed
+                         * @property {string|null} [replicaZone] StoragePool replicaZone
+                         * @property {string|null} [zone] StoragePool zone
                          */
     
                         /**
@@ -20479,6 +20520,22 @@
                          */
                         StoragePool.prototype.globalAccessAllowed = null;
     
+                        /**
+                         * StoragePool replicaZone.
+                         * @member {string} replicaZone
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.replicaZone = "";
+    
+                        /**
+                         * StoragePool zone.
+                         * @member {string} zone
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.zone = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -20552,6 +20609,10 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.encryptionType);
                             if (message.globalAccessAllowed != null && Object.hasOwnProperty.call(message, "globalAccessAllowed"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.globalAccessAllowed);
+                            if (message.replicaZone != null && Object.hasOwnProperty.call(message, "replicaZone"))
+                                writer.uint32(/* id 20, wireType 2 =*/162).string(message.replicaZone);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 21, wireType 2 =*/170).string(message.zone);
                             return writer;
                         };
     
@@ -20671,6 +20732,14 @@
                                     }
                                 case 17: {
                                         message.globalAccessAllowed = reader.bool();
+                                        break;
+                                    }
+                                case 20: {
+                                        message.replicaZone = reader.string();
+                                        break;
+                                    }
+                                case 21: {
+                                        message.zone = reader.string();
                                         break;
                                     }
                                 default:
@@ -20794,6 +20863,12 @@
                                 if (typeof message.globalAccessAllowed !== "boolean")
                                     return "globalAccessAllowed: boolean expected";
                             }
+                            if (message.replicaZone != null && message.hasOwnProperty("replicaZone"))
+                                if (!$util.isString(message.replicaZone))
+                                    return "replicaZone: string expected";
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
                             return null;
                         };
     
@@ -20947,6 +21022,10 @@
                             }
                             if (object.globalAccessAllowed != null)
                                 message.globalAccessAllowed = Boolean(object.globalAccessAllowed);
+                            if (object.replicaZone != null)
+                                message.replicaZone = String(object.replicaZone);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
                             return message;
                         };
     
@@ -20989,6 +21068,8 @@
                                 object.ldapEnabled = false;
                                 object.psaRange = "";
                                 object.encryptionType = options.enums === String ? "ENCRYPTION_TYPE_UNSPECIFIED" : 0;
+                                object.replicaZone = "";
+                                object.zone = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -21037,6 +21118,10 @@
                                 if (options.oneofs)
                                     object._globalAccessAllowed = "globalAccessAllowed";
                             }
+                            if (message.replicaZone != null && message.hasOwnProperty("replicaZone"))
+                                object.replicaZone = message.replicaZone;
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                object.zone = message.zone;
                             return object;
                         };
     
@@ -23258,7 +23343,11 @@
                          * @property {boolean|null} [hasReplication] Volume hasReplication
                          * @property {google.cloud.netapp.v1.IBackupConfig|null} [backupConfig] Volume backupConfig
                          * @property {Array.<google.cloud.netapp.v1.RestrictedAction>|null} [restrictedActions] Volume restrictedActions
+                         * @property {boolean|null} [largeCapacity] Volume largeCapacity
+                         * @property {boolean|null} [multipleEndpoints] Volume multipleEndpoints
                          * @property {google.cloud.netapp.v1.ITieringPolicy|null} [tieringPolicy] Volume tieringPolicy
+                         * @property {string|null} [replicaZone] Volume replicaZone
+                         * @property {string|null} [zone] Volume zone
                          */
     
                         /**
@@ -23530,12 +23619,44 @@
                         Volume.prototype.restrictedActions = $util.emptyArray;
     
                         /**
+                         * Volume largeCapacity.
+                         * @member {boolean} largeCapacity
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.largeCapacity = false;
+    
+                        /**
+                         * Volume multipleEndpoints.
+                         * @member {boolean} multipleEndpoints
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.multipleEndpoints = false;
+    
+                        /**
                          * Volume tieringPolicy.
                          * @member {google.cloud.netapp.v1.ITieringPolicy|null|undefined} tieringPolicy
                          * @memberof google.cloud.netapp.v1.Volume
                          * @instance
                          */
                         Volume.prototype.tieringPolicy = null;
+    
+                        /**
+                         * Volume replicaZone.
+                         * @member {string} replicaZone
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.replicaZone = "";
+    
+                        /**
+                         * Volume zone.
+                         * @member {string} zone
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.zone = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -23662,8 +23783,16 @@
                                     writer.int32(message.restrictedActions[i]);
                                 writer.ldelim();
                             }
+                            if (message.largeCapacity != null && Object.hasOwnProperty.call(message, "largeCapacity"))
+                                writer.uint32(/* id 32, wireType 0 =*/256).bool(message.largeCapacity);
+                            if (message.multipleEndpoints != null && Object.hasOwnProperty.call(message, "multipleEndpoints"))
+                                writer.uint32(/* id 33, wireType 0 =*/264).bool(message.multipleEndpoints);
                             if (message.tieringPolicy != null && Object.hasOwnProperty.call(message, "tieringPolicy"))
                                 $root.google.cloud.netapp.v1.TieringPolicy.encode(message.tieringPolicy, writer.uint32(/* id 34, wireType 2 =*/274).fork()).ldelim();
+                            if (message.replicaZone != null && Object.hasOwnProperty.call(message, "replicaZone"))
+                                writer.uint32(/* id 36, wireType 2 =*/290).string(message.replicaZone);
+                            if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
+                                writer.uint32(/* id 37, wireType 2 =*/298).string(message.zone);
                             return writer;
                         };
     
@@ -23864,8 +23993,24 @@
                                             message.restrictedActions.push(reader.int32());
                                         break;
                                     }
+                                case 32: {
+                                        message.largeCapacity = reader.bool();
+                                        break;
+                                    }
+                                case 33: {
+                                        message.multipleEndpoints = reader.bool();
+                                        break;
+                                    }
                                 case 34: {
                                         message.tieringPolicy = $root.google.cloud.netapp.v1.TieringPolicy.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 36: {
+                                        message.replicaZone = reader.string();
+                                        break;
+                                    }
+                                case 37: {
+                                        message.zone = reader.string();
                                         break;
                                     }
                                 default:
@@ -24089,6 +24234,12 @@
                                         break;
                                     }
                             }
+                            if (message.largeCapacity != null && message.hasOwnProperty("largeCapacity"))
+                                if (typeof message.largeCapacity !== "boolean")
+                                    return "largeCapacity: boolean expected";
+                            if (message.multipleEndpoints != null && message.hasOwnProperty("multipleEndpoints"))
+                                if (typeof message.multipleEndpoints !== "boolean")
+                                    return "multipleEndpoints: boolean expected";
                             if (message.tieringPolicy != null && message.hasOwnProperty("tieringPolicy")) {
                                 properties._tieringPolicy = 1;
                                 {
@@ -24097,6 +24248,12 @@
                                         return "tieringPolicy." + error;
                                 }
                             }
+                            if (message.replicaZone != null && message.hasOwnProperty("replicaZone"))
+                                if (!$util.isString(message.replicaZone))
+                                    return "replicaZone: string expected";
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                if (!$util.isString(message.zone))
+                                    return "zone: string expected";
                             return null;
                         };
     
@@ -24413,11 +24570,19 @@
                                         break;
                                     }
                             }
+                            if (object.largeCapacity != null)
+                                message.largeCapacity = Boolean(object.largeCapacity);
+                            if (object.multipleEndpoints != null)
+                                message.multipleEndpoints = Boolean(object.multipleEndpoints);
                             if (object.tieringPolicy != null) {
                                 if (typeof object.tieringPolicy !== "object")
                                     throw TypeError(".google.cloud.netapp.v1.Volume.tieringPolicy: object expected");
                                 message.tieringPolicy = $root.google.cloud.netapp.v1.TieringPolicy.fromObject(object.tieringPolicy);
                             }
+                            if (object.replicaZone != null)
+                                message.replicaZone = String(object.replicaZone);
+                            if (object.zone != null)
+                                message.zone = String(object.zone);
                             return message;
                         };
     
@@ -24476,6 +24641,10 @@
                                 object.kmsConfig = "";
                                 object.encryptionType = options.enums === String ? "ENCRYPTION_TYPE_UNSPECIFIED" : 0;
                                 object.hasReplication = false;
+                                object.largeCapacity = false;
+                                object.multipleEndpoints = false;
+                                object.replicaZone = "";
+                                object.zone = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -24564,11 +24733,19 @@
                                 for (var j = 0; j < message.restrictedActions.length; ++j)
                                     object.restrictedActions[j] = options.enums === String ? $root.google.cloud.netapp.v1.RestrictedAction[message.restrictedActions[j]] === undefined ? message.restrictedActions[j] : $root.google.cloud.netapp.v1.RestrictedAction[message.restrictedActions[j]] : message.restrictedActions[j];
                             }
+                            if (message.largeCapacity != null && message.hasOwnProperty("largeCapacity"))
+                                object.largeCapacity = message.largeCapacity;
+                            if (message.multipleEndpoints != null && message.hasOwnProperty("multipleEndpoints"))
+                                object.multipleEndpoints = message.multipleEndpoints;
                             if (message.tieringPolicy != null && message.hasOwnProperty("tieringPolicy")) {
                                 object.tieringPolicy = $root.google.cloud.netapp.v1.TieringPolicy.toObject(message.tieringPolicy, options);
                                 if (options.oneofs)
                                     object._tieringPolicy = "tieringPolicy";
                             }
+                            if (message.replicaZone != null && message.hasOwnProperty("replicaZone"))
+                                object.replicaZone = message.replicaZone;
+                            if (message.zone != null && message.hasOwnProperty("zone"))
+                                object.zone = message.zone;
                             return object;
                         };
     

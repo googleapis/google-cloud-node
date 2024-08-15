@@ -5290,6 +5290,7 @@
                      * @interface IGcsData
                      * @property {string|null} [bucketName] GcsData bucketName
                      * @property {string|null} [path] GcsData path
+                     * @property {boolean|null} [managedFolderTransferEnabled] GcsData managedFolderTransferEnabled
                      */
     
                     /**
@@ -5324,6 +5325,14 @@
                     GcsData.prototype.path = "";
     
                     /**
+                     * GcsData managedFolderTransferEnabled.
+                     * @member {boolean} managedFolderTransferEnabled
+                     * @memberof google.storagetransfer.v1.GcsData
+                     * @instance
+                     */
+                    GcsData.prototype.managedFolderTransferEnabled = false;
+    
+                    /**
                      * Creates a new GcsData instance using the specified properties.
                      * @function create
                      * @memberof google.storagetransfer.v1.GcsData
@@ -5351,6 +5360,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucketName);
                         if (message.path != null && Object.hasOwnProperty.call(message, "path"))
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
+                        if (message.managedFolderTransferEnabled != null && Object.hasOwnProperty.call(message, "managedFolderTransferEnabled"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).bool(message.managedFolderTransferEnabled);
                         return writer;
                     };
     
@@ -5391,6 +5402,10 @@
                                 }
                             case 3: {
                                     message.path = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.managedFolderTransferEnabled = reader.bool();
                                     break;
                                 }
                             default:
@@ -5434,6 +5449,9 @@
                         if (message.path != null && message.hasOwnProperty("path"))
                             if (!$util.isString(message.path))
                                 return "path: string expected";
+                        if (message.managedFolderTransferEnabled != null && message.hasOwnProperty("managedFolderTransferEnabled"))
+                            if (typeof message.managedFolderTransferEnabled !== "boolean")
+                                return "managedFolderTransferEnabled: boolean expected";
                         return null;
                     };
     
@@ -5453,6 +5471,8 @@
                             message.bucketName = String(object.bucketName);
                         if (object.path != null)
                             message.path = String(object.path);
+                        if (object.managedFolderTransferEnabled != null)
+                            message.managedFolderTransferEnabled = Boolean(object.managedFolderTransferEnabled);
                         return message;
                     };
     
@@ -5472,11 +5492,14 @@
                         if (options.defaults) {
                             object.bucketName = "";
                             object.path = "";
+                            object.managedFolderTransferEnabled = false;
                         }
                         if (message.bucketName != null && message.hasOwnProperty("bucketName"))
                             object.bucketName = message.bucketName;
                         if (message.path != null && message.hasOwnProperty("path"))
                             object.path = message.path;
+                        if (message.managedFolderTransferEnabled != null && message.hasOwnProperty("managedFolderTransferEnabled"))
+                            object.managedFolderTransferEnabled = message.managedFolderTransferEnabled;
                         return object;
                     };
     
@@ -5519,7 +5542,9 @@
                      * @property {google.storagetransfer.v1.IAwsAccessKey|null} [awsAccessKey] AwsS3Data awsAccessKey
                      * @property {string|null} [path] AwsS3Data path
                      * @property {string|null} [roleArn] AwsS3Data roleArn
+                     * @property {string|null} [cloudfrontDomain] AwsS3Data cloudfrontDomain
                      * @property {string|null} [credentialsSecret] AwsS3Data credentialsSecret
+                     * @property {boolean|null} [managedPrivateNetwork] AwsS3Data managedPrivateNetwork
                      */
     
                     /**
@@ -5570,12 +5595,42 @@
                     AwsS3Data.prototype.roleArn = "";
     
                     /**
+                     * AwsS3Data cloudfrontDomain.
+                     * @member {string} cloudfrontDomain
+                     * @memberof google.storagetransfer.v1.AwsS3Data
+                     * @instance
+                     */
+                    AwsS3Data.prototype.cloudfrontDomain = "";
+    
+                    /**
                      * AwsS3Data credentialsSecret.
                      * @member {string} credentialsSecret
                      * @memberof google.storagetransfer.v1.AwsS3Data
                      * @instance
                      */
                     AwsS3Data.prototype.credentialsSecret = "";
+    
+                    /**
+                     * AwsS3Data managedPrivateNetwork.
+                     * @member {boolean|null|undefined} managedPrivateNetwork
+                     * @memberof google.storagetransfer.v1.AwsS3Data
+                     * @instance
+                     */
+                    AwsS3Data.prototype.managedPrivateNetwork = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AwsS3Data privateNetwork.
+                     * @member {"managedPrivateNetwork"|undefined} privateNetwork
+                     * @memberof google.storagetransfer.v1.AwsS3Data
+                     * @instance
+                     */
+                    Object.defineProperty(AwsS3Data.prototype, "privateNetwork", {
+                        get: $util.oneOfGetter($oneOfFields = ["managedPrivateNetwork"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
     
                     /**
                      * Creates a new AwsS3Data instance using the specified properties.
@@ -5609,8 +5664,12 @@
                             writer.uint32(/* id 3, wireType 2 =*/26).string(message.path);
                         if (message.roleArn != null && Object.hasOwnProperty.call(message, "roleArn"))
                             writer.uint32(/* id 4, wireType 2 =*/34).string(message.roleArn);
+                        if (message.cloudfrontDomain != null && Object.hasOwnProperty.call(message, "cloudfrontDomain"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.cloudfrontDomain);
                         if (message.credentialsSecret != null && Object.hasOwnProperty.call(message, "credentialsSecret"))
                             writer.uint32(/* id 7, wireType 2 =*/58).string(message.credentialsSecret);
+                        if (message.managedPrivateNetwork != null && Object.hasOwnProperty.call(message, "managedPrivateNetwork"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).bool(message.managedPrivateNetwork);
                         return writer;
                     };
     
@@ -5661,8 +5720,16 @@
                                     message.roleArn = reader.string();
                                     break;
                                 }
+                            case 6: {
+                                    message.cloudfrontDomain = reader.string();
+                                    break;
+                                }
                             case 7: {
                                     message.credentialsSecret = reader.string();
+                                    break;
+                                }
+                            case 8: {
+                                    message.managedPrivateNetwork = reader.bool();
                                     break;
                                 }
                             default:
@@ -5700,6 +5767,7 @@
                     AwsS3Data.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.bucketName != null && message.hasOwnProperty("bucketName"))
                             if (!$util.isString(message.bucketName))
                                 return "bucketName: string expected";
@@ -5714,9 +5782,17 @@
                         if (message.roleArn != null && message.hasOwnProperty("roleArn"))
                             if (!$util.isString(message.roleArn))
                                 return "roleArn: string expected";
+                        if (message.cloudfrontDomain != null && message.hasOwnProperty("cloudfrontDomain"))
+                            if (!$util.isString(message.cloudfrontDomain))
+                                return "cloudfrontDomain: string expected";
                         if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
                             if (!$util.isString(message.credentialsSecret))
                                 return "credentialsSecret: string expected";
+                        if (message.managedPrivateNetwork != null && message.hasOwnProperty("managedPrivateNetwork")) {
+                            properties.privateNetwork = 1;
+                            if (typeof message.managedPrivateNetwork !== "boolean")
+                                return "managedPrivateNetwork: boolean expected";
+                        }
                         return null;
                     };
     
@@ -5743,8 +5819,12 @@
                             message.path = String(object.path);
                         if (object.roleArn != null)
                             message.roleArn = String(object.roleArn);
+                        if (object.cloudfrontDomain != null)
+                            message.cloudfrontDomain = String(object.cloudfrontDomain);
                         if (object.credentialsSecret != null)
                             message.credentialsSecret = String(object.credentialsSecret);
+                        if (object.managedPrivateNetwork != null)
+                            message.managedPrivateNetwork = Boolean(object.managedPrivateNetwork);
                         return message;
                     };
     
@@ -5766,6 +5846,7 @@
                             object.awsAccessKey = null;
                             object.path = "";
                             object.roleArn = "";
+                            object.cloudfrontDomain = "";
                             object.credentialsSecret = "";
                         }
                         if (message.bucketName != null && message.hasOwnProperty("bucketName"))
@@ -5776,8 +5857,15 @@
                             object.path = message.path;
                         if (message.roleArn != null && message.hasOwnProperty("roleArn"))
                             object.roleArn = message.roleArn;
+                        if (message.cloudfrontDomain != null && message.hasOwnProperty("cloudfrontDomain"))
+                            object.cloudfrontDomain = message.cloudfrontDomain;
                         if (message.credentialsSecret != null && message.hasOwnProperty("credentialsSecret"))
                             object.credentialsSecret = message.credentialsSecret;
+                        if (message.managedPrivateNetwork != null && message.hasOwnProperty("managedPrivateNetwork")) {
+                            object.managedPrivateNetwork = message.managedPrivateNetwork;
+                            if (options.oneofs)
+                                object.privateNetwork = "managedPrivateNetwork";
+                        }
                         return object;
                     };
     
@@ -6515,6 +6603,209 @@
                     };
     
                     return PosixFilesystem;
+                })();
+    
+                v1.HdfsData = (function() {
+    
+                    /**
+                     * Properties of a HdfsData.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IHdfsData
+                     * @property {string|null} [path] HdfsData path
+                     */
+    
+                    /**
+                     * Constructs a new HdfsData.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a HdfsData.
+                     * @implements IHdfsData
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IHdfsData=} [properties] Properties to set
+                     */
+                    function HdfsData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * HdfsData path.
+                     * @member {string} path
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @instance
+                     */
+                    HdfsData.prototype.path = "";
+    
+                    /**
+                     * Creates a new HdfsData instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {google.storagetransfer.v1.IHdfsData=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.HdfsData} HdfsData instance
+                     */
+                    HdfsData.create = function create(properties) {
+                        return new HdfsData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified HdfsData message. Does not implicitly {@link google.storagetransfer.v1.HdfsData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {google.storagetransfer.v1.IHdfsData} message HdfsData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    HdfsData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.path);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified HdfsData message, length delimited. Does not implicitly {@link google.storagetransfer.v1.HdfsData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {google.storagetransfer.v1.IHdfsData} message HdfsData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    HdfsData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a HdfsData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.HdfsData} HdfsData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    HdfsData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.HdfsData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.path = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a HdfsData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.HdfsData} HdfsData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    HdfsData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a HdfsData message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    HdfsData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.path != null && message.hasOwnProperty("path"))
+                            if (!$util.isString(message.path))
+                                return "path: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a HdfsData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.HdfsData} HdfsData
+                     */
+                    HdfsData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.HdfsData)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.HdfsData();
+                        if (object.path != null)
+                            message.path = String(object.path);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a HdfsData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {google.storagetransfer.v1.HdfsData} message HdfsData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    HdfsData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.path = "";
+                        if (message.path != null && message.hasOwnProperty("path"))
+                            object.path = message.path;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this HdfsData to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    HdfsData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for HdfsData
+                     * @function getTypeUrl
+                     * @memberof google.storagetransfer.v1.HdfsData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    HdfsData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.storagetransfer.v1.HdfsData";
+                    };
+    
+                    return HdfsData;
                 })();
     
                 v1.AwsS3CompatibleData = (function() {
@@ -8175,6 +8466,7 @@
                      * @property {google.storagetransfer.v1.IPosixFilesystem|null} [posixDataSource] TransferSpec posixDataSource
                      * @property {google.storagetransfer.v1.IAzureBlobStorageData|null} [azureBlobStorageDataSource] TransferSpec azureBlobStorageDataSource
                      * @property {google.storagetransfer.v1.IAwsS3CompatibleData|null} [awsS3CompatibleDataSource] TransferSpec awsS3CompatibleDataSource
+                     * @property {google.storagetransfer.v1.IHdfsData|null} [hdfsDataSource] TransferSpec hdfsDataSource
                      * @property {google.storagetransfer.v1.IGcsData|null} [gcsIntermediateDataLocation] TransferSpec gcsIntermediateDataLocation
                      * @property {google.storagetransfer.v1.IObjectConditions|null} [objectConditions] TransferSpec objectConditions
                      * @property {google.storagetransfer.v1.ITransferOptions|null} [transferOptions] TransferSpec transferOptions
@@ -8263,6 +8555,14 @@
                     TransferSpec.prototype.awsS3CompatibleDataSource = null;
     
                     /**
+                     * TransferSpec hdfsDataSource.
+                     * @member {google.storagetransfer.v1.IHdfsData|null|undefined} hdfsDataSource
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.hdfsDataSource = null;
+    
+                    /**
                      * TransferSpec gcsIntermediateDataLocation.
                      * @member {google.storagetransfer.v1.IGcsData|null|undefined} gcsIntermediateDataLocation
                      * @memberof google.storagetransfer.v1.TransferSpec
@@ -8326,12 +8626,12 @@
     
                     /**
                      * TransferSpec dataSource.
-                     * @member {"gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|"awsS3CompatibleDataSource"|undefined} dataSource
+                     * @member {"gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|"awsS3CompatibleDataSource"|"hdfsDataSource"|undefined} dataSource
                      * @memberof google.storagetransfer.v1.TransferSpec
                      * @instance
                      */
                     Object.defineProperty(TransferSpec.prototype, "dataSource", {
-                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource", "awsS3DataSource", "httpDataSource", "posixDataSource", "azureBlobStorageDataSource", "awsS3CompatibleDataSource"]),
+                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource", "awsS3DataSource", "httpDataSource", "posixDataSource", "azureBlobStorageDataSource", "awsS3CompatibleDataSource", "hdfsDataSource"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -8398,6 +8698,8 @@
                             writer.uint32(/* id 18, wireType 2 =*/146).string(message.sinkAgentPoolName);
                         if (message.awsS3CompatibleDataSource != null && Object.hasOwnProperty.call(message, "awsS3CompatibleDataSource"))
                             $root.google.storagetransfer.v1.AwsS3CompatibleData.encode(message.awsS3CompatibleDataSource, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
+                        if (message.hdfsDataSource != null && Object.hasOwnProperty.call(message, "hdfsDataSource"))
+                            $root.google.storagetransfer.v1.HdfsData.encode(message.hdfsDataSource, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                         return writer;
                     };
     
@@ -8462,6 +8764,10 @@
                                 }
                             case 19: {
                                     message.awsS3CompatibleDataSource = $root.google.storagetransfer.v1.AwsS3CompatibleData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 20: {
+                                    message.hdfsDataSource = $root.google.storagetransfer.v1.HdfsData.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 16: {
@@ -8600,6 +8906,16 @@
                                     return "awsS3CompatibleDataSource." + error;
                             }
                         }
+                        if (message.hdfsDataSource != null && message.hasOwnProperty("hdfsDataSource")) {
+                            if (properties.dataSource === 1)
+                                return "dataSource: multiple values";
+                            properties.dataSource = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.HdfsData.verify(message.hdfsDataSource);
+                                if (error)
+                                    return "hdfsDataSource." + error;
+                            }
+                        }
                         if (message.gcsIntermediateDataLocation != null && message.hasOwnProperty("gcsIntermediateDataLocation")) {
                             properties.intermediateDataLocation = 1;
                             {
@@ -8683,6 +8999,11 @@
                             if (typeof object.awsS3CompatibleDataSource !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.awsS3CompatibleDataSource: object expected");
                             message.awsS3CompatibleDataSource = $root.google.storagetransfer.v1.AwsS3CompatibleData.fromObject(object.awsS3CompatibleDataSource);
+                        }
+                        if (object.hdfsDataSource != null) {
+                            if (typeof object.hdfsDataSource !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferSpec.hdfsDataSource: object expected");
+                            message.hdfsDataSource = $root.google.storagetransfer.v1.HdfsData.fromObject(object.hdfsDataSource);
                         }
                         if (object.gcsIntermediateDataLocation != null) {
                             if (typeof object.gcsIntermediateDataLocation !== "object")
@@ -8785,6 +9106,11 @@
                             object.awsS3CompatibleDataSource = $root.google.storagetransfer.v1.AwsS3CompatibleData.toObject(message.awsS3CompatibleDataSource, options);
                             if (options.oneofs)
                                 object.dataSource = "awsS3CompatibleDataSource";
+                        }
+                        if (message.hdfsDataSource != null && message.hasOwnProperty("hdfsDataSource")) {
+                            object.hdfsDataSource = $root.google.storagetransfer.v1.HdfsData.toObject(message.hdfsDataSource, options);
+                            if (options.oneofs)
+                                object.dataSource = "hdfsDataSource";
                         }
                         return object;
                     };

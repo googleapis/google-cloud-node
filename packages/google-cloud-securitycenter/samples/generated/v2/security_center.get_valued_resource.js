@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. The name of this valued resource
    *  Valid format:
-   *  "organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}"
+   *  `organizations/{organization}/simulations/{simulation}/valuedResources/{valued_resource}`
    */
   // const name = 'abc123'
 

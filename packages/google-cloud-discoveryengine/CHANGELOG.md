@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.11.0...discoveryengine-v1.12.0) (2024-08-09)
+
+
+### Features
+
+* [discoveryengine] Update CompletionService ([#5574](https://github.com/googleapis/google-cloud-node/issues/5574)) ([384096f](https://github.com/googleapis/google-cloud-node/commit/384096fe3bbab56e9f708a2bc422f711cc1d8641))
+* [discoveryengine] Update SearchService ([#5578](https://github.com/googleapis/google-cloud-node/issues/5578)) ([af46d57](https://github.com/googleapis/google-cloud-node/commit/af46d5779f82d7a37c687e1364b8c653bb6369e9))
+
 ## [1.11.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.10.0...discoveryengine-v1.11.0) (2024-07-22)
 
 

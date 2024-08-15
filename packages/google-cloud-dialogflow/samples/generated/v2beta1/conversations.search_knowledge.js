@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(query, conversationProfile) {
+function main(parent, query, conversationProfile, sessionId) {
   // [START dialogflow_v2beta1_generated_Conversations_SearchKnowledge_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(query, conversationProfile) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The parent resource contains the conversation profile
+   *  Required. The parent resource contains the conversation profile
    *  Format: 'projects/<Project ID>' or `projects/<Project
    *  ID>/locations/<Location ID>`.
    */
@@ -45,7 +45,7 @@ function main(query, conversationProfile) {
    */
   // const conversationProfile = 'abc123'
   /**
-   *  The ID of the search session.
+   *  Required. The ID of the search session.
    *  The session_id can be combined with Dialogflow V3 Agent ID retrieved from
    *  conversation profile or on its own to identify a search session. The search
    *  history of the same session will impact the search result. It's up to the
@@ -55,13 +55,13 @@ function main(query, conversationProfile) {
    */
   // const sessionId = 'abc123'
   /**
-   *  The conversation (between human agent and end user) where the search
-   *  request is triggered. Format: `projects/<Project ID>/locations/<Location
-   *  ID>/conversations/<Conversation ID>`.
+   *  Optional. The conversation (between human agent and end user) where the
+   *  search request is triggered. Format: `projects/<Project
+   *  ID>/locations/<Location ID>/conversations/<Conversation ID>`.
    */
   // const conversation = 'abc123'
   /**
-   *  The name of the latest conversation message when the request is
+   *  Optional. The name of the latest conversation message when the request is
    *  triggered.
    *  Format: `projects/<Project ID>/locations/<Location
    *  ID>/conversations/<Conversation ID>/messages/<Message ID>`.
@@ -77,8 +77,10 @@ function main(query, conversationProfile) {
   async function callSearchKnowledge() {
     // Construct request
     const request = {
+      parent,
       query,
       conversationProfile,
+      sessionId,
     };
 
     // Run request

@@ -1114,6 +1114,10 @@
                 "nonComplianceReason": {
                   "type": "string",
                   "id": 3
+                },
+                "version": {
+                  "type": "grafeas.v1.ComplianceVersion",
+                  "id": 4
                 }
               }
             },
@@ -1448,6 +1452,10 @@
                 "sbomStatus": {
                   "type": "SBOMStatus",
                   "id": 9
+                },
+                "vulnerabilityAttestation": {
+                  "type": "VulnerabilityAttestation",
+                  "id": 10
                 }
               },
               "nested": {
@@ -1498,6 +1506,31 @@
                         "SBOM_STATE_UNSPECIFIED": 0,
                         "PENDING": 1,
                         "COMPLETE": 2
+                      }
+                    }
+                  }
+                },
+                "VulnerabilityAttestation": {
+                  "fields": {
+                    "lastAttemptTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 1
+                    },
+                    "state": {
+                      "type": "VulnerabilityAttestationState",
+                      "id": 2
+                    },
+                    "error": {
+                      "type": "string",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "VulnerabilityAttestationState": {
+                      "values": {
+                        "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED": 0,
+                        "SUCCESS": 1,
+                        "FAILURE": 2
                       }
                     }
                   }
@@ -1595,12 +1628,16 @@
                   "responseType": "google.protobuf.Empty",
                   "options": {
                     "(google.api.http).delete": "/v1/{name=projects/*/occurrences/*}",
+                    "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/occurrences/*}",
                     "(google.api.method_signature)": "name"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
-                        "delete": "/v1/{name=projects/*/occurrences/*}"
+                        "delete": "/v1/{name=projects/*/occurrences/*}",
+                        "additional_bindings": {
+                          "delete": "/v1/{name=projects/*/locations/*/occurrences/*}"
+                        }
                       }
                     },
                     {
@@ -1614,13 +1651,19 @@
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/occurrences",
                     "(google.api.http).body": "occurrence",
+                    "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/occurrences",
+                    "(google.api.http).additional_bindings.body": "occurrence",
                     "(google.api.method_signature)": "parent,occurrence"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
                         "post": "/v1/{parent=projects/*}/occurrences",
-                        "body": "occurrence"
+                        "body": "occurrence",
+                        "additional_bindings": {
+                          "post": "/v1/{parent=projects/*/locations/*}/occurrences",
+                          "body": "occurrence"
+                        }
                       }
                     },
                     {
@@ -1634,13 +1677,19 @@
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/occurrences:batchCreate",
                     "(google.api.http).body": "*",
+                    "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/occurrences:batchCreate",
+                    "(google.api.http).additional_bindings.body": "*",
                     "(google.api.method_signature)": "parent,occurrences"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
                         "post": "/v1/{parent=projects/*}/occurrences:batchCreate",
-                        "body": "*"
+                        "body": "*",
+                        "additional_bindings": {
+                          "post": "/v1/{parent=projects/*/locations/*}/occurrences:batchCreate",
+                          "body": "*"
+                        }
                       }
                     },
                     {
@@ -1654,13 +1703,19 @@
                   "options": {
                     "(google.api.http).patch": "/v1/{name=projects/*/occurrences/*}",
                     "(google.api.http).body": "occurrence",
+                    "(google.api.http).additional_bindings.patch": "/v1/{name=projects/*/locations/*/occurrences/*}",
+                    "(google.api.http).additional_bindings.body": "occurrence",
                     "(google.api.method_signature)": "name,occurrence,update_mask"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
                         "patch": "/v1/{name=projects/*/occurrences/*}",
-                        "body": "occurrence"
+                        "body": "occurrence",
+                        "additional_bindings": {
+                          "patch": "/v1/{name=projects/*/locations/*/occurrences/*}",
+                          "body": "occurrence"
+                        }
                       }
                     },
                     {
@@ -1739,12 +1794,16 @@
                   "responseType": "google.protobuf.Empty",
                   "options": {
                     "(google.api.http).delete": "/v1/{name=projects/*/notes/*}",
+                    "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/notes/*}",
                     "(google.api.method_signature)": "name"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
-                        "delete": "/v1/{name=projects/*/notes/*}"
+                        "delete": "/v1/{name=projects/*/notes/*}",
+                        "additional_bindings": {
+                          "delete": "/v1/{name=projects/*/locations/*/notes/*}"
+                        }
                       }
                     },
                     {
@@ -1758,13 +1817,19 @@
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/notes",
                     "(google.api.http).body": "note",
+                    "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/notes",
+                    "(google.api.http).additional_bindings.body": "note",
                     "(google.api.method_signature)": "parent,note_id,note"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
                         "post": "/v1/{parent=projects/*}/notes",
-                        "body": "note"
+                        "body": "note",
+                        "additional_bindings": {
+                          "post": "/v1/{parent=projects/*/locations/*}/notes",
+                          "body": "note"
+                        }
                       }
                     },
                     {
@@ -1778,13 +1843,19 @@
                   "options": {
                     "(google.api.http).post": "/v1/{parent=projects/*}/notes:batchCreate",
                     "(google.api.http).body": "*",
+                    "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/notes:batchCreate",
+                    "(google.api.http).additional_bindings.body": "*",
                     "(google.api.method_signature)": "parent,notes"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
                         "post": "/v1/{parent=projects/*}/notes:batchCreate",
-                        "body": "*"
+                        "body": "*",
+                        "additional_bindings": {
+                          "post": "/v1/{parent=projects/*/locations/*}/notes:batchCreate",
+                          "body": "*"
+                        }
                       }
                     },
                     {
@@ -1798,13 +1869,19 @@
                   "options": {
                     "(google.api.http).patch": "/v1/{name=projects/*/notes/*}",
                     "(google.api.http).body": "note",
+                    "(google.api.http).additional_bindings.patch": "/v1/{name=projects/*/locations/*/notes/*}",
+                    "(google.api.http).additional_bindings.body": "note",
                     "(google.api.method_signature)": "name,note,update_mask"
                   },
                   "parsedOptions": [
                     {
                       "(google.api.http)": {
                         "patch": "/v1/{name=projects/*/notes/*}",
-                        "body": "note"
+                        "body": "note",
+                        "additional_bindings": {
+                          "patch": "/v1/{name=projects/*/locations/*/notes/*}",
+                          "body": "note"
+                        }
                       }
                     },
                     {

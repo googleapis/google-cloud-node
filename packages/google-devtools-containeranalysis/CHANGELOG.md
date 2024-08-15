@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.5.0...containeranalysis-v5.6.0) (2024-08-09)
+
+
+### Features
+
+* [containeranalysis] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence` ([#5586](https://github.com/googleapis/google-cloud-node/issues/5586)) ([f60f2f9](https://github.com/googleapis/google-cloud-node/commit/f60f2f901ce9aa4e51237246f359a6acf7f3d5b1))
+
 ## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/containeranalysis-v5.4.0...containeranalysis-v5.5.0) (2024-05-21)
 
 

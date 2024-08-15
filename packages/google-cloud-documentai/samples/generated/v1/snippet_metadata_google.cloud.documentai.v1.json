@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-documentai",
-        "version": "8.8.0",
+        "version": "8.9.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 98,
+                    "end": 102,
                     "type": "FULL"
                 }
             ],
@@ -62,6 +62,10 @@
                     {
                         "name": "labels",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "imageless_mode",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.cloud.documentai.v1.ProcessResponse",

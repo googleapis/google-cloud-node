@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.7.0...dialogflow-v6.8.0) (2024-08-09)
+
+
+### Features
+
+* [dialogflow] Add Proactive Generative Knowledge Assist endpoints and types ([#5601](https://github.com/googleapis/google-cloud-node/issues/5601)) ([041f681](https://github.com/googleapis/google-cloud-node/commit/041f68140326c2cea686e73e5ed7025ce1ca897d))
+
 ## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.6.0...dialogflow-v6.7.0) (2024-05-21)
 
 

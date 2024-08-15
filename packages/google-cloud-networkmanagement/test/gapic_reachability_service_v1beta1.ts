@@ -2584,5 +2584,83 @@ describe('v1beta1.ReachabilityServiceClient', () => {
         );
       });
     });
+
+    describe('vpcFlowLogsConfig', () => {
+      const fakePath = '/rendered/path/vpcFlowLogsConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        vpc_flow_logs_config: 'vpcFlowLogsConfigValue',
+      };
+      const client =
+        new reachabilityserviceModule.v1beta1.ReachabilityServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.vpcFlowLogsConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.vpcFlowLogsConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('vpcFlowLogsConfigPath', () => {
+        const result = client.vpcFlowLogsConfigPath(
+          'projectValue',
+          'locationValue',
+          'vpcFlowLogsConfigValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.vpcFlowLogsConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromVpcFlowLogsConfigName', () => {
+        const result = client.matchProjectFromVpcFlowLogsConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.vpcFlowLogsConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromVpcFlowLogsConfigName', () => {
+        const result = client.matchLocationFromVpcFlowLogsConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.vpcFlowLogsConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchVpcFlowLogsConfigFromVpcFlowLogsConfigName', () => {
+        const result =
+          client.matchVpcFlowLogsConfigFromVpcFlowLogsConfigName(fakePath);
+        assert.strictEqual(result, 'vpcFlowLogsConfigValue');
+        assert(
+          (
+            client.pathTemplates.vpcFlowLogsConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });

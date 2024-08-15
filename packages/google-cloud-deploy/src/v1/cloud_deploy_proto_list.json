@@ -4,7 +4,6 @@
   "../../protos/google/cloud/deploy/v1/cloud_deploy.proto",
   "../../protos/google/cloud/deploy/v1/customtargettype_notification_payload.proto",
   "../../protos/google/cloud/deploy/v1/deliverypipeline_notification_payload.proto",
-  "../../protos/google/cloud/deploy/v1/deploypolicy_evaluation_payload.proto",
   "../../protos/google/cloud/deploy/v1/deploypolicy_notification_payload.proto",
   "../../protos/google/cloud/deploy/v1/jobrun_notification_payload.proto",
   "../../protos/google/cloud/deploy/v1/log_enums.proto",
