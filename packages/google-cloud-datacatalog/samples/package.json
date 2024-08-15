@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@google-cloud/bigquery": "^7.0.0",
-    "@google-cloud/datacatalog": "^4.4.0",
+    "@google-cloud/datacatalog": "^4.5.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

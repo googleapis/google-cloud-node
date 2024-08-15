@@ -2427,6 +2427,9 @@ export namespace google {
 
                 /** GcsData path */
                 path?: (string|null);
+
+                /** GcsData managedFolderTransferEnabled */
+                managedFolderTransferEnabled?: (boolean|null);
             }
 
             /** Represents a GcsData. */
@@ -2443,6 +2446,9 @@ export namespace google {
 
                 /** GcsData path. */
                 public path: string;
+
+                /** GcsData managedFolderTransferEnabled. */
+                public managedFolderTransferEnabled: boolean;
 
                 /**
                  * Creates a new GcsData instance using the specified properties.
@@ -2537,8 +2543,14 @@ export namespace google {
                 /** AwsS3Data roleArn */
                 roleArn?: (string|null);
 
+                /** AwsS3Data cloudfrontDomain */
+                cloudfrontDomain?: (string|null);
+
                 /** AwsS3Data credentialsSecret */
                 credentialsSecret?: (string|null);
+
+                /** AwsS3Data managedPrivateNetwork */
+                managedPrivateNetwork?: (boolean|null);
             }
 
             /** Represents an AwsS3Data. */
@@ -2562,8 +2574,17 @@ export namespace google {
                 /** AwsS3Data roleArn. */
                 public roleArn: string;
 
+                /** AwsS3Data cloudfrontDomain. */
+                public cloudfrontDomain: string;
+
                 /** AwsS3Data credentialsSecret. */
                 public credentialsSecret: string;
+
+                /** AwsS3Data managedPrivateNetwork. */
+                public managedPrivateNetwork?: (boolean|null);
+
+                /** AwsS3Data privateNetwork. */
+                public privateNetwork?: "managedPrivateNetwork";
 
                 /**
                  * Creates a new AwsS3Data instance using the specified properties.
@@ -2952,6 +2973,103 @@ export namespace google {
 
                 /**
                  * Gets the default type url for PosixFilesystem
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a HdfsData. */
+            interface IHdfsData {
+
+                /** HdfsData path */
+                path?: (string|null);
+            }
+
+            /** Represents a HdfsData. */
+            class HdfsData implements IHdfsData {
+
+                /**
+                 * Constructs a new HdfsData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IHdfsData);
+
+                /** HdfsData path. */
+                public path: string;
+
+                /**
+                 * Creates a new HdfsData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns HdfsData instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IHdfsData): google.storagetransfer.v1.HdfsData;
+
+                /**
+                 * Encodes the specified HdfsData message. Does not implicitly {@link google.storagetransfer.v1.HdfsData.verify|verify} messages.
+                 * @param message HdfsData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IHdfsData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified HdfsData message, length delimited. Does not implicitly {@link google.storagetransfer.v1.HdfsData.verify|verify} messages.
+                 * @param message HdfsData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IHdfsData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a HdfsData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns HdfsData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.HdfsData;
+
+                /**
+                 * Decodes a HdfsData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns HdfsData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.HdfsData;
+
+                /**
+                 * Verifies a HdfsData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a HdfsData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns HdfsData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.HdfsData;
+
+                /**
+                 * Creates a plain object from a HdfsData message. Also converts values to other types if specified.
+                 * @param message HdfsData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.HdfsData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this HdfsData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for HdfsData
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -3610,6 +3728,9 @@ export namespace google {
                 /** TransferSpec awsS3CompatibleDataSource */
                 awsS3CompatibleDataSource?: (google.storagetransfer.v1.IAwsS3CompatibleData|null);
 
+                /** TransferSpec hdfsDataSource */
+                hdfsDataSource?: (google.storagetransfer.v1.IHdfsData|null);
+
                 /** TransferSpec gcsIntermediateDataLocation */
                 gcsIntermediateDataLocation?: (google.storagetransfer.v1.IGcsData|null);
 
@@ -3662,6 +3783,9 @@ export namespace google {
                 /** TransferSpec awsS3CompatibleDataSource. */
                 public awsS3CompatibleDataSource?: (google.storagetransfer.v1.IAwsS3CompatibleData|null);
 
+                /** TransferSpec hdfsDataSource. */
+                public hdfsDataSource?: (google.storagetransfer.v1.IHdfsData|null);
+
                 /** TransferSpec gcsIntermediateDataLocation. */
                 public gcsIntermediateDataLocation?: (google.storagetransfer.v1.IGcsData|null);
 
@@ -3684,7 +3808,7 @@ export namespace google {
                 public dataSink?: ("gcsDataSink"|"posixDataSink");
 
                 /** TransferSpec dataSource. */
-                public dataSource?: ("gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|"awsS3CompatibleDataSource");
+                public dataSource?: ("gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|"awsS3CompatibleDataSource"|"hdfsDataSource");
 
                 /** TransferSpec intermediateDataLocation. */
                 public intermediateDataLocation?: "gcsIntermediateDataLocation";
