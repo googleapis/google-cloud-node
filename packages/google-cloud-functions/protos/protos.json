@@ -2197,6 +2197,14 @@
                         }
                       }
                     },
+                    "OperationType": {
+                      "values": {
+                        "OPERATIONTYPE_UNSPECIFIED": 0,
+                        "CREATE_FUNCTION": 1,
+                        "UPDATE_FUNCTION": 2,
+                        "DELETE_FUNCTION": 3
+                      }
+                    },
                     "Environment": {
                       "values": {
                         "ENVIRONMENT_UNSPECIFIED": 0,
@@ -2276,6 +2284,20 @@
                           "options": {
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2330,6 +2352,10 @@
                         "generation": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceUploadUrl": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -2379,7 +2405,8 @@
                         "source": {
                           "oneof": [
                             "storageSource",
-                            "repoSource"
+                            "repoSource",
+                            "gitUri"
                           ]
                         }
                       },
@@ -2391,6 +2418,10 @@
                         "repoSource": {
                           "type": "RepoSource",
                           "id": 2
+                        },
+                        "gitUri": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -2403,11 +2434,31 @@
                         "resolvedRepoSource": {
                           "type": "RepoSource",
                           "id": 2
+                        },
+                        "gitUri": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
                     "BuildConfig": {
+                      "oneofs": {
+                        "runtimeUpdatePolicy": {
+                          "oneof": [
+                            "automaticUpdatePolicy",
+                            "onDeployUpdatePolicy"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "automaticUpdatePolicy": {
+                          "type": "AutomaticUpdatePolicy",
+                          "id": 40
+                        },
+                        "onDeployUpdatePolicy": {
+                          "type": "OnDeployUpdatePolicy",
+                          "id": 41
+                        },
                         "build": {
                           "type": "string",
                           "id": 1,
@@ -2457,6 +2508,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 27
                         }
                       },
                       "nested": {
@@ -2558,6 +2613,13 @@
                         "securityLevel": {
                           "type": "SecurityLevel",
                           "id": 21
+                        },
+                        "binaryAuthorizationPolicy": {
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2695,6 +2757,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "eventarc.googleapis.com/Channel"
                           }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2740,6 +2809,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudfunctions.googleapis.com/Function"
+                          }
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -2856,6 +2932,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
+                        },
+                        "environment": {
+                          "type": "Environment",
+                          "id": 3
                         }
                       }
                     },
@@ -2938,6 +3018,14 @@
                             "environment": {
                               "type": "Environment",
                               "id": 4
+                            },
+                            "deprecationDate": {
+                              "type": "google.type.Date",
+                              "id": 6
+                            },
+                            "decommissionDate": {
+                              "type": "google.type.Date",
+                              "id": 7
                             }
                           }
                         },
@@ -2950,6 +3038,20 @@
                             "GA": 4,
                             "DEPRECATED": 5,
                             "DECOMMISSIONED": 6
+                          }
+                        }
+                      }
+                    },
+                    "AutomaticUpdatePolicy": {
+                      "fields": {}
+                    },
+                    "OnDeployUpdatePolicy": {
+                      "fields": {
+                        "runtimeVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -2992,6 +3094,14 @@
                           "rule": "repeated",
                           "type": "Stage",
                           "id": 9
+                        },
+                        "buildName": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "operationType": {
+                          "type": "OperationType",
+                          "id": 11
                         }
                       }
                     },
@@ -3243,6 +3353,14 @@
                         }
                       }
                     },
+                    "OperationType": {
+                      "values": {
+                        "OPERATIONTYPE_UNSPECIFIED": 0,
+                        "CREATE_FUNCTION": 1,
+                        "UPDATE_FUNCTION": 2,
+                        "DELETE_FUNCTION": 3
+                      }
+                    },
                     "Environment": {
                       "values": {
                         "ENVIRONMENT_UNSPECIFIED": 0,
@@ -3322,6 +3440,20 @@
                           "options": {
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3376,6 +3508,10 @@
                         "generation": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceUploadUrl": {
+                          "type": "string",
+                          "id": 4
                         }
                       }
                     },
@@ -3425,7 +3561,8 @@
                         "source": {
                           "oneof": [
                             "storageSource",
-                            "repoSource"
+                            "repoSource",
+                            "gitUri"
                           ]
                         }
                       },
@@ -3437,6 +3574,10 @@
                         "repoSource": {
                           "type": "RepoSource",
                           "id": 2
+                        },
+                        "gitUri": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -3449,11 +3590,31 @@
                         "resolvedRepoSource": {
                           "type": "RepoSource",
                           "id": 2
+                        },
+                        "gitUri": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
                     "BuildConfig": {
+                      "oneofs": {
+                        "runtimeUpdatePolicy": {
+                          "oneof": [
+                            "automaticUpdatePolicy",
+                            "onDeployUpdatePolicy"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "automaticUpdatePolicy": {
+                          "type": "AutomaticUpdatePolicy",
+                          "id": 40
+                        },
+                        "onDeployUpdatePolicy": {
+                          "type": "OnDeployUpdatePolicy",
+                          "id": 41
+                        },
                         "build": {
                           "type": "string",
                           "id": 1,
@@ -3503,6 +3664,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "artifactregistry.googleapis.com/Repository"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 27
                         }
                       },
                       "nested": {
@@ -3604,6 +3769,13 @@
                         "securityLevel": {
                           "type": "SecurityLevel",
                           "id": 21
+                        },
+                        "binaryAuthorizationPolicy": {
+                          "type": "string",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3741,6 +3913,13 @@
                             "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "eventarc.googleapis.com/Channel"
                           }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3786,6 +3965,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudfunctions.googleapis.com/Function"
+                          }
+                        },
+                        "revision": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3902,6 +4088,10 @@
                           "options": {
                             "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
+                        },
+                        "environment": {
+                          "type": "Environment",
+                          "id": 3
                         }
                       }
                     },
@@ -3984,6 +4174,14 @@
                             "environment": {
                               "type": "Environment",
                               "id": 4
+                            },
+                            "deprecationDate": {
+                              "type": "google.type.Date",
+                              "id": 6
+                            },
+                            "decommissionDate": {
+                              "type": "google.type.Date",
+                              "id": 7
                             }
                           }
                         },
@@ -3996,6 +4194,20 @@
                             "GA": 4,
                             "DEPRECATED": 5,
                             "DECOMMISSIONED": 6
+                          }
+                        }
+                      }
+                    },
+                    "AutomaticUpdatePolicy": {
+                      "fields": {}
+                    },
+                    "OnDeployUpdatePolicy": {
+                      "fields": {
+                        "runtimeVersion": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -4038,6 +4250,14 @@
                           "rule": "repeated",
                           "type": "Stage",
                           "id": 9
+                        },
+                        "buildName": {
+                          "type": "string",
+                          "id": 13
+                        },
+                        "operationType": {
+                          "type": "OperationType",
+                          "id": 11
                         }
                       }
                     },

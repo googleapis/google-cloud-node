@@ -597,6 +597,10 @@ export class EvaluationServiceClient {
    * @param {google.cloud.aiplatform.v1beta1.QuestionAnsweringCorrectnessInput} request.questionAnsweringCorrectnessInput
    *   Input for question answering correctness
    *   metric.
+   * @param {google.cloud.aiplatform.v1beta1.PointwiseMetricInput} request.pointwiseMetricInput
+   *   Input for pointwise metric.
+   * @param {google.cloud.aiplatform.v1beta1.PairwiseMetricInput} request.pairwiseMetricInput
+   *   Input for pairwise metric.
    * @param {google.cloud.aiplatform.v1beta1.ToolCallValidInput} request.toolCallValidInput
    *   Tool call metric instances.
    *   Input for tool call valid metric.

@@ -1138,9 +1138,14 @@ export class PredictionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
-   *   Required. The name of the publisher model requested to serve the
-   *   prediction. Format:
+   *   Required. The fully qualified name of the publisher model or tuned model
+   *   endpoint to use.
+   *
+   *   Publisher model format:
    *   `projects/{project}/locations/{location}/publishers/* /models/*`
+   *
+   *   Tuned model endpoint format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
@@ -1410,9 +1415,14 @@ export class PredictionServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.model
-   *   Required. The name of the publisher model requested to serve the
-   *   prediction. Format:
+   *   Required. The fully qualified name of the publisher model or tuned model
+   *   endpoint to use.
+   *
+   *   Publisher model format:
    *   `projects/{project}/locations/{location}/publishers/* /models/*`
+   *
+   *   Tuned model endpoint format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *

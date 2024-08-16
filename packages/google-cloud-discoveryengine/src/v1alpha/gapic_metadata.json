@@ -96,6 +96,16 @@
               "methods": [
                 "purgeSuggestionDenyListEntries"
               ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
+              ]
             }
           }
         },
@@ -115,6 +125,16 @@
             "PurgeSuggestionDenyListEntries": {
               "methods": [
                 "purgeSuggestionDenyListEntries"
+              ]
+            },
+            "ImportCompletionSuggestions": {
+              "methods": [
+                "importCompletionSuggestions"
+              ]
+            },
+            "PurgeCompletionSuggestions": {
+              "methods": [
+                "purgeCompletionSuggestions"
               ]
             }
           }
@@ -1166,6 +1186,11 @@
                 "getTargetSite"
               ]
             },
+            "GetUriPatternDocumentData": {
+              "methods": [
+                "getUriPatternDocumentData"
+              ]
+            },
             "CreateTargetSite": {
               "methods": [
                 "createTargetSite"
@@ -1204,6 +1229,11 @@
             "BatchVerifyTargetSites": {
               "methods": [
                 "batchVerifyTargetSites"
+              ]
+            },
+            "SetUriPatternDocumentData": {
+              "methods": [
+                "setUriPatternDocumentData"
               ]
             },
             "ListTargetSites": {
@@ -1235,6 +1265,11 @@
                 "getTargetSite"
               ]
             },
+            "GetUriPatternDocumentData": {
+              "methods": [
+                "getUriPatternDocumentData"
+              ]
+            },
             "CreateTargetSite": {
               "methods": [
                 "createTargetSite"
@@ -1273,6 +1308,11 @@
             "BatchVerifyTargetSites": {
               "methods": [
                 "batchVerifyTargetSites"
+              ]
+            },
+            "SetUriPatternDocumentData": {
+              "methods": [
+                "setUriPatternDocumentData"
               ]
             },
             "ListTargetSites": {

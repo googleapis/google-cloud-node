@@ -601,10 +601,21 @@
                     "path": {
                       "type": "string",
                       "id": 3
+                    },
+                    "managedFolderTransferEnabled": {
+                      "type": "bool",
+                      "id": 4
                     }
                   }
                 },
                 "AwsS3Data": {
+                  "oneofs": {
+                    "privateNetwork": {
+                      "oneof": [
+                        "managedPrivateNetwork"
+                      ]
+                    }
+                  },
                   "fields": {
                     "bucketName": {
                       "type": "string",
@@ -628,12 +639,23 @@
                       "type": "string",
                       "id": 4
                     },
+                    "cloudfrontDomain": {
+                      "type": "string",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
                     "credentialsSecret": {
                       "type": "string",
                       "id": 7,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "managedPrivateNetwork": {
+                      "type": "bool",
+                      "id": 8
                     }
                   }
                 },
@@ -687,6 +709,14 @@
                 "PosixFilesystem": {
                   "fields": {
                     "rootDirectory": {
+                      "type": "string",
+                      "id": 1
+                    }
+                  }
+                },
+                "HdfsData": {
+                  "fields": {
+                    "path": {
                       "type": "string",
                       "id": 1
                     }
@@ -876,7 +906,8 @@
                         "httpDataSource",
                         "posixDataSource",
                         "azureBlobStorageDataSource",
-                        "awsS3CompatibleDataSource"
+                        "awsS3CompatibleDataSource",
+                        "hdfsDataSource"
                       ]
                     },
                     "intermediateDataLocation": {
@@ -917,6 +948,10 @@
                     "awsS3CompatibleDataSource": {
                       "type": "AwsS3CompatibleData",
                       "id": 19
+                    },
+                    "hdfsDataSource": {
+                      "type": "HdfsData",
+                      "id": 20
                     },
                     "gcsIntermediateDataLocation": {
                       "type": "GcsData",

@@ -49,6 +49,13 @@ function main(parent) {
    *  Key/KeyRing/Project/Organization (least access preferred).
    */
   // const kmsKeyName = 'abc123'
+  /**
+   *  The function environment the generated upload url will be used for.
+   *  The upload url for 2nd Gen functions can also be used for 1st gen
+   *  functions, but not vice versa. If not specified, 2nd generation-style
+   *  upload URLs are generated.
+   */
+  // const environment = {}
 
   // Imports the Functions library
   const {FunctionServiceClient} = require('@google-cloud/functions').v2alpha;
