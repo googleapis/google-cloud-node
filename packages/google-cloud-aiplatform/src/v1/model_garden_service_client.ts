@@ -545,6 +545,8 @@ export class ModelGardenServiceClient {
    * @param {boolean} [request.isHuggingFaceModel]
    *   Optional. Boolean indicates whether the requested model is a Hugging Face
    *   model.
+   * @param {string} [request.huggingFaceToken]
+   *   Optional. Token used to access Hugging Face gated models.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
