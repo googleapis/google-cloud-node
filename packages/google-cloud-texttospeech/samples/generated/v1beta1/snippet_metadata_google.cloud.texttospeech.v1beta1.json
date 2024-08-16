@@ -104,6 +104,50 @@
             }
         },
         {
+            "regionTag": "texttospeech_v1beta1_generated_TextToSpeech_StreamingSynthesize_async",
+            "title": "TextToSpeech streamingSynthesize Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs bidirectional streaming speech synthesis: receive audio while sending text.",
+            "canonical": true,
+            "file": "text_to_speech.streaming_synthesize.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamingSynthesize",
+                "fullName": "google.cloud.texttospeech.v1beta1.TextToSpeech.StreamingSynthesize",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "streaming_config",
+                        "type": ".google.cloud.texttospeech.v1beta1.StreamingSynthesizeConfig"
+                    },
+                    {
+                        "name": "input",
+                        "type": ".google.cloud.texttospeech.v1beta1.StreamingSynthesisInput"
+                    }
+                ],
+                "resultType": ".google.cloud.texttospeech.v1beta1.StreamingSynthesizeResponse",
+                "client": {
+                    "shortName": "TextToSpeechClient",
+                    "fullName": "google.cloud.texttospeech.v1beta1.TextToSpeechClient"
+                },
+                "method": {
+                    "shortName": "StreamingSynthesize",
+                    "fullName": "google.cloud.texttospeech.v1beta1.TextToSpeech.StreamingSynthesize",
+                    "service": {
+                        "shortName": "TextToSpeech",
+                        "fullName": "google.cloud.texttospeech.v1beta1.TextToSpeech"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "texttospeech_v1beta1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_async",
             "title": "TextToSpeech synthesizeLongAudio Sample",
             "origin": "API_DEFINITION",
