@@ -5399,6 +5399,9 @@ export namespace google {
                     /** Schema items */
                     items?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
+                    /** Schema maxItems */
+                    maxItems?: (number|Long|string|null);
+
                     /** Schema properties */
                     properties?: ({ [k: string]: google.ai.generativelanguage.v1beta.ISchema }|null);
 
@@ -5432,6 +5435,9 @@ export namespace google {
 
                     /** Schema items. */
                     public items?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
+                    /** Schema maxItems. */
+                    public maxItems: (number|Long|string);
 
                     /** Schema properties. */
                     public properties: { [k: string]: google.ai.generativelanguage.v1beta.ISchema };
@@ -9039,7 +9045,9 @@ export namespace google {
                         enum BlockReason {
                             BLOCK_REASON_UNSPECIFIED = 0,
                             SAFETY = 1,
-                            OTHER = 2
+                            OTHER = 2,
+                            BLOCKLIST = 3,
+                            PROHIBITED_CONTENT = 4
                         }
                     }
 
@@ -9304,7 +9312,12 @@ export namespace google {
                         MAX_TOKENS = 2,
                         SAFETY = 3,
                         RECITATION = 4,
-                        OTHER = 5
+                        LANGUAGE = 6,
+                        OTHER = 5,
+                        BLOCKLIST = 7,
+                        PROHIBITED_CONTENT = 8,
+                        SPII = 9,
+                        MALFORMED_FUNCTION_CALL = 10
                     }
                 }
 

@@ -415,13 +415,13 @@ export class GenerativeServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Generates a response from the model given an input
-   * `GenerateContentRequest`.
-   *
-   * Input capabilities differ between models, including tuned models. See the
-   * [model guide](https://ai.google.dev/models/gemini) and
-   * [tuning guide](https://ai.google.dev/docs/model_tuning_guidance) for
-   * details.
+   * Generates a model response given an input `GenerateContentRequest`.
+   * Refer to the [text generation
+   * guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed
+   * usage information. Input capabilities differ between models, including
+   * tuned models. Refer to the [model
+   * guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning
+   * guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -430,23 +430,32 @@ export class GenerativeServiceClient {
    *
    *   Format: `name=models/{model}`.
    * @param {google.ai.generativelanguage.v1beta.Content} [request.systemInstruction]
-   *   Optional. Developer set system instruction. Currently, text only.
+   *   Optional. Developer set [system
+   *   instruction(s)](https://ai.google.dev/gemini-api/docs/system-instructions).
+   *   Currently, text only.
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
-   *   For single-turn queries, this is a single instance. For multi-turn queries,
-   *   this is a repeated field that contains conversation history + latest
-   *   request.
+   *   For single-turn queries, this is a single instance. For multi-turn queries
+   *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+   *   this is a repeated field that contains the conversation history and the
+   *   latest request.
    * @param {number[]} [request.tools]
-   *   Optional. A list of `Tools` the model may use to generate the next
+   *   Optional. A list of `Tools` the `Model` may use to generate the next
    *   response.
    *
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
-   *   knowledge and scope of the model. The only supported tool is currently
-   *   `Function`.
+   *   knowledge and scope of the `Model`. Supported `Tool`s are `Function` and
+   *   `code_execution`. Refer to the [Function
+   *   calling](https://ai.google.dev/gemini-api/docs/function-calling) and the
+   *   [Code execution](https://ai.google.dev/gemini-api/docs/code-execution)
+   *   guides to learn more.
    * @param {google.ai.generativelanguage.v1beta.ToolConfig} [request.toolConfig]
-   *   Optional. Tool configuration for any `Tool` specified in the request.
+   *   Optional. Tool configuration for any `Tool` specified in the request. Refer
+   *   to the [Function calling
+   *   guide](https://ai.google.dev/gemini-api/docs/function-calling#function_calling_mode)
+   *   for a usage example.
    * @param {number[]} [request.safetySettings]
    *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *   content.
@@ -460,14 +469,17 @@ export class GenerativeServiceClient {
    *   `SafetyCategory` provided in the list, the API will use the default safety
    *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *   HARM_CATEGORY_HARASSMENT are supported.
+   *   HARM_CATEGORY_HARASSMENT are supported. Refer to the
+   *   [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+   *   for detailed information on available safety settings. Also refer to the
+   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *   learn how to incorporate safety considerations in your AI applications.
    * @param {google.ai.generativelanguage.v1beta.GenerationConfig} [request.generationConfig]
    *   Optional. Configuration options for model generation and outputs.
    * @param {string} [request.cachedContent]
-   *   Optional. The name of the cached content used as context to serve the
-   *   prediction. Note: only used in explicit caching, where users can have
-   *   control over caching (e.g. what content to cache) and enjoy guaranteed cost
-   *   savings. Format: `cachedContents/{cachedContent}`
+   *   Optional. The name of the content
+   *   [cached](https://ai.google.dev/gemini-api/docs/caching) to use as context
+   *   to serve the prediction. Format: `cachedContents/{cachedContent}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -574,12 +586,12 @@ export class GenerativeServiceClient {
    *
    *   Format: `model=models/{model}`.
    * @param {number[]} request.contents
-   *   Required. The content of the current conversation with the model. For
+   *   Required. The content of the current conversation with the `Model`. For
    *   single-turn queries, this is a single question to answer. For multi-turn
    *   queries, this is a repeated field that contains conversation history and
    *   the last `Content` in the list containing the question.
    *
-   *   Note: GenerateAnswer currently only supports queries in English.
+   *   Note: `GenerateAnswer` only supports queries in English.
    * @param {google.ai.generativelanguage.v1beta.GenerateAnswerRequest.AnswerStyle} request.answerStyle
    *   Required. Style in which answers should be returned.
    * @param {number[]} [request.safetySettings]
@@ -596,6 +608,11 @@ export class GenerativeServiceClient {
    *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
    *   HARM_CATEGORY_HARASSMENT are supported.
+   *   Refer to the
+   *   [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+   *   for detailed information on available safety settings. Also refer to the
+   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *   learn how to incorporate safety considerations in your AI applications.
    * @param {number} [request.temperature]
    *   Optional. Controls the randomness of the output.
    *
@@ -694,7 +711,9 @@ export class GenerativeServiceClient {
     return this.innerApiCalls.generateAnswer(request, options, callback);
   }
   /**
-   * Generates an embedding from the model given an input `Content`.
+   * Generates a text embedding vector from the input `Content` using the
+   * specified [Gemini Embedding
+   * model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -720,8 +739,8 @@ export class GenerativeServiceClient {
    * @param {number} [request.outputDimensionality]
    *   Optional. Optional reduced dimension for the output embedding. If set,
    *   excessive values in the output embedding are truncated from the end.
-   *   Supported by newer models since 2024, and the earlier model
-   *   (`models/embedding-001`) cannot specify this value.
+   *   Supported by newer models since 2024 only. You cannot set this value if
+   *   using the earlier model (`models/embedding-001`).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -812,8 +831,9 @@ export class GenerativeServiceClient {
     return this.innerApiCalls.embedContent(request, options, callback);
   }
   /**
-   * Generates multiple embeddings from the model given input text in a
-   * synchronous call.
+   * Generates multiple embedding vectors from the input `Content` which
+   * consists of a batch of strings represented as `EmbedContentRequest`
+   * objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -917,7 +937,9 @@ export class GenerativeServiceClient {
     return this.innerApiCalls.batchEmbedContents(request, options, callback);
   }
   /**
-   * Runs a model's tokenizer on input content and returns the token count.
+   * Runs a model's tokenizer on input `Content` and returns the token count.
+   * Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens)
+   * to learn more about tokens.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -932,8 +954,14 @@ export class GenerativeServiceClient {
    *   Optional. The input given to the model as a prompt. This field is ignored
    *   when `generate_content_request` is set.
    * @param {google.ai.generativelanguage.v1beta.GenerateContentRequest} [request.generateContentRequest]
-   *   Optional. The overall input given to the model. CountTokens will count
-   *   prompt, function calling, etc.
+   *   Optional. The overall input given to the `Model`. This includes the prompt
+   *   as well as other model steering information like [system
+   *   instructions](https://ai.google.dev/gemini-api/docs/system-instructions),
+   *   and/or function declarations for [function
+   *   calling](https://ai.google.dev/gemini-api/docs/function-calling).
+   *   `Model`s/`Content`s and `generate_content_request`s are mutually
+   *   exclusive. You can either send `Model` + `Content`s or a
+   *   `generate_content_request`, but never both.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1025,8 +1053,9 @@ export class GenerativeServiceClient {
   }
 
   /**
-   * Generates a streamed response from the model given an input
-   * `GenerateContentRequest`.
+   * Generates a [streamed
+   * response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream)
+   * from the model given an input `GenerateContentRequest`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1035,23 +1064,32 @@ export class GenerativeServiceClient {
    *
    *   Format: `name=models/{model}`.
    * @param {google.ai.generativelanguage.v1beta.Content} [request.systemInstruction]
-   *   Optional. Developer set system instruction. Currently, text only.
+   *   Optional. Developer set [system
+   *   instruction(s)](https://ai.google.dev/gemini-api/docs/system-instructions).
+   *   Currently, text only.
    * @param {number[]} request.contents
    *   Required. The content of the current conversation with the model.
    *
-   *   For single-turn queries, this is a single instance. For multi-turn queries,
-   *   this is a repeated field that contains conversation history + latest
-   *   request.
+   *   For single-turn queries, this is a single instance. For multi-turn queries
+   *   like [chat](https://ai.google.dev/gemini-api/docs/text-generation#chat),
+   *   this is a repeated field that contains the conversation history and the
+   *   latest request.
    * @param {number[]} [request.tools]
-   *   Optional. A list of `Tools` the model may use to generate the next
+   *   Optional. A list of `Tools` the `Model` may use to generate the next
    *   response.
    *
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
-   *   knowledge and scope of the model. The only supported tool is currently
-   *   `Function`.
+   *   knowledge and scope of the `Model`. Supported `Tool`s are `Function` and
+   *   `code_execution`. Refer to the [Function
+   *   calling](https://ai.google.dev/gemini-api/docs/function-calling) and the
+   *   [Code execution](https://ai.google.dev/gemini-api/docs/code-execution)
+   *   guides to learn more.
    * @param {google.ai.generativelanguage.v1beta.ToolConfig} [request.toolConfig]
-   *   Optional. Tool configuration for any `Tool` specified in the request.
+   *   Optional. Tool configuration for any `Tool` specified in the request. Refer
+   *   to the [Function calling
+   *   guide](https://ai.google.dev/gemini-api/docs/function-calling#function_calling_mode)
+   *   for a usage example.
    * @param {number[]} [request.safetySettings]
    *   Optional. A list of unique `SafetySetting` instances for blocking unsafe
    *   content.
@@ -1065,14 +1103,17 @@ export class GenerativeServiceClient {
    *   `SafetyCategory` provided in the list, the API will use the default safety
    *   setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *   HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *   HARM_CATEGORY_HARASSMENT are supported.
+   *   HARM_CATEGORY_HARASSMENT are supported. Refer to the
+   *   [guide](https://ai.google.dev/gemini-api/docs/safety-settings)
+   *   for detailed information on available safety settings. Also refer to the
+   *   [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *   learn how to incorporate safety considerations in your AI applications.
    * @param {google.ai.generativelanguage.v1beta.GenerationConfig} [request.generationConfig]
    *   Optional. Configuration options for model generation and outputs.
    * @param {string} [request.cachedContent]
-   *   Optional. The name of the cached content used as context to serve the
-   *   prediction. Note: only used in explicit caching, where users can have
-   *   control over caching (e.g. what content to cache) and enjoy guaranteed cost
-   *   savings. Format: `cachedContents/{cachedContent}`
+   *   Optional. The name of the content
+   *   [cached](https://ai.google.dev/gemini-api/docs/caching) to use as context
+   *   to serve the prediction. Format: `cachedContents/{cachedContent}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

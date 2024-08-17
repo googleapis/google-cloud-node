@@ -34,27 +34,36 @@ function main(model, contents) {
    */
   // const model = 'abc123'
   /**
-   *  Optional. Developer set system instruction. Currently, text only.
+   *  Optional. Developer set system
+   *  instruction(s) (https://ai.google.dev/gemini-api/docs/system-instructions).
+   *  Currently, text only.
    */
   // const systemInstruction = {}
   /**
    *  Required. The content of the current conversation with the model.
-   *  For single-turn queries, this is a single instance. For multi-turn queries,
-   *  this is a repeated field that contains conversation history + latest
-   *  request.
+   *  For single-turn queries, this is a single instance. For multi-turn queries
+   *  like chat (https://ai.google.dev/gemini-api/docs/text-generation#chat),
+   *  this is a repeated field that contains the conversation history and the
+   *  latest request.
    */
   // const contents = [1,2,3,4]
   /**
-   *  Optional. A list of `Tools` the model may use to generate the next
+   *  Optional. A list of `Tools` the `Model` may use to generate the next
    *  response.
    *  A `Tool` is a piece of code that enables the system to interact with
    *  external systems to perform an action, or set of actions, outside of
-   *  knowledge and scope of the model. The only supported tool is currently
-   *  `Function`.
+   *  knowledge and scope of the `Model`. Supported `Tool`s are `Function` and
+   *  `code_execution`. Refer to the Function
+   *  calling (https://ai.google.dev/gemini-api/docs/function-calling) and the
+   *  Code execution (https://ai.google.dev/gemini-api/docs/code-execution)
+   *  guides to learn more.
    */
   // const tools = [1,2,3,4]
   /**
-   *  Optional. Tool configuration for any `Tool` specified in the request.
+   *  Optional. Tool configuration for any `Tool` specified in the request. Refer
+   *  to the Function calling
+   *  guide (https://ai.google.dev/gemini-api/docs/function-calling#function_calling_mode)
+   *  for a usage example.
    */
   // const toolConfig = {}
   /**
@@ -69,7 +78,11 @@ function main(model, contents) {
    *  `SafetyCategory` provided in the list, the API will use the default safety
    *  setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *  HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
-   *  HARM_CATEGORY_HARASSMENT are supported.
+   *  HARM_CATEGORY_HARASSMENT are supported. Refer to the
+   *  guide (https://ai.google.dev/gemini-api/docs/safety-settings)
+   *  for detailed information on available safety settings. Also refer to the
+   *  Safety guidance (https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *  learn how to incorporate safety considerations in your AI applications.
    */
   // const safetySettings = [1,2,3,4]
   /**
@@ -77,10 +90,9 @@ function main(model, contents) {
    */
   // const generationConfig = {}
   /**
-   *  Optional. The name of the cached content used as context to serve the
-   *  prediction. Note: only used in explicit caching, where users can have
-   *  control over caching (e.g. what content to cache) and enjoy guaranteed cost
-   *  savings. Format: `cachedContents/{cachedContent}`
+   *  Optional. The name of the content
+   *  cached (https://ai.google.dev/gemini-api/docs/caching) to use as context
+   *  to serve the prediction. Format: `cachedContents/{cachedContent}`
    */
   // const cachedContent = 'abc123'
 
