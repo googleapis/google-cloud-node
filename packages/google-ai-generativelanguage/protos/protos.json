@@ -417,7 +417,9 @@
                               "values": {
                                 "BLOCK_REASON_UNSPECIFIED": 0,
                                 "SAFETY": 1,
-                                "OTHER": 2
+                                "OTHER": 2,
+                                "BLOCKLIST": 3,
+                                "PROHIBITED_CONTENT": 4
                               }
                             }
                           }
@@ -499,7 +501,12 @@
                             "MAX_TOKENS": 2,
                             "SAFETY": 3,
                             "RECITATION": 4,
-                            "OTHER": 5
+                            "LANGUAGE": 6,
+                            "OTHER": 5,
+                            "BLOCKLIST": 7,
+                            "PROHIBITED_CONTENT": 8,
+                            "SPII": 9,
+                            "MALFORMED_FUNCTION_CALL": 10
                           }
                         }
                       }
@@ -739,6 +746,11 @@
                             "temperature"
                           ]
                         },
+                        "_maxTemperature": {
+                          "oneof": [
+                            "maxTemperature"
+                          ]
+                        },
                         "_topP": {
                           "oneof": [
                             "topP"
@@ -796,6 +808,13 @@
                         "temperature": {
                           "type": "float",
                           "id": 9,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxTemperature": {
+                          "type": "float",
+                          "id": 13,
                           "options": {
                             "proto3_optional": true
                           }

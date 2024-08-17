@@ -30,8 +30,7 @@ function main() {
    */
   /**
    *  The maximum number of `Models` to return (per page).
-   *  The service may return fewer models.
-   *  If unspecified, at most 50 models will be returned per page.
+   *  If unspecified, 50 models will be returned per page.
    *  This method returns at most 1000 models per page, even if you pass a larger
    *  page_size.
    */
