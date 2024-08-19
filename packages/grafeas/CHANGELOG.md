@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.4.0...grafeas-v5.5.0) (2024-08-19)
+
+
+### Features
+
+* [grafeas] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence` ([#5585](https://github.com/googleapis/google-cloud-node/issues/5585)) ([f9cfc54](https://github.com/googleapis/google-cloud-node/commit/f9cfc5463b02af3296df3e647633597730122ae8))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/grafeas-v5.3.0...grafeas-v5.4.0) (2024-05-21)
 
 

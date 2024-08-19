@@ -5,6 +5,211 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "f9cfc5463b02af3296df3e647633597730122ae8",
+          "message": "[grafeas] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence`",
+          "issues": [
+            "5585"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "60379c0b-9431-4748-8e91-cde7cd22f106",
+      "createTime": "2024-08-19T17:17:10.524Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7500af4746970169ea3edfbe6c8782e3bbf8c375",
+          "message": "[storagetransfer] add HDFS configuration",
+          "issues": [
+            "5619"
+          ]
+        }
+      ],
+      "version": "3.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "f6ceda49-c222-4c26-995e-6b96a6020c3d",
+      "createTime": "2024-08-19T17:17:10.502Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "215ae318d9ed8bf2878e88381542ddef6e28014a",
+          "message": "[dlp] inspect template modified cadence discovery config for Cloud SQL",
+          "issues": [
+            "5623"
+          ]
+        }
+      ],
+      "version": "5.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "50cf28e0-c3ea-4fc7-a035-ccf4b8d6ee5d",
+      "createTime": "2024-08-19T17:17:10.484Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "aff05fb72e379005718402c7273275b0e4de8c99",
+          "message": "Update dependency natural to v8",
+          "issues": [
+            "5613"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "4.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "9210bae4-46b5-4319-83d5-d70948a6b62f",
+      "createTime": "2024-08-19T17:17:10.457Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "700a9373dd608cd2a76856c26249ca01aa11ec5f",
+          "message": "[translate] Add BigQuery Metastore Partition Service API version v1alpha",
+          "issues": [
+            "5611"
+          ]
+        }
+      ],
+      "version": "8.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "96b2599a-2a76-49a1-affe-cf8cd422d5d3",
+      "createTime": "2024-08-19T17:17:10.441Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a8d513d66e58983a3ac9e4726f6229bc58eb753b",
+          "message": "[texttospeech] A new method `StreamingSynthesize` is added to service `TextToSpeech`",
+          "issues": [
+            "5620"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "7206a088-4cf2-4d7b-9c8c-93b8c6da2fee",
+      "createTime": "2024-08-19T17:17:10.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4e3953ae94bb63568a27ea90f729b428a8c78b50",
+          "message": "[sql] add Postgres Import/Export config messages",
+          "issues": [
+            "5572"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "61b747c1-edc1-4d11-a975-c7348ad6941c",
+      "createTime": "2024-08-19T17:17:10.410Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c18942bff326cc28125d5c9b50b8d318b6ffefc8",
+          "message": "[networkmanagement] expose the new vpcflowlogs api proto",
+          "issues": [
+            "5606"
+          ]
+        }
+      ],
+      "version": "3.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "7ee2c657-b652-49c3-80df-52083eb91355",
+      "createTime": "2024-08-19T17:17:10.393Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ddb9d8850040732832e46b3e3b6d4abc33f42099",
+          "message": "[functions] optional field for specifying a service account to use for the build. This helps navigate the change of historical default on new projects. For more details, see https://cloud.google.com/build/docs/cloud-build-service-account-updates",
+          "issues": [
+            "5612"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "14041203-2403-49d4-9c62-c89d6b209b24",
+      "createTime": "2024-08-19T17:17:10.376Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5cf8d9e6be7c9f95910185062817379a2e29ffdc",
+          "message": "[discoveryengine] support natural language understanding in search",
+          "issues": [
+            "5596"
+          ]
+        }
+      ],
+      "version": "1.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "018a975e-b906-4159-bb8e-babc8a770ca5",
+      "createTime": "2024-08-19T17:17:10.310Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d2ba736d327901a153e2d9261a7e8824261255e6",
+          "message": "[contentwarehouse] A new field `imageless_mode` is added to message `.google.cloud.documentai.v1.ProcessRequest`",
+          "issues": [
+            "5598"
+          ]
+        }
+      ],
+      "version": "1.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "99e03d8c-9038-46ac-8102-e7b79d8a06e7",
+      "createTime": "2024-08-19T17:17:10.283Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e4574ad769864684f633fa38c4ebf819143ccabb",
+          "message": "A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.BatchPredictionJob`",
+          "issues": [
+            "5605"
+          ]
+        }
+      ],
+      "version": "3.27.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "45706721-6622-4672-891f-9eaa61a2dd6c",
+      "createTime": "2024-08-19T17:17:10.173Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "c73a5040c46cbf2a919a27ae42e0775c8e1328a2",
           "message": "[parallelstore] add file_stripe_level and directory_stripe_level fields to Instance",
           "issues": [
@@ -35899,5 +36104,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-08-09T20:45:35.154Z"
+  "updateTime": "2024-08-19T17:17:10.524Z"
 }

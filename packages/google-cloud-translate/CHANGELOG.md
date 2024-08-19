@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [8.5.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.4.0...translate-v8.5.0) (2024-08-19)
+
+
+### Features
+
+* [translate] Add BigQuery Metastore Partition Service API version v1alpha ([#5611](https://github.com/googleapis/google-cloud-node/issues/5611)) ([700a937](https://github.com/googleapis/google-cloud-node/commit/700a9373dd608cd2a76856c26249ca01aa11ec5f))
+
 ## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/translate-v8.3.0...translate-v8.4.0) (2024-08-09)
 
 
