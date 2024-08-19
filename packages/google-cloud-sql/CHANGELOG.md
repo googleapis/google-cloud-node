@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.17.0...sql-v0.18.0) (2024-08-19)
+
+
+### Features
+
+* [sql] add Postgres Import/Export config messages ([#5572](https://github.com/googleapis/google-cloud-node/issues/5572)) ([4e3953a](https://github.com/googleapis/google-cloud-node/commit/4e3953ae94bb63568a27ea90f729b428a8c78b50))
+
 ## [0.17.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.16.0...sql-v0.17.0) (2024-07-22)
 
 

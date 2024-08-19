@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [4.3.2](https://github.com/googleapis/google-cloud-node/compare/vision-v4.3.1...vision-v4.3.2) (2024-08-19)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency natural to v8 ([#5613](https://github.com/googleapis/google-cloud-node/issues/5613)) ([aff05fb](https://github.com/googleapis/google-cloud-node/commit/aff05fb72e379005718402c7273275b0e4de8c99))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/vision-v4.3.0...vision-v4.3.1) (2024-08-09)
 
 

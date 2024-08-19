@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.9.0...dlp-v5.10.0) (2024-08-19)
+
+
+### Features
+
+* [dlp] inspect template modified cadence discovery config for Cloud SQL ([#5623](https://github.com/googleapis/google-cloud-node/issues/5623)) ([215ae31](https://github.com/googleapis/google-cloud-node/commit/215ae318d9ed8bf2878e88381542ddef6e28014a))
+
 ## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.8.0...dlp-v5.9.0) (2024-08-09)
 
 
