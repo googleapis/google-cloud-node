@@ -316,6 +316,17 @@ describe('Query', () => {
       assert.strictEqual(filter.val, 'Stephen');
     });
   });
+  it('should not issue a warning when an EntityFilter instance is provided', done => {
+    const onWarning = () => {
+      assert.fail();
+    };
+    process.on('warning', onWarning);
+    new Query(['kind1']).filter(new PropertyFilter('name', '=', 'Stephen'));
+    setImmediate(() => {
+      process.removeListener('warning', onWarning);
+      done();
+    });
+  });
   describe('filter with Filter class', () => {
     it('should support filter with Filter', () => {
       const now = new Date();
