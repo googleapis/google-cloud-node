@@ -24,7 +24,7 @@ import type {
   Descriptors,
   ClientOptions,
 } from 'google-gax';
-
+import {PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 
@@ -202,6 +202,16 @@ export class TextToSpeechClient {
       ),
     };
 
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+      streamingSynthesize: new this._gaxModule.StreamDescriptor(
+        this._gaxModule.StreamType.BIDI_STREAMING,
+        !!opts.fallback,
+        !!opts.gaxServerStreamingRetries
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.texttospeech.v1beta1.TextToSpeech',
@@ -251,12 +261,28 @@ export class TextToSpeechClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const textToSpeechStubMethods = ['listVoices', 'synthesizeSpeech'];
+    const textToSpeechStubMethods = [
+      'listVoices',
+      'synthesizeSpeech',
+      'streamingSynthesize',
+    ];
     for (const methodName of textToSpeechStubMethods) {
       const callPromise = this.textToSpeechStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
+              if (methodName in this.descriptors.stream) {
+                const stream = new PassThrough();
+                setImmediate(() => {
+                  stream.emit(
+                    'error',
+                    new this._gaxModule.GoogleError(
+                      'The client has already been closed.'
+                    )
+                  );
+                });
+                return stream;
+              }
               return Promise.reject('The client has already been closed.');
             }
             const func = stub[methodName];
@@ -267,7 +293,7 @@ export class TextToSpeechClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.stream[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -556,6 +582,26 @@ export class TextToSpeechClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     this.initialize();
     return this.innerApiCalls.synthesizeSpeech(request, options, callback);
+  }
+
+  /**
+   * Performs bidirectional streaming speech synthesis: receive audio while
+   * sending text.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.texttospeech.v1beta1.StreamingSynthesizeRequest|StreamingSynthesizeRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.texttospeech.v1beta1.StreamingSynthesizeResponse|StreamingSynthesizeResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/text_to_speech.streaming_synthesize.js</caption>
+   * region_tag:texttospeech_v1beta1_generated_TextToSpeech_StreamingSynthesize_async
+   */
+  streamingSynthesize(options?: CallOptions): gax.CancellableStream {
+    this.initialize();
+    return this.innerApiCalls.streamingSynthesize(null, options);
   }
 
   // --------------------
