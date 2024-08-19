@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as texttospeechModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
@@ -62,6 +64,20 @@ function stubSimpleCallWithCallback<ResponseType>(
   return error
     ? sinon.stub().callsArgWith(2, error)
     : sinon.stub().callsArgWith(2, null, response);
+}
+
+function stubBidiStreamingCall<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  return sinon.stub().returns(mockStream);
 }
 
 describe('v1.TextToSpeechClient', () => {
@@ -408,6 +424,96 @@ describe('v1.TextToSpeechClient', () => {
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.synthesizeSpeech(request), expectedError);
+    });
+  });
+
+  describe('streamingSynthesize', () => {
+    it('invokes streamingSynthesize without error', async () => {
+      const client = new texttospeechModule.v1.TextToSpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.texttospeech.v1.StreamingSynthesizeRequest()
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.texttospeech.v1.StreamingSynthesizeResponse()
+      );
+      client.innerApiCalls.streamingSynthesize =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamingSynthesize();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.texttospeech.v1.StreamingSynthesizeResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.streamingSynthesize as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
+    });
+
+    it('invokes streamingSynthesize with error', async () => {
+      const client = new texttospeechModule.v1.TextToSpeechClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.texttospeech.v1.StreamingSynthesizeRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingSynthesize = stubBidiStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.streamingSynthesize();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.texttospeech.v1.StreamingSynthesizeResponse
+          ) => {
+            resolve(response);
+          }
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.innerApiCalls.streamingSynthesize as SinonStub)
+          .getCall(0)
+          .calledWith(null)
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request
+      );
     });
   });
 
