@@ -3062,7 +3062,8 @@ describe('storage', function () {
     });
   });
 
-  describe('HMAC keys', () => {
+  // TODO: Undo this skip once https://github.com/googleapis/nodejs-storage/issues/2461 is complete.
+  describe.skip('HMAC keys', () => {
     // This is generally a valid service account for a project.
     const ALTERNATE_SERVICE_ACCOUNT = `${process.env.PROJECT_ID}@appspot.gserviceaccount.com`;
     const SERVICE_ACCOUNT =
