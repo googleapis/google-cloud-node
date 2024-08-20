@@ -20,7 +20,7 @@
 const gateway = require('@google-cloud/gke-connect-gateway');
 
 function main() {
-  const gatewayServiceClient = new gateway.GatewayServiceClient();
+  const gatewayControlClient = new gateway.GatewayControlClient();
 }
 
 main();
