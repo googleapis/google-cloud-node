@@ -315,6 +315,7 @@ export class RecaptchaEnterpriseServiceClient {
       'updateKey',
       'deleteKey',
       'migrateKey',
+      'addIpOverride',
       'getMetrics',
       'createFirewallPolicy',
       'listFirewallPolicies',
@@ -1142,11 +1143,11 @@ export class RecaptchaEnterpriseServiceClient {
    *   Optional. If true, skips the billing check.
    *   A reCAPTCHA Enterprise key or migrated key behaves differently than a
    *   reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-   *   https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+   *   https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
    *   any disruption of your usage, we check that a billing account is present.
    *   If your usage of reCAPTCHA is under the free quota, you can safely skip the
    *   billing check and proceed with the migration. See
-   *   https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+   *   https://cloud.google.com/recaptcha/docs/billing-information.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1229,6 +1230,108 @@ export class RecaptchaEnterpriseServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.migrateKey(request, options, callback);
+  }
+  /**
+   * Adds an IP override to a key. The following restrictions hold:
+   * * The maximum number of IP overrides per key is 100.
+   * * For any conflict (such as IP already exists or IP part of an existing
+   *   IP range), an error will be returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the key to which the IP override is added, in the
+   *   format `projects/{project}/keys/{key}`.
+   * @param {google.cloud.recaptchaenterprise.v1.IpOverrideData} request.ipOverrideData
+   *   Required. IP override added to the key.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.AddIpOverrideResponse|AddIpOverrideResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AddIpOverride_async
+   */
+  addIpOverride(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  addIpOverride(
+    request: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addIpOverride(
+    request: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addIpOverride(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideResponse,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IAddIpOverrideRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.addIpOverride(request, options, callback);
   }
   /**
    * Get some aggregated metrics for a Key. This data can be used to build

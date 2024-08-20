@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Recaptcha_enterprise_service.add_ip_override](#recaptcha_enterprise_service.add_ip_override)
   * [Recaptcha_enterprise_service.annotate_assessment](#recaptcha_enterprise_service.annotate_assessment)
   * [Recaptcha_enterprise_service.create_assessment](#recaptcha_enterprise_service.create_assessment)
   * [Recaptcha_enterprise_service.create_firewall_policy](#recaptcha_enterprise_service.create_firewall_policy)
@@ -52,6 +53,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Recaptcha_enterprise_service.add_ip_override
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-recaptchaenterprise/samples/generated/v1/recaptcha_enterprise_service.add_ip_override.js`
+
+
+-----
+
 
 
 
