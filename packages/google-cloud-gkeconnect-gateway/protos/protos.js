@@ -66,6 +66,651 @@
                      */
                     var gateway = {};
     
+                    gateway.v1 = (function() {
+    
+                        /**
+                         * Namespace v1.
+                         * @memberof google.cloud.gkeconnect.gateway
+                         * @namespace
+                         */
+                        var v1 = {};
+    
+                        v1.GatewayControl = (function() {
+    
+                            /**
+                             * Constructs a new GatewayControl service.
+                             * @memberof google.cloud.gkeconnect.gateway.v1
+                             * @classdesc Represents a GatewayControl
+                             * @extends $protobuf.rpc.Service
+                             * @constructor
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             */
+                            function GatewayControl(rpcImpl, requestDelimited, responseDelimited) {
+                                $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                            }
+    
+                            (GatewayControl.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = GatewayControl;
+    
+                            /**
+                             * Creates new GatewayControl service using the specified rpc implementation.
+                             * @function create
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GatewayControl
+                             * @static
+                             * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                             * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                             * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                             * @returns {GatewayControl} RPC service. Useful where requests and/or responses are streamed.
+                             */
+                            GatewayControl.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                                return new this(rpcImpl, requestDelimited, responseDelimited);
+                            };
+    
+                            /**
+                             * Callback as used by {@link google.cloud.gkeconnect.gateway.v1.GatewayControl|generateCredentials}.
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GatewayControl
+                             * @typedef GenerateCredentialsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse} [response] GenerateCredentialsResponse
+                             */
+    
+                            /**
+                             * Calls GenerateCredentials.
+                             * @function generateCredentials
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GatewayControl
+                             * @instance
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest} request GenerateCredentialsRequest message or plain object
+                             * @param {google.cloud.gkeconnect.gateway.v1.GatewayControl.GenerateCredentialsCallback} callback Node-style callback called with the error, if any, and GenerateCredentialsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(GatewayControl.prototype.generateCredentials = function generateCredentials(request, callback) {
+                                return this.rpcCall(generateCredentials, $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest, $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse, request, callback);
+                            }, "name", { value: "GenerateCredentials" });
+    
+                            /**
+                             * Calls GenerateCredentials.
+                             * @function generateCredentials
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GatewayControl
+                             * @instance
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest} request GenerateCredentialsRequest message or plain object
+                             * @returns {Promise<google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            return GatewayControl;
+                        })();
+    
+                        v1.GenerateCredentialsRequest = (function() {
+    
+                            /**
+                             * Properties of a GenerateCredentialsRequest.
+                             * @memberof google.cloud.gkeconnect.gateway.v1
+                             * @interface IGenerateCredentialsRequest
+                             * @property {string|null} [name] GenerateCredentialsRequest name
+                             * @property {boolean|null} [forceUseAgent] GenerateCredentialsRequest forceUseAgent
+                             * @property {string|null} [version] GenerateCredentialsRequest version
+                             * @property {string|null} [kubernetesNamespace] GenerateCredentialsRequest kubernetesNamespace
+                             * @property {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem|null} [operatingSystem] GenerateCredentialsRequest operatingSystem
+                             */
+    
+                            /**
+                             * Constructs a new GenerateCredentialsRequest.
+                             * @memberof google.cloud.gkeconnect.gateway.v1
+                             * @classdesc Represents a GenerateCredentialsRequest.
+                             * @implements IGenerateCredentialsRequest
+                             * @constructor
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest=} [properties] Properties to set
+                             */
+                            function GenerateCredentialsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GenerateCredentialsRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @instance
+                             */
+                            GenerateCredentialsRequest.prototype.name = "";
+    
+                            /**
+                             * GenerateCredentialsRequest forceUseAgent.
+                             * @member {boolean} forceUseAgent
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @instance
+                             */
+                            GenerateCredentialsRequest.prototype.forceUseAgent = false;
+    
+                            /**
+                             * GenerateCredentialsRequest version.
+                             * @member {string} version
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @instance
+                             */
+                            GenerateCredentialsRequest.prototype.version = "";
+    
+                            /**
+                             * GenerateCredentialsRequest kubernetesNamespace.
+                             * @member {string} kubernetesNamespace
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @instance
+                             */
+                            GenerateCredentialsRequest.prototype.kubernetesNamespace = "";
+    
+                            /**
+                             * GenerateCredentialsRequest operatingSystem.
+                             * @member {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem} operatingSystem
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @instance
+                             */
+                            GenerateCredentialsRequest.prototype.operatingSystem = 0;
+    
+                            /**
+                             * Creates a new GenerateCredentialsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest} GenerateCredentialsRequest instance
+                             */
+                            GenerateCredentialsRequest.create = function create(properties) {
+                                return new GenerateCredentialsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GenerateCredentialsRequest message. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest} message GenerateCredentialsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GenerateCredentialsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.forceUseAgent != null && Object.hasOwnProperty.call(message, "forceUseAgent"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.forceUseAgent);
+                                if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.version);
+                                if (message.kubernetesNamespace != null && Object.hasOwnProperty.call(message, "kubernetesNamespace"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.kubernetesNamespace);
+                                if (message.operatingSystem != null && Object.hasOwnProperty.call(message, "operatingSystem"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).int32(message.operatingSystem);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GenerateCredentialsRequest message, length delimited. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest} message GenerateCredentialsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GenerateCredentialsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GenerateCredentialsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest} GenerateCredentialsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GenerateCredentialsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.forceUseAgent = reader.bool();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.version = reader.string();
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.kubernetesNamespace = reader.string();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.operatingSystem = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GenerateCredentialsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest} GenerateCredentialsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GenerateCredentialsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GenerateCredentialsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GenerateCredentialsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                if (message.forceUseAgent != null && message.hasOwnProperty("forceUseAgent"))
+                                    if (typeof message.forceUseAgent !== "boolean")
+                                        return "forceUseAgent: boolean expected";
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    if (!$util.isString(message.version))
+                                        return "version: string expected";
+                                if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace"))
+                                    if (!$util.isString(message.kubernetesNamespace))
+                                        return "kubernetesNamespace: string expected";
+                                if (message.operatingSystem != null && message.hasOwnProperty("operatingSystem"))
+                                    switch (message.operatingSystem) {
+                                    default:
+                                        return "operatingSystem: enum value expected";
+                                    case 0:
+                                    case 1:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GenerateCredentialsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest} GenerateCredentialsRequest
+                             */
+                            GenerateCredentialsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                if (object.forceUseAgent != null)
+                                    message.forceUseAgent = Boolean(object.forceUseAgent);
+                                if (object.version != null)
+                                    message.version = String(object.version);
+                                if (object.kubernetesNamespace != null)
+                                    message.kubernetesNamespace = String(object.kubernetesNamespace);
+                                switch (object.operatingSystem) {
+                                default:
+                                    if (typeof object.operatingSystem === "number") {
+                                        message.operatingSystem = object.operatingSystem;
+                                        break;
+                                    }
+                                    break;
+                                case "OPERATING_SYSTEM_UNSPECIFIED":
+                                case 0:
+                                    message.operatingSystem = 0;
+                                    break;
+                                case "OPERATING_SYSTEM_WINDOWS":
+                                case 1:
+                                    message.operatingSystem = 1;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GenerateCredentialsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest} message GenerateCredentialsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GenerateCredentialsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.name = "";
+                                    object.forceUseAgent = false;
+                                    object.version = "";
+                                    object.kubernetesNamespace = "";
+                                    object.operatingSystem = options.enums === String ? "OPERATING_SYSTEM_UNSPECIFIED" : 0;
+                                }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                if (message.forceUseAgent != null && message.hasOwnProperty("forceUseAgent"))
+                                    object.forceUseAgent = message.forceUseAgent;
+                                if (message.version != null && message.hasOwnProperty("version"))
+                                    object.version = message.version;
+                                if (message.kubernetesNamespace != null && message.hasOwnProperty("kubernetesNamespace"))
+                                    object.kubernetesNamespace = message.kubernetesNamespace;
+                                if (message.operatingSystem != null && message.hasOwnProperty("operatingSystem"))
+                                    object.operatingSystem = options.enums === String ? $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem[message.operatingSystem] === undefined ? message.operatingSystem : $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem[message.operatingSystem] : message.operatingSystem;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GenerateCredentialsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GenerateCredentialsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GenerateCredentialsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GenerateCredentialsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest";
+                            };
+    
+                            /**
+                             * OperatingSystem enum.
+                             * @name google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem
+                             * @enum {number}
+                             * @property {number} OPERATING_SYSTEM_UNSPECIFIED=0 OPERATING_SYSTEM_UNSPECIFIED value
+                             * @property {number} OPERATING_SYSTEM_WINDOWS=1 OPERATING_SYSTEM_WINDOWS value
+                             */
+                            GenerateCredentialsRequest.OperatingSystem = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "OPERATING_SYSTEM_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "OPERATING_SYSTEM_WINDOWS"] = 1;
+                                return values;
+                            })();
+    
+                            return GenerateCredentialsRequest;
+                        })();
+    
+                        v1.GenerateCredentialsResponse = (function() {
+    
+                            /**
+                             * Properties of a GenerateCredentialsResponse.
+                             * @memberof google.cloud.gkeconnect.gateway.v1
+                             * @interface IGenerateCredentialsResponse
+                             * @property {Uint8Array|null} [kubeconfig] GenerateCredentialsResponse kubeconfig
+                             * @property {string|null} [endpoint] GenerateCredentialsResponse endpoint
+                             */
+    
+                            /**
+                             * Constructs a new GenerateCredentialsResponse.
+                             * @memberof google.cloud.gkeconnect.gateway.v1
+                             * @classdesc Represents a GenerateCredentialsResponse.
+                             * @implements IGenerateCredentialsResponse
+                             * @constructor
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse=} [properties] Properties to set
+                             */
+                            function GenerateCredentialsResponse(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GenerateCredentialsResponse kubeconfig.
+                             * @member {Uint8Array} kubeconfig
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @instance
+                             */
+                            GenerateCredentialsResponse.prototype.kubeconfig = $util.newBuffer([]);
+    
+                            /**
+                             * GenerateCredentialsResponse endpoint.
+                             * @member {string} endpoint
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @instance
+                             */
+                            GenerateCredentialsResponse.prototype.endpoint = "";
+    
+                            /**
+                             * Creates a new GenerateCredentialsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse} GenerateCredentialsResponse instance
+                             */
+                            GenerateCredentialsResponse.create = function create(properties) {
+                                return new GenerateCredentialsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GenerateCredentialsResponse message. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse} message GenerateCredentialsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GenerateCredentialsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.kubeconfig != null && Object.hasOwnProperty.call(message, "kubeconfig"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.kubeconfig);
+                                if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.endpoint);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GenerateCredentialsResponse message, length delimited. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse} message GenerateCredentialsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GenerateCredentialsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GenerateCredentialsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse} GenerateCredentialsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GenerateCredentialsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.kubeconfig = reader.bytes();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.endpoint = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GenerateCredentialsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse} GenerateCredentialsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GenerateCredentialsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GenerateCredentialsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GenerateCredentialsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.kubeconfig != null && message.hasOwnProperty("kubeconfig"))
+                                    if (!(message.kubeconfig && typeof message.kubeconfig.length === "number" || $util.isString(message.kubeconfig)))
+                                        return "kubeconfig: buffer expected";
+                                if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                    if (!$util.isString(message.endpoint))
+                                        return "endpoint: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GenerateCredentialsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse} GenerateCredentialsResponse
+                             */
+                            GenerateCredentialsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse();
+                                if (object.kubeconfig != null)
+                                    if (typeof object.kubeconfig === "string")
+                                        $util.base64.decode(object.kubeconfig, message.kubeconfig = $util.newBuffer($util.base64.length(object.kubeconfig)), 0);
+                                    else if (object.kubeconfig.length >= 0)
+                                        message.kubeconfig = object.kubeconfig;
+                                if (object.endpoint != null)
+                                    message.endpoint = String(object.endpoint);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GenerateCredentialsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse} message GenerateCredentialsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GenerateCredentialsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    if (options.bytes === String)
+                                        object.kubeconfig = "";
+                                    else {
+                                        object.kubeconfig = [];
+                                        if (options.bytes !== Array)
+                                            object.kubeconfig = $util.newBuffer(object.kubeconfig);
+                                    }
+                                    object.endpoint = "";
+                                }
+                                if (message.kubeconfig != null && message.hasOwnProperty("kubeconfig"))
+                                    object.kubeconfig = options.bytes === String ? $util.base64.encode(message.kubeconfig, 0, message.kubeconfig.length) : options.bytes === Array ? Array.prototype.slice.call(message.kubeconfig) : message.kubeconfig;
+                                if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                                    object.endpoint = message.endpoint;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GenerateCredentialsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GenerateCredentialsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GenerateCredentialsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GenerateCredentialsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse";
+                            };
+    
+                            return GenerateCredentialsResponse;
+                        })();
+    
+                        return v1;
+                    })();
+    
                     gateway.v1beta1 = (function() {
     
                         /**
