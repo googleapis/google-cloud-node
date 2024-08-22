@@ -192,6 +192,26 @@
                             }
                           ]
                         },
+                        "AddIpOverride": {
+                          "requestType": "AddIpOverrideRequest",
+                          "responseType": "AddIpOverrideResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/keys/*}:addIpOverride",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ip_override_data"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/keys/*}:addIpOverride",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ip_override_data"
+                            }
+                          ]
+                        },
                         "GetMetrics": {
                           "requestType": "GetMetricsRequest",
                           "responseType": "Metrics",
@@ -1807,7 +1827,8 @@
                           "oneof": [
                             "webSettings",
                             "androidSettings",
-                            "iosSettings"
+                            "iosSettings",
+                            "expressSettings"
                           ]
                         }
                       },
@@ -1837,6 +1858,10 @@
                         "iosSettings": {
                           "type": "IOSKeySettings",
                           "id": 5
+                        },
+                        "expressSettings": {
+                          "type": "ExpressKeySettings",
+                          "id": 11
                         },
                         "labels": {
                           "keyType": "string",
@@ -2005,6 +2030,9 @@
                           }
                         }
                       }
+                    },
+                    "ExpressKeySettings": {
+                      "fields": {}
                     },
                     "AppleDeveloperId": {
                       "fields": {
@@ -2352,6 +2380,28 @@
                         }
                       }
                     },
+                    "AddIpOverrideRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        },
+                        "ipOverrideData": {
+                          "type": "IpOverrideData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AddIpOverrideResponse": {
+                      "fields": {}
+                    },
                     "RelatedAccountGroupMembership": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership",
@@ -2430,6 +2480,33 @@
                             "CA": 1,
                             "FASTLY": 3,
                             "CLOUDFLARE": 4
+                          }
+                        }
+                      }
+                    },
+                    "IpOverrideData": {
+                      "fields": {
+                        "ip": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6",
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "overrideType": {
+                          "type": "OverrideType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "OverrideType": {
+                          "values": {
+                            "OVERRIDE_TYPE_UNSPECIFIED": 0,
+                            "ALLOW": 1
                           }
                         }
                       }

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async]
+function main(name, ipOverrideData) {
+  // [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AddIpOverride_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,21 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the key to be migrated, in the format
-   *  `projects/{project}/keys/{key}`.
+   *  Required. The name of the key to which the IP override is added, in the
+   *  format `projects/{project}/keys/{key}`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. If true, skips the billing check.
-   *  A reCAPTCHA Enterprise key or migrated key behaves differently than a
-   *  reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-   *  https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
-   *  any disruption of your usage, we check that a billing account is present.
-   *  If your usage of reCAPTCHA is under the free quota, you can safely skip the
-   *  billing check and proceed with the migration. See
-   *  https://cloud.google.com/recaptcha/docs/billing-information.
+   *  Required. IP override added to the key.
    */
-  // const skipBillingCheck = true
+  // const ipOverrideData = {}
 
   // Imports the Recaptchaenterprise library
   const {RecaptchaEnterpriseServiceClient} = require('@google-cloud/recaptcha-enterprise').v1;
@@ -51,19 +44,20 @@ function main(name) {
   // Instantiates a client
   const recaptchaenterpriseClient = new RecaptchaEnterpriseServiceClient();
 
-  async function callMigrateKey() {
+  async function callAddIpOverride() {
     // Construct request
     const request = {
       name,
+      ipOverrideData,
     };
 
     // Run request
-    const response = await recaptchaenterpriseClient.migrateKey(request);
+    const response = await recaptchaenterpriseClient.addIpOverride(request);
     console.log(response);
   }
 
-  callMigrateKey();
-  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_MigrateKey_async]
+  callAddIpOverride();
+  // [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_AddIpOverride_async]
 }
 
 process.on('unhandledRejection', err => {
