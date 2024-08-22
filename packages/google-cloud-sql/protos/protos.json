@@ -155,6 +155,13 @@
                       }
                     },
                     "BackupRun": {
+                      "oneofs": {
+                        "_maxChargeableBytes": {
+                          "oneof": [
+                            "maxChargeableBytes"
+                          ]
+                        }
+                      },
                       "fields": {
                         "kind": {
                           "type": "string",
@@ -223,6 +230,14 @@
                         "timeZone": {
                           "type": "string",
                           "id": 23
+                        },
+                        "maxChargeableBytes": {
+                          "type": "int64",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -924,6 +939,11 @@
                           "oneof": [
                             "pscConfig"
                           ]
+                        },
+                        "_serverCaMode": {
+                          "oneof": [
+                            "serverCaMode"
+                          ]
                         }
                       },
                       "fields": {
@@ -962,6 +982,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "serverCaMode": {
+                          "type": "CaMode",
+                          "id": 10,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -971,6 +998,13 @@
                             "ALLOW_UNENCRYPTED_AND_ENCRYPTED": 1,
                             "ENCRYPTED_ONLY": 2,
                             "TRUSTED_CLIENT_CERTIFICATE_REQUIRED": 3
+                          }
+                        },
+                        "CaMode": {
+                          "values": {
+                            "CA_MODE_UNSPECIFIED": 0,
+                            "GOOGLE_MANAGED_INTERNAL_CA": 1,
+                            "GOOGLE_MANAGED_CAS_CA": 2
                           }
                         }
                       }
@@ -1311,7 +1345,8 @@
                             "RECONFIGURE_OLD_PRIMARY": 44,
                             "CLUSTER_MAINTENANCE": 45,
                             "SELF_SERVICE_MAINTENANCE": 46,
-                            "SWITCHOVER_TO_REPLICA": 47
+                            "SWITCHOVER_TO_REPLICA": 47,
+                            "MAJOR_VERSION_UPGRADE": 48
                           }
                         },
                         "SqlOperationStatus": {
@@ -1955,6 +1990,19 @@
                         "dnsName": {
                           "type": "string",
                           "id": 34
+                        },
+                        "serverCaMode": {
+                          "type": "CaMode",
+                          "id": 35
+                        }
+                      },
+                      "nested": {
+                        "CaMode": {
+                          "values": {
+                            "CA_MODE_UNSPECIFIED": 0,
+                            "GOOGLE_MANAGED_INTERNAL_CA": 1,
+                            "GOOGLE_MANAGED_CAS_CA": 2
+                          }
                         }
                       }
                     },
@@ -3747,6 +3795,11 @@
                           "oneof": [
                             "geminiConfig"
                           ]
+                        },
+                        "_switchTransactionLogsToCloudStorageEnabled": {
+                          "oneof": [
+                            "switchTransactionLogsToCloudStorageEnabled"
+                          ]
                         }
                       },
                       "fields": {
@@ -3978,6 +4031,21 @@
                           "type": "GeminiInstanceConfig",
                           "id": 55,
                           "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 56,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "switchTransactionLogsToCloudStorageEnabled": {
+                          "type": "google.protobuf.BoolValue",
+                          "id": 57,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY",
                             "proto3_optional": true
                           }
                         }
@@ -4438,7 +4506,8 @@
                             "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED": 45,
                             "EXTENSIONS_NOT_MIGRATED": 46,
                             "PG_CRON_FLAG_ENABLED_IN_REPLICA": 47,
-                            "EXTENSIONS_NOT_ENABLED_IN_REPLICA": 48
+                            "EXTENSIONS_NOT_ENABLED_IN_REPLICA": 48,
+                            "UNSUPPORTED_COLUMNS": 49
                           }
                         }
                       }

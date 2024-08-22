@@ -650,6 +650,9 @@ export namespace google {
 
                     /** BackupRun timeZone */
                     timeZone?: (string|null);
+
+                    /** BackupRun maxChargeableBytes */
+                    maxChargeableBytes?: (number|Long|string|null);
                 }
 
                 /** Represents a BackupRun. */
@@ -711,6 +714,12 @@ export namespace google {
 
                     /** BackupRun timeZone. */
                     public timeZone: string;
+
+                    /** BackupRun maxChargeableBytes. */
+                    public maxChargeableBytes?: (number|Long|string|null);
+
+                    /** BackupRun _maxChargeableBytes. */
+                    public _maxChargeableBytes?: "maxChargeableBytes";
 
                     /**
                      * Creates a new BackupRun instance using the specified properties.
@@ -4019,6 +4028,9 @@ export namespace google {
 
                     /** IpConfiguration pscConfig */
                     pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
+
+                    /** IpConfiguration serverCaMode */
+                    serverCaMode?: (google.cloud.sql.v1.IpConfiguration.CaMode|keyof typeof google.cloud.sql.v1.IpConfiguration.CaMode|null);
                 }
 
                 /** Represents an IpConfiguration. */
@@ -4054,8 +4066,14 @@ export namespace google {
                     /** IpConfiguration pscConfig. */
                     public pscConfig?: (google.cloud.sql.v1.IPscConfig|null);
 
+                    /** IpConfiguration serverCaMode. */
+                    public serverCaMode?: (google.cloud.sql.v1.IpConfiguration.CaMode|keyof typeof google.cloud.sql.v1.IpConfiguration.CaMode|null);
+
                     /** IpConfiguration _pscConfig. */
                     public _pscConfig?: "pscConfig";
+
+                    /** IpConfiguration _serverCaMode. */
+                    public _serverCaMode?: "serverCaMode";
 
                     /**
                      * Creates a new IpConfiguration instance using the specified properties.
@@ -4143,6 +4161,13 @@ export namespace google {
                         ALLOW_UNENCRYPTED_AND_ENCRYPTED = 1,
                         ENCRYPTED_ONLY = 2,
                         TRUSTED_CLIENT_CERTIFICATE_REQUIRED = 3
+                    }
+
+                    /** CaMode enum. */
+                    enum CaMode {
+                        CA_MODE_UNSPECIFIED = 0,
+                        GOOGLE_MANAGED_INTERNAL_CA = 1,
+                        GOOGLE_MANAGED_CAS_CA = 2
                     }
                 }
 
@@ -5431,7 +5456,8 @@ export namespace google {
                         RECONFIGURE_OLD_PRIMARY = 44,
                         CLUSTER_MAINTENANCE = 45,
                         SELF_SERVICE_MAINTENANCE = 46,
-                        SWITCHOVER_TO_REPLICA = 47
+                        SWITCHOVER_TO_REPLICA = 47,
+                        MAJOR_VERSION_UPGRADE = 48
                     }
 
                     /** SqlOperationStatus enum. */
@@ -7207,6 +7233,9 @@ export namespace google {
 
                     /** ConnectSettings dnsName */
                     dnsName?: (string|null);
+
+                    /** ConnectSettings serverCaMode */
+                    serverCaMode?: (google.cloud.sql.v1.ConnectSettings.CaMode|keyof typeof google.cloud.sql.v1.ConnectSettings.CaMode|null);
                 }
 
                 /** Represents a ConnectSettings. */
@@ -7241,6 +7270,9 @@ export namespace google {
 
                     /** ConnectSettings dnsName. */
                     public dnsName: string;
+
+                    /** ConnectSettings serverCaMode. */
+                    public serverCaMode: (google.cloud.sql.v1.ConnectSettings.CaMode|keyof typeof google.cloud.sql.v1.ConnectSettings.CaMode);
 
                     /**
                      * Creates a new ConnectSettings instance using the specified properties.
@@ -7318,6 +7350,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConnectSettings {
+
+                    /** CaMode enum. */
+                    enum CaMode {
+                        CA_MODE_UNSPECIFIED = 0,
+                        GOOGLE_MANAGED_INTERNAL_CA = 1,
+                        GOOGLE_MANAGED_CAS_CA = 2
+                    }
                 }
 
                 /** Properties of a GenerateEphemeralCertRequest. */
@@ -15280,6 +15322,12 @@ export namespace google {
 
                     /** DatabaseInstance geminiConfig */
                     geminiConfig?: (google.cloud.sql.v1.IGeminiInstanceConfig|null);
+
+                    /** DatabaseInstance satisfiesPzi */
+                    satisfiesPzi?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance switchTransactionLogsToCloudStorageEnabled */
+                    switchTransactionLogsToCloudStorageEnabled?: (google.protobuf.IBoolValue|null);
                 }
 
                 /** Represents a DatabaseInstance. */
@@ -15423,6 +15471,12 @@ export namespace google {
                     /** DatabaseInstance geminiConfig. */
                     public geminiConfig?: (google.cloud.sql.v1.IGeminiInstanceConfig|null);
 
+                    /** DatabaseInstance satisfiesPzi. */
+                    public satisfiesPzi?: (google.protobuf.IBoolValue|null);
+
+                    /** DatabaseInstance switchTransactionLogsToCloudStorageEnabled. */
+                    public switchTransactionLogsToCloudStorageEnabled?: (google.protobuf.IBoolValue|null);
+
                     /** DatabaseInstance _outOfDiskReport. */
                     public _outOfDiskReport?: "outOfDiskReport";
 
@@ -15443,6 +15497,9 @@ export namespace google {
 
                     /** DatabaseInstance _geminiConfig. */
                     public _geminiConfig?: "geminiConfig";
+
+                    /** DatabaseInstance _switchTransactionLogsToCloudStorageEnabled. */
+                    public _switchTransactionLogsToCloudStorageEnabled?: "switchTransactionLogsToCloudStorageEnabled";
 
                     /**
                      * Creates a new DatabaseInstance instance using the specified properties.
@@ -17276,7 +17333,8 @@ export namespace google {
                         UNSUPPORTED_EXTENSIONS_NOT_MIGRATED = 45,
                         EXTENSIONS_NOT_MIGRATED = 46,
                         PG_CRON_FLAG_ENABLED_IN_REPLICA = 47,
-                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48
+                        EXTENSIONS_NOT_ENABLED_IN_REPLICA = 48,
+                        UNSUPPORTED_COLUMNS = 49
                     }
                 }
 
