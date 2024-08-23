@@ -21,7 +21,7 @@
     "precompile": "npm run clean"
   },
   "dependencies": {
-    "@google-cloud/pubsub": "^4.5.0",
+    "@google-cloud/pubsub": "^4.6.0",
     "@google-cloud/storage": "^7.11.1",
     "@opentelemetry/api": "^1.6.0",
     "@opentelemetry/tracing": "^0.24.0",
