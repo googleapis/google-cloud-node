@@ -60,8 +60,8 @@ guides.
   * [Listen with exactly-once delivery](#listen-with-exactly-once-delivery)
   * [Listen For Protobuf Messages](#listen-for-protobuf-messages)
   * [Listen For Messages With Custom Attributes](#listen-for-messages-with-custom-attributes)
+  * [Subscribe with OpenTelemetry Tracing](#subscribe-with-opentelemetry-tracing)
   * [Modify Push Configuration](#modify-push-configuration)
-  * [OpenTelemetry Tracing](#opentelemetry-tracing)
   * [Publish Avro Records to a Topic](#publish-avro-records-to-a-topic)
   * [Publish Batched Messages](#publish-batched-messages)
   * [Publish Message](#publish-message)
@@ -69,6 +69,7 @@ guides.
   * [Publish Ordered Message](#publish-ordered-message)
   * [Publish Protobuf Messages to a Topic](#publish-protobuf-messages-to-a-topic)
   * [Publish with flow control](#publish-with-flow-control)
+  * [Publish with OpenTelemetry Tracing](#publish-with-opentelemetry-tracing)
   * [Publish With Retry Settings](#publish-with-retry-settings)
   * [Quickstart](#quickstart)
   * [Remove Dead Letter Policy](#remove-dead-letter-policy)
@@ -862,6 +863,25 @@ __Usage:__
 
 
 
+### Subscribe with OpenTelemetry Tracing
+
+Demonstrates how to enable OpenTelemetry tracing in a subscriber.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenWithOpenTelemetryTracing.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenWithOpenTelemetryTracing.js,samples/README.md)
+
+__Usage:__
+
+
+`node listenWithOpenTelemetryTracing.js <subscription-name-or-id>`
+
+
+-----
+
+
+
+
 ### Modify Push Configuration
 
 Modifies the configuration of an existing push subscription.
@@ -874,25 +894,6 @@ __Usage:__
 
 
 `node modifyPushConfig.js <topic-name-or-id> <subscription-name-or-id>`
-
-
------
-
-
-
-
-### OpenTelemetry Tracing
-
-Demonstrates how to enable OpenTelemetry tracing in a publisher or subscriber.
-
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/openTelemetryTracing.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/openTelemetryTracing.js,samples/README.md)
-
-__Usage:__
-
-
-`node openTelemetryTracing.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -1026,6 +1027,25 @@ __Usage:__
 
 
 `node publishWithFlowControl.js <topic-name-or-id>`
+
+
+-----
+
+
+
+
+### Publish with OpenTelemetry Tracing
+
+Demonstrates how to enable OpenTelemetry tracing in a publisher.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishWithOpenTelemetryTracing.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishWithOpenTelemetryTracing.js,samples/README.md)
+
+__Usage:__
+
+
+`node openTelemetryTracing.js <topic-name-or-id>`
 
 
 -----

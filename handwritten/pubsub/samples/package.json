@@ -21,10 +21,14 @@
     "precompile": "npm run clean"
   },
   "dependencies": {
+    "@google-cloud/opentelemetry-cloud-trace-exporter": "^2.0.0",
     "@google-cloud/pubsub": "^4.6.0",
     "@google-cloud/storage": "^7.11.1",
     "@opentelemetry/api": "^1.6.0",
-    "@opentelemetry/tracing": "^0.24.0",
+    "@opentelemetry/resources": "^1.17.0",
+    "@opentelemetry/sdk-trace-base": "^1.17.0",
+    "@opentelemetry/sdk-trace-node": "^1.17.0",
+    "@opentelemetry/semantic-conventions": "^1.17.0",
     "avro-js": "^1.11.3",
     "p-defer": "^3.0.0",
     "protobufjs": "~7.3.0"
