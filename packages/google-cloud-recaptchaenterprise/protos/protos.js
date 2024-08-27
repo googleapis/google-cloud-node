@@ -3158,6 +3158,7 @@
                          * @property {google.cloud.recaptchaenterprise.v1.IFraudPreventionAssessment|null} [fraudPreventionAssessment] Assessment fraudPreventionAssessment
                          * @property {google.cloud.recaptchaenterprise.v1.IFraudSignals|null} [fraudSignals] Assessment fraudSignals
                          * @property {google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null} [phoneFraudAssessment] Assessment phoneFraudAssessment
+                         * @property {google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment|null} [assessmentEnvironment] Assessment assessmentEnvironment
                          */
     
                         /**
@@ -3264,6 +3265,14 @@
                         Assessment.prototype.phoneFraudAssessment = null;
     
                         /**
+                         * Assessment assessmentEnvironment.
+                         * @member {google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment|null|undefined} assessmentEnvironment
+                         * @memberof google.cloud.recaptchaenterprise.v1.Assessment
+                         * @instance
+                         */
+                        Assessment.prototype.assessmentEnvironment = null;
+    
+                        /**
                          * Creates a new Assessment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.recaptchaenterprise.v1.Assessment
@@ -3309,6 +3318,8 @@
                                 $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.encode(message.phoneFraudAssessment, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.fraudSignals != null && Object.hasOwnProperty.call(message, "fraudSignals"))
                                 $root.google.cloud.recaptchaenterprise.v1.FraudSignals.encode(message.fraudSignals, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.assessmentEnvironment != null && Object.hasOwnProperty.call(message, "assessmentEnvironment"))
+                                $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.encode(message.assessmentEnvironment, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -3385,6 +3396,10 @@
                                     }
                                 case 12: {
                                         message.phoneFraudAssessment = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.assessmentEnvironment = $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -3475,6 +3490,11 @@
                                 if (error)
                                     return "phoneFraudAssessment." + error;
                             }
+                            if (message.assessmentEnvironment != null && message.hasOwnProperty("assessmentEnvironment")) {
+                                var error = $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.verify(message.assessmentEnvironment);
+                                if (error)
+                                    return "assessmentEnvironment." + error;
+                            }
                             return null;
                         };
     
@@ -3542,6 +3562,11 @@
                                     throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.phoneFraudAssessment: object expected");
                                 message.phoneFraudAssessment = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.fromObject(object.phoneFraudAssessment);
                             }
+                            if (object.assessmentEnvironment != null) {
+                                if (typeof object.assessmentEnvironment !== "object")
+                                    throw TypeError(".google.cloud.recaptchaenterprise.v1.Assessment.assessmentEnvironment: object expected");
+                                message.assessmentEnvironment = $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.fromObject(object.assessmentEnvironment);
+                            }
                             return message;
                         };
     
@@ -3570,6 +3595,7 @@
                                 object.fraudPreventionAssessment = null;
                                 object.phoneFraudAssessment = null;
                                 object.fraudSignals = null;
+                                object.assessmentEnvironment = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3593,6 +3619,8 @@
                                 object.phoneFraudAssessment = $root.google.cloud.recaptchaenterprise.v1.PhoneFraudAssessment.toObject(message.phoneFraudAssessment, options);
                             if (message.fraudSignals != null && message.hasOwnProperty("fraudSignals"))
                                 object.fraudSignals = $root.google.cloud.recaptchaenterprise.v1.FraudSignals.toObject(message.fraudSignals, options);
+                            if (message.assessmentEnvironment != null && message.hasOwnProperty("assessmentEnvironment"))
+                                object.assessmentEnvironment = $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.toObject(message.assessmentEnvironment, options);
                             return object;
                         };
     
@@ -21932,6 +21960,233 @@
                         })();
     
                         return WafSettings;
+                    })();
+    
+                    v1.AssessmentEnvironment = (function() {
+    
+                        /**
+                         * Properties of an AssessmentEnvironment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @interface IAssessmentEnvironment
+                         * @property {string|null} [client] AssessmentEnvironment client
+                         * @property {string|null} [version] AssessmentEnvironment version
+                         */
+    
+                        /**
+                         * Constructs a new AssessmentEnvironment.
+                         * @memberof google.cloud.recaptchaenterprise.v1
+                         * @classdesc Represents an AssessmentEnvironment.
+                         * @implements IAssessmentEnvironment
+                         * @constructor
+                         * @param {google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment=} [properties] Properties to set
+                         */
+                        function AssessmentEnvironment(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AssessmentEnvironment client.
+                         * @member {string} client
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @instance
+                         */
+                        AssessmentEnvironment.prototype.client = "";
+    
+                        /**
+                         * AssessmentEnvironment version.
+                         * @member {string} version
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @instance
+                         */
+                        AssessmentEnvironment.prototype.version = "";
+    
+                        /**
+                         * Creates a new AssessmentEnvironment instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment=} [properties] Properties to set
+                         * @returns {google.cloud.recaptchaenterprise.v1.AssessmentEnvironment} AssessmentEnvironment instance
+                         */
+                        AssessmentEnvironment.create = function create(properties) {
+                            return new AssessmentEnvironment(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AssessmentEnvironment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment} message AssessmentEnvironment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssessmentEnvironment.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.client != null && Object.hasOwnProperty.call(message, "client"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.client);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AssessmentEnvironment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment} message AssessmentEnvironment message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AssessmentEnvironment.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AssessmentEnvironment message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.recaptchaenterprise.v1.AssessmentEnvironment} AssessmentEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssessmentEnvironment.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.client = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.version = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AssessmentEnvironment message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.recaptchaenterprise.v1.AssessmentEnvironment} AssessmentEnvironment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AssessmentEnvironment.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AssessmentEnvironment message.
+                         * @function verify
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AssessmentEnvironment.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.client != null && message.hasOwnProperty("client"))
+                                if (!$util.isString(message.client))
+                                    return "client: string expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AssessmentEnvironment message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.recaptchaenterprise.v1.AssessmentEnvironment} AssessmentEnvironment
+                         */
+                        AssessmentEnvironment.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment)
+                                return object;
+                            var message = new $root.google.cloud.recaptchaenterprise.v1.AssessmentEnvironment();
+                            if (object.client != null)
+                                message.client = String(object.client);
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AssessmentEnvironment message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {google.cloud.recaptchaenterprise.v1.AssessmentEnvironment} message AssessmentEnvironment
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AssessmentEnvironment.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.client = "";
+                                object.version = "";
+                            }
+                            if (message.client != null && message.hasOwnProperty("client"))
+                                object.client = message.client;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AssessmentEnvironment to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AssessmentEnvironment.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AssessmentEnvironment
+                         * @function getTypeUrl
+                         * @memberof google.cloud.recaptchaenterprise.v1.AssessmentEnvironment
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AssessmentEnvironment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.recaptchaenterprise.v1.AssessmentEnvironment";
+                        };
+    
+                        return AssessmentEnvironment;
                     })();
     
                     v1.IpOverrideData = (function() {

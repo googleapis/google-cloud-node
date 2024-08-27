@@ -1363,6 +1363,9 @@ export namespace google {
 
                     /** Assessment phoneFraudAssessment */
                     phoneFraudAssessment?: (google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null);
+
+                    /** Assessment assessmentEnvironment */
+                    assessmentEnvironment?: (google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment|null);
                 }
 
                 /** Represents an Assessment. */
@@ -1406,6 +1409,9 @@ export namespace google {
 
                     /** Assessment phoneFraudAssessment. */
                     public phoneFraudAssessment?: (google.cloud.recaptchaenterprise.v1.IPhoneFraudAssessment|null);
+
+                    /** Assessment assessmentEnvironment. */
+                    public assessmentEnvironment?: (google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment|null);
 
                     /**
                      * Creates a new Assessment instance using the specified properties.
@@ -9028,6 +9034,109 @@ export namespace google {
                         FASTLY = 3,
                         CLOUDFLARE = 4
                     }
+                }
+
+                /** Properties of an AssessmentEnvironment. */
+                interface IAssessmentEnvironment {
+
+                    /** AssessmentEnvironment client */
+                    client?: (string|null);
+
+                    /** AssessmentEnvironment version */
+                    version?: (string|null);
+                }
+
+                /** Represents an AssessmentEnvironment. */
+                class AssessmentEnvironment implements IAssessmentEnvironment {
+
+                    /**
+                     * Constructs a new AssessmentEnvironment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment);
+
+                    /** AssessmentEnvironment client. */
+                    public client: string;
+
+                    /** AssessmentEnvironment version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new AssessmentEnvironment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AssessmentEnvironment instance
+                     */
+                    public static create(properties?: google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment): google.cloud.recaptchaenterprise.v1.AssessmentEnvironment;
+
+                    /**
+                     * Encodes the specified AssessmentEnvironment message. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.verify|verify} messages.
+                     * @param message AssessmentEnvironment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AssessmentEnvironment message, length delimited. Does not implicitly {@link google.cloud.recaptchaenterprise.v1.AssessmentEnvironment.verify|verify} messages.
+                     * @param message AssessmentEnvironment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.recaptchaenterprise.v1.IAssessmentEnvironment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AssessmentEnvironment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AssessmentEnvironment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.recaptchaenterprise.v1.AssessmentEnvironment;
+
+                    /**
+                     * Decodes an AssessmentEnvironment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AssessmentEnvironment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.recaptchaenterprise.v1.AssessmentEnvironment;
+
+                    /**
+                     * Verifies an AssessmentEnvironment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AssessmentEnvironment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AssessmentEnvironment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.recaptchaenterprise.v1.AssessmentEnvironment;
+
+                    /**
+                     * Creates a plain object from an AssessmentEnvironment message. Also converts values to other types if specified.
+                     * @param message AssessmentEnvironment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.recaptchaenterprise.v1.AssessmentEnvironment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AssessmentEnvironment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AssessmentEnvironment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an IpOverrideData. */
