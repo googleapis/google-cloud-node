@@ -17773,7 +17773,8 @@ export namespace google {
                     UNSPECIFIED = 0,
                     RAPID = 1,
                     REGULAR = 2,
-                    STABLE = 3
+                    STABLE = 3,
+                    EXTENDED = 4
                 }
             }
 
