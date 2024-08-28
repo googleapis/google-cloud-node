@@ -767,6 +767,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "assessmentEnvironment": {
+                          "type": "AssessmentEnvironment",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2480,6 +2487,24 @@
                             "CA": 1,
                             "FASTLY": 3,
                             "CLOUDFLARE": 4
+                          }
+                        }
+                      }
+                    },
+                    "AssessmentEnvironment": {
+                      "fields": {
+                        "client": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
