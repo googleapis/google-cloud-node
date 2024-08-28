@@ -68,6 +68,7 @@ import {RunOptions} from './transaction';
 import * as protos from '../protos/protos';
 import {serializer} from 'google-gax';
 import * as gax from 'google-gax';
+import {SaveDataValue} from './interfaces/save';
 type JSONValue =
   | string
   | number
@@ -1412,8 +1413,10 @@ export interface PrepareEntityObject {
   [key: string]: google.datastore.v1.Key | undefined;
 }
 export interface PrepareEntityObjectResponse {
-  key?: google.datastore.v1.Key;
-  data?: google.datastore.v1.Entity;
+  key?: entity.Key;
+  data?: SaveDataValue;
+  excludeFromIndexes?: string[];
+  excludeLargeProperties?: boolean;
   method?: string;
 }
 export interface RequestCallback {
