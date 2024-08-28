@@ -34,6 +34,7 @@ import * as is from 'is';
 import * as sinon from 'sinon';
 import * as extend from 'extend';
 import {google} from '../protos/protos';
+import {ServiceError} from 'google-gax';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const v1 = require('../src/v1/index.js');
@@ -88,6 +89,7 @@ const fakeEntityInit: any = {
   keyToKeyProto: entity.keyToKeyProto,
   encodeValue: entity.encodeValue,
   entityToEntityProto: entity.entityToEntityProto,
+  addExcludeFromIndexes: entity.addExcludeFromIndexes,
   findLargeProperties_: entity.findLargeProperties_,
   URLSafeKey: entity.URLSafeKey,
 };
@@ -1533,6 +1535,68 @@ async.each(
             gaxOptions,
             assert.ifError
           );
+        });
+
+        it('should throw error when value is not provided', done => {
+          datastore.request_ = (config: RequestConfig) => {
+            done('Should not reach request_ function');
+          };
+
+          try {
+            datastore.save(
+              {
+                key,
+                data: [
+                  {
+                    name: 'something',
+                  },
+                ],
+              },
+              () => {
+                done('Should not reach callback');
+              }
+            );
+          } catch (err: unknown) {
+            assert.strictEqual(
+              (err as {message: string}).message,
+              'Unsupported field value, undefined, was provided.'
+            );
+            done();
+            return;
+          }
+          assert.fail('Calling save should have thrown an error');
+        });
+
+        it('should throw error when name property does not support toString method', done => {
+          datastore.request_ = (config: RequestConfig) => {
+            done('Should not reach request_ function');
+          };
+          try {
+            datastore.save(
+              {
+                key,
+                data: [
+                  {
+                    name: null,
+                    value: 7,
+                  },
+                ],
+              },
+              () => {
+                done('Should not reach callback');
+              }
+            );
+          } catch (err: unknown) {
+            assert(
+              [
+                "Cannot read properties of null (reading 'toString')", // Later Node versions
+                "Cannot read property 'toString' of null", // Node 14
+              ].includes((err as {message: string}).message)
+            );
+            done();
+            return;
+          }
+          assert.fail('Calling save should have thrown an error');
         });
 
         it('should prepare entity objects', done => {
