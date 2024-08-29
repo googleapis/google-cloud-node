@@ -26,8 +26,568 @@ export namespace google {
             /** Namespace gateway. */
             namespace gateway {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents a GatewayControl */
+                    class GatewayControl extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new GatewayControl service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new GatewayControl service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GatewayControl;
+
+                        /**
+                         * Calls GenerateCredentials.
+                         * @param request GenerateCredentialsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and GenerateCredentialsResponse
+                         */
+                        public generateCredentials(request: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest, callback: google.cloud.gkeconnect.gateway.v1.GatewayControl.GenerateCredentialsCallback): void;
+
+                        /**
+                         * Calls GenerateCredentials.
+                         * @param request GenerateCredentialsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public generateCredentials(request: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest): Promise<google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse>;
+                    }
+
+                    namespace GatewayControl {
+
+                        /**
+                         * Callback as used by {@link google.cloud.gkeconnect.gateway.v1.GatewayControl|generateCredentials}.
+                         * @param error Error, if any
+                         * @param [response] GenerateCredentialsResponse
+                         */
+                        type GenerateCredentialsCallback = (error: (Error|null), response?: google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse) => void;
+                    }
+
+                    /** Properties of a GenerateCredentialsRequest. */
+                    interface IGenerateCredentialsRequest {
+
+                        /** GenerateCredentialsRequest name */
+                        name?: (string|null);
+
+                        /** GenerateCredentialsRequest forceUseAgent */
+                        forceUseAgent?: (boolean|null);
+
+                        /** GenerateCredentialsRequest version */
+                        version?: (string|null);
+
+                        /** GenerateCredentialsRequest kubernetesNamespace */
+                        kubernetesNamespace?: (string|null);
+
+                        /** GenerateCredentialsRequest operatingSystem */
+                        operatingSystem?: (google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem|keyof typeof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem|null);
+                    }
+
+                    /** Represents a GenerateCredentialsRequest. */
+                    class GenerateCredentialsRequest implements IGenerateCredentialsRequest {
+
+                        /**
+                         * Constructs a new GenerateCredentialsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest);
+
+                        /** GenerateCredentialsRequest name. */
+                        public name: string;
+
+                        /** GenerateCredentialsRequest forceUseAgent. */
+                        public forceUseAgent: boolean;
+
+                        /** GenerateCredentialsRequest version. */
+                        public version: string;
+
+                        /** GenerateCredentialsRequest kubernetesNamespace. */
+                        public kubernetesNamespace: string;
+
+                        /** GenerateCredentialsRequest operatingSystem. */
+                        public operatingSystem: (google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem|keyof typeof google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem);
+
+                        /**
+                         * Creates a new GenerateCredentialsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerateCredentialsRequest instance
+                         */
+                        public static create(properties?: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsRequest message. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.verify|verify} messages.
+                         * @param message GenerateCredentialsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsRequest message, length delimited. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.verify|verify} messages.
+                         * @param message GenerateCredentialsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerateCredentialsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerateCredentialsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest;
+
+                        /**
+                         * Decodes a GenerateCredentialsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerateCredentialsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest;
+
+                        /**
+                         * Verifies a GenerateCredentialsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerateCredentialsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerateCredentialsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest;
+
+                        /**
+                         * Creates a plain object from a GenerateCredentialsRequest message. Also converts values to other types if specified.
+                         * @param message GenerateCredentialsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerateCredentialsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerateCredentialsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GenerateCredentialsRequest {
+
+                        /** OperatingSystem enum. */
+                        enum OperatingSystem {
+                            OPERATING_SYSTEM_UNSPECIFIED = 0,
+                            OPERATING_SYSTEM_WINDOWS = 1
+                        }
+                    }
+
+                    /** Properties of a GenerateCredentialsResponse. */
+                    interface IGenerateCredentialsResponse {
+
+                        /** GenerateCredentialsResponse kubeconfig */
+                        kubeconfig?: (Uint8Array|string|null);
+
+                        /** GenerateCredentialsResponse endpoint */
+                        endpoint?: (string|null);
+                    }
+
+                    /** Represents a GenerateCredentialsResponse. */
+                    class GenerateCredentialsResponse implements IGenerateCredentialsResponse {
+
+                        /**
+                         * Constructs a new GenerateCredentialsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse);
+
+                        /** GenerateCredentialsResponse kubeconfig. */
+                        public kubeconfig: (Uint8Array|string);
+
+                        /** GenerateCredentialsResponse endpoint. */
+                        public endpoint: string;
+
+                        /**
+                         * Creates a new GenerateCredentialsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerateCredentialsResponse instance
+                         */
+                        public static create(properties?: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsResponse message. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse.verify|verify} messages.
+                         * @param message GenerateCredentialsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsResponse message, length delimited. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse.verify|verify} messages.
+                         * @param message GenerateCredentialsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkeconnect.gateway.v1.IGenerateCredentialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerateCredentialsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerateCredentialsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse;
+
+                        /**
+                         * Decodes a GenerateCredentialsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerateCredentialsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse;
+
+                        /**
+                         * Verifies a GenerateCredentialsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerateCredentialsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerateCredentialsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse;
+
+                        /**
+                         * Creates a plain object from a GenerateCredentialsResponse message. Also converts values to other types if specified.
+                         * @param message GenerateCredentialsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerateCredentialsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerateCredentialsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Namespace v1beta1. */
                 namespace v1beta1 {
+
+                    /** Represents a GatewayControl */
+                    class GatewayControl extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new GatewayControl service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new GatewayControl service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): GatewayControl;
+
+                        /**
+                         * Calls GenerateCredentials.
+                         * @param request GenerateCredentialsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and GenerateCredentialsResponse
+                         */
+                        public generateCredentials(request: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest, callback: google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentialsCallback): void;
+
+                        /**
+                         * Calls GenerateCredentials.
+                         * @param request GenerateCredentialsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public generateCredentials(request: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest): Promise<google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse>;
+                    }
+
+                    namespace GatewayControl {
+
+                        /**
+                         * Callback as used by {@link google.cloud.gkeconnect.gateway.v1beta1.GatewayControl|generateCredentials}.
+                         * @param error Error, if any
+                         * @param [response] GenerateCredentialsResponse
+                         */
+                        type GenerateCredentialsCallback = (error: (Error|null), response?: google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse) => void;
+                    }
+
+                    /** Properties of a GenerateCredentialsRequest. */
+                    interface IGenerateCredentialsRequest {
+
+                        /** GenerateCredentialsRequest name */
+                        name?: (string|null);
+
+                        /** GenerateCredentialsRequest forceUseAgent */
+                        forceUseAgent?: (boolean|null);
+
+                        /** GenerateCredentialsRequest version */
+                        version?: (string|null);
+
+                        /** GenerateCredentialsRequest kubernetesNamespace */
+                        kubernetesNamespace?: (string|null);
+
+                        /** GenerateCredentialsRequest operatingSystem */
+                        operatingSystem?: (google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem|keyof typeof google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem|null);
+                    }
+
+                    /** Represents a GenerateCredentialsRequest. */
+                    class GenerateCredentialsRequest implements IGenerateCredentialsRequest {
+
+                        /**
+                         * Constructs a new GenerateCredentialsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest);
+
+                        /** GenerateCredentialsRequest name. */
+                        public name: string;
+
+                        /** GenerateCredentialsRequest forceUseAgent. */
+                        public forceUseAgent: boolean;
+
+                        /** GenerateCredentialsRequest version. */
+                        public version: string;
+
+                        /** GenerateCredentialsRequest kubernetesNamespace. */
+                        public kubernetesNamespace: string;
+
+                        /** GenerateCredentialsRequest operatingSystem. */
+                        public operatingSystem: (google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem|keyof typeof google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem);
+
+                        /**
+                         * Creates a new GenerateCredentialsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerateCredentialsRequest instance
+                         */
+                        public static create(properties?: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsRequest message. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.verify|verify} messages.
+                         * @param message GenerateCredentialsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsRequest message, length delimited. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.verify|verify} messages.
+                         * @param message GenerateCredentialsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerateCredentialsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerateCredentialsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest;
+
+                        /**
+                         * Decodes a GenerateCredentialsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerateCredentialsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest;
+
+                        /**
+                         * Verifies a GenerateCredentialsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerateCredentialsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerateCredentialsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest;
+
+                        /**
+                         * Creates a plain object from a GenerateCredentialsRequest message. Also converts values to other types if specified.
+                         * @param message GenerateCredentialsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerateCredentialsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerateCredentialsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GenerateCredentialsRequest {
+
+                        /** OperatingSystem enum. */
+                        enum OperatingSystem {
+                            OPERATING_SYSTEM_UNSPECIFIED = 0,
+                            OPERATING_SYSTEM_WINDOWS = 1
+                        }
+                    }
+
+                    /** Properties of a GenerateCredentialsResponse. */
+                    interface IGenerateCredentialsResponse {
+
+                        /** GenerateCredentialsResponse kubeconfig */
+                        kubeconfig?: (Uint8Array|string|null);
+
+                        /** GenerateCredentialsResponse endpoint */
+                        endpoint?: (string|null);
+                    }
+
+                    /** Represents a GenerateCredentialsResponse. */
+                    class GenerateCredentialsResponse implements IGenerateCredentialsResponse {
+
+                        /**
+                         * Constructs a new GenerateCredentialsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse);
+
+                        /** GenerateCredentialsResponse kubeconfig. */
+                        public kubeconfig: (Uint8Array|string);
+
+                        /** GenerateCredentialsResponse endpoint. */
+                        public endpoint: string;
+
+                        /**
+                         * Creates a new GenerateCredentialsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GenerateCredentialsResponse instance
+                         */
+                        public static create(properties?: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsResponse message. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse.verify|verify} messages.
+                         * @param message GenerateCredentialsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GenerateCredentialsResponse message, length delimited. Does not implicitly {@link google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse.verify|verify} messages.
+                         * @param message GenerateCredentialsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gkeconnect.gateway.v1beta1.IGenerateCredentialsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GenerateCredentialsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GenerateCredentialsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse;
+
+                        /**
+                         * Decodes a GenerateCredentialsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GenerateCredentialsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse;
+
+                        /**
+                         * Verifies a GenerateCredentialsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GenerateCredentialsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GenerateCredentialsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse;
+
+                        /**
+                         * Creates a plain object from a GenerateCredentialsResponse message. Also converts values to other types if specified.
+                         * @param message GenerateCredentialsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GenerateCredentialsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GenerateCredentialsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Represents a GatewayService */
                     class GatewayService extends $protobuf.rpc.Service {
@@ -2010,6 +2570,19 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a HttpBody. */
@@ -4282,6 +4855,9 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.api.fieldBehavior */
+            ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
         }
 
         /** Represents a FieldOptions. */

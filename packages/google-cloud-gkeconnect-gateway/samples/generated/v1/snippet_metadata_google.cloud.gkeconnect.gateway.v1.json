@@ -5,14 +5,14 @@
         "language": "TYPESCRIPT",
         "apis": [
             {
-                "id": "google.cloud.gkeconnect.gateway.v1beta1",
-                "version": "v1beta1"
+                "id": "google.cloud.gkeconnect.gateway.v1",
+                "version": "v1"
             }
         ]
     },
     "snippets": [
         {
-            "regionTag": "connectgateway_v1beta1_generated_GatewayControl_GenerateCredentials_async",
+            "regionTag": "connectgateway_v1_generated_GatewayControl_GenerateCredentials_async",
             "title": "GatewayControl generateCredentials Sample",
             "origin": "API_DEFINITION",
             "description": " GenerateCredentials provides connection information that allows a user to access the specified membership using Connect Gateway.",
@@ -28,7 +28,7 @@
             ],
             "clientMethod": {
                 "shortName": "GenerateCredentials",
-                "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentials",
+                "fullName": "google.cloud.gkeconnect.gateway.v1.GatewayControl.GenerateCredentials",
                 "async": true,
                 "parameters": [
                     {
@@ -49,20 +49,20 @@
                     },
                     {
                         "name": "operating_system",
-                        "type": ".google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsRequest.OperatingSystem"
+                        "type": ".google.cloud.gkeconnect.gateway.v1.GenerateCredentialsRequest.OperatingSystem"
                     }
                 ],
-                "resultType": ".google.cloud.gkeconnect.gateway.v1beta1.GenerateCredentialsResponse",
+                "resultType": ".google.cloud.gkeconnect.gateway.v1.GenerateCredentialsResponse",
                 "client": {
                     "shortName": "GatewayControlClient",
-                    "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControlClient"
+                    "fullName": "google.cloud.gkeconnect.gateway.v1.GatewayControlClient"
                 },
                 "method": {
                     "shortName": "GenerateCredentials",
-                    "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl.GenerateCredentials",
+                    "fullName": "google.cloud.gkeconnect.gateway.v1.GatewayControl.GenerateCredentials",
                     "service": {
                         "shortName": "GatewayControl",
-                        "fullName": "google.cloud.gkeconnect.gateway.v1beta1.GatewayControl"
+                        "fullName": "google.cloud.gkeconnect.gateway.v1.GatewayControl"
                     }
                 }
             }
