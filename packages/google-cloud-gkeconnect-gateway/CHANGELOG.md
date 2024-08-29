@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/gke-connect-gateway-v3.3.0...gke-connect-gateway-v4.0.0) (2024-08-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* existing client libraries are being regenerated to remove unused functionality and introduce new features.
+
+### Features
+
+* [gkeconnect] removed the nonfunctional GatewayService and replaced it with the GatewayControl service ([#5632](https://github.com/googleapis/google-cloud-node/issues/5632)) ([c03e3a5](https://github.com/googleapis/google-cloud-node/commit/c03e3a5ce9740b70c9e9cf67ef98464d14052f84))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/gke-connect-gateway-v3.2.0...gke-connect-gateway-v3.3.0) (2024-05-21)
 
 

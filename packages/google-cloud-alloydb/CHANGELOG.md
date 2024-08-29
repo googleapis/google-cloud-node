@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.8.0...alloydb-v1.9.0) (2024-08-29)
+
+
+### Features
+
+* [alloydb] support for enabling outbound public IP on an instance ([#5638](https://github.com/googleapis/google-cloud-node/issues/5638)) ([11554e0](https://github.com/googleapis/google-cloud-node/commit/11554e0847734bff0b1c68007fd5227ae2008b87))
+
 ## [1.8.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v1.7.0...alloydb-v1.8.0) (2024-05-21)
 
 

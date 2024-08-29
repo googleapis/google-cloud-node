@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.18.0...sql-v0.19.0) (2024-08-29)
+
+
+### Features
+
+* [sql] A new field `max_chargeable_bytes` is added to message `.google.cloud.sql.v1.BackupRun` ([#5631](https://github.com/googleapis/google-cloud-node/issues/5631)) ([a2328d8](https://github.com/googleapis/google-cloud-node/commit/a2328d88189081ce1d3342470d1ffcedfc0c78be))
+
 ## [0.18.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.17.0...sql-v0.18.0) (2024-08-19)
 
 

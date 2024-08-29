@@ -5,6 +5,117 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b03f419cab2ebf8385d2df7bf018863e63295624",
+          "message": "[container] add `EXTENDED` enum value for `ReleaseChannel.Channel`",
+          "issues": [
+            "5641"
+          ]
+        }
+      ],
+      "version": "5.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "5357da50-318f-4c63-9e78-f9713ab69b9d",
+      "createTime": "2024-08-29T21:45:48.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a2328d88189081ce1d3342470d1ffcedfc0c78be",
+          "message": "[sql] A new field `max_chargeable_bytes` is added to message `.google.cloud.sql.v1.BackupRun`",
+          "issues": [
+            "5631"
+          ]
+        }
+      ],
+      "version": "0.19.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "1b555c9c-8eb9-400a-94be-91cef876568d",
+      "createTime": "2024-08-29T21:45:48.368Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4fe0674834f7bce5e845017efae304dd0c8ef862",
+          "message": "[recaptchaenterprise] add AssessmentEnvironment for CreateAssessement to explicitly describe the environment of the assessment",
+          "issues": [
+            "5639"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a211bb6ca388ef08b2ea819515d71399b0b51979",
+          "message": "[recaptchaenterprise] add AddIpOverride RPC",
+          "issues": [
+            "5629"
+          ]
+        }
+      ],
+      "version": "5.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "3a53352d-3866-4741-9b5e-65e2a8835522",
+      "createTime": "2024-08-29T21:45:48.351Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c03e3a5ce9740b70c9e9cf67ef98464d14052f84",
+          "message": "[gkeconnect] removed the nonfunctional GatewayService and replaced it with the GatewayControl service",
+          "issues": [
+            "5632"
+          ],
+          "breakingChangeNote": "existing client libraries are being regenerated to remove unused functionality and introduce new features."
+        }
+      ],
+      "version": "4.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "93097cf3-188b-48c1-bcb1-4121162fd232",
+      "createTime": "2024-08-29T21:45:48.335Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "11554e0847734bff0b1c68007fd5227ae2008b87",
+          "message": "[alloydb] support for enabling outbound public IP on an instance",
+          "issues": [
+            "5638"
+          ]
+        }
+      ],
+      "version": "1.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "14b738c0-e806-471b-9d4f-820ad5d05da6",
+      "createTime": "2024-08-29T21:45:48.319Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "39e65cbbe8c09020d6d33a2b6864de17ec58ef51",
+          "message": "Add max_wait_duration to Scheduling",
+          "issues": [
+            "5642"
+          ]
+        }
+      ],
+      "version": "3.28.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "d0cdee92-6a12-49dd-8c77-be4a2cba1142",
+      "createTime": "2024-08-29T21:45:48.283Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "f9cfc5463b02af3296df3e647633597730122ae8",
           "message": "[grafeas] A new field `version` is added to message `.grafeas.v1.ComplianceOccurrence`",
           "issues": [
@@ -36104,5 +36215,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-08-19T17:17:10.524Z"
+  "updateTime": "2024-08-29T21:45:48.411Z"
 }
