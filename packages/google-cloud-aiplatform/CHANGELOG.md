@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.28.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.27.0...aiplatform-v3.28.0) (2024-08-29)
+
+
+### Features
+
+* Add max_wait_duration to Scheduling ([#5642](https://github.com/googleapis/google-cloud-node/issues/5642)) ([39e65cb](https://github.com/googleapis/google-cloud-node/commit/39e65cbbe8c09020d6d33a2b6864de17ec58ef51))
+
 ## [3.27.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.26.0...aiplatform-v3.27.0) (2024-08-19)
 
 

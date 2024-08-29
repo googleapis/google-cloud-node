@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.10.0...recaptcha-enterprise-v5.11.0) (2024-08-29)
+
+
+### Features
+
+* [recaptchaenterprise] add AddIpOverride RPC ([#5629](https://github.com/googleapis/google-cloud-node/issues/5629)) ([a211bb6](https://github.com/googleapis/google-cloud-node/commit/a211bb6ca388ef08b2ea819515d71399b0b51979))
+* [recaptchaenterprise] add AssessmentEnvironment for CreateAssessement to explicitly describe the environment of the assessment ([#5639](https://github.com/googleapis/google-cloud-node/issues/5639)) ([4fe0674](https://github.com/googleapis/google-cloud-node/commit/4fe0674834f7bce5e845017efae304dd0c8ef862))
+
 ## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/recaptcha-enterprise-v5.9.0...recaptcha-enterprise-v5.10.0) (2024-06-26)
 
 
