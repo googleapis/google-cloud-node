@@ -34,7 +34,7 @@ function main(key) {
   // const key = {}
   /**
    *  Optional. The mask to control which fields of the key get updated. If the
-   *  mask is not present, all fields will be updated.
+   *  mask is not present, all fields are updated.
    */
   // const updateMask = {}
 

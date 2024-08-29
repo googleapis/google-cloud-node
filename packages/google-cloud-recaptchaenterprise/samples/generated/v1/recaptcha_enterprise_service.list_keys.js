@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project that contains the keys that will be
+   *  Required. The name of the project that contains the keys that are
    *  listed, in the format `projects/{project}`.
    */
   // const parent = 'abc123'
