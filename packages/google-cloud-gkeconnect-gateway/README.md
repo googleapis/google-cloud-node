@@ -59,10 +59,10 @@ npm install @google-cloud/gke-connect-gateway
 ```javascript
 // Imports the Google Cloud client library
 
-const {GatewayServiceClient} = require('@google-cloud/gke-connect-gateway');
+const {GatewayControlClient} = require('@google-cloud/gke-connect-gateway');
 
 // Creates a client
-new GatewayServiceClient();
+new GatewayControlClient();
 
 ```
 
