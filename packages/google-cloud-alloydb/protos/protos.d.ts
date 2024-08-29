@@ -21008,6 +21008,306 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MaintenanceUpdatePolicy. */
+                interface IMaintenanceUpdatePolicy {
+
+                    /** MaintenanceUpdatePolicy maintenanceWindows */
+                    maintenanceWindows?: (google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow[]|null);
+                }
+
+                /** Represents a MaintenanceUpdatePolicy. */
+                class MaintenanceUpdatePolicy implements IMaintenanceUpdatePolicy {
+
+                    /**
+                     * Constructs a new MaintenanceUpdatePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1beta.IMaintenanceUpdatePolicy);
+
+                    /** MaintenanceUpdatePolicy maintenanceWindows. */
+                    public maintenanceWindows: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow[];
+
+                    /**
+                     * Creates a new MaintenanceUpdatePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceUpdatePolicy instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1beta.IMaintenanceUpdatePolicy): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy;
+
+                    /**
+                     * Encodes the specified MaintenanceUpdatePolicy message. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.verify|verify} messages.
+                     * @param message MaintenanceUpdatePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1beta.IMaintenanceUpdatePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceUpdatePolicy message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.verify|verify} messages.
+                     * @param message MaintenanceUpdatePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1beta.IMaintenanceUpdatePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceUpdatePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceUpdatePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy;
+
+                    /**
+                     * Decodes a MaintenanceUpdatePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceUpdatePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy;
+
+                    /**
+                     * Verifies a MaintenanceUpdatePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceUpdatePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceUpdatePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy;
+
+                    /**
+                     * Creates a plain object from a MaintenanceUpdatePolicy message. Also converts values to other types if specified.
+                     * @param message MaintenanceUpdatePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceUpdatePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceUpdatePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MaintenanceUpdatePolicy {
+
+                    /** Properties of a MaintenanceWindow. */
+                    interface IMaintenanceWindow {
+
+                        /** MaintenanceWindow day */
+                        day?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                        /** MaintenanceWindow startTime */
+                        startTime?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a MaintenanceWindow. */
+                    class MaintenanceWindow implements IMaintenanceWindow {
+
+                        /**
+                         * Constructs a new MaintenanceWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow);
+
+                        /** MaintenanceWindow day. */
+                        public day: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                        /** MaintenanceWindow startTime. */
+                        public startTime?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new MaintenanceWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MaintenanceWindow instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow;
+
+                        /**
+                         * Encodes the specified MaintenanceWindow message. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow.verify|verify} messages.
+                         * @param message MaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow.verify|verify} messages.
+                         * @param message MaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.IMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MaintenanceWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow;
+
+                        /**
+                         * Decodes a MaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow;
+
+                        /**
+                         * Verifies a MaintenanceWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MaintenanceWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow;
+
+                        /**
+                         * Creates a plain object from a MaintenanceWindow message. Also converts values to other types if specified.
+                         * @param message MaintenanceWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.MaintenanceUpdatePolicy.MaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MaintenanceWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a MaintenanceSchedule. */
+                interface IMaintenanceSchedule {
+
+                    /** MaintenanceSchedule startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MaintenanceSchedule. */
+                class MaintenanceSchedule implements IMaintenanceSchedule {
+
+                    /**
+                     * Constructs a new MaintenanceSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.alloydb.v1beta.IMaintenanceSchedule);
+
+                    /** MaintenanceSchedule startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MaintenanceSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceSchedule instance
+                     */
+                    public static create(properties?: google.cloud.alloydb.v1beta.IMaintenanceSchedule): google.cloud.alloydb.v1beta.MaintenanceSchedule;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.alloydb.v1beta.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.alloydb.v1beta.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.MaintenanceSchedule;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.MaintenanceSchedule;
+
+                    /**
+                     * Verifies a MaintenanceSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.MaintenanceSchedule;
+
+                    /**
+                     * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                     * @param message MaintenanceSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.alloydb.v1beta.MaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Cluster. */
                 interface ICluster {
 
@@ -21091,6 +21391,12 @@ export namespace google {
 
                     /** Cluster satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
+
+                    /** Cluster maintenanceUpdatePolicy */
+                    maintenanceUpdatePolicy?: (google.cloud.alloydb.v1beta.IMaintenanceUpdatePolicy|null);
+
+                    /** Cluster maintenanceSchedule */
+                    maintenanceSchedule?: (google.cloud.alloydb.v1beta.IMaintenanceSchedule|null);
                 }
 
                 /** Represents a Cluster. */
@@ -21182,6 +21488,12 @@ export namespace google {
 
                     /** Cluster satisfiesPzs. */
                     public satisfiesPzs: boolean;
+
+                    /** Cluster maintenanceUpdatePolicy. */
+                    public maintenanceUpdatePolicy?: (google.cloud.alloydb.v1beta.IMaintenanceUpdatePolicy|null);
+
+                    /** Cluster maintenanceSchedule. */
+                    public maintenanceSchedule?: (google.cloud.alloydb.v1beta.IMaintenanceSchedule|null);
 
                     /** Cluster source. */
                     public source?: ("backupSource"|"migrationSource");
@@ -21668,6 +21980,9 @@ export namespace google {
 
                     /** Instance networkConfig */
                     networkConfig?: (google.cloud.alloydb.v1beta.Instance.IInstanceNetworkConfig|null);
+
+                    /** Instance outboundPublicIpAddresses */
+                    outboundPublicIpAddresses?: (string[]|null);
                 }
 
                 /** Represents an Instance. */
@@ -21759,6 +22074,9 @@ export namespace google {
 
                     /** Instance networkConfig. */
                     public networkConfig?: (google.cloud.alloydb.v1beta.Instance.IInstanceNetworkConfig|null);
+
+                    /** Instance outboundPublicIpAddresses. */
+                    public outboundPublicIpAddresses: string[];
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -22721,6 +23039,9 @@ export namespace google {
 
                         /** InstanceNetworkConfig enablePublicIp */
                         enablePublicIp?: (boolean|null);
+
+                        /** InstanceNetworkConfig enableOutboundPublicIp */
+                        enableOutboundPublicIp?: (boolean|null);
                     }
 
                     /** Represents an InstanceNetworkConfig. */
@@ -22737,6 +23058,9 @@ export namespace google {
 
                         /** InstanceNetworkConfig enablePublicIp. */
                         public enablePublicIp: boolean;
+
+                        /** InstanceNetworkConfig enableOutboundPublicIp. */
+                        public enableOutboundPublicIp: boolean;
 
                         /**
                          * Creates a new InstanceNetworkConfig instance using the specified properties.

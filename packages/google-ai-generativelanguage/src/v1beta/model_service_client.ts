@@ -447,7 +447,12 @@ export class ModelServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets information about a specific Model.
+   * Gets information about a specific `Model` such as its version number, token
+   * limits,
+   * [parameters](https://ai.google.dev/gemini-api/docs/models/generative-models#model-parameters)
+   * and other metadata. Refer to the [Gemini models
+   * guide](https://ai.google.dev/gemini-api/docs/models/gemini) for detailed
+   * model information.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -836,10 +841,10 @@ export class ModelServiceClient {
 
   /**
    * Creates a tuned model.
-   * Intermediate tuning progress (if any) is accessed through the
+   * Check intermediate tuning progress (if any) through the
    * [google.longrunning.Operations] service.
    *
-   * Status and results can be accessed through the Operations service.
+   * Access status and results through the Operations service.
    * Example:
    *   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222
    *
@@ -849,7 +854,7 @@ export class ModelServiceClient {
    *   Optional. The unique id for the tuned model if specified.
    *   This value should be up to 40 characters, the first character must be a
    *   letter, the last could be a letter or a number. The id must match the
-   *   regular expression: [a-z]([a-z0-9-]{0,38}[a-z0-9])?.
+   *   regular expression: `[a-z]([a-z0-9-]{0,38}[a-z0-9])?`.
    * @param {google.ai.generativelanguage.v1beta.TunedModel} request.tunedModel
    *   Required. The tuned model to create.
    * @param {object} [options]
@@ -978,15 +983,15 @@ export class ModelServiceClient {
     >;
   }
   /**
-   * Lists models available through the API.
+   * Lists the [`Model`s](https://ai.google.dev/gemini-api/docs/models/gemini)
+   * available through the Gemini API.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {number} request.pageSize
    *   The maximum number of `Models` to return (per page).
    *
-   *   The service may return fewer models.
-   *   If unspecified, at most 50 models will be returned per page.
+   *   If unspecified, 50 models will be returned per page.
    *   This method returns at most 1000 models per page, even if you pass a larger
    *   page_size.
    * @param {string} request.pageToken
@@ -1087,8 +1092,7 @@ export class ModelServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of `Models` to return (per page).
    *
-   *   The service may return fewer models.
-   *   If unspecified, at most 50 models will be returned per page.
+   *   If unspecified, 50 models will be returned per page.
    *   This method returns at most 1000 models per page, even if you pass a larger
    *   page_size.
    * @param {string} request.pageToken
@@ -1137,8 +1141,7 @@ export class ModelServiceClient {
    * @param {number} request.pageSize
    *   The maximum number of `Models` to return (per page).
    *
-   *   The service may return fewer models.
-   *   If unspecified, at most 50 models will be returned per page.
+   *   If unspecified, 50 models will be returned per page.
    *   This method returns at most 1000 models per page, even if you pass a larger
    *   page_size.
    * @param {string} request.pageToken
@@ -1179,7 +1182,7 @@ export class ModelServiceClient {
     ) as AsyncIterable<protos.google.ai.generativelanguage.v1beta.IModel>;
   }
   /**
-   * Lists tuned models owned by the user.
+   * Lists created tuned models.
    *
    * @param {Object} request
    *   The request object that will be sent.

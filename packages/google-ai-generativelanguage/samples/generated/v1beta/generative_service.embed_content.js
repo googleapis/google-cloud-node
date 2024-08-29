@@ -55,8 +55,8 @@ function main(model, content) {
   /**
    *  Optional. Optional reduced dimension for the output embedding. If set,
    *  excessive values in the output embedding are truncated from the end.
-   *  Supported by newer models since 2024, and the earlier model
-   *  (`models/embedding-001`) cannot specify this value.
+   *  Supported by newer models since 2024 only. You cannot set this value if
+   *  using the earlier model (`models/embedding-001`).
    */
   // const outputDimensionality = 1234
 

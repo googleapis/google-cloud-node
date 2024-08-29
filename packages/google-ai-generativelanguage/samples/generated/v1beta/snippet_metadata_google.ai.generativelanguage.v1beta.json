@@ -491,14 +491,14 @@
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_GenerateContent_async",
             "title": "CacheService generateContent Sample",
             "origin": "API_DEFINITION",
-            "description": " Generates a response from the model given an input `GenerateContentRequest`. Input capabilities differ between models, including tuned models. See the [model guide](https://ai.google.dev/models/gemini) and [tuning guide](https://ai.google.dev/docs/model_tuning_guidance) for details.",
+            "description": " Generates a model response given an input `GenerateContentRequest`. Refer to the [text generation guide](https://ai.google.dev/gemini-api/docs/text-generation) for detailed usage information. Input capabilities differ between models, including tuned models. Refer to the [model guide](https://ai.google.dev/gemini-api/docs/models/gemini) and [tuning guide](https://ai.google.dev/gemini-api/docs/model-tuning) for details.",
             "canonical": true,
             "file": "generative_service.generate_content.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 105,
+                    "end": 117,
                     "type": "FULL"
                 }
             ],
@@ -566,7 +566,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 102,
+                    "end": 107,
                     "type": "FULL"
                 }
             ],
@@ -623,14 +623,14 @@
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_StreamGenerateContent_async",
             "title": "CacheService streamGenerateContent Sample",
             "origin": "API_DEFINITION",
-            "description": " Generates a streamed response from the model given an input `GenerateContentRequest`.",
+            "description": " Generates a [streamed response](https://ai.google.dev/gemini-api/docs/text-generation?lang=python#generate-a-text-stream) from the model given an input `GenerateContentRequest`.",
             "canonical": true,
             "file": "generative_service.stream_generate_content.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 107,
+                    "end": 119,
                     "type": "FULL"
                 }
             ],
@@ -691,7 +691,7 @@
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_EmbedContent_async",
             "title": "CacheService embedContent Sample",
             "origin": "API_DEFINITION",
-            "description": " Generates an embedding from the model given an input `Content`.",
+            "description": " Generates a text embedding vector from the input `Content` using the specified [Gemini Embedding model](https://ai.google.dev/gemini-api/docs/models/gemini#text-embedding).",
             "canonical": true,
             "file": "generative_service.embed_content.js",
             "language": "JAVASCRIPT",
@@ -747,7 +747,7 @@
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_BatchEmbedContents_async",
             "title": "CacheService batchEmbedContents Sample",
             "origin": "API_DEFINITION",
-            "description": " Generates multiple embeddings from the model given input text in a synchronous call.",
+            "description": " Generates multiple embedding vectors from the input `Content` which consists of a batch of strings represented as `EmbedContentRequest` objects.",
             "canonical": true,
             "file": "generative_service.batch_embed_contents.js",
             "language": "JAVASCRIPT",
@@ -791,14 +791,14 @@
             "regionTag": "generativelanguage_v1beta_generated_GenerativeService_CountTokens_async",
             "title": "CacheService countTokens Sample",
             "origin": "API_DEFINITION",
-            "description": " Runs a model's tokenizer on input content and returns the token count.",
+            "description": " Runs a model's tokenizer on input `Content` and returns the token count. Refer to the [tokens guide](https://ai.google.dev/gemini-api/docs/tokens) to learn more about tokens.",
             "canonical": true,
             "file": "generative_service.count_tokens.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -839,7 +839,7 @@
             "regionTag": "generativelanguage_v1beta_generated_ModelService_GetModel_async",
             "title": "CacheService getModel Sample",
             "origin": "API_DEFINITION",
-            "description": " Gets information about a specific Model.",
+            "description": " Gets information about a specific `Model` such as its version number, token limits, [parameters](https://ai.google.dev/gemini-api/docs/models/generative-models#model-parameters) and other metadata. Refer to the [Gemini models guide](https://ai.google.dev/gemini-api/docs/models/gemini) for detailed model information.",
             "canonical": true,
             "file": "model_service.get_model.js",
             "language": "JAVASCRIPT",
@@ -879,14 +879,14 @@
             "regionTag": "generativelanguage_v1beta_generated_ModelService_ListModels_async",
             "title": "CacheService listModels Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists models available through the API.",
+            "description": " Lists the [`Model`s](https://ai.google.dev/gemini-api/docs/models/gemini) available through the Gemini API.",
             "canonical": true,
             "file": "model_service.list_models.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 66,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -963,7 +963,7 @@
             "regionTag": "generativelanguage_v1beta_generated_ModelService_ListTunedModels_async",
             "title": "CacheService listTunedModels Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists tuned models owned by the user.",
+            "description": " Lists created tuned models.",
             "canonical": true,
             "file": "model_service.list_tuned_models.js",
             "language": "JAVASCRIPT",
@@ -1011,7 +1011,7 @@
             "regionTag": "generativelanguage_v1beta_generated_ModelService_CreateTunedModel_async",
             "title": "CacheService createTunedModel Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a tuned model. Intermediate tuning progress (if any) is accessed through the [google.longrunning.Operations] service. Status and results can be accessed through the Operations service. Example:   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222",
+            "description": " Creates a tuned model. Check intermediate tuning progress (if any) through the [google.longrunning.Operations] service. Access status and results through the Operations service. Example:   GET /v1/tunedModels/az2mb0bpw6i/operations/000-111-222",
             "canonical": true,
             "file": "model_service.create_tuned_model.js",
             "language": "JAVASCRIPT",

@@ -7074,6 +7074,40 @@
                         }
                       }
                     },
+                    "MaintenanceUpdatePolicy": {
+                      "fields": {
+                        "maintenanceWindows": {
+                          "rule": "repeated",
+                          "type": "MaintenanceWindow",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "MaintenanceWindow": {
+                          "fields": {
+                            "day": {
+                              "type": "google.type.DayOfWeek",
+                              "id": 1
+                            },
+                            "startTime": {
+                              "type": "google.type.TimeOfDay",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MaintenanceSchedule": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "Cluster": {
                       "options": {
                         "(google.api.resource).type": "alloydb.googleapis.com/Cluster",
@@ -7263,6 +7297,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "maintenanceUpdatePolicy": {
+                          "type": "MaintenanceUpdatePolicy",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maintenanceSchedule": {
+                          "type": "MaintenanceSchedule",
+                          "id": 37,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -7444,6 +7492,7 @@
                           "type": "string",
                           "id": 27,
                           "options": {
+                            "(google.api.field_info).format": "IPV4",
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
@@ -7493,6 +7542,15 @@
                           "id": 29,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outboundPublicIpAddresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4",
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       },
@@ -7690,6 +7748,13 @@
                             "enablePublicIp": {
                               "type": "bool",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "enableOutboundPublicIp": {
+                              "type": "bool",
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

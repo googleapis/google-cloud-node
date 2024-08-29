@@ -35,7 +35,6 @@ function main(input, audioConfig, outputGcsUri, voice) {
   // const parent = 'abc123'
   /**
    *  Required. The Synthesizer requires either plain text or SSML as input.
-   *  While Long Audio is in preview, SSML is temporarily unsupported.
    */
   // const input = {}
   /**
