@@ -14804,6 +14804,46 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async",
+      "title": "DatasetService updateRagCorpus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a RagCorpus.",
+      "canonical": true,
+      "file": "vertex_rag_data_service.update_rag_corpus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateRagCorpus",
+        "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UpdateRagCorpus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "rag_corpus",
+            "type": ".google.cloud.aiplatform.v1beta1.RagCorpus"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VertexRagDataServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateRagCorpus",
+          "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService.UpdateRagCorpus",
+          "service": {
+            "shortName": "VertexRagDataService",
+            "fullName": "google.cloud.aiplatform.v1beta1.VertexRagDataService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_VertexRagDataService_GetRagCorpus_async",
       "title": "DatasetService getRagCorpus Sample",
       "origin": "API_DEFINITION",
