@@ -48,6 +48,11 @@ function main(projectId, region, clusterName) {
    */
   // const tarballGcsDir = 'abc123'
   /**
+   *  Optional. (Optional) The access type to the diagnostic tarball. If not
+   *  specified, falls back to default access of the bucket
+   */
+  // const tarballAccess = {}
+  /**
    *  Optional. Time interval in which diagnosis should be carried out on the
    *  cluster.
    */
