@@ -2853,6 +2853,9 @@ export namespace google {
 
                         /** InstancePolicyOrTemplate installOpsAgent */
                         installOpsAgent?: (boolean|null);
+
+                        /** InstancePolicyOrTemplate blockProjectSshKeys */
+                        blockProjectSshKeys?: (boolean|null);
                     }
 
                     /** Represents an InstancePolicyOrTemplate. */
@@ -2875,6 +2878,9 @@ export namespace google {
 
                         /** InstancePolicyOrTemplate installOpsAgent. */
                         public installOpsAgent: boolean;
+
+                        /** InstancePolicyOrTemplate blockProjectSshKeys. */
+                        public blockProjectSshKeys: boolean;
 
                         /** InstancePolicyOrTemplate policyTemplate. */
                         public policyTemplate?: ("policy"|"instanceTemplate");
