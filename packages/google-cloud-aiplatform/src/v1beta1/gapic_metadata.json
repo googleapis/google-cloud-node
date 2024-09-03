@@ -3803,6 +3803,11 @@
                 "createRagCorpus"
               ]
             },
+            "UpdateRagCorpus": {
+              "methods": [
+                "updateRagCorpus"
+              ]
+            },
             "DeleteRagCorpus": {
               "methods": [
                 "deleteRagCorpus"
@@ -3855,6 +3860,11 @@
             "CreateRagCorpus": {
               "methods": [
                 "createRagCorpus"
+              ]
+            },
+            "UpdateRagCorpus": {
+              "methods": [
+                "updateRagCorpus"
               ]
             },
             "DeleteRagCorpus": {
