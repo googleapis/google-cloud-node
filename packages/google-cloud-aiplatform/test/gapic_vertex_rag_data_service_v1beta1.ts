@@ -961,6 +961,210 @@ describe('v1beta1.VertexRagDataServiceClient', () => {
     });
   });
 
+  describe('updateRagCorpus', () => {
+    it('invokes updateRagCorpus without error', async () => {
+      const client =
+        new vertexragdataserviceModule.v1beta1.VertexRagDataServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest()
+      );
+      request.ragCorpus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest',
+        ['ragCorpus', 'name']
+      );
+      request.ragCorpus.name = defaultValue1;
+      const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateRagCorpus =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateRagCorpus(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRagCorpus without error using callback', async () => {
+      const client =
+        new vertexragdataserviceModule.v1beta1.VertexRagDataServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest()
+      );
+      request.ragCorpus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest',
+        ['ragCorpus', 'name']
+      );
+      request.ragCorpus.name = defaultValue1;
+      const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateRagCorpus =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateRagCorpus(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+              protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRagCorpus with call error', async () => {
+      const client =
+        new vertexragdataserviceModule.v1beta1.VertexRagDataServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest()
+      );
+      request.ragCorpus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest',
+        ['ragCorpus', 'name']
+      );
+      request.ragCorpus.name = defaultValue1;
+      const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRagCorpus = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateRagCorpus(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateRagCorpus with LRO error', async () => {
+      const client =
+        new vertexragdataserviceModule.v1beta1.VertexRagDataServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest()
+      );
+      request.ragCorpus ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusRequest',
+        ['ragCorpus', 'name']
+      );
+      request.ragCorpus.name = defaultValue1;
+      const expectedHeaderRequestParams = `rag_corpus.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateRagCorpus = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateRagCorpus(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRagCorpus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateRagCorpusProgress without error', async () => {
+      const client =
+        new vertexragdataserviceModule.v1beta1.VertexRagDataServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateRagCorpusProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateRagCorpusProgress with error', async () => {
+      const client =
+        new vertexragdataserviceModule.v1beta1.VertexRagDataServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateRagCorpusProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('deleteRagCorpus', () => {
     it('invokes deleteRagCorpus without error', async () => {
       const client =
