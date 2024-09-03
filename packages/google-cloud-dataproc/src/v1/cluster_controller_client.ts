@@ -1608,6 +1608,9 @@ export class ClusterControllerClient {
    *   Optional. The output Cloud Storage directory for the diagnostic
    *   tarball. If not specified, a task-specific directory in the cluster's
    *   staging bucket will be used.
+   * @param {google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess} [request.tarballAccess]
+   *   Optional. (Optional) The access type to the diagnostic tarball. If not
+   *   specified, falls back to default access of the bucket
    * @param {google.type.Interval} [request.diagnosisInterval]
    *   Optional. Time interval in which diagnosis should be carried out on the
    *   cluster.

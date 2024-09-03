@@ -3198,6 +3198,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "tarballAccess": {
+                          "type": "TarballAccess",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "diagnosisInterval": {
                           "type": "google.type.Interval",
                           "id": 6,
@@ -3219,6 +3226,15 @@
                           "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TarballAccess": {
+                          "values": {
+                            "TARBALL_ACCESS_UNSPECIFIED": 0,
+                            "GOOGLE_CLOUD_SUPPORT": 1,
+                            "GOOGLE_DATAPROC_DIAGNOSE": 2
                           }
                         }
                       }

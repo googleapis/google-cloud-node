@@ -2163,6 +2163,12 @@ export class VertexRagDataServiceClient {
     const createRagCorpusMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateRagCorpusResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.RagCorpus'
+    ) as gax.protobuf.Type;
+    const updateRagCorpusMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata'
+    ) as gax.protobuf.Type;
     const deleteRagCorpusResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -2187,6 +2193,11 @@ export class VertexRagDataServiceClient {
         this.operationsClient,
         createRagCorpusResponse.decode.bind(createRagCorpusResponse),
         createRagCorpusMetadata.decode.bind(createRagCorpusMetadata)
+      ),
+      updateRagCorpus: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateRagCorpusResponse.decode.bind(updateRagCorpusResponse),
+        updateRagCorpusMetadata.decode.bind(updateRagCorpusMetadata)
       ),
       deleteRagCorpus: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -2257,6 +2268,7 @@ export class VertexRagDataServiceClient {
     // and create an API call method for each.
     const vertexRagDataServiceStubMethods = [
       'createRagCorpus',
+      'updateRagCorpus',
       'getRagCorpus',
       'listRagCorpora',
       'deleteRagCorpus',
@@ -2801,6 +2813,142 @@ export class VertexRagDataServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.RagCorpus,
       protos.google.cloud.aiplatform.v1beta1.CreateRagCorpusOperationMetadata
+    >;
+  }
+  /**
+   * Updates a RagCorpus.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1beta1.RagCorpus} request.ragCorpus
+   *   Required. The RagCorpus which replaces the resource on the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async
+   */
+  updateRagCorpus(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateRagCorpus(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateRagCorpus(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateRagCorpus(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+            protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IRagCorpus,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateRagCorpusOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'rag_corpus.name': request.ragCorpus!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateRagCorpus(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateRagCorpus()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/vertex_rag_data_service.update_rag_corpus.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_VertexRagDataService_UpdateRagCorpus_async
+   */
+  async checkUpdateRagCorpusProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.RagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateRagCorpus,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.RagCorpus,
+      protos.google.cloud.aiplatform.v1beta1.UpdateRagCorpusOperationMetadata
     >;
   }
   /**
