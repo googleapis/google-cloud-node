@@ -9868,6 +9868,9 @@ export namespace google {
                     /** DiagnoseClusterRequest tarballGcsDir */
                     tarballGcsDir?: (string|null);
 
+                    /** DiagnoseClusterRequest tarballAccess */
+                    tarballAccess?: (google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess|keyof typeof google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess|null);
+
                     /** DiagnoseClusterRequest diagnosisInterval */
                     diagnosisInterval?: (google.type.IInterval|null);
 
@@ -9898,6 +9901,9 @@ export namespace google {
 
                     /** DiagnoseClusterRequest tarballGcsDir. */
                     public tarballGcsDir: string;
+
+                    /** DiagnoseClusterRequest tarballAccess. */
+                    public tarballAccess: (google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess|keyof typeof google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess);
 
                     /** DiagnoseClusterRequest diagnosisInterval. */
                     public diagnosisInterval?: (google.type.IInterval|null);
@@ -9984,6 +9990,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DiagnoseClusterRequest {
+
+                    /** TarballAccess enum. */
+                    enum TarballAccess {
+                        TARBALL_ACCESS_UNSPECIFIED = 0,
+                        GOOGLE_CLOUD_SUPPORT = 1,
+                        GOOGLE_DATAPROC_DIAGNOSE = 2
+                    }
                 }
 
                 /** Properties of a DiagnoseClusterResults. */
