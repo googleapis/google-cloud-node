@@ -122,8 +122,12 @@ function main(servingConfig) {
    *  a field in an Document google.cloud.discoveryengine.v1beta.Document 
    *  object. Leave it unset if ordered by relevance. `order_by` expression is
    *  case-sensitive.
-   *  For more information on ordering for retail search, see
-   *  Ordering (https://cloud.google.com/retail/docs/filter-and-order#order)
+   *  For more information on ordering the website search results, see
+   *  Order web search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *  For more information on ordering the healthcare search results, see
+   *  Order healthcare search
+   *  results (https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *  If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    */
   // const orderBy = 'abc123'
@@ -300,6 +304,13 @@ function main(servingConfig) {
    *  Can be used only when `session` is set.
    */
   // const sessionSpec = {}
+  /**
+   *  The relevance threshold of the search results.
+   *  Default to Google defined threshold, leveraging a balance of
+   *  precision and recall to deliver both highly accurate results and
+   *  comprehensive coverage of relevant information.
+   */
+  // const relevanceThreshold = {}
 
   // Imports the Discoveryengine library
   const {SearchServiceClient} = require('@google-cloud/discoveryengine').v1beta;

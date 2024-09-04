@@ -15,7 +15,7 @@
             "regionTag": "discoveryengine_v1alpha_generated_AclConfigService_UpdateAclConfig_async",
             "title": "AclConfigService updateAclConfig Sample",
             "origin": "API_DEFINITION",
-            "description": " Default Acl Configuration for use in a location of a customer's project. Updates will only reflect to new data stores. Existing data stores will still use the old value.",
+            "description": " Default ACL configuration for use in a location of a customer's project. Updates will only reflect to new data stores. Existing data stores will still use the old value.",
             "canonical": true,
             "file": "acl_config_service.update_acl_config.js",
             "language": "JAVASCRIPT",
@@ -2020,6 +2020,50 @@
                 "method": {
                     "shortName": "GetProcessedDocument",
                     "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.GetProcessedDocument",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1alpha_generated_DocumentService_BatchGetDocumentsMetadata_async",
+            "title": "AclConfigService batchGetDocumentsMetadata Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets index freshness metadata for [Document][google.cloud.discoveryengine.v1alpha.Document]s. Supported for website search only.",
+            "canonical": true,
+            "file": "document_service.batch_get_documents_metadata.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchGetDocumentsMetadata",
+                "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.BatchGetDocumentsMetadata",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "matcher",
+                        "type": ".google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest.Matcher"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataResponse",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchGetDocumentsMetadata",
+                    "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService.BatchGetDocumentsMetadata",
                     "service": {
                         "shortName": "DocumentService",
                         "fullName": "google.cloud.discoveryengine.v1alpha.DocumentService"

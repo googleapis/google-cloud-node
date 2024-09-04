@@ -382,6 +382,11 @@
                 "deleteDocument"
               ]
             },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batchGetDocumentsMetadata"
+              ]
+            },
             "ImportDocuments": {
               "methods": [
                 "importDocuments"
@@ -422,6 +427,11 @@
             "DeleteDocument": {
               "methods": [
                 "deleteDocument"
+              ]
+            },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batchGetDocumentsMetadata"
               ]
             },
             "ImportDocuments": {
@@ -705,6 +715,40 @@
         }
       }
     },
+    "SearchTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SearchTuningServiceClient",
+          "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
+            "TrainCustomModel": {
+              "methods": [
+                "trainCustomModel"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SearchTuningServiceClient",
+          "rpcs": {
+            "ListCustomModels": {
+              "methods": [
+                "listCustomModels"
+              ]
+            },
+            "TrainCustomModel": {
+              "methods": [
+                "trainCustomModel"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SiteSearchEngineService": {
       "clients": {
         "grpc": {
@@ -862,6 +906,11 @@
                 "collectUserEvent"
               ]
             },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
+              ]
+            },
             "ImportUserEvents": {
               "methods": [
                 "importUserEvents"
@@ -880,6 +929,11 @@
             "CollectUserEvent": {
               "methods": [
                 "collectUserEvent"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purgeUserEvents"
               ]
             },
             "ImportUserEvents": {

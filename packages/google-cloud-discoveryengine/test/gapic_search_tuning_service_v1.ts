@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as datastoreserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as searchtuningserviceModule from '../src';
 
 import {
   protobuf,
@@ -103,44 +101,6 @@ function stubLongRunningCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, mockOperation);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
 function stubAsyncIterationCall<ResponseType>(
   responses?: ResponseType[],
   error?: Error
@@ -164,16 +124,18 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.DataStoreServiceClient', () => {
+describe('v1.SearchTuningServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+      const client =
+        new searchtuningserviceModule.v1.SearchTuningServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
     });
 
     it('has universeDomain', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+      const client =
+        new searchtuningserviceModule.v1.SearchTuningServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -185,7 +147,7 @@ describe('v1.DataStoreServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          datastoreserviceModule.v1.DataStoreServiceClient.servicePath;
+          searchtuningserviceModule.v1.SearchTuningServiceClient.servicePath;
         assert.strictEqual(servicePath, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
@@ -194,24 +156,24 @@ describe('v1.DataStoreServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          datastoreserviceModule.v1.DataStoreServiceClient.apiEndpoint;
+          searchtuningserviceModule.v1.SearchTuningServiceClient.apiEndpoint;
         assert.strictEqual(apiEndpoint, 'discoveryengine.googleapis.com');
         assert(stub.called);
         stub.restore();
       });
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        universeDomain: 'example.com',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {universeDomain: 'example.com'}
+      );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        universe_domain: 'example.com',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {universe_domain: 'example.com'}
+      );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
     });
@@ -221,7 +183,8 @@ describe('v1.DataStoreServiceClient', () => {
         it('sets apiEndpoint from environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+          const client =
+            new searchtuningserviceModule.v1.SearchTuningServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'discoveryengine.example.com');
           if (saved) {
@@ -234,9 +197,10 @@ describe('v1.DataStoreServiceClient', () => {
         it('value configured in code has priority over environment variable', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
-          const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-            universeDomain: 'configured.example.com',
-          });
+          const client =
+            new searchtuningserviceModule.v1.SearchTuningServiceClient({
+              universeDomain: 'configured.example.com',
+            });
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
             servicePath,
@@ -252,7 +216,7 @@ describe('v1.DataStoreServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new datastoreserviceModule.v1.DataStoreServiceClient({
+        new searchtuningserviceModule.v1.SearchTuningServiceClient({
           universe_domain: 'example.com',
           universeDomain: 'example.net',
         });
@@ -260,51 +224,60 @@ describe('v1.DataStoreServiceClient', () => {
     });
 
     it('has port', () => {
-      const port = datastoreserviceModule.v1.DataStoreServiceClient.port;
+      const port = searchtuningserviceModule.v1.SearchTuningServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient();
+      const client =
+        new searchtuningserviceModule.v1.SearchTuningServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        fallback: true,
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          fallback: true,
+        }
+      );
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataStoreServiceStub, undefined);
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      assert.strictEqual(client.searchTuningServiceStub, undefined);
       await client.initialize();
-      assert(client.dataStoreServiceStub);
+      assert(client.searchTuningServiceStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
-      assert(client.dataStoreServiceStub);
+      assert(client.searchTuningServiceStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.dataStoreServiceStub, undefined);
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      assert.strictEqual(client.searchTuningServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -312,10 +285,12 @@ describe('v1.DataStoreServiceClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -324,10 +299,12 @@ describe('v1.DataStoreServiceClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -345,991 +322,357 @@ describe('v1.DataStoreServiceClient', () => {
     });
   });
 
-  describe('getDataStore', () => {
-    it('invokes getDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.getDataStore = stubSimpleCall(expectedResponse);
-      const [response] = await client.getDataStore(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.getDataStore =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.getDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDataStore | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataStore with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.getDataStore = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.getDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.getDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes getDataStore with closed client', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.GetDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.GetDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.getDataStore(request), expectedError);
-    });
-  });
-
-  describe('updateDataStore', () => {
-    it('invokes updateDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.updateDataStore = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateDataStore(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DataStore()
-      );
-      client.innerApiCalls.updateDataStore =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDataStore | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataStore with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedHeaderRequestParams = `data_store.name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateDataStore = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.updateDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes updateDataStore with closed client', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.UpdateDataStoreRequest()
-      );
-      request.dataStore ??= {};
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.UpdateDataStoreRequest',
-        ['dataStore', 'name']
-      );
-      request.dataStore.name = defaultValue1;
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.updateDataStore(request), expectedError);
-    });
-  });
-
-  describe('createDataStore', () => {
-    it('invokes createDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDataStore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createDataStore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.createDataStore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.cloud.discoveryengine.v1.IDataStore,
-              protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.cloud.discoveryengine.v1.IDataStore,
-        protos.google.cloud.discoveryengine.v1.ICreateDataStoreMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataStore with call error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataStore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes createDataStore with LRO error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.CreateDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.CreateDataStoreRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createDataStore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.createDataStore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.createDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkCreateDataStoreProgress without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateDataStoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkCreateDataStoreProgress with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkCreateDataStoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('deleteDataStore', () => {
-    it('invokes deleteDataStore without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataStore =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteDataStore(request);
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataStore without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
-      );
-      client.innerApiCalls.deleteDataStore =
-        stubLongRunningCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteDataStore(
-          request,
-          (
-            err?: Error | null,
-            result?: LROperation<
-              protos.google.protobuf.IEmpty,
-              protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
-            > | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const operation = (await promise) as LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.discoveryengine.v1.IDeleteDataStoreMetadata
-      >;
-      const [response] = await operation.promise();
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataStore with call error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataStore = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteDataStore(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes deleteDataStore with LRO error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.DeleteDataStoreRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.DeleteDataStoreRequest',
-        ['name']
-      );
-      request.name = defaultValue1;
-      const expectedHeaderRequestParams = `name=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteDataStore = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
-      const [operation] = await client.deleteDataStore(request);
-      await assert.rejects(operation.promise(), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.deleteDataStore as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes checkDeleteDataStoreProgress without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedResponse = generateSampleMessage(
-        new operationsProtos.google.longrunning.Operation()
-      );
-      expectedResponse.name = 'test';
-      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
-      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
-
-      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteDataStoreProgress(
-        expectedResponse.name
-      );
-      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
-      assert(decodedOperation.metadata);
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-
-    it('invokes checkDeleteDataStoreProgress with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const expectedError = new Error('expected');
-
-      client.operationsClient.getOperation = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.checkDeleteDataStoreProgress(''),
-        expectedError
-      );
-      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
-    });
-  });
-
-  describe('listDataStores', () => {
-    it('invokes listDataStores without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.innerApiCalls.listDataStores = stubSimpleCall(expectedResponse);
-      const [response] = await client.listDataStores(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDataStores without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.innerApiCalls.listDataStores =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listDataStores(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.discoveryengine.v1.IDataStore[] | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      const actualRequest = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDataStores with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listDataStores = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listDataStores(request), expectedError);
-      const actualRequest = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[0];
-      assert.deepStrictEqual(actualRequest, request);
-      const actualHeaderRequestParams = (
-        client.innerApiCalls.listDataStores as SinonStub
-      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
-      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
-    });
-
-    it('invokes listDataStoresStream without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.descriptors.page.listDataStores.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listDataStoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.DataStore[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1.DataStore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDataStores, request)
-      );
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('invokes listDataStoresStream with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDataStores.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listDataStoresStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.discoveryengine.v1.DataStore[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.discoveryengine.v1.DataStore) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listDataStores, request)
-      );
-      assert(
-        (client.descriptors.page.listDataStores.createStream as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDataStores without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.discoveryengine.v1.DataStore()
-        ),
-      ];
-      client.descriptors.page.listDataStores.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.discoveryengine.v1.IDataStore[] = [];
-      const iterable = client.listDataStoresAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDataStores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
-      );
-    });
-
-    it('uses async iteration with listDataStores with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.discoveryengine.v1.ListDataStoresRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.discoveryengine.v1.ListDataStoresRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listDataStores.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listDataStoresAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.discoveryengine.v1.IDataStore[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
+  describe('listCustomModels', () => {
+    it('invokes listCustomModels without error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
         }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListCustomModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListCustomModelsRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListCustomModelsResponse()
+      );
+      client.innerApiCalls.listCustomModels = stubSimpleCall(expectedResponse);
+      const [response] = await client.listCustomModels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCustomModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomModels without error using callback', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListCustomModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListCustomModelsRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListCustomModelsResponse()
+      );
+      client.innerApiCalls.listCustomModels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listCustomModels(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1.IListCustomModelsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
       });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listDataStores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listCustomModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomModels with error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
       );
-      assert(
-        (client.descriptors.page.listDataStores.asyncIterate as SinonStub)
-          .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams)
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListCustomModelsRequest()
       );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListCustomModelsRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listCustomModels = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listCustomModels(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listCustomModels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomModels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listCustomModels with closed client', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.ListCustomModelsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.ListCustomModelsRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.listCustomModels(request), expectedError);
+    });
+  });
+
+  describe('trainCustomModel', () => {
+    it('invokes trainCustomModel without error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.TrainCustomModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.TrainCustomModelRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.trainCustomModel =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.trainCustomModel(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes trainCustomModel without error using callback', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.TrainCustomModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.TrainCustomModelRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.trainCustomModel =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.trainCustomModel(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.discoveryengine.v1.ITrainCustomModelResponse,
+              protos.google.cloud.discoveryengine.v1.ITrainCustomModelMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.discoveryengine.v1.ITrainCustomModelResponse,
+        protos.google.cloud.discoveryengine.v1.ITrainCustomModelMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes trainCustomModel with call error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.TrainCustomModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.TrainCustomModelRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.trainCustomModel = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.trainCustomModel(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes trainCustomModel with LRO error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1.TrainCustomModelRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1.TrainCustomModelRequest',
+        ['dataStore']
+      );
+      request.dataStore = defaultValue1;
+      const expectedHeaderRequestParams = `data_store=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.trainCustomModel = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.trainCustomModel(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.trainCustomModel as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkTrainCustomModelProgress without error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkTrainCustomModelProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkTrainCustomModelProgress with error', async () => {
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkTrainCustomModelProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1356,10 +699,12 @@ describe('v1.DataStoreServiceClient', () => {
       );
     });
     it('invokes getLocation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1400,10 +745,12 @@ describe('v1.DataStoreServiceClient', () => {
       assert((client.locationsClient.getLocation as SinonStub).getCall(0));
     });
     it('invokes getLocation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.GetLocationRequest()
@@ -1435,10 +782,12 @@ describe('v1.DataStoreServiceClient', () => {
   });
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1483,10 +832,12 @@ describe('v1.DataStoreServiceClient', () => {
       );
     });
     it('uses async iteration with listLocations with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new LocationProtos.google.cloud.location.ListLocationsRequest()
@@ -1524,10 +875,12 @@ describe('v1.DataStoreServiceClient', () => {
   });
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
@@ -1545,10 +898,12 @@ describe('v1.DataStoreServiceClient', () => {
       );
     });
     it('invokes getOperation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1579,10 +934,12 @@ describe('v1.DataStoreServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
     it('invokes getOperation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.GetOperationRequest()
       );
@@ -1603,10 +960,12 @@ describe('v1.DataStoreServiceClient', () => {
   });
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
@@ -1625,10 +984,12 @@ describe('v1.DataStoreServiceClient', () => {
       );
     });
     it('invokes cancelOperation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1659,10 +1020,12 @@ describe('v1.DataStoreServiceClient', () => {
       assert((client.operationsClient.cancelOperation as SinonStub).getCall(0));
     });
     it('invokes cancelOperation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.CancelOperationRequest()
       );
@@ -1683,10 +1046,12 @@ describe('v1.DataStoreServiceClient', () => {
   });
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
@@ -1705,10 +1070,12 @@ describe('v1.DataStoreServiceClient', () => {
       );
     });
     it('invokes deleteOperation without error using callback', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1739,10 +1106,12 @@ describe('v1.DataStoreServiceClient', () => {
       assert((client.operationsClient.deleteOperation as SinonStub).getCall(0));
     });
     it('invokes deleteOperation with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.DeleteOperationRequest()
       );
@@ -1763,10 +1132,12 @@ describe('v1.DataStoreServiceClient', () => {
   });
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
       );
@@ -1799,10 +1170,12 @@ describe('v1.DataStoreServiceClient', () => {
       );
     });
     it('uses async iteration with listOperations with error', async () => {
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new operationsProtos.google.longrunning.ListOperationsRequest()
@@ -1829,70 +1202,6 @@ describe('v1.DataStoreServiceClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('collection', () => {
-      const fakePath = '/rendered/path/collection';
-      const expectedParameters = {
-        project: 'projectValue',
-        location: 'locationValue',
-        collection: 'collectionValue',
-      };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      client.pathTemplates.collectionPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.collectionPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
-
-      it('collectionPath', () => {
-        const result = client.collectionPath(
-          'projectValue',
-          'locationValue',
-          'collectionValue'
-        );
-        assert.strictEqual(result, fakePath);
-        assert(
-          (client.pathTemplates.collectionPathTemplate.render as SinonStub)
-            .getCall(-1)
-            .calledWith(expectedParameters)
-        );
-      });
-
-      it('matchProjectFromCollectionName', () => {
-        const result = client.matchProjectFromCollectionName(fakePath);
-        assert.strictEqual(result, 'projectValue');
-        assert(
-          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchLocationFromCollectionName', () => {
-        const result = client.matchLocationFromCollectionName(fakePath);
-        assert.strictEqual(result, 'locationValue');
-        assert(
-          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-
-      it('matchCollectionFromCollectionName', () => {
-        const result = client.matchCollectionFromCollectionName(fakePath);
-        assert.strictEqual(result, 'collectionValue');
-        assert(
-          (client.pathTemplates.collectionPathTemplate.match as SinonStub)
-            .getCall(-1)
-            .calledWith(fakePath)
-        );
-      });
-    });
-
     describe('engine', () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
@@ -1901,10 +1210,12 @@ describe('v1.DataStoreServiceClient', () => {
         collection: 'collectionValue',
         engine: 'engineValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.enginePathTemplate.render = sinon
         .stub()
@@ -1974,10 +1285,12 @@ describe('v1.DataStoreServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -2015,10 +1328,12 @@ describe('v1.DataStoreServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStorePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2119,10 +1434,12 @@ describe('v1.DataStoreServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2266,10 +1583,12 @@ describe('v1.DataStoreServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2429,10 +1748,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2555,10 +1876,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2682,10 +2005,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         custom_tuning_model: 'customTuningModelValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2808,10 +2133,12 @@ describe('v1.DataStoreServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -2917,10 +2244,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3043,10 +2372,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3170,10 +2501,12 @@ describe('v1.DataStoreServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3314,10 +2647,12 @@ describe('v1.DataStoreServiceClient', () => {
         collection: 'collectionValue',
         data_store: 'dataStoreValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3423,10 +2758,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3549,10 +2886,12 @@ describe('v1.DataStoreServiceClient', () => {
         engine: 'engineValue',
         control: 'controlValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineControlPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3675,10 +3014,12 @@ describe('v1.DataStoreServiceClient', () => {
         engine: 'engineValue',
         conversation: 'conversationValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3800,10 +3141,12 @@ describe('v1.DataStoreServiceClient', () => {
         engine: 'engineValue',
         session: 'sessionValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -3927,10 +3270,12 @@ describe('v1.DataStoreServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationCollectionEngineSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4068,10 +3413,12 @@ describe('v1.DataStoreServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStorePathTemplate.render = sinon
         .stub()
@@ -4149,10 +3496,12 @@ describe('v1.DataStoreServiceClient', () => {
         branch: 'branchValue',
         document: 'documentValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4276,10 +3625,12 @@ describe('v1.DataStoreServiceClient', () => {
         document: 'documentValue',
         chunk: 'chunkValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreBranchDocumentChunkPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4418,10 +3769,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         control: 'controlValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreControlPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4513,10 +3866,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         conversation: 'conversationValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreConversationPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4620,10 +3975,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         custom_tuning_model: 'customTuningModelValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4726,10 +4083,12 @@ describe('v1.DataStoreServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreDocumentProcessingConfigPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4815,10 +4174,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         schema: 'schemaValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSchemaPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -4908,10 +4269,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         session: 'sessionValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5004,10 +4367,12 @@ describe('v1.DataStoreServiceClient', () => {
         session: 'sessionValue',
         answer: 'answerValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSessionAnswerPathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5128,10 +4493,12 @@ describe('v1.DataStoreServiceClient', () => {
         location: 'locationValue',
         data_store: 'dataStoreValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEnginePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -5217,10 +4584,12 @@ describe('v1.DataStoreServiceClient', () => {
         data_store: 'dataStoreValue',
         target_site: 'targetSiteValue',
       };
-      const client = new datastoreserviceModule.v1.DataStoreServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client = new searchtuningserviceModule.v1.SearchTuningServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
       client.initialize();
       client.pathTemplates.projectLocationDataStoreSiteSearchEngineTargetSitePathTemplate.render =
         sinon.stub().returns(fakePath);

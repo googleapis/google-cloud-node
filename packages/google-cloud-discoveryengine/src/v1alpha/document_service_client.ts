@@ -579,6 +579,7 @@ export class DocumentServiceClient {
       'importDocuments',
       'purgeDocuments',
       'getProcessedDocument',
+      'batchGetDocumentsMetadata',
     ];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
@@ -1246,6 +1247,112 @@ export class DocumentServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getProcessedDocument(request, options, callback);
+  }
+  /**
+   * Gets index freshness metadata for
+   * {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s. Supported for
+   * website search only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent branch resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+   * @param {google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest.Matcher} request.matcher
+   *   Required. Matcher for the
+   *   {@link protos.google.cloud.discoveryengine.v1alpha.Document|Document}s.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataResponse|BatchGetDocumentsMetadataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/document_service.batch_get_documents_metadata.js</caption>
+   * region_tag:discoveryengine_v1alpha_generated_DocumentService_BatchGetDocumentsMetadata_async
+   */
+  batchGetDocumentsMetadata(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchGetDocumentsMetadata(
+    request: protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
+      | protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchGetDocumentsMetadata(
+    request: protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
+      | protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchGetDocumentsMetadata(
+    request?: protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
+          | protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
+      | protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchGetDocumentsMetadata(
+      request,
+      options,
+      callback
+    );
   }
 
   /**
