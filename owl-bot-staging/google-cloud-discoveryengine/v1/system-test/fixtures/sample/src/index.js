@@ -33,6 +33,7 @@ function main() {
   const recommendationServiceClient = new discoveryengine.RecommendationServiceClient();
   const schemaServiceClient = new discoveryengine.SchemaServiceClient();
   const searchServiceClient = new discoveryengine.SearchServiceClient();
+  const searchTuningServiceClient = new discoveryengine.SearchTuningServiceClient();
   const siteSearchEngineServiceClient = new discoveryengine.SiteSearchEngineServiceClient();
   const userEventServiceClient = new discoveryengine.UserEventServiceClient();
 }

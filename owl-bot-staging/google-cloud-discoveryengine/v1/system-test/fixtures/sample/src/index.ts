@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient} from '@google-cloud/discoveryengine';
+import {CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, DataStoreServiceClient, DocumentServiceClient, EngineServiceClient, GroundedGenerationServiceClient, ProjectServiceClient, RankServiceClient, RecommendationServiceClient, SchemaServiceClient, SearchServiceClient, SearchTuningServiceClient, SiteSearchEngineServiceClient, UserEventServiceClient} from '@google-cloud/discoveryengine';
 
 // check that the client class type name can be used
 function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
@@ -53,6 +53,9 @@ function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
   client.close();
 }
 function doStuffWithSearchServiceClient(client: SearchServiceClient) {
+  client.close();
+}
+function doStuffWithSearchTuningServiceClient(client: SearchTuningServiceClient) {
   client.close();
 }
 function doStuffWithSiteSearchEngineServiceClient(client: SiteSearchEngineServiceClient) {
@@ -99,6 +102,9 @@ function main() {
   // check that the client instance can be created
   const searchServiceClient = new SearchServiceClient();
   doStuffWithSearchServiceClient(searchServiceClient);
+  // check that the client instance can be created
+  const searchTuningServiceClient = new SearchTuningServiceClient();
+  doStuffWithSearchTuningServiceClient(searchTuningServiceClient);
   // check that the client instance can be created
   const siteSearchEngineServiceClient = new SiteSearchEngineServiceClient();
   doStuffWithSiteSearchEngineServiceClient(siteSearchEngineServiceClient);

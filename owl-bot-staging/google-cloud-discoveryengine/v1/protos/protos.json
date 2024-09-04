@@ -116,7 +116,8 @@
                             "content": {
                               "oneof": [
                                 "unstructuredDocumentInfo",
-                                "chunkInfo"
+                                "chunkInfo",
+                                "structuredDocumentInfo"
                               ]
                             }
                           },
@@ -128,6 +129,10 @@
                             "chunkInfo": {
                               "type": "ChunkInfo",
                               "id": 2
+                            },
+                            "structuredDocumentInfo": {
+                              "type": "StructuredDocumentInfo",
+                              "id": 3
                             }
                           },
                           "nested": {
@@ -160,6 +165,13 @@
                               },
                               "nested": {
                                 "ChunkContent": {
+                                  "oneofs": {
+                                    "_relevanceScore": {
+                                      "oneof": [
+                                        "relevanceScore"
+                                      ]
+                                    }
+                                  },
                                   "fields": {
                                     "content": {
                                       "type": "string",
@@ -168,6 +180,13 @@
                                     "pageIdentifier": {
                                       "type": "string",
                                       "id": 2
+                                    },
+                                    "relevanceScore": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
                                     }
                                   }
                                 }
@@ -232,6 +251,21 @@
                                       "id": 5
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "StructuredDocumentInfo": {
+                              "fields": {
+                                "document": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                                  }
+                                },
+                                "structData": {
+                                  "type": "google.protobuf.Struct",
+                                  "id": 2
                                 }
                               }
                             }
@@ -403,7 +437,8 @@
                                   "values": {
                                     "TYPE_UNSPECIFIED": 0,
                                     "ADVERSARIAL_QUERY": 1,
-                                    "NON_ANSWER_SEEKING_QUERY": 2
+                                    "NON_ANSWER_SEEKING_QUERY": 2,
+                                    "JAIL_BREAKING_QUERY": 3
                                   }
                                 }
                               }
@@ -425,7 +460,9 @@
                             "NON_ANSWER_SEEKING_QUERY_IGNORED": 2,
                             "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
                             "POTENTIAL_POLICY_VIOLATION": 4,
-                            "NO_RELEVANT_CONTENT": 5
+                            "NO_RELEVANT_CONTENT": 5,
+                            "JAIL_BREAKING_QUERY_IGNORED": 6,
+                            "CUSTOMER_POLICY_VIOLATION": 7
                           }
                         }
                       }
@@ -1114,6 +1151,11 @@
                         "gcsStagingDir": {
                           "type": "string",
                           "id": 2
+                        },
+                        "resourceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1684,6 +1726,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "indexStatus": {
+                          "type": "IndexStatus",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1708,6 +1757,19 @@
                             "mimeType": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "IndexStatus": {
+                          "fields": {
+                            "indexTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "errorSamples": {
+                              "rule": "repeated",
+                              "type": "google.rpc.Status",
+                              "id": 2
                             }
                           }
                         }
@@ -1979,6 +2041,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
+                        },
+                        "joined": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2045,8 +2114,90 @@
                         }
                       }
                     },
-                    "PurgeDocumentsRequest": {
+                    "PurgeUserEventsRequest": {
                       "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "force": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PurgeUserEventsResponse": {
+                      "fields": {
+                        "purgeCount": {
+                          "type": "int64",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PurgeUserEventsMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "successCount": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "failureCount": {
+                          "type": "int64",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "PurgeErrorConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsPrefix"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PurgeDocumentsRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource",
+                            "inlineSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 5
+                        },
+                        "inlineSource": {
+                          "type": "InlineSource",
+                          "id": 6
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
@@ -2062,9 +2213,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "errorConfig": {
+                          "type": "PurgeErrorConfig",
+                          "id": 7
+                        },
                         "force": {
                           "type": "bool",
                           "id": 3
+                        }
+                      },
+                      "nested": {
+                        "InlineSource": {
+                          "fields": {
+                            "documents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3111,6 +3281,10 @@
                                   "type": "bool",
                                   "id": 4
                                 },
+                                "ignoreLowRelevantContent": {
+                                  "type": "bool",
+                                  "id": 9
+                                },
                                 "modelPromptSpec": {
                                   "type": "ModelPromptSpec",
                                   "id": 5
@@ -3470,7 +3644,10 @@
                                 "NON_SUMMARY_SEEKING_QUERY_IGNORED": 2,
                                 "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
                                 "POTENTIAL_POLICY_VIOLATION": 4,
-                                "LLM_ADDON_NOT_ENABLED": 5
+                                "LLM_ADDON_NOT_ENABLED": 5,
+                                "NO_RELEVANT_CONTENT": 6,
+                                "JAIL_BREAKING_QUERY_IGNORED": 7,
+                                "CUSTOMER_POLICY_VIOLATION": 8
                               }
                             }
                           }
@@ -4384,7 +4561,8 @@
                                   "values": {
                                     "TYPE_UNSPECIFIED": 0,
                                     "ADVERSARIAL_QUERY": 1,
-                                    "NON_ANSWER_SEEKING_QUERY": 2
+                                    "NON_ANSWER_SEEKING_QUERY": 2,
+                                    "JAIL_BREAKING_QUERY": 3
                                   }
                                 }
                               }
@@ -4613,6 +4791,64 @@
                         "queryId": {
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "CustomTuningModel": {
+                      "options": {
+                        "(google.api.resource).type": "discoveryengine.googleapis.com/CustomTuningModel",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/CustomTuningModel"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "modelVersion": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "modelState": {
+                          "type": "ModelState",
+                          "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "trainingStartTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6
+                        },
+                        "metrics": {
+                          "keyType": "string",
+                          "type": "double",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "ModelState": {
+                          "values": {
+                            "MODEL_STATE_UNSPECIFIED": 0,
+                            "TRAINING_PAUSED": 1,
+                            "TRAINING": 2,
+                            "TRAINING_COMPLETE": 3,
+                            "READY_FOR_SERVING": 4,
+                            "TRAINING_FAILED": 5,
+                            "NO_IMPROVEMENT": 6,
+                            "INPUT_VALIDATION_FAILED": 7
+                          }
                         }
                       }
                     },
@@ -4994,6 +5230,10 @@
                         "createAdvancedSiteSearch": {
                           "type": "bool",
                           "id": 4
+                        },
+                        "skipDefaultSchemaCreation": {
+                          "type": "bool",
+                          "id": 7
                         }
                       }
                     },
@@ -5280,6 +5520,28 @@
                               }
                             }
                           ]
+                        },
+                        "BatchGetDocumentsMetadata": {
+                          "requestType": "BatchGetDocumentsMetadataRequest",
+                          "responseType": "BatchGetDocumentsMetadataResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/dataStores/*/branches/*}/batchGetDocumentsMetadata",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/batchGetDocumentsMetadata",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/dataStores/*/branches/*}/batchGetDocumentsMetadata",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/batchGetDocumentsMetadata"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -5381,6 +5643,107 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetDocumentsMetadataRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Branch"
+                          }
+                        },
+                        "matcher": {
+                          "type": "Matcher",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UrisMatcher": {
+                          "fields": {
+                            "uris": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Matcher": {
+                          "oneofs": {
+                            "matcher": {
+                              "oneof": [
+                                "urisMatcher"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "urisMatcher": {
+                              "type": "UrisMatcher",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetDocumentsMetadataResponse": {
+                      "fields": {
+                        "documentsMetadata": {
+                          "rule": "repeated",
+                          "type": "DocumentMetadata",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "DocumentMetadata": {
+                          "fields": {
+                            "matcherValue": {
+                              "type": "MatcherValue",
+                              "id": 2
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 3
+                            },
+                            "lastRefreshedTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            },
+                            "dataIngestionSource": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "MatcherValue": {
+                              "oneofs": {
+                                "matcherValue": {
+                                  "oneof": [
+                                    "uri"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "uri": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "INDEXED": 1,
+                            "NOT_IN_TARGET_SITE": 2,
+                            "NOT_IN_INDEX": 3
                           }
                         }
                       }
@@ -6607,6 +6970,168 @@
                         }
                       }
                     },
+                    "SearchTuningService": {
+                      "options": {
+                        "(google.api.default_host)": "discoveryengine.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "TrainCustomModel": {
+                          "requestType": "TrainCustomModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{data_store=projects/*/locations/*/collections/*/dataStores/*}:trainCustomModel",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.discoveryengine.v1.TrainCustomModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.discoveryengine.v1.TrainCustomModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{data_store=projects/*/locations/*/collections/*/dataStores/*}:trainCustomModel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.discoveryengine.v1.TrainCustomModelResponse",
+                                "metadata_type": "google.cloud.discoveryengine.v1.TrainCustomModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListCustomModels": {
+                          "requestType": "ListCustomModelsRequest",
+                          "responseType": "ListCustomModelsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{data_store=projects/*/locations/*/collections/*/dataStores/*}/customModels"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{data_store=projects/*/locations/*/collections/*/dataStores/*}/customModels"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListCustomModelsRequest": {
+                      "fields": {
+                        "dataStore": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomModelsResponse": {
+                      "fields": {
+                        "models": {
+                          "rule": "repeated",
+                          "type": "CustomTuningModel",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TrainCustomModelRequest": {
+                      "oneofs": {
+                        "trainingInput": {
+                          "oneof": [
+                            "gcsTrainingInput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsTrainingInput": {
+                          "type": "GcsTrainingInput",
+                          "id": 2
+                        },
+                        "dataStore": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/DataStore"
+                          }
+                        },
+                        "modelType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "errorConfig": {
+                          "type": "ImportErrorConfig",
+                          "id": 4
+                        },
+                        "modelId": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "GcsTrainingInput": {
+                          "fields": {
+                            "corpusDataPath": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "queryDataPath": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "trainDataPath": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "testDataPath": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TrainCustomModelResponse": {
+                      "fields": {
+                        "errorSamples": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 1
+                        },
+                        "errorConfig": {
+                          "type": "ImportErrorConfig",
+                          "id": 2
+                        },
+                        "modelStatus": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "metrics": {
+                          "keyType": "string",
+                          "type": "double",
+                          "id": 4
+                        },
+                        "modelName": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TrainCustomModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        }
+                      }
+                    },
                     "SiteSearchEngine": {
                       "options": {
                         "(google.api.resource).type": "discoveryengine.googleapis.com/SiteSearchEngine",
@@ -7545,6 +8070,36 @@
                                     "get": "/v1/{parent=projects/*/locations/*}/userEvents:collect"
                                   }
                                 ]
+                              }
+                            }
+                          ]
+                        },
+                        "PurgeUserEvents": {
+                          "requestType": "PurgeUserEventsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/dataStores/*}/userEvents:purge",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:purge",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.discoveryengine.v1.PurgeUserEventsResponse",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.discoveryengine.v1.PurgeUserEventsMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/dataStores/*}/userEvents:purge",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*/collections/*/dataStores/*}/userEvents:purge",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.discoveryengine.v1.PurgeUserEventsResponse",
+                                "metadata_type": "google.cloud.discoveryengine.v1.PurgeUserEventsMetadata"
                               }
                             }
                           ]
@@ -9556,15 +10111,6 @@
                 }
               }
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -9574,6 +10120,15 @@
                 "value": {
                   "type": "bytes",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             },

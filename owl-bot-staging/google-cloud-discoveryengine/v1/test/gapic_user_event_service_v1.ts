@@ -464,6 +464,160 @@ describe('v1.UserEventServiceClient', () => {
         });
     });
 
+    describe('purgeUserEvents', () => {
+        it('invokes purgeUserEvents without error', async () => {
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.PurgeUserEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.PurgeUserEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.purgeUserEvents = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.purgeUserEvents(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes purgeUserEvents without error using callback', async () => {
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.PurgeUserEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.PurgeUserEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.purgeUserEvents = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.purgeUserEvents(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.cloud.discoveryengine.v1.IPurgeUserEventsResponse, protos.google.cloud.discoveryengine.v1.IPurgeUserEventsMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.cloud.discoveryengine.v1.IPurgeUserEventsResponse, protos.google.cloud.discoveryengine.v1.IPurgeUserEventsMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes purgeUserEvents with call error', async () => {
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.PurgeUserEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.PurgeUserEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.purgeUserEvents = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.purgeUserEvents(request), expectedError);
+            const actualRequest = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes purgeUserEvents with LRO error', async () => {
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.discoveryengine.v1.PurgeUserEventsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.discoveryengine.v1.PurgeUserEventsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.purgeUserEvents = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.purgeUserEvents(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.purgeUserEvents as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkPurgeUserEventsProgress without error', async () => {
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkPurgeUserEventsProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkPurgeUserEventsProgress with error', async () => {
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkPurgeUserEventsProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
     describe('importUserEvents', () => {
         it('invokes importUserEvents without error', async () => {
             const client = new usereventserviceModule.v1.UserEventServiceClient({
@@ -1451,6 +1605,68 @@ describe('v1.UserEventServiceClient', () => {
             });
         });
 
+        describe('projectLocationCollectionDataStoreCustomTuningModel', () => {
+            const fakePath = "/rendered/path/projectLocationCollectionDataStoreCustomTuningModel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                collection: "collectionValue",
+                data_store: "dataStoreValue",
+                custom_tuning_model: "customTuningModelValue",
+            };
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationCollectionDataStoreCustomTuningModelPath', () => {
+                const result = client.projectLocationCollectionDataStoreCustomTuningModelPath("projectValue", "locationValue", "collectionValue", "dataStoreValue", "customTuningModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "collectionValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName', () => {
+                const result = client.matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "customTuningModelValue");
+                assert((client.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('projectLocationCollectionDataStoreDocumentProcessingConfig', () => {
             const fakePath = "/rendered/path/projectLocationCollectionDataStoreDocumentProcessingConfig";
             const expectedParameters = {
@@ -2353,6 +2569,60 @@ describe('v1.UserEventServiceClient', () => {
                 const result = client.matchConversationFromProjectLocationDataStoreConversationName(fakePath);
                 assert.strictEqual(result, "conversationValue");
                 assert((client.pathTemplates.projectLocationDataStoreConversationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('projectLocationDataStoreCustomTuningModel', () => {
+            const fakePath = "/rendered/path/projectLocationDataStoreCustomTuningModel";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                data_store: "dataStoreValue",
+                custom_tuning_model: "customTuningModelValue",
+            };
+            const client = new usereventserviceModule.v1.UserEventServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            client.initialize();
+            client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('projectLocationDataStoreCustomTuningModelPath', () => {
+                const result = client.projectLocationDataStoreCustomTuningModelPath("projectValue", "locationValue", "dataStoreValue", "customTuningModelValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchProjectFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchLocationFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchDataStoreFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "dataStoreValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName', () => {
+                const result = client.matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(fakePath);
+                assert.strictEqual(result, "customTuningModelValue");
+                assert((client.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
