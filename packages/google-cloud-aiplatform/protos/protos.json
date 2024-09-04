@@ -3767,7 +3767,8 @@
                             "ON_DEMAND": 1,
                             "LOW_COST": 2,
                             "STANDARD": 3,
-                            "SPOT": 4
+                            "SPOT": 4,
+                            "FLEX_START": 6
                           }
                         }
                       }
@@ -34881,6 +34882,39 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "usageMetadata": {
+                          "type": "UsageMetadata",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UsageMetadata": {
+                          "fields": {
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "textCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "imageCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "videoDurationSeconds": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "audioDurationSeconds": {
+                              "type": "int32",
+                              "id": 5
+                            }
+                          }
                         }
                       }
                     },
@@ -62980,6 +63014,13 @@
                             "totalTokenCount": {
                               "type": "int32",
                               "id": 3
+                            },
+                            "cachedContentTokenCount": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
