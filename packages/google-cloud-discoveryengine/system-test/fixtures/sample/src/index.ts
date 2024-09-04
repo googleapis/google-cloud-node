@@ -29,6 +29,7 @@ import {
   RecommendationServiceClient,
   SchemaServiceClient,
   SearchServiceClient,
+  SearchTuningServiceClient,
   SiteSearchEngineServiceClient,
   UserEventServiceClient,
 } from '@google-cloud/discoveryengine';
@@ -74,6 +75,11 @@ function doStuffWithSchemaServiceClient(client: SchemaServiceClient) {
   client.close();
 }
 function doStuffWithSearchServiceClient(client: SearchServiceClient) {
+  client.close();
+}
+function doStuffWithSearchTuningServiceClient(
+  client: SearchTuningServiceClient
+) {
   client.close();
 }
 function doStuffWithSiteSearchEngineServiceClient(
@@ -125,6 +131,9 @@ function main() {
   // check that the client instance can be created
   const searchServiceClient = new SearchServiceClient();
   doStuffWithSearchServiceClient(searchServiceClient);
+  // check that the client instance can be created
+  const searchTuningServiceClient = new SearchTuningServiceClient();
+  doStuffWithSearchTuningServiceClient(searchTuningServiceClient);
   // check that the client instance can be created
   const siteSearchEngineServiceClient = new SiteSearchEngineServiceClient();
   doStuffWithSiteSearchEngineServiceClient(siteSearchEngineServiceClient);

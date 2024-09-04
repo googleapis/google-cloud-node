@@ -240,6 +240,10 @@ export class DocumentServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
         ),
+      projectLocationCollectionDataStoreCustomTuningModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+        ),
       projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
@@ -302,6 +306,10 @@ export class DocumentServiceClient {
       projectLocationDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationDataStoreCustomTuningModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
         ),
       projectLocationDataStoreDocumentProcessingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -406,6 +414,9 @@ export class DocumentServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+            },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
           ],
@@ -446,6 +457,9 @@ export class DocumentServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+            },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},
           ],
@@ -538,6 +552,7 @@ export class DocumentServiceClient {
       'deleteDocument',
       'importDocuments',
       'purgeDocuments',
+      'batchGetDocumentsMetadata',
     ];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
@@ -1071,6 +1086,112 @@ export class DocumentServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteDocument(request, options, callback);
   }
+  /**
+   * Gets index freshness metadata for
+   * {@link protos.google.cloud.discoveryengine.v1.Document|Document}s. Supported for
+   * website search only.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent branch resource name, such as
+   *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+   * @param {google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataRequest.Matcher} request.matcher
+   *   Required. Matcher for the
+   *   {@link protos.google.cloud.discoveryengine.v1.Document|Document}s.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse|BatchGetDocumentsMetadataResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/document_service.batch_get_documents_metadata.js</caption>
+   * region_tag:discoveryengine_v1_generated_DocumentService_BatchGetDocumentsMetadata_async
+   */
+  batchGetDocumentsMetadata(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchGetDocumentsMetadata(
+    request: protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataResponse,
+      | protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchGetDocumentsMetadata(
+    request: protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest,
+    callback: Callback<
+      protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataResponse,
+      | protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchGetDocumentsMetadata(
+    request?: protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataResponse,
+          | protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataResponse,
+      | protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataResponse,
+      (
+        | protos.google.cloud.discoveryengine.v1.IBatchGetDocumentsMetadataRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchGetDocumentsMetadata(
+      request,
+      options,
+      callback
+    );
+  }
 
   /**
    * Bulk import of multiple
@@ -1324,6 +1445,13 @@ export class DocumentServiceClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {google.cloud.discoveryengine.v1.GcsSource} request.gcsSource
+   *   Cloud Storage location for the input content.
+   *   Supported `data_schema`:
+   *   * `document_id`: One valid
+   *   {@link protos.google.cloud.discoveryengine.v1.Document.id|Document.id} per line.
+   * @param {google.cloud.discoveryengine.v1.PurgeDocumentsRequest.InlineSource} request.inlineSource
+   *   Inline source for the input content for purge.
    * @param {string} request.parent
    *   Required. The parent resource name, such as
    *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
@@ -1331,6 +1459,8 @@ export class DocumentServiceClient {
    *   Required. Filter matching documents to purge. Only currently supported
    *   value is
    *   `*` (all items).
+   * @param {google.cloud.discoveryengine.v1.PurgeErrorConfig} request.errorConfig
+   *   The desired location of errors incurred during the purge.
    * @param {boolean} request.force
    *   Actually performs the purge. If `force` is set to false, return the
    *   expected purge count without deleting any documents.
@@ -2711,6 +2841,109 @@ export class DocumentServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
       projectLocationCollectionDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreCustomTuningModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} custom_tuning_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreCustomTuningModelPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    customTuningModel: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        custom_tuning_model: customTuningModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).data_store;
+  }
+
+  /**
+   * Parse the custom_tuning_model from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the custom_tuning_model.
+   */
+  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).custom_tuning_model;
   }
 
   /**
@@ -4285,6 +4518,91 @@ export class DocumentServiceClient {
     return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
       projectLocationDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreCustomTuningModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} custom_tuning_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreCustomTuningModelPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    customTuningModel: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        custom_tuning_model: customTuningModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).data_store;
+  }
+
+  /**
+   * Parse the custom_tuning_model from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the custom_tuning_model.
+   */
+  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).custom_tuning_model;
   }
 
   /**

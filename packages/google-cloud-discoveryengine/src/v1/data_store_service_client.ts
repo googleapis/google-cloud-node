@@ -239,6 +239,10 @@ export class DataStoreServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
         ),
+      projectLocationCollectionDataStoreCustomTuningModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+        ),
       projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
@@ -297,6 +301,10 @@ export class DataStoreServiceClient {
       projectLocationDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationDataStoreCustomTuningModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
         ),
       projectLocationDataStoreDocumentProcessingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -401,6 +409,9 @@ export class DataStoreServiceClient {
             {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
+            {
+              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+            },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
           ],
@@ -441,6 +452,9 @@ export class DataStoreServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/models/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
+            {
+              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+            },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},
           ],
@@ -891,6 +905,15 @@ export class DataStoreServiceClient {
    *   If the data store is not configured as site
    *   search (GENERIC vertical and PUBLIC_WEBSITE content_config), this flag will
    *   be ignored.
+   * @param {boolean} request.skipDefaultSchemaCreation
+   *   A boolean flag indicating whether to skip the default schema creation for
+   *   the data store. Only enable this flag if you are certain that the default
+   *   schema is incompatible with your use case.
+   *
+   *   If set to true, you must manually create a schema for the data store before
+   *   any documents can be ingested.
+   *
+   *   This flag cannot be specified if `data_store.starting_schema` is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2366,6 +2389,109 @@ export class DataStoreServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
       projectLocationCollectionDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreCustomTuningModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} custom_tuning_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreCustomTuningModelPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    customTuningModel: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        custom_tuning_model: customTuningModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).data_store;
+  }
+
+  /**
+   * Parse the custom_tuning_model from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the custom_tuning_model.
+   */
+  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).custom_tuning_model;
   }
 
   /**
@@ -3855,6 +3981,91 @@ export class DataStoreServiceClient {
     return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
       projectLocationDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreCustomTuningModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} custom_tuning_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreCustomTuningModelPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    customTuningModel: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        custom_tuning_model: customTuningModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).data_store;
+  }
+
+  /**
+   * Parse the custom_tuning_model from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the custom_tuning_model.
+   */
+  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).custom_tuning_model;
   }
 
   /**
