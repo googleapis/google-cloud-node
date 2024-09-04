@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, filter) {
-  // [START discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async]
+function main(parent, matcher) {
+  // [START discoveryengine_v1beta_generated_DocumentService_BatchGetDocumentsMetadata_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,36 +29,15 @@ function main(parent, filter) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Cloud Storage location for the input content.
-   *  Supported `data_schema`:
-   *  * `document_id`: One valid
-   *  Document.id google.cloud.discoveryengine.v1beta.Document.id  per line.
-   */
-  // const gcsSource = {}
-  /**
-   *  Inline source for the input content for purge.
-   */
-  // const inlineSource = {}
-  /**
-   *  Required. The parent resource name, such as
+   *  Required. The parent branch resource name, such as
    *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. Filter matching documents to purge. Only currently supported
-   *  value is
-   *  `*` (all items).
+   *  Required. Matcher for the
+   *  Document google.cloud.discoveryengine.v1beta.Document s.
    */
-  // const filter = 'abc123'
-  /**
-   *  The desired location of errors incurred during the purge.
-   */
-  // const errorConfig = {}
-  /**
-   *  Actually performs the purge. If `force` is set to false, return the
-   *  expected purge count without deleting any documents.
-   */
-  // const force = true
+  // const matcher = {}
 
   // Imports the Discoveryengine library
   const {DocumentServiceClient} = require('@google-cloud/discoveryengine').v1beta;
@@ -66,21 +45,20 @@ function main(parent, filter) {
   // Instantiates a client
   const discoveryengineClient = new DocumentServiceClient();
 
-  async function callPurgeDocuments() {
+  async function callBatchGetDocumentsMetadata() {
     // Construct request
     const request = {
       parent,
-      filter,
+      matcher,
     };
 
     // Run request
-    const [operation] = await discoveryengineClient.purgeDocuments(request);
-    const [response] = await operation.promise();
+    const response = await discoveryengineClient.batchGetDocumentsMetadata(request);
     console.log(response);
   }
 
-  callPurgeDocuments();
-  // [END discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_async]
+  callBatchGetDocumentsMetadata();
+  // [END discoveryengine_v1beta_generated_DocumentService_BatchGetDocumentsMetadata_async]
 }
 
 process.on('unhandledRejection', err => {

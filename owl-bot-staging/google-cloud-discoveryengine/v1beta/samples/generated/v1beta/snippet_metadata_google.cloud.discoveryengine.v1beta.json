@@ -1678,7 +1678,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 67,
+          "end": 82,
           "type": "FULL"
         }
       ],
@@ -1688,12 +1688,24 @@
         "async": true,
         "parameters": [
           {
+            "name": "gcs_source",
+            "type": ".google.cloud.discoveryengine.v1beta.GcsSource"
+          },
+          {
+            "name": "inline_source",
+            "type": ".google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.InlineSource"
+          },
+          {
             "name": "parent",
             "type": "TYPE_STRING"
           },
           {
             "name": "filter",
             "type": "TYPE_STRING"
+          },
+          {
+            "name": "error_config",
+            "type": ".google.cloud.discoveryengine.v1beta.PurgeErrorConfig"
           },
           {
             "name": "force",
@@ -1708,6 +1720,50 @@
         "method": {
           "shortName": "PurgeDocuments",
           "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocuments",
+          "service": {
+            "shortName": "DocumentService",
+            "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "discoveryengine_v1beta_generated_DocumentService_BatchGetDocumentsMetadata_async",
+      "title": "CompletionService batchGetDocumentsMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets index freshness metadata for [Document][google.cloud.discoveryengine.v1beta.Document]s. Supported for website search only.",
+      "canonical": true,
+      "file": "document_service.batch_get_documents_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchGetDocumentsMetadata",
+        "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.BatchGetDocumentsMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "matcher",
+            "type": ".google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest.Matcher"
+          }
+        ],
+        "resultType": ".google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataResponse",
+        "client": {
+          "shortName": "DocumentServiceClient",
+          "fullName": "google.cloud.discoveryengine.v1beta.DocumentServiceClient"
+        },
+        "method": {
+          "shortName": "BatchGetDocumentsMetadata",
+          "fullName": "google.cloud.discoveryengine.v1beta.DocumentService.BatchGetDocumentsMetadata",
           "service": {
             "shortName": "DocumentService",
             "fullName": "google.cloud.discoveryengine.v1beta.DocumentService"
@@ -3198,7 +3254,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 323,
+          "end": 334,
           "type": "FULL"
         }
       ],
@@ -3322,6 +3378,10 @@
           {
             "name": "session_spec",
             "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.SessionSpec"
+          },
+          {
+            "name": "relevance_threshold",
+            "type": ".google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold"
           }
         ],
         "resultType": ".google.cloud.discoveryengine.v1beta.SearchResponse",

@@ -386,7 +386,7 @@ export class DocumentServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const documentServiceStubMethods =
-        ['getDocument', 'listDocuments', 'createDocument', 'updateDocument', 'deleteDocument', 'importDocuments', 'purgeDocuments'];
+        ['getDocument', 'listDocuments', 'createDocument', 'updateDocument', 'deleteDocument', 'importDocuments', 'purgeDocuments', 'batchGetDocumentsMetadata'];
     for (const methodName of documentServiceStubMethods) {
       const callPromise = this.documentServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -826,6 +826,82 @@ export class DocumentServiceClient {
     this.initialize();
     return this.innerApiCalls.deleteDocument(request, options, callback);
   }
+/**
+ * Gets index freshness metadata for
+ * {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s. Supported for
+ * website search only.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent branch resource name, such as
+ *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+ * @param {google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataRequest.Matcher} request.matcher
+ *   Required. Matcher for the
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Document|Document}s.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.discoveryengine.v1beta.BatchGetDocumentsMetadataResponse|BatchGetDocumentsMetadataResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/document_service.batch_get_documents_metadata.js</caption>
+ * region_tag:discoveryengine_v1beta_generated_DocumentService_BatchGetDocumentsMetadata_async
+ */
+  batchGetDocumentsMetadata(
+      request?: protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse,
+        protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest|undefined, {}|undefined
+      ]>;
+  batchGetDocumentsMetadata(
+      request: protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse,
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetDocumentsMetadata(
+      request: protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest,
+      callback: Callback<
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse,
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest|null|undefined,
+          {}|null|undefined>): void;
+  batchGetDocumentsMetadata(
+      request?: protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse,
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse,
+          protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataResponse,
+        protos.google.cloud.discoveryengine.v1beta.IBatchGetDocumentsMetadataRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize();
+    return this.innerApiCalls.batchGetDocumentsMetadata(request, options, callback);
+  }
 
 /**
  * Bulk import of multiple
@@ -1033,6 +1109,13 @@ export class DocumentServiceClient {
  *
  * @param {Object} request
  *   The request object that will be sent.
+ * @param {google.cloud.discoveryengine.v1beta.GcsSource} request.gcsSource
+ *   Cloud Storage location for the input content.
+ *   Supported `data_schema`:
+ *   * `document_id`: One valid
+ *   {@link protos.google.cloud.discoveryengine.v1beta.Document.id|Document.id} per line.
+ * @param {google.cloud.discoveryengine.v1beta.PurgeDocumentsRequest.InlineSource} request.inlineSource
+ *   Inline source for the input content for purge.
  * @param {string} request.parent
  *   Required. The parent resource name, such as
  *   `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
@@ -1040,6 +1123,8 @@ export class DocumentServiceClient {
  *   Required. Filter matching documents to purge. Only currently supported
  *   value is
  *   `*` (all items).
+ * @param {google.cloud.discoveryengine.v1beta.PurgeErrorConfig} request.errorConfig
+ *   The desired location of errors incurred during the purge.
  * @param {boolean} request.force
  *   Actually performs the purge. If `force` is set to false, return the
  *   expected purge count without deleting any documents.

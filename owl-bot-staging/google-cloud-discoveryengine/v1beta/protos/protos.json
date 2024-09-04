@@ -116,7 +116,8 @@
                             "content": {
                               "oneof": [
                                 "unstructuredDocumentInfo",
-                                "chunkInfo"
+                                "chunkInfo",
+                                "structuredDocumentInfo"
                               ]
                             }
                           },
@@ -128,6 +129,10 @@
                             "chunkInfo": {
                               "type": "ChunkInfo",
                               "id": 2
+                            },
+                            "structuredDocumentInfo": {
+                              "type": "StructuredDocumentInfo",
+                              "id": 3
                             }
                           },
                           "nested": {
@@ -160,6 +165,13 @@
                               },
                               "nested": {
                                 "ChunkContent": {
+                                  "oneofs": {
+                                    "_relevanceScore": {
+                                      "oneof": [
+                                        "relevanceScore"
+                                      ]
+                                    }
+                                  },
                                   "fields": {
                                     "content": {
                                       "type": "string",
@@ -168,6 +180,13 @@
                                     "pageIdentifier": {
                                       "type": "string",
                                       "id": 2
+                                    },
+                                    "relevanceScore": {
+                                      "type": "float",
+                                      "id": 3,
+                                      "options": {
+                                        "proto3_optional": true
+                                      }
                                     }
                                   }
                                 }
@@ -232,6 +251,21 @@
                                       "id": 5
                                     }
                                   }
+                                }
+                              }
+                            },
+                            "StructuredDocumentInfo": {
+                              "fields": {
+                                "document": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                                  }
+                                },
+                                "structData": {
+                                  "type": "google.protobuf.Struct",
+                                  "id": 2
                                 }
                               }
                             }
@@ -403,7 +437,8 @@
                                   "values": {
                                     "TYPE_UNSPECIFIED": 0,
                                     "ADVERSARIAL_QUERY": 1,
-                                    "NON_ANSWER_SEEKING_QUERY": 2
+                                    "NON_ANSWER_SEEKING_QUERY": 2,
+                                    "JAIL_BREAKING_QUERY": 3
                                   }
                                 }
                               }
@@ -425,7 +460,9 @@
                             "NON_ANSWER_SEEKING_QUERY_IGNORED": 2,
                             "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
                             "POTENTIAL_POLICY_VIOLATION": 4,
-                            "NO_RELEVANT_CONTENT": 5
+                            "NO_RELEVANT_CONTENT": 5,
+                            "JAIL_BREAKING_QUERY_IGNORED": 6,
+                            "CUSTOMER_POLICY_VIOLATION": 7
                           }
                         }
                       }
@@ -1131,6 +1168,11 @@
                         "gcsStagingDir": {
                           "type": "string",
                           "id": 2
+                        },
+                        "resourceTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1789,6 +1831,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "indexStatus": {
+                          "type": "IndexStatus",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -1813,6 +1862,19 @@
                             "mimeType": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "IndexStatus": {
+                          "fields": {
+                            "indexTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
+                            },
+                            "errorSamples": {
+                              "rule": "repeated",
+                              "type": "google.rpc.Status",
+                              "id": 2
                             }
                           }
                         }
@@ -2164,6 +2226,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
+                        },
+                        "joined": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2281,8 +2350,39 @@
                         }
                       }
                     },
-                    "PurgeDocumentsRequest": {
+                    "PurgeErrorConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsPrefix"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "gcsPrefix": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "PurgeDocumentsRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource",
+                            "inlineSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 5
+                        },
+                        "inlineSource": {
+                          "type": "InlineSource",
+                          "id": 6
+                        },
                         "parent": {
                           "type": "string",
                           "id": 1,
@@ -2298,9 +2398,28 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "errorConfig": {
+                          "type": "PurgeErrorConfig",
+                          "id": 7
+                        },
                         "force": {
                           "type": "bool",
                           "id": 3
+                        }
+                      },
+                      "nested": {
+                        "InlineSource": {
+                          "fields": {
+                            "documents": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3183,6 +3302,10 @@
                         "sessionSpec": {
                           "type": "SessionSpec",
                           "id": 42
+                        },
+                        "relevanceThreshold": {
+                          "type": "RelevanceThreshold",
+                          "id": 44
                         }
                       },
                       "nested": {
@@ -3457,6 +3580,10 @@
                                   "type": "bool",
                                   "id": 4
                                 },
+                                "ignoreLowRelevantContent": {
+                                  "type": "bool",
+                                  "id": 9
+                                },
                                 "modelPromptSpec": {
                                   "type": "ModelPromptSpec",
                                   "id": 5
@@ -3622,6 +3749,15 @@
                               }
                             }
                           }
+                        },
+                        "RelevanceThreshold": {
+                          "values": {
+                            "RELEVANCE_THRESHOLD_UNSPECIFIED": 0,
+                            "LOWEST": 1,
+                            "LOW": 2,
+                            "MEDIUM": 3,
+                            "HIGH": 4
+                          }
                         }
                       }
                     },
@@ -3686,6 +3822,11 @@
                         "sessionInfo": {
                           "type": "SessionInfo",
                           "id": 19
+                        },
+                        "oneBoxResults": {
+                          "rule": "repeated",
+                          "type": "OneBoxResult",
+                          "id": 20
                         }
                       },
                       "nested": {
@@ -3914,7 +4055,9 @@
                                 "OUT_OF_DOMAIN_QUERY_IGNORED": 3,
                                 "POTENTIAL_POLICY_VIOLATION": 4,
                                 "LLM_ADDON_NOT_ENABLED": 5,
-                                "NO_RELEVANT_CONTENT": 6
+                                "NO_RELEVANT_CONTENT": 6,
+                                "JAIL_BREAKING_QUERY_IGNORED": 7,
+                                "CUSTOMER_POLICY_VIOLATION": 8
                               }
                             }
                           }
@@ -3977,6 +4120,10 @@
                                       "rule": "repeated",
                                       "type": "string",
                                       "id": 2
+                                    },
+                                    "querySegment": {
+                                      "type": "string",
+                                      "id": 3
                                     }
                                   }
                                 },
@@ -3993,6 +4140,10 @@
                                     "value": {
                                       "type": "double",
                                       "id": 3
+                                    },
+                                    "querySegment": {
+                                      "type": "string",
+                                      "id": 4
                                     }
                                   },
                                   "nested": {
@@ -4017,6 +4168,14 @@
                                     "address": {
                                       "type": "string",
                                       "id": 2
+                                    },
+                                    "latitude": {
+                                      "type": "double",
+                                      "id": 4
+                                    },
+                                    "longitude": {
+                                      "type": "double",
+                                      "id": 5
                                     },
                                     "radiusInMeters": {
                                       "type": "float",
@@ -4090,6 +4249,29 @@
                             "queryId": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "OneBoxResult": {
+                          "fields": {
+                            "oneBoxType": {
+                              "type": "OneBoxType",
+                              "id": 1
+                            },
+                            "searchResults": {
+                              "rule": "repeated",
+                              "type": "SearchResult",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "OneBoxType": {
+                              "values": {
+                                "ONE_BOX_TYPE_UNSPECIFIED": 0,
+                                "PEOPLE": 1,
+                                "ORGANIZATION": 2,
+                                "SLACK": 3
+                              }
                             }
                           }
                         }
@@ -4983,7 +5165,8 @@
                                   "values": {
                                     "TYPE_UNSPECIFIED": 0,
                                     "ADVERSARIAL_QUERY": 1,
-                                    "NON_ANSWER_SEEKING_QUERY": 2
+                                    "NON_ANSWER_SEEKING_QUERY": 2,
+                                    "JAIL_BREAKING_QUERY": 3
                                   }
                                 }
                               }
@@ -5267,7 +5450,8 @@
                             "TRAINING_COMPLETE": 3,
                             "READY_FOR_SERVING": 4,
                             "TRAINING_FAILED": 5,
-                            "NO_IMPROVEMENT": 6
+                            "NO_IMPROVEMENT": 6,
+                            "INPUT_VALIDATION_FAILED": 7
                           }
                         }
                       }
@@ -5973,6 +6157,28 @@
                               }
                             }
                           ]
+                        },
+                        "BatchGetDocumentsMetadata": {
+                          "requestType": "BatchGetDocumentsMetadataRequest",
+                          "responseType": "BatchGetDocumentsMetadataResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/batchGetDocumentsMetadata",
+                            "(google.api.http).additional_bindings.get": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/batchGetDocumentsMetadata",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/dataStores/*/branches/*}/batchGetDocumentsMetadata",
+                                "additional_bindings": {
+                                  "get": "/v1beta/{parent=projects/*/locations/*/collections/*/dataStores/*/branches/*}/batchGetDocumentsMetadata"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -6074,6 +6280,107 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Document"
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetDocumentsMetadataRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Branch"
+                          }
+                        },
+                        "matcher": {
+                          "type": "Matcher",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UrisMatcher": {
+                          "fields": {
+                            "uris": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Matcher": {
+                          "oneofs": {
+                            "matcher": {
+                              "oneof": [
+                                "urisMatcher"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "urisMatcher": {
+                              "type": "UrisMatcher",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "BatchGetDocumentsMetadataResponse": {
+                      "fields": {
+                        "documentsMetadata": {
+                          "rule": "repeated",
+                          "type": "DocumentMetadata",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "DocumentMetadata": {
+                          "fields": {
+                            "matcherValue": {
+                              "type": "MatcherValue",
+                              "id": 2
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 3
+                            },
+                            "lastRefreshedTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            },
+                            "dataIngestionSource": {
+                              "type": "string",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "MatcherValue": {
+                              "oneofs": {
+                                "matcherValue": {
+                                  "oneof": [
+                                    "uri"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "uri": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "INDEXED": 1,
+                            "NOT_IN_TARGET_SITE": 2,
+                            "NOT_IN_INDEX": 3
                           }
                         }
                       }
@@ -11701,15 +12008,6 @@
                 }
               }
             },
-            "FieldMask": {
-              "fields": {
-                "paths": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                }
-              }
-            },
             "Any": {
               "fields": {
                 "type_url": {
@@ -11719,6 +12017,15 @@
                 "value": {
                   "type": "bytes",
                   "id": 2
+                }
+              }
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
                 }
               }
             },

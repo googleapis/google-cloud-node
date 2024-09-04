@@ -541,9 +541,12 @@ export class SearchServiceClient {
  *   object. Leave it unset if ordered by relevance. `order_by` expression is
  *   case-sensitive.
  *
- *   For more information on ordering for retail search, see
- *   [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
- *
+ *   For more information on ordering the website search results, see
+ *   [Order web search
+ *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+ *   For more information on ordering the healthcare search results, see
+ *   [Order healthcare search
+ *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
  *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
  * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
  *   Information about the end user.
@@ -706,6 +709,12 @@ export class SearchServiceClient {
  *   Session specification.
  *
  *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The relevance threshold of the search results.
+ *
+ *   Default to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -864,9 +873,12 @@ export class SearchServiceClient {
  *   object. Leave it unset if ordered by relevance. `order_by` expression is
  *   case-sensitive.
  *
- *   For more information on ordering for retail search, see
- *   [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
- *
+ *   For more information on ordering the website search results, see
+ *   [Order web search
+ *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+ *   For more information on ordering the healthcare search results, see
+ *   [Order healthcare search
+ *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
  *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
  * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
  *   Information about the end user.
@@ -1029,6 +1041,12 @@ export class SearchServiceClient {
  *   Session specification.
  *
  *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The relevance threshold of the search results.
+ *
+ *   Default to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1154,9 +1172,12 @@ export class SearchServiceClient {
  *   object. Leave it unset if ordered by relevance. `order_by` expression is
  *   case-sensitive.
  *
- *   For more information on ordering for retail search, see
- *   [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
- *
+ *   For more information on ordering the website search results, see
+ *   [Order web search
+ *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+ *   For more information on ordering the healthcare search results, see
+ *   [Order healthcare search
+ *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
  *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
  * @param {google.cloud.discoveryengine.v1beta.UserInfo} request.userInfo
  *   Information about the end user.
@@ -1319,6 +1340,12 @@ export class SearchServiceClient {
  *   Session specification.
  *
  *   Can be used only when `session` is set.
+ * @param {google.cloud.discoveryengine.v1beta.SearchRequest.RelevanceThreshold} request.relevanceThreshold
+ *   The relevance threshold of the search results.
+ *
+ *   Default to Google defined threshold, leveraging a balance of
+ *   precision and recall to deliver both highly accurate results and
+ *   comprehensive coverage of relevant information.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
