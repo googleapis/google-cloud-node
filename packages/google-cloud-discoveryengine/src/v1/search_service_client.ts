@@ -236,6 +236,10 @@ export class SearchServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/conversations/{conversation}'
         ),
+      projectLocationCollectionDataStoreCustomTuningModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
+        ),
       projectLocationCollectionDataStoreDocumentProcessingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/documentProcessingConfig'
@@ -306,6 +310,10 @@ export class SearchServiceClient {
       projectLocationDataStoreConversationPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/dataStores/{data_store}/conversations/{conversation}'
+        ),
+      projectLocationDataStoreCustomTuningModelPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}'
         ),
       projectLocationDataStoreDocumentProcessingConfigPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -602,9 +610,12 @@ export class SearchServiceClient {
    *   Leave it unset if ordered by relevance. `order_by` expression is
    *   case-sensitive.
    *
-   *   For more information on ordering for retail search, see
-   *   [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
-   *
+   *   For more information on ordering the website search results, see
+   *   [Order web search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *   For more information on ordering the healthcare search results, see
+   *   [Order healthcare search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
@@ -891,9 +902,12 @@ export class SearchServiceClient {
    *   Leave it unset if ordered by relevance. `order_by` expression is
    *   case-sensitive.
    *
-   *   For more information on ordering for retail search, see
-   *   [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
-   *
+   *   For more information on ordering the website search results, see
+   *   [Order web search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *   For more information on ordering the healthcare search results, see
+   *   [Order healthcare search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
@@ -1134,9 +1148,12 @@ export class SearchServiceClient {
    *   Leave it unset if ordered by relevance. `order_by` expression is
    *   case-sensitive.
    *
-   *   For more information on ordering for retail search, see
-   *   [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
-   *
+   *   For more information on ordering the website search results, see
+   *   [Order web search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+   *   For more information on ordering the healthcare search results, see
+   *   [Order healthcare search
+   *   results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
    *   If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
    * @param {google.cloud.discoveryengine.v1.UserInfo} request.userInfo
    *   Information about the end user.
@@ -2110,6 +2127,109 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationCollectionDataStoreConversationPathTemplate.match(
       projectLocationCollectionDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCollectionDataStoreCustomTuningModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} collection
+   * @param {string} data_store
+   * @param {string} custom_tuning_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationCollectionDataStoreCustomTuningModelPath(
+    project: string,
+    location: string,
+    collection: string,
+    dataStore: string,
+    customTuningModel: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        collection: collection,
+        data_store: dataStore,
+        custom_tuning_model: customTuningModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).location;
+  }
+
+  /**
+   * Parse the collection from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the collection.
+   */
+  matchCollectionFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).collection;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).data_store;
+  }
+
+  /**
+   * Parse the custom_tuning_model from ProjectLocationCollectionDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationCollectionDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_collection_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the custom_tuning_model.
+   */
+  matchCustomTuningModelFromProjectLocationCollectionDataStoreCustomTuningModelName(
+    projectLocationCollectionDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationCollectionDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationCollectionDataStoreCustomTuningModelName
+    ).custom_tuning_model;
   }
 
   /**
@@ -3890,6 +4010,91 @@ export class SearchServiceClient {
     return this.pathTemplates.projectLocationDataStoreConversationPathTemplate.match(
       projectLocationDataStoreConversationName
     ).conversation;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDataStoreCustomTuningModel resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} data_store
+   * @param {string} custom_tuning_model
+   * @returns {string} Resource name string.
+   */
+  projectLocationDataStoreCustomTuningModelPath(
+    project: string,
+    location: string,
+    dataStore: string,
+    customTuningModel: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        data_store: dataStore,
+        custom_tuning_model: customTuningModel,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).location;
+  }
+
+  /**
+   * Parse the data_store from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the data_store.
+   */
+  matchDataStoreFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).data_store;
+  }
+
+  /**
+   * Parse the custom_tuning_model from ProjectLocationDataStoreCustomTuningModel resource.
+   *
+   * @param {string} projectLocationDataStoreCustomTuningModelName
+   *   A fully-qualified path representing project_location_data_store_custom_tuning_model resource.
+   * @returns {string} A string representing the custom_tuning_model.
+   */
+  matchCustomTuningModelFromProjectLocationDataStoreCustomTuningModelName(
+    projectLocationDataStoreCustomTuningModelName: string
+  ) {
+    return this.pathTemplates.projectLocationDataStoreCustomTuningModelPathTemplate.match(
+      projectLocationDataStoreCustomTuningModelName
+    ).custom_tuning_model;
   }
 
   /**

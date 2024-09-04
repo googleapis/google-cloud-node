@@ -29,7 +29,8 @@ function main(servingConfig, userEvent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Full resource name of a ServingConfig :
+   *  Required. Full resource name of a
+   *  ServingConfig google.cloud.discoveryengine.v1.ServingConfig:
    *  `projects/* /locations/global/collections/* /engines/* /servingConfigs/*`, or
    *  `projects/* /locations/global/collections/* /dataStores/* /servingConfigs/*`
    *  One default serving config is created along with your recommendation engine
