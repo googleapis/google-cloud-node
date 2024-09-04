@@ -105,7 +105,7 @@ function main(parent) {
   const {ApiHubClient} = require('@google-cloud/apihub').v1;
 
   // Instantiates a client
-  const apihubClient = new ApiHubClient();
+  const apihubClient = new ApiHubClient({fallback: 'rest'});
 
   async function callListDeployments() {
     // Construct request
