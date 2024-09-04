@@ -3767,7 +3767,8 @@
                             "ON_DEMAND": 1,
                             "LOW_COST": 2,
                             "STANDARD": 3,
-                            "SPOT": 4
+                            "SPOT": 4,
+                            "FLEX_START": 6
                           }
                         }
                       }
