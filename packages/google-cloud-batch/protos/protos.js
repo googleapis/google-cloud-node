@@ -7401,6 +7401,7 @@
                              * @property {string|null} [instanceTemplate] InstancePolicyOrTemplate instanceTemplate
                              * @property {boolean|null} [installGpuDrivers] InstancePolicyOrTemplate installGpuDrivers
                              * @property {boolean|null} [installOpsAgent] InstancePolicyOrTemplate installOpsAgent
+                             * @property {boolean|null} [blockProjectSshKeys] InstancePolicyOrTemplate blockProjectSshKeys
                              */
     
                             /**
@@ -7450,6 +7451,14 @@
                              */
                             InstancePolicyOrTemplate.prototype.installOpsAgent = false;
     
+                            /**
+                             * InstancePolicyOrTemplate blockProjectSshKeys.
+                             * @member {boolean} blockProjectSshKeys
+                             * @memberof google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate
+                             * @instance
+                             */
+                            InstancePolicyOrTemplate.prototype.blockProjectSshKeys = false;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -7496,6 +7505,8 @@
                                     writer.uint32(/* id 3, wireType 0 =*/24).bool(message.installGpuDrivers);
                                 if (message.installOpsAgent != null && Object.hasOwnProperty.call(message, "installOpsAgent"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.installOpsAgent);
+                                if (message.blockProjectSshKeys != null && Object.hasOwnProperty.call(message, "blockProjectSshKeys"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.blockProjectSshKeys);
                                 return writer;
                             };
     
@@ -7544,6 +7555,10 @@
                                         }
                                     case 4: {
                                             message.installOpsAgent = reader.bool();
+                                            break;
+                                        }
+                                    case 5: {
+                                            message.blockProjectSshKeys = reader.bool();
                                             break;
                                         }
                                     default:
@@ -7603,6 +7618,9 @@
                                 if (message.installOpsAgent != null && message.hasOwnProperty("installOpsAgent"))
                                     if (typeof message.installOpsAgent !== "boolean")
                                         return "installOpsAgent: boolean expected";
+                                if (message.blockProjectSshKeys != null && message.hasOwnProperty("blockProjectSshKeys"))
+                                    if (typeof message.blockProjectSshKeys !== "boolean")
+                                        return "blockProjectSshKeys: boolean expected";
                                 return null;
                             };
     
@@ -7629,6 +7647,8 @@
                                     message.installGpuDrivers = Boolean(object.installGpuDrivers);
                                 if (object.installOpsAgent != null)
                                     message.installOpsAgent = Boolean(object.installOpsAgent);
+                                if (object.blockProjectSshKeys != null)
+                                    message.blockProjectSshKeys = Boolean(object.blockProjectSshKeys);
                                 return message;
                             };
     
@@ -7648,6 +7668,7 @@
                                 if (options.defaults) {
                                     object.installGpuDrivers = false;
                                     object.installOpsAgent = false;
+                                    object.blockProjectSshKeys = false;
                                 }
                                 if (message.policy != null && message.hasOwnProperty("policy")) {
                                     object.policy = $root.google.cloud.batch.v1.AllocationPolicy.InstancePolicy.toObject(message.policy, options);
@@ -7663,6 +7684,8 @@
                                     object.installGpuDrivers = message.installGpuDrivers;
                                 if (message.installOpsAgent != null && message.hasOwnProperty("installOpsAgent"))
                                     object.installOpsAgent = message.installOpsAgent;
+                                if (message.blockProjectSshKeys != null && message.hasOwnProperty("blockProjectSshKeys"))
+                                    object.blockProjectSshKeys = message.blockProjectSshKeys;
                                 return object;
                             };
     

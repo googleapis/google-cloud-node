@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.9.0...contentwarehouse-v1.10.0) (2024-08-19)
+
+
+### Features
+
+* [contentwarehouse] A new field `imageless_mode` is added to message `.google.cloud.documentai.v1.ProcessRequest` ([#5598](https://github.com/googleapis/google-cloud-node/issues/5598)) ([d2ba736](https://github.com/googleapis/google-cloud-node/commit/d2ba736d327901a153e2d9261a7e8824261255e6))
+
 ## [1.9.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v1.8.0...contentwarehouse-v1.9.0) (2024-06-03)
 
 

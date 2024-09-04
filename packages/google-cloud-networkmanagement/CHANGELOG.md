@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.6.0...network-management-v3.7.0) (2024-08-19)
+
+
+### Features
+
+* [networkmanagement] expose the new vpcflowlogs api proto ([#5606](https://github.com/googleapis/google-cloud-node/issues/5606)) ([c18942b](https://github.com/googleapis/google-cloud-node/commit/c18942bff326cc28125d5c9b50b8d318b6ffefc8))
+
 ## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/network-management-v3.5.0...network-management-v3.6.0) (2024-05-21)
 
 

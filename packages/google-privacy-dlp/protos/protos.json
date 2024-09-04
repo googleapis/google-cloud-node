@@ -5671,6 +5671,10 @@
                         "refreshFrequency": {
                           "type": "DataProfileUpdateFrequency",
                           "id": 2
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 3
                         }
                       },
                       "nested": {

@@ -410,7 +410,6 @@ export class TextToSpeechLongAudioSynthesizeClient {
    *   `projects/* /locations/*`.
    * @param {google.cloud.texttospeech.v1.SynthesisInput} request.input
    *   Required. The Synthesizer requires either plain text or SSML as input.
-   *   While Long Audio is in preview, SSML is temporarily unsupported.
    * @param {google.cloud.texttospeech.v1.AudioConfig} request.audioConfig
    *   Required. The configuration of the synthesized audio.
    * @param {string} request.outputGcsUri

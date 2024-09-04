@@ -17,10 +17,10 @@ async function main() {
   // [START nodejs_connect_gateway_quickstart]
   // Imports the Google Cloud client library
 
-  const {GatewayServiceClient} = require('@google-cloud/gke-connect-gateway');
+  const {GatewayControlClient} = require('@google-cloud/gke-connect-gateway');
 
   // Creates a client
-  new GatewayServiceClient();
+  new GatewayControlClient();
   // [END nodejs_connect_gateway_quickstart]
 }
 

@@ -127,6 +127,18 @@ service RecaptchaEnterpriseService {
     };
   }
 
+  // Adds an IP override to a key. The following restrictions hold:
+  // * The maximum number of IP overrides per key is 100.
+  // * For any conflict (such as IP already exists or IP part of an existing
+  //   IP range), an error is returned.
+  rpc AddIpOverride(AddIpOverrideRequest) returns (AddIpOverrideResponse) {
+    option (google.api.http) = {
+      post: "/v1/{name=projects/*/keys/*}:addIpOverride"
+      body: "*"
+    };
+    option (google.api.method_signature) = "name,ip_override_data";
+  }
+
   // Get some aggregated metrics for a Key. This data can be used to build
   // dashboards.
   rpc GetMetrics(GetMetricsRequest) returns (Metrics) {
@@ -227,7 +239,7 @@ service RecaptchaEnterpriseService {
 
 // The create assessment request message.
 message CreateAssessmentRequest {
-  // Required. The name of the project in which the assessment will be created,
+  // Required. The name of the project in which the assessment is created,
   // in the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -457,7 +469,7 @@ message AnnotateAssessmentRequest {
     }
   ];
 
-  // Optional. The annotation that will be assigned to the Event. This field can
+  // Optional. The annotation that is assigned to the Event. This field can
   // be left empty to provide reasons that apply to an event without concluding
   // whether the event is legitimate or fraudulent.
   Annotation annotation = 2 [(google.api.field_behavior) = OPTIONAL];
@@ -655,6 +667,12 @@ message Assessment {
   // protection need to be enabled.
   PhoneFraudAssessment phone_fraud_assessment = 12
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. The environment creating the assessment. This describes your
+  // environment (the system invoking CreateAssessment), NOT the environment of
+  // your user.
+  AssessmentEnvironment assessment_environment = 14
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The event being assessed.
@@ -708,8 +726,7 @@ message Event {
       [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 
   // Optional. Flag for a reCAPTCHA express request for an assessment without a
-  // token. If enabled, `site_key` must reference a SCORE key with WAF feature
-  // set to EXPRESS.
+  // token. If enabled, `site_key` must reference an express key.
   bool express = 14 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The URI resource the user requested that triggered an assessment.
@@ -727,12 +744,12 @@ message Event {
   repeated string headers = 11 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Flag for enabling firewall policy config assessment.
-  // If this flag is enabled, the firewall policy will be evaluated and a
-  // suggested firewall action will be returned in the response.
+  // If this flag is enabled, the firewall policy is evaluated and a
+  // suggested firewall action is returned in the response.
   bool firewall_policy_evaluation = 12 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Data describing a payment transaction to be assessed. Sending
-  // this data enables reCAPTCHA Enterprise Fraud Prevention and the
+  // this data enables reCAPTCHA Fraud Prevention and the
   // FraudPreventionAssessment component in the response.
   TransactionData transaction_data = 13
       [(google.api.field_behavior) = OPTIONAL];
@@ -1180,7 +1197,7 @@ message AccountDefenderAssessment {
 
 // The create key request message.
 message CreateKeyRequest {
-  // Required. The name of the project in which the key will be created, in the
+  // Required. The name of the project in which the key is created, in the
   // format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -1195,7 +1212,7 @@ message CreateKeyRequest {
 
 // The list keys request message.
 message ListKeysRequest {
-  // Required. The name of the project that contains the keys that will be
+  // Required. The name of the project that contains the keys that are
   // listed, in the format `projects/{project}`.
   string parent = 1 [
     (google.api.field_behavior) = REQUIRED,
@@ -1253,7 +1270,7 @@ message UpdateKeyRequest {
   Key key = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The mask to control which fields of the key get updated. If the
-  // mask is not present, all fields will be updated.
+  // mask is not present, all fields are updated.
   google.protobuf.FieldMask update_mask = 2
       [(google.api.field_behavior) = OPTIONAL];
 }
@@ -1333,7 +1350,7 @@ message UpdateFirewallPolicyRequest {
   FirewallPolicy firewall_policy = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The mask to control which fields of the policy get updated. If
-  // the mask is not present, all fields will be updated.
+  // the mask is not present, all fields are updated.
   google.protobuf.FieldMask update_mask = 2
       [(google.api.field_behavior) = OPTIONAL];
 }
@@ -1388,11 +1405,11 @@ message MigrateKeyRequest {
   // Optional. If true, skips the billing check.
   // A reCAPTCHA Enterprise key or migrated key behaves differently than a
   // reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-  // https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+  // https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
   // any disruption of your usage, we check that a billing account is present.
   // If your usage of reCAPTCHA is under the free quota, you can safely skip the
   // billing check and proceed with the migration. See
-  // https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+  // https://cloud.google.com/recaptcha/docs/billing-information.
   bool skip_billing_check = 2 [(google.api.field_behavior) = OPTIONAL];
 }
 
@@ -1427,11 +1444,11 @@ message Metrics {
   // Inclusive start time aligned to a day (UTC).
   google.protobuf.Timestamp start_time = 1;
 
-  // Metrics will be continuous and in order by dates, and in the granularity
+  // Metrics are continuous and in order by dates, and in the granularity
   // of day. All Key types should have score-based data.
   repeated ScoreMetrics score_metrics = 2;
 
-  // Metrics will be continuous and in order by dates, and in the granularity
+  // Metrics are continuous and in order by dates, and in the granularity
   // of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
   // challenge-based data.
   repeated ChallengeMetrics challenge_metrics = 3;
@@ -1475,10 +1492,13 @@ message Key {
 
     // Settings for keys that can be used by iOS apps.
     IOSKeySettings ios_settings = 5;
+
+    // Settings specific to keys that can be used for reCAPTCHA Express.
+    ExpressKeySettings express_settings = 11;
   }
 
   // Optional. See [Creating and managing labels]
-  // (https://cloud.google.com/recaptcha-enterprise/docs/labels).
+  // (https://cloud.google.com/recaptcha/docs/labels).
   map<string, string> labels = 6 [(google.api.field_behavior) = OPTIONAL];
 
   // Output only. The timestamp corresponding to the creation of this key.
@@ -1618,6 +1638,9 @@ message IOSKeySettings {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
+// Settings specific to keys that can be used for reCAPTCHA Express.
+message ExpressKeySettings {}
+
 // Contains fields that are required to perform Apple-specific integrity checks.
 message AppleDeveloperId {
   // Required. Input only. A private key (downloaded as a text file with a .p8
@@ -1675,13 +1698,13 @@ message ChallengeMetrics {
 
 // Policy config assessment.
 message FirewallPolicyAssessment {
-  // Output only. If the processing of a policy config fails, an error will be
-  // populated and the firewall_policy will be left empty.
+  // Output only. If the processing of a policy config fails, an error is
+  // populated and the firewall_policy is left empty.
   google.rpc.Status error = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. The policy that matched the request. If more than one policy
   // may match, this is the first match. If no policy matches the incoming
-  // request, the policy field will be left empty.
+  // request, the policy field is left empty.
   FirewallPolicy firewall_policy = 8
       [(google.api.field_behavior) = OUTPUT_ONLY];
 }
@@ -1919,6 +1942,24 @@ message SearchRelatedAccountGroupMembershipsResponse {
   string next_page_token = 2;
 }
 
+// The AddIpOverride request message.
+message AddIpOverrideRequest {
+  // Required. The name of the key to which the IP override is added, in the
+  // format `projects/{project}/keys/{key}`.
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {
+      type: "recaptchaenterprise.googleapis.com/Key"
+    }
+  ];
+
+  // Required. IP override added to the key.
+  IpOverrideData ip_override_data = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response for AddIpOverride.
+message AddIpOverrideResponse {}
+
 // A membership in a group of related accounts.
 message RelatedAccountGroupMembership {
   option (google.api.resource) = {
@@ -1969,7 +2010,7 @@ message RelatedAccountGroup {
 // Firewall).
 message WafSettings {
   // Supported WAF features. For more information, see
-  // https://cloud.google.com/recaptcha-enterprise/docs/usecase#comparison_of_features.
+  // https://cloud.google.com/recaptcha/docs/usecase#comparison_of_features.
   enum WafFeature {
     // Undefined feature.
     WAF_FEATURE_UNSPECIFIED = 0;
@@ -2009,4 +2050,48 @@ message WafSettings {
 
   // Required. The WAF feature for which this key is enabled.
   WafFeature waf_feature = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// The environment creating the assessment. This describes your environment
+// (the system invoking CreateAssessment), NOT the environment of your user.
+message AssessmentEnvironment {
+  // Optional. Identifies the client module initiating the CreateAssessment
+  // request. This can be the link to the client module's project. Examples
+  // include:
+  // - "github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager"
+  // - "cloud.google.com/recaptcha/docs/implement-waf-akamai"
+  // - "cloud.google.com/recaptcha/docs/implement-waf-cloudflare"
+  // - "wordpress.org/plugins/recaptcha-something"
+  string client = 1 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The version of the client module. For example, "1.0.0".
+  string version = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Information about the IP or IP range override.
+message IpOverrideData {
+  // Enum that represents the type of IP override.
+  enum OverrideType {
+    // Default override type that indicates this enum hasn't been specified.
+    OVERRIDE_TYPE_UNSPECIFIED = 0;
+
+    // Allowlist the IP address; i.e. give a `risk_analysis.score` of 0.9 for
+    // all valid assessments.
+    ALLOW = 1;
+  }
+
+  // Required. The IP address to override (can be IPv4, IPv6 or CIDR).
+  // The IP override must be a valid IPv4 or IPv6 address, or a CIDR range.
+  // The IP override must be a public IP address.
+  // Example of IPv4: 168.192.5.6
+  // Example of IPv6: 2001:0000:130F:0000:0000:09C0:876A:130B
+  // Example of IPv4 with CIDR: 168.192.5.0/24
+  // Example of IPv6 with CIDR: 2001:0DB8:1234::/48
+  string ip = 1 [
+    (google.api.field_info).format = IPV4_OR_IPV6,
+    (google.api.field_behavior) = REQUIRED
+  ];
+
+  // Required. Describes the type of IP override.
+  OverrideType override_type = 3 [(google.api.field_behavior) = REQUIRED];
 }

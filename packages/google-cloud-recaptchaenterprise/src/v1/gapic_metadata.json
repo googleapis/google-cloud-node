@@ -50,6 +50,11 @@
                 "migrateKey"
               ]
             },
+            "AddIpOverride": {
+              "methods": [
+                "addIpOverride"
+              ]
+            },
             "GetMetrics": {
               "methods": [
                 "getMetrics"
@@ -158,6 +163,11 @@
             "MigrateKey": {
               "methods": [
                 "migrateKey"
+              ]
+            },
+            "AddIpOverride": {
+              "methods": [
+                "addIpOverride"
               ]
             },
             "GetMetrics": {

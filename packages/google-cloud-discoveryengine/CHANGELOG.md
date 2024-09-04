@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.12.0...discoveryengine-v1.13.0) (2024-08-19)
+
+
+### Features
+
+* [discoveryengine] support natural language understanding in search ([#5596](https://github.com/googleapis/google-cloud-node/issues/5596)) ([5cf8d9e](https://github.com/googleapis/google-cloud-node/commit/5cf8d9e6be7c9f95910185062817379a2e29ffdc))
+
 ## [1.12.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.11.0...discoveryengine-v1.12.0) (2024-08-09)
 
 

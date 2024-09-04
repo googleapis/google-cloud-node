@@ -550,6 +550,10 @@ export class DataTransferServiceClient {
    * @param {google.cloud.bigquery.datatransfer.v1.TransferConfig} request.transferConfig
    *   Required. Data transfer configuration to create.
    * @param {string} request.authorizationCode
+   *   Deprecated: Authorization code was required when
+   *   `transferConfig.dataSourceId` is 'youtube_channel' but it is no longer used
+   *   in any data sources. Use `version_info` instead.
+   *
    *   Optional OAuth2 authorization code to use with this transfer configuration.
    *   This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
    *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
@@ -557,7 +561,7 @@ export class DataTransferServiceClient {
    *   <pre class="prettyprint" suppresswarning="true">
    *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
-   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   * The <var>client_id</var> is the OAuth client_id of the data source as
    *   returned by ListDataSources method.
    *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
    *   method.
@@ -565,14 +569,15 @@ export class DataTransferServiceClient {
    *   Note that this should not be set when `service_account_name` is used to
    *   create the transfer config.
    * @param {string} request.versionInfo
-   *   Optional version info. This is required only if
-   *   `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+   *   Optional version info. This parameter replaces `authorization_code` which
+   *   is no longer used in any data sources. This is required only if
+   *   `transferConfig.dataSourceId` is 'youtube_channel' *or* new credentials
    *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *   info, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
    *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
-   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   * The <var>client_id</var> is the OAuth client_id of the data source as
    *   returned by ListDataSources method.
    *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
    *   method.
@@ -687,6 +692,10 @@ export class DataTransferServiceClient {
    * @param {google.cloud.bigquery.datatransfer.v1.TransferConfig} request.transferConfig
    *   Required. Data transfer configuration to create.
    * @param {string} request.authorizationCode
+   *   Deprecated: Authorization code was required when
+   *   `transferConfig.dataSourceId` is 'youtube_channel' but it is no longer used
+   *   in any data sources. Use `version_info` instead.
+   *
    *   Optional OAuth2 authorization code to use with this transfer configuration.
    *   This is required only if `transferConfig.dataSourceId` is 'youtube_channel'
    *   and new credentials are needed, as indicated by `CheckValidCreds`. In order
@@ -694,7 +703,7 @@ export class DataTransferServiceClient {
    *   <pre class="prettyprint" suppresswarning="true">
    *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
-   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   * The <var>client_id</var> is the OAuth client_id of the data source as
    *   returned by ListDataSources method.
    *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
    *   method.
@@ -704,14 +713,15 @@ export class DataTransferServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Required list of fields to be updated in this request.
    * @param {string} request.versionInfo
-   *   Optional version info. This is required only if
-   *   `transferConfig.dataSourceId` is not 'youtube_channel' and new credentials
+   *   Optional version info. This parameter replaces `authorization_code` which
+   *   is no longer used in any data sources. This is required only if
+   *   `transferConfig.dataSourceId` is 'youtube_channel' *or* new credentials
    *   are needed, as indicated by `CheckValidCreds`. In order to obtain version
    *   info, make a request to the following URL:
    *   <pre class="prettyprint" suppresswarning="true">
    *   https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=<var>client_id</var>&scope=<var>data_source_scopes</var>
    *   </pre>
-   *   * The <var>client_id</var> is the OAuth client_id of the a data source as
+   *   * The <var>client_id</var> is the OAuth client_id of the data source as
    *   returned by ListDataSources method.
    *   * <var>data_source_scopes</var> are the scopes returned by ListDataSources
    *   method.

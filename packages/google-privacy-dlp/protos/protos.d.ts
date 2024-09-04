@@ -23748,6 +23748,9 @@ export namespace google {
 
                     /** DiscoveryCloudSqlGenerationCadence refreshFrequency */
                     refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+
+                    /** DiscoveryCloudSqlGenerationCadence inspectTemplateModifiedCadence */
+                    inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
                 }
 
                 /** Represents a DiscoveryCloudSqlGenerationCadence. */
@@ -23764,6 +23767,9 @@ export namespace google {
 
                     /** DiscoveryCloudSqlGenerationCadence refreshFrequency. */
                     public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                    /** DiscoveryCloudSqlGenerationCadence inspectTemplateModifiedCadence. */
+                    public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
 
                     /**
                      * Creates a new DiscoveryCloudSqlGenerationCadence instance using the specified properties.

@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.28.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.27.0...aiplatform-v3.28.0) (2024-08-29)
+
+
+### Features
+
+* Add max_wait_duration to Scheduling ([#5642](https://github.com/googleapis/google-cloud-node/issues/5642)) ([39e65cb](https://github.com/googleapis/google-cloud-node/commit/39e65cbbe8c09020d6d33a2b6864de17ec58ef51))
+
+## [3.27.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.26.0...aiplatform-v3.27.0) (2024-08-19)
+
+
+### Features
+
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.BatchPredictionJob` ([#5605](https://github.com/googleapis/google-cloud-node/issues/5605)) ([e4574ad](https://github.com/googleapis/google-cloud-node/commit/e4574ad769864684f633fa38c4ebf819143ccabb))
+
 ## [3.26.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.25.0...aiplatform-v3.26.0) (2024-08-09)
 
 

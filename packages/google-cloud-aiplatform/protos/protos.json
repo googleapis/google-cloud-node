@@ -3743,6 +3743,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "maxWaitDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -27628,7 +27635,8 @@
                         },
                         "request": {
                           "oneof": [
-                            "createPipelineJobRequest"
+                            "createPipelineJobRequest",
+                            "createNotebookExecutionJobRequest"
                           ]
                         }
                       },
@@ -27640,6 +27648,10 @@
                         "createPipelineJobRequest": {
                           "type": "CreatePipelineJobRequest",
                           "id": 14
+                        },
+                        "createNotebookExecutionJobRequest": {
+                          "type": "CreateNotebookExecutionJobRequest",
+                          "id": 20
                         },
                         "name": {
                           "type": "string",
@@ -32023,7 +32035,19 @@
                       }
                     },
                     "ApiAuth": {
-                      "fields": {},
+                      "oneofs": {
+                        "authConfig": {
+                          "oneof": [
+                            "apiKeyConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "apiKeyConfig": {
+                          "type": "ApiKeyConfig",
+                          "id": 1
+                        }
+                      },
                       "nested": {
                         "ApiKeyConfig": {
                           "fields": {
@@ -36553,6 +36577,13 @@
                         "disableRetries": {
                           "type": "bool",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "maxWaitDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -67700,7 +67731,8 @@
                       "oneofs": {
                         "modelConfig": {
                           "oneof": [
-                            "vertexPredictionEndpoint"
+                            "vertexPredictionEndpoint",
+                            "hybridSearchConfig"
                           ]
                         }
                       },
@@ -67708,6 +67740,10 @@
                         "vertexPredictionEndpoint": {
                           "type": "VertexPredictionEndpoint",
                           "id": 1
+                        },
+                        "hybridSearchConfig": {
+                          "type": "HybridSearchConfig",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -67736,6 +67772,189 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        },
+                        "SparseEmbeddingConfig": {
+                          "oneofs": {
+                            "model": {
+                              "oneof": [
+                                "bm25"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "bm25": {
+                              "type": "Bm25",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Bm25": {
+                              "oneofs": {
+                                "_k1": {
+                                  "oneof": [
+                                    "k1"
+                                  ]
+                                },
+                                "_b": {
+                                  "oneof": [
+                                    "b"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "multilingual": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "k1": {
+                                  "type": "float",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "b": {
+                                  "type": "float",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "HybridSearchConfig": {
+                          "fields": {
+                            "sparseEmbeddingConfig": {
+                              "type": "SparseEmbeddingConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "denseEmbeddingModelPredictionEndpoint": {
+                              "type": "VertexPredictionEndpoint",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RagVectorDbConfig": {
+                      "oneofs": {
+                        "vectorDb": {
+                          "oneof": [
+                            "ragManagedDb",
+                            "weaviate",
+                            "vertexFeatureStore"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ragManagedDb": {
+                          "type": "RagManagedDb",
+                          "id": 1
+                        },
+                        "weaviate": {
+                          "type": "Weaviate",
+                          "id": 2
+                        },
+                        "vertexFeatureStore": {
+                          "type": "VertexFeatureStore",
+                          "id": 4
+                        },
+                        "apiAuth": {
+                          "type": "ApiAuth",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "RagManagedDb": {
+                          "fields": {}
+                        },
+                        "Weaviate": {
+                          "fields": {
+                            "httpEndpoint": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "collectionName": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "VertexFeatureStore": {
+                          "fields": {
+                            "featureViewResourceName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "FileStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorStatus": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "ERROR": 2
+                          }
+                        }
+                      }
+                    },
+                    "CorpusStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorStatus": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNKNOWN": 0,
+                            "INITIALIZED": 1,
+                            "ACTIVE": 2,
+                            "ERROR": 3
                           }
                         }
                       }
@@ -67776,6 +67995,13 @@
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
                         },
+                        "ragVectorDbConfig": {
+                          "type": "RagVectorDbConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 4,
@@ -67786,6 +68012,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "corpusStatus": {
+                          "type": "CorpusStatus",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -67885,6 +68118,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "fileStatus": {
+                          "type": "FileStatus",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -68003,6 +68243,34 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "RagCorpus",
                                 "metadata_type": "CreateRagCorpusOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateRagCorpus": {
+                          "requestType": "UpdateRagCorpusRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{rag_corpus.name=projects/*/locations/*/ragCorpora/*}",
+                            "(google.api.http).body": "rag_corpus",
+                            "(google.api.method_signature)": "rag_corpus",
+                            "(google.longrunning.operation_info).response_type": "RagCorpus",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateRagCorpusOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{rag_corpus.name=projects/*/locations/*/ragCorpora/*}",
+                                "body": "rag_corpus"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "rag_corpus"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RagCorpus",
+                                "metadata_type": "UpdateRagCorpusOperationMetadata"
                               }
                             }
                           ]
@@ -68422,6 +68690,25 @@
                         }
                       }
                     },
+                    "UpdateRagCorpusRequest": {
+                      "fields": {
+                        "ragCorpus": {
+                          "type": "RagCorpus",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateRagCorpusOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ImportRagFilesOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
@@ -68494,6 +68781,34 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ranking": {
+                          "type": "Ranking",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Ranking": {
+                          "oneofs": {
+                            "_alpha": {
+                              "oneof": [
+                                "alpha"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "alpha": {
+                              "type": "float",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
                           }
                         }
                       }
@@ -68610,6 +68925,10 @@
                             "distance": {
                               "type": "double",
                               "id": 3
+                            },
+                            "sparseDistance": {
+                              "type": "double",
+                              "id": 4
                             }
                           }
                         }

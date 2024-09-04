@@ -44,11 +44,11 @@ function main(model, contents, answerStyle) {
    */
   // const model = 'abc123'
   /**
-   *  Required. The content of the current conversation with the model. For
+   *  Required. The content of the current conversation with the `Model`. For
    *  single-turn queries, this is a single question to answer. For multi-turn
    *  queries, this is a repeated field that contains conversation history and
    *  the last `Content` in the list containing the question.
-   *  Note: GenerateAnswer currently only supports queries in English.
+   *  Note: `GenerateAnswer` only supports queries in English.
    */
   // const contents = [1,2,3,4]
   /**
@@ -68,6 +68,11 @@ function main(model, contents, answerStyle) {
    *  setting for that category. Harm categories HARM_CATEGORY_HATE_SPEECH,
    *  HARM_CATEGORY_SEXUALLY_EXPLICIT, HARM_CATEGORY_DANGEROUS_CONTENT,
    *  HARM_CATEGORY_HARASSMENT are supported.
+   *  Refer to the
+   *  guide (https://ai.google.dev/gemini-api/docs/safety-settings)
+   *  for detailed information on available safety settings. Also refer to the
+   *  Safety guidance (https://ai.google.dev/gemini-api/docs/safety-guidance) to
+   *  learn how to incorporate safety considerations in your AI applications.
    */
   // const safetySettings = [1,2,3,4]
   /**

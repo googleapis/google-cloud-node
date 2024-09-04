@@ -814,7 +814,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 86,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -838,6 +838,10 @@
                     {
                         "name": "tarball_gcs_dir",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tarball_access",
+                        "type": ".google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess"
                     },
                     {
                         "name": "diagnosis_interval",

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [5.17.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.16.0...container-v5.17.0) (2024-08-29)
+
+
+### Features
+
+* [container] add `EXTENDED` enum value for `ReleaseChannel.Channel` ([#5641](https://github.com/googleapis/google-cloud-node/issues/5641)) ([b03f419](https://github.com/googleapis/google-cloud-node/commit/b03f419cab2ebf8385d2df7bf018863e63295624))
+
 ## [5.16.0](https://github.com/googleapis/google-cloud-node/compare/container-v5.15.1...container-v5.16.0) (2024-07-22)
 
 

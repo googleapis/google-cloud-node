@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.3.0...storage-transfer-v3.4.0) (2024-08-19)
+
+
+### Features
+
+* [storagetransfer] add HDFS configuration ([#5619](https://github.com/googleapis/google-cloud-node/issues/5619)) ([7500af4](https://github.com/googleapis/google-cloud-node/commit/7500af4746970169ea3edfbe6c8782e3bbf8c375))
+
 ## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/storage-transfer-v3.2.0...storage-transfer-v3.3.0) (2024-05-21)
 
 

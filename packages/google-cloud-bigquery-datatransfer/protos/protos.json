@@ -653,7 +653,10 @@
                             },
                             "authorizationCode": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "versionInfo": {
                               "type": "string",
@@ -676,7 +679,10 @@
                             },
                             "authorizationCode": {
                               "type": "string",
-                              "id": 3
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "updateMask": {
                               "type": "google.protobuf.FieldMask",

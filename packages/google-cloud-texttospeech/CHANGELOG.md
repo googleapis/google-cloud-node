@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.3.0...text-to-speech-v5.4.0) (2024-08-19)
+
+
+### Features
+
+* [texttospeech] A new method `StreamingSynthesize` is added to service `TextToSpeech` ([#5620](https://github.com/googleapis/google-cloud-node/issues/5620)) ([a8d513d](https://github.com/googleapis/google-cloud-node/commit/a8d513d66e58983a3ac9e4726f6229bc58eb753b))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.2.0...text-to-speech-v5.3.0) (2024-05-21)
 
 

@@ -29,7 +29,7 @@ function main(parent, key) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project in which the key will be created, in the
+   *  Required. The name of the project in which the key is created, in the
    *  format `projects/{project}`.
    */
   // const parent = 'abc123'

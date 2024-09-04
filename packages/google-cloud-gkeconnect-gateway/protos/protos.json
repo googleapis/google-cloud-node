@@ -8,6 +8,100 @@
               "nested": {
                 "gateway": {
                   "nested": {
+                    "v1": {
+                      "options": {
+                        "csharp_namespace": "Google.Cloud.GkeConnect.Gateway.V1",
+                        "go_package": "cloud.google.com/go/gkeconnect/gateway/apiv1/gatewaypb;gatewaypb",
+                        "java_multiple_files": true,
+                        "java_outer_classname": "ControlProto",
+                        "java_package": "com.google.cloud.gkeconnect.gateway.v1",
+                        "php_namespace": "Google\\Cloud\\GkeConnect\\Gateway\\V1",
+                        "ruby_package": "Google::Cloud::GkeConnect::Gateway::V1"
+                      },
+                      "nested": {
+                        "GatewayControl": {
+                          "options": {
+                            "(google.api.default_host)": "connectgateway.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "GenerateCredentials": {
+                              "requestType": "GenerateCredentialsRequest",
+                              "responseType": "GenerateCredentialsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/memberships/*}:generateCredentials"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/memberships/*}:generateCredentials"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "GenerateCredentialsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "forceUseAgent": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "kubernetesNamespace": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "operatingSystem": {
+                              "type": "OperatingSystem",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "OperatingSystem": {
+                              "values": {
+                                "OPERATING_SYSTEM_UNSPECIFIED": 0,
+                                "OPERATING_SYSTEM_WINDOWS": 1
+                              }
+                            }
+                          }
+                        },
+                        "GenerateCredentialsResponse": {
+                          "fields": {
+                            "kubeconfig": {
+                              "type": "bytes",
+                              "id": 1
+                            },
+                            "endpoint": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
                     "v1beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.GkeConnect.Gateway.V1Beta1",
@@ -19,6 +113,87 @@
                         "ruby_package": "Google::Cloud::GkeConnect::Gateway::V1beta1"
                       },
                       "nested": {
+                        "GatewayControl": {
+                          "options": {
+                            "(google.api.default_host)": "connectgateway.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                          },
+                          "methods": {
+                            "GenerateCredentials": {
+                              "requestType": "GenerateCredentialsRequest",
+                              "responseType": "GenerateCredentialsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/memberships/*}:generateCredentials"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/memberships/*}:generateCredentials"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "GenerateCredentialsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "forceUseAgent": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "kubernetesNamespace": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "operatingSystem": {
+                              "type": "OperatingSystem",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "OperatingSystem": {
+                              "values": {
+                                "OPERATING_SYSTEM_UNSPECIFIED": 0,
+                                "OPERATING_SYSTEM_WINDOWS": 1
+                              }
+                            }
+                          }
+                        },
+                        "GenerateCredentialsResponse": {
+                          "fields": {
+                            "kubeconfig": {
+                              "type": "bytes",
+                              "id": 1
+                            },
+                            "endpoint": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
                         "GatewayService": {
                           "options": {
                             "(google.api.default_host)": "connectgateway.googleapis.com",
@@ -495,6 +670,25 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
               }
             },
             "HttpBody": {

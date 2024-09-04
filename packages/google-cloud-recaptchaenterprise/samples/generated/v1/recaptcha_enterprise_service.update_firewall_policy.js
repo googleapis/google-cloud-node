@@ -34,7 +34,7 @@ function main(firewallPolicy) {
   // const firewallPolicy = {}
   /**
    *  Optional. The mask to control which fields of the policy get updated. If
-   *  the mask is not present, all fields will be updated.
+   *  the mask is not present, all fields are updated.
    */
   // const updateMask = {}
 

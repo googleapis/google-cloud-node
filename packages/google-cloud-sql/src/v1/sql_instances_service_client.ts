@@ -405,7 +405,9 @@ export class SqlInstancesServiceClient {
    * instance. Required to prepare for a certificate rotation. If a CA version
    * was previously added but never used in a certificate rotation, this
    * operation replaces that version. There cannot be more than one CA version
-   * waiting to be rotated in.
+   * waiting to be rotated in. For instances that have enabled Certificate
+   * Authority Service (CAS) based server CA, please use AddServerCertificate to
+   * add a new server certificate.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2171,7 +2173,9 @@ export class SqlInstancesServiceClient {
   }
   /**
    * Rotates the server certificate to one signed by the Certificate Authority
-   * (CA) version previously added with the addServerCA method.
+   * (CA) version previously added with the addServerCA method. For instances
+   * that have enabled Certificate Authority Service (CAS) based server CA,
+   * please use RotateServerCertificate to rotate the server certificate.
    *
    * @param {Object} request
    *   The request object that will be sent.
