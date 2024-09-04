@@ -20,10 +20,11 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as provisioningModule from '../src';
 
 import {
+  GoogleAuth,
   protobuf,
   LROperation,
   operationsProtos,
@@ -125,6 +126,19 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.ProvisioningClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client = new provisioningModule.v1.ProvisioningClient();
@@ -236,7 +250,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.provisioningStub, undefined);
@@ -246,7 +260,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('has close method for the initialized client', done => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -258,7 +272,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.provisioningStub, undefined);
@@ -270,7 +284,7 @@ describe('v1.ProvisioningClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -282,7 +296,7 @@ describe('v1.ProvisioningClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -305,7 +319,7 @@ describe('v1.ProvisioningClient', () => {
   describe('getApiHubInstance', () => {
     it('invokes getApiHubInstance without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -336,7 +350,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes getApiHubInstance without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -383,7 +397,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes getApiHubInstance with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -414,7 +428,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes getApiHubInstance with closed client', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -435,7 +449,7 @@ describe('v1.ProvisioningClient', () => {
   describe('lookupApiHubInstance', () => {
     it('invokes lookupApiHubInstance without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -467,7 +481,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes lookupApiHubInstance without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -514,7 +528,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes lookupApiHubInstance with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -545,7 +559,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes lookupApiHubInstance with closed client', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -566,7 +580,7 @@ describe('v1.ProvisioningClient', () => {
   describe('createApiHubInstance', () => {
     it('invokes createApiHubInstance without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -599,7 +613,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes createApiHubInstance without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -653,7 +667,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes createApiHubInstance with call error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -684,7 +698,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes createApiHubInstance with LRO error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -717,7 +731,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes checkCreateApiHubInstanceProgress without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -739,7 +753,7 @@ describe('v1.ProvisioningClient', () => {
 
     it('invokes checkCreateApiHubInstanceProgress with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -759,7 +773,7 @@ describe('v1.ProvisioningClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -789,7 +803,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -833,7 +847,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -868,7 +882,7 @@ describe('v1.ProvisioningClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -957,7 +971,7 @@ describe('v1.ProvisioningClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -978,7 +992,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1012,7 +1026,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1036,7 +1050,7 @@ describe('v1.ProvisioningClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1058,7 +1072,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1092,7 +1106,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1116,7 +1130,7 @@ describe('v1.ProvisioningClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1138,7 +1152,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1172,7 +1186,7 @@ describe('v1.ProvisioningClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1196,7 +1210,7 @@ describe('v1.ProvisioningClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new provisioningModule.v1.ProvisioningClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       const request = generateSampleMessage(

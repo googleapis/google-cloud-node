@@ -20,12 +20,12 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as runtimeprojectattachmentserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LocationProtos} from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -128,6 +128,19 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.RuntimeProjectAttachmentServiceClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
@@ -254,7 +267,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -267,7 +280,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -282,7 +295,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -297,7 +310,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -312,7 +325,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -338,7 +351,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -373,7 +386,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -423,7 +436,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -460,7 +473,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -487,7 +500,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -522,7 +535,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -572,7 +585,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -609,7 +622,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -636,7 +649,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -671,7 +684,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -721,7 +734,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -758,7 +771,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -785,7 +798,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -820,7 +833,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -870,7 +883,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -907,7 +920,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -1213,7 +1226,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -1319,7 +1332,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -1352,7 +1365,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -1399,7 +1412,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );
@@ -1437,7 +1450,7 @@ describe('v1.RuntimeProjectAttachmentServiceClient', () => {
       const client =
         new runtimeprojectattachmentserviceModule.v1.RuntimeProjectAttachmentServiceClient(
           {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            auth: googleAuth,
             projectId: 'bogus',
           }
         );

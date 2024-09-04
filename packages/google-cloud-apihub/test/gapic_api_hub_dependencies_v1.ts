@@ -20,12 +20,12 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as apihubdependenciesModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf, LocationProtos} from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -128,6 +128,19 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.ApiHubDependenciesClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient();
@@ -241,7 +254,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiHubDependenciesStub, undefined);
@@ -251,7 +264,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('has close method for the initialized client', done => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -263,7 +276,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.apiHubDependenciesStub, undefined);
@@ -275,7 +288,7 @@ describe('v1.ApiHubDependenciesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -287,7 +300,7 @@ describe('v1.ApiHubDependenciesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -310,7 +323,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   describe('createDependency', () => {
     it('invokes createDependency without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -341,7 +354,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes createDependency without error using callback', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -388,7 +401,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes createDependency with error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -419,7 +432,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes createDependency with closed client', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -440,7 +453,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   describe('getDependency', () => {
     it('invokes getDependency without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -471,7 +484,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes getDependency without error using callback', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -518,7 +531,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes getDependency with error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -549,7 +562,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes getDependency with closed client', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -570,7 +583,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   describe('updateDependency', () => {
     it('invokes updateDependency without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -602,7 +615,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes updateDependency without error using callback', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -650,7 +663,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes updateDependency with error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -682,7 +695,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes updateDependency with closed client', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -704,7 +717,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   describe('deleteDependency', () => {
     it('invokes deleteDependency without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -735,7 +748,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes deleteDependency without error using callback', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -782,7 +795,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes deleteDependency with error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -813,7 +826,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('invokes deleteDependency with closed client', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1050,7 +1063,7 @@ describe('v1.ApiHubDependenciesClient', () => {
 
     it('uses async iteration with listDependencies without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1134,7 +1147,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1164,7 +1177,7 @@ describe('v1.ApiHubDependenciesClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1208,7 +1221,7 @@ describe('v1.ApiHubDependenciesClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1243,7 +1256,7 @@ describe('v1.ApiHubDependenciesClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new apihubdependenciesModule.v1.ApiHubDependenciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();

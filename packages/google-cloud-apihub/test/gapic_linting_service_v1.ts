@@ -20,10 +20,10 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as lintingserviceModule from '../src';
 
-import {protobuf, LocationProtos} from 'google-gax';
+import {GoogleAuth, protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -88,6 +88,19 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.LintingServiceClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client = new lintingserviceModule.v1.LintingServiceClient();
@@ -199,7 +212,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.lintingServiceStub, undefined);
@@ -209,7 +222,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('has close method for the initialized client', done => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -221,7 +234,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       assert.strictEqual(client.lintingServiceStub, undefined);
@@ -233,7 +246,7 @@ describe('v1.LintingServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -245,7 +258,7 @@ describe('v1.LintingServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -268,7 +281,7 @@ describe('v1.LintingServiceClient', () => {
   describe('getStyleGuide', () => {
     it('invokes getStyleGuide without error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -299,7 +312,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes getStyleGuide without error using callback', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -346,7 +359,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes getStyleGuide with error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -377,7 +390,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes getStyleGuide with closed client', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -398,7 +411,7 @@ describe('v1.LintingServiceClient', () => {
   describe('updateStyleGuide', () => {
     it('invokes updateStyleGuide without error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -430,7 +443,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes updateStyleGuide without error using callback', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -478,7 +491,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes updateStyleGuide with error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -510,7 +523,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes updateStyleGuide with closed client', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -532,7 +545,7 @@ describe('v1.LintingServiceClient', () => {
   describe('getStyleGuideContents', () => {
     it('invokes getStyleGuideContents without error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -564,7 +577,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes getStyleGuideContents without error using callback', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -611,7 +624,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes getStyleGuideContents with error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -645,7 +658,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes getStyleGuideContents with closed client', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -669,7 +682,7 @@ describe('v1.LintingServiceClient', () => {
   describe('lintSpec', () => {
     it('invokes lintSpec without error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -700,7 +713,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes lintSpec without error using callback', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -747,7 +760,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes lintSpec with error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -775,7 +788,7 @@ describe('v1.LintingServiceClient', () => {
 
     it('invokes lintSpec with closed client', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -795,7 +808,7 @@ describe('v1.LintingServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -825,7 +838,7 @@ describe('v1.LintingServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -869,7 +882,7 @@ describe('v1.LintingServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -904,7 +917,7 @@ describe('v1.LintingServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new lintingserviceModule.v1.LintingServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();

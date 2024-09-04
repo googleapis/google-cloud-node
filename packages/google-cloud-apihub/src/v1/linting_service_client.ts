@@ -137,6 +137,12 @@ export class LintingServiceClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
+    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
+    if (!opts) {
+      opts = {fallback: true};
+    } else {
+      opts.fallback = opts.fallback ?? true;
+    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
