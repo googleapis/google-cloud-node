@@ -3767,7 +3767,8 @@
                             "ON_DEMAND": 1,
                             "LOW_COST": 2,
                             "STANDARD": 3,
-                            "SPOT": 4
+                            "SPOT": 4,
+                            "FLEX_START": 6
                           }
                         }
                       }
@@ -10076,9 +10077,23 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "staticDataSource": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "timeSeries": {
                               "type": "TimeSeries",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dense": {
+                              "type": "bool",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -10907,7 +10922,8 @@
                         "source": {
                           "oneof": [
                             "bigQuerySource",
-                            "featureRegistrySource"
+                            "featureRegistrySource",
+                            "vertexRagSource"
                           ]
                         }
                       },
@@ -10922,6 +10938,13 @@
                         "featureRegistrySource": {
                           "type": "FeatureRegistrySource",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vertexRagSource": {
+                          "type": "VertexRagSource",
+                          "id": 18,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -11163,6 +11186,24 @@
                               }
                             }
                           }
+                        },
+                        "VertexRagSource": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ragCorpusId": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -11238,6 +11279,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "systemWatermarkTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
                             }
                           }
                         }
@@ -34881,6 +34926,39 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "usageMetadata": {
+                          "type": "UsageMetadata",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "UsageMetadata": {
+                          "fields": {
+                            "totalTokenCount": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "textCount": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "imageCount": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "videoDurationSeconds": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "audioDurationSeconds": {
+                              "type": "int32",
+                              "id": 5
+                            }
+                          }
                         }
                       }
                     },
@@ -36604,7 +36682,8 @@
                             "ON_DEMAND": 1,
                             "LOW_COST": 2,
                             "STANDARD": 3,
-                            "SPOT": 4
+                            "SPOT": 4,
+                            "FLEX_START": 6
                           }
                         }
                       }
@@ -43606,9 +43685,23 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "staticDataSource": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "timeSeries": {
                               "type": "TimeSeries",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dense": {
+                              "type": "bool",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -44459,7 +44552,8 @@
                         "source": {
                           "oneof": [
                             "bigQuerySource",
-                            "featureRegistrySource"
+                            "featureRegistrySource",
+                            "vertexRagSource"
                           ]
                         }
                       },
@@ -44474,6 +44568,13 @@
                         "featureRegistrySource": {
                           "type": "FeatureRegistrySource",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vertexRagSource": {
+                          "type": "VertexRagSource",
+                          "id": 18,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -44841,6 +44942,24 @@
                             }
                           }
                         },
+                        "VertexRagSource": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ragCorpusId": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "ServiceAgentType": {
                           "values": {
                             "SERVICE_AGENT_TYPE_UNSPECIFIED": 0,
@@ -44922,6 +45041,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "systemWatermarkTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
                             }
                           }
                         }
@@ -62980,6 +63103,13 @@
                             "totalTokenCount": {
                               "type": "int32",
                               "id": 3
+                            },
+                            "cachedContentTokenCount": {
+                              "type": "int32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
