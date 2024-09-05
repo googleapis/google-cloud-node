@@ -10077,9 +10077,23 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "staticDataSource": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "timeSeries": {
                               "type": "TimeSeries",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dense": {
+                              "type": "bool",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -10908,7 +10922,8 @@
                         "source": {
                           "oneof": [
                             "bigQuerySource",
-                            "featureRegistrySource"
+                            "featureRegistrySource",
+                            "vertexRagSource"
                           ]
                         }
                       },
@@ -10923,6 +10938,13 @@
                         "featureRegistrySource": {
                           "type": "FeatureRegistrySource",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "vertexRagSource": {
+                          "type": "VertexRagSource",
+                          "id": 18,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -11164,6 +11186,24 @@
                               }
                             }
                           }
+                        },
+                        "VertexRagSource": {
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "ragCorpusId": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -11239,6 +11279,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "systemWatermarkTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
                             }
                           }
                         }
