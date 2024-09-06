@@ -2531,7 +2531,8 @@
                   "oneofs": {
                     "data": {
                       "oneof": [
-                        "driveLinkData"
+                        "driveLinkData",
+                        "chatSpaceLinkData"
                       ]
                     }
                   },
@@ -2547,13 +2548,18 @@
                     "driveLinkData": {
                       "type": "DriveLinkData",
                       "id": 3
+                    },
+                    "chatSpaceLinkData": {
+                      "type": "ChatSpaceLinkData",
+                      "id": 4
                     }
                   },
                   "nested": {
                     "RichLinkType": {
                       "values": {
                         "RICH_LINK_TYPE_UNSPECIFIED": 0,
-                        "DRIVE_FILE": 1
+                        "DRIVE_FILE": 1,
+                        "CHAT_SPACE": 2
                       }
                     }
                   }
@@ -2567,6 +2573,31 @@
                     "mimeType": {
                       "type": "string",
                       "id": 2
+                    }
+                  }
+                },
+                "ChatSpaceLinkData": {
+                  "fields": {
+                    "space": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Space"
+                      }
+                    },
+                    "thread": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Thread"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Message"
+                      }
                     }
                   }
                 },
