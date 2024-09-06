@@ -1135,7 +1135,7 @@ export class DeliveryServiceClient {
  *   http://aip.dev/160 for examples of filter syntax. If you don't specify a
  *   value, or if you filter on an empty string, then all Tasks are returned.
  *   For information about the Task properties that you can filter on, see [List
- *   tasks](https://developers.google.com/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list-tasks).
+ *   tasks](https://developers.google.com/maps/documentation/mobility/fleet-engine/journeys/tasks/find-tasks#filter_listed_tasks).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1241,7 +1241,7 @@ export class DeliveryServiceClient {
  *   http://aip.dev/160 for examples of filter syntax. If you don't specify a
  *   value, or if you filter on an empty string, then all Tasks are returned.
  *   For information about the Task properties that you can filter on, see [List
- *   tasks](https://developers.google.com/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list-tasks).
+ *   tasks](https://developers.google.com/maps/documentation/mobility/fleet-engine/journeys/tasks/find-tasks#filter_listed_tasks).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1314,7 +1314,7 @@ export class DeliveryServiceClient {
  *   http://aip.dev/160 for examples of filter syntax. If you don't specify a
  *   value, or if you filter on an empty string, then all Tasks are returned.
  *   For information about the Task properties that you can filter on, see [List
- *   tasks](https://developers.google.com/maps/documentation/transportation-logistics/last-mile-fleet-solution/fleet-performance/fleet-engine/deliveries_api#list-tasks).
+ *   tasks](https://developers.google.com/maps/documentation/mobility/fleet-engine/journeys/tasks/find-tasks#filter_listed_tasks).
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
