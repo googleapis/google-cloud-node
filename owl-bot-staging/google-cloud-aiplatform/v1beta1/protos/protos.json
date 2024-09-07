@@ -3453,7 +3453,8 @@
                             "BLOCK_LOW_AND_ABOVE": 1,
                             "BLOCK_MEDIUM_AND_ABOVE": 2,
                             "BLOCK_ONLY_HIGH": 3,
-                            "BLOCK_NONE": 4
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         },
                         "HarmBlockMethod": {
