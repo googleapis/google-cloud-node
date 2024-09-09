@@ -40,4 +40,3 @@ describe('Quickstart', () => {
     assert.match(stdout, /\[\]/);
   });
 });
-
