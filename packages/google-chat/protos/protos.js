@@ -27508,6 +27508,7 @@
                      * @property {string|null} [uri] RichLinkMetadata uri
                      * @property {google.chat.v1.RichLinkMetadata.RichLinkType|null} [richLinkType] RichLinkMetadata richLinkType
                      * @property {google.chat.v1.IDriveLinkData|null} [driveLinkData] RichLinkMetadata driveLinkData
+                     * @property {google.chat.v1.IChatSpaceLinkData|null} [chatSpaceLinkData] RichLinkMetadata chatSpaceLinkData
                      */
     
                     /**
@@ -27549,17 +27550,25 @@
                      */
                     RichLinkMetadata.prototype.driveLinkData = null;
     
+                    /**
+                     * RichLinkMetadata chatSpaceLinkData.
+                     * @member {google.chat.v1.IChatSpaceLinkData|null|undefined} chatSpaceLinkData
+                     * @memberof google.chat.v1.RichLinkMetadata
+                     * @instance
+                     */
+                    RichLinkMetadata.prototype.chatSpaceLinkData = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
                     /**
                      * RichLinkMetadata data.
-                     * @member {"driveLinkData"|undefined} data
+                     * @member {"driveLinkData"|"chatSpaceLinkData"|undefined} data
                      * @memberof google.chat.v1.RichLinkMetadata
                      * @instance
                      */
                     Object.defineProperty(RichLinkMetadata.prototype, "data", {
-                        get: $util.oneOfGetter($oneOfFields = ["driveLinkData"]),
+                        get: $util.oneOfGetter($oneOfFields = ["driveLinkData", "chatSpaceLinkData"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -27593,6 +27602,8 @@
                             writer.uint32(/* id 2, wireType 0 =*/16).int32(message.richLinkType);
                         if (message.driveLinkData != null && Object.hasOwnProperty.call(message, "driveLinkData"))
                             $root.google.chat.v1.DriveLinkData.encode(message.driveLinkData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.chatSpaceLinkData != null && Object.hasOwnProperty.call(message, "chatSpaceLinkData"))
+                            $root.google.chat.v1.ChatSpaceLinkData.encode(message.chatSpaceLinkData, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                         return writer;
                     };
     
@@ -27637,6 +27648,10 @@
                                 }
                             case 3: {
                                     message.driveLinkData = $root.google.chat.v1.DriveLinkData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 4: {
+                                    message.chatSpaceLinkData = $root.google.chat.v1.ChatSpaceLinkData.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -27684,6 +27699,7 @@
                                 return "richLinkType: enum value expected";
                             case 0:
                             case 1:
+                            case 2:
                                 break;
                             }
                         if (message.driveLinkData != null && message.hasOwnProperty("driveLinkData")) {
@@ -27692,6 +27708,16 @@
                                 var error = $root.google.chat.v1.DriveLinkData.verify(message.driveLinkData);
                                 if (error)
                                     return "driveLinkData." + error;
+                            }
+                        }
+                        if (message.chatSpaceLinkData != null && message.hasOwnProperty("chatSpaceLinkData")) {
+                            if (properties.data === 1)
+                                return "data: multiple values";
+                            properties.data = 1;
+                            {
+                                var error = $root.google.chat.v1.ChatSpaceLinkData.verify(message.chatSpaceLinkData);
+                                if (error)
+                                    return "chatSpaceLinkData." + error;
                             }
                         }
                         return null;
@@ -27726,11 +27752,20 @@
                         case 1:
                             message.richLinkType = 1;
                             break;
+                        case "CHAT_SPACE":
+                        case 2:
+                            message.richLinkType = 2;
+                            break;
                         }
                         if (object.driveLinkData != null) {
                             if (typeof object.driveLinkData !== "object")
                                 throw TypeError(".google.chat.v1.RichLinkMetadata.driveLinkData: object expected");
                             message.driveLinkData = $root.google.chat.v1.DriveLinkData.fromObject(object.driveLinkData);
+                        }
+                        if (object.chatSpaceLinkData != null) {
+                            if (typeof object.chatSpaceLinkData !== "object")
+                                throw TypeError(".google.chat.v1.RichLinkMetadata.chatSpaceLinkData: object expected");
+                            message.chatSpaceLinkData = $root.google.chat.v1.ChatSpaceLinkData.fromObject(object.chatSpaceLinkData);
                         }
                         return message;
                     };
@@ -27760,6 +27795,11 @@
                             object.driveLinkData = $root.google.chat.v1.DriveLinkData.toObject(message.driveLinkData, options);
                             if (options.oneofs)
                                 object.data = "driveLinkData";
+                        }
+                        if (message.chatSpaceLinkData != null && message.hasOwnProperty("chatSpaceLinkData")) {
+                            object.chatSpaceLinkData = $root.google.chat.v1.ChatSpaceLinkData.toObject(message.chatSpaceLinkData, options);
+                            if (options.oneofs)
+                                object.data = "chatSpaceLinkData";
                         }
                         return object;
                     };
@@ -27796,11 +27836,13 @@
                      * @enum {number}
                      * @property {number} RICH_LINK_TYPE_UNSPECIFIED=0 RICH_LINK_TYPE_UNSPECIFIED value
                      * @property {number} DRIVE_FILE=1 DRIVE_FILE value
+                     * @property {number} CHAT_SPACE=2 CHAT_SPACE value
                      */
                     RichLinkMetadata.RichLinkType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "RICH_LINK_TYPE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "DRIVE_FILE"] = 1;
+                        values[valuesById[2] = "CHAT_SPACE"] = 2;
                         return values;
                     })();
     
@@ -28037,6 +28079,256 @@
                     };
     
                     return DriveLinkData;
+                })();
+    
+                v1.ChatSpaceLinkData = (function() {
+    
+                    /**
+                     * Properties of a ChatSpaceLinkData.
+                     * @memberof google.chat.v1
+                     * @interface IChatSpaceLinkData
+                     * @property {string|null} [space] ChatSpaceLinkData space
+                     * @property {string|null} [thread] ChatSpaceLinkData thread
+                     * @property {string|null} [message] ChatSpaceLinkData message
+                     */
+    
+                    /**
+                     * Constructs a new ChatSpaceLinkData.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a ChatSpaceLinkData.
+                     * @implements IChatSpaceLinkData
+                     * @constructor
+                     * @param {google.chat.v1.IChatSpaceLinkData=} [properties] Properties to set
+                     */
+                    function ChatSpaceLinkData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ChatSpaceLinkData space.
+                     * @member {string} space
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @instance
+                     */
+                    ChatSpaceLinkData.prototype.space = "";
+    
+                    /**
+                     * ChatSpaceLinkData thread.
+                     * @member {string} thread
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @instance
+                     */
+                    ChatSpaceLinkData.prototype.thread = "";
+    
+                    /**
+                     * ChatSpaceLinkData message.
+                     * @member {string} message
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @instance
+                     */
+                    ChatSpaceLinkData.prototype.message = "";
+    
+                    /**
+                     * Creates a new ChatSpaceLinkData instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.IChatSpaceLinkData=} [properties] Properties to set
+                     * @returns {google.chat.v1.ChatSpaceLinkData} ChatSpaceLinkData instance
+                     */
+                    ChatSpaceLinkData.create = function create(properties) {
+                        return new ChatSpaceLinkData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ChatSpaceLinkData message. Does not implicitly {@link google.chat.v1.ChatSpaceLinkData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.IChatSpaceLinkData} message ChatSpaceLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ChatSpaceLinkData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.space != null && Object.hasOwnProperty.call(message, "space"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.space);
+                        if (message.thread != null && Object.hasOwnProperty.call(message, "thread"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.thread);
+                        if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ChatSpaceLinkData message, length delimited. Does not implicitly {@link google.chat.v1.ChatSpaceLinkData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.IChatSpaceLinkData} message ChatSpaceLinkData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ChatSpaceLinkData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a ChatSpaceLinkData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.ChatSpaceLinkData} ChatSpaceLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ChatSpaceLinkData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.ChatSpaceLinkData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.space = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.thread = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.message = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a ChatSpaceLinkData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.ChatSpaceLinkData} ChatSpaceLinkData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ChatSpaceLinkData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a ChatSpaceLinkData message.
+                     * @function verify
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ChatSpaceLinkData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            if (!$util.isString(message.space))
+                                return "space: string expected";
+                        if (message.thread != null && message.hasOwnProperty("thread"))
+                            if (!$util.isString(message.thread))
+                                return "thread: string expected";
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            if (!$util.isString(message.message))
+                                return "message: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a ChatSpaceLinkData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.ChatSpaceLinkData} ChatSpaceLinkData
+                     */
+                    ChatSpaceLinkData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.ChatSpaceLinkData)
+                            return object;
+                        var message = new $root.google.chat.v1.ChatSpaceLinkData();
+                        if (object.space != null)
+                            message.space = String(object.space);
+                        if (object.thread != null)
+                            message.thread = String(object.thread);
+                        if (object.message != null)
+                            message.message = String(object.message);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a ChatSpaceLinkData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {google.chat.v1.ChatSpaceLinkData} message ChatSpaceLinkData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ChatSpaceLinkData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.space = "";
+                            object.thread = "";
+                            object.message = "";
+                        }
+                        if (message.space != null && message.hasOwnProperty("space"))
+                            object.space = message.space;
+                        if (message.thread != null && message.hasOwnProperty("thread"))
+                            object.thread = message.thread;
+                        if (message.message != null && message.hasOwnProperty("message"))
+                            object.message = message.message;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ChatSpaceLinkData to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ChatSpaceLinkData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ChatSpaceLinkData
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.ChatSpaceLinkData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ChatSpaceLinkData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.ChatSpaceLinkData";
+                    };
+    
+                    return ChatSpaceLinkData;
                 })();
     
                 /**
