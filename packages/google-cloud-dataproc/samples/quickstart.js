@@ -15,7 +15,7 @@
 'use strict';
 
 function main(projectId, region) {
-  // [START dataproc_v1_generated_ClusterController_ListClusters_async]
+  // [START dataproc_v1_generated_quickstart]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -76,7 +76,7 @@ function main(projectId, region) {
   }
 
   callListClusters();
-  // [END dataproc_v1_generated_ClusterController_ListClusters_async]
+  // [END dataproc_v1_generated_quickstart]
 }
 
 process.on('unhandledRejection', err => {
