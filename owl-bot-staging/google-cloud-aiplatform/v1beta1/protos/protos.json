@@ -1543,6 +1543,67 @@
                         }
                       }
                     },
+                    "SharePointSources": {
+                      "fields": {
+                        "sharePointSources": {
+                          "rule": "repeated",
+                          "type": "SharePointSource",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SharePointSource": {
+                          "oneofs": {
+                            "folderSource": {
+                              "oneof": [
+                                "sharepointFolderPath",
+                                "sharepointFolderId"
+                              ]
+                            },
+                            "driveSource": {
+                              "oneof": [
+                                "driveName",
+                                "driveId"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "sharepointFolderPath": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "sharepointFolderId": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "driveName": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "driveId": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "clientId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "clientSecret": {
+                              "type": "ApiAuth.ApiKeyConfig",
+                              "id": 2
+                            },
+                            "tenantId": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "sharepointSiteName": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
                     "JobState": {
                       "values": {
                         "JOB_STATE_UNSPECIFIED": 0,
@@ -36401,7 +36462,14 @@
                             "gcsSource",
                             "googleDriveSource",
                             "slackSource",
-                            "jiraSource"
+                            "jiraSource",
+                            "sharePointSources"
+                          ]
+                        },
+                        "partialFailureSink": {
+                          "oneof": [
+                            "partialFailureGcsSink",
+                            "partialFailureBigquerySink"
                           ]
                         }
                       },
@@ -36421,6 +36489,18 @@
                         "jiraSource": {
                           "type": "JiraSource",
                           "id": 7
+                        },
+                        "sharePointSources": {
+                          "type": "SharePointSources",
+                          "id": 13
+                        },
+                        "partialFailureGcsSink": {
+                          "type": "GcsDestination",
+                          "id": 11
+                        },
+                        "partialFailureBigquerySink": {
+                          "type": "BigQueryDestination",
+                          "id": 12
                         },
                         "ragFileChunkingConfig": {
                           "type": "RagFileChunkingConfig",
@@ -36830,7 +36910,23 @@
                       }
                     },
                     "ImportRagFilesResponse": {
+                      "oneofs": {
+                        "partialFailureSink": {
+                          "oneof": [
+                            "partialFailuresGcsPath",
+                            "partialFailuresBigqueryTable"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "partialFailuresGcsPath": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "partialFailuresBigqueryTable": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "importedRagFilesCount": {
                           "type": "int64",
                           "id": 1
