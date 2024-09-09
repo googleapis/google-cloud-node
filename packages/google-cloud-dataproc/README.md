@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,72 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/dataproc
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The ID of the Google Cloud Platform project that the cluster
+ *  belongs to.
+ */
+// const projectId = 'abc123'
+/**
+ *  Required. The Dataproc region in which to handle the request.
+ */
+// const region = 'us-central1'
+/**
+ *  Optional. A filter constraining the clusters to list. Filters are
+ *  case-sensitive and have the following syntax:
+ *  field = value AND field = value   ...
+ *  where **field** is one of `status.state`, `clusterName`, or `labels.KEY`,
+ *  and `[KEY]` is a label key. **value** can be `*` to match all values.
+ *  `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
+ *  `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
+ *  contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
+ *  contains the `DELETING` and `ERROR` states.
+ *  `clusterName` is the name of the cluster provided at creation time.
+ *  Only the logical `AND` operator is supported; space-separated items are
+ *  treated as having an implicit `AND` operator.
+ *  Example filter:
+ *  status.state = ACTIVE AND clusterName = mycluster
+ *  AND labels.env = staging AND labels.starred = *
+ */
+// const filter = 'abc123'
+/**
+ *  Optional. The standard List page size.
+ */
+// const pageSize = 1234
+/**
+ *  Optional. The standard List page token.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Dataproc library
+const {ClusterControllerClient} = require('@google-cloud/dataproc').v1;
+
+// Instantiates a client
+const dataprocClient = new ClusterControllerClient();
+
+async function callListClusters() {
+  // Construct request
+  const request = {
+    projectId,
+    region,
+  };
+
+  // Run request
+  const iterable = dataprocClient.listClustersAsync(request);
+  for await (const response of iterable) {
+    console.log(response);
+  }
+}
+
+callListClusters();
+
+```
 
 
 
