@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
+
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,119 +53,6 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/dataproc
 ```
 
-
-### Using the client library
-
-```javascript
-// This quickstart sample walks a user through creating a Dataproc
-// cluster, submitting a PySpark job from Google Cloud Storage to the
-// cluster, reading the output of the job and deleting the cluster, all
-// using the Node.js client library.
-
-'use strict';
-
-function main(projectId, region, clusterName, jobFilePath) {
-  const dataproc = require('@google-cloud/dataproc');
-  const {Storage} = require('@google-cloud/storage');
-
-  // Create a cluster client with the endpoint set to the desired cluster region
-  const clusterClient = new dataproc.v1.ClusterControllerClient({
-    apiEndpoint: `${region}-dataproc.googleapis.com`,
-    projectId: projectId,
-  });
-
-  // Create a job client with the endpoint set to the desired cluster region
-  const jobClient = new dataproc.v1.JobControllerClient({
-    apiEndpoint: `${region}-dataproc.googleapis.com`,
-    projectId: projectId,
-  });
-
-  async function quickstart() {
-    // Create the cluster config
-    const cluster = {
-      projectId: projectId,
-      region: region,
-      cluster: {
-        clusterName: clusterName,
-        config: {
-          masterConfig: {
-            numInstances: 1,
-            machineTypeUri: 'n1-standard-2',
-          },
-          workerConfig: {
-            numInstances: 2,
-            machineTypeUri: 'n1-standard-2',
-          },
-        },
-      },
-    };
-
-    // Create the cluster
-    const [operation] = await clusterClient.createCluster(cluster);
-    const [response] = await operation.promise();
-
-    // Output a success message
-    console.log(`Cluster created successfully: ${response.clusterName}`);
-
-    const job = {
-      projectId: projectId,
-      region: region,
-      job: {
-        placement: {
-          clusterName: clusterName,
-        },
-        pysparkJob: {
-          mainPythonFileUri: jobFilePath,
-        },
-      },
-    };
-
-    const [jobOperation] = await jobClient.submitJobAsOperation(job);
-    const [jobResponse] = await jobOperation.promise();
-
-    const matches =
-      jobResponse.driverOutputResourceUri.match('gs://(.*?)/(.*)');
-
-    const storage = new Storage();
-
-    const output = await storage
-      .bucket(matches[1])
-      .file(`${matches[2]}.000000000`)
-      .download();
-
-    // Output a success message.
-    console.log(`Job finished successfully: ${output}`);
-
-    // Delete the cluster once the job has terminated.
-    const deleteClusterReq = {
-      projectId: projectId,
-      region: region,
-      clusterName: clusterName,
-    };
-
-    const [deleteOperation] =
-      await clusterClient.deleteCluster(deleteClusterReq);
-    await deleteOperation.promise();
-
-    // Output a success message
-    console.log(`Cluster ${clusterName} successfully deleted.`);
-  }
-
-  quickstart();
-}
-
-const args = process.argv.slice(2);
-
-if (args.length !== 4) {
-  console.log(
-    'Insufficient number of parameters provided. Please make sure a ' +
-      'PROJECT_ID, REGION, CLUSTER_NAME and JOB_FILE_PATH are provided, in this order.'
-  );
-}
-
-main(...args);
-
-```
 
 
 
