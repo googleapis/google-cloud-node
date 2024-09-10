@@ -4273,6 +4273,64 @@
                         }
                       }
                     },
+                    "FlinkJob": {
+                      "oneofs": {
+                        "driver": {
+                          "oneof": [
+                            "mainJarFileUri",
+                            "mainClass"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mainJarFileUri": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "mainClass": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "args": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "jarFileUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "savepointUri": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "loggingConfig": {
+                          "type": "LoggingConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "JobPlacement": {
                       "fields": {
                         "clusterName": {
@@ -4432,7 +4490,8 @@
                             "sparkRJob",
                             "sparkSqlJob",
                             "prestoJob",
-                            "trinoJob"
+                            "trinoJob",
+                            "flinkJob"
                           ]
                         }
                       },
@@ -4510,6 +4569,13 @@
                         "trinoJob": {
                           "type": "TrinoJob",
                           "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "flinkJob": {
+                          "type": "FlinkJob",
+                          "id": 29,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -4830,6 +4896,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
