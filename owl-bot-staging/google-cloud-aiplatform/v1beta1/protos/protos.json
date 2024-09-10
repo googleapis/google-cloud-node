@@ -36143,7 +36143,9 @@
                           "oneof": [
                             "ragManagedDb",
                             "weaviate",
-                            "vertexFeatureStore"
+                            "pinecone",
+                            "vertexFeatureStore",
+                            "vertexVectorSearch"
                           ]
                         }
                       },
@@ -36156,9 +36158,17 @@
                           "type": "Weaviate",
                           "id": 2
                         },
+                        "pinecone": {
+                          "type": "Pinecone",
+                          "id": 3
+                        },
                         "vertexFeatureStore": {
                           "type": "VertexFeatureStore",
                           "id": 4
+                        },
+                        "vertexVectorSearch": {
+                          "type": "VertexVectorSearch",
+                          "id": 6
                         },
                         "apiAuth": {
                           "type": "ApiAuth",
@@ -36181,11 +36191,31 @@
                             }
                           }
                         },
+                        "Pinecone": {
+                          "fields": {
+                            "indexName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "VertexFeatureStore": {
                           "fields": {
                             "featureViewResourceName": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "VertexVectorSearch": {
+                          "fields": {
+                            "indexEndpoint": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "index": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }
