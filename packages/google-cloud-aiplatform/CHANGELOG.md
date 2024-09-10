@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.29.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.28.0...aiplatform-v3.29.0) (2024-09-10)
+
+
+### Features
+
+* Add more configurability to feature_group.proto ([#5656](https://github.com/googleapis/google-cloud-node/issues/5656)) ([9760c20](https://github.com/googleapis/google-cloud-node/commit/9760c20edaed2aaba62f4278b9afff01804d5c34))
+* Add Vector DB config for Vertex RAG (Weaviate + FeatureStore) ([#5648](https://github.com/googleapis/google-cloud-node/issues/5648)) ([d62f18a](https://github.com/googleapis/google-cloud-node/commit/d62f18a7e7b0800e44604216f3c9a7477dc8551e))
+
 ## [3.28.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.27.0...aiplatform-v3.28.0) (2024-08-29)
 
 

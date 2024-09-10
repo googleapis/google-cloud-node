@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.13.0...batch-v1.14.0) (2024-09-10)
+
+
+### Features
+
+* **v1:** [batch] promote block_project_ssh_keys support to batch v1 API ([#5653](https://github.com/googleapis/google-cloud-node/issues/5653)) ([de5b8c0](https://github.com/googleapis/google-cloud-node/commit/de5b8c0911b0a4f6e1cd7dfc96602a2c22dee40f))
+
 ## [1.13.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.12.0...batch-v1.13.0) (2024-08-09)
 
 
