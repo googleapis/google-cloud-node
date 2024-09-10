@@ -830,7 +830,7 @@ View the [source code](https://github.com/googleapis/google-cloud-node/blob/main
 __Usage:__
 
 
-`node quickstart.js <PROJECT_ID> <REGION> <CLUSTER_NAME> <JOB_FILE_PATH>`
+`node packages/google-cloud-dataproc/samples/quickstart.js`
 
 
 
