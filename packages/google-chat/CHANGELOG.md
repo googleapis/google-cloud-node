@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.7.0...chat-v0.8.0) (2024-09-10)
+
+
+### Features
+
+* [chat] Add CHAT_SPACE link type support for GA launch ([#5659](https://github.com/googleapis/google-cloud-node/issues/5659)) ([b61a65d](https://github.com/googleapis/google-cloud-node/commit/b61a65d30dde04c2ff85d233ddbc1c79ff7a5736))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.6.0...chat-v0.7.0) (2024-07-22)
 
 
