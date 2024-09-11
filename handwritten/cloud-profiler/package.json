@@ -38,7 +38,7 @@
     "parse-duration": "^1.0.0",
     "pprof": "4.0.0",
     "pretty-ms": "^7.0.0",
-    "protobufjs": "~7.3.0",
+    "protobufjs": "~7.4.0",
     "semver": "^7.0.0",
     "teeny-request": "^9.0.0"
   },
