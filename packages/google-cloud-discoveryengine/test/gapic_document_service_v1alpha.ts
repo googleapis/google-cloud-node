@@ -1002,6 +1002,143 @@ describe('v1alpha.DocumentServiceClient', () => {
     });
   });
 
+  describe('batchGetDocumentsMetadata', () => {
+    it('invokes batchGetDocumentsMetadata without error', async () => {
+      const client = new documentserviceModule.v1alpha.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataResponse()
+      );
+      client.innerApiCalls.batchGetDocumentsMetadata =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchGetDocumentsMetadata(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchGetDocumentsMetadata without error using callback', async () => {
+      const client = new documentserviceModule.v1alpha.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataResponse()
+      );
+      client.innerApiCalls.batchGetDocumentsMetadata =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchGetDocumentsMetadata(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1alpha.IBatchGetDocumentsMetadataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchGetDocumentsMetadata with error', async () => {
+      const client = new documentserviceModule.v1alpha.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchGetDocumentsMetadata = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchGetDocumentsMetadata(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetDocumentsMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchGetDocumentsMetadata with closed client', async () => {
+      const client = new documentserviceModule.v1alpha.DocumentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1alpha.BatchGetDocumentsMetadataRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.batchGetDocumentsMetadata(request),
+        expectedError
+      );
+    });
+  });
+
   describe('importDocuments', () => {
     it('invokes importDocuments without error', async () => {
       const client = new documentserviceModule.v1alpha.DocumentServiceClient({

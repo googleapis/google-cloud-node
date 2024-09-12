@@ -37437,6 +37437,9 @@ export namespace google {
                         /** EntityType name */
                         name?: (string|null);
 
+                        /** EntityType description */
+                        description?: (string|null);
+
                         /** EntityType baseTypes */
                         baseTypes?: (string[]|null);
 
@@ -37464,6 +37467,9 @@ export namespace google {
 
                         /** EntityType name. */
                         public name: string;
+
+                        /** EntityType description. */
+                        public description: string;
 
                         /** EntityType baseTypes. */
                         public baseTypes: string[];
@@ -37660,6 +37666,9 @@ export namespace google {
                             /** Property name */
                             name?: (string|null);
 
+                            /** Property description */
+                            description?: (string|null);
+
                             /** Property displayName */
                             displayName?: (string|null);
 
@@ -37684,6 +37693,9 @@ export namespace google {
 
                             /** Property name. */
                             public name: string;
+
+                            /** Property description. */
+                            public description: string;
 
                             /** Property displayName. */
                             public displayName: string;

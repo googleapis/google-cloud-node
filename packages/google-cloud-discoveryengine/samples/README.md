@@ -40,6 +40,7 @@
   * [Data_store_service.get_data_store](#data_store_service.get_data_store)
   * [Data_store_service.list_data_stores](#data_store_service.list_data_stores)
   * [Data_store_service.update_data_store](#data_store_service.update_data_store)
+  * [Document_service.batch_get_documents_metadata](#document_service.batch_get_documents_metadata)
   * [Document_service.create_document](#document_service.create_document)
   * [Document_service.delete_document](#document_service.delete_document)
   * [Document_service.get_document](#document_service.get_document)
@@ -62,6 +63,8 @@
   * [Schema_service.list_schemas](#schema_service.list_schemas)
   * [Schema_service.update_schema](#schema_service.update_schema)
   * [Search_service.search](#search_service.search)
+  * [Search_tuning_service.list_custom_models](#search_tuning_service.list_custom_models)
+  * [Search_tuning_service.train_custom_model](#search_tuning_service.train_custom_model)
   * [Site_search_engine_service.batch_create_target_sites](#site_search_engine_service.batch_create_target_sites)
   * [Site_search_engine_service.batch_verify_target_sites](#site_search_engine_service.batch_verify_target_sites)
   * [Site_search_engine_service.create_target_site](#site_search_engine_service.create_target_site)
@@ -76,6 +79,7 @@
   * [Site_search_engine_service.update_target_site](#site_search_engine_service.update_target_site)
   * [User_event_service.collect_user_event](#user_event_service.collect_user_event)
   * [User_event_service.import_user_events](#user_event_service.import_user_events)
+  * [User_event_service.purge_user_events](#user_event_service.purge_user_events)
   * [User_event_service.write_user_event](#user_event_service.write_user_event)
   * [Acl_config_service.get_acl_config](#acl_config_service.get_acl_config)
   * [Acl_config_service.update_acl_config](#acl_config_service.update_acl_config)
@@ -111,6 +115,7 @@
   * [Data_store_service.list_data_stores](#data_store_service.list_data_stores)
   * [Data_store_service.update_data_store](#data_store_service.update_data_store)
   * [Data_store_service.update_document_processing_config](#data_store_service.update_document_processing_config)
+  * [Document_service.batch_get_documents_metadata](#document_service.batch_get_documents_metadata)
   * [Document_service.create_document](#document_service.create_document)
   * [Document_service.delete_document](#document_service.delete_document)
   * [Document_service.get_document](#document_service.get_document)
@@ -206,6 +211,7 @@
   * [Data_store_service.get_data_store](#data_store_service.get_data_store)
   * [Data_store_service.list_data_stores](#data_store_service.list_data_stores)
   * [Data_store_service.update_data_store](#data_store_service.update_data_store)
+  * [Document_service.batch_get_documents_metadata](#document_service.batch_get_documents_metadata)
   * [Document_service.create_document](#document_service.create_document)
   * [Document_service.delete_document](#document_service.delete_document)
   * [Document_service.get_document](#document_service.get_document)
@@ -760,6 +766,23 @@ __Usage:__
 
 
 
+### Document_service.batch_get_documents_metadata
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.batch_get_documents_metadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/document_service.batch_get_documents_metadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/document_service.batch_get_documents_metadata.js`
+
+
+-----
+
+
+
+
 ### Document_service.create_document
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/document_service.create_document.js).
@@ -1134,6 +1157,40 @@ __Usage:__
 
 
 
+### Search_tuning_service.list_custom_models
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.list_custom_models.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.list_custom_models.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.list_custom_models.js`
+
+
+-----
+
+
+
+
+### Search_tuning_service.train_custom_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/search_tuning_service.train_custom_model.js`
+
+
+-----
+
+
+
+
 ### Site_search_engine_service.batch_create_target_sites
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/site_search_engine_service.batch_create_target_sites.js).
@@ -1365,6 +1422,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.import_user_events.js`
+
+
+-----
+
+
+
+
+### User_event_service.purge_user_events
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.purge_user_events.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.purge_user_events.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/user_event_service.purge_user_events.js`
 
 
 -----
@@ -1960,6 +2034,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1alpha/data_store_service.update_document_processing_config.js`
+
+
+-----
+
+
+
+
+### Document_service.batch_get_documents_metadata
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.batch_get_documents_metadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.batch_get_documents_metadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1alpha/document_service.batch_get_documents_metadata.js`
 
 
 -----
@@ -3575,6 +3666,23 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1beta/data_store_service.update_data_store.js`
+
+
+-----
+
+
+
+
+### Document_service.batch_get_documents_metadata
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.batch_get_documents_metadata.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.batch_get_documents_metadata.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1beta/document_service.batch_get_documents_metadata.js`
 
 
 -----

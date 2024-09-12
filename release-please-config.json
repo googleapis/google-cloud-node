@@ -189,7 +189,8 @@
     "packages/google-cloud-privilegedaccessmanager": {},
     "packages/google-shopping-merchant-products": {},
     "packages/google-shopping-merchant-accounts": {},
-    "packages/google-cloud-gdchardwaremanagement": {}
+    "packages/google-cloud-gdchardwaremanagement": {},
+    "packages/google-cloud-apihub": {}
   },
   "plugins": [
     {

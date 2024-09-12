@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.14.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.13.0...discoveryengine-v1.14.0) (2024-09-10)
+
+
+### Features
+
+* [discoveryengine] promote search tuning service to v1 ([#5655](https://github.com/googleapis/google-cloud-node/issues/5655)) ([f4072a0](https://github.com/googleapis/google-cloud-node/commit/f4072a051e85b1fd42116416f19e850bb32fc542))
+
 ## [1.13.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v1.12.0...discoveryengine-v1.13.0) (2024-08-19)
 
 

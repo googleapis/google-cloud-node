@@ -479,6 +479,11 @@
                 "getProcessedDocument"
               ]
             },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batchGetDocumentsMetadata"
+              ]
+            },
             "ImportDocuments": {
               "methods": [
                 "importDocuments"
@@ -524,6 +529,11 @@
             "GetProcessedDocument": {
               "methods": [
                 "getProcessedDocument"
+              ]
+            },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batchGetDocumentsMetadata"
               ]
             },
             "ImportDocuments": {

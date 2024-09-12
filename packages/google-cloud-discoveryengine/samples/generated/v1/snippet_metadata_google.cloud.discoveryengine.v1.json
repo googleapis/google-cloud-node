@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-discoveryengine",
-        "version": "1.13.0",
+        "version": "1.14.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -1126,7 +1126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 80,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -1149,6 +1149,10 @@
                     },
                     {
                         "name": "create_advanced_site_search",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "skip_default_schema_creation",
                         "type": "TYPE_BOOL"
                     }
                 ],
@@ -1674,7 +1678,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -1684,12 +1688,24 @@
                 "async": true,
                 "parameters": [
                     {
+                        "name": "gcs_source",
+                        "type": ".google.cloud.discoveryengine.v1.GcsSource"
+                    },
+                    {
+                        "name": "inline_source",
+                        "type": ".google.cloud.discoveryengine.v1.PurgeDocumentsRequest.InlineSource"
+                    },
+                    {
                         "name": "parent",
                         "type": "TYPE_STRING"
                     },
                     {
                         "name": "filter",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "error_config",
+                        "type": ".google.cloud.discoveryengine.v1.PurgeErrorConfig"
                     },
                     {
                         "name": "force",
@@ -1704,6 +1720,50 @@
                 "method": {
                     "shortName": "PurgeDocuments",
                     "fullName": "google.cloud.discoveryengine.v1.DocumentService.PurgeDocuments",
+                    "service": {
+                        "shortName": "DocumentService",
+                        "fullName": "google.cloud.discoveryengine.v1.DocumentService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_DocumentService_BatchGetDocumentsMetadata_async",
+            "title": "CompletionService batchGetDocumentsMetadata Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets index freshness metadata for [Document][google.cloud.discoveryengine.v1.Document]s. Supported for website search only.",
+            "canonical": true,
+            "file": "document_service.batch_get_documents_metadata.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "BatchGetDocumentsMetadata",
+                "fullName": "google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "matcher",
+                        "type": ".google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataRequest.Matcher"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.BatchGetDocumentsMetadataResponse",
+                "client": {
+                    "shortName": "DocumentServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentServiceClient"
+                },
+                "method": {
+                    "shortName": "BatchGetDocumentsMetadata",
+                    "fullName": "google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata",
                     "service": {
                         "shortName": "DocumentService",
                         "fullName": "google.cloud.discoveryengine.v1.DocumentService"
@@ -2114,7 +2174,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 166,
+                    "end": 167,
                     "type": "FULL"
                 }
             ],
@@ -2398,7 +2458,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 277,
+                    "end": 281,
                     "type": "FULL"
                 }
             ],
@@ -2519,6 +2579,102 @@
                     "service": {
                         "shortName": "SearchService",
                         "fullName": "google.cloud.discoveryengine.v1.SearchService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_SearchTuningService_TrainCustomModel_async",
+            "title": "CompletionService trainCustomModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Trains a custom model.",
+            "canonical": true,
+            "file": "search_tuning_service.train_custom_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 74,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "TrainCustomModel",
+                "fullName": "google.cloud.discoveryengine.v1.SearchTuningService.TrainCustomModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_training_input",
+                        "type": ".google.cloud.discoveryengine.v1.TrainCustomModelRequest.GcsTrainingInput"
+                    },
+                    {
+                        "name": "data_store",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "model_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "error_config",
+                        "type": ".google.cloud.discoveryengine.v1.ImportErrorConfig"
+                    },
+                    {
+                        "name": "model_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "SearchTuningServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.SearchTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "TrainCustomModel",
+                    "fullName": "google.cloud.discoveryengine.v1.SearchTuningService.TrainCustomModel",
+                    "service": {
+                        "shortName": "SearchTuningService",
+                        "fullName": "google.cloud.discoveryengine.v1.SearchTuningService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_SearchTuningService_ListCustomModels_async",
+            "title": "CompletionService listCustomModels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets a list of all the custom models.",
+            "canonical": true,
+            "file": "search_tuning_service.list_custom_models.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 56,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListCustomModels",
+                "fullName": "google.cloud.discoveryengine.v1.SearchTuningService.ListCustomModels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "data_store",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.ListCustomModelsResponse",
+                "client": {
+                    "shortName": "SearchTuningServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.SearchTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "ListCustomModels",
+                    "fullName": "google.cloud.discoveryengine.v1.SearchTuningService.ListCustomModels",
+                    "service": {
+                        "shortName": "SearchTuningService",
+                        "fullName": "google.cloud.discoveryengine.v1.SearchTuningService"
                     }
                 }
             }
@@ -3124,6 +3280,54 @@
                 "method": {
                     "shortName": "CollectUserEvent",
                     "fullName": "google.cloud.discoveryengine.v1.UserEventService.CollectUserEvent",
+                    "service": {
+                        "shortName": "UserEventService",
+                        "fullName": "google.cloud.discoveryengine.v1.UserEventService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_UserEventService_PurgeUserEvents_async",
+            "title": "CompletionService purgeUserEvents Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes permanently all user events specified by the filter provided. Depending on the number of events specified by the filter, this operation could take hours or days to complete. To test a filter, use the list command first.",
+            "canonical": true,
+            "file": "user_event_service.purge_user_events.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 90,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "PurgeUserEvents",
+                "fullName": "google.cloud.discoveryengine.v1.UserEventService.PurgeUserEvents",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "UserEventServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventServiceClient"
+                },
+                "method": {
+                    "shortName": "PurgeUserEvents",
+                    "fullName": "google.cloud.discoveryengine.v1.UserEventService.PurgeUserEvents",
                     "service": {
                         "shortName": "UserEventService",
                         "fullName": "google.cloud.discoveryengine.v1.UserEventService"

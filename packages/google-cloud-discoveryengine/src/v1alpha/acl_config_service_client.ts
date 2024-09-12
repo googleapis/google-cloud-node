@@ -512,7 +512,7 @@ export class AclConfigServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Default Acl Configuration for use in a location of a customer's project.
+   * Default ACL configuration for use in a location of a customer's project.
    * Updates will only reflect to new data stores. Existing data stores will
    * still use the old value.
    *

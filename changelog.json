@@ -5,6 +5,133 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "88edc8b2120fb1c246e8821d2793ef95724840d9",
+          "message": "Add initial files for google.cloud.apihub.v1",
+          "issues": [
+            "5621"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "79ce2838-a865-4308-8f6a-7876473a9360",
+      "createTime": "2024-09-10T01:12:24.526Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b61a65d30dde04c2ff85d233ddbc1c79ff7a5736",
+          "message": "[chat] Add CHAT_SPACE link type support for GA launch",
+          "issues": [
+            "5659"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "dc52f7bb-17d6-4250-a802-9a21d820184f",
+      "createTime": "2024-09-10T01:12:24.425Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f4072a051e85b1fd42116416f19e850bb32fc542",
+          "message": "[discoveryengine] promote search tuning service to v1",
+          "issues": [
+            "5655"
+          ]
+        }
+      ],
+      "version": "1.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "d7cb2abb-de38-4f3d-9975-05789c8f54ba",
+      "createTime": "2024-09-10T01:12:24.369Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2d1df0fe8ba212573550b7046db7f6688d7ee036",
+          "message": "[dataproc]add optional parameters (tarball-access) in DiagnoseClusterRequest",
+          "issues": [
+            "5652"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "eb3b1496-2238-4733-b923-4fe4c7e68097",
+      "createTime": "2024-09-10T01:12:24.350Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "de5b8c0911b0a4f6e1cd7dfc96602a2c22dee40f",
+          "message": "[batch] promote block_project_ssh_keys support to batch v1 API",
+          "issues": [
+            "5653"
+          ],
+          "scope": "v1"
+        }
+      ],
+      "version": "1.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "14c128f9-c0ff-4972-a4ad-08510aed7473",
+      "createTime": "2024-09-10T01:12:24.335Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9760c20edaed2aaba62f4278b9afff01804d5c34",
+          "message": "Add more configurability to feature_group.proto",
+          "issues": [
+            "5656"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "d62f18a7e7b0800e44604216f3c9a7477dc8551e",
+          "message": "Add Vector DB config for Vertex RAG (Weaviate + FeatureStore)",
+          "issues": [
+            "5648"
+          ]
+        }
+      ],
+      "version": "3.29.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "c2509702-2fd4-4fe2-b25a-9c6807e7ba4b",
+      "createTime": "2024-09-10T01:12:24.320Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "b03f419cab2ebf8385d2df7bf018863e63295624",
           "message": "[container] add `EXTENDED` enum value for `ReleaseChannel.Channel`",
           "issues": [
@@ -36215,5 +36342,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-08-29T21:45:48.411Z"
+  "updateTime": "2024-09-10T01:12:24.526Z"
 }

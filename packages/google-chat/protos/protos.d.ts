@@ -10176,6 +10176,9 @@ export namespace google {
 
                 /** RichLinkMetadata driveLinkData */
                 driveLinkData?: (google.chat.v1.IDriveLinkData|null);
+
+                /** RichLinkMetadata chatSpaceLinkData */
+                chatSpaceLinkData?: (google.chat.v1.IChatSpaceLinkData|null);
             }
 
             /** Represents a RichLinkMetadata. */
@@ -10196,8 +10199,11 @@ export namespace google {
                 /** RichLinkMetadata driveLinkData. */
                 public driveLinkData?: (google.chat.v1.IDriveLinkData|null);
 
+                /** RichLinkMetadata chatSpaceLinkData. */
+                public chatSpaceLinkData?: (google.chat.v1.IChatSpaceLinkData|null);
+
                 /** RichLinkMetadata data. */
-                public data?: "driveLinkData";
+                public data?: ("driveLinkData"|"chatSpaceLinkData");
 
                 /**
                  * Creates a new RichLinkMetadata instance using the specified properties.
@@ -10282,7 +10288,8 @@ export namespace google {
                 /** RichLinkType enum. */
                 enum RichLinkType {
                     RICH_LINK_TYPE_UNSPECIFIED = 0,
-                    DRIVE_FILE = 1
+                    DRIVE_FILE = 1,
+                    CHAT_SPACE = 2
                 }
             }
 
@@ -10383,6 +10390,115 @@ export namespace google {
 
                 /**
                  * Gets the default type url for DriveLinkData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a ChatSpaceLinkData. */
+            interface IChatSpaceLinkData {
+
+                /** ChatSpaceLinkData space */
+                space?: (string|null);
+
+                /** ChatSpaceLinkData thread */
+                thread?: (string|null);
+
+                /** ChatSpaceLinkData message */
+                message?: (string|null);
+            }
+
+            /** Represents a ChatSpaceLinkData. */
+            class ChatSpaceLinkData implements IChatSpaceLinkData {
+
+                /**
+                 * Constructs a new ChatSpaceLinkData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.IChatSpaceLinkData);
+
+                /** ChatSpaceLinkData space. */
+                public space: string;
+
+                /** ChatSpaceLinkData thread. */
+                public thread: string;
+
+                /** ChatSpaceLinkData message. */
+                public message: string;
+
+                /**
+                 * Creates a new ChatSpaceLinkData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ChatSpaceLinkData instance
+                 */
+                public static create(properties?: google.chat.v1.IChatSpaceLinkData): google.chat.v1.ChatSpaceLinkData;
+
+                /**
+                 * Encodes the specified ChatSpaceLinkData message. Does not implicitly {@link google.chat.v1.ChatSpaceLinkData.verify|verify} messages.
+                 * @param message ChatSpaceLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.IChatSpaceLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ChatSpaceLinkData message, length delimited. Does not implicitly {@link google.chat.v1.ChatSpaceLinkData.verify|verify} messages.
+                 * @param message ChatSpaceLinkData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.IChatSpaceLinkData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ChatSpaceLinkData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ChatSpaceLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.ChatSpaceLinkData;
+
+                /**
+                 * Decodes a ChatSpaceLinkData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ChatSpaceLinkData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.ChatSpaceLinkData;
+
+                /**
+                 * Verifies a ChatSpaceLinkData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ChatSpaceLinkData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ChatSpaceLinkData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.ChatSpaceLinkData;
+
+                /**
+                 * Creates a plain object from a ChatSpaceLinkData message. Also converts values to other types if specified.
+                 * @param message ChatSpaceLinkData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.ChatSpaceLinkData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ChatSpaceLinkData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ChatSpaceLinkData
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
