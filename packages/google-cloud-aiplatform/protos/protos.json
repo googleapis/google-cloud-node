@@ -2594,7 +2594,8 @@
                             "BLOCK_LOW_AND_ABOVE": 1,
                             "BLOCK_MEDIUM_AND_ABOVE": 2,
                             "BLOCK_ONLY_HIGH": 3,
-                            "BLOCK_NONE": 4
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         },
                         "HarmBlockMethod": {
@@ -33448,6 +33449,67 @@
                         }
                       }
                     },
+                    "SharePointSources": {
+                      "fields": {
+                        "sharePointSources": {
+                          "rule": "repeated",
+                          "type": "SharePointSource",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "SharePointSource": {
+                          "oneofs": {
+                            "folderSource": {
+                              "oneof": [
+                                "sharepointFolderPath",
+                                "sharepointFolderId"
+                              ]
+                            },
+                            "driveSource": {
+                              "oneof": [
+                                "driveName",
+                                "driveId"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "sharepointFolderPath": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "sharepointFolderId": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "driveName": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "driveId": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "clientId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "clientSecret": {
+                              "type": "ApiAuth.ApiKeyConfig",
+                              "id": 2
+                            },
+                            "tenantId": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "sharepointSiteName": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
                     "JobState": {
                       "values": {
                         "JOB_STATE_UNSPECIFIED": 0,
@@ -35358,7 +35420,8 @@
                             "BLOCK_LOW_AND_ABOVE": 1,
                             "BLOCK_MEDIUM_AND_ABOVE": 2,
                             "BLOCK_ONLY_HIGH": 3,
-                            "BLOCK_NONE": 4
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         },
                         "HarmBlockMethod": {
@@ -67986,7 +68049,9 @@
                           "oneof": [
                             "ragManagedDb",
                             "weaviate",
-                            "vertexFeatureStore"
+                            "pinecone",
+                            "vertexFeatureStore",
+                            "vertexVectorSearch"
                           ]
                         }
                       },
@@ -67999,9 +68064,17 @@
                           "type": "Weaviate",
                           "id": 2
                         },
+                        "pinecone": {
+                          "type": "Pinecone",
+                          "id": 3
+                        },
                         "vertexFeatureStore": {
                           "type": "VertexFeatureStore",
                           "id": 4
+                        },
+                        "vertexVectorSearch": {
+                          "type": "VertexVectorSearch",
+                          "id": 6
                         },
                         "apiAuth": {
                           "type": "ApiAuth",
@@ -68024,11 +68097,31 @@
                             }
                           }
                         },
+                        "Pinecone": {
+                          "fields": {
+                            "indexName": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
                         "VertexFeatureStore": {
                           "fields": {
                             "featureViewResourceName": {
                               "type": "string",
                               "id": 1
+                            }
+                          }
+                        },
+                        "VertexVectorSearch": {
+                          "fields": {
+                            "indexEndpoint": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "index": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }
@@ -68305,7 +68398,14 @@
                             "gcsSource",
                             "googleDriveSource",
                             "slackSource",
-                            "jiraSource"
+                            "jiraSource",
+                            "sharePointSources"
+                          ]
+                        },
+                        "partialFailureSink": {
+                          "oneof": [
+                            "partialFailureGcsSink",
+                            "partialFailureBigquerySink"
                           ]
                         }
                       },
@@ -68325,6 +68425,18 @@
                         "jiraSource": {
                           "type": "JiraSource",
                           "id": 7
+                        },
+                        "sharePointSources": {
+                          "type": "SharePointSources",
+                          "id": 13
+                        },
+                        "partialFailureGcsSink": {
+                          "type": "GcsDestination",
+                          "id": 11
+                        },
+                        "partialFailureBigquerySink": {
+                          "type": "BigQueryDestination",
+                          "id": 12
                         },
                         "ragFileChunkingConfig": {
                           "type": "RagFileChunkingConfig",
@@ -68734,7 +68846,23 @@
                       }
                     },
                     "ImportRagFilesResponse": {
+                      "oneofs": {
+                        "partialFailureSink": {
+                          "oneof": [
+                            "partialFailuresGcsPath",
+                            "partialFailuresBigqueryTable"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "partialFailuresGcsPath": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "partialFailuresBigqueryTable": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "importedRagFilesCount": {
                           "type": "int64",
                           "id": 1
