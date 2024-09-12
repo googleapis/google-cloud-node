@@ -2976,6 +2976,24 @@
                         }
                       ]
                     },
+                    "SearchSpaces": {
+                      "requestType": "SearchSpacesRequest",
+                      "responseType": "SearchSpacesResponse",
+                      "options": {
+                        "(google.api.http).get": "/v1/spaces:search",
+                        "(google.api.method_signature)": ""
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "get": "/v1/spaces:search"
+                          }
+                        },
+                        {
+                          "(google.api.method_signature)": ""
+                        }
+                      ]
+                    },
                     "GetSpace": {
                       "requestType": "GetSpaceRequest",
                       "responseType": "Space",
@@ -3398,6 +3416,10 @@
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 5
                     }
                   }
                 },
@@ -3416,6 +3438,10 @@
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 3
                     }
                   }
                 },
@@ -3463,6 +3489,10 @@
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 8
                     }
                   }
                 },
@@ -3491,6 +3521,10 @@
                         "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Membership"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 3
                     }
                   }
                 },
@@ -3503,6 +3537,10 @@
                         "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Membership"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 2
                     }
                   }
                 },
@@ -4636,9 +4674,23 @@
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
                     },
+                    "lastActiveTime": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 18,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
                     "adminInstalled": {
                       "type": "bool",
                       "id": 19,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "membershipCount": {
+                      "type": "MembershipCount",
+                      "id": 20,
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
@@ -4691,6 +4743,18 @@
                         "guidelines": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "MembershipCount": {
+                      "fields": {
+                        "joinedDirectHumanUserCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "joinedGroupCount": {
+                          "type": "int32",
+                          "id": 5
                         }
                       }
                     },
@@ -4788,6 +4852,10 @@
                         "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Space"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 2
                     }
                   }
                 },
@@ -4814,6 +4882,57 @@
                     "updateMask": {
                       "type": "google.protobuf.FieldMask",
                       "id": 2
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 3
+                    }
+                  }
+                },
+                "SearchSpacesRequest": {
+                  "fields": {
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 1
+                    },
+                    "pageSize": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "pageToken": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "query": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "orderBy": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "SearchSpacesResponse": {
+                  "fields": {
+                    "spaces": {
+                      "rule": "repeated",
+                      "type": "Space",
+                      "id": 1
+                    },
+                    "nextPageToken": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "totalSize": {
+                      "type": "int32",
+                      "id": 3
                     }
                   }
                 },
@@ -4826,6 +4945,10 @@
                         "(google.api.field_behavior)": "REQUIRED",
                         "(google.api.resource_reference).type": "chat.googleapis.com/Space"
                       }
+                    },
+                    "useAdminAccess": {
+                      "type": "bool",
+                      "id": 2
                     }
                   }
                 },
