@@ -17139,6 +17139,9 @@ export namespace google {
                             /** Environment satisfiesPzs */
                             satisfiesPzs?: (boolean|null);
 
+                            /** Environment satisfiesPzi */
+                            satisfiesPzi?: (boolean|null);
+
                             /** Environment storageConfig */
                             storageConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig|null);
                         }
@@ -17175,6 +17178,9 @@ export namespace google {
 
                             /** Environment satisfiesPzs. */
                             public satisfiesPzs: boolean;
+
+                            /** Environment satisfiesPzi. */
+                            public satisfiesPzi: boolean;
 
                             /** Environment storageConfig. */
                             public storageConfig?: (google.cloud.orchestration.airflow.service.v1beta1.IStorageConfig|null);

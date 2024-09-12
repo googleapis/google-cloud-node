@@ -4489,6 +4489,13 @@
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
                                 },
+                                "satisfiesPzi": {
+                                  "type": "bool",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
                                 "storageConfig": {
                                   "type": "StorageConfig",
                                   "id": 9,
