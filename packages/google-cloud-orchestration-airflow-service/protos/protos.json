@@ -208,6 +208,30 @@
                                     }
                                   ]
                                 },
+                                "CheckUpgrade": {
+                                  "requestType": "CheckUpgradeRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{environment=projects/*/locations/*/environments/*}:checkUpgrade",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse",
+                                    "(google.longrunning.operation_info).metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{environment=projects/*/locations/*/environments/*}:checkUpgrade",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse",
+                                        "metadata_type": "google.cloud.orchestration.airflow.service.v1.OperationMetadata"
+                                      }
+                                    }
+                                  ]
+                                },
                                 "CreateUserWorkloadsSecret": {
                                   "requestType": "CreateUserWorkloadsSecretRequest",
                                   "responseType": "UserWorkloadsSecret",
@@ -1997,6 +2021,13 @@
                                     "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
                                 },
+                                "satisfiesPzi": {
+                                  "type": "bool",
+                                  "id": 10,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
                                 "storageConfig": {
                                   "type": "StorageConfig",
                                   "id": 9,
@@ -2014,6 +2045,24 @@
                                     "UPDATING": 3,
                                     "DELETING": 4,
                                     "ERROR": 5
+                                  }
+                                }
+                              }
+                            },
+                            "CheckUpgradeRequest": {
+                              "fields": {
+                                "environment": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "imageVersion": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -2063,6 +2112,13 @@
                             },
                             "DataRetentionConfig": {
                               "fields": {
+                                "airflowMetadataRetentionConfig": {
+                                  "type": "AirflowMetadataRetentionPolicyConfig",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
                                 "taskLogsRetentionConfig": {
                                   "type": "TaskLogsRetentionConfig",
                                   "id": 2,
@@ -2088,6 +2144,33 @@
                                     "TASK_LOGS_STORAGE_MODE_UNSPECIFIED": 0,
                                     "CLOUD_LOGGING_AND_CLOUD_STORAGE": 1,
                                     "CLOUD_LOGGING_ONLY": 2
+                                  }
+                                }
+                              }
+                            },
+                            "AirflowMetadataRetentionPolicyConfig": {
+                              "fields": {
+                                "retentionMode": {
+                                  "type": "RetentionMode",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "retentionDays": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "RetentionMode": {
+                                  "values": {
+                                    "RETENTION_MODE_UNSPECIFIED": 0,
+                                    "RETENTION_MODE_ENABLED": 1,
+                                    "RETENTION_MODE_DISABLED": 2
                                   }
                                 }
                               }

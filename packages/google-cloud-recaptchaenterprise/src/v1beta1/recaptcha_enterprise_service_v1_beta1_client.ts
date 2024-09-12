@@ -379,7 +379,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project in which the assessment is created,
+   *   Required. The name of the project in which the assessment will be created,
    *   in the format `projects/{project_number}`.
    * @param {google.cloud.recaptchaenterprise.v1beta1.Assessment} request.assessment
    *   Required. The assessment details.
@@ -482,7 +482,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    *   Required. The resource name of the Assessment, in the format
    *   `projects/{project_number}/assessments/{assessment_id}`.
    * @param {google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation} [request.annotation]
-   *   Optional. The annotation that is assigned to the Event. This field can
+   *   Optional. The annotation that will be assigned to the Event. This field can
    *   be left empty to provide reasons that apply to an event without concluding
    *   whether the event is legitimate or fraudulent.
    * @param {number[]} [request.reasons]

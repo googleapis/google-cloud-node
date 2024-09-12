@@ -285,6 +285,12 @@ export class EnvironmentsClient {
     const deleteEnvironmentMetadata = protoFilesRoot.lookup(
       '.google.cloud.orchestration.airflow.service.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const checkUpgradeResponse = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse'
+    ) as gax.protobuf.Type;
+    const checkUpgradeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.orchestration.airflow.service.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const saveSnapshotResponse = protoFilesRoot.lookup(
       '.google.cloud.orchestration.airflow.service.v1.SaveSnapshotResponse'
     ) as gax.protobuf.Type;
@@ -319,6 +325,11 @@ export class EnvironmentsClient {
         this.operationsClient,
         deleteEnvironmentResponse.decode.bind(deleteEnvironmentResponse),
         deleteEnvironmentMetadata.decode.bind(deleteEnvironmentMetadata)
+      ),
+      checkUpgrade: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        checkUpgradeResponse.decode.bind(checkUpgradeResponse),
+        checkUpgradeMetadata.decode.bind(checkUpgradeMetadata)
       ),
       saveSnapshot: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -397,6 +408,7 @@ export class EnvironmentsClient {
       'stopAirflowCommand',
       'pollAirflowCommand',
       'listWorkloads',
+      'checkUpgrade',
       'createUserWorkloadsSecret',
       'getUserWorkloadsSecret',
       'listUserWorkloadsSecrets',
@@ -2417,6 +2429,171 @@ export class EnvironmentsClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Check if an upgrade operation on the environment will succeed.
+   *
+   * In case of problems detailed info can be found in the returned Operation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Required. The resource name of the environment to check upgrade for, in the
+   *   form:
+   *   "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+   * @param {string} [request.imageVersion]
+   *   Optional. The version of the software running in the environment.
+   *   This encapsulates both the version of Cloud Composer functionality and the
+   *   version of Apache Airflow. It must match the regular expression
+   *   `composer-([0-9]+(\.[0-9]+\.[0-9]+(-preview\.[0-9]+)?)?|latest)-airflow-([0-9]+(\.[0-9]+(\.[0-9]+)?)?)`.
+   *   When used as input, the server also checks if the provided version is
+   *   supported and denies the request for an unsupported version.
+   *
+   *   The Cloud Composer portion of the image version is a full
+   *   [semantic version](https://semver.org), or an alias in the form of major
+   *   version number or `latest`. When an alias is provided, the server replaces
+   *   it with the current Cloud Composer version that satisfies the alias.
+   *
+   *   The Apache Airflow portion of the image version is a full semantic version
+   *   that points to one of the supported Apache Airflow versions, or an alias in
+   *   the form of only major or major.minor versions specified. When an alias is
+   *   provided, the server replaces it with the latest Apache Airflow version
+   *   that satisfies the alias and is supported in the given Cloud Composer
+   *   version.
+   *
+   *   In all cases, the resolved image version is stored in the same field.
+   *
+   *   See also [version
+   *   list](/composer/docs/concepts/versioning/composer-versions) and [versioning
+   *   overview](/composer/docs/concepts/versioning/composer-versioning-overview).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.check_upgrade.js</caption>
+   * region_tag:composer_v1_generated_Environments_CheckUpgrade_async
+   */
+  checkUpgrade(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  checkUpgrade(
+    request: protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  checkUpgrade(
+    request: protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  checkUpgrade(
+    request?: protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+            protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.orchestration.airflow.service.v1.ICheckUpgradeResponse,
+        protos.google.cloud.orchestration.airflow.service.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        environment: request.environment ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.checkUpgrade(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `checkUpgrade()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/environments.check_upgrade.js</caption>
+   * region_tag:composer_v1_generated_Environments_CheckUpgrade_async
+   */
+  async checkCheckUpgradeProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse,
+      protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.checkUpgrade,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.orchestration.airflow.service.v1.CheckUpgradeResponse,
       protos.google.cloud.orchestration.airflow.service.v1.OperationMetadata
     >;
   }

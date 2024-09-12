@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Environments.check_upgrade](#environments.check_upgrade)
   * [Environments.create_environment](#environments.create_environment)
   * [Environments.create_user_workloads_config_map](#environments.create_user_workloads_config_map)
   * [Environments.create_user_workloads_secret](#environments.create_user_workloads_secret)
@@ -76,6 +77,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Environments.check_upgrade
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.check_upgrade.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.check_upgrade.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-orchestration-airflow-service/samples/generated/v1/environments.check_upgrade.js`
+
+
+-----
+
 
 
 
