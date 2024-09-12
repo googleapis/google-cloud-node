@@ -8605,7 +8605,9 @@ export namespace google {
                         RUNNING = 3,
                         SUCCEEDED = 4,
                         FAILED = 5,
-                        DELETION_IN_PROGRESS = 6
+                        DELETION_IN_PROGRESS = 6,
+                        CANCELLATION_IN_PROGRESS = 7,
+                        CANCELLED = 8
                     }
                 }
 

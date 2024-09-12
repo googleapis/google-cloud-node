@@ -7910,6 +7910,10 @@
                               "type": "string",
                               "id": 1
                             },
+                            "description": {
+                              "type": "string",
+                              "id": 15
+                            },
                             "baseTypes": {
                               "rule": "repeated",
                               "type": "string",
@@ -7940,6 +7944,10 @@
                                 "name": {
                                   "type": "string",
                                   "id": 1
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 7
                                 },
                                 "displayName": {
                                   "type": "string",
