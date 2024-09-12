@@ -179,6 +179,20 @@ export namespace google {
                             public listWorkloads(request: google.cloud.orchestration.airflow.service.v1.IListWorkloadsRequest): Promise<google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse>;
 
                             /**
+                             * Calls CheckUpgrade.
+                             * @param request CheckUpgradeRequest message or plain object
+                             * @param callback Node-style callback called with the error, if any, and Operation
+                             */
+                            public checkUpgrade(request: google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest, callback: google.cloud.orchestration.airflow.service.v1.Environments.CheckUpgradeCallback): void;
+
+                            /**
+                             * Calls CheckUpgrade.
+                             * @param request CheckUpgradeRequest message or plain object
+                             * @returns Promise
+                             */
+                            public checkUpgrade(request: google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest): Promise<google.longrunning.Operation>;
+
+                            /**
                              * Calls CreateUserWorkloadsSecret.
                              * @param request CreateUserWorkloadsSecretRequest message or plain object
                              * @param callback Node-style callback called with the error, if any, and UserWorkloadsSecret
@@ -439,6 +453,13 @@ export namespace google {
                              * @param [response] ListWorkloadsResponse
                              */
                             type ListWorkloadsCallback = (error: (Error|null), response?: google.cloud.orchestration.airflow.service.v1.ListWorkloadsResponse) => void;
+
+                            /**
+                             * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|checkUpgrade}.
+                             * @param error Error, if any
+                             * @param [response] Operation
+                             */
+                            type CheckUpgradeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                             /**
                              * Callback as used by {@link google.cloud.orchestration.airflow.service.v1.Environments|createUserWorkloadsSecret}.
@@ -7721,6 +7742,9 @@ export namespace google {
                             /** Environment satisfiesPzs */
                             satisfiesPzs?: (boolean|null);
 
+                            /** Environment satisfiesPzi */
+                            satisfiesPzi?: (boolean|null);
+
                             /** Environment storageConfig */
                             storageConfig?: (google.cloud.orchestration.airflow.service.v1.IStorageConfig|null);
                         }
@@ -7757,6 +7781,9 @@ export namespace google {
 
                             /** Environment satisfiesPzs. */
                             public satisfiesPzs: boolean;
+
+                            /** Environment satisfiesPzi. */
+                            public satisfiesPzi: boolean;
 
                             /** Environment storageConfig. */
                             public storageConfig?: (google.cloud.orchestration.airflow.service.v1.IStorageConfig|null);
@@ -7850,6 +7877,109 @@ export namespace google {
                                 DELETING = 4,
                                 ERROR = 5
                             }
+                        }
+
+                        /** Properties of a CheckUpgradeRequest. */
+                        interface ICheckUpgradeRequest {
+
+                            /** CheckUpgradeRequest environment */
+                            environment?: (string|null);
+
+                            /** CheckUpgradeRequest imageVersion */
+                            imageVersion?: (string|null);
+                        }
+
+                        /** Represents a CheckUpgradeRequest. */
+                        class CheckUpgradeRequest implements ICheckUpgradeRequest {
+
+                            /**
+                             * Constructs a new CheckUpgradeRequest.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest);
+
+                            /** CheckUpgradeRequest environment. */
+                            public environment: string;
+
+                            /** CheckUpgradeRequest imageVersion. */
+                            public imageVersion: string;
+
+                            /**
+                             * Creates a new CheckUpgradeRequest instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CheckUpgradeRequest instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest): google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest;
+
+                            /**
+                             * Encodes the specified CheckUpgradeRequest message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest.verify|verify} messages.
+                             * @param message CheckUpgradeRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CheckUpgradeRequest message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest.verify|verify} messages.
+                             * @param message CheckUpgradeRequest message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.ICheckUpgradeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CheckUpgradeRequest message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CheckUpgradeRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest;
+
+                            /**
+                             * Decodes a CheckUpgradeRequest message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CheckUpgradeRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest;
+
+                            /**
+                             * Verifies a CheckUpgradeRequest message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CheckUpgradeRequest message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CheckUpgradeRequest
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest;
+
+                            /**
+                             * Creates a plain object from a CheckUpgradeRequest message. Also converts values to other types if specified.
+                             * @param message CheckUpgradeRequest
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.CheckUpgradeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CheckUpgradeRequest to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CheckUpgradeRequest
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
 
                         /** Properties of a CheckUpgradeResponse. */
@@ -7986,6 +8116,9 @@ export namespace google {
                         /** Properties of a DataRetentionConfig. */
                         interface IDataRetentionConfig {
 
+                            /** DataRetentionConfig airflowMetadataRetentionConfig */
+                            airflowMetadataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.IAirflowMetadataRetentionPolicyConfig|null);
+
                             /** DataRetentionConfig taskLogsRetentionConfig */
                             taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig|null);
                         }
@@ -7998,6 +8131,9 @@ export namespace google {
                              * @param [properties] Properties to set
                              */
                             constructor(properties?: google.cloud.orchestration.airflow.service.v1.IDataRetentionConfig);
+
+                            /** DataRetentionConfig airflowMetadataRetentionConfig. */
+                            public airflowMetadataRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.IAirflowMetadataRetentionPolicyConfig|null);
 
                             /** DataRetentionConfig taskLogsRetentionConfig. */
                             public taskLogsRetentionConfig?: (google.cloud.orchestration.airflow.service.v1.ITaskLogsRetentionConfig|null);
@@ -8184,6 +8320,119 @@ export namespace google {
                                 TASK_LOGS_STORAGE_MODE_UNSPECIFIED = 0,
                                 CLOUD_LOGGING_AND_CLOUD_STORAGE = 1,
                                 CLOUD_LOGGING_ONLY = 2
+                            }
+                        }
+
+                        /** Properties of an AirflowMetadataRetentionPolicyConfig. */
+                        interface IAirflowMetadataRetentionPolicyConfig {
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionMode */
+                            retentionMode?: (google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.RetentionMode|keyof typeof google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.RetentionMode|null);
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionDays */
+                            retentionDays?: (number|null);
+                        }
+
+                        /** Represents an AirflowMetadataRetentionPolicyConfig. */
+                        class AirflowMetadataRetentionPolicyConfig implements IAirflowMetadataRetentionPolicyConfig {
+
+                            /**
+                             * Constructs a new AirflowMetadataRetentionPolicyConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.orchestration.airflow.service.v1.IAirflowMetadataRetentionPolicyConfig);
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionMode. */
+                            public retentionMode: (google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.RetentionMode|keyof typeof google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.RetentionMode);
+
+                            /** AirflowMetadataRetentionPolicyConfig retentionDays. */
+                            public retentionDays: number;
+
+                            /**
+                             * Creates a new AirflowMetadataRetentionPolicyConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns AirflowMetadataRetentionPolicyConfig instance
+                             */
+                            public static create(properties?: google.cloud.orchestration.airflow.service.v1.IAirflowMetadataRetentionPolicyConfig): google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Encodes the specified AirflowMetadataRetentionPolicyConfig message. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.verify|verify} messages.
+                             * @param message AirflowMetadataRetentionPolicyConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.orchestration.airflow.service.v1.IAirflowMetadataRetentionPolicyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified AirflowMetadataRetentionPolicyConfig message, length delimited. Does not implicitly {@link google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig.verify|verify} messages.
+                             * @param message AirflowMetadataRetentionPolicyConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.orchestration.airflow.service.v1.IAirflowMetadataRetentionPolicyConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an AirflowMetadataRetentionPolicyConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns AirflowMetadataRetentionPolicyConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Decodes an AirflowMetadataRetentionPolicyConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns AirflowMetadataRetentionPolicyConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Verifies an AirflowMetadataRetentionPolicyConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an AirflowMetadataRetentionPolicyConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns AirflowMetadataRetentionPolicyConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig;
+
+                            /**
+                             * Creates a plain object from an AirflowMetadataRetentionPolicyConfig message. Also converts values to other types if specified.
+                             * @param message AirflowMetadataRetentionPolicyConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.orchestration.airflow.service.v1.AirflowMetadataRetentionPolicyConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this AirflowMetadataRetentionPolicyConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for AirflowMetadataRetentionPolicyConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace AirflowMetadataRetentionPolicyConfig {
+
+                            /** RetentionMode enum. */
+                            enum RetentionMode {
+                                RETENTION_MODE_UNSPECIFIED = 0,
+                                RETENTION_MODE_ENABLED = 1,
+                                RETENTION_MODE_DISABLED = 2
                             }
                         }
 
