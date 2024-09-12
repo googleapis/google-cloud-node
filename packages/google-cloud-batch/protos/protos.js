@@ -21123,6 +21123,8 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.statusEvents != null && message.hasOwnProperty("statusEvents")) {
@@ -21203,6 +21205,14 @@
                             case "DELETION_IN_PROGRESS":
                             case 6:
                                 message.state = 6;
+                                break;
+                            case "CANCELLATION_IN_PROGRESS":
+                            case 7:
+                                message.state = 7;
+                                break;
+                            case "CANCELLED":
+                            case 8:
+                                message.state = 8;
                                 break;
                             }
                             if (object.statusEvents) {
@@ -21931,6 +21941,8 @@
                          * @property {number} SUCCEEDED=4 SUCCEEDED value
                          * @property {number} FAILED=5 FAILED value
                          * @property {number} DELETION_IN_PROGRESS=6 DELETION_IN_PROGRESS value
+                         * @property {number} CANCELLATION_IN_PROGRESS=7 CANCELLATION_IN_PROGRESS value
+                         * @property {number} CANCELLED=8 CANCELLED value
                          */
                         JobStatus.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -21941,6 +21953,8 @@
                             values[valuesById[4] = "SUCCEEDED"] = 4;
                             values[valuesById[5] = "FAILED"] = 5;
                             values[valuesById[6] = "DELETION_IN_PROGRESS"] = 6;
+                            values[valuesById[7] = "CANCELLATION_IN_PROGRESS"] = 7;
+                            values[valuesById[8] = "CANCELLED"] = 8;
                             return values;
                         })();
     
@@ -22560,6 +22574,8 @@
                                     case 4:
                                     case 5:
                                     case 6:
+                                    case 7:
+                                    case 8:
                                         break;
                                     }
                                 if (message.newTaskState != null && message.hasOwnProperty("newTaskState"))
@@ -22644,6 +22660,14 @@
                                 case "DELETION_IN_PROGRESS":
                                 case 6:
                                     message.newJobState = 6;
+                                    break;
+                                case "CANCELLATION_IN_PROGRESS":
+                                case 7:
+                                    message.newJobState = 7;
+                                    break;
+                                case "CANCELLED":
+                                case 8:
+                                    message.newJobState = 8;
                                     break;
                                 }
                                 switch (object.newTaskState) {
