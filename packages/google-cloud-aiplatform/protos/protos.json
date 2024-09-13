@@ -33505,6 +33505,13 @@
                             "sharepointSiteName": {
                               "type": "string",
                               "id": 4
+                            },
+                            "fileId": {
+                              "type": "string",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -68262,7 +68269,8 @@
                             "googleDriveSource",
                             "directUploadSource",
                             "slackSource",
-                            "jiraSource"
+                            "jiraSource",
+                            "sharePointSources"
                           ]
                         }
                       },
@@ -68295,6 +68303,10 @@
                         "jiraSource": {
                           "type": "JiraSource",
                           "id": 12
+                        },
+                        "sharePointSources": {
+                          "type": "SharePointSources",
+                          "id": 14
                         },
                         "name": {
                           "type": "string",
