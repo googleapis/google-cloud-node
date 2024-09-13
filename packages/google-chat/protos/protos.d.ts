@@ -11454,6 +11454,20 @@ export namespace google {
                 public listSpaces(request: google.chat.v1.IListSpacesRequest): Promise<google.chat.v1.ListSpacesResponse>;
 
                 /**
+                 * Calls SearchSpaces.
+                 * @param request SearchSpacesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and SearchSpacesResponse
+                 */
+                public searchSpaces(request: google.chat.v1.ISearchSpacesRequest, callback: google.chat.v1.ChatService.SearchSpacesCallback): void;
+
+                /**
+                 * Calls SearchSpaces.
+                 * @param request SearchSpacesRequest message or plain object
+                 * @returns Promise
+                 */
+                public searchSpaces(request: google.chat.v1.ISearchSpacesRequest): Promise<google.chat.v1.SearchSpacesResponse>;
+
+                /**
                  * Calls GetSpace.
                  * @param request GetSpaceRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and Space
@@ -11779,6 +11793,13 @@ export namespace google {
                 type ListSpacesCallback = (error: (Error|null), response?: google.chat.v1.ListSpacesResponse) => void;
 
                 /**
+                 * Callback as used by {@link google.chat.v1.ChatService|searchSpaces}.
+                 * @param error Error, if any
+                 * @param [response] SearchSpacesResponse
+                 */
+                type SearchSpacesCallback = (error: (Error|null), response?: google.chat.v1.SearchSpacesResponse) => void;
+
+                /**
                  * Callback as used by {@link google.chat.v1.ChatService|getSpace}.
                  * @param error Error, if any
                  * @param [response] Space
@@ -12067,6 +12088,9 @@ export namespace google {
 
                 /** CreateMembershipRequest membership */
                 membership?: (google.chat.v1.IMembership|null);
+
+                /** CreateMembershipRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents a CreateMembershipRequest. */
@@ -12083,6 +12107,9 @@ export namespace google {
 
                 /** CreateMembershipRequest membership. */
                 public membership?: (google.chat.v1.IMembership|null);
+
+                /** CreateMembershipRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new CreateMembershipRequest instance using the specified properties.
@@ -12170,6 +12197,9 @@ export namespace google {
 
                 /** UpdateMembershipRequest updateMask */
                 updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateMembershipRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents an UpdateMembershipRequest. */
@@ -12186,6 +12216,9 @@ export namespace google {
 
                 /** UpdateMembershipRequest updateMask. */
                 public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateMembershipRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new UpdateMembershipRequest instance using the specified properties.
@@ -12285,6 +12318,9 @@ export namespace google {
 
                 /** ListMembershipsRequest showInvited */
                 showInvited?: (boolean|null);
+
+                /** ListMembershipsRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents a ListMembershipsRequest. */
@@ -12313,6 +12349,9 @@ export namespace google {
 
                 /** ListMembershipsRequest showInvited. */
                 public showInvited: boolean;
+
+                /** ListMembershipsRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new ListMembershipsRequest instance using the specified properties.
@@ -12500,6 +12539,9 @@ export namespace google {
 
                 /** GetMembershipRequest name */
                 name?: (string|null);
+
+                /** GetMembershipRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents a GetMembershipRequest. */
@@ -12513,6 +12555,9 @@ export namespace google {
 
                 /** GetMembershipRequest name. */
                 public name: string;
+
+                /** GetMembershipRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new GetMembershipRequest instance using the specified properties.
@@ -12597,6 +12642,9 @@ export namespace google {
 
                 /** DeleteMembershipRequest name */
                 name?: (string|null);
+
+                /** DeleteMembershipRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents a DeleteMembershipRequest. */
@@ -12610,6 +12658,9 @@ export namespace google {
 
                 /** DeleteMembershipRequest name. */
                 public name: string;
+
+                /** DeleteMembershipRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new DeleteMembershipRequest instance using the specified properties.
@@ -17719,8 +17770,14 @@ export namespace google {
                 /** Space createTime */
                 createTime?: (google.protobuf.ITimestamp|null);
 
+                /** Space lastActiveTime */
+                lastActiveTime?: (google.protobuf.ITimestamp|null);
+
                 /** Space adminInstalled */
                 adminInstalled?: (boolean|null);
+
+                /** Space membershipCount */
+                membershipCount?: (google.chat.v1.Space.IMembershipCount|null);
 
                 /** Space accessSettings */
                 accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
@@ -17774,8 +17831,14 @@ export namespace google {
                 /** Space createTime. */
                 public createTime?: (google.protobuf.ITimestamp|null);
 
+                /** Space lastActiveTime. */
+                public lastActiveTime?: (google.protobuf.ITimestamp|null);
+
                 /** Space adminInstalled. */
                 public adminInstalled: boolean;
+
+                /** Space membershipCount. */
+                public membershipCount?: (google.chat.v1.Space.IMembershipCount|null);
 
                 /** Space accessSettings. */
                 public accessSettings?: (google.chat.v1.Space.IAccessSettings|null);
@@ -17983,6 +18046,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for SpaceDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MembershipCount. */
+                interface IMembershipCount {
+
+                    /** MembershipCount joinedDirectHumanUserCount */
+                    joinedDirectHumanUserCount?: (number|null);
+
+                    /** MembershipCount joinedGroupCount */
+                    joinedGroupCount?: (number|null);
+                }
+
+                /** Represents a MembershipCount. */
+                class MembershipCount implements IMembershipCount {
+
+                    /**
+                     * Constructs a new MembershipCount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IMembershipCount);
+
+                    /** MembershipCount joinedDirectHumanUserCount. */
+                    public joinedDirectHumanUserCount: number;
+
+                    /** MembershipCount joinedGroupCount. */
+                    public joinedGroupCount: number;
+
+                    /**
+                     * Creates a new MembershipCount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MembershipCount instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IMembershipCount): google.chat.v1.Space.MembershipCount;
+
+                    /**
+                     * Encodes the specified MembershipCount message. Does not implicitly {@link google.chat.v1.Space.MembershipCount.verify|verify} messages.
+                     * @param message MembershipCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IMembershipCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MembershipCount message, length delimited. Does not implicitly {@link google.chat.v1.Space.MembershipCount.verify|verify} messages.
+                     * @param message MembershipCount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IMembershipCount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MembershipCount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MembershipCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.MembershipCount;
+
+                    /**
+                     * Decodes a MembershipCount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MembershipCount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.MembershipCount;
+
+                    /**
+                     * Verifies a MembershipCount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MembershipCount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MembershipCount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.MembershipCount;
+
+                    /**
+                     * Creates a plain object from a MembershipCount message. Also converts values to other types if specified.
+                     * @param message MembershipCount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.MembershipCount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MembershipCount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MembershipCount
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18423,6 +18589,9 @@ export namespace google {
 
                 /** GetSpaceRequest name */
                 name?: (string|null);
+
+                /** GetSpaceRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents a GetSpaceRequest. */
@@ -18436,6 +18605,9 @@ export namespace google {
 
                 /** GetSpaceRequest name. */
                 public name: string;
+
+                /** GetSpaceRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new GetSpaceRequest instance using the specified properties.
@@ -18620,6 +18792,9 @@ export namespace google {
 
                 /** UpdateSpaceRequest updateMask */
                 updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateSpaceRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents an UpdateSpaceRequest. */
@@ -18636,6 +18811,9 @@ export namespace google {
 
                 /** UpdateSpaceRequest updateMask. */
                 public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /** UpdateSpaceRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new UpdateSpaceRequest instance using the specified properties.
@@ -18715,11 +18893,244 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a SearchSpacesRequest. */
+            interface ISearchSpacesRequest {
+
+                /** SearchSpacesRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
+
+                /** SearchSpacesRequest pageSize */
+                pageSize?: (number|null);
+
+                /** SearchSpacesRequest pageToken */
+                pageToken?: (string|null);
+
+                /** SearchSpacesRequest query */
+                query?: (string|null);
+
+                /** SearchSpacesRequest orderBy */
+                orderBy?: (string|null);
+            }
+
+            /** Represents a SearchSpacesRequest. */
+            class SearchSpacesRequest implements ISearchSpacesRequest {
+
+                /**
+                 * Constructs a new SearchSpacesRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISearchSpacesRequest);
+
+                /** SearchSpacesRequest useAdminAccess. */
+                public useAdminAccess: boolean;
+
+                /** SearchSpacesRequest pageSize. */
+                public pageSize: number;
+
+                /** SearchSpacesRequest pageToken. */
+                public pageToken: string;
+
+                /** SearchSpacesRequest query. */
+                public query: string;
+
+                /** SearchSpacesRequest orderBy. */
+                public orderBy: string;
+
+                /**
+                 * Creates a new SearchSpacesRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchSpacesRequest instance
+                 */
+                public static create(properties?: google.chat.v1.ISearchSpacesRequest): google.chat.v1.SearchSpacesRequest;
+
+                /**
+                 * Encodes the specified SearchSpacesRequest message. Does not implicitly {@link google.chat.v1.SearchSpacesRequest.verify|verify} messages.
+                 * @param message SearchSpacesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISearchSpacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchSpacesRequest message, length delimited. Does not implicitly {@link google.chat.v1.SearchSpacesRequest.verify|verify} messages.
+                 * @param message SearchSpacesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISearchSpacesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchSpacesRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchSpacesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SearchSpacesRequest;
+
+                /**
+                 * Decodes a SearchSpacesRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchSpacesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SearchSpacesRequest;
+
+                /**
+                 * Verifies a SearchSpacesRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchSpacesRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchSpacesRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SearchSpacesRequest;
+
+                /**
+                 * Creates a plain object from a SearchSpacesRequest message. Also converts values to other types if specified.
+                 * @param message SearchSpacesRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SearchSpacesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchSpacesRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchSpacesRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SearchSpacesResponse. */
+            interface ISearchSpacesResponse {
+
+                /** SearchSpacesResponse spaces */
+                spaces?: (google.chat.v1.ISpace[]|null);
+
+                /** SearchSpacesResponse nextPageToken */
+                nextPageToken?: (string|null);
+
+                /** SearchSpacesResponse totalSize */
+                totalSize?: (number|null);
+            }
+
+            /** Represents a SearchSpacesResponse. */
+            class SearchSpacesResponse implements ISearchSpacesResponse {
+
+                /**
+                 * Constructs a new SearchSpacesResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.chat.v1.ISearchSpacesResponse);
+
+                /** SearchSpacesResponse spaces. */
+                public spaces: google.chat.v1.ISpace[];
+
+                /** SearchSpacesResponse nextPageToken. */
+                public nextPageToken: string;
+
+                /** SearchSpacesResponse totalSize. */
+                public totalSize: number;
+
+                /**
+                 * Creates a new SearchSpacesResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SearchSpacesResponse instance
+                 */
+                public static create(properties?: google.chat.v1.ISearchSpacesResponse): google.chat.v1.SearchSpacesResponse;
+
+                /**
+                 * Encodes the specified SearchSpacesResponse message. Does not implicitly {@link google.chat.v1.SearchSpacesResponse.verify|verify} messages.
+                 * @param message SearchSpacesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.chat.v1.ISearchSpacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SearchSpacesResponse message, length delimited. Does not implicitly {@link google.chat.v1.SearchSpacesResponse.verify|verify} messages.
+                 * @param message SearchSpacesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.chat.v1.ISearchSpacesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SearchSpacesResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SearchSpacesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.SearchSpacesResponse;
+
+                /**
+                 * Decodes a SearchSpacesResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SearchSpacesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.SearchSpacesResponse;
+
+                /**
+                 * Verifies a SearchSpacesResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SearchSpacesResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SearchSpacesResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.chat.v1.SearchSpacesResponse;
+
+                /**
+                 * Creates a plain object from a SearchSpacesResponse message. Also converts values to other types if specified.
+                 * @param message SearchSpacesResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.chat.v1.SearchSpacesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SearchSpacesResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SearchSpacesResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
             /** Properties of a DeleteSpaceRequest. */
             interface IDeleteSpaceRequest {
 
                 /** DeleteSpaceRequest name */
                 name?: (string|null);
+
+                /** DeleteSpaceRequest useAdminAccess */
+                useAdminAccess?: (boolean|null);
             }
 
             /** Represents a DeleteSpaceRequest. */
@@ -18733,6 +19144,9 @@ export namespace google {
 
                 /** DeleteSpaceRequest name. */
                 public name: string;
+
+                /** DeleteSpaceRequest useAdminAccess. */
+                public useAdminAccess: boolean;
 
                 /**
                  * Creates a new DeleteSpaceRequest instance using the specified properties.

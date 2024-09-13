@@ -3965,6 +3965,209 @@ describe('v1.ChatServiceClient', () => {
     });
   });
 
+  describe('searchSpaces', () => {
+    it('invokes searchSpaces without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+      ];
+      client.innerApiCalls.searchSpaces = stubSimpleCall(expectedResponse);
+      const [response] = await client.searchSpaces(request);
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes searchSpaces without error using callback', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+      ];
+      client.innerApiCalls.searchSpaces =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchSpaces(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.chat.v1.ISpace[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+    });
+
+    it('invokes searchSpaces with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchSpaces = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.searchSpaces(request), expectedError);
+    });
+
+    it('invokes searchSpacesStream without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+      ];
+      client.descriptors.page.searchSpaces.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchSpacesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.Space[] = [];
+        stream.on('data', (response: protos.google.chat.v1.Space) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.searchSpaces.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchSpaces, request)
+      );
+    });
+
+    it('invokes searchSpacesStream with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchSpaces.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.searchSpacesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.chat.v1.Space[] = [];
+        stream.on('data', (response: protos.google.chat.v1.Space) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.searchSpaces.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchSpaces, request)
+      );
+    });
+
+    it('uses async iteration with searchSpaces without error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+        generateSampleMessage(new protos.google.chat.v1.Space()),
+      ];
+      client.descriptors.page.searchSpaces.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.chat.v1.ISpace[] = [];
+      const iterable = client.searchSpacesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchSpaces.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+
+    it('uses async iteration with searchSpaces with error', async () => {
+      const client = new chatserviceModule.v1.ChatServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.chat.v1.SearchSpacesRequest()
+      );
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchSpaces.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.searchSpacesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.chat.v1.ISpace[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchSpaces.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+    });
+  });
+
   describe('listReactions', () => {
     it('invokes listReactions without error', async () => {
       const client = new chatserviceModule.v1.ChatServiceClient({
