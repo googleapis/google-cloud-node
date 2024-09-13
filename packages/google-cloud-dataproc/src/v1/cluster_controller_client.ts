@@ -210,6 +210,9 @@ export class ClusterControllerClient {
       batchPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batches/{batch}'
       ),
+      cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
+      ),
       nodeGroupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/regions/{region}/clusters/{cluster}/nodeGroups/{node_group}'
       ),
@@ -1605,7 +1608,7 @@ export class ClusterControllerClient {
    * @param {string} request.clusterName
    *   Required. The cluster name.
    * @param {string} [request.tarballGcsDir]
-   *   Optional. The output Cloud Storage directory for the diagnostic
+   *   Optional. (Optional) The output Cloud Storage directory for the diagnostic
    *   tarball. If not specified, a task-specific directory in the cluster's
    *   staging bucket will be used.
    * @param {google.cloud.dataproc.v1.DiagnoseClusterRequest.TarballAccess} [request.tarballAccess]
@@ -1770,12 +1773,12 @@ export class ClusterControllerClient {
    *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
    *   and `[KEY]` is a label key. **value** can be `*` to match all values.
    *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-   *   contains the `DELETING` and `ERROR` states.
-   *   `clusterName` is the name of the cluster provided at creation time.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+   *   `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+   *   states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+   *   `STOPPED` states. `clusterName` is the name of the cluster provided at
+   *   creation time. Only the logical `AND` operator is supported;
+   *   space-separated items are treated as having an implicit `AND` operator.
    *
    *   Example filter:
    *
@@ -1885,12 +1888,12 @@ export class ClusterControllerClient {
    *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
    *   and `[KEY]` is a label key. **value** can be `*` to match all values.
    *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-   *   contains the `DELETING` and `ERROR` states.
-   *   `clusterName` is the name of the cluster provided at creation time.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+   *   `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+   *   states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+   *   `STOPPED` states. `clusterName` is the name of the cluster provided at
+   *   creation time. Only the logical `AND` operator is supported;
+   *   space-separated items are treated as having an implicit `AND` operator.
    *
    *   Example filter:
    *
@@ -1954,12 +1957,12 @@ export class ClusterControllerClient {
    *   where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
    *   and `[KEY]` is a label key. **value** can be `*` to match all values.
    *   `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-   *   contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-   *   contains the `DELETING` and `ERROR` states.
-   *   `clusterName` is the name of the cluster provided at creation time.
-   *   Only the logical `AND` operator is supported; space-separated items are
-   *   treated as having an implicit `AND` operator.
+   *   `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+   *   `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+   *   states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+   *   `STOPPED` states. `clusterName` is the name of the cluster provided at
+   *   creation time. Only the logical `AND` operator is supported;
+   *   space-separated items are treated as having an implicit `AND` operator.
    *
    *   Example filter:
    *
@@ -2367,6 +2370,77 @@ export class ClusterControllerClient {
    */
   matchBatchFromBatchName(batchName: string) {
     return this.pathTemplates.batchPathTemplate.match(batchName).batch;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKey resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string
+  ) {
+    return this.pathTemplates.cryptoKeyPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKey resource.
+   *
+   * @param {string} cryptoKeyName
+   *   A fully-qualified path representing CryptoKey resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyName(cryptoKeyName: string) {
+    return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName)
+      .crypto_key;
   }
 
   /**
