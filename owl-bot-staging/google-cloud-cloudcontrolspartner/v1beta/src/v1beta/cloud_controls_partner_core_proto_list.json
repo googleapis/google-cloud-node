@@ -1,0 +1,12 @@
+[
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/access_approval_requests.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/completion_state.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/core.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/customer_workloads.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/customers.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/ekm_connections.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/monitoring.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/partner_permissions.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/partners.proto",
+  "../../protos/google/cloud/cloudcontrolspartner/v1beta/violations.proto"
+]
