@@ -146,6 +146,13 @@
                 "listSpacesAsync"
               ]
             },
+            "SearchSpaces": {
+              "methods": [
+                "searchSpaces",
+                "searchSpacesStream",
+                "searchSpacesAsync"
+              ]
+            },
             "ListReactions": {
               "methods": [
                 "listReactions",
@@ -299,6 +306,13 @@
                 "listSpaces",
                 "listSpacesStream",
                 "listSpacesAsync"
+              ]
+            },
+            "SearchSpaces": {
+              "methods": [
+                "searchSpaces",
+                "searchSpacesStream",
+                "searchSpacesAsync"
               ]
             },
             "ListReactions": {

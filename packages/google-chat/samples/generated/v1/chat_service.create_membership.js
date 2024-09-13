@@ -53,6 +53,19 @@ function main(parent, membership) {
    *  scope, set `user.type` to `BOT`, and set `user.name` to `users/app`.
    */
   // const membership = {}
+  /**
+   *  When `true`, the method runs using the user's Google Workspace
+   *  administrator privileges.
+   *  The calling user must be a Google Workspace administrator with the
+   *  manage chat and spaces conversations
+   *  privilege (https://support.google.com/a/answer/13369245).
+   *  Requires the `chat.admin.memberships` OAuth 2.0
+   *  scope (https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+   *  Creating app memberships or creating memberships for users outside the
+   *  administrator's Google Workspace organization isn't supported using admin
+   *  access.
+   */
+  // const useAdminAccess = true
 
   // Imports the Chat library
   const {ChatServiceClient} = require('@google-apps/chat').v1;
