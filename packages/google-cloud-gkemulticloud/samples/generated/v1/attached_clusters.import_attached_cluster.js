@@ -54,7 +54,7 @@ function main(parent, fleetMembership, platformVersion, distribution) {
   // const platformVersion = 'abc123'
   /**
    *  Required. The Kubernetes distribution of the underlying attached cluster.
-   *  Supported values: "eks", "aks".
+   *  Supported values: "eks", "aks", "generic".
    */
   // const distribution = 'abc123'
   /**
