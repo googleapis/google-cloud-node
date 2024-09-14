@@ -2221,6 +2221,204 @@ describe('v1.NetAppClient', () => {
     });
   });
 
+  describe('switchActiveReplicaZone', () => {
+    it('invokes switchActiveReplicaZone without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.switchActiveReplicaZone =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.switchActiveReplicaZone(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchActiveReplicaZone without error using callback', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.switchActiveReplicaZone =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.switchActiveReplicaZone(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.netapp.v1.IStoragePool,
+              protos.google.cloud.netapp.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchActiveReplicaZone with call error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.switchActiveReplicaZone = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.switchActiveReplicaZone(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes switchActiveReplicaZone with LRO error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.switchActiveReplicaZone = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.switchActiveReplicaZone(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchActiveReplicaZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkSwitchActiveReplicaZoneProgress without error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkSwitchActiveReplicaZoneProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkSwitchActiveReplicaZoneProgress with error', async () => {
+      const client = new netappModule.v1.NetAppClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkSwitchActiveReplicaZoneProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('createVolume', () => {
     it('invokes createVolume without error', async () => {
       const client = new netappModule.v1.NetAppClient({

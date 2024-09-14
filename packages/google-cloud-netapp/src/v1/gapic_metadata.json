@@ -75,6 +75,11 @@
                 "deleteStoragePool"
               ]
             },
+            "SwitchActiveReplicaZone": {
+              "methods": [
+                "switchActiveReplicaZone"
+              ]
+            },
             "CreateVolume": {
               "methods": [
                 "createVolume"
@@ -351,6 +356,11 @@
             "DeleteStoragePool": {
               "methods": [
                 "deleteStoragePool"
+              ]
+            },
+            "SwitchActiveReplicaZone": {
+              "methods": [
+                "switchActiveReplicaZone"
               ]
             },
             "CreateVolume": {
