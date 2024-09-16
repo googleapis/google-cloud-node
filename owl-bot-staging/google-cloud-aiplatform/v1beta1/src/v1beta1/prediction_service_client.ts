@@ -1019,6 +1019,9 @@ export class PredictionServiceClient {
  *   A `Tool` is a piece of code that enables the system to interact with
  *   external systems to perform an action, or set of actions, outside of
  *   knowledge and scope of the model.
+ * @param {google.cloud.aiplatform.v1beta1.GenerationConfig} [request.generationConfig]
+ *   Optional. Generation config that the model will use to generate the
+ *   response.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1088,9 +1091,14 @@ export class PredictionServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.model
- *   Required. The name of the publisher model requested to serve the
- *   prediction. Format:
+ *   Required. The fully qualified name of the publisher model or tuned model
+ *   endpoint to use.
+ *
+ *   Publisher model format:
  *   `projects/{project}/locations/{location}/publishers/* /models/*`
+ *
+ *   Tuned model endpoint format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
  * @param {number[]} request.contents
  *   Required. The content of the current conversation with the model.
  *
@@ -1117,6 +1125,14 @@ export class PredictionServiceClient {
  * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
  *   Optional. Tool config. This config is shared for all tools provided in the
  *   request.
+ * @param {number[]} [request.labels]
+ *   Optional. The labels with user-defined metadata for the request. It is used
+ *   for billing and reporting only.
+ *
+ *   Label keys and values can be no longer than 63 characters
+ *   (Unicode codepoints) and can only contain lowercase letters, numeric
+ *   characters, underscores, and dashes. International characters are allowed.
+ *   Label values are optional. Label keys must start with a letter.
  * @param {number[]} [request.safetySettings]
  *   Optional. Per request settings for blocking unsafe content.
  *   Enforced on GenerateContentResponse.candidates.
@@ -1356,9 +1372,14 @@ export class PredictionServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.model
- *   Required. The name of the publisher model requested to serve the
- *   prediction. Format:
+ *   Required. The fully qualified name of the publisher model or tuned model
+ *   endpoint to use.
+ *
+ *   Publisher model format:
  *   `projects/{project}/locations/{location}/publishers/* /models/*`
+ *
+ *   Tuned model endpoint format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
  * @param {number[]} request.contents
  *   Required. The content of the current conversation with the model.
  *
@@ -1385,6 +1406,14 @@ export class PredictionServiceClient {
  * @param {google.cloud.aiplatform.v1beta1.ToolConfig} [request.toolConfig]
  *   Optional. Tool config. This config is shared for all tools provided in the
  *   request.
+ * @param {number[]} [request.labels]
+ *   Optional. The labels with user-defined metadata for the request. It is used
+ *   for billing and reporting only.
+ *
+ *   Label keys and values can be no longer than 63 characters
+ *   (Unicode codepoints) and can only contain lowercase letters, numeric
+ *   characters, underscores, and dashes. International characters are allowed.
+ *   Label values are optional. Label keys must start with a letter.
  * @param {number[]} [request.safetySettings]
  *   Optional. Per request settings for blocking unsafe content.
  *   Enforced on GenerateContentResponse.candidates.
@@ -1422,9 +1451,9 @@ export class PredictionServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.endpoint
- *   Required. The name of the Endpoint requested to serve the prediction.
+ *   Required. The name of the endpoint requested to serve the prediction.
  *   Format:
- *   `projects/{project}/locations/{location}/endpoints/openapi`
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
  * @param {google.api.HttpBody} [request.httpBody]
  *   Optional. The prediction input. Supports HTTP headers and arbitrary data
  *   payload.
