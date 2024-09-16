@@ -3115,6 +3115,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "propertyOrdering": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "required": {
                           "rule": "repeated",
                           "type": "string",
