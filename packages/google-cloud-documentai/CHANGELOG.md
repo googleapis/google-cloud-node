@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.9.0...documentai-v8.10.0) (2024-09-13)
+
+
+### Features
+
+* [documentai] Add API fields for the descriptions of entity type and property in the document schema ([#5662](https://github.com/googleapis/google-cloud-node/issues/5662)) ([c0995a2](https://github.com/googleapis/google-cloud-node/commit/c0995a2e4866012d19ce21a3b98c514c8640a5e3))
+
 ## [8.9.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.8.0...documentai-v8.9.0) (2024-08-09)
 
 

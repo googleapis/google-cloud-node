@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.5.0...orchestration-airflow-v3.6.0) (2024-09-13)
+
+
+### Features
+
+* [orchestration] A new method `CheckUpgrade` is added to service `Environments` ([#5673](https://github.com/googleapis/google-cloud-node/issues/5673)) ([6f8373d](https://github.com/googleapis/google-cloud-node/commit/6f8373d0d04cda5593be12b8cc192a4447cdeb08))
+* [orchestration] add `satisfies_pzi` to `Environment` ([#5676](https://github.com/googleapis/google-cloud-node/issues/5676)) ([66ef73a](https://github.com/googleapis/google-cloud-node/commit/66ef73a560ba5566d263c99ce3940f2f7f2f4a82))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/orchestration-airflow-v3.4.0...orchestration-airflow-v3.5.0) (2024-07-22)
 
 

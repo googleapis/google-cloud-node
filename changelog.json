@@ -5,6 +5,99 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "4f0945ef49b10c71039eafc00ac7e93dd6a3ddee",
+          "message": "[chat] If you're a domain administrator or a delegated administrator, you can now include the `useAdminAccess` parameter when you call the Chat API with your administrator privileges with the following methods to manage Chat spaces and membership...",
+          "issues": [
+            "5675"
+          ]
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "fd77329b-8bf7-417c-a830-59f3ea0b60d2",
+      "createTime": "2024-09-13T00:35:47.392Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "66ef73a560ba5566d263c99ce3940f2f7f2f4a82",
+          "message": "[orchestration] add `satisfies_pzi` to `Environment`",
+          "issues": [
+            "5676"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6f8373d0d04cda5593be12b8cc192a4447cdeb08",
+          "message": "[orchestration] A new method `CheckUpgrade` is added to service `Environments`",
+          "issues": [
+            "5673"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "142e6633-934f-4e26-b64f-b1478e0c63f6",
+      "createTime": "2024-09-13T00:35:47.376Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c0995a2e4866012d19ce21a3b98c514c8640a5e3",
+          "message": "[documentai] Add API fields for the descriptions of entity type and property in the document schema",
+          "issues": [
+            "5662"
+          ]
+        }
+      ],
+      "version": "8.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "68dd1b4d-b8fc-4d6b-a245-c81d06314c70",
+      "createTime": "2024-09-13T00:35:47.360Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a53df0d4600c1666cabf1818d550232f04b265c8",
+          "message": "[dataproc] add support for new Dataproc features",
+          "issues": [
+            "5666"
+          ]
+        }
+      ],
+      "version": "5.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "4d1d04ce-103e-4c38-9b24-ccc73b2494e4",
+      "createTime": "2024-09-13T00:35:47.344Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ce998945ad320a493c5aef5bc7fdc7474777b21e",
+          "message": "[batch] A new value `CANCELLATION_IN_PROGRESS` is added to enum `State`",
+          "issues": [
+            "5670"
+          ]
+        }
+      ],
+      "version": "1.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "53376b14-5318-4e52-a081-346a7e8e245d",
+      "createTime": "2024-09-13T00:35:47.326Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "88edc8b2120fb1c246e8821d2793ef95724840d9",
           "message": "Add initial files for google.cloud.apihub.v1",
           "issues": [
@@ -36342,5 +36435,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-09-10T01:12:24.526Z"
+  "updateTime": "2024-09-13T00:35:47.392Z"
 }
