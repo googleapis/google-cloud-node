@@ -177,6 +177,7 @@ export interface GetFilesOptions {
   startOffset?: string;
   userProject?: string;
   versions?: boolean;
+  fields?: string;
 }
 
 export interface CombineOptions extends PreconditionOptions {
@@ -2824,6 +2825,11 @@ class Bucket extends ServiceObject<Bucket, BucketMetadata> {
         const itemsArray = resp.items ? resp.items : [];
         const files = itemsArray.map((file: FileMetadata) => {
           const options = {} as FileOptions;
+
+          if (query.fields) {
+            const fileInstance = file;
+            return fileInstance;
+          }
 
           if (query.versions) {
             options.generation = file.generation;

@@ -3249,6 +3249,20 @@ describe('storage', function () {
       assert.strictEqual(files!.length, NEW_FILES.length);
     });
 
+    it('returns file name only when fields is set as name', async () => {
+      const expected = [
+        {name: 'CloudLogo1'},
+        {name: 'CloudLogo2'},
+        {name: 'CloudLogo3'},
+        {name: `${DIRECTORY_NAME}/CloudLogo4`},
+        {name: `${DIRECTORY_NAME}/CloudLogo5`},
+        {name: `${DIRECTORY_NAME}/inner/CloudLogo6`},
+      ];
+      const [files] = await bucket.getFiles({fields: 'items(name)'});
+
+      assert.deepStrictEqual(files, expected);
+    });
+
     it('returns folders as prefixes when includeFoldersAsPrefixes is set', async () => {
       const expected = [`${DIRECTORY_NAME}/`];
       const [, , result] = await bucket.getFiles({

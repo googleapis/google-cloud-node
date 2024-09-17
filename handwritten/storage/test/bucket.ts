@@ -1866,6 +1866,26 @@ describe('Bucket', () => {
       });
     });
 
+    it('should return Files with specified values if queried for fields', done => {
+      bucket.request = (
+        reqOpts: DecorateRequestOptions,
+        callback: Function
+      ) => {
+        callback(null, {
+          items: [{name: 'fake-file-name'}],
+        });
+      };
+
+      bucket.getFiles(
+        {fields: 'items(name)'},
+        (err: Error, files: FakeFile[]) => {
+          assert.ifError(err);
+          assert.strictEqual(files[0].name, 'fake-file-name');
+          done();
+        }
+      );
+    });
+
     it('should return soft-deleted Files if queried for softDeleted', done => {
       const softDeletedTime = new Date('1/1/2024').toISOString();
       bucket.request = (

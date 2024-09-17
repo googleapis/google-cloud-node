@@ -105,9 +105,9 @@ describe('Common', () => {
           assert(err?.message.includes('ECONNREFUSED'));
           const timeResponse = Date.now();
           assert(timeResponse - timeRequest > minExpectedResponseTime);
-          done();
         }
       );
+      done();
     });
   });
 });
