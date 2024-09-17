@@ -6558,6 +6558,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
                                         break;
                                     }
                             }
@@ -6608,6 +6609,10 @@
                                     case "ASSURED_WORKLOADS_EKM_CONNECTION_STATUS":
                                     case 4:
                                         message.partnerPermissions[i] = 4;
+                                        break;
+                                    case "ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER":
+                                    case 5:
+                                        message.partnerPermissions[i] = 5;
                                         break;
                                     }
                             }
@@ -6676,6 +6681,7 @@
                          * @property {number} ASSURED_WORKLOADS_MONITORING=2 ASSURED_WORKLOADS_MONITORING value
                          * @property {number} ACCESS_APPROVAL_REQUESTS=3 ACCESS_APPROVAL_REQUESTS value
                          * @property {number} ASSURED_WORKLOADS_EKM_CONNECTION_STATUS=4 ASSURED_WORKLOADS_EKM_CONNECTION_STATUS value
+                         * @property {number} ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER=5 ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER value
                          */
                         PartnerPermissions.Permission = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -6684,6 +6690,7 @@
                             values[valuesById[2] = "ASSURED_WORKLOADS_MONITORING"] = 2;
                             values[valuesById[3] = "ACCESS_APPROVAL_REQUESTS"] = 3;
                             values[valuesById[4] = "ASSURED_WORKLOADS_EKM_CONNECTION_STATUS"] = 4;
+                            values[valuesById[5] = "ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER"] = 5;
                             return values;
                         })();
     
@@ -17094,6 +17101,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
                                         break;
                                     }
                             }
@@ -17144,6 +17152,10 @@
                                     case "ASSURED_WORKLOADS_EKM_CONNECTION_STATUS":
                                     case 4:
                                         message.partnerPermissions[i] = 4;
+                                        break;
+                                    case "ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER":
+                                    case 5:
+                                        message.partnerPermissions[i] = 5;
                                         break;
                                     }
                             }
@@ -17212,6 +17224,7 @@
                          * @property {number} ASSURED_WORKLOADS_MONITORING=2 ASSURED_WORKLOADS_MONITORING value
                          * @property {number} ACCESS_APPROVAL_REQUESTS=3 ACCESS_APPROVAL_REQUESTS value
                          * @property {number} ASSURED_WORKLOADS_EKM_CONNECTION_STATUS=4 ASSURED_WORKLOADS_EKM_CONNECTION_STATUS value
+                         * @property {number} ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER=5 ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER value
                          */
                         PartnerPermissions.Permission = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -17220,6 +17233,7 @@
                             values[valuesById[2] = "ASSURED_WORKLOADS_MONITORING"] = 2;
                             values[valuesById[3] = "ACCESS_APPROVAL_REQUESTS"] = 3;
                             values[valuesById[4] = "ASSURED_WORKLOADS_EKM_CONNECTION_STATUS"] = 4;
+                            values[valuesById[5] = "ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER"] = 5;
                             return values;
                         })();
     
