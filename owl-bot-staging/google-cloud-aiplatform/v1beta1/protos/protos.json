@@ -29190,6 +29190,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "originalPipelineJobId": {
+                          "type": "int64",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pipelineTaskRerunConfigs": {
+                          "rule": "repeated",
+                          "type": "PipelineTaskRerunConfig",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -29514,6 +29529,79 @@
                         }
                       }
                     },
+                    "PipelineTaskRerunConfig": {
+                      "fields": {
+                        "taskId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taskName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "inputs": {
+                          "type": "Inputs",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "skipTask": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "skipDownstreamTasks": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ArtifactList": {
+                          "fields": {
+                            "artifacts": {
+                              "rule": "repeated",
+                              "type": "RuntimeArtifact",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Inputs": {
+                          "fields": {
+                            "artifacts": {
+                              "keyType": "string",
+                              "type": "ArtifactList",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "parameterValues": {
+                              "keyType": "string",
+                              "type": "google.protobuf.Value",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "PipelineState": {
                       "values": {
                         "PIPELINE_STATE_UNSPECIFIED": 0,
@@ -29525,6 +29613,74 @@
                         "PIPELINE_STATE_CANCELLING": 6,
                         "PIPELINE_STATE_CANCELLED": 7,
                         "PIPELINE_STATE_PAUSED": 8
+                      }
+                    },
+                    "ArtifactTypeSchema": {
+                      "oneofs": {
+                        "kind": {
+                          "oneof": [
+                            "schemaTitle",
+                            "schemaUri",
+                            "instanceSchema"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "schemaTitle": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "schemaUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "instanceSchema": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "schemaVersion": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "RuntimeArtifact": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "ArtifactTypeSchema",
+                          "id": 2
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "Value",
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "customProperties": {
+                          "keyType": "string",
+                          "type": "Value",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        }
                       }
                     },
                     "Value": {
