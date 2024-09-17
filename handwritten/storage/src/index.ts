@@ -78,6 +78,7 @@ export {
   HmacKeyResourceResponse,
   IdempotencyStrategy,
   PreconditionOptions,
+  RETRYABLE_ERR_FN_DEFAULT,
   ServiceAccount,
   Storage,
   StorageOptions,
