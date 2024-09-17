@@ -38,6 +38,11 @@ function main(name) {
    *  AIP-155 (https://google.aip.dev/155).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. Type of this request. If unset, the request type is assumed to be
+   *  `INFO_PENDING`.
+   */
+  // const type = {}
 
   // Imports the Gdchardwaremanagement library
   const {GDCHardwareManagementClient} = require('@google-cloud/gdchardwaremanagement').v1alpha;
