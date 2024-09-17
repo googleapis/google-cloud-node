@@ -512,7 +512,9 @@ export namespace google {
                         METHOD_TYPE_UNSPECIFIED = 0,
                         CREATE = 1,
                         UPDATE = 2,
-                        DELETE = 3
+                        DELETE = 3,
+                        REMOVE_GRANT = 4,
+                        GOVERN_TAGS = 5
                     }
 
                     /** ActionType enum. */
