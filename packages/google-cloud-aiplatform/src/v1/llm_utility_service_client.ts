@@ -557,6 +557,9 @@ export class LlmUtilityServiceClient {
    *   A `Tool` is a piece of code that enables the system to interact with
    *   external systems to perform an action, or set of actions, outside of
    *   knowledge and scope of the model.
+   * @param {google.cloud.aiplatform.v1.GenerationConfig} [request.generationConfig]
+   *   Optional. Generation config that the model will use to generate the
+   *   response.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

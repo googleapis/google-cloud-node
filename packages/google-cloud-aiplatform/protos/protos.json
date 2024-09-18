@@ -3115,6 +3115,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "propertyOrdering": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "required": {
                           "rule": "repeated",
                           "type": "string",
@@ -20118,6 +20126,11 @@
                           "oneof": [
                             "systemInstruction"
                           ]
+                        },
+                        "_generationConfig": {
+                          "oneof": [
+                            "generationConfig"
+                          ]
                         }
                       },
                       "fields": {
@@ -20166,6 +20179,14 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationConfig": {
+                          "type": "GenerationConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -20225,6 +20246,14 @@
                         "toolConfig": {
                           "type": "ToolConfig",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -35949,6 +35978,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "propertyOrdering": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "required": {
                           "rule": "repeated",
                           "type": "string",
@@ -39133,6 +39170,24 @@
                         "bigqueryDestination": {
                           "type": "BigQueryDestination",
                           "id": 3
+                        }
+                      }
+                    },
+                    "PSCAutomationConfig": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -50566,6 +50621,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "pscAutomationConfigs": {
+                          "rule": "repeated",
+                          "type": "PSCAutomationConfig",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -61088,6 +61151,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "originalPipelineJobId": {
+                          "type": "int64",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pipelineTaskRerunConfigs": {
+                          "rule": "repeated",
+                          "type": "PipelineTaskRerunConfig",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -61412,6 +61490,79 @@
                         }
                       }
                     },
+                    "PipelineTaskRerunConfig": {
+                      "fields": {
+                        "taskId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taskName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "inputs": {
+                          "type": "Inputs",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "skipTask": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "skipDownstreamTasks": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ArtifactList": {
+                          "fields": {
+                            "artifacts": {
+                              "rule": "repeated",
+                              "type": "RuntimeArtifact",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Inputs": {
+                          "fields": {
+                            "artifacts": {
+                              "keyType": "string",
+                              "type": "ArtifactList",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "parameterValues": {
+                              "keyType": "string",
+                              "type": "google.protobuf.Value",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "PipelineState": {
                       "values": {
                         "PIPELINE_STATE_UNSPECIFIED": 0,
@@ -61423,6 +61574,74 @@
                         "PIPELINE_STATE_CANCELLING": 6,
                         "PIPELINE_STATE_CANCELLED": 7,
                         "PIPELINE_STATE_PAUSED": 8
+                      }
+                    },
+                    "ArtifactTypeSchema": {
+                      "oneofs": {
+                        "kind": {
+                          "oneof": [
+                            "schemaTitle",
+                            "schemaUri",
+                            "instanceSchema"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "schemaTitle": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "schemaUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "instanceSchema": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "schemaVersion": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "RuntimeArtifact": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "ArtifactTypeSchema",
+                          "id": 2
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "properties": {
+                          "keyType": "string",
+                          "type": "Value",
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "customProperties": {
+                          "keyType": "string",
+                          "type": "Value",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 6
+                        }
                       }
                     },
                     "Value": {
@@ -62964,6 +63183,11 @@
                           "oneof": [
                             "systemInstruction"
                           ]
+                        },
+                        "_generationConfig": {
+                          "oneof": [
+                            "generationConfig"
+                          ]
                         }
                       },
                       "fields": {
@@ -63012,6 +63236,14 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationConfig": {
+                          "type": "GenerationConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -63079,6 +63311,14 @@
                         "toolConfig": {
                           "type": "ToolConfig",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
