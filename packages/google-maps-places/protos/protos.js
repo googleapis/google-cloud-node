@@ -12276,6 +12276,352 @@
                         return Places;
                     })();
     
+                    v1.RoutingParameters = (function() {
+    
+                        /**
+                         * Properties of a RoutingParameters.
+                         * @memberof google.maps.places.v1
+                         * @interface IRoutingParameters
+                         * @property {google.type.ILatLng|null} [origin] RoutingParameters origin
+                         * @property {google.maps.places.v1.TravelMode|null} [travelMode] RoutingParameters travelMode
+                         * @property {google.maps.places.v1.IRouteModifiers|null} [routeModifiers] RoutingParameters routeModifiers
+                         * @property {google.maps.places.v1.RoutingPreference|null} [routingPreference] RoutingParameters routingPreference
+                         */
+    
+                        /**
+                         * Constructs a new RoutingParameters.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a RoutingParameters.
+                         * @implements IRoutingParameters
+                         * @constructor
+                         * @param {google.maps.places.v1.IRoutingParameters=} [properties] Properties to set
+                         */
+                        function RoutingParameters(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RoutingParameters origin.
+                         * @member {google.type.ILatLng|null|undefined} origin
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @instance
+                         */
+                        RoutingParameters.prototype.origin = null;
+    
+                        /**
+                         * RoutingParameters travelMode.
+                         * @member {google.maps.places.v1.TravelMode} travelMode
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @instance
+                         */
+                        RoutingParameters.prototype.travelMode = 0;
+    
+                        /**
+                         * RoutingParameters routeModifiers.
+                         * @member {google.maps.places.v1.IRouteModifiers|null|undefined} routeModifiers
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @instance
+                         */
+                        RoutingParameters.prototype.routeModifiers = null;
+    
+                        /**
+                         * RoutingParameters routingPreference.
+                         * @member {google.maps.places.v1.RoutingPreference} routingPreference
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @instance
+                         */
+                        RoutingParameters.prototype.routingPreference = 0;
+    
+                        /**
+                         * Creates a new RoutingParameters instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {google.maps.places.v1.IRoutingParameters=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.RoutingParameters} RoutingParameters instance
+                         */
+                        RoutingParameters.create = function create(properties) {
+                            return new RoutingParameters(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RoutingParameters message. Does not implicitly {@link google.maps.places.v1.RoutingParameters.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {google.maps.places.v1.IRoutingParameters} message RoutingParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoutingParameters.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.origin != null && Object.hasOwnProperty.call(message, "origin"))
+                                $root.google.type.LatLng.encode(message.origin, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.travelMode != null && Object.hasOwnProperty.call(message, "travelMode"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.travelMode);
+                            if (message.routeModifiers != null && Object.hasOwnProperty.call(message, "routeModifiers"))
+                                $root.google.maps.places.v1.RouteModifiers.encode(message.routeModifiers, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.routingPreference != null && Object.hasOwnProperty.call(message, "routingPreference"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.routingPreference);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RoutingParameters message, length delimited. Does not implicitly {@link google.maps.places.v1.RoutingParameters.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {google.maps.places.v1.IRoutingParameters} message RoutingParameters message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoutingParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RoutingParameters message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.RoutingParameters} RoutingParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoutingParameters.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RoutingParameters();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.origin = $root.google.type.LatLng.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.travelMode = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.routeModifiers = $root.google.maps.places.v1.RouteModifiers.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.routingPreference = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RoutingParameters message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.RoutingParameters} RoutingParameters
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoutingParameters.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RoutingParameters message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RoutingParameters.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.origin != null && message.hasOwnProperty("origin")) {
+                                var error = $root.google.type.LatLng.verify(message.origin);
+                                if (error)
+                                    return "origin." + error;
+                            }
+                            if (message.travelMode != null && message.hasOwnProperty("travelMode"))
+                                switch (message.travelMode) {
+                                default:
+                                    return "travelMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.routeModifiers != null && message.hasOwnProperty("routeModifiers")) {
+                                var error = $root.google.maps.places.v1.RouteModifiers.verify(message.routeModifiers);
+                                if (error)
+                                    return "routeModifiers." + error;
+                            }
+                            if (message.routingPreference != null && message.hasOwnProperty("routingPreference"))
+                                switch (message.routingPreference) {
+                                default:
+                                    return "routingPreference: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RoutingParameters message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.RoutingParameters} RoutingParameters
+                         */
+                        RoutingParameters.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.RoutingParameters)
+                                return object;
+                            var message = new $root.google.maps.places.v1.RoutingParameters();
+                            if (object.origin != null) {
+                                if (typeof object.origin !== "object")
+                                    throw TypeError(".google.maps.places.v1.RoutingParameters.origin: object expected");
+                                message.origin = $root.google.type.LatLng.fromObject(object.origin);
+                            }
+                            switch (object.travelMode) {
+                            default:
+                                if (typeof object.travelMode === "number") {
+                                    message.travelMode = object.travelMode;
+                                    break;
+                                }
+                                break;
+                            case "TRAVEL_MODE_UNSPECIFIED":
+                            case 0:
+                                message.travelMode = 0;
+                                break;
+                            case "DRIVE":
+                            case 1:
+                                message.travelMode = 1;
+                                break;
+                            case "BICYCLE":
+                            case 2:
+                                message.travelMode = 2;
+                                break;
+                            case "WALK":
+                            case 3:
+                                message.travelMode = 3;
+                                break;
+                            case "TWO_WHEELER":
+                            case 4:
+                                message.travelMode = 4;
+                                break;
+                            }
+                            if (object.routeModifiers != null) {
+                                if (typeof object.routeModifiers !== "object")
+                                    throw TypeError(".google.maps.places.v1.RoutingParameters.routeModifiers: object expected");
+                                message.routeModifiers = $root.google.maps.places.v1.RouteModifiers.fromObject(object.routeModifiers);
+                            }
+                            switch (object.routingPreference) {
+                            default:
+                                if (typeof object.routingPreference === "number") {
+                                    message.routingPreference = object.routingPreference;
+                                    break;
+                                }
+                                break;
+                            case "ROUTING_PREFERENCE_UNSPECIFIED":
+                            case 0:
+                                message.routingPreference = 0;
+                                break;
+                            case "TRAFFIC_UNAWARE":
+                            case 1:
+                                message.routingPreference = 1;
+                                break;
+                            case "TRAFFIC_AWARE":
+                            case 2:
+                                message.routingPreference = 2;
+                                break;
+                            case "TRAFFIC_AWARE_OPTIMAL":
+                            case 3:
+                                message.routingPreference = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RoutingParameters message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {google.maps.places.v1.RoutingParameters} message RoutingParameters
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RoutingParameters.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.origin = null;
+                                object.travelMode = options.enums === String ? "TRAVEL_MODE_UNSPECIFIED" : 0;
+                                object.routeModifiers = null;
+                                object.routingPreference = options.enums === String ? "ROUTING_PREFERENCE_UNSPECIFIED" : 0;
+                            }
+                            if (message.origin != null && message.hasOwnProperty("origin"))
+                                object.origin = $root.google.type.LatLng.toObject(message.origin, options);
+                            if (message.travelMode != null && message.hasOwnProperty("travelMode"))
+                                object.travelMode = options.enums === String ? $root.google.maps.places.v1.TravelMode[message.travelMode] === undefined ? message.travelMode : $root.google.maps.places.v1.TravelMode[message.travelMode] : message.travelMode;
+                            if (message.routeModifiers != null && message.hasOwnProperty("routeModifiers"))
+                                object.routeModifiers = $root.google.maps.places.v1.RouteModifiers.toObject(message.routeModifiers, options);
+                            if (message.routingPreference != null && message.hasOwnProperty("routingPreference"))
+                                object.routingPreference = options.enums === String ? $root.google.maps.places.v1.RoutingPreference[message.routingPreference] === undefined ? message.routingPreference : $root.google.maps.places.v1.RoutingPreference[message.routingPreference] : message.routingPreference;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RoutingParameters to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RoutingParameters.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RoutingParameters
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.RoutingParameters
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RoutingParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.RoutingParameters";
+                        };
+    
+                        return RoutingParameters;
+                    })();
+    
                     v1.SearchNearbyRequest = (function() {
     
                         /**
@@ -12291,6 +12637,7 @@
                          * @property {number|null} [maxResultCount] SearchNearbyRequest maxResultCount
                          * @property {google.maps.places.v1.SearchNearbyRequest.ILocationRestriction|null} [locationRestriction] SearchNearbyRequest locationRestriction
                          * @property {google.maps.places.v1.SearchNearbyRequest.RankPreference|null} [rankPreference] SearchNearbyRequest rankPreference
+                         * @property {google.maps.places.v1.IRoutingParameters|null} [routingParameters] SearchNearbyRequest routingParameters
                          */
     
                         /**
@@ -12385,6 +12732,14 @@
                         SearchNearbyRequest.prototype.rankPreference = 0;
     
                         /**
+                         * SearchNearbyRequest routingParameters.
+                         * @member {google.maps.places.v1.IRoutingParameters|null|undefined} routingParameters
+                         * @memberof google.maps.places.v1.SearchNearbyRequest
+                         * @instance
+                         */
+                        SearchNearbyRequest.prototype.routingParameters = null;
+    
+                        /**
                          * Creates a new SearchNearbyRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.SearchNearbyRequest
@@ -12430,6 +12785,8 @@
                                 $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.encode(message.locationRestriction, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.rankPreference != null && Object.hasOwnProperty.call(message, "rankPreference"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.rankPreference);
+                            if (message.routingParameters != null && Object.hasOwnProperty.call(message, "routingParameters"))
+                                $root.google.maps.places.v1.RoutingParameters.encode(message.routingParameters, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -12506,6 +12863,10 @@
                                     }
                                 case 9: {
                                         message.rankPreference = reader.int32();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -12594,6 +12955,11 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.routingParameters != null && message.hasOwnProperty("routingParameters")) {
+                                var error = $root.google.maps.places.v1.RoutingParameters.verify(message.routingParameters);
+                                if (error)
+                                    return "routingParameters." + error;
+                            }
                             return null;
                         };
     
@@ -12668,6 +13034,11 @@
                                 message.rankPreference = 2;
                                 break;
                             }
+                            if (object.routingParameters != null) {
+                                if (typeof object.routingParameters !== "object")
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyRequest.routingParameters: object expected");
+                                message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters);
+                            }
                             return message;
                         };
     
@@ -12696,6 +13067,7 @@
                                 object.maxResultCount = 0;
                                 object.locationRestriction = null;
                                 object.rankPreference = options.enums === String ? "RANK_PREFERENCE_UNSPECIFIED" : 0;
+                                object.routingParameters = null;
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -12727,6 +13099,8 @@
                                 object.locationRestriction = $root.google.maps.places.v1.SearchNearbyRequest.LocationRestriction.toObject(message.locationRestriction, options);
                             if (message.rankPreference != null && message.hasOwnProperty("rankPreference"))
                                 object.rankPreference = options.enums === String ? $root.google.maps.places.v1.SearchNearbyRequest.RankPreference[message.rankPreference] === undefined ? message.rankPreference : $root.google.maps.places.v1.SearchNearbyRequest.RankPreference[message.rankPreference] : message.rankPreference;
+                            if (message.routingParameters != null && message.hasOwnProperty("routingParameters"))
+                                object.routingParameters = $root.google.maps.places.v1.RoutingParameters.toObject(message.routingParameters, options);
                             return object;
                         };
     
@@ -13009,6 +13383,7 @@
                          * @memberof google.maps.places.v1
                          * @interface ISearchNearbyResponse
                          * @property {Array.<google.maps.places.v1.IPlace>|null} [places] SearchNearbyResponse places
+                         * @property {Array.<google.maps.places.v1.IRoutingSummary>|null} [routingSummaries] SearchNearbyResponse routingSummaries
                          */
     
                         /**
@@ -13021,6 +13396,7 @@
                          */
                         function SearchNearbyResponse(properties) {
                             this.places = [];
+                            this.routingSummaries = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -13034,6 +13410,14 @@
                          * @instance
                          */
                         SearchNearbyResponse.prototype.places = $util.emptyArray;
+    
+                        /**
+                         * SearchNearbyResponse routingSummaries.
+                         * @member {Array.<google.maps.places.v1.IRoutingSummary>} routingSummaries
+                         * @memberof google.maps.places.v1.SearchNearbyResponse
+                         * @instance
+                         */
+                        SearchNearbyResponse.prototype.routingSummaries = $util.emptyArray;
     
                         /**
                          * Creates a new SearchNearbyResponse instance using the specified properties.
@@ -13062,6 +13446,9 @@
                             if (message.places != null && message.places.length)
                                 for (var i = 0; i < message.places.length; ++i)
                                     $root.google.maps.places.v1.Place.encode(message.places[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.routingSummaries != null && message.routingSummaries.length)
+                                for (var i = 0; i < message.routingSummaries.length; ++i)
+                                    $root.google.maps.places.v1.RoutingSummary.encode(message.routingSummaries[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             return writer;
                         };
     
@@ -13100,6 +13487,12 @@
                                         if (!(message.places && message.places.length))
                                             message.places = [];
                                         message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.routingSummaries && message.routingSummaries.length))
+                                            message.routingSummaries = [];
+                                        message.routingSummaries.push($root.google.maps.places.v1.RoutingSummary.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 default:
@@ -13146,6 +13539,15 @@
                                         return "places." + error;
                                 }
                             }
+                            if (message.routingSummaries != null && message.hasOwnProperty("routingSummaries")) {
+                                if (!Array.isArray(message.routingSummaries))
+                                    return "routingSummaries: array expected";
+                                for (var i = 0; i < message.routingSummaries.length; ++i) {
+                                    var error = $root.google.maps.places.v1.RoutingSummary.verify(message.routingSummaries[i]);
+                                    if (error)
+                                        return "routingSummaries." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -13171,6 +13573,16 @@
                                     message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i]);
                                 }
                             }
+                            if (object.routingSummaries) {
+                                if (!Array.isArray(object.routingSummaries))
+                                    throw TypeError(".google.maps.places.v1.SearchNearbyResponse.routingSummaries: array expected");
+                                message.routingSummaries = [];
+                                for (var i = 0; i < object.routingSummaries.length; ++i) {
+                                    if (typeof object.routingSummaries[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.SearchNearbyResponse.routingSummaries: object expected");
+                                    message.routingSummaries[i] = $root.google.maps.places.v1.RoutingSummary.fromObject(object.routingSummaries[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -13187,12 +13599,19 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.places = [];
+                                object.routingSummaries = [];
+                            }
                             if (message.places && message.places.length) {
                                 object.places = [];
                                 for (var j = 0; j < message.places.length; ++j)
                                     object.places[j] = $root.google.maps.places.v1.Place.toObject(message.places[j], options);
+                            }
+                            if (message.routingSummaries && message.routingSummaries.length) {
+                                object.routingSummaries = [];
+                                for (var j = 0; j < message.routingSummaries.length; ++j)
+                                    object.routingSummaries[j] = $root.google.maps.places.v1.RoutingSummary.toObject(message.routingSummaries[j], options);
                             }
                             return object;
                         };
@@ -13245,6 +13664,8 @@
                          * @property {google.maps.places.v1.SearchTextRequest.ILocationBias|null} [locationBias] SearchTextRequest locationBias
                          * @property {google.maps.places.v1.SearchTextRequest.ILocationRestriction|null} [locationRestriction] SearchTextRequest locationRestriction
                          * @property {google.maps.places.v1.SearchTextRequest.IEVOptions|null} [evOptions] SearchTextRequest evOptions
+                         * @property {google.maps.places.v1.IRoutingParameters|null} [routingParameters] SearchTextRequest routingParameters
+                         * @property {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters|null} [searchAlongRouteParameters] SearchTextRequest searchAlongRouteParameters
                          */
     
                         /**
@@ -13368,6 +13789,22 @@
                         SearchTextRequest.prototype.evOptions = null;
     
                         /**
+                         * SearchTextRequest routingParameters.
+                         * @member {google.maps.places.v1.IRoutingParameters|null|undefined} routingParameters
+                         * @memberof google.maps.places.v1.SearchTextRequest
+                         * @instance
+                         */
+                        SearchTextRequest.prototype.routingParameters = null;
+    
+                        /**
+                         * SearchTextRequest searchAlongRouteParameters.
+                         * @member {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters|null|undefined} searchAlongRouteParameters
+                         * @memberof google.maps.places.v1.SearchTextRequest
+                         * @instance
+                         */
+                        SearchTextRequest.prototype.searchAlongRouteParameters = null;
+    
+                        /**
                          * Creates a new SearchTextRequest instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.SearchTextRequest
@@ -13421,6 +13858,10 @@
                                 $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.encode(message.locationRestriction, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             if (message.evOptions != null && Object.hasOwnProperty.call(message, "evOptions"))
                                 $root.google.maps.places.v1.SearchTextRequest.EVOptions.encode(message.evOptions, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                            if (message.routingParameters != null && Object.hasOwnProperty.call(message, "routingParameters"))
+                                $root.google.maps.places.v1.RoutingParameters.encode(message.routingParameters, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                            if (message.searchAlongRouteParameters != null && Object.hasOwnProperty.call(message, "searchAlongRouteParameters"))
+                                $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.encode(message.searchAlongRouteParameters, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -13512,6 +13953,14 @@
                                     }
                                 case 15: {
                                         message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.routingParameters = $root.google.maps.places.v1.RoutingParameters.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 17: {
+                                        message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -13612,6 +14061,16 @@
                                 var error = $root.google.maps.places.v1.SearchTextRequest.EVOptions.verify(message.evOptions);
                                 if (error)
                                     return "evOptions." + error;
+                            }
+                            if (message.routingParameters != null && message.hasOwnProperty("routingParameters")) {
+                                var error = $root.google.maps.places.v1.RoutingParameters.verify(message.routingParameters);
+                                if (error)
+                                    return "routingParameters." + error;
+                            }
+                            if (message.searchAlongRouteParameters != null && message.hasOwnProperty("searchAlongRouteParameters")) {
+                                var error = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.verify(message.searchAlongRouteParameters);
+                                if (error)
+                                    return "searchAlongRouteParameters." + error;
                             }
                             return null;
                         };
@@ -13716,6 +14175,16 @@
                                     throw TypeError(".google.maps.places.v1.SearchTextRequest.evOptions: object expected");
                                 message.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.fromObject(object.evOptions);
                             }
+                            if (object.routingParameters != null) {
+                                if (typeof object.routingParameters !== "object")
+                                    throw TypeError(".google.maps.places.v1.SearchTextRequest.routingParameters: object expected");
+                                message.routingParameters = $root.google.maps.places.v1.RoutingParameters.fromObject(object.routingParameters);
+                            }
+                            if (object.searchAlongRouteParameters != null) {
+                                if (typeof object.searchAlongRouteParameters !== "object")
+                                    throw TypeError(".google.maps.places.v1.SearchTextRequest.searchAlongRouteParameters: object expected");
+                                message.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.fromObject(object.searchAlongRouteParameters);
+                            }
                             return message;
                         };
     
@@ -13747,6 +14216,8 @@
                                 object.locationBias = null;
                                 object.locationRestriction = null;
                                 object.evOptions = null;
+                                object.routingParameters = null;
+                                object.searchAlongRouteParameters = null;
                             }
                             if (message.textQuery != null && message.hasOwnProperty("textQuery"))
                                 object.textQuery = message.textQuery;
@@ -13777,6 +14248,10 @@
                                 object.locationRestriction = $root.google.maps.places.v1.SearchTextRequest.LocationRestriction.toObject(message.locationRestriction, options);
                             if (message.evOptions != null && message.hasOwnProperty("evOptions"))
                                 object.evOptions = $root.google.maps.places.v1.SearchTextRequest.EVOptions.toObject(message.evOptions, options);
+                            if (message.routingParameters != null && message.hasOwnProperty("routingParameters"))
+                                object.routingParameters = $root.google.maps.places.v1.RoutingParameters.toObject(message.routingParameters, options);
+                            if (message.searchAlongRouteParameters != null && message.hasOwnProperty("searchAlongRouteParameters"))
+                                object.searchAlongRouteParameters = $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.toObject(message.searchAlongRouteParameters, options);
                             return object;
                         };
     
@@ -14621,6 +15096,214 @@
                             return EVOptions;
                         })();
     
+                        SearchTextRequest.SearchAlongRouteParameters = (function() {
+    
+                            /**
+                             * Properties of a SearchAlongRouteParameters.
+                             * @memberof google.maps.places.v1.SearchTextRequest
+                             * @interface ISearchAlongRouteParameters
+                             * @property {google.maps.places.v1.IPolyline|null} [polyline] SearchAlongRouteParameters polyline
+                             */
+    
+                            /**
+                             * Constructs a new SearchAlongRouteParameters.
+                             * @memberof google.maps.places.v1.SearchTextRequest
+                             * @classdesc Represents a SearchAlongRouteParameters.
+                             * @implements ISearchAlongRouteParameters
+                             * @constructor
+                             * @param {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters=} [properties] Properties to set
+                             */
+                            function SearchAlongRouteParameters(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchAlongRouteParameters polyline.
+                             * @member {google.maps.places.v1.IPolyline|null|undefined} polyline
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @instance
+                             */
+                            SearchAlongRouteParameters.prototype.polyline = null;
+    
+                            /**
+                             * Creates a new SearchAlongRouteParameters instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} SearchAlongRouteParameters instance
+                             */
+                            SearchAlongRouteParameters.create = function create(properties) {
+                                return new SearchAlongRouteParameters(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchAlongRouteParameters message. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters} message SearchAlongRouteParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchAlongRouteParameters.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.polyline != null && Object.hasOwnProperty.call(message, "polyline"))
+                                    $root.google.maps.places.v1.Polyline.encode(message.polyline, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchAlongRouteParameters message, length delimited. Does not implicitly {@link google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.ISearchAlongRouteParameters} message SearchAlongRouteParameters message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchAlongRouteParameters.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchAlongRouteParameters message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} SearchAlongRouteParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchAlongRouteParameters.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.polyline = $root.google.maps.places.v1.Polyline.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchAlongRouteParameters message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} SearchAlongRouteParameters
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchAlongRouteParameters.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchAlongRouteParameters message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchAlongRouteParameters.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.polyline != null && message.hasOwnProperty("polyline")) {
+                                    var error = $root.google.maps.places.v1.Polyline.verify(message.polyline);
+                                    if (error)
+                                        return "polyline." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchAlongRouteParameters message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} SearchAlongRouteParameters
+                             */
+                            SearchAlongRouteParameters.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters();
+                                if (object.polyline != null) {
+                                    if (typeof object.polyline !== "object")
+                                        throw TypeError(".google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters.polyline: object expected");
+                                    message.polyline = $root.google.maps.places.v1.Polyline.fromObject(object.polyline);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchAlongRouteParameters message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} message SearchAlongRouteParameters
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchAlongRouteParameters.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.polyline = null;
+                                if (message.polyline != null && message.hasOwnProperty("polyline"))
+                                    object.polyline = $root.google.maps.places.v1.Polyline.toObject(message.polyline, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchAlongRouteParameters to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchAlongRouteParameters.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SearchAlongRouteParameters
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SearchAlongRouteParameters.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters";
+                            };
+    
+                            return SearchAlongRouteParameters;
+                        })();
+    
                         return SearchTextRequest;
                     })();
     
@@ -14631,6 +15314,7 @@
                          * @memberof google.maps.places.v1
                          * @interface ISearchTextResponse
                          * @property {Array.<google.maps.places.v1.IPlace>|null} [places] SearchTextResponse places
+                         * @property {Array.<google.maps.places.v1.IRoutingSummary>|null} [routingSummaries] SearchTextResponse routingSummaries
                          * @property {Array.<google.maps.places.v1.IContextualContent>|null} [contextualContents] SearchTextResponse contextualContents
                          */
     
@@ -14644,6 +15328,7 @@
                          */
                         function SearchTextResponse(properties) {
                             this.places = [];
+                            this.routingSummaries = [];
                             this.contextualContents = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -14658,6 +15343,14 @@
                          * @instance
                          */
                         SearchTextResponse.prototype.places = $util.emptyArray;
+    
+                        /**
+                         * SearchTextResponse routingSummaries.
+                         * @member {Array.<google.maps.places.v1.IRoutingSummary>} routingSummaries
+                         * @memberof google.maps.places.v1.SearchTextResponse
+                         * @instance
+                         */
+                        SearchTextResponse.prototype.routingSummaries = $util.emptyArray;
     
                         /**
                          * SearchTextResponse contextualContents.
@@ -14694,6 +15387,9 @@
                             if (message.places != null && message.places.length)
                                 for (var i = 0; i < message.places.length; ++i)
                                     $root.google.maps.places.v1.Place.encode(message.places[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.routingSummaries != null && message.routingSummaries.length)
+                                for (var i = 0; i < message.routingSummaries.length; ++i)
+                                    $root.google.maps.places.v1.RoutingSummary.encode(message.routingSummaries[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.contextualContents != null && message.contextualContents.length)
                                 for (var i = 0; i < message.contextualContents.length; ++i)
                                     $root.google.maps.places.v1.ContextualContent.encode(message.contextualContents[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
@@ -14735,6 +15431,12 @@
                                         if (!(message.places && message.places.length))
                                             message.places = [];
                                         message.places.push($root.google.maps.places.v1.Place.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.routingSummaries && message.routingSummaries.length))
+                                            message.routingSummaries = [];
+                                        message.routingSummaries.push($root.google.maps.places.v1.RoutingSummary.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 3: {
@@ -14787,6 +15489,15 @@
                                         return "places." + error;
                                 }
                             }
+                            if (message.routingSummaries != null && message.hasOwnProperty("routingSummaries")) {
+                                if (!Array.isArray(message.routingSummaries))
+                                    return "routingSummaries: array expected";
+                                for (var i = 0; i < message.routingSummaries.length; ++i) {
+                                    var error = $root.google.maps.places.v1.RoutingSummary.verify(message.routingSummaries[i]);
+                                    if (error)
+                                        return "routingSummaries." + error;
+                                }
+                            }
                             if (message.contextualContents != null && message.hasOwnProperty("contextualContents")) {
                                 if (!Array.isArray(message.contextualContents))
                                     return "contextualContents: array expected";
@@ -14821,6 +15532,16 @@
                                     message.places[i] = $root.google.maps.places.v1.Place.fromObject(object.places[i]);
                                 }
                             }
+                            if (object.routingSummaries) {
+                                if (!Array.isArray(object.routingSummaries))
+                                    throw TypeError(".google.maps.places.v1.SearchTextResponse.routingSummaries: array expected");
+                                message.routingSummaries = [];
+                                for (var i = 0; i < object.routingSummaries.length; ++i) {
+                                    if (typeof object.routingSummaries[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.SearchTextResponse.routingSummaries: object expected");
+                                    message.routingSummaries[i] = $root.google.maps.places.v1.RoutingSummary.fromObject(object.routingSummaries[i]);
+                                }
+                            }
                             if (object.contextualContents) {
                                 if (!Array.isArray(object.contextualContents))
                                     throw TypeError(".google.maps.places.v1.SearchTextResponse.contextualContents: array expected");
@@ -14849,12 +15570,18 @@
                             var object = {};
                             if (options.arrays || options.defaults) {
                                 object.places = [];
+                                object.routingSummaries = [];
                                 object.contextualContents = [];
                             }
                             if (message.places && message.places.length) {
                                 object.places = [];
                                 for (var j = 0; j < message.places.length; ++j)
                                     object.places[j] = $root.google.maps.places.v1.Place.toObject(message.places[j], options);
+                            }
+                            if (message.routingSummaries && message.routingSummaries.length) {
+                                object.routingSummaries = [];
+                                for (var j = 0; j < message.routingSummaries.length; ++j)
+                                    object.routingSummaries[j] = $root.google.maps.places.v1.RoutingSummary.toObject(message.routingSummaries[j], options);
                             }
                             if (message.contextualContents && message.contextualContents.length) {
                                 object.contextualContents = [];
@@ -18452,6 +19179,994 @@
                         })();
     
                         return AutocompletePlacesResponse;
+                    })();
+    
+                    v1.Polyline = (function() {
+    
+                        /**
+                         * Properties of a Polyline.
+                         * @memberof google.maps.places.v1
+                         * @interface IPolyline
+                         * @property {string|null} [encodedPolyline] Polyline encodedPolyline
+                         */
+    
+                        /**
+                         * Constructs a new Polyline.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a Polyline.
+                         * @implements IPolyline
+                         * @constructor
+                         * @param {google.maps.places.v1.IPolyline=} [properties] Properties to set
+                         */
+                        function Polyline(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Polyline encodedPolyline.
+                         * @member {string|null|undefined} encodedPolyline
+                         * @memberof google.maps.places.v1.Polyline
+                         * @instance
+                         */
+                        Polyline.prototype.encodedPolyline = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Polyline polylineType.
+                         * @member {"encodedPolyline"|undefined} polylineType
+                         * @memberof google.maps.places.v1.Polyline
+                         * @instance
+                         */
+                        Object.defineProperty(Polyline.prototype, "polylineType", {
+                            get: $util.oneOfGetter($oneOfFields = ["encodedPolyline"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Polyline instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {google.maps.places.v1.IPolyline=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.Polyline} Polyline instance
+                         */
+                        Polyline.create = function create(properties) {
+                            return new Polyline(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Polyline message. Does not implicitly {@link google.maps.places.v1.Polyline.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {google.maps.places.v1.IPolyline} message Polyline message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Polyline.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.encodedPolyline != null && Object.hasOwnProperty.call(message, "encodedPolyline"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.encodedPolyline);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Polyline message, length delimited. Does not implicitly {@link google.maps.places.v1.Polyline.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {google.maps.places.v1.IPolyline} message Polyline message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Polyline.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Polyline message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.Polyline} Polyline
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Polyline.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Polyline();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.encodedPolyline = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Polyline message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.Polyline} Polyline
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Polyline.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Polyline message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Polyline.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.encodedPolyline != null && message.hasOwnProperty("encodedPolyline")) {
+                                properties.polylineType = 1;
+                                if (!$util.isString(message.encodedPolyline))
+                                    return "encodedPolyline: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Polyline message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.Polyline} Polyline
+                         */
+                        Polyline.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.Polyline)
+                                return object;
+                            var message = new $root.google.maps.places.v1.Polyline();
+                            if (object.encodedPolyline != null)
+                                message.encodedPolyline = String(object.encodedPolyline);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Polyline message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {google.maps.places.v1.Polyline} message Polyline
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Polyline.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.encodedPolyline != null && message.hasOwnProperty("encodedPolyline")) {
+                                object.encodedPolyline = message.encodedPolyline;
+                                if (options.oneofs)
+                                    object.polylineType = "encodedPolyline";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Polyline to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.Polyline
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Polyline.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Polyline
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.Polyline
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Polyline.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.Polyline";
+                        };
+    
+                        return Polyline;
+                    })();
+    
+                    v1.RouteModifiers = (function() {
+    
+                        /**
+                         * Properties of a RouteModifiers.
+                         * @memberof google.maps.places.v1
+                         * @interface IRouteModifiers
+                         * @property {boolean|null} [avoidTolls] RouteModifiers avoidTolls
+                         * @property {boolean|null} [avoidHighways] RouteModifiers avoidHighways
+                         * @property {boolean|null} [avoidFerries] RouteModifiers avoidFerries
+                         * @property {boolean|null} [avoidIndoor] RouteModifiers avoidIndoor
+                         */
+    
+                        /**
+                         * Constructs a new RouteModifiers.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a RouteModifiers.
+                         * @implements IRouteModifiers
+                         * @constructor
+                         * @param {google.maps.places.v1.IRouteModifiers=} [properties] Properties to set
+                         */
+                        function RouteModifiers(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RouteModifiers avoidTolls.
+                         * @member {boolean} avoidTolls
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidTolls = false;
+    
+                        /**
+                         * RouteModifiers avoidHighways.
+                         * @member {boolean} avoidHighways
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidHighways = false;
+    
+                        /**
+                         * RouteModifiers avoidFerries.
+                         * @member {boolean} avoidFerries
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidFerries = false;
+    
+                        /**
+                         * RouteModifiers avoidIndoor.
+                         * @member {boolean} avoidIndoor
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @instance
+                         */
+                        RouteModifiers.prototype.avoidIndoor = false;
+    
+                        /**
+                         * Creates a new RouteModifiers instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {google.maps.places.v1.IRouteModifiers=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.RouteModifiers} RouteModifiers instance
+                         */
+                        RouteModifiers.create = function create(properties) {
+                            return new RouteModifiers(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RouteModifiers message. Does not implicitly {@link google.maps.places.v1.RouteModifiers.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {google.maps.places.v1.IRouteModifiers} message RouteModifiers message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RouteModifiers.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.avoidTolls != null && Object.hasOwnProperty.call(message, "avoidTolls"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.avoidTolls);
+                            if (message.avoidHighways != null && Object.hasOwnProperty.call(message, "avoidHighways"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.avoidHighways);
+                            if (message.avoidFerries != null && Object.hasOwnProperty.call(message, "avoidFerries"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.avoidFerries);
+                            if (message.avoidIndoor != null && Object.hasOwnProperty.call(message, "avoidIndoor"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.avoidIndoor);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RouteModifiers message, length delimited. Does not implicitly {@link google.maps.places.v1.RouteModifiers.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {google.maps.places.v1.IRouteModifiers} message RouteModifiers message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RouteModifiers.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RouteModifiers message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.RouteModifiers} RouteModifiers
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RouteModifiers.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RouteModifiers();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.avoidTolls = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.avoidHighways = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.avoidFerries = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.avoidIndoor = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RouteModifiers message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.RouteModifiers} RouteModifiers
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RouteModifiers.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RouteModifiers message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RouteModifiers.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.avoidTolls != null && message.hasOwnProperty("avoidTolls"))
+                                if (typeof message.avoidTolls !== "boolean")
+                                    return "avoidTolls: boolean expected";
+                            if (message.avoidHighways != null && message.hasOwnProperty("avoidHighways"))
+                                if (typeof message.avoidHighways !== "boolean")
+                                    return "avoidHighways: boolean expected";
+                            if (message.avoidFerries != null && message.hasOwnProperty("avoidFerries"))
+                                if (typeof message.avoidFerries !== "boolean")
+                                    return "avoidFerries: boolean expected";
+                            if (message.avoidIndoor != null && message.hasOwnProperty("avoidIndoor"))
+                                if (typeof message.avoidIndoor !== "boolean")
+                                    return "avoidIndoor: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RouteModifiers message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.RouteModifiers} RouteModifiers
+                         */
+                        RouteModifiers.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.RouteModifiers)
+                                return object;
+                            var message = new $root.google.maps.places.v1.RouteModifiers();
+                            if (object.avoidTolls != null)
+                                message.avoidTolls = Boolean(object.avoidTolls);
+                            if (object.avoidHighways != null)
+                                message.avoidHighways = Boolean(object.avoidHighways);
+                            if (object.avoidFerries != null)
+                                message.avoidFerries = Boolean(object.avoidFerries);
+                            if (object.avoidIndoor != null)
+                                message.avoidIndoor = Boolean(object.avoidIndoor);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RouteModifiers message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {google.maps.places.v1.RouteModifiers} message RouteModifiers
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RouteModifiers.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.avoidTolls = false;
+                                object.avoidHighways = false;
+                                object.avoidFerries = false;
+                                object.avoidIndoor = false;
+                            }
+                            if (message.avoidTolls != null && message.hasOwnProperty("avoidTolls"))
+                                object.avoidTolls = message.avoidTolls;
+                            if (message.avoidHighways != null && message.hasOwnProperty("avoidHighways"))
+                                object.avoidHighways = message.avoidHighways;
+                            if (message.avoidFerries != null && message.hasOwnProperty("avoidFerries"))
+                                object.avoidFerries = message.avoidFerries;
+                            if (message.avoidIndoor != null && message.hasOwnProperty("avoidIndoor"))
+                                object.avoidIndoor = message.avoidIndoor;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RouteModifiers to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RouteModifiers.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RouteModifiers
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.RouteModifiers
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RouteModifiers.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.RouteModifiers";
+                        };
+    
+                        return RouteModifiers;
+                    })();
+    
+                    /**
+                     * RoutingPreference enum.
+                     * @name google.maps.places.v1.RoutingPreference
+                     * @enum {number}
+                     * @property {number} ROUTING_PREFERENCE_UNSPECIFIED=0 ROUTING_PREFERENCE_UNSPECIFIED value
+                     * @property {number} TRAFFIC_UNAWARE=1 TRAFFIC_UNAWARE value
+                     * @property {number} TRAFFIC_AWARE=2 TRAFFIC_AWARE value
+                     * @property {number} TRAFFIC_AWARE_OPTIMAL=3 TRAFFIC_AWARE_OPTIMAL value
+                     */
+                    v1.RoutingPreference = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ROUTING_PREFERENCE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "TRAFFIC_UNAWARE"] = 1;
+                        values[valuesById[2] = "TRAFFIC_AWARE"] = 2;
+                        values[valuesById[3] = "TRAFFIC_AWARE_OPTIMAL"] = 3;
+                        return values;
+                    })();
+    
+                    v1.RoutingSummary = (function() {
+    
+                        /**
+                         * Properties of a RoutingSummary.
+                         * @memberof google.maps.places.v1
+                         * @interface IRoutingSummary
+                         * @property {Array.<google.maps.places.v1.RoutingSummary.ILeg>|null} [legs] RoutingSummary legs
+                         */
+    
+                        /**
+                         * Constructs a new RoutingSummary.
+                         * @memberof google.maps.places.v1
+                         * @classdesc Represents a RoutingSummary.
+                         * @implements IRoutingSummary
+                         * @constructor
+                         * @param {google.maps.places.v1.IRoutingSummary=} [properties] Properties to set
+                         */
+                        function RoutingSummary(properties) {
+                            this.legs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RoutingSummary legs.
+                         * @member {Array.<google.maps.places.v1.RoutingSummary.ILeg>} legs
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @instance
+                         */
+                        RoutingSummary.prototype.legs = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RoutingSummary instance using the specified properties.
+                         * @function create
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {google.maps.places.v1.IRoutingSummary=} [properties] Properties to set
+                         * @returns {google.maps.places.v1.RoutingSummary} RoutingSummary instance
+                         */
+                        RoutingSummary.create = function create(properties) {
+                            return new RoutingSummary(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RoutingSummary message. Does not implicitly {@link google.maps.places.v1.RoutingSummary.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {google.maps.places.v1.IRoutingSummary} message RoutingSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoutingSummary.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.legs != null && message.legs.length)
+                                for (var i = 0; i < message.legs.length; ++i)
+                                    $root.google.maps.places.v1.RoutingSummary.Leg.encode(message.legs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RoutingSummary message, length delimited. Does not implicitly {@link google.maps.places.v1.RoutingSummary.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {google.maps.places.v1.IRoutingSummary} message RoutingSummary message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoutingSummary.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RoutingSummary message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.maps.places.v1.RoutingSummary} RoutingSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoutingSummary.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RoutingSummary();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.legs && message.legs.length))
+                                            message.legs = [];
+                                        message.legs.push($root.google.maps.places.v1.RoutingSummary.Leg.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RoutingSummary message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.maps.places.v1.RoutingSummary} RoutingSummary
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoutingSummary.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RoutingSummary message.
+                         * @function verify
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RoutingSummary.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.legs != null && message.hasOwnProperty("legs")) {
+                                if (!Array.isArray(message.legs))
+                                    return "legs: array expected";
+                                for (var i = 0; i < message.legs.length; ++i) {
+                                    var error = $root.google.maps.places.v1.RoutingSummary.Leg.verify(message.legs[i]);
+                                    if (error)
+                                        return "legs." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RoutingSummary message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.maps.places.v1.RoutingSummary} RoutingSummary
+                         */
+                        RoutingSummary.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.maps.places.v1.RoutingSummary)
+                                return object;
+                            var message = new $root.google.maps.places.v1.RoutingSummary();
+                            if (object.legs) {
+                                if (!Array.isArray(object.legs))
+                                    throw TypeError(".google.maps.places.v1.RoutingSummary.legs: array expected");
+                                message.legs = [];
+                                for (var i = 0; i < object.legs.length; ++i) {
+                                    if (typeof object.legs[i] !== "object")
+                                        throw TypeError(".google.maps.places.v1.RoutingSummary.legs: object expected");
+                                    message.legs[i] = $root.google.maps.places.v1.RoutingSummary.Leg.fromObject(object.legs[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RoutingSummary message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {google.maps.places.v1.RoutingSummary} message RoutingSummary
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RoutingSummary.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.legs = [];
+                            if (message.legs && message.legs.length) {
+                                object.legs = [];
+                                for (var j = 0; j < message.legs.length; ++j)
+                                    object.legs[j] = $root.google.maps.places.v1.RoutingSummary.Leg.toObject(message.legs[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RoutingSummary to JSON.
+                         * @function toJSON
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RoutingSummary.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RoutingSummary
+                         * @function getTypeUrl
+                         * @memberof google.maps.places.v1.RoutingSummary
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RoutingSummary.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.maps.places.v1.RoutingSummary";
+                        };
+    
+                        RoutingSummary.Leg = (function() {
+    
+                            /**
+                             * Properties of a Leg.
+                             * @memberof google.maps.places.v1.RoutingSummary
+                             * @interface ILeg
+                             * @property {google.protobuf.IDuration|null} [duration] Leg duration
+                             * @property {number|null} [distanceMeters] Leg distanceMeters
+                             */
+    
+                            /**
+                             * Constructs a new Leg.
+                             * @memberof google.maps.places.v1.RoutingSummary
+                             * @classdesc Represents a Leg.
+                             * @implements ILeg
+                             * @constructor
+                             * @param {google.maps.places.v1.RoutingSummary.ILeg=} [properties] Properties to set
+                             */
+                            function Leg(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Leg duration.
+                             * @member {google.protobuf.IDuration|null|undefined} duration
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @instance
+                             */
+                            Leg.prototype.duration = null;
+    
+                            /**
+                             * Leg distanceMeters.
+                             * @member {number} distanceMeters
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @instance
+                             */
+                            Leg.prototype.distanceMeters = 0;
+    
+                            /**
+                             * Creates a new Leg instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {google.maps.places.v1.RoutingSummary.ILeg=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.RoutingSummary.Leg} Leg instance
+                             */
+                            Leg.create = function create(properties) {
+                                return new Leg(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Leg message. Does not implicitly {@link google.maps.places.v1.RoutingSummary.Leg.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {google.maps.places.v1.RoutingSummary.ILeg} message Leg message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Leg.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                                    $root.google.protobuf.Duration.encode(message.duration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.distanceMeters != null && Object.hasOwnProperty.call(message, "distanceMeters"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.distanceMeters);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Leg message, length delimited. Does not implicitly {@link google.maps.places.v1.RoutingSummary.Leg.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {google.maps.places.v1.RoutingSummary.ILeg} message Leg message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Leg.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Leg message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.RoutingSummary.Leg} Leg
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Leg.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.RoutingSummary.Leg();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.duration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.distanceMeters = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Leg message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.RoutingSummary.Leg} Leg
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Leg.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Leg message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Leg.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.duration != null && message.hasOwnProperty("duration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.duration);
+                                    if (error)
+                                        return "duration." + error;
+                                }
+                                if (message.distanceMeters != null && message.hasOwnProperty("distanceMeters"))
+                                    if (!$util.isInteger(message.distanceMeters))
+                                        return "distanceMeters: integer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Leg message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.RoutingSummary.Leg} Leg
+                             */
+                            Leg.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.RoutingSummary.Leg)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.RoutingSummary.Leg();
+                                if (object.duration != null) {
+                                    if (typeof object.duration !== "object")
+                                        throw TypeError(".google.maps.places.v1.RoutingSummary.Leg.duration: object expected");
+                                    message.duration = $root.google.protobuf.Duration.fromObject(object.duration);
+                                }
+                                if (object.distanceMeters != null)
+                                    message.distanceMeters = object.distanceMeters | 0;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Leg message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {google.maps.places.v1.RoutingSummary.Leg} message Leg
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Leg.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.duration = null;
+                                    object.distanceMeters = 0;
+                                }
+                                if (message.duration != null && message.hasOwnProperty("duration"))
+                                    object.duration = $root.google.protobuf.Duration.toObject(message.duration, options);
+                                if (message.distanceMeters != null && message.hasOwnProperty("distanceMeters"))
+                                    object.distanceMeters = message.distanceMeters;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Leg to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Leg.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for Leg
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.RoutingSummary.Leg
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            Leg.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.RoutingSummary.Leg";
+                            };
+    
+                            return Leg;
+                        })();
+    
+                        return RoutingSummary;
+                    })();
+    
+                    /**
+                     * TravelMode enum.
+                     * @name google.maps.places.v1.TravelMode
+                     * @enum {number}
+                     * @property {number} TRAVEL_MODE_UNSPECIFIED=0 TRAVEL_MODE_UNSPECIFIED value
+                     * @property {number} DRIVE=1 DRIVE value
+                     * @property {number} BICYCLE=2 BICYCLE value
+                     * @property {number} WALK=3 WALK value
+                     * @property {number} TWO_WHEELER=4 TWO_WHEELER value
+                     */
+                    v1.TravelMode = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "TRAVEL_MODE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DRIVE"] = 1;
+                        values[valuesById[2] = "BICYCLE"] = 2;
+                        values[valuesById[3] = "WALK"] = 3;
+                        values[valuesById[4] = "TWO_WHEELER"] = 4;
+                        return values;
                     })();
     
                     return v1;
