@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [7.13.0](https://github.com/googleapis/nodejs-storage/compare/v7.12.1...v7.13.0) (2024-09-17)
+
+
+### Features
+
+* **storage:** Add support for 'fields' query parameter to getFiles ([#2521](https://github.com/googleapis/nodejs-storage/issues/2521)) ([f78fe92](https://github.com/googleapis/nodejs-storage/commit/f78fe92348a0b383314b4fbfb55638d47af052ff))
+
+
+### Bug Fixes
+
+* **retry:** Export RETRYABLE_ERR_FN_DEFAULT ([#2517](https://github.com/googleapis/nodejs-storage/issues/2517)) ([db890fd](https://github.com/googleapis/nodejs-storage/commit/db890fd1b25d5cd94e3bcd97ec21fa8f77b1b724))
+
 ## [7.12.1](https://github.com/googleapis/nodejs-storage/compare/v7.12.0...v7.12.1) (2024-08-07)
 
 
