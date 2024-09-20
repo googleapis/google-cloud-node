@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.8.0...chat-v0.9.0) (2024-09-13)
+
+
+### Features
+
+* [chat] If you're a domain administrator or a delegated administrator, you can now include the `useAdminAccess` parameter when you call the Chat API with your administrator privileges with the following methods to manage Chat spaces and membership... ([#5675](https://github.com/googleapis/google-cloud-node/issues/5675)) ([4f0945e](https://github.com/googleapis/google-cloud-node/commit/4f0945ef49b10c71039eafc00ac7e93dd6a3ddee))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.7.0...chat-v0.8.0) (2024-09-10)
 
 

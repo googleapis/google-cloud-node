@@ -53,6 +53,7 @@
   * [Net_app.reverse_replication_direction](#net_app.reverse_replication_direction)
   * [Net_app.revert_volume](#net_app.revert_volume)
   * [Net_app.stop_replication](#net_app.stop_replication)
+  * [Net_app.switch_active_replica_zone](#net_app.switch_active_replica_zone)
   * [Net_app.update_active_directory](#net_app.update_active_directory)
   * [Net_app.update_backup](#net_app.update_backup)
   * [Net_app.update_backup_policy](#net_app.update_backup_policy)
@@ -770,6 +771,23 @@ __Usage:__
 
 
 `node packages/google-cloud-netapp/samples/generated/v1/net_app.stop_replication.js`
+
+
+-----
+
+
+
+
+### Net_app.switch_active_replica_zone
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js`
 
 
 -----

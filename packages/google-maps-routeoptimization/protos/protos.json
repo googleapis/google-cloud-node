@@ -646,6 +646,29 @@
                         }
                       }
                     },
+                    "RouteModifiers": {
+                      "fields": {
+                        "avoidTolls": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "avoidHighways": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "avoidFerries": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "avoidIndoor": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "Vehicle": {
                       "oneofs": {
                         "_travelDurationMultiple": {
@@ -662,6 +685,10 @@
                         "travelMode": {
                           "type": "TravelMode",
                           "id": 1
+                        },
+                        "routeModifiers": {
+                          "type": "RouteModifiers",
+                          "id": 2
                         },
                         "startLocation": {
                           "type": "google.type.LatLng",
@@ -940,6 +967,11 @@
                             "softMaxMeters"
                           ]
                         },
+                        "_costPerKilometerBelowSoftMax": {
+                          "oneof": [
+                            "costPerKilometerBelowSoftMax"
+                          ]
+                        },
                         "_costPerKilometerAboveSoftMax": {
                           "oneof": [
                             "costPerKilometerAboveSoftMax"
@@ -957,6 +989,13 @@
                         "softMaxMeters": {
                           "type": "int64",
                           "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "costPerKilometerBelowSoftMax": {
+                          "type": "double",
+                          "id": 4,
                           "options": {
                             "proto3_optional": true
                           }

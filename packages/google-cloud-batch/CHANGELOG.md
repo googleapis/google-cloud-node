@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.14.0...batch-v1.15.0) (2024-09-13)
+
+
+### Features
+
+* [batch] A new value `CANCELLATION_IN_PROGRESS` is added to enum `State` ([#5670](https://github.com/googleapis/google-cloud-node/issues/5670)) ([ce99894](https://github.com/googleapis/google-cloud-node/commit/ce998945ad320a493c5aef5bc7fdc7474777b21e))
+
 ## [1.14.0](https://github.com/googleapis/google-cloud-node/compare/batch-v1.13.0...batch-v1.14.0) (2024-09-10)
 
 

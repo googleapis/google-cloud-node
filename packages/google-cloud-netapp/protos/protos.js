@@ -8650,6 +8650,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.netapp.v1.NetApp|switchActiveReplicaZone}.
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @typedef SwitchActiveReplicaZoneCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls SwitchActiveReplicaZone.
+                         * @function switchActiveReplicaZone
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest} request SwitchActiveReplicaZoneRequest message or plain object
+                         * @param {google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZoneCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(NetApp.prototype.switchActiveReplicaZone = function switchActiveReplicaZone(request, callback) {
+                            return this.rpcCall(switchActiveReplicaZone, $root.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "SwitchActiveReplicaZone" });
+    
+                        /**
+                         * Calls SwitchActiveReplicaZone.
+                         * @function switchActiveReplicaZone
+                         * @memberof google.cloud.netapp.v1.NetApp
+                         * @instance
+                         * @param {google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest} request SwitchActiveReplicaZoneRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.netapp.v1.NetApp|listVolumes}.
                          * @memberof google.cloud.netapp.v1.NetApp
                          * @typedef ListVolumesCallback
@@ -20341,6 +20374,209 @@
                         return DeleteStoragePoolRequest;
                     })();
     
+                    v1.SwitchActiveReplicaZoneRequest = (function() {
+    
+                        /**
+                         * Properties of a SwitchActiveReplicaZoneRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @interface ISwitchActiveReplicaZoneRequest
+                         * @property {string|null} [name] SwitchActiveReplicaZoneRequest name
+                         */
+    
+                        /**
+                         * Constructs a new SwitchActiveReplicaZoneRequest.
+                         * @memberof google.cloud.netapp.v1
+                         * @classdesc Represents a SwitchActiveReplicaZoneRequest.
+                         * @implements ISwitchActiveReplicaZoneRequest
+                         * @constructor
+                         * @param {google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest=} [properties] Properties to set
+                         */
+                        function SwitchActiveReplicaZoneRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SwitchActiveReplicaZoneRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @instance
+                         */
+                        SwitchActiveReplicaZoneRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new SwitchActiveReplicaZoneRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest=} [properties] Properties to set
+                         * @returns {google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest} SwitchActiveReplicaZoneRequest instance
+                         */
+                        SwitchActiveReplicaZoneRequest.create = function create(properties) {
+                            return new SwitchActiveReplicaZoneRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SwitchActiveReplicaZoneRequest message. Does not implicitly {@link google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest} message SwitchActiveReplicaZoneRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SwitchActiveReplicaZoneRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SwitchActiveReplicaZoneRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest} message SwitchActiveReplicaZoneRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SwitchActiveReplicaZoneRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SwitchActiveReplicaZoneRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest} SwitchActiveReplicaZoneRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SwitchActiveReplicaZoneRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SwitchActiveReplicaZoneRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest} SwitchActiveReplicaZoneRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SwitchActiveReplicaZoneRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SwitchActiveReplicaZoneRequest message.
+                         * @function verify
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SwitchActiveReplicaZoneRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SwitchActiveReplicaZoneRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest} SwitchActiveReplicaZoneRequest
+                         */
+                        SwitchActiveReplicaZoneRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest)
+                                return object;
+                            var message = new $root.google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SwitchActiveReplicaZoneRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest} message SwitchActiveReplicaZoneRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SwitchActiveReplicaZoneRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SwitchActiveReplicaZoneRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SwitchActiveReplicaZoneRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SwitchActiveReplicaZoneRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SwitchActiveReplicaZoneRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest";
+                        };
+    
+                        return SwitchActiveReplicaZoneRequest;
+                    })();
+    
                     v1.StoragePool = (function() {
     
                         /**
@@ -20364,6 +20600,7 @@
                          * @property {string|null} [psaRange] StoragePool psaRange
                          * @property {google.cloud.netapp.v1.EncryptionType|null} [encryptionType] StoragePool encryptionType
                          * @property {boolean|null} [globalAccessAllowed] StoragePool globalAccessAllowed
+                         * @property {boolean|null} [allowAutoTiering] StoragePool allowAutoTiering
                          * @property {string|null} [replicaZone] StoragePool replicaZone
                          * @property {string|null} [zone] StoragePool zone
                          */
@@ -20521,6 +20758,14 @@
                         StoragePool.prototype.globalAccessAllowed = null;
     
                         /**
+                         * StoragePool allowAutoTiering.
+                         * @member {boolean} allowAutoTiering
+                         * @memberof google.cloud.netapp.v1.StoragePool
+                         * @instance
+                         */
+                        StoragePool.prototype.allowAutoTiering = false;
+    
+                        /**
                          * StoragePool replicaZone.
                          * @member {string} replicaZone
                          * @memberof google.cloud.netapp.v1.StoragePool
@@ -20609,6 +20854,8 @@
                                 writer.uint32(/* id 16, wireType 0 =*/128).int32(message.encryptionType);
                             if (message.globalAccessAllowed != null && Object.hasOwnProperty.call(message, "globalAccessAllowed"))
                                 writer.uint32(/* id 17, wireType 0 =*/136).bool(message.globalAccessAllowed);
+                            if (message.allowAutoTiering != null && Object.hasOwnProperty.call(message, "allowAutoTiering"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.allowAutoTiering);
                             if (message.replicaZone != null && Object.hasOwnProperty.call(message, "replicaZone"))
                                 writer.uint32(/* id 20, wireType 2 =*/162).string(message.replicaZone);
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
@@ -20732,6 +20979,10 @@
                                     }
                                 case 17: {
                                         message.globalAccessAllowed = reader.bool();
+                                        break;
+                                    }
+                                case 18: {
+                                        message.allowAutoTiering = reader.bool();
                                         break;
                                     }
                                 case 20: {
@@ -20863,6 +21114,9 @@
                                 if (typeof message.globalAccessAllowed !== "boolean")
                                     return "globalAccessAllowed: boolean expected";
                             }
+                            if (message.allowAutoTiering != null && message.hasOwnProperty("allowAutoTiering"))
+                                if (typeof message.allowAutoTiering !== "boolean")
+                                    return "allowAutoTiering: boolean expected";
                             if (message.replicaZone != null && message.hasOwnProperty("replicaZone"))
                                 if (!$util.isString(message.replicaZone))
                                     return "replicaZone: string expected";
@@ -21022,6 +21276,8 @@
                             }
                             if (object.globalAccessAllowed != null)
                                 message.globalAccessAllowed = Boolean(object.globalAccessAllowed);
+                            if (object.allowAutoTiering != null)
+                                message.allowAutoTiering = Boolean(object.allowAutoTiering);
                             if (object.replicaZone != null)
                                 message.replicaZone = String(object.replicaZone);
                             if (object.zone != null)
@@ -21068,6 +21324,7 @@
                                 object.ldapEnabled = false;
                                 object.psaRange = "";
                                 object.encryptionType = options.enums === String ? "ENCRYPTION_TYPE_UNSPECIFIED" : 0;
+                                object.allowAutoTiering = false;
                                 object.replicaZone = "";
                                 object.zone = "";
                             }
@@ -21118,6 +21375,8 @@
                                 if (options.oneofs)
                                     object._globalAccessAllowed = "globalAccessAllowed";
                             }
+                            if (message.allowAutoTiering != null && message.hasOwnProperty("allowAutoTiering"))
+                                object.allowAutoTiering = message.allowAutoTiering;
                             if (message.replicaZone != null && message.hasOwnProperty("replicaZone"))
                                 object.replicaZone = message.replicaZone;
                             if (message.zone != null && message.hasOwnProperty("zone"))
@@ -23348,6 +23607,7 @@
                          * @property {google.cloud.netapp.v1.ITieringPolicy|null} [tieringPolicy] Volume tieringPolicy
                          * @property {string|null} [replicaZone] Volume replicaZone
                          * @property {string|null} [zone] Volume zone
+                         * @property {number|Long|null} [coldTierSizeGib] Volume coldTierSizeGib
                          */
     
                         /**
@@ -23658,6 +23918,14 @@
                          */
                         Volume.prototype.zone = "";
     
+                        /**
+                         * Volume coldTierSizeGib.
+                         * @member {number|Long} coldTierSizeGib
+                         * @memberof google.cloud.netapp.v1.Volume
+                         * @instance
+                         */
+                        Volume.prototype.coldTierSizeGib = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -23793,6 +24061,8 @@
                                 writer.uint32(/* id 36, wireType 2 =*/290).string(message.replicaZone);
                             if (message.zone != null && Object.hasOwnProperty.call(message, "zone"))
                                 writer.uint32(/* id 37, wireType 2 =*/298).string(message.zone);
+                            if (message.coldTierSizeGib != null && Object.hasOwnProperty.call(message, "coldTierSizeGib"))
+                                writer.uint32(/* id 39, wireType 0 =*/312).int64(message.coldTierSizeGib);
                             return writer;
                         };
     
@@ -24011,6 +24281,10 @@
                                     }
                                 case 37: {
                                         message.zone = reader.string();
+                                        break;
+                                    }
+                                case 39: {
+                                        message.coldTierSizeGib = reader.int64();
                                         break;
                                     }
                                 default:
@@ -24254,6 +24528,9 @@
                             if (message.zone != null && message.hasOwnProperty("zone"))
                                 if (!$util.isString(message.zone))
                                     return "zone: string expected";
+                            if (message.coldTierSizeGib != null && message.hasOwnProperty("coldTierSizeGib"))
+                                if (!$util.isInteger(message.coldTierSizeGib) && !(message.coldTierSizeGib && $util.isInteger(message.coldTierSizeGib.low) && $util.isInteger(message.coldTierSizeGib.high)))
+                                    return "coldTierSizeGib: integer|Long expected";
                             return null;
                         };
     
@@ -24583,6 +24860,15 @@
                                 message.replicaZone = String(object.replicaZone);
                             if (object.zone != null)
                                 message.zone = String(object.zone);
+                            if (object.coldTierSizeGib != null)
+                                if ($util.Long)
+                                    (message.coldTierSizeGib = $util.Long.fromValue(object.coldTierSizeGib)).unsigned = false;
+                                else if (typeof object.coldTierSizeGib === "string")
+                                    message.coldTierSizeGib = parseInt(object.coldTierSizeGib, 10);
+                                else if (typeof object.coldTierSizeGib === "number")
+                                    message.coldTierSizeGib = object.coldTierSizeGib;
+                                else if (typeof object.coldTierSizeGib === "object")
+                                    message.coldTierSizeGib = new $util.LongBits(object.coldTierSizeGib.low >>> 0, object.coldTierSizeGib.high >>> 0).toNumber();
                             return message;
                         };
     
@@ -24645,6 +24931,11 @@
                                 object.multipleEndpoints = false;
                                 object.replicaZone = "";
                                 object.zone = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.coldTierSizeGib = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.coldTierSizeGib = options.longs === String ? "0" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -24746,6 +25037,11 @@
                                 object.replicaZone = message.replicaZone;
                             if (message.zone != null && message.hasOwnProperty("zone"))
                                 object.zone = message.zone;
+                            if (message.coldTierSizeGib != null && message.hasOwnProperty("coldTierSizeGib"))
+                                if (typeof message.coldTierSizeGib === "number")
+                                    object.coldTierSizeGib = options.longs === String ? String(message.coldTierSizeGib) : message.coldTierSizeGib;
+                                else
+                                    object.coldTierSizeGib = options.longs === String ? $util.Long.prototype.toString.call(message.coldTierSizeGib) : options.longs === Number ? new $util.LongBits(message.coldTierSizeGib.low >>> 0, message.coldTierSizeGib.high >>> 0).toNumber() : message.coldTierSizeGib;
                             return object;
                         };
     

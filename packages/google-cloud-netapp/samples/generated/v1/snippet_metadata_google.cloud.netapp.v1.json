@@ -240,6 +240,46 @@
             }
         },
         {
+            "regionTag": "netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async",
+            "title": "NetApp switchActiveReplicaZone Sample",
+            "origin": "API_DEFINITION",
+            "description": " This operation will switch the active/replica zone for a regional storagePool.",
+            "canonical": true,
+            "file": "net_app.switch_active_replica_zone.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SwitchActiveReplicaZone",
+                "fullName": "google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZone",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "NetAppClient",
+                    "fullName": "google.cloud.netapp.v1.NetAppClient"
+                },
+                "method": {
+                    "shortName": "SwitchActiveReplicaZone",
+                    "fullName": "google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZone",
+                    "service": {
+                        "shortName": "NetApp",
+                        "fullName": "google.cloud.netapp.v1.NetApp"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "netapp_v1_generated_NetApp_ListVolumes_async",
             "title": "NetApp listVolumes Sample",
             "origin": "API_DEFINITION",

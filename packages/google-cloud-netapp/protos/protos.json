@@ -1028,6 +1028,30 @@
                             }
                           ]
                         },
+                        "SwitchActiveReplicaZone": {
+                          "requestType": "SwitchActiveReplicaZoneRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/storagePools/*}:switch",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "StoragePool",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/storagePools/*}:switch",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "StoragePool",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ListVolumes": {
                           "requestType": "ListVolumesRequest",
                           "responseType": "ListVolumesResponse",
@@ -3166,6 +3190,18 @@
                         }
                       }
                     },
+                    "SwitchActiveReplicaZoneRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        }
+                      }
+                    },
                     "StoragePool": {
                       "options": {
                         "(google.api.resource).type": "netapp.googleapis.com/StoragePool",
@@ -3303,6 +3339,13 @@
                           "options": {
                             "deprecated": true,
                             "proto3_optional": true
+                          }
+                        },
+                        "allowAutoTiering": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "replicaZone": {
@@ -3820,6 +3863,13 @@
                         "zone": {
                           "type": "string",
                           "id": 37,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "coldTierSizeGib": {
+                          "type": "int64",
+                          "id": 39,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
