@@ -1676,6 +1676,9 @@ export namespace google {
 
                     /** ListBatchesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListBatchesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListBatchesResponse. */
@@ -1692,6 +1695,9 @@ export namespace google {
 
                     /** ListBatchesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListBatchesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListBatchesResponse instance using the specified properties.
@@ -5777,6 +5783,9 @@ export namespace google {
 
                     /** EncryptionConfig gcePdKmsKeyName */
                     gcePdKmsKeyName?: (string|null);
+
+                    /** EncryptionConfig kmsKey */
+                    kmsKey?: (string|null);
                 }
 
                 /** Represents an EncryptionConfig. */
@@ -5790,6 +5799,9 @@ export namespace google {
 
                     /** EncryptionConfig gcePdKmsKeyName. */
                     public gcePdKmsKeyName: string;
+
+                    /** EncryptionConfig kmsKey. */
+                    public kmsKey: string;
 
                     /**
                      * Creates a new EncryptionConfig instance using the specified properties.
@@ -8796,7 +8808,8 @@ export namespace google {
                         YARN = 4,
                         SPARK_HISTORY_SERVER = 5,
                         HIVESERVER2 = 6,
-                        HIVEMETASTORE = 7
+                        HIVEMETASTORE = 7,
+                        FLINK = 8
                     }
 
                     /** Properties of a Metric. */
@@ -12538,6 +12551,142 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FlinkJob. */
+                interface IFlinkJob {
+
+                    /** FlinkJob mainJarFileUri */
+                    mainJarFileUri?: (string|null);
+
+                    /** FlinkJob mainClass */
+                    mainClass?: (string|null);
+
+                    /** FlinkJob args */
+                    args?: (string[]|null);
+
+                    /** FlinkJob jarFileUris */
+                    jarFileUris?: (string[]|null);
+
+                    /** FlinkJob savepointUri */
+                    savepointUri?: (string|null);
+
+                    /** FlinkJob properties */
+                    properties?: ({ [k: string]: string }|null);
+
+                    /** FlinkJob loggingConfig */
+                    loggingConfig?: (google.cloud.dataproc.v1.ILoggingConfig|null);
+                }
+
+                /** Represents a FlinkJob. */
+                class FlinkJob implements IFlinkJob {
+
+                    /**
+                     * Constructs a new FlinkJob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IFlinkJob);
+
+                    /** FlinkJob mainJarFileUri. */
+                    public mainJarFileUri?: (string|null);
+
+                    /** FlinkJob mainClass. */
+                    public mainClass?: (string|null);
+
+                    /** FlinkJob args. */
+                    public args: string[];
+
+                    /** FlinkJob jarFileUris. */
+                    public jarFileUris: string[];
+
+                    /** FlinkJob savepointUri. */
+                    public savepointUri: string;
+
+                    /** FlinkJob properties. */
+                    public properties: { [k: string]: string };
+
+                    /** FlinkJob loggingConfig. */
+                    public loggingConfig?: (google.cloud.dataproc.v1.ILoggingConfig|null);
+
+                    /** FlinkJob driver. */
+                    public driver?: ("mainJarFileUri"|"mainClass");
+
+                    /**
+                     * Creates a new FlinkJob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FlinkJob instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IFlinkJob): google.cloud.dataproc.v1.FlinkJob;
+
+                    /**
+                     * Encodes the specified FlinkJob message. Does not implicitly {@link google.cloud.dataproc.v1.FlinkJob.verify|verify} messages.
+                     * @param message FlinkJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IFlinkJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FlinkJob message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.FlinkJob.verify|verify} messages.
+                     * @param message FlinkJob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IFlinkJob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FlinkJob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FlinkJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.FlinkJob;
+
+                    /**
+                     * Decodes a FlinkJob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FlinkJob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.FlinkJob;
+
+                    /**
+                     * Verifies a FlinkJob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FlinkJob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FlinkJob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.FlinkJob;
+
+                    /**
+                     * Creates a plain object from a FlinkJob message. Also converts values to other types if specified.
+                     * @param message FlinkJob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.FlinkJob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FlinkJob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FlinkJob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a JobPlacement. */
                 interface IJobPlacement {
 
@@ -13057,6 +13206,9 @@ export namespace google {
                     /** Job trinoJob */
                     trinoJob?: (google.cloud.dataproc.v1.ITrinoJob|null);
 
+                    /** Job flinkJob */
+                    flinkJob?: (google.cloud.dataproc.v1.IFlinkJob|null);
+
                     /** Job status */
                     status?: (google.cloud.dataproc.v1.IJobStatus|null);
 
@@ -13130,6 +13282,9 @@ export namespace google {
                     /** Job trinoJob. */
                     public trinoJob?: (google.cloud.dataproc.v1.ITrinoJob|null);
 
+                    /** Job flinkJob. */
+                    public flinkJob?: (google.cloud.dataproc.v1.IFlinkJob|null);
+
                     /** Job status. */
                     public status?: (google.cloud.dataproc.v1.IJobStatus|null);
 
@@ -13161,7 +13316,7 @@ export namespace google {
                     public driverSchedulingConfig?: (google.cloud.dataproc.v1.IDriverSchedulingConfig|null);
 
                     /** Job typeJob. */
-                    public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|"trinoJob");
+                    public typeJob?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|"trinoJob"|"flinkJob");
 
                     /**
                      * Creates a new Job instance using the specified properties.
@@ -14058,6 +14213,9 @@ export namespace google {
 
                     /** ListJobsResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListJobsResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListJobsResponse. */
@@ -14074,6 +14232,9 @@ export namespace google {
 
                     /** ListJobsResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListJobsResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListJobsResponse instance using the specified properties.
@@ -17067,6 +17228,9 @@ export namespace google {
 
                     /** WorkflowTemplate dagTimeout */
                     dagTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkflowTemplate encryptionConfig */
+                    encryptionConfig?: (google.cloud.dataproc.v1.WorkflowTemplate.IEncryptionConfig|null);
                 }
 
                 /** Represents a WorkflowTemplate. */
@@ -17107,6 +17271,9 @@ export namespace google {
 
                     /** WorkflowTemplate dagTimeout. */
                     public dagTimeout?: (google.protobuf.IDuration|null);
+
+                    /** WorkflowTemplate encryptionConfig. */
+                    public encryptionConfig?: (google.cloud.dataproc.v1.WorkflowTemplate.IEncryptionConfig|null);
 
                     /**
                      * Creates a new WorkflowTemplate instance using the specified properties.
@@ -17184,6 +17351,106 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace WorkflowTemplate {
+
+                    /** Properties of an EncryptionConfig. */
+                    interface IEncryptionConfig {
+
+                        /** EncryptionConfig kmsKey */
+                        kmsKey?: (string|null);
+                    }
+
+                    /** Represents an EncryptionConfig. */
+                    class EncryptionConfig implements IEncryptionConfig {
+
+                        /**
+                         * Constructs a new EncryptionConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.WorkflowTemplate.IEncryptionConfig);
+
+                        /** EncryptionConfig kmsKey. */
+                        public kmsKey: string;
+
+                        /**
+                         * Creates a new EncryptionConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EncryptionConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.WorkflowTemplate.IEncryptionConfig): google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig;
+
+                        /**
+                         * Encodes the specified EncryptionConfig message. Does not implicitly {@link google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig.verify|verify} messages.
+                         * @param message EncryptionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.WorkflowTemplate.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EncryptionConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig.verify|verify} messages.
+                         * @param message EncryptionConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.WorkflowTemplate.IEncryptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EncryptionConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EncryptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig;
+
+                        /**
+                         * Decodes an EncryptionConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EncryptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig;
+
+                        /**
+                         * Verifies an EncryptionConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EncryptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EncryptionConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig;
+
+                        /**
+                         * Creates a plain object from an EncryptionConfig message. Also converts values to other types if specified.
+                         * @param message EncryptionConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.WorkflowTemplate.EncryptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EncryptionConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EncryptionConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a WorkflowTemplatePlacement. */
@@ -17534,6 +17801,12 @@ export namespace google {
                     /** OrderedJob prestoJob */
                     prestoJob?: (google.cloud.dataproc.v1.IPrestoJob|null);
 
+                    /** OrderedJob trinoJob */
+                    trinoJob?: (google.cloud.dataproc.v1.ITrinoJob|null);
+
+                    /** OrderedJob flinkJob */
+                    flinkJob?: (google.cloud.dataproc.v1.IFlinkJob|null);
+
                     /** OrderedJob labels */
                     labels?: ({ [k: string]: string }|null);
 
@@ -17580,6 +17853,12 @@ export namespace google {
                     /** OrderedJob prestoJob. */
                     public prestoJob?: (google.cloud.dataproc.v1.IPrestoJob|null);
 
+                    /** OrderedJob trinoJob. */
+                    public trinoJob?: (google.cloud.dataproc.v1.ITrinoJob|null);
+
+                    /** OrderedJob flinkJob. */
+                    public flinkJob?: (google.cloud.dataproc.v1.IFlinkJob|null);
+
                     /** OrderedJob labels. */
                     public labels: { [k: string]: string };
 
@@ -17590,7 +17869,7 @@ export namespace google {
                     public prerequisiteStepIds: string[];
 
                     /** OrderedJob jobType. */
-                    public jobType?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob");
+                    public jobType?: ("hadoopJob"|"sparkJob"|"pysparkJob"|"hiveJob"|"pigJob"|"sparkRJob"|"sparkSqlJob"|"prestoJob"|"trinoJob"|"flinkJob");
 
                     /**
                      * Creates a new OrderedJob instance using the specified properties.
@@ -19255,6 +19534,9 @@ export namespace google {
 
                     /** ListWorkflowTemplatesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListWorkflowTemplatesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListWorkflowTemplatesResponse. */
@@ -19271,6 +19553,9 @@ export namespace google {
 
                     /** ListWorkflowTemplatesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListWorkflowTemplatesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListWorkflowTemplatesResponse instance using the specified properties.

@@ -30558,6 +30558,39 @@
                      */
     
                     /**
+                     * Callback as used by {@link google.chat.v1.ChatService|searchSpaces}.
+                     * @memberof google.chat.v1.ChatService
+                     * @typedef SearchSpacesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.chat.v1.SearchSpacesResponse} [response] SearchSpacesResponse
+                     */
+    
+                    /**
+                     * Calls SearchSpaces.
+                     * @function searchSpaces
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.ISearchSpacesRequest} request SearchSpacesRequest message or plain object
+                     * @param {google.chat.v1.ChatService.SearchSpacesCallback} callback Node-style callback called with the error, if any, and SearchSpacesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(ChatService.prototype.searchSpaces = function searchSpaces(request, callback) {
+                        return this.rpcCall(searchSpaces, $root.google.chat.v1.SearchSpacesRequest, $root.google.chat.v1.SearchSpacesResponse, request, callback);
+                    }, "name", { value: "SearchSpaces" });
+    
+                    /**
+                     * Calls SearchSpaces.
+                     * @function searchSpaces
+                     * @memberof google.chat.v1.ChatService
+                     * @instance
+                     * @param {google.chat.v1.ISearchSpacesRequest} request SearchSpacesRequest message or plain object
+                     * @returns {Promise<google.chat.v1.SearchSpacesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
                      * Callback as used by {@link google.chat.v1.ChatService|getSpace}.
                      * @memberof google.chat.v1.ChatService
                      * @typedef GetSpaceCallback
@@ -31638,6 +31671,7 @@
                      * @interface ICreateMembershipRequest
                      * @property {string|null} [parent] CreateMembershipRequest parent
                      * @property {google.chat.v1.IMembership|null} [membership] CreateMembershipRequest membership
+                     * @property {boolean|null} [useAdminAccess] CreateMembershipRequest useAdminAccess
                      */
     
                     /**
@@ -31672,6 +31706,14 @@
                     CreateMembershipRequest.prototype.membership = null;
     
                     /**
+                     * CreateMembershipRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.CreateMembershipRequest
+                     * @instance
+                     */
+                    CreateMembershipRequest.prototype.useAdminAccess = false;
+    
+                    /**
                      * Creates a new CreateMembershipRequest instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.CreateMembershipRequest
@@ -31699,6 +31741,8 @@
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                         if (message.membership != null && Object.hasOwnProperty.call(message, "membership"))
                             $root.google.chat.v1.Membership.encode(message.membership, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 5, wireType 0 =*/40).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -31739,6 +31783,10 @@
                                 }
                             case 2: {
                                     message.membership = $root.google.chat.v1.Membership.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -31784,6 +31832,9 @@
                             if (error)
                                 return "membership." + error;
                         }
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -31806,6 +31857,8 @@
                                 throw TypeError(".google.chat.v1.CreateMembershipRequest.membership: object expected");
                             message.membership = $root.google.chat.v1.Membership.fromObject(object.membership);
                         }
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -31825,11 +31878,14 @@
                         if (options.defaults) {
                             object.parent = "";
                             object.membership = null;
+                            object.useAdminAccess = false;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
                         if (message.membership != null && message.hasOwnProperty("membership"))
                             object.membership = $root.google.chat.v1.Membership.toObject(message.membership, options);
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -31870,6 +31926,7 @@
                      * @interface IUpdateMembershipRequest
                      * @property {google.chat.v1.IMembership|null} [membership] UpdateMembershipRequest membership
                      * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMembershipRequest updateMask
+                     * @property {boolean|null} [useAdminAccess] UpdateMembershipRequest useAdminAccess
                      */
     
                     /**
@@ -31904,6 +31961,14 @@
                     UpdateMembershipRequest.prototype.updateMask = null;
     
                     /**
+                     * UpdateMembershipRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.UpdateMembershipRequest
+                     * @instance
+                     */
+                    UpdateMembershipRequest.prototype.useAdminAccess = false;
+    
+                    /**
                      * Creates a new UpdateMembershipRequest instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.UpdateMembershipRequest
@@ -31931,6 +31996,8 @@
                             $root.google.chat.v1.Membership.encode(message.membership, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                             $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -31971,6 +32038,10 @@
                                 }
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -32018,6 +32089,9 @@
                             if (error)
                                 return "updateMask." + error;
                         }
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -32043,6 +32117,8 @@
                                 throw TypeError(".google.chat.v1.UpdateMembershipRequest.updateMask: object expected");
                             message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
                         }
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -32062,11 +32138,14 @@
                         if (options.defaults) {
                             object.membership = null;
                             object.updateMask = null;
+                            object.useAdminAccess = false;
                         }
                         if (message.membership != null && message.hasOwnProperty("membership"))
                             object.membership = $root.google.chat.v1.Membership.toObject(message.membership, options);
                         if (message.updateMask != null && message.hasOwnProperty("updateMask"))
                             object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -32111,6 +32190,7 @@
                      * @property {string|null} [filter] ListMembershipsRequest filter
                      * @property {boolean|null} [showGroups] ListMembershipsRequest showGroups
                      * @property {boolean|null} [showInvited] ListMembershipsRequest showInvited
+                     * @property {boolean|null} [useAdminAccess] ListMembershipsRequest useAdminAccess
                      */
     
                     /**
@@ -32177,6 +32257,14 @@
                     ListMembershipsRequest.prototype.showInvited = false;
     
                     /**
+                     * ListMembershipsRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.ListMembershipsRequest
+                     * @instance
+                     */
+                    ListMembershipsRequest.prototype.useAdminAccess = false;
+    
+                    /**
                      * Creates a new ListMembershipsRequest instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.ListMembershipsRequest
@@ -32212,6 +32300,8 @@
                             writer.uint32(/* id 6, wireType 0 =*/48).bool(message.showGroups);
                         if (message.showInvited != null && Object.hasOwnProperty.call(message, "showInvited"))
                             writer.uint32(/* id 7, wireType 0 =*/56).bool(message.showInvited);
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 8, wireType 0 =*/64).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -32270,6 +32360,10 @@
                                     message.showInvited = reader.bool();
                                     break;
                                 }
+                            case 8: {
+                                    message.useAdminAccess = reader.bool();
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -32323,6 +32417,9 @@
                         if (message.showInvited != null && message.hasOwnProperty("showInvited"))
                             if (typeof message.showInvited !== "boolean")
                                 return "showInvited: boolean expected";
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -32350,6 +32447,8 @@
                             message.showGroups = Boolean(object.showGroups);
                         if (object.showInvited != null)
                             message.showInvited = Boolean(object.showInvited);
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -32373,6 +32472,7 @@
                             object.filter = "";
                             object.showGroups = false;
                             object.showInvited = false;
+                            object.useAdminAccess = false;
                         }
                         if (message.parent != null && message.hasOwnProperty("parent"))
                             object.parent = message.parent;
@@ -32386,6 +32486,8 @@
                             object.showGroups = message.showGroups;
                         if (message.showInvited != null && message.hasOwnProperty("showInvited"))
                             object.showInvited = message.showInvited;
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -32673,6 +32775,7 @@
                      * @memberof google.chat.v1
                      * @interface IGetMembershipRequest
                      * @property {string|null} [name] GetMembershipRequest name
+                     * @property {boolean|null} [useAdminAccess] GetMembershipRequest useAdminAccess
                      */
     
                     /**
@@ -32697,6 +32800,14 @@
                      * @instance
                      */
                     GetMembershipRequest.prototype.name = "";
+    
+                    /**
+                     * GetMembershipRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.GetMembershipRequest
+                     * @instance
+                     */
+                    GetMembershipRequest.prototype.useAdminAccess = false;
     
                     /**
                      * Creates a new GetMembershipRequest instance using the specified properties.
@@ -32724,6 +32835,8 @@
                             writer = $Writer.create();
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -32760,6 +32873,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -32800,6 +32917,9 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -32817,6 +32937,8 @@
                         var message = new $root.google.chat.v1.GetMembershipRequest();
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -32833,10 +32955,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.useAdminAccess = false;
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -32876,6 +33002,7 @@
                      * @memberof google.chat.v1
                      * @interface IDeleteMembershipRequest
                      * @property {string|null} [name] DeleteMembershipRequest name
+                     * @property {boolean|null} [useAdminAccess] DeleteMembershipRequest useAdminAccess
                      */
     
                     /**
@@ -32900,6 +33027,14 @@
                      * @instance
                      */
                     DeleteMembershipRequest.prototype.name = "";
+    
+                    /**
+                     * DeleteMembershipRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.DeleteMembershipRequest
+                     * @instance
+                     */
+                    DeleteMembershipRequest.prototype.useAdminAccess = false;
     
                     /**
                      * Creates a new DeleteMembershipRequest instance using the specified properties.
@@ -32927,6 +33062,8 @@
                             writer = $Writer.create();
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -32963,6 +33100,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -33003,6 +33144,9 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -33020,6 +33164,8 @@
                         var message = new $root.google.chat.v1.DeleteMembershipRequest();
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -33036,10 +33182,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.useAdminAccess = false;
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -45572,7 +45722,9 @@
                      * @property {google.chat.v1.HistoryState|null} [spaceHistoryState] Space spaceHistoryState
                      * @property {boolean|null} [importMode] Space importMode
                      * @property {google.protobuf.ITimestamp|null} [createTime] Space createTime
+                     * @property {google.protobuf.ITimestamp|null} [lastActiveTime] Space lastActiveTime
                      * @property {boolean|null} [adminInstalled] Space adminInstalled
+                     * @property {google.chat.v1.Space.IMembershipCount|null} [membershipCount] Space membershipCount
                      * @property {google.chat.v1.Space.IAccessSettings|null} [accessSettings] Space accessSettings
                      * @property {string|null} [spaceUri] Space spaceUri
                      */
@@ -45689,12 +45841,28 @@
                     Space.prototype.createTime = null;
     
                     /**
+                     * Space lastActiveTime.
+                     * @member {google.protobuf.ITimestamp|null|undefined} lastActiveTime
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.lastActiveTime = null;
+    
+                    /**
                      * Space adminInstalled.
                      * @member {boolean} adminInstalled
                      * @memberof google.chat.v1.Space
                      * @instance
                      */
                     Space.prototype.adminInstalled = false;
+    
+                    /**
+                     * Space membershipCount.
+                     * @member {google.chat.v1.Space.IMembershipCount|null|undefined} membershipCount
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.membershipCount = null;
     
                     /**
                      * Space accessSettings.
@@ -45760,8 +45928,12 @@
                             writer.uint32(/* id 16, wireType 0 =*/128).bool(message.importMode);
                         if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                             $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                        if (message.lastActiveTime != null && Object.hasOwnProperty.call(message, "lastActiveTime"))
+                            $root.google.protobuf.Timestamp.encode(message.lastActiveTime, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                         if (message.adminInstalled != null && Object.hasOwnProperty.call(message, "adminInstalled"))
                             writer.uint32(/* id 19, wireType 0 =*/152).bool(message.adminInstalled);
+                        if (message.membershipCount != null && Object.hasOwnProperty.call(message, "membershipCount"))
+                            $root.google.chat.v1.Space.MembershipCount.encode(message.membershipCount, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                         if (message.accessSettings != null && Object.hasOwnProperty.call(message, "accessSettings"))
                             $root.google.chat.v1.Space.AccessSettings.encode(message.accessSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                         if (message.spaceUri != null && Object.hasOwnProperty.call(message, "spaceUri"))
@@ -45848,8 +46020,16 @@
                                     message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 18: {
+                                    message.lastActiveTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                }
                             case 19: {
                                     message.adminInstalled = reader.bool();
+                                    break;
+                                }
+                            case 20: {
+                                    message.membershipCount = $root.google.chat.v1.Space.MembershipCount.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 23: {
@@ -45961,9 +46141,19 @@
                             if (error)
                                 return "createTime." + error;
                         }
+                        if (message.lastActiveTime != null && message.hasOwnProperty("lastActiveTime")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.lastActiveTime);
+                            if (error)
+                                return "lastActiveTime." + error;
+                        }
                         if (message.adminInstalled != null && message.hasOwnProperty("adminInstalled"))
                             if (typeof message.adminInstalled !== "boolean")
                                 return "adminInstalled: boolean expected";
+                        if (message.membershipCount != null && message.hasOwnProperty("membershipCount")) {
+                            var error = $root.google.chat.v1.Space.MembershipCount.verify(message.membershipCount);
+                            if (error)
+                                return "membershipCount." + error;
+                        }
                         if (message.accessSettings != null && message.hasOwnProperty("accessSettings")) {
                             var error = $root.google.chat.v1.Space.AccessSettings.verify(message.accessSettings);
                             if (error)
@@ -46097,8 +46287,18 @@
                                 throw TypeError(".google.chat.v1.Space.createTime: object expected");
                             message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
                         }
+                        if (object.lastActiveTime != null) {
+                            if (typeof object.lastActiveTime !== "object")
+                                throw TypeError(".google.chat.v1.Space.lastActiveTime: object expected");
+                            message.lastActiveTime = $root.google.protobuf.Timestamp.fromObject(object.lastActiveTime);
+                        }
                         if (object.adminInstalled != null)
                             message.adminInstalled = Boolean(object.adminInstalled);
+                        if (object.membershipCount != null) {
+                            if (typeof object.membershipCount !== "object")
+                                throw TypeError(".google.chat.v1.Space.membershipCount: object expected");
+                            message.membershipCount = $root.google.chat.v1.Space.MembershipCount.fromObject(object.membershipCount);
+                        }
                         if (object.accessSettings != null) {
                             if (typeof object.accessSettings !== "object")
                                 throw TypeError(".google.chat.v1.Space.accessSettings: object expected");
@@ -46135,7 +46335,9 @@
                             object.spaceHistoryState = options.enums === String ? "HISTORY_STATE_UNSPECIFIED" : 0;
                             object.importMode = false;
                             object.createTime = null;
+                            object.lastActiveTime = null;
                             object.adminInstalled = false;
+                            object.membershipCount = null;
                             object.accessSettings = null;
                             object.spaceUri = "";
                         }
@@ -46163,8 +46365,12 @@
                             object.importMode = message.importMode;
                         if (message.createTime != null && message.hasOwnProperty("createTime"))
                             object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                        if (message.lastActiveTime != null && message.hasOwnProperty("lastActiveTime"))
+                            object.lastActiveTime = $root.google.protobuf.Timestamp.toObject(message.lastActiveTime, options);
                         if (message.adminInstalled != null && message.hasOwnProperty("adminInstalled"))
                             object.adminInstalled = message.adminInstalled;
+                        if (message.membershipCount != null && message.hasOwnProperty("membershipCount"))
+                            object.membershipCount = $root.google.chat.v1.Space.MembershipCount.toObject(message.membershipCount, options);
                         if (message.accessSettings != null && message.hasOwnProperty("accessSettings"))
                             object.accessSettings = $root.google.chat.v1.Space.AccessSettings.toObject(message.accessSettings, options);
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
@@ -46475,6 +46681,233 @@
                         };
     
                         return SpaceDetails;
+                    })();
+    
+                    Space.MembershipCount = (function() {
+    
+                        /**
+                         * Properties of a MembershipCount.
+                         * @memberof google.chat.v1.Space
+                         * @interface IMembershipCount
+                         * @property {number|null} [joinedDirectHumanUserCount] MembershipCount joinedDirectHumanUserCount
+                         * @property {number|null} [joinedGroupCount] MembershipCount joinedGroupCount
+                         */
+    
+                        /**
+                         * Constructs a new MembershipCount.
+                         * @memberof google.chat.v1.Space
+                         * @classdesc Represents a MembershipCount.
+                         * @implements IMembershipCount
+                         * @constructor
+                         * @param {google.chat.v1.Space.IMembershipCount=} [properties] Properties to set
+                         */
+                        function MembershipCount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MembershipCount joinedDirectHumanUserCount.
+                         * @member {number} joinedDirectHumanUserCount
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @instance
+                         */
+                        MembershipCount.prototype.joinedDirectHumanUserCount = 0;
+    
+                        /**
+                         * MembershipCount joinedGroupCount.
+                         * @member {number} joinedGroupCount
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @instance
+                         */
+                        MembershipCount.prototype.joinedGroupCount = 0;
+    
+                        /**
+                         * Creates a new MembershipCount instance using the specified properties.
+                         * @function create
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {google.chat.v1.Space.IMembershipCount=} [properties] Properties to set
+                         * @returns {google.chat.v1.Space.MembershipCount} MembershipCount instance
+                         */
+                        MembershipCount.create = function create(properties) {
+                            return new MembershipCount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MembershipCount message. Does not implicitly {@link google.chat.v1.Space.MembershipCount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {google.chat.v1.Space.IMembershipCount} message MembershipCount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MembershipCount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.joinedDirectHumanUserCount != null && Object.hasOwnProperty.call(message, "joinedDirectHumanUserCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.joinedDirectHumanUserCount);
+                            if (message.joinedGroupCount != null && Object.hasOwnProperty.call(message, "joinedGroupCount"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.joinedGroupCount);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MembershipCount message, length delimited. Does not implicitly {@link google.chat.v1.Space.MembershipCount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {google.chat.v1.Space.IMembershipCount} message MembershipCount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MembershipCount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MembershipCount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.chat.v1.Space.MembershipCount} MembershipCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MembershipCount.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.MembershipCount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4: {
+                                        message.joinedDirectHumanUserCount = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.joinedGroupCount = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MembershipCount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.chat.v1.Space.MembershipCount} MembershipCount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MembershipCount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MembershipCount message.
+                         * @function verify
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MembershipCount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.joinedDirectHumanUserCount != null && message.hasOwnProperty("joinedDirectHumanUserCount"))
+                                if (!$util.isInteger(message.joinedDirectHumanUserCount))
+                                    return "joinedDirectHumanUserCount: integer expected";
+                            if (message.joinedGroupCount != null && message.hasOwnProperty("joinedGroupCount"))
+                                if (!$util.isInteger(message.joinedGroupCount))
+                                    return "joinedGroupCount: integer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MembershipCount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.chat.v1.Space.MembershipCount} MembershipCount
+                         */
+                        MembershipCount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.chat.v1.Space.MembershipCount)
+                                return object;
+                            var message = new $root.google.chat.v1.Space.MembershipCount();
+                            if (object.joinedDirectHumanUserCount != null)
+                                message.joinedDirectHumanUserCount = object.joinedDirectHumanUserCount | 0;
+                            if (object.joinedGroupCount != null)
+                                message.joinedGroupCount = object.joinedGroupCount | 0;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MembershipCount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {google.chat.v1.Space.MembershipCount} message MembershipCount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MembershipCount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.joinedDirectHumanUserCount = 0;
+                                object.joinedGroupCount = 0;
+                            }
+                            if (message.joinedDirectHumanUserCount != null && message.hasOwnProperty("joinedDirectHumanUserCount"))
+                                object.joinedDirectHumanUserCount = message.joinedDirectHumanUserCount;
+                            if (message.joinedGroupCount != null && message.hasOwnProperty("joinedGroupCount"))
+                                object.joinedGroupCount = message.joinedGroupCount;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MembershipCount to JSON.
+                         * @function toJSON
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MembershipCount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MembershipCount
+                         * @function getTypeUrl
+                         * @memberof google.chat.v1.Space.MembershipCount
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MembershipCount.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.chat.v1.Space.MembershipCount";
+                        };
+    
+                        return MembershipCount;
                     })();
     
                     Space.AccessSettings = (function() {
@@ -47484,6 +47917,7 @@
                      * @memberof google.chat.v1
                      * @interface IGetSpaceRequest
                      * @property {string|null} [name] GetSpaceRequest name
+                     * @property {boolean|null} [useAdminAccess] GetSpaceRequest useAdminAccess
                      */
     
                     /**
@@ -47508,6 +47942,14 @@
                      * @instance
                      */
                     GetSpaceRequest.prototype.name = "";
+    
+                    /**
+                     * GetSpaceRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.GetSpaceRequest
+                     * @instance
+                     */
+                    GetSpaceRequest.prototype.useAdminAccess = false;
     
                     /**
                      * Creates a new GetSpaceRequest instance using the specified properties.
@@ -47535,6 +47977,8 @@
                             writer = $Writer.create();
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -47571,6 +48015,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -47611,6 +48059,9 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -47628,6 +48079,8 @@
                         var message = new $root.google.chat.v1.GetSpaceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -47644,10 +48097,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.useAdminAccess = false;
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -47891,6 +48348,7 @@
                      * @interface IUpdateSpaceRequest
                      * @property {google.chat.v1.ISpace|null} [space] UpdateSpaceRequest space
                      * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateSpaceRequest updateMask
+                     * @property {boolean|null} [useAdminAccess] UpdateSpaceRequest useAdminAccess
                      */
     
                     /**
@@ -47925,6 +48383,14 @@
                     UpdateSpaceRequest.prototype.updateMask = null;
     
                     /**
+                     * UpdateSpaceRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.UpdateSpaceRequest
+                     * @instance
+                     */
+                    UpdateSpaceRequest.prototype.useAdminAccess = false;
+    
+                    /**
                      * Creates a new UpdateSpaceRequest instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.UpdateSpaceRequest
@@ -47952,6 +48418,8 @@
                             $root.google.chat.v1.Space.encode(message.space, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                         if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
                             $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -47992,6 +48460,10 @@
                                 }
                             case 2: {
                                     message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -48039,6 +48511,9 @@
                             if (error)
                                 return "updateMask." + error;
                         }
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -48064,6 +48539,8 @@
                                 throw TypeError(".google.chat.v1.UpdateSpaceRequest.updateMask: object expected");
                             message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
                         }
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -48083,11 +48560,14 @@
                         if (options.defaults) {
                             object.space = null;
                             object.updateMask = null;
+                            object.useAdminAccess = false;
                         }
                         if (message.space != null && message.hasOwnProperty("space"))
                             object.space = $root.google.chat.v1.Space.toObject(message.space, options);
                         if (message.updateMask != null && message.hasOwnProperty("updateMask"))
                             object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     
@@ -48120,6 +48600,574 @@
                     return UpdateSpaceRequest;
                 })();
     
+                v1.SearchSpacesRequest = (function() {
+    
+                    /**
+                     * Properties of a SearchSpacesRequest.
+                     * @memberof google.chat.v1
+                     * @interface ISearchSpacesRequest
+                     * @property {boolean|null} [useAdminAccess] SearchSpacesRequest useAdminAccess
+                     * @property {number|null} [pageSize] SearchSpacesRequest pageSize
+                     * @property {string|null} [pageToken] SearchSpacesRequest pageToken
+                     * @property {string|null} [query] SearchSpacesRequest query
+                     * @property {string|null} [orderBy] SearchSpacesRequest orderBy
+                     */
+    
+                    /**
+                     * Constructs a new SearchSpacesRequest.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SearchSpacesRequest.
+                     * @implements ISearchSpacesRequest
+                     * @constructor
+                     * @param {google.chat.v1.ISearchSpacesRequest=} [properties] Properties to set
+                     */
+                    function SearchSpacesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchSpacesRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @instance
+                     */
+                    SearchSpacesRequest.prototype.useAdminAccess = false;
+    
+                    /**
+                     * SearchSpacesRequest pageSize.
+                     * @member {number} pageSize
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @instance
+                     */
+                    SearchSpacesRequest.prototype.pageSize = 0;
+    
+                    /**
+                     * SearchSpacesRequest pageToken.
+                     * @member {string} pageToken
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @instance
+                     */
+                    SearchSpacesRequest.prototype.pageToken = "";
+    
+                    /**
+                     * SearchSpacesRequest query.
+                     * @member {string} query
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @instance
+                     */
+                    SearchSpacesRequest.prototype.query = "";
+    
+                    /**
+                     * SearchSpacesRequest orderBy.
+                     * @member {string} orderBy
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @instance
+                     */
+                    SearchSpacesRequest.prototype.orderBy = "";
+    
+                    /**
+                     * Creates a new SearchSpacesRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {google.chat.v1.ISearchSpacesRequest=} [properties] Properties to set
+                     * @returns {google.chat.v1.SearchSpacesRequest} SearchSpacesRequest instance
+                     */
+                    SearchSpacesRequest.create = function create(properties) {
+                        return new SearchSpacesRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchSpacesRequest message. Does not implicitly {@link google.chat.v1.SearchSpacesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {google.chat.v1.ISearchSpacesRequest} message SearchSpacesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchSpacesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.useAdminAccess);
+                        if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                        if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                        if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.query);
+                        if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchSpacesRequest message, length delimited. Does not implicitly {@link google.chat.v1.SearchSpacesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {google.chat.v1.ISearchSpacesRequest} message SearchSpacesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchSpacesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchSpacesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SearchSpacesRequest} SearchSpacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchSpacesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SearchSpacesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.useAdminAccess = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.pageSize = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.pageToken = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.query = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.orderBy = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchSpacesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SearchSpacesRequest} SearchSpacesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchSpacesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchSpacesRequest message.
+                     * @function verify
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchSpacesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            if (!$util.isInteger(message.pageSize))
+                                return "pageSize: integer expected";
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            if (!$util.isString(message.pageToken))
+                                return "pageToken: string expected";
+                        if (message.query != null && message.hasOwnProperty("query"))
+                            if (!$util.isString(message.query))
+                                return "query: string expected";
+                        if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                            if (!$util.isString(message.orderBy))
+                                return "orderBy: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchSpacesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SearchSpacesRequest} SearchSpacesRequest
+                     */
+                    SearchSpacesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SearchSpacesRequest)
+                            return object;
+                        var message = new $root.google.chat.v1.SearchSpacesRequest();
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
+                        if (object.pageSize != null)
+                            message.pageSize = object.pageSize | 0;
+                        if (object.pageToken != null)
+                            message.pageToken = String(object.pageToken);
+                        if (object.query != null)
+                            message.query = String(object.query);
+                        if (object.orderBy != null)
+                            message.orderBy = String(object.orderBy);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchSpacesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {google.chat.v1.SearchSpacesRequest} message SearchSpacesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchSpacesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.useAdminAccess = false;
+                            object.pageSize = 0;
+                            object.pageToken = "";
+                            object.query = "";
+                            object.orderBy = "";
+                        }
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
+                        if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                            object.pageSize = message.pageSize;
+                        if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                            object.pageToken = message.pageToken;
+                        if (message.query != null && message.hasOwnProperty("query"))
+                            object.query = message.query;
+                        if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                            object.orderBy = message.orderBy;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchSpacesRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchSpacesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchSpacesRequest
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SearchSpacesRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchSpacesRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SearchSpacesRequest";
+                    };
+    
+                    return SearchSpacesRequest;
+                })();
+    
+                v1.SearchSpacesResponse = (function() {
+    
+                    /**
+                     * Properties of a SearchSpacesResponse.
+                     * @memberof google.chat.v1
+                     * @interface ISearchSpacesResponse
+                     * @property {Array.<google.chat.v1.ISpace>|null} [spaces] SearchSpacesResponse spaces
+                     * @property {string|null} [nextPageToken] SearchSpacesResponse nextPageToken
+                     * @property {number|null} [totalSize] SearchSpacesResponse totalSize
+                     */
+    
+                    /**
+                     * Constructs a new SearchSpacesResponse.
+                     * @memberof google.chat.v1
+                     * @classdesc Represents a SearchSpacesResponse.
+                     * @implements ISearchSpacesResponse
+                     * @constructor
+                     * @param {google.chat.v1.ISearchSpacesResponse=} [properties] Properties to set
+                     */
+                    function SearchSpacesResponse(properties) {
+                        this.spaces = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SearchSpacesResponse spaces.
+                     * @member {Array.<google.chat.v1.ISpace>} spaces
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @instance
+                     */
+                    SearchSpacesResponse.prototype.spaces = $util.emptyArray;
+    
+                    /**
+                     * SearchSpacesResponse nextPageToken.
+                     * @member {string} nextPageToken
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @instance
+                     */
+                    SearchSpacesResponse.prototype.nextPageToken = "";
+    
+                    /**
+                     * SearchSpacesResponse totalSize.
+                     * @member {number} totalSize
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @instance
+                     */
+                    SearchSpacesResponse.prototype.totalSize = 0;
+    
+                    /**
+                     * Creates a new SearchSpacesResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {google.chat.v1.ISearchSpacesResponse=} [properties] Properties to set
+                     * @returns {google.chat.v1.SearchSpacesResponse} SearchSpacesResponse instance
+                     */
+                    SearchSpacesResponse.create = function create(properties) {
+                        return new SearchSpacesResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SearchSpacesResponse message. Does not implicitly {@link google.chat.v1.SearchSpacesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {google.chat.v1.ISearchSpacesResponse} message SearchSpacesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchSpacesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spaces != null && message.spaces.length)
+                            for (var i = 0; i < message.spaces.length; ++i)
+                                $root.google.chat.v1.Space.encode(message.spaces[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                        if (message.totalSize != null && Object.hasOwnProperty.call(message, "totalSize"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.totalSize);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SearchSpacesResponse message, length delimited. Does not implicitly {@link google.chat.v1.SearchSpacesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {google.chat.v1.ISearchSpacesResponse} message SearchSpacesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SearchSpacesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SearchSpacesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.chat.v1.SearchSpacesResponse} SearchSpacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchSpacesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.SearchSpacesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.spaces && message.spaces.length))
+                                        message.spaces = [];
+                                    message.spaces.push($root.google.chat.v1.Space.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.totalSize = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SearchSpacesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.chat.v1.SearchSpacesResponse} SearchSpacesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SearchSpacesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SearchSpacesResponse message.
+                     * @function verify
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SearchSpacesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spaces != null && message.hasOwnProperty("spaces")) {
+                            if (!Array.isArray(message.spaces))
+                                return "spaces: array expected";
+                            for (var i = 0; i < message.spaces.length; ++i) {
+                                var error = $root.google.chat.v1.Space.verify(message.spaces[i]);
+                                if (error)
+                                    return "spaces." + error;
+                            }
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            if (!$util.isString(message.nextPageToken))
+                                return "nextPageToken: string expected";
+                        if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                            if (!$util.isInteger(message.totalSize))
+                                return "totalSize: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SearchSpacesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.chat.v1.SearchSpacesResponse} SearchSpacesResponse
+                     */
+                    SearchSpacesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.chat.v1.SearchSpacesResponse)
+                            return object;
+                        var message = new $root.google.chat.v1.SearchSpacesResponse();
+                        if (object.spaces) {
+                            if (!Array.isArray(object.spaces))
+                                throw TypeError(".google.chat.v1.SearchSpacesResponse.spaces: array expected");
+                            message.spaces = [];
+                            for (var i = 0; i < object.spaces.length; ++i) {
+                                if (typeof object.spaces[i] !== "object")
+                                    throw TypeError(".google.chat.v1.SearchSpacesResponse.spaces: object expected");
+                                message.spaces[i] = $root.google.chat.v1.Space.fromObject(object.spaces[i]);
+                            }
+                        }
+                        if (object.nextPageToken != null)
+                            message.nextPageToken = String(object.nextPageToken);
+                        if (object.totalSize != null)
+                            message.totalSize = object.totalSize | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SearchSpacesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {google.chat.v1.SearchSpacesResponse} message SearchSpacesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SearchSpacesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.spaces = [];
+                        if (options.defaults) {
+                            object.nextPageToken = "";
+                            object.totalSize = 0;
+                        }
+                        if (message.spaces && message.spaces.length) {
+                            object.spaces = [];
+                            for (var j = 0; j < message.spaces.length; ++j)
+                                object.spaces[j] = $root.google.chat.v1.Space.toObject(message.spaces[j], options);
+                        }
+                        if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                            object.nextPageToken = message.nextPageToken;
+                        if (message.totalSize != null && message.hasOwnProperty("totalSize"))
+                            object.totalSize = message.totalSize;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SearchSpacesResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SearchSpacesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SearchSpacesResponse
+                     * @function getTypeUrl
+                     * @memberof google.chat.v1.SearchSpacesResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SearchSpacesResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.chat.v1.SearchSpacesResponse";
+                    };
+    
+                    return SearchSpacesResponse;
+                })();
+    
                 v1.DeleteSpaceRequest = (function() {
     
                     /**
@@ -48127,6 +49175,7 @@
                      * @memberof google.chat.v1
                      * @interface IDeleteSpaceRequest
                      * @property {string|null} [name] DeleteSpaceRequest name
+                     * @property {boolean|null} [useAdminAccess] DeleteSpaceRequest useAdminAccess
                      */
     
                     /**
@@ -48151,6 +49200,14 @@
                      * @instance
                      */
                     DeleteSpaceRequest.prototype.name = "";
+    
+                    /**
+                     * DeleteSpaceRequest useAdminAccess.
+                     * @member {boolean} useAdminAccess
+                     * @memberof google.chat.v1.DeleteSpaceRequest
+                     * @instance
+                     */
+                    DeleteSpaceRequest.prototype.useAdminAccess = false;
     
                     /**
                      * Creates a new DeleteSpaceRequest instance using the specified properties.
@@ -48178,6 +49235,8 @@
                             writer = $Writer.create();
                         if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                             writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                        if (message.useAdminAccess != null && Object.hasOwnProperty.call(message, "useAdminAccess"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useAdminAccess);
                         return writer;
                     };
     
@@ -48214,6 +49273,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.name = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.useAdminAccess = reader.bool();
                                     break;
                                 }
                             default:
@@ -48254,6 +49317,9 @@
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            if (typeof message.useAdminAccess !== "boolean")
+                                return "useAdminAccess: boolean expected";
                         return null;
                     };
     
@@ -48271,6 +49337,8 @@
                         var message = new $root.google.chat.v1.DeleteSpaceRequest();
                         if (object.name != null)
                             message.name = String(object.name);
+                        if (object.useAdminAccess != null)
+                            message.useAdminAccess = Boolean(object.useAdminAccess);
                         return message;
                     };
     
@@ -48287,10 +49355,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.name = "";
+                            object.useAdminAccess = false;
+                        }
                         if (message.name != null && message.hasOwnProperty("name"))
                             object.name = message.name;
+                        if (message.useAdminAccess != null && message.hasOwnProperty("useAdminAccess"))
+                            object.useAdminAccess = message.useAdminAccess;
                         return object;
                     };
     

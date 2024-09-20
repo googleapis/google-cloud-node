@@ -90,6 +90,11 @@
                 "deleteEnvironment"
               ]
             },
+            "CheckUpgrade": {
+              "methods": [
+                "checkUpgrade"
+              ]
+            },
             "SaveSnapshot": {
               "methods": [
                 "saveSnapshot"
@@ -216,6 +221,11 @@
             "DeleteEnvironment": {
               "methods": [
                 "deleteEnvironment"
+              ]
+            },
+            "CheckUpgrade": {
+              "methods": [
+                "checkUpgrade"
               ]
             },
             "SaveSnapshot": {

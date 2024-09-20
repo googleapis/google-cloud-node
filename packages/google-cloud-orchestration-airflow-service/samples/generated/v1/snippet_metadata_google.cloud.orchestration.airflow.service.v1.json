@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-service",
-        "version": "3.5.0",
+        "version": "3.6.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -440,6 +440,50 @@
                 "method": {
                     "shortName": "ListWorkloads",
                     "fullName": "google.cloud.orchestration.airflow.service.v1.Environments.ListWorkloads",
+                    "service": {
+                        "shortName": "Environments",
+                        "fullName": "google.cloud.orchestration.airflow.service.v1.Environments"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "composer_v1_generated_Environments_CheckUpgrade_async",
+            "title": "Environments checkUpgrade Sample",
+            "origin": "API_DEFINITION",
+            "description": " Check if an upgrade operation on the environment will succeed. In case of problems detailed info can be found in the returned Operation.",
+            "canonical": true,
+            "file": "environments.check_upgrade.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "CheckUpgrade",
+                "fullName": "google.cloud.orchestration.airflow.service.v1.Environments.CheckUpgrade",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "environment",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "image_version",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "EnvironmentsClient",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1.EnvironmentsClient"
+                },
+                "method": {
+                    "shortName": "CheckUpgrade",
+                    "fullName": "google.cloud.orchestration.airflow.service.v1.Environments.CheckUpgrade",
                     "service": {
                         "shortName": "Environments",
                         "fullName": "google.cloud.orchestration.airflow.service.v1.Environments"
