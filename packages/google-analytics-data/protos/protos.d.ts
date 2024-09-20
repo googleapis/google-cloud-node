@@ -4682,6 +4682,20 @@ export namespace google {
                     public listRecurringAudienceLists(request: google.analytics.data.v1alpha.IListRecurringAudienceListsRequest): Promise<google.analytics.data.v1alpha.ListRecurringAudienceListsResponse>;
 
                     /**
+                     * Calls GetPropertyQuotasSnapshot.
+                     * @param request GetPropertyQuotasSnapshotRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PropertyQuotasSnapshot
+                     */
+                    public getPropertyQuotasSnapshot(request: google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest, callback: google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshotCallback): void;
+
+                    /**
+                     * Calls GetPropertyQuotasSnapshot.
+                     * @param request GetPropertyQuotasSnapshotRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPropertyQuotasSnapshot(request: google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest): Promise<google.analytics.data.v1alpha.PropertyQuotasSnapshot>;
+
+                    /**
                      * Calls CreateReportTask.
                      * @param request CreateReportTaskRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -4802,6 +4816,13 @@ export namespace google {
                      * @param [response] ListRecurringAudienceListsResponse
                      */
                     type ListRecurringAudienceListsCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.ListRecurringAudienceListsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|getPropertyQuotasSnapshot}.
+                     * @param error Error, if any
+                     * @param [response] PropertyQuotasSnapshot
+                     */
+                    type GetPropertyQuotasSnapshotCallback = (error: (Error|null), response?: google.analytics.data.v1alpha.PropertyQuotasSnapshot) => void;
 
                     /**
                      * Callback as used by {@link google.analytics.data.v1alpha.AlphaAnalyticsData|createReportTask}.
@@ -5489,6 +5510,218 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListRecurringAudienceListsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetPropertyQuotasSnapshotRequest. */
+                interface IGetPropertyQuotasSnapshotRequest {
+
+                    /** GetPropertyQuotasSnapshotRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPropertyQuotasSnapshotRequest. */
+                class GetPropertyQuotasSnapshotRequest implements IGetPropertyQuotasSnapshotRequest {
+
+                    /**
+                     * Constructs a new GetPropertyQuotasSnapshotRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest);
+
+                    /** GetPropertyQuotasSnapshotRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPropertyQuotasSnapshotRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPropertyQuotasSnapshotRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest): google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest;
+
+                    /**
+                     * Encodes the specified GetPropertyQuotasSnapshotRequest message. Does not implicitly {@link google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest.verify|verify} messages.
+                     * @param message GetPropertyQuotasSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPropertyQuotasSnapshotRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest.verify|verify} messages.
+                     * @param message GetPropertyQuotasSnapshotRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPropertyQuotasSnapshotRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPropertyQuotasSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest;
+
+                    /**
+                     * Decodes a GetPropertyQuotasSnapshotRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPropertyQuotasSnapshotRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest;
+
+                    /**
+                     * Verifies a GetPropertyQuotasSnapshotRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPropertyQuotasSnapshotRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPropertyQuotasSnapshotRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest;
+
+                    /**
+                     * Creates a plain object from a GetPropertyQuotasSnapshotRequest message. Also converts values to other types if specified.
+                     * @param message GetPropertyQuotasSnapshotRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.GetPropertyQuotasSnapshotRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPropertyQuotasSnapshotRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPropertyQuotasSnapshotRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PropertyQuotasSnapshot. */
+                interface IPropertyQuotasSnapshot {
+
+                    /** PropertyQuotasSnapshot name */
+                    name?: (string|null);
+
+                    /** PropertyQuotasSnapshot corePropertyQuota */
+                    corePropertyQuota?: (google.analytics.data.v1alpha.IPropertyQuota|null);
+
+                    /** PropertyQuotasSnapshot realtimePropertyQuota */
+                    realtimePropertyQuota?: (google.analytics.data.v1alpha.IPropertyQuota|null);
+
+                    /** PropertyQuotasSnapshot funnelPropertyQuota */
+                    funnelPropertyQuota?: (google.analytics.data.v1alpha.IPropertyQuota|null);
+                }
+
+                /** Represents a PropertyQuotasSnapshot. */
+                class PropertyQuotasSnapshot implements IPropertyQuotasSnapshot {
+
+                    /**
+                     * Constructs a new PropertyQuotasSnapshot.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1alpha.IPropertyQuotasSnapshot);
+
+                    /** PropertyQuotasSnapshot name. */
+                    public name: string;
+
+                    /** PropertyQuotasSnapshot corePropertyQuota. */
+                    public corePropertyQuota?: (google.analytics.data.v1alpha.IPropertyQuota|null);
+
+                    /** PropertyQuotasSnapshot realtimePropertyQuota. */
+                    public realtimePropertyQuota?: (google.analytics.data.v1alpha.IPropertyQuota|null);
+
+                    /** PropertyQuotasSnapshot funnelPropertyQuota. */
+                    public funnelPropertyQuota?: (google.analytics.data.v1alpha.IPropertyQuota|null);
+
+                    /**
+                     * Creates a new PropertyQuotasSnapshot instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PropertyQuotasSnapshot instance
+                     */
+                    public static create(properties?: google.analytics.data.v1alpha.IPropertyQuotasSnapshot): google.analytics.data.v1alpha.PropertyQuotasSnapshot;
+
+                    /**
+                     * Encodes the specified PropertyQuotasSnapshot message. Does not implicitly {@link google.analytics.data.v1alpha.PropertyQuotasSnapshot.verify|verify} messages.
+                     * @param message PropertyQuotasSnapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1alpha.IPropertyQuotasSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PropertyQuotasSnapshot message, length delimited. Does not implicitly {@link google.analytics.data.v1alpha.PropertyQuotasSnapshot.verify|verify} messages.
+                     * @param message PropertyQuotasSnapshot message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1alpha.IPropertyQuotasSnapshot, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PropertyQuotasSnapshot message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PropertyQuotasSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1alpha.PropertyQuotasSnapshot;
+
+                    /**
+                     * Decodes a PropertyQuotasSnapshot message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PropertyQuotasSnapshot
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1alpha.PropertyQuotasSnapshot;
+
+                    /**
+                     * Verifies a PropertyQuotasSnapshot message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PropertyQuotasSnapshot message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PropertyQuotasSnapshot
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1alpha.PropertyQuotasSnapshot;
+
+                    /**
+                     * Creates a plain object from a PropertyQuotasSnapshot message. Also converts values to other types if specified.
+                     * @param message PropertyQuotasSnapshot
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1alpha.PropertyQuotasSnapshot, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PropertyQuotasSnapshot to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PropertyQuotasSnapshot
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
