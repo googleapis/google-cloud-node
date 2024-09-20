@@ -131,6 +131,10 @@ function main(locationRestriction) {
    *  How results will be ranked in the response.
    */
   // const rankPreference = {}
+  /**
+   *  Optional. Parameters that affect the routing to the search results.
+   */
+  // const routingParameters = {}
 
   // Imports the Places library
   const {PlacesClient} = require('@googlemaps/places').v1;

@@ -107,7 +107,7 @@
                     "csharp_namespace": "Google.Maps.Places.V1",
                     "go_package": "cloud.google.com/go/maps/places/apiv1/placespb;placespb",
                     "java_multiple_files": true,
-                    "java_outer_classname": "PlacesServiceProto",
+                    "java_outer_classname": "TravelModeProto",
                     "java_package": "com.google.maps.places.v1",
                     "objc_class_prefix": "GMPSV1",
                     "php_namespace": "Google\\Maps\\Places\\V1"
@@ -1478,6 +1478,38 @@
                         }
                       }
                     },
+                    "RoutingParameters": {
+                      "fields": {
+                        "origin": {
+                          "type": "google.type.LatLng",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "travelMode": {
+                          "type": "TravelMode",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "routeModifiers": {
+                          "type": "RouteModifiers",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "routingPreference": {
+                          "type": "RoutingPreference",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "SearchNearbyRequest": {
                       "fields": {
                         "languageCode": {
@@ -1522,6 +1554,13 @@
                         "rankPreference": {
                           "type": "RankPreference",
                           "id": 9
+                        },
+                        "routingParameters": {
+                          "type": "RoutingParameters",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -1555,6 +1594,11 @@
                           "rule": "repeated",
                           "type": "Place",
                           "id": 1
+                        },
+                        "routingSummaries": {
+                          "rule": "repeated",
+                          "type": "RoutingSummary",
+                          "id": 2
                         }
                       }
                     },
@@ -1615,6 +1659,20 @@
                         "evOptions": {
                           "type": "EVOptions",
                           "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "routingParameters": {
+                          "type": "RoutingParameters",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "searchAlongRouteParameters": {
+                          "type": "SearchAlongRouteParameters",
+                          "id": 17,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1681,6 +1739,17 @@
                               }
                             }
                           }
+                        },
+                        "SearchAlongRouteParameters": {
+                          "fields": {
+                            "polyline": {
+                              "type": "Polyline",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1690,6 +1759,11 @@
                           "rule": "repeated",
                           "type": "Place",
                           "id": 1
+                        },
+                        "routingSummaries": {
+                          "rule": "repeated",
+                          "type": "RoutingSummary",
+                          "id": 2
                         },
                         "contextualContents": {
                           "rule": "repeated",
@@ -2019,6 +2093,93 @@
                             }
                           }
                         }
+                      }
+                    },
+                    "Polyline": {
+                      "oneofs": {
+                        "polylineType": {
+                          "oneof": [
+                            "encodedPolyline"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "encodedPolyline": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RouteModifiers": {
+                      "fields": {
+                        "avoidTolls": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "avoidHighways": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "avoidFerries": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "avoidIndoor": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RoutingPreference": {
+                      "values": {
+                        "ROUTING_PREFERENCE_UNSPECIFIED": 0,
+                        "TRAFFIC_UNAWARE": 1,
+                        "TRAFFIC_AWARE": 2,
+                        "TRAFFIC_AWARE_OPTIMAL": 3
+                      }
+                    },
+                    "RoutingSummary": {
+                      "fields": {
+                        "legs": {
+                          "rule": "repeated",
+                          "type": "Leg",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Leg": {
+                          "fields": {
+                            "duration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "distanceMeters": {
+                              "type": "int32",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TravelMode": {
+                      "values": {
+                        "TRAVEL_MODE_UNSPECIFIED": 0,
+                        "DRIVE": 1,
+                        "BICYCLE": 2,
+                        "WALK": 3,
+                        "TWO_WHEELER": 4
                       }
                     }
                   }
