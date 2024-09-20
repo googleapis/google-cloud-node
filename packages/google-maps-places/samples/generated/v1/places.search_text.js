@@ -108,6 +108,14 @@ function main(textQuery) {
    *  Optional. Set the searchable EV options of a place search request.
    */
   // const evOptions = {}
+  /**
+   *  Optional. Additional parameters for routing to results.
+   */
+  // const routingParameters = {}
+  /**
+   *  Optional. Additional parameters proto for searching along a route.
+   */
+  // const searchAlongRouteParameters = {}
 
   // Imports the Places library
   const {PlacesClient} = require('@googlemaps/places').v1;
