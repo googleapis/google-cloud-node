@@ -653,6 +653,11 @@ message CountTokensRequest {
   // external systems to perform an action, or set of actions, outside of
   // knowledge and scope of the model.
   repeated Tool tools = 6 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Generation config that the model will use to generate the
+  // response.
+  optional GenerationConfig generation_config = 7
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response message for [PredictionService.CountTokens][].
@@ -701,6 +706,15 @@ message GenerateContentRequest {
   // Optional. Tool config. This config is shared for all tools provided in the
   // request.
   ToolConfig tool_config = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The labels with user-defined metadata for the request. It is used
+  // for billing and reporting only.
+  //
+  // Label keys and values can be no longer than 63 characters
+  // (Unicode codepoints) and can only contain lowercase letters, numeric
+  // characters, underscores, and dashes. International characters are allowed.
+  // Label values are optional. Label keys must start with a letter.
+  map<string, string> labels = 10 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Per request settings for blocking unsafe content.
   // Enforced on GenerateContentResponse.candidates.
@@ -756,11 +770,15 @@ message GenerateContentResponse {
     // Number of tokens in the response(s).
     int32 candidates_token_count = 2;
 
+    // Total token count for prompt and response candidates.
     int32 total_token_count = 3;
   }
 
   // Output only. Generated candidates.
   repeated Candidate candidates = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. The model version used to generate the response.
+  string model_version = 11 [(google.api.field_behavior) = OUTPUT_ONLY];
 
   // Output only. Content filter results for a prompt sent in the request.
   // Note: Sent only in the first stream chunk.

@@ -12362,7 +12362,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -12394,6 +12394,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_config",
+                        "type": ".google.cloud.aiplatform.v1beta1.GenerationConfig"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.CountTokensResponse",
@@ -12422,7 +12426,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 99,
+                    "end": 111,
                     "type": "FULL"
                 }
             ],
@@ -12454,6 +12458,10 @@
                     {
                         "name": "tool_config",
                         "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "safety_settings",
@@ -12490,7 +12498,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 101,
+                    "end": 113,
                     "type": "FULL"
                 }
             ],
@@ -12522,6 +12530,10 @@
                     {
                         "name": "tool_config",
                         "type": ".google.cloud.aiplatform.v1beta1.ToolConfig"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "safety_settings",

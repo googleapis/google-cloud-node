@@ -29,9 +29,12 @@ function main(model, contents) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the publisher model requested to serve the
-   *  prediction. Format:
+   *  Required. The fully qualified name of the publisher model or tuned model
+   *  endpoint to use.
+   *  Publisher model format:
    *  `projects/{project}/locations/{location}/publishers/* /models/*`
+   *  Tuned model endpoint format:
+   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
    */
   // const model = 'abc123'
   /**
@@ -68,6 +71,15 @@ function main(model, contents) {
    *  request.
    */
   // const toolConfig = {}
+  /**
+   *  Optional. The labels with user-defined metadata for the request. It is used
+   *  for billing and reporting only.
+   *  Label keys and values can be no longer than 63 characters
+   *  (Unicode codepoints) and can only contain lowercase letters, numeric
+   *  characters, underscores, and dashes. International characters are allowed.
+   *  Label values are optional. Label keys must start with a letter.
+   */
+  // const labels = [1,2,3,4]
   /**
    *  Optional. Per request settings for blocking unsafe content.
    *  Enforced on GenerateContentResponse.candidates.

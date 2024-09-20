@@ -132,12 +132,32 @@ message RagVectorDbConfig {
     string collection_name = 2;
   }
 
+  // The config for the Pinecone.
+  message Pinecone {
+    // Pinecone index name.
+    // This value cannot be changed after it's set.
+    string index_name = 1;
+  }
+
   // The config for the Vertex Feature Store.
   message VertexFeatureStore {
     // The resource name of the FeatureView.
     // Format:
     // `projects/{project}/locations/{location}/featureOnlineStores/{feature_online_store}/featureViews/{feature_view}`
     string feature_view_resource_name = 1;
+  }
+
+  // The config for the Vertex Vector Search.
+  message VertexVectorSearch {
+    // The resource name of the Index Endpoint.
+    // Format:
+    // `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
+    string index_endpoint = 1;
+
+    // The resource name of the Index.
+    // Format:
+    // `projects/{project}/locations/{location}/indexes/{index}`
+    string index = 2;
   }
 
   // The config for the Vector DB.
@@ -148,8 +168,14 @@ message RagVectorDbConfig {
     // The config for the Weaviate.
     Weaviate weaviate = 2;
 
+    // The config for the Pinecone.
+    Pinecone pinecone = 3;
+
     // The config for the Vertex Feature Store.
     VertexFeatureStore vertex_feature_store = 4;
+
+    // The config for the Vertex Vector Search.
+    VertexVectorSearch vertex_vector_search = 6;
   }
 
   // Authentication config for the chosen Vector DB.
@@ -291,6 +317,9 @@ message RagFile {
 
     // The RagFile is imported from a Jira query.
     JiraSource jira_source = 12;
+
+    // The RagFile is imported from a SharePoint source.
+    SharePointSources share_point_sources = 14;
   }
 
   // Output only. The resource name of the RagFile.
@@ -362,6 +391,23 @@ message ImportRagFilesConfig {
 
     // Jira queries with their corresponding authentication.
     JiraSource jira_source = 7;
+
+    // SharePoint sources.
+    SharePointSources share_point_sources = 13;
+  }
+
+  // Optional. If provided, all partial failures are written to the sink.
+  oneof partial_failure_sink {
+    // The Cloud Storage path to write partial failures to.
+    GcsDestination partial_failure_gcs_sink = 11;
+
+    // The BigQuery destination to write partial failures to. It should be a
+    // bigquery table resource name (e.g.
+    // "bq://projectId.bqDatasetId.bqTableId"). If the dataset id does not
+    // exist, it will be created. If the table does not exist, it will be
+    // created with the expected schema. If the table exists, the schema will be
+    // validated and data will be added to this existing table.
+    BigQueryDestination partial_failure_bigquery_sink = 12;
   }
 
   // Specifies the size and overlap of chunks after importing RagFiles.
