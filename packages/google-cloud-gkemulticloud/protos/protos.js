@@ -94,6 +94,7 @@
                          * @property {google.cloud.gkemulticloud.v1.IMonitoringConfig|null} [monitoringConfig] AttachedCluster monitoringConfig
                          * @property {google.cloud.gkemulticloud.v1.IAttachedProxyConfig|null} [proxyConfig] AttachedCluster proxyConfig
                          * @property {google.cloud.gkemulticloud.v1.IBinaryAuthorization|null} [binaryAuthorization] AttachedCluster binaryAuthorization
+                         * @property {google.cloud.gkemulticloud.v1.ISecurityPostureConfig|null} [securityPostureConfig] AttachedCluster securityPostureConfig
                          */
     
                         /**
@@ -290,6 +291,14 @@
                         AttachedCluster.prototype.binaryAuthorization = null;
     
                         /**
+                         * AttachedCluster securityPostureConfig.
+                         * @member {google.cloud.gkemulticloud.v1.ISecurityPostureConfig|null|undefined} securityPostureConfig
+                         * @memberof google.cloud.gkemulticloud.v1.AttachedCluster
+                         * @instance
+                         */
+                        AttachedCluster.prototype.securityPostureConfig = null;
+    
+                        /**
                          * Creates a new AttachedCluster instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gkemulticloud.v1.AttachedCluster
@@ -359,6 +368,8 @@
                                 $root.google.cloud.gkemulticloud.v1.AttachedProxyConfig.encode(message.proxyConfig, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             if (message.binaryAuthorization != null && Object.hasOwnProperty.call(message, "binaryAuthorization"))
                                 $root.google.cloud.gkemulticloud.v1.BinaryAuthorization.encode(message.binaryAuthorization, writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                            if (message.securityPostureConfig != null && Object.hasOwnProperty.call(message, "securityPostureConfig"))
+                                $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.encode(message.securityPostureConfig, writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             return writer;
                         };
     
@@ -500,6 +511,10 @@
                                     }
                                 case 25: {
                                         message.binaryAuthorization = $root.google.cloud.gkemulticloud.v1.BinaryAuthorization.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 26: {
+                                        message.securityPostureConfig = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -644,6 +659,11 @@
                                 if (error)
                                     return "binaryAuthorization." + error;
                             }
+                            if (message.securityPostureConfig != null && message.hasOwnProperty("securityPostureConfig")) {
+                                var error = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.verify(message.securityPostureConfig);
+                                if (error)
+                                    return "securityPostureConfig." + error;
+                            }
                             return null;
                         };
     
@@ -780,6 +800,11 @@
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AttachedCluster.binaryAuthorization: object expected");
                                 message.binaryAuthorization = $root.google.cloud.gkemulticloud.v1.BinaryAuthorization.fromObject(object.binaryAuthorization);
                             }
+                            if (object.securityPostureConfig != null) {
+                                if (typeof object.securityPostureConfig !== "object")
+                                    throw TypeError(".google.cloud.gkemulticloud.v1.AttachedCluster.securityPostureConfig: object expected");
+                                message.securityPostureConfig = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.fromObject(object.securityPostureConfig);
+                            }
                             return message;
                         };
     
@@ -821,6 +846,7 @@
                                 object.monitoringConfig = null;
                                 object.proxyConfig = null;
                                 object.binaryAuthorization = null;
+                                object.securityPostureConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -873,6 +899,8 @@
                                 object.proxyConfig = $root.google.cloud.gkemulticloud.v1.AttachedProxyConfig.toObject(message.proxyConfig, options);
                             if (message.binaryAuthorization != null && message.hasOwnProperty("binaryAuthorization"))
                                 object.binaryAuthorization = $root.google.cloud.gkemulticloud.v1.BinaryAuthorization.toObject(message.binaryAuthorization, options);
+                            if (message.securityPostureConfig != null && message.hasOwnProperty("securityPostureConfig"))
+                                object.securityPostureConfig = $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.toObject(message.securityPostureConfig, options);
                             return object;
                         };
     
@@ -4433,6 +4461,375 @@
                         return NodeTaint;
                     })();
     
+                    v1.NodeKubeletConfig = (function() {
+    
+                        /**
+                         * Properties of a NodeKubeletConfig.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @interface INodeKubeletConfig
+                         * @property {boolean|null} [insecureKubeletReadonlyPortEnabled] NodeKubeletConfig insecureKubeletReadonlyPortEnabled
+                         * @property {string|null} [cpuManagerPolicy] NodeKubeletConfig cpuManagerPolicy
+                         * @property {boolean|null} [cpuCfsQuota] NodeKubeletConfig cpuCfsQuota
+                         * @property {string|null} [cpuCfsQuotaPeriod] NodeKubeletConfig cpuCfsQuotaPeriod
+                         * @property {number|Long|null} [podPidsLimit] NodeKubeletConfig podPidsLimit
+                         */
+    
+                        /**
+                         * Constructs a new NodeKubeletConfig.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @classdesc Represents a NodeKubeletConfig.
+                         * @implements INodeKubeletConfig
+                         * @constructor
+                         * @param {google.cloud.gkemulticloud.v1.INodeKubeletConfig=} [properties] Properties to set
+                         */
+                        function NodeKubeletConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * NodeKubeletConfig insecureKubeletReadonlyPortEnabled.
+                         * @member {boolean} insecureKubeletReadonlyPortEnabled
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        NodeKubeletConfig.prototype.insecureKubeletReadonlyPortEnabled = false;
+    
+                        /**
+                         * NodeKubeletConfig cpuManagerPolicy.
+                         * @member {string|null|undefined} cpuManagerPolicy
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        NodeKubeletConfig.prototype.cpuManagerPolicy = null;
+    
+                        /**
+                         * NodeKubeletConfig cpuCfsQuota.
+                         * @member {boolean|null|undefined} cpuCfsQuota
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        NodeKubeletConfig.prototype.cpuCfsQuota = null;
+    
+                        /**
+                         * NodeKubeletConfig cpuCfsQuotaPeriod.
+                         * @member {string|null|undefined} cpuCfsQuotaPeriod
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        NodeKubeletConfig.prototype.cpuCfsQuotaPeriod = null;
+    
+                        /**
+                         * NodeKubeletConfig podPidsLimit.
+                         * @member {number|Long|null|undefined} podPidsLimit
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        NodeKubeletConfig.prototype.podPidsLimit = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * NodeKubeletConfig _cpuManagerPolicy.
+                         * @member {"cpuManagerPolicy"|undefined} _cpuManagerPolicy
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        Object.defineProperty(NodeKubeletConfig.prototype, "_cpuManagerPolicy", {
+                            get: $util.oneOfGetter($oneOfFields = ["cpuManagerPolicy"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * NodeKubeletConfig _cpuCfsQuota.
+                         * @member {"cpuCfsQuota"|undefined} _cpuCfsQuota
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        Object.defineProperty(NodeKubeletConfig.prototype, "_cpuCfsQuota", {
+                            get: $util.oneOfGetter($oneOfFields = ["cpuCfsQuota"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * NodeKubeletConfig _cpuCfsQuotaPeriod.
+                         * @member {"cpuCfsQuotaPeriod"|undefined} _cpuCfsQuotaPeriod
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        Object.defineProperty(NodeKubeletConfig.prototype, "_cpuCfsQuotaPeriod", {
+                            get: $util.oneOfGetter($oneOfFields = ["cpuCfsQuotaPeriod"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * NodeKubeletConfig _podPidsLimit.
+                         * @member {"podPidsLimit"|undefined} _podPidsLimit
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         */
+                        Object.defineProperty(NodeKubeletConfig.prototype, "_podPidsLimit", {
+                            get: $util.oneOfGetter($oneOfFields = ["podPidsLimit"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new NodeKubeletConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.INodeKubeletConfig=} [properties] Properties to set
+                         * @returns {google.cloud.gkemulticloud.v1.NodeKubeletConfig} NodeKubeletConfig instance
+                         */
+                        NodeKubeletConfig.create = function create(properties) {
+                            return new NodeKubeletConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified NodeKubeletConfig message. Does not implicitly {@link google.cloud.gkemulticloud.v1.NodeKubeletConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.INodeKubeletConfig} message NodeKubeletConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeKubeletConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.insecureKubeletReadonlyPortEnabled != null && Object.hasOwnProperty.call(message, "insecureKubeletReadonlyPortEnabled"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.insecureKubeletReadonlyPortEnabled);
+                            if (message.cpuManagerPolicy != null && Object.hasOwnProperty.call(message, "cpuManagerPolicy"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.cpuManagerPolicy);
+                            if (message.cpuCfsQuota != null && Object.hasOwnProperty.call(message, "cpuCfsQuota"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.cpuCfsQuota);
+                            if (message.cpuCfsQuotaPeriod != null && Object.hasOwnProperty.call(message, "cpuCfsQuotaPeriod"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.cpuCfsQuotaPeriod);
+                            if (message.podPidsLimit != null && Object.hasOwnProperty.call(message, "podPidsLimit"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.podPidsLimit);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified NodeKubeletConfig message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.NodeKubeletConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.INodeKubeletConfig} message NodeKubeletConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        NodeKubeletConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a NodeKubeletConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkemulticloud.v1.NodeKubeletConfig} NodeKubeletConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeKubeletConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.insecureKubeletReadonlyPortEnabled = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.cpuManagerPolicy = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.cpuCfsQuota = reader.bool();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.cpuCfsQuotaPeriod = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.podPidsLimit = reader.int64();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a NodeKubeletConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkemulticloud.v1.NodeKubeletConfig} NodeKubeletConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        NodeKubeletConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a NodeKubeletConfig message.
+                         * @function verify
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        NodeKubeletConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.insecureKubeletReadonlyPortEnabled != null && message.hasOwnProperty("insecureKubeletReadonlyPortEnabled"))
+                                if (typeof message.insecureKubeletReadonlyPortEnabled !== "boolean")
+                                    return "insecureKubeletReadonlyPortEnabled: boolean expected";
+                            if (message.cpuManagerPolicy != null && message.hasOwnProperty("cpuManagerPolicy")) {
+                                properties._cpuManagerPolicy = 1;
+                                if (!$util.isString(message.cpuManagerPolicy))
+                                    return "cpuManagerPolicy: string expected";
+                            }
+                            if (message.cpuCfsQuota != null && message.hasOwnProperty("cpuCfsQuota")) {
+                                properties._cpuCfsQuota = 1;
+                                if (typeof message.cpuCfsQuota !== "boolean")
+                                    return "cpuCfsQuota: boolean expected";
+                            }
+                            if (message.cpuCfsQuotaPeriod != null && message.hasOwnProperty("cpuCfsQuotaPeriod")) {
+                                properties._cpuCfsQuotaPeriod = 1;
+                                if (!$util.isString(message.cpuCfsQuotaPeriod))
+                                    return "cpuCfsQuotaPeriod: string expected";
+                            }
+                            if (message.podPidsLimit != null && message.hasOwnProperty("podPidsLimit")) {
+                                properties._podPidsLimit = 1;
+                                if (!$util.isInteger(message.podPidsLimit) && !(message.podPidsLimit && $util.isInteger(message.podPidsLimit.low) && $util.isInteger(message.podPidsLimit.high)))
+                                    return "podPidsLimit: integer|Long expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a NodeKubeletConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkemulticloud.v1.NodeKubeletConfig} NodeKubeletConfig
+                         */
+                        NodeKubeletConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig)
+                                return object;
+                            var message = new $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig();
+                            if (object.insecureKubeletReadonlyPortEnabled != null)
+                                message.insecureKubeletReadonlyPortEnabled = Boolean(object.insecureKubeletReadonlyPortEnabled);
+                            if (object.cpuManagerPolicy != null)
+                                message.cpuManagerPolicy = String(object.cpuManagerPolicy);
+                            if (object.cpuCfsQuota != null)
+                                message.cpuCfsQuota = Boolean(object.cpuCfsQuota);
+                            if (object.cpuCfsQuotaPeriod != null)
+                                message.cpuCfsQuotaPeriod = String(object.cpuCfsQuotaPeriod);
+                            if (object.podPidsLimit != null)
+                                if ($util.Long)
+                                    (message.podPidsLimit = $util.Long.fromValue(object.podPidsLimit)).unsigned = false;
+                                else if (typeof object.podPidsLimit === "string")
+                                    message.podPidsLimit = parseInt(object.podPidsLimit, 10);
+                                else if (typeof object.podPidsLimit === "number")
+                                    message.podPidsLimit = object.podPidsLimit;
+                                else if (typeof object.podPidsLimit === "object")
+                                    message.podPidsLimit = new $util.LongBits(object.podPidsLimit.low >>> 0, object.podPidsLimit.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a NodeKubeletConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.NodeKubeletConfig} message NodeKubeletConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        NodeKubeletConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.insecureKubeletReadonlyPortEnabled = false;
+                            if (message.insecureKubeletReadonlyPortEnabled != null && message.hasOwnProperty("insecureKubeletReadonlyPortEnabled"))
+                                object.insecureKubeletReadonlyPortEnabled = message.insecureKubeletReadonlyPortEnabled;
+                            if (message.cpuManagerPolicy != null && message.hasOwnProperty("cpuManagerPolicy")) {
+                                object.cpuManagerPolicy = message.cpuManagerPolicy;
+                                if (options.oneofs)
+                                    object._cpuManagerPolicy = "cpuManagerPolicy";
+                            }
+                            if (message.cpuCfsQuota != null && message.hasOwnProperty("cpuCfsQuota")) {
+                                object.cpuCfsQuota = message.cpuCfsQuota;
+                                if (options.oneofs)
+                                    object._cpuCfsQuota = "cpuCfsQuota";
+                            }
+                            if (message.cpuCfsQuotaPeriod != null && message.hasOwnProperty("cpuCfsQuotaPeriod")) {
+                                object.cpuCfsQuotaPeriod = message.cpuCfsQuotaPeriod;
+                                if (options.oneofs)
+                                    object._cpuCfsQuotaPeriod = "cpuCfsQuotaPeriod";
+                            }
+                            if (message.podPidsLimit != null && message.hasOwnProperty("podPidsLimit")) {
+                                if (typeof message.podPidsLimit === "number")
+                                    object.podPidsLimit = options.longs === String ? String(message.podPidsLimit) : message.podPidsLimit;
+                                else
+                                    object.podPidsLimit = options.longs === String ? $util.Long.prototype.toString.call(message.podPidsLimit) : options.longs === Number ? new $util.LongBits(message.podPidsLimit.low >>> 0, message.podPidsLimit.high >>> 0).toNumber() : message.podPidsLimit;
+                                if (options.oneofs)
+                                    object._podPidsLimit = "podPidsLimit";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this NodeKubeletConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        NodeKubeletConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for NodeKubeletConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkemulticloud.v1.NodeKubeletConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        NodeKubeletConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkemulticloud.v1.NodeKubeletConfig";
+                        };
+    
+                        return NodeKubeletConfig;
+                    })();
+    
                     v1.Fleet = (function() {
     
                         /**
@@ -5787,6 +6184,249 @@
                         })();
     
                         return BinaryAuthorization;
+                    })();
+    
+                    v1.SecurityPostureConfig = (function() {
+    
+                        /**
+                         * Properties of a SecurityPostureConfig.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @interface ISecurityPostureConfig
+                         * @property {google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode|null} [vulnerabilityMode] SecurityPostureConfig vulnerabilityMode
+                         */
+    
+                        /**
+                         * Constructs a new SecurityPostureConfig.
+                         * @memberof google.cloud.gkemulticloud.v1
+                         * @classdesc Represents a SecurityPostureConfig.
+                         * @implements ISecurityPostureConfig
+                         * @constructor
+                         * @param {google.cloud.gkemulticloud.v1.ISecurityPostureConfig=} [properties] Properties to set
+                         */
+                        function SecurityPostureConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SecurityPostureConfig vulnerabilityMode.
+                         * @member {google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode} vulnerabilityMode
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @instance
+                         */
+                        SecurityPostureConfig.prototype.vulnerabilityMode = 0;
+    
+                        /**
+                         * Creates a new SecurityPostureConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.ISecurityPostureConfig=} [properties] Properties to set
+                         * @returns {google.cloud.gkemulticloud.v1.SecurityPostureConfig} SecurityPostureConfig instance
+                         */
+                        SecurityPostureConfig.create = function create(properties) {
+                            return new SecurityPostureConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityPostureConfig message. Does not implicitly {@link google.cloud.gkemulticloud.v1.SecurityPostureConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.ISecurityPostureConfig} message SecurityPostureConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityPostureConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.vulnerabilityMode != null && Object.hasOwnProperty.call(message, "vulnerabilityMode"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.vulnerabilityMode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SecurityPostureConfig message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.SecurityPostureConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.ISecurityPostureConfig} message SecurityPostureConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SecurityPostureConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SecurityPostureConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkemulticloud.v1.SecurityPostureConfig} SecurityPostureConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityPostureConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.vulnerabilityMode = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SecurityPostureConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkemulticloud.v1.SecurityPostureConfig} SecurityPostureConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SecurityPostureConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SecurityPostureConfig message.
+                         * @function verify
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SecurityPostureConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.vulnerabilityMode != null && message.hasOwnProperty("vulnerabilityMode"))
+                                switch (message.vulnerabilityMode) {
+                                default:
+                                    return "vulnerabilityMode: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SecurityPostureConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkemulticloud.v1.SecurityPostureConfig} SecurityPostureConfig
+                         */
+                        SecurityPostureConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig)
+                                return object;
+                            var message = new $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig();
+                            switch (object.vulnerabilityMode) {
+                            default:
+                                if (typeof object.vulnerabilityMode === "number") {
+                                    message.vulnerabilityMode = object.vulnerabilityMode;
+                                    break;
+                                }
+                                break;
+                            case "VULNERABILITY_MODE_UNSPECIFIED":
+                            case 0:
+                                message.vulnerabilityMode = 0;
+                                break;
+                            case "VULNERABILITY_DISABLED":
+                            case 1:
+                                message.vulnerabilityMode = 1;
+                                break;
+                            case "VULNERABILITY_ENTERPRISE":
+                            case 2:
+                                message.vulnerabilityMode = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SecurityPostureConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {google.cloud.gkemulticloud.v1.SecurityPostureConfig} message SecurityPostureConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SecurityPostureConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.vulnerabilityMode = options.enums === String ? "VULNERABILITY_MODE_UNSPECIFIED" : 0;
+                            if (message.vulnerabilityMode != null && message.hasOwnProperty("vulnerabilityMode"))
+                                object.vulnerabilityMode = options.enums === String ? $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode[message.vulnerabilityMode] === undefined ? message.vulnerabilityMode : $root.google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode[message.vulnerabilityMode] : message.vulnerabilityMode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SecurityPostureConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SecurityPostureConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SecurityPostureConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkemulticloud.v1.SecurityPostureConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SecurityPostureConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkemulticloud.v1.SecurityPostureConfig";
+                        };
+    
+                        /**
+                         * VulnerabilityMode enum.
+                         * @name google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode
+                         * @enum {number}
+                         * @property {number} VULNERABILITY_MODE_UNSPECIFIED=0 VULNERABILITY_MODE_UNSPECIFIED value
+                         * @property {number} VULNERABILITY_DISABLED=1 VULNERABILITY_DISABLED value
+                         * @property {number} VULNERABILITY_ENTERPRISE=2 VULNERABILITY_ENTERPRISE value
+                         */
+                        SecurityPostureConfig.VulnerabilityMode = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "VULNERABILITY_MODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "VULNERABILITY_DISABLED"] = 1;
+                            values[valuesById[2] = "VULNERABILITY_ENTERPRISE"] = 2;
+                            return values;
+                        })();
+    
+                        return SecurityPostureConfig;
                     })();
     
                     v1.AttachedClusters = (function() {
@@ -12524,6 +13164,7 @@
                          * @property {google.cloud.gkemulticloud.v1.IMaxPodsConstraint|null} [maxPodsConstraint] AwsNodePool maxPodsConstraint
                          * @property {Array.<google.cloud.gkemulticloud.v1.IAwsNodePoolError>|null} [errors] AwsNodePool errors
                          * @property {google.cloud.gkemulticloud.v1.IAwsNodeManagement|null} [management] AwsNodePool management
+                         * @property {google.cloud.gkemulticloud.v1.INodeKubeletConfig|null} [kubeletConfig] AwsNodePool kubeletConfig
                          * @property {google.cloud.gkemulticloud.v1.IUpdateSettings|null} [updateSettings] AwsNodePool updateSettings
                          */
     
@@ -12665,6 +13306,14 @@
                         AwsNodePool.prototype.management = null;
     
                         /**
+                         * AwsNodePool kubeletConfig.
+                         * @member {google.cloud.gkemulticloud.v1.INodeKubeletConfig|null|undefined} kubeletConfig
+                         * @memberof google.cloud.gkemulticloud.v1.AwsNodePool
+                         * @instance
+                         */
+                        AwsNodePool.prototype.kubeletConfig = null;
+    
+                        /**
                          * AwsNodePool updateSettings.
                          * @member {google.cloud.gkemulticloud.v1.IUpdateSettings|null|undefined} updateSettings
                          * @memberof google.cloud.gkemulticloud.v1.AwsNodePool
@@ -12728,6 +13377,8 @@
                                     $root.google.cloud.gkemulticloud.v1.AwsNodePoolError.encode(message.errors[i], writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                             if (message.management != null && Object.hasOwnProperty.call(message, "management"))
                                 $root.google.cloud.gkemulticloud.v1.AwsNodeManagement.encode(message.management, writer.uint32(/* id 30, wireType 2 =*/242).fork()).ldelim();
+                            if (message.kubeletConfig != null && Object.hasOwnProperty.call(message, "kubeletConfig"))
+                                $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig.encode(message.kubeletConfig, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
                             if (message.updateSettings != null && Object.hasOwnProperty.call(message, "updateSettings"))
                                 $root.google.cloud.gkemulticloud.v1.UpdateSettings.encode(message.updateSettings, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                             return writer;
@@ -12843,6 +13494,10 @@
                                     }
                                 case 30: {
                                         message.management = $root.google.cloud.gkemulticloud.v1.AwsNodeManagement.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 31: {
+                                        message.kubeletConfig = $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 32: {
@@ -12962,6 +13617,11 @@
                                 if (error)
                                     return "management." + error;
                             }
+                            if (message.kubeletConfig != null && message.hasOwnProperty("kubeletConfig")) {
+                                var error = $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig.verify(message.kubeletConfig);
+                                if (error)
+                                    return "kubeletConfig." + error;
+                            }
                             if (message.updateSettings != null && message.hasOwnProperty("updateSettings")) {
                                 var error = $root.google.cloud.gkemulticloud.v1.UpdateSettings.verify(message.updateSettings);
                                 if (error)
@@ -13077,6 +13737,11 @@
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AwsNodePool.management: object expected");
                                 message.management = $root.google.cloud.gkemulticloud.v1.AwsNodeManagement.fromObject(object.management);
                             }
+                            if (object.kubeletConfig != null) {
+                                if (typeof object.kubeletConfig !== "object")
+                                    throw TypeError(".google.cloud.gkemulticloud.v1.AwsNodePool.kubeletConfig: object expected");
+                                message.kubeletConfig = $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig.fromObject(object.kubeletConfig);
+                            }
                             if (object.updateSettings != null) {
                                 if (typeof object.updateSettings !== "object")
                                     throw TypeError(".google.cloud.gkemulticloud.v1.AwsNodePool.updateSettings: object expected");
@@ -13116,6 +13781,7 @@
                                 object.maxPodsConstraint = null;
                                 object.config = null;
                                 object.management = null;
+                                object.kubeletConfig = null;
                                 object.updateSettings = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -13155,6 +13821,8 @@
                             }
                             if (message.management != null && message.hasOwnProperty("management"))
                                 object.management = $root.google.cloud.gkemulticloud.v1.AwsNodeManagement.toObject(message.management, options);
+                            if (message.kubeletConfig != null && message.hasOwnProperty("kubeletConfig"))
+                                object.kubeletConfig = $root.google.cloud.gkemulticloud.v1.NodeKubeletConfig.toObject(message.kubeletConfig, options);
                             if (message.updateSettings != null && message.hasOwnProperty("updateSettings"))
                                 object.updateSettings = $root.google.cloud.gkemulticloud.v1.UpdateSettings.toObject(message.updateSettings, options);
                             return object;
