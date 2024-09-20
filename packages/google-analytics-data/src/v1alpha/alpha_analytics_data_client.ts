@@ -208,6 +208,9 @@ export class AlphaAnalyticsDataClient {
       propertyPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}'
       ),
+      propertyQuotasSnapshotPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/propertyQuotasSnapshot'
+      ),
       recurringAudienceListPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/recurringAudienceLists/{recurring_audience_list}'
       ),
@@ -338,6 +341,7 @@ export class AlphaAnalyticsDataClient {
       'createRecurringAudienceList',
       'getRecurringAudienceList',
       'listRecurringAudienceLists',
+      'getPropertyQuotasSnapshot',
       'createReportTask',
       'queryReportTask',
       'getReportTask',
@@ -486,9 +490,9 @@ export class AlphaAnalyticsDataClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} [request.property]
-   *   Optional. A Google Analytics GA4 property identifier whose events are
-   *   tracked. Specified in the URL path and not the body. To learn more, see
-   *   [where to find your Property
+   *   Optional. A Google Analytics property identifier whose events are tracked.
+   *   Specified in the URL path and not the body. To learn more, see [where to
+   *   find your Property
    *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
    *   Within a batch request, this property should either be unspecified or
    *   consistent with the batch-level property.
@@ -1239,6 +1243,108 @@ export class AlphaAnalyticsDataClient {
     );
   }
   /**
+   * Get all property quotas organized by quota category for a given property.
+   * This will charge 1 property quota from the category with the most quota.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Quotas from this property will be listed in the response.
+   *   Format: `properties/{property}/propertyQuotasSnapshot`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.analytics.data.v1alpha.PropertyQuotasSnapshot|PropertyQuotasSnapshot}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js</caption>
+   * region_tag:analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async
+   */
+  getPropertyQuotasSnapshot(
+    request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      (
+        | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getPropertyQuotasSnapshot(
+    request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPropertyQuotasSnapshot(
+    request: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPropertyQuotasSnapshot(
+    request?: protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+          | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1alpha.IPropertyQuotasSnapshot,
+      (
+        | protos.google.analytics.data.v1alpha.IGetPropertyQuotasSnapshotRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPropertyQuotasSnapshot(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
    * Retrieves a report task's content. After requesting the `CreateReportTask`,
    * you are able to retrieve the report content once the report is
    * ACTIVE. This method will return an error if the report task's state is not
@@ -1620,6 +1726,12 @@ export class AlphaAnalyticsDataClient {
    * returns a report task and initiates a long running
    * asynchronous request to form a customized report of your Google Analytics
    * event data.
+   *
+   * A report task will be retained and available for querying for 72 hours
+   * after it has been created.
+   *
+   * A report task created by one user can be listed and queried by all users
+   * who have access to the property.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2641,6 +2753,33 @@ export class AlphaAnalyticsDataClient {
    */
   matchPropertyFromPropertyName(propertyName: string) {
     return this.pathTemplates.propertyPathTemplate.match(propertyName).property;
+  }
+
+  /**
+   * Return a fully-qualified propertyQuotasSnapshot resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  propertyQuotasSnapshotPath(property: string) {
+    return this.pathTemplates.propertyQuotasSnapshotPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from PropertyQuotasSnapshot resource.
+   *
+   * @param {string} propertyQuotasSnapshotName
+   *   A fully-qualified path representing PropertyQuotasSnapshot resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromPropertyQuotasSnapshotName(
+    propertyQuotasSnapshotName: string
+  ) {
+    return this.pathTemplates.propertyQuotasSnapshotPathTemplate.match(
+      propertyQuotasSnapshotName
+    ).property;
   }
 
   /**
