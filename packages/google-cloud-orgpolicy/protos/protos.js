@@ -1160,6 +1160,8 @@
                                     case 1:
                                     case 2:
                                     case 3:
+                                    case 4:
+                                    case 5:
                                         break;
                                     }
                             }
@@ -1236,6 +1238,14 @@
                                     case "DELETE":
                                     case 3:
                                         message.methodTypes[i] = 3;
+                                        break;
+                                    case "REMOVE_GRANT":
+                                    case 4:
+                                        message.methodTypes[i] = 4;
+                                        break;
+                                    case "GOVERN_TAGS":
+                                    case 5:
+                                        message.methodTypes[i] = 5;
                                         break;
                                     }
                             }
@@ -1357,6 +1367,8 @@
                          * @property {number} CREATE=1 CREATE value
                          * @property {number} UPDATE=2 UPDATE value
                          * @property {number} DELETE=3 DELETE value
+                         * @property {number} REMOVE_GRANT=4 REMOVE_GRANT value
+                         * @property {number} GOVERN_TAGS=5 GOVERN_TAGS value
                          */
                         CustomConstraint.MethodType = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1364,6 +1376,8 @@
                             values[valuesById[1] = "CREATE"] = 1;
                             values[valuesById[2] = "UPDATE"] = 2;
                             values[valuesById[3] = "DELETE"] = 3;
+                            values[valuesById[4] = "REMOVE_GRANT"] = 4;
+                            values[valuesById[5] = "GOVERN_TAGS"] = 5;
                             return values;
                         })();
     
