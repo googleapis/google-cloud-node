@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async]
+function main(name, actionType) {
+  // [START gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,20 +29,15 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the order.
-   *  Format: `projects/{project}/locations/{location}/orders/{order}`
+   *  Required. The name of the comment.
+   *  Format:
+   *  `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
    */
   // const name = 'abc123'
   /**
-   *  Optional. An optional unique identifier for this request. See
-   *  AIP-155 (https://google.aip.dev/155).
+   *  Required. The action type of the recorded action.
    */
-  // const requestId = 'abc123'
-  /**
-   *  Optional. Type of this request. If unset, the request type is assumed to be
-   *  `INFO_PENDING`.
-   */
-  // const type = {}
+  // const actionType = {}
 
   // Imports the Gdchardwaremanagement library
   const {GDCHardwareManagementClient} = require('@google-cloud/gdchardwaremanagement').v1alpha;
@@ -50,20 +45,20 @@ function main(name) {
   // Instantiates a client
   const gdchardwaremanagementClient = new GDCHardwareManagementClient();
 
-  async function callSubmitOrder() {
+  async function callRecordActionOnComment() {
     // Construct request
     const request = {
       name,
+      actionType,
     };
 
     // Run request
-    const [operation] = await gdchardwaremanagementClient.submitOrder(request);
-    const [response] = await operation.promise();
+    const response = await gdchardwaremanagementClient.recordActionOnComment(request);
     console.log(response);
   }
 
-  callSubmitOrder();
-  // [END gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async]
+  callRecordActionOnComment();
+  // [END gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async]
 }
 
 process.on('unhandledRejection', err => {

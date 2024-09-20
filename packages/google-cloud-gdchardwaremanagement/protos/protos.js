@@ -82,6 +82,24 @@
                         return values;
                     })();
     
+                    /**
+                     * Entity enum.
+                     * @name google.cloud.gdchardwaremanagement.v1alpha.Entity
+                     * @enum {number}
+                     * @property {number} ENTITY_UNSPECIFIED=0 ENTITY_UNSPECIFIED value
+                     * @property {number} GOOGLE=1 GOOGLE value
+                     * @property {number} CUSTOMER=2 CUSTOMER value
+                     * @property {number} VENDOR=3 VENDOR value
+                     */
+                    v1alpha.Entity = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ENTITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GOOGLE"] = 1;
+                        values[valuesById[2] = "CUSTOMER"] = 2;
+                        values[valuesById[3] = "VENDOR"] = 3;
+                        return values;
+                    })();
+    
                     v1alpha.Order = (function() {
     
                         /**
@@ -498,6 +516,7 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 12:
                                 case 3:
                                 case 4:
                                 case 5:
@@ -615,6 +634,10 @@
                             case "SUBMITTED":
                             case 2:
                                 message.state = 2;
+                                break;
+                            case "INFO_COMPLETE":
+                            case 12:
+                                message.state = 12;
                                 break;
                             case "ACCEPTED":
                             case 3:
@@ -828,6 +851,7 @@
                          * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
                          * @property {number} DRAFT=1 DRAFT value
                          * @property {number} SUBMITTED=2 SUBMITTED value
+                         * @property {number} INFO_COMPLETE=12 INFO_COMPLETE value
                          * @property {number} ACCEPTED=3 ACCEPTED value
                          * @property {number} ADDITIONAL_INFO_NEEDED=4 ADDITIONAL_INFO_NEEDED value
                          * @property {number} BUILDING=5 BUILDING value
@@ -843,6 +867,7 @@
                             values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "DRAFT"] = 1;
                             values[valuesById[2] = "SUBMITTED"] = 2;
+                            values[valuesById[12] = "INFO_COMPLETE"] = 12;
                             values[valuesById[3] = "ACCEPTED"] = 3;
                             values[valuesById[4] = "ADDITIONAL_INFO_NEEDED"] = 4;
                             values[valuesById[5] = "BUILDING"] = 5;
@@ -890,6 +915,7 @@
                          * @property {string|null} [googleMapsPinUri] Site googleMapsPinUri
                          * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.ITimePeriod>|null} [accessTimes] Site accessTimes
                          * @property {string|null} [notes] Site notes
+                         * @property {string|null} [customerSiteId] Site customerSiteId
                          */
     
                         /**
@@ -990,6 +1016,14 @@
                         Site.prototype.notes = "";
     
                         /**
+                         * Site customerSiteId.
+                         * @member {string} customerSiteId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Site
+                         * @instance
+                         */
+                        Site.prototype.customerSiteId = "";
+    
+                        /**
                          * Creates a new Site instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Site
@@ -1035,6 +1069,8 @@
                                     $root.google.cloud.gdchardwaremanagement.v1alpha.TimePeriod.encode(message.accessTimes[i], writer.uint32(/* id 26, wireType 2 =*/210).fork()).ldelim();
                             if (message.notes != null && Object.hasOwnProperty.call(message, "notes"))
                                 writer.uint32(/* id 27, wireType 2 =*/218).string(message.notes);
+                            if (message.customerSiteId != null && Object.hasOwnProperty.call(message, "customerSiteId"))
+                                writer.uint32(/* id 28, wireType 2 =*/226).string(message.customerSiteId);
                             return writer;
                         };
     
@@ -1130,6 +1166,10 @@
                                         message.notes = reader.string();
                                         break;
                                     }
+                                case 28: {
+                                        message.customerSiteId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1212,6 +1252,9 @@
                             if (message.notes != null && message.hasOwnProperty("notes"))
                                 if (!$util.isString(message.notes))
                                     return "notes: string expected";
+                            if (message.customerSiteId != null && message.hasOwnProperty("customerSiteId"))
+                                if (!$util.isString(message.customerSiteId))
+                                    return "customerSiteId: string expected";
                             return null;
                         };
     
@@ -1269,6 +1312,8 @@
                             }
                             if (object.notes != null)
                                 message.notes = String(object.notes);
+                            if (object.customerSiteId != null)
+                                message.customerSiteId = String(object.customerSiteId);
                             return message;
                         };
     
@@ -1298,6 +1343,7 @@
                                 object.displayName = "";
                                 object.description = "";
                                 object.notes = "";
+                                object.customerSiteId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1326,6 +1372,8 @@
                             }
                             if (message.notes != null && message.hasOwnProperty("notes"))
                                 object.notes = message.notes;
+                            if (message.customerSiteId != null && message.hasOwnProperty("customerSiteId"))
+                                object.customerSiteId = message.customerSiteId;
                             return object;
                         };
     
@@ -2627,6 +2675,8 @@
                          * @property {Object.<string,string>|null} [labels] Comment labels
                          * @property {string|null} [author] Comment author
                          * @property {string|null} [text] Comment text
+                         * @property {google.protobuf.ITimestamp|null} [customerViewedTime] Comment customerViewedTime
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.Entity|null} [authorEntity] Comment authorEntity
                          */
     
                         /**
@@ -2686,6 +2736,22 @@
                         Comment.prototype.text = "";
     
                         /**
+                         * Comment customerViewedTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} customerViewedTime
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Comment
+                         * @instance
+                         */
+                        Comment.prototype.customerViewedTime = null;
+    
+                        /**
+                         * Comment authorEntity.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.Entity} authorEntity
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Comment
+                         * @instance
+                         */
+                        Comment.prototype.authorEntity = 0;
+    
+                        /**
                          * Creates a new Comment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Comment
@@ -2720,6 +2786,10 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.author);
                             if (message.text != null && Object.hasOwnProperty.call(message, "text"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.text);
+                            if (message.customerViewedTime != null && Object.hasOwnProperty.call(message, "customerViewedTime"))
+                                $root.google.protobuf.Timestamp.encode(message.customerViewedTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.authorEntity != null && Object.hasOwnProperty.call(message, "authorEntity"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.authorEntity);
                             return writer;
                         };
     
@@ -2793,6 +2863,14 @@
                                         message.text = reader.string();
                                         break;
                                     }
+                                case 6: {
+                                        message.customerViewedTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.authorEntity = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2850,6 +2928,21 @@
                             if (message.text != null && message.hasOwnProperty("text"))
                                 if (!$util.isString(message.text))
                                     return "text: string expected";
+                            if (message.customerViewedTime != null && message.hasOwnProperty("customerViewedTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.customerViewedTime);
+                                if (error)
+                                    return "customerViewedTime." + error;
+                            }
+                            if (message.authorEntity != null && message.hasOwnProperty("authorEntity"))
+                                switch (message.authorEntity) {
+                                default:
+                                    return "authorEntity: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2883,6 +2976,35 @@
                                 message.author = String(object.author);
                             if (object.text != null)
                                 message.text = String(object.text);
+                            if (object.customerViewedTime != null) {
+                                if (typeof object.customerViewedTime !== "object")
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Comment.customerViewedTime: object expected");
+                                message.customerViewedTime = $root.google.protobuf.Timestamp.fromObject(object.customerViewedTime);
+                            }
+                            switch (object.authorEntity) {
+                            default:
+                                if (typeof object.authorEntity === "number") {
+                                    message.authorEntity = object.authorEntity;
+                                    break;
+                                }
+                                break;
+                            case "ENTITY_UNSPECIFIED":
+                            case 0:
+                                message.authorEntity = 0;
+                                break;
+                            case "GOOGLE":
+                            case 1:
+                                message.authorEntity = 1;
+                                break;
+                            case "CUSTOMER":
+                            case 2:
+                                message.authorEntity = 2;
+                                break;
+                            case "VENDOR":
+                            case 3:
+                                message.authorEntity = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2906,6 +3028,8 @@
                                 object.createTime = null;
                                 object.author = "";
                                 object.text = "";
+                                object.customerViewedTime = null;
+                                object.authorEntity = options.enums === String ? "ENTITY_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2921,6 +3045,10 @@
                                 object.author = message.author;
                             if (message.text != null && message.hasOwnProperty("text"))
                                 object.text = message.text;
+                            if (message.customerViewedTime != null && message.hasOwnProperty("customerViewedTime"))
+                                object.customerViewedTime = $root.google.protobuf.Timestamp.toObject(message.customerViewedTime, options);
+                            if (message.authorEntity != null && message.hasOwnProperty("authorEntity"))
+                                object.authorEntity = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.Entity[message.authorEntity] === undefined ? message.authorEntity : $root.google.cloud.gdchardwaremanagement.v1alpha.Entity[message.authorEntity] : message.authorEntity;
                             return object;
                         };
     
@@ -3794,6 +3922,7 @@
                          * @property {string|null} [ciqUri] Zone ciqUri
                          * @property {google.cloud.gdchardwaremanagement.v1alpha.IZoneNetworkConfig|null} [networkConfig] Zone networkConfig
                          * @property {string|null} [globallyUniqueId] Zone globallyUniqueId
+                         * @property {Array.<google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig>|null} [subscriptionConfigs] Zone subscriptionConfigs
                          */
     
                         /**
@@ -3807,6 +3936,7 @@
                         function Zone(properties) {
                             this.labels = {};
                             this.contacts = [];
+                            this.subscriptionConfigs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3894,6 +4024,14 @@
                         Zone.prototype.globallyUniqueId = "";
     
                         /**
+                         * Zone subscriptionConfigs.
+                         * @member {Array.<google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig>} subscriptionConfigs
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
+                         * @instance
+                         */
+                        Zone.prototype.subscriptionConfigs = $util.emptyArray;
+    
+                        /**
                          * Creates a new Zone instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.Zone
@@ -3939,6 +4077,9 @@
                                 $root.google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.encode(message.networkConfig, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.globallyUniqueId != null && Object.hasOwnProperty.call(message, "globallyUniqueId"))
                                 writer.uint32(/* id 12, wireType 2 =*/98).string(message.globallyUniqueId);
+                            if (message.subscriptionConfigs != null && message.subscriptionConfigs.length)
+                                for (var i = 0; i < message.subscriptionConfigs.length; ++i)
+                                    $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.encode(message.subscriptionConfigs[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -4034,6 +4175,12 @@
                                         message.globallyUniqueId = reader.string();
                                         break;
                                     }
+                                case 13: {
+                                        if (!(message.subscriptionConfigs && message.subscriptionConfigs.length))
+                                            message.subscriptionConfigs = [];
+                                        message.subscriptionConfigs.push($root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.decode(reader, reader.uint32()));
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4127,6 +4274,15 @@
                             if (message.globallyUniqueId != null && message.hasOwnProperty("globallyUniqueId"))
                                 if (!$util.isString(message.globallyUniqueId))
                                     return "globallyUniqueId: string expected";
+                            if (message.subscriptionConfigs != null && message.hasOwnProperty("subscriptionConfigs")) {
+                                if (!Array.isArray(message.subscriptionConfigs))
+                                    return "subscriptionConfigs: array expected";
+                                for (var i = 0; i < message.subscriptionConfigs.length; ++i) {
+                                    var error = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify(message.subscriptionConfigs[i]);
+                                    if (error)
+                                        return "subscriptionConfigs." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4222,6 +4378,16 @@
                             }
                             if (object.globallyUniqueId != null)
                                 message.globallyUniqueId = String(object.globallyUniqueId);
+                            if (object.subscriptionConfigs) {
+                                if (!Array.isArray(object.subscriptionConfigs))
+                                    throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Zone.subscriptionConfigs: array expected");
+                                message.subscriptionConfigs = [];
+                                for (var i = 0; i < object.subscriptionConfigs.length; ++i) {
+                                    if (typeof object.subscriptionConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.gdchardwaremanagement.v1alpha.Zone.subscriptionConfigs: object expected");
+                                    message.subscriptionConfigs[i] = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.fromObject(object.subscriptionConfigs[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -4238,8 +4404,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.contacts = [];
+                                object.subscriptionConfigs = [];
+                            }
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -4279,6 +4447,11 @@
                                 object.networkConfig = $root.google.cloud.gdchardwaremanagement.v1alpha.ZoneNetworkConfig.toObject(message.networkConfig, options);
                             if (message.globallyUniqueId != null && message.hasOwnProperty("globallyUniqueId"))
                                 object.globallyUniqueId = message.globallyUniqueId;
+                            if (message.subscriptionConfigs && message.subscriptionConfigs.length) {
+                                object.subscriptionConfigs = [];
+                                for (var j = 0; j < message.subscriptionConfigs.length; ++j)
+                                    object.subscriptionConfigs[j] = $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.toObject(message.subscriptionConfigs[j], options);
+                            }
                             return object;
                         };
     
@@ -8261,6 +8434,317 @@
                         return HardwareLocation;
                     })();
     
+                    v1alpha.SubscriptionConfig = (function() {
+    
+                        /**
+                         * Properties of a SubscriptionConfig.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface ISubscriptionConfig
+                         * @property {string|null} [subscriptionId] SubscriptionConfig subscriptionId
+                         * @property {string|null} [billingId] SubscriptionConfig billingId
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState|null} [state] SubscriptionConfig state
+                         */
+    
+                        /**
+                         * Constructs a new SubscriptionConfig.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a SubscriptionConfig.
+                         * @implements ISubscriptionConfig
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig=} [properties] Properties to set
+                         */
+                        function SubscriptionConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SubscriptionConfig subscriptionId.
+                         * @member {string} subscriptionId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         */
+                        SubscriptionConfig.prototype.subscriptionId = "";
+    
+                        /**
+                         * SubscriptionConfig billingId.
+                         * @member {string} billingId
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         */
+                        SubscriptionConfig.prototype.billingId = "";
+    
+                        /**
+                         * SubscriptionConfig state.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState} state
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         */
+                        SubscriptionConfig.prototype.state = 0;
+    
+                        /**
+                         * Creates a new SubscriptionConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig instance
+                         */
+                        SubscriptionConfig.create = function create(properties) {
+                            return new SubscriptionConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriptionConfig message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig} message SubscriptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriptionConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.subscriptionId != null && Object.hasOwnProperty.call(message, "subscriptionId"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.subscriptionId);
+                            if (message.billingId != null && Object.hasOwnProperty.call(message, "billingId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.billingId);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SubscriptionConfig message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig} message SubscriptionConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SubscriptionConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SubscriptionConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriptionConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.subscriptionId = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.billingId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SubscriptionConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SubscriptionConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SubscriptionConfig message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SubscriptionConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.subscriptionId != null && message.hasOwnProperty("subscriptionId"))
+                                if (!$util.isString(message.subscriptionId))
+                                    return "subscriptionId: string expected";
+                            if (message.billingId != null && message.hasOwnProperty("billingId"))
+                                if (!$util.isString(message.billingId))
+                                    return "billingId: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SubscriptionConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} SubscriptionConfig
+                         */
+                        SubscriptionConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig();
+                            if (object.subscriptionId != null)
+                                message.subscriptionId = String(object.subscriptionId);
+                            if (object.billingId != null)
+                                message.billingId = String(object.billingId);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "SUBSCRIPTION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "INACTIVE":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "ERROR":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "FAILED_TO_RETRIEVE":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "COMPLETED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SubscriptionConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig} message SubscriptionConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SubscriptionConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.subscriptionId = "";
+                                object.billingId = "";
+                                object.state = options.enums === String ? "SUBSCRIPTION_STATE_UNSPECIFIED" : 0;
+                            }
+                            if (message.subscriptionId != null && message.hasOwnProperty("subscriptionId"))
+                                object.subscriptionId = message.subscriptionId;
+                            if (message.billingId != null && message.hasOwnProperty("billingId"))
+                                object.billingId = message.billingId;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState[message.state] === undefined ? message.state : $root.google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SubscriptionConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SubscriptionConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for SubscriptionConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        SubscriptionConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig";
+                        };
+    
+                        /**
+                         * SubscriptionState enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState
+                         * @enum {number}
+                         * @property {number} SUBSCRIPTION_STATE_UNSPECIFIED=0 SUBSCRIPTION_STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} INACTIVE=2 INACTIVE value
+                         * @property {number} ERROR=3 ERROR value
+                         * @property {number} FAILED_TO_RETRIEVE=4 FAILED_TO_RETRIEVE value
+                         * @property {number} COMPLETED=5 COMPLETED value
+                         */
+                        SubscriptionConfig.SubscriptionState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SUBSCRIPTION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "INACTIVE"] = 2;
+                            values[valuesById[3] = "ERROR"] = 3;
+                            values[valuesById[4] = "FAILED_TO_RETRIEVE"] = 4;
+                            values[valuesById[5] = "COMPLETED"] = 5;
+                            return values;
+                        })();
+    
+                        return SubscriptionConfig;
+                    })();
+    
                     v1alpha.GDCHardwareManagement = (function() {
     
                         /**
@@ -9049,6 +9533,39 @@
                          * @instance
                          * @param {google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest} request CreateCommentRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|recordActionOnComment}.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @typedef RecordActionOnCommentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.Comment} [response] Comment
+                         */
+    
+                        /**
+                         * Calls RecordActionOnComment.
+                         * @function recordActionOnComment
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} request RecordActionOnCommentRequest message or plain object
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnCommentCallback} callback Node-style callback called with the error, if any, and Comment
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GDCHardwareManagement.prototype.recordActionOnComment = function recordActionOnComment(request, callback) {
+                            return this.rpcCall(recordActionOnComment, $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest, $root.google.cloud.gdchardwaremanagement.v1alpha.Comment, request, callback);
+                        }, "name", { value: "RecordActionOnComment" });
+    
+                        /**
+                         * Calls RecordActionOnComment.
+                         * @function recordActionOnComment
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement
+                         * @instance
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} request RecordActionOnCommentRequest message or plain object
+                         * @returns {Promise<google.cloud.gdchardwaremanagement.v1alpha.Comment>} Promise
                          * @variation 2
                          */
     
@@ -10968,6 +11485,7 @@
                          * @interface ISubmitOrderRequest
                          * @property {string|null} [name] SubmitOrderRequest name
                          * @property {string|null} [requestId] SubmitOrderRequest requestId
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type|null} [type] SubmitOrderRequest type
                          */
     
                         /**
@@ -11002,6 +11520,14 @@
                         SubmitOrderRequest.prototype.requestId = "";
     
                         /**
+                         * SubmitOrderRequest type.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type} type
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest
+                         * @instance
+                         */
+                        SubmitOrderRequest.prototype.type = 0;
+    
+                        /**
                          * Creates a new SubmitOrderRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest
@@ -11029,6 +11555,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
                             return writer;
                         };
     
@@ -11069,6 +11597,10 @@
                                     }
                                 case 2: {
                                         message.requestId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.type = reader.int32();
                                         break;
                                     }
                                 default:
@@ -11112,6 +11644,15 @@
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 if (!$util.isString(message.requestId))
                                     return "requestId: string expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                switch (message.type) {
+                                default:
+                                    return "type: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -11131,6 +11672,26 @@
                                 message.name = String(object.name);
                             if (object.requestId != null)
                                 message.requestId = String(object.requestId);
+                            switch (object.type) {
+                            default:
+                                if (typeof object.type === "number") {
+                                    message.type = object.type;
+                                    break;
+                                }
+                                break;
+                            case "TYPE_UNSPECIFIED":
+                            case 0:
+                                message.type = 0;
+                                break;
+                            case "INFO_PENDING":
+                            case 1:
+                                message.type = 1;
+                                break;
+                            case "INFO_COMPLETE":
+                            case 2:
+                                message.type = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -11150,11 +11711,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.requestId = "";
+                                object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.requestId != null && message.hasOwnProperty("requestId"))
                                 object.requestId = message.requestId;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type[message.type] === undefined ? message.type : $root.google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type[message.type] : message.type;
                             return object;
                         };
     
@@ -11183,6 +11747,22 @@
                             }
                             return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest";
                         };
+    
+                        /**
+                         * Type enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type
+                         * @enum {number}
+                         * @property {number} TYPE_UNSPECIFIED=0 TYPE_UNSPECIFIED value
+                         * @property {number} INFO_PENDING=1 INFO_PENDING value
+                         * @property {number} INFO_COMPLETE=2 INFO_COMPLETE value
+                         */
+                        SubmitOrderRequest.Type = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "INFO_PENDING"] = 1;
+                            values[valuesById[2] = "INFO_COMPLETE"] = 2;
+                            return values;
+                        })();
     
                         return SubmitOrderRequest;
                     })();
@@ -16658,6 +17238,273 @@
                         return CreateCommentRequest;
                     })();
     
+                    v1alpha.RecordActionOnCommentRequest = (function() {
+    
+                        /**
+                         * Properties of a RecordActionOnCommentRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @interface IRecordActionOnCommentRequest
+                         * @property {string|null} [name] RecordActionOnCommentRequest name
+                         * @property {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType|null} [actionType] RecordActionOnCommentRequest actionType
+                         */
+    
+                        /**
+                         * Constructs a new RecordActionOnCommentRequest.
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha
+                         * @classdesc Represents a RecordActionOnCommentRequest.
+                         * @implements IRecordActionOnCommentRequest
+                         * @constructor
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest=} [properties] Properties to set
+                         */
+                        function RecordActionOnCommentRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RecordActionOnCommentRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @instance
+                         */
+                        RecordActionOnCommentRequest.prototype.name = "";
+    
+                        /**
+                         * RecordActionOnCommentRequest actionType.
+                         * @member {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType} actionType
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @instance
+                         */
+                        RecordActionOnCommentRequest.prototype.actionType = 0;
+    
+                        /**
+                         * Creates a new RecordActionOnCommentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest instance
+                         */
+                        RecordActionOnCommentRequest.create = function create(properties) {
+                            return new RecordActionOnCommentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RecordActionOnCommentRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} message RecordActionOnCommentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecordActionOnCommentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.actionType != null && Object.hasOwnProperty.call(message, "actionType"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.actionType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RecordActionOnCommentRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest} message RecordActionOnCommentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RecordActionOnCommentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RecordActionOnCommentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecordActionOnCommentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.actionType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RecordActionOnCommentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RecordActionOnCommentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RecordActionOnCommentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RecordActionOnCommentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                switch (message.actionType) {
+                                default:
+                                    return "actionType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RecordActionOnCommentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} RecordActionOnCommentRequest
+                         */
+                        RecordActionOnCommentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest)
+                                return object;
+                            var message = new $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.actionType) {
+                            default:
+                                if (typeof object.actionType === "number") {
+                                    message.actionType = object.actionType;
+                                    break;
+                                }
+                                break;
+                            case "ACTION_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.actionType = 0;
+                                break;
+                            case "READ":
+                            case 1:
+                                message.actionType = 1;
+                                break;
+                            case "UNREAD":
+                            case 2:
+                                message.actionType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RecordActionOnCommentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest} message RecordActionOnCommentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RecordActionOnCommentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.actionType = options.enums === String ? "ACTION_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.actionType != null && message.hasOwnProperty("actionType"))
+                                object.actionType = options.enums === String ? $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType[message.actionType] === undefined ? message.actionType : $root.google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType[message.actionType] : message.actionType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RecordActionOnCommentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RecordActionOnCommentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for RecordActionOnCommentRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        RecordActionOnCommentRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest";
+                        };
+    
+                        /**
+                         * ActionType enum.
+                         * @name google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType
+                         * @enum {number}
+                         * @property {number} ACTION_TYPE_UNSPECIFIED=0 ACTION_TYPE_UNSPECIFIED value
+                         * @property {number} READ=1 READ value
+                         * @property {number} UNREAD=2 UNREAD value
+                         */
+                        RecordActionOnCommentRequest.ActionType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ACTION_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "READ"] = 1;
+                            values[valuesById[2] = "UNREAD"] = 2;
+                            return values;
+                        })();
+    
+                        return RecordActionOnCommentRequest;
+                    })();
+    
                     v1alpha.ListChangeLogEntriesRequest = (function() {
     
                         /**
@@ -19957,6 +20804,7 @@
                                     return "stateSignal: enum value expected";
                                 case 0:
                                 case 1:
+                                case 1:
                                 case 2:
                                     break;
                                 }
@@ -19989,6 +20837,10 @@
                             case "STATE_SIGNAL_UNSPECIFIED":
                             case 0:
                                 message.stateSignal = 0;
+                                break;
+                            case "FACTORY_TURNUP_CHECKS_PASSED":
+                            case 1:
+                                message.stateSignal = 1;
                                 break;
                             case "READY_FOR_SITE_TURNUP":
                             case 1:
@@ -20060,13 +20912,15 @@
                          * @name google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal
                          * @enum {number}
                          * @property {number} STATE_SIGNAL_UNSPECIFIED=0 STATE_SIGNAL_UNSPECIFIED value
+                         * @property {number} FACTORY_TURNUP_CHECKS_PASSED=1 FACTORY_TURNUP_CHECKS_PASSED value
                          * @property {number} READY_FOR_SITE_TURNUP=1 READY_FOR_SITE_TURNUP value
                          * @property {number} FACTORY_TURNUP_CHECKS_FAILED=2 FACTORY_TURNUP_CHECKS_FAILED value
                          */
                         SignalZoneStateRequest.StateSignal = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "STATE_SIGNAL_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "READY_FOR_SITE_TURNUP"] = 1;
+                            values[valuesById[1] = "FACTORY_TURNUP_CHECKS_PASSED"] = 1;
+                            values["READY_FOR_SITE_TURNUP"] = 1;
                             values[valuesById[2] = "FACTORY_TURNUP_CHECKS_FAILED"] = 2;
                             return values;
                         })();
