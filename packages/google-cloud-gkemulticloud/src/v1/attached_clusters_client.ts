@@ -1166,6 +1166,7 @@ export class AttachedClustersClient {
    *    *   `platform_version`.
    *    *   `proxy_config.kubernetes_secret.name`.
    *    *   `proxy_config.kubernetes_secret.namespace`.
+   *    *   `security_posture_config.vulnerability_mode`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1331,7 +1332,7 @@ export class AttachedClustersClient {
    * @param {string} request.distribution
    *   Required. The Kubernetes distribution of the underlying attached cluster.
    *
-   *   Supported values: ["eks", "aks"].
+   *   Supported values: ["eks", "aks", "generic"].
    * @param {google.cloud.gkemulticloud.v1.AttachedProxyConfig} [request.proxyConfig]
    *   Optional. Proxy configuration for outbound HTTP(S) traffic.
    * @param {object} [options]
