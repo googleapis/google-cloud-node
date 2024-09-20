@@ -8773,6 +8773,16 @@
                             "articleSuggestionModelMetadata",
                             "smartReplyModelMetadata"
                           ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
                         }
                       },
                       "fields": {
@@ -8820,6 +8830,22 @@
                         "smartReplyModelMetadata": {
                           "type": "SmartReplyModelMetadata",
                           "id": 9
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
