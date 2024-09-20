@@ -24,7 +24,7 @@ import {
 } from './file.js';
 import pLimit from 'p-limit';
 import * as path from 'path';
-import {createReadStream, promises as fsp} from 'fs';
+import {createReadStream, existsSync, promises as fsp} from 'fs';
 import {CRC32C} from './crc32c.js';
 import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
@@ -108,6 +108,7 @@ export interface DownloadManyFilesOptions {
   prefix?: string;
   stripPrefix?: string;
   passthroughOptions?: DownloadOptions;
+  skipIfExists?: boolean;
 }
 
 export interface DownloadFileInChunksOptions {
@@ -524,6 +525,8 @@ export class TransferManager {
    * @property {string} [stripPrefix] A prefix to remove from all of the downloaded files.
    * @property {object} [passthroughOptions] {@link DownloadOptions} Options to be passed through
    * to each individual download operation.
+   * @property {boolean} [skipIfExists] Do not download the file if it already exists in
+   * the destination.
    *
    */
   /**
@@ -604,6 +607,12 @@ export class TransferManager {
       }
       if (options.stripPrefix) {
         passThroughOptionsCopy.destination = file.name.replace(regex, '');
+      }
+      if (
+        options.skipIfExists &&
+        existsSync(passThroughOptionsCopy.destination || '')
+      ) {
+        continue;
       }
 
       promises.push(

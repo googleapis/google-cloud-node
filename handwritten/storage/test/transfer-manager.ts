@@ -30,6 +30,7 @@ import {
   TransferManager,
   Storage,
   DownloadResponse,
+  DownloadManyFilesOptions,
 } from '../src/index.js';
 import assert from 'assert';
 import * as path from 'path';
@@ -195,6 +196,10 @@ describe('Transfer Manager', () => {
   });
 
   describe('downloadManyFiles', () => {
+    beforeEach(() => {
+      sandbox.stub(fs, 'existsSync').returns(true);
+    });
+
     it('calls download for each provided file', async () => {
       let count = 0;
       const firstFile = new File(bucket, 'first.txt');
@@ -274,6 +279,27 @@ describe('Transfer Manager', () => {
       const file = new File(bucket, filename);
       file.download = download;
       await transferManager.downloadManyFiles([file], {passthroughOptions});
+    });
+
+    it('does not download files that already exist locally when skipIfExists is true', async () => {
+      const firstFile = new File(bucket, 'first.txt');
+      sandbox.stub(firstFile, 'download').callsFake(options => {
+        assert.strictEqual(
+          (options as DownloadManyFilesOptions).skipIfExists,
+          0
+        );
+      });
+      const secondFile = new File(bucket, 'second.txt');
+      sandbox.stub(secondFile, 'download').callsFake(options => {
+        assert.strictEqual(
+          (options as DownloadManyFilesOptions).skipIfExists,
+          0
+        );
+      });
+
+      const files = [firstFile, secondFile];
+      const options = {skipIfExists: true};
+      await transferManager.downloadManyFiles(files, options);
     });
 
     it('does not set the destination when prefix, strip prefix and passthroughOptions.destination are not provided', async () => {
