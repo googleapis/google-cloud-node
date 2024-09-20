@@ -2370,6 +2370,16 @@
                             "maxOutputTokens"
                           ]
                         },
+                        "_responseLogprobs": {
+                          "oneof": [
+                            "responseLogprobs"
+                          ]
+                        },
+                        "_logprobs": {
+                          "oneof": [
+                            "logprobs"
+                          ]
+                        },
                         "_presencePenalty": {
                           "oneof": [
                             "presencePenalty"
@@ -2443,6 +2453,22 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseLogprobs": {
+                          "type": "bool",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "logprobs": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "presencePenalty": {
@@ -2769,6 +2795,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "logprobsResult": {
+                          "type": "LogprobsResult",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "finishReason": {
                           "type": "FinishReason",
                           "id": 3,
@@ -2820,6 +2853,73 @@
                             "PROHIBITED_CONTENT": 7,
                             "SPII": 8,
                             "MALFORMED_FUNCTION_CALL": 9
+                          }
+                        }
+                      }
+                    },
+                    "LogprobsResult": {
+                      "fields": {
+                        "topCandidates": {
+                          "rule": "repeated",
+                          "type": "TopCandidates",
+                          "id": 1
+                        },
+                        "chosenCandidates": {
+                          "rule": "repeated",
+                          "type": "Candidate",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Candidate": {
+                          "oneofs": {
+                            "_token": {
+                              "oneof": [
+                                "token"
+                              ]
+                            },
+                            "_tokenId": {
+                              "oneof": [
+                                "tokenId"
+                              ]
+                            },
+                            "_logProbability": {
+                              "oneof": [
+                                "logProbability"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "token": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "tokenId": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "logProbability": {
+                              "type": "float",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "TopCandidates": {
+                          "fields": {
+                            "candidates": {
+                              "rule": "repeated",
+                              "type": "Candidate",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -20290,6 +20390,13 @@
                           "rule": "repeated",
                           "type": "Candidate",
                           "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "modelVersion": {
+                          "type": "string",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
