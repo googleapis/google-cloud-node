@@ -4963,6 +4963,8 @@
                           "oneof": [
                             "exportData",
                             "pubSubNotification",
+                            "publishToChronicle",
+                            "publishToScc",
                             "tagResources"
                           ]
                         }
@@ -4975,6 +4977,14 @@
                         "pubSubNotification": {
                           "type": "PubSubNotification",
                           "id": 2
+                        },
+                        "publishToChronicle": {
+                          "type": "PublishToChronicle",
+                          "id": 3
+                        },
+                        "publishToScc": {
+                          "type": "PublishToSecurityCommandCenter",
+                          "id": 4
                         },
                         "tagResources": {
                           "type": "TagResources",
@@ -5028,6 +5038,12 @@
                             "SCORE_INCREASED": 3,
                             "ERROR_CHANGED": 4
                           }
+                        },
+                        "PublishToChronicle": {
+                          "fields": {}
+                        },
+                        "PublishToSecurityCommandCenter": {
+                          "fields": {}
                         },
                         "TagResources": {
                           "fields": {
@@ -5094,6 +5110,10 @@
                         "projectId": {
                           "type": "string",
                           "id": 5
+                        },
+                        "otherCloudStartingLocation": {
+                          "type": "OtherCloudDiscoveryStartingLocation",
+                          "id": 8
                         },
                         "inspectTemplates": {
                           "rule": "repeated",
@@ -5204,6 +5224,10 @@
                           "type": "OrgConfig",
                           "id": 2
                         },
+                        "otherCloudStartingLocation": {
+                          "type": "OtherCloudDiscoveryStartingLocation",
+                          "id": 12
+                        },
                         "inspectTemplates": {
                           "rule": "repeated",
                           "type": "string",
@@ -5285,7 +5309,8 @@
                             "bigQueryTarget",
                             "cloudSqlTarget",
                             "secretsTarget",
-                            "cloudStorageTarget"
+                            "cloudStorageTarget",
+                            "otherCloudTarget"
                           ]
                         }
                       },
@@ -5305,6 +5330,10 @@
                         "cloudStorageTarget": {
                           "type": "CloudStorageDiscoveryTarget",
                           "id": 4
+                        },
+                        "otherCloudTarget": {
+                          "type": "OtherCloudDiscoveryTarget",
+                          "id": 5
                         }
                       }
                     },
@@ -5956,6 +5985,257 @@
                         }
                       }
                     },
+                    "OtherCloudDiscoveryTarget": {
+                      "oneofs": {
+                        "cadence": {
+                          "oneof": [
+                            "generationCadence",
+                            "disabled"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dataSourceType": {
+                          "type": "DataSourceType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "filter": {
+                          "type": "DiscoveryOtherCloudFilter",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "conditions": {
+                          "type": "DiscoveryOtherCloudConditions",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "generationCadence": {
+                          "type": "DiscoveryOtherCloudGenerationCadence",
+                          "id": 4
+                        },
+                        "disabled": {
+                          "type": "Disabled",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DiscoveryOtherCloudFilter": {
+                      "oneofs": {
+                        "filter": {
+                          "oneof": [
+                            "collection",
+                            "singleResource",
+                            "others"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "collection": {
+                          "type": "OtherCloudResourceCollection",
+                          "id": 1
+                        },
+                        "singleResource": {
+                          "type": "OtherCloudSingleResourceReference",
+                          "id": 2
+                        },
+                        "others": {
+                          "type": "AllOtherResources",
+                          "id": 100,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OtherCloudResourceCollection": {
+                      "oneofs": {
+                        "pattern": {
+                          "oneof": [
+                            "includeRegexes"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "includeRegexes": {
+                          "type": "OtherCloudResourceRegexes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OtherCloudResourceRegexes": {
+                      "fields": {
+                        "patterns": {
+                          "rule": "repeated",
+                          "type": "OtherCloudResourceRegex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OtherCloudResourceRegex": {
+                      "oneofs": {
+                        "resourceRegex": {
+                          "oneof": [
+                            "amazonS3BucketRegex"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "amazonS3BucketRegex": {
+                          "type": "AmazonS3BucketRegex",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AwsAccountRegex": {
+                      "fields": {
+                        "accountIdRegex": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AmazonS3BucketRegex": {
+                      "fields": {
+                        "awsAccountRegex": {
+                          "type": "AwsAccountRegex",
+                          "id": 1
+                        },
+                        "bucketNameRegex": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OtherCloudSingleResourceReference": {
+                      "oneofs": {
+                        "resource": {
+                          "oneof": [
+                            "amazonS3Bucket"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "amazonS3Bucket": {
+                          "type": "AmazonS3Bucket",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AwsAccount": {
+                      "fields": {
+                        "accountId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AmazonS3Bucket": {
+                      "fields": {
+                        "awsAccount": {
+                          "type": "AwsAccount",
+                          "id": 1
+                        },
+                        "bucketName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryOtherCloudConditions": {
+                      "oneofs": {
+                        "conditions": {
+                          "oneof": [
+                            "amazonS3BucketConditions"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "minAge": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "amazonS3BucketConditions": {
+                          "type": "AmazonS3BucketConditions",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "AmazonS3BucketConditions": {
+                      "fields": {
+                        "bucketTypes": {
+                          "rule": "repeated",
+                          "type": "BucketType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "objectStorageClasses": {
+                          "rule": "repeated",
+                          "type": "ObjectStorageClass",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "BucketType": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "TYPE_ALL_SUPPORTED": 1,
+                            "TYPE_GENERAL_PURPOSE": 2
+                          }
+                        },
+                        "ObjectStorageClass": {
+                          "values": {
+                            "UNSPECIFIED": 0,
+                            "ALL_SUPPORTED_CLASSES": 1,
+                            "STANDARD": 2,
+                            "STANDARD_INFREQUENT_ACCESS": 4,
+                            "GLACIER_INSTANT_RETRIEVAL": 6,
+                            "INTELLIGENT_TIERING": 7
+                          }
+                        }
+                      }
+                    },
+                    "DiscoveryOtherCloudGenerationCadence": {
+                      "fields": {
+                        "refreshFrequency": {
+                          "type": "DataProfileUpdateFrequency",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inspectTemplateModifiedCadence": {
+                          "type": "DiscoveryInspectTemplateModifiedCadence",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "DiscoveryStartingLocation": {
                       "oneofs": {
                         "location": {
@@ -5973,6 +6253,43 @@
                         "folderId": {
                           "type": "int64",
                           "id": 2
+                        }
+                      }
+                    },
+                    "OtherCloudDiscoveryStartingLocation": {
+                      "oneofs": {
+                        "location": {
+                          "oneof": [
+                            "awsLocation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "awsLocation": {
+                          "type": "AwsDiscoveryStartingLocation",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "AwsDiscoveryStartingLocation": {
+                          "oneofs": {
+                            "scope": {
+                              "oneof": [
+                                "accountId",
+                                "allAssetInventoryAssets"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "accountId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "allAssetInventoryAssets": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
