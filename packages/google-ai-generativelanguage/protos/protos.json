@@ -1550,11 +1550,56 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "googleSearchRetrieval": {
+                          "type": "GoogleSearchRetrieval",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "codeExecution": {
                           "type": "CodeExecution",
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleSearchRetrieval": {
+                      "fields": {
+                        "dynamicRetrievalConfig": {
+                          "type": "DynamicRetrievalConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "DynamicRetrievalConfig": {
+                      "oneofs": {
+                        "_dynamicThreshold": {
+                          "oneof": [
+                            "dynamicThreshold"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "dynamicThreshold": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "MODE_DYNAMIC": 1
                           }
                         }
                       }
@@ -1735,6 +1780,13 @@
                         "maxItems": {
                           "type": "int64",
                           "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minItems": {
+                          "type": "int64",
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -2101,7 +2153,8 @@
                         "HARM_CATEGORY_HARASSMENT": 7,
                         "HARM_CATEGORY_HATE_SPEECH": 8,
                         "HARM_CATEGORY_SEXUALLY_EXPLICIT": 9,
-                        "HARM_CATEGORY_DANGEROUS_CONTENT": 10
+                        "HARM_CATEGORY_DANGEROUS_CONTENT": 10,
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": 11
                       }
                     },
                     "ContentFilter": {
@@ -2204,7 +2257,8 @@
                             "BLOCK_LOW_AND_ABOVE": 1,
                             "BLOCK_MEDIUM_AND_ABOVE": 2,
                             "BLOCK_ONLY_HIGH": 3,
-                            "BLOCK_NONE": 4
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         }
                       }
@@ -2732,6 +2786,26 @@
                           "oneof": [
                             "topK"
                           ]
+                        },
+                        "_presencePenalty": {
+                          "oneof": [
+                            "presencePenalty"
+                          ]
+                        },
+                        "_frequencyPenalty": {
+                          "oneof": [
+                            "frequencyPenalty"
+                          ]
+                        },
+                        "_responseLogprobs": {
+                          "oneof": [
+                            "responseLogprobs"
+                          ]
+                        },
+                        "_logprobs": {
+                          "oneof": [
+                            "logprobs"
+                          ]
                         }
                       },
                       "fields": {
@@ -2795,6 +2869,38 @@
                           "id": 14,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "presencePenalty": {
+                          "type": "float",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "frequencyPenalty": {
+                          "type": "float",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseLogprobs": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "logprobs": {
+                          "type": "int32",
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -2979,6 +3085,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "groundingMetadata": {
+                          "type": "GroundingMetadata",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "avgLogprobs": {
+                          "type": "double",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "logprobsResult": {
+                          "type": "LogprobsResult",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2995,6 +3122,73 @@
                             "PROHIBITED_CONTENT": 8,
                             "SPII": 9,
                             "MALFORMED_FUNCTION_CALL": 10
+                          }
+                        }
+                      }
+                    },
+                    "LogprobsResult": {
+                      "fields": {
+                        "topCandidates": {
+                          "rule": "repeated",
+                          "type": "TopCandidates",
+                          "id": 1
+                        },
+                        "chosenCandidates": {
+                          "rule": "repeated",
+                          "type": "Candidate",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Candidate": {
+                          "oneofs": {
+                            "_token": {
+                              "oneof": [
+                                "token"
+                              ]
+                            },
+                            "_tokenId": {
+                              "oneof": [
+                                "tokenId"
+                              ]
+                            },
+                            "_logProbability": {
+                              "oneof": [
+                                "logProbability"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "token": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "tokenId": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "logProbability": {
+                              "type": "float",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "TopCandidates": {
+                          "fields": {
+                            "candidates": {
+                              "rule": "repeated",
+                              "type": "Candidate",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -3069,6 +3263,183 @@
                         "content": {
                           "type": "Content",
                           "id": 2
+                        }
+                      }
+                    },
+                    "RetrievalMetadata": {
+                      "fields": {
+                        "googleSearchDynamicRetrievalScore": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GroundingMetadata": {
+                      "oneofs": {
+                        "_searchEntryPoint": {
+                          "oneof": [
+                            "searchEntryPoint"
+                          ]
+                        },
+                        "_retrievalMetadata": {
+                          "oneof": [
+                            "retrievalMetadata"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "searchEntryPoint": {
+                          "type": "SearchEntryPoint",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "groundingChunks": {
+                          "rule": "repeated",
+                          "type": "GroundingChunk",
+                          "id": 2
+                        },
+                        "groundingSupports": {
+                          "rule": "repeated",
+                          "type": "GroundingSupport",
+                          "id": 3
+                        },
+                        "retrievalMetadata": {
+                          "type": "RetrievalMetadata",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SearchEntryPoint": {
+                      "fields": {
+                        "renderedContent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sdkBlob": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GroundingChunk": {
+                      "oneofs": {
+                        "chunkType": {
+                          "oneof": [
+                            "web"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "web": {
+                          "type": "Web",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Web": {
+                          "oneofs": {
+                            "_uri": {
+                              "oneof": [
+                                "uri"
+                              ]
+                            },
+                            "_title": {
+                              "oneof": [
+                                "title"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "uri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "title": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Segment": {
+                      "fields": {
+                        "partIndex": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startIndex": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endIndex": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "text": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GroundingSupport": {
+                      "oneofs": {
+                        "_segment": {
+                          "oneof": [
+                            "segment"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "segment": {
+                          "type": "Segment",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "groundingChunkIndices": {
+                          "rule": "repeated",
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "confidenceScores": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 3
                         }
                       }
                     },
@@ -4169,6 +4540,14 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "readerProjectNumbers": {
+                          "rule": "repeated",
+                          "type": "int64",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4719,6 +5098,69 @@
                     },
                     "TransferOwnershipResponse": {
                       "fields": {}
+                    },
+                    "PredictionService": {
+                      "options": {
+                        "(google.api.default_host)": "generativelanguage.googleapis.com"
+                      },
+                      "methods": {
+                        "Predict": {
+                          "requestType": "PredictRequest",
+                          "responseType": "PredictResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{model=models/*}:predict",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "model,instances"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{model=models/*}:predict",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,instances"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "PredictRequest": {
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "generativelanguage.googleapis.com/Model"
+                          }
+                        },
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parameters": {
+                          "type": "google.protobuf.Value",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PredictResponse": {
+                      "fields": {
+                        "predictions": {
+                          "rule": "repeated",
+                          "type": "google.protobuf.Value",
+                          "id": 1
+                        }
+                      }
                     },
                     "RetrieverService": {
                       "options": {
