@@ -16614,6 +16614,34 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "RebaseTunedModel": {
+                          "requestType": "RebaseTunedModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*}/tuningJobs:rebaseTunedModel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,tuned_model_ref",
+                            "(google.longrunning.operation_info).response_type": "TuningJob",
+                            "(google.longrunning.operation_info).metadata_type": "RebaseTunedModelOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*}/tuningJobs:rebaseTunedModel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,tuned_model_ref"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "TuningJob",
+                                "metadata_type": "RebaseTunedModelOperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -16703,6 +16731,54 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/TuningJob"
                           }
+                        }
+                      }
+                    },
+                    "RebaseTunedModelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "tunedModelRef": {
+                          "type": "TunedModelRef",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tuningJob": {
+                          "type": "TuningJob",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "artifactDestination": {
+                          "type": "GcsDestination",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "deployToSameEndpoint": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RebaseTunedModelOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
                         }
                       }
                     },
@@ -17387,6 +17463,40 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TunedModelRef": {
+                      "oneofs": {
+                        "tunedModelRef": {
+                          "oneof": [
+                            "tunedModel",
+                            "tuningJob",
+                            "pipelineJob"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tunedModel": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "tuningJob": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/TuningJob"
+                          }
+                        },
+                        "pipelineJob": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
                           }
                         }
                       }
