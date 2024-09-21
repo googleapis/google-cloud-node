@@ -841,6 +841,18 @@ export namespace google {
 
                     /** GenerationConfig topK */
                     topK?: (number|null);
+
+                    /** GenerationConfig presencePenalty */
+                    presencePenalty?: (number|null);
+
+                    /** GenerationConfig frequencyPenalty */
+                    frequencyPenalty?: (number|null);
+
+                    /** GenerationConfig responseLogprobs */
+                    responseLogprobs?: (boolean|null);
+
+                    /** GenerationConfig logprobs */
+                    logprobs?: (number|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -870,6 +882,18 @@ export namespace google {
                     /** GenerationConfig topK. */
                     public topK?: (number|null);
 
+                    /** GenerationConfig presencePenalty. */
+                    public presencePenalty?: (number|null);
+
+                    /** GenerationConfig frequencyPenalty. */
+                    public frequencyPenalty?: (number|null);
+
+                    /** GenerationConfig responseLogprobs. */
+                    public responseLogprobs?: (boolean|null);
+
+                    /** GenerationConfig logprobs. */
+                    public logprobs?: (number|null);
+
                     /** GenerationConfig _candidateCount. */
                     public _candidateCount?: "candidateCount";
 
@@ -884,6 +908,18 @@ export namespace google {
 
                     /** GenerationConfig _topK. */
                     public _topK?: "topK";
+
+                    /** GenerationConfig _presencePenalty. */
+                    public _presencePenalty?: "presencePenalty";
+
+                    /** GenerationConfig _frequencyPenalty. */
+                    public _frequencyPenalty?: "frequencyPenalty";
+
+                    /** GenerationConfig _responseLogprobs. */
+                    public _responseLogprobs?: "responseLogprobs";
+
+                    /** GenerationConfig _logprobs. */
+                    public _logprobs?: "logprobs";
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
@@ -1319,6 +1355,12 @@ export namespace google {
 
                     /** Candidate tokenCount */
                     tokenCount?: (number|null);
+
+                    /** Candidate avgLogprobs */
+                    avgLogprobs?: (number|null);
+
+                    /** Candidate logprobsResult */
+                    logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
                 }
 
                 /** Represents a Candidate. */
@@ -1347,6 +1389,12 @@ export namespace google {
 
                     /** Candidate tokenCount. */
                     public tokenCount: number;
+
+                    /** Candidate avgLogprobs. */
+                    public avgLogprobs: number;
+
+                    /** Candidate logprobsResult. */
+                    public logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
 
                     /** Candidate _index. */
                     public _index?: "index";
@@ -1444,6 +1492,327 @@ export namespace google {
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10
+                    }
+                }
+
+                /** Properties of a LogprobsResult. */
+                interface ILogprobsResult {
+
+                    /** LogprobsResult topCandidates */
+                    topCandidates?: (google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[]|null);
+
+                    /** LogprobsResult chosenCandidates */
+                    chosenCandidates?: (google.ai.generativelanguage.v1.LogprobsResult.ICandidate[]|null);
+                }
+
+                /** Represents a LogprobsResult. */
+                class LogprobsResult implements ILogprobsResult {
+
+                    /**
+                     * Constructs a new LogprobsResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1.ILogprobsResult);
+
+                    /** LogprobsResult topCandidates. */
+                    public topCandidates: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[];
+
+                    /** LogprobsResult chosenCandidates. */
+                    public chosenCandidates: google.ai.generativelanguage.v1.LogprobsResult.ICandidate[];
+
+                    /**
+                     * Creates a new LogprobsResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LogprobsResult instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1.ILogprobsResult): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Encodes the specified LogprobsResult message. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.verify|verify} messages.
+                     * @param message LogprobsResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1.ILogprobsResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LogprobsResult message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.verify|verify} messages.
+                     * @param message LogprobsResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1.ILogprobsResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LogprobsResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LogprobsResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Decodes a LogprobsResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LogprobsResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Verifies a LogprobsResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LogprobsResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LogprobsResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Creates a plain object from a LogprobsResult message. Also converts values to other types if specified.
+                     * @param message LogprobsResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1.LogprobsResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LogprobsResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LogprobsResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace LogprobsResult {
+
+                    /** Properties of a Candidate. */
+                    interface ICandidate {
+
+                        /** Candidate token */
+                        token?: (string|null);
+
+                        /** Candidate tokenId */
+                        tokenId?: (number|null);
+
+                        /** Candidate logProbability */
+                        logProbability?: (number|null);
+                    }
+
+                    /** Represents a Candidate. */
+                    class Candidate implements ICandidate {
+
+                        /**
+                         * Constructs a new Candidate.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1.LogprobsResult.ICandidate);
+
+                        /** Candidate token. */
+                        public token?: (string|null);
+
+                        /** Candidate tokenId. */
+                        public tokenId?: (number|null);
+
+                        /** Candidate logProbability. */
+                        public logProbability?: (number|null);
+
+                        /** Candidate _token. */
+                        public _token?: "token";
+
+                        /** Candidate _tokenId. */
+                        public _tokenId?: "tokenId";
+
+                        /** Candidate _logProbability. */
+                        public _logProbability?: "logProbability";
+
+                        /**
+                         * Creates a new Candidate instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Candidate instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1.LogprobsResult.ICandidate): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Encodes the specified Candidate message. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.Candidate.verify|verify} messages.
+                         * @param message Candidate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1.LogprobsResult.ICandidate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Candidate message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.Candidate.verify|verify} messages.
+                         * @param message Candidate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1.LogprobsResult.ICandidate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Candidate message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Candidate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Decodes a Candidate message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Candidate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Verifies a Candidate message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Candidate message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Candidate
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Creates a plain object from a Candidate message. Also converts values to other types if specified.
+                         * @param message Candidate
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1.LogprobsResult.Candidate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Candidate to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Candidate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TopCandidates. */
+                    interface ITopCandidates {
+
+                        /** TopCandidates candidates */
+                        candidates?: (google.ai.generativelanguage.v1.LogprobsResult.ICandidate[]|null);
+                    }
+
+                    /** Represents a TopCandidates. */
+                    class TopCandidates implements ITopCandidates {
+
+                        /**
+                         * Constructs a new TopCandidates.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates);
+
+                        /** TopCandidates candidates. */
+                        public candidates: google.ai.generativelanguage.v1.LogprobsResult.ICandidate[];
+
+                        /**
+                         * Creates a new TopCandidates instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TopCandidates instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Encodes the specified TopCandidates message. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.TopCandidates.verify|verify} messages.
+                         * @param message TopCandidates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TopCandidates message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.TopCandidates.verify|verify} messages.
+                         * @param message TopCandidates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TopCandidates message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TopCandidates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Decodes a TopCandidates message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TopCandidates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Verifies a TopCandidates message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TopCandidates message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TopCandidates
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Creates a plain object from a TopCandidates message. Also converts values to other types if specified.
+                         * @param message TopCandidates
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1.LogprobsResult.TopCandidates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TopCandidates to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TopCandidates
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -2189,7 +2558,8 @@ export namespace google {
                     HARM_CATEGORY_HARASSMENT = 7,
                     HARM_CATEGORY_HATE_SPEECH = 8,
                     HARM_CATEGORY_SEXUALLY_EXPLICIT = 9,
-                    HARM_CATEGORY_DANGEROUS_CONTENT = 10
+                    HARM_CATEGORY_DANGEROUS_CONTENT = 10,
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 11
                 }
 
                 /** Properties of a SafetyRating. */
@@ -2424,7 +2794,8 @@ export namespace google {
                         BLOCK_LOW_AND_ABOVE = 1,
                         BLOCK_MEDIUM_AND_ABOVE = 2,
                         BLOCK_ONLY_HIGH = 3,
-                        BLOCK_NONE = 4
+                        BLOCK_NONE = 4,
+                        OFF = 5
                     }
                 }
 

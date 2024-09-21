@@ -324,6 +324,26 @@
                           "oneof": [
                             "topK"
                           ]
+                        },
+                        "_presencePenalty": {
+                          "oneof": [
+                            "presencePenalty"
+                          ]
+                        },
+                        "_frequencyPenalty": {
+                          "oneof": [
+                            "frequencyPenalty"
+                          ]
+                        },
+                        "_responseLogprobs": {
+                          "oneof": [
+                            "responseLogprobs"
+                          ]
+                        },
+                        "_logprobs": {
+                          "oneof": [
+                            "logprobs"
+                          ]
                         }
                       },
                       "fields": {
@@ -370,6 +390,38 @@
                         "topK": {
                           "type": "int32",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "presencePenalty": {
+                          "type": "float",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "frequencyPenalty": {
+                          "type": "float",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "responseLogprobs": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "logprobs": {
+                          "type": "int32",
+                          "id": 18,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -491,6 +543,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "avgLogprobs": {
+                          "type": "double",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "logprobsResult": {
+                          "type": "LogprobsResult",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -507,6 +573,73 @@
                             "PROHIBITED_CONTENT": 8,
                             "SPII": 9,
                             "MALFORMED_FUNCTION_CALL": 10
+                          }
+                        }
+                      }
+                    },
+                    "LogprobsResult": {
+                      "fields": {
+                        "topCandidates": {
+                          "rule": "repeated",
+                          "type": "TopCandidates",
+                          "id": 1
+                        },
+                        "chosenCandidates": {
+                          "rule": "repeated",
+                          "type": "Candidate",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Candidate": {
+                          "oneofs": {
+                            "_token": {
+                              "oneof": [
+                                "token"
+                              ]
+                            },
+                            "_tokenId": {
+                              "oneof": [
+                                "tokenId"
+                              ]
+                            },
+                            "_logProbability": {
+                              "oneof": [
+                                "logProbability"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "token": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "tokenId": {
+                              "type": "int32",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "logProbability": {
+                              "type": "float",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "TopCandidates": {
+                          "fields": {
+                            "candidates": {
+                              "rule": "repeated",
+                              "type": "Candidate",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -670,7 +803,8 @@
                         "HARM_CATEGORY_HARASSMENT": 7,
                         "HARM_CATEGORY_HATE_SPEECH": 8,
                         "HARM_CATEGORY_SEXUALLY_EXPLICIT": 9,
-                        "HARM_CATEGORY_DANGEROUS_CONTENT": 10
+                        "HARM_CATEGORY_DANGEROUS_CONTENT": 10,
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": 11
                       }
                     },
                     "SafetyRating": {
@@ -730,7 +864,8 @@
                             "BLOCK_LOW_AND_ABOVE": 1,
                             "BLOCK_MEDIUM_AND_ABOVE": 2,
                             "BLOCK_ONLY_HIGH": 3,
-                            "BLOCK_NONE": 4
+                            "BLOCK_NONE": 4,
+                            "OFF": 5
                           }
                         }
                       }
