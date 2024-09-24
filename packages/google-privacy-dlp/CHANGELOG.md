@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.10.0...dlp-v5.11.0) (2024-09-24)
+
+
+### Features
+
+* [dlp] action for publishing data profiles to SecOps (formelly known as Chronicle) ([#5691](https://github.com/googleapis/google-cloud-node/issues/5691)) ([106d029](https://github.com/googleapis/google-cloud-node/commit/106d029eacd05fc890dffd1169a19d4596d93c54))
+
 ## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v5.9.0...dlp-v5.10.0) (2024-08-19)
 
 
