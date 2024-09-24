@@ -62,6 +62,7 @@ guides.
   * [Listen For Messages With Custom Attributes](#listen-for-messages-with-custom-attributes)
   * [Subscribe with OpenTelemetry Tracing](#subscribe-with-opentelemetry-tracing)
   * [Modify Push Configuration](#modify-push-configuration)
+  * [Optimistic Subscribe](#optimistic-subscribe)
   * [Publish Avro Records to a Topic](#publish-avro-records-to-a-topic)
   * [Publish Batched Messages](#publish-batched-messages)
   * [Publish Message](#publish-message)
@@ -894,6 +895,25 @@ __Usage:__
 
 
 `node modifyPushConfig.js <topic-name-or-id> <subscription-name-or-id>`
+
+
+-----
+
+
+
+
+### Optimistic Subscribe
+
+Listens for messages from a subscription, creating it if needed.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/optimisticSubscribe.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/optimisticSubscribe.js,samples/README.md)
+
+__Usage:__
+
+
+`node optimisticSubscribe.js <subscription-name-or-id> <topic-name-or-id> [timeout-in-seconds]`
 
 
 -----

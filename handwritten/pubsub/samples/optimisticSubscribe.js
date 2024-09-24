@@ -1,4 +1,4 @@
-// Copyright 2019-2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// This is a generated sample, using the typeless sample bot. Please
+// look for the source TypeScript sample (.ts) for modifications.
+'use strict';
+
 /**
- * This application demonstrates how to perform basic operations on
+ * This sample demonstrates how to perform basic operations on
  * subscriptions with the Google Cloud Pub/Sub API.
  *
  * For more information, see the README.md under /pubsub and the documentation
@@ -21,32 +25,31 @@
  */
 
 // sample-metadata:
-//   title: Listen For Messages
-//   description: Listens for messages from a subscription.
-//   usage: node listenForMessages.js <subscription-name-or-id> [timeout-in-seconds]
+//   title: Optimistic Subscribe
+//   description: Listens for messages from a subscription, creating it if needed.
+//   usage: node optimisticSubscribe.js <subscription-name-or-id> <topic-name-or-id> [timeout-in-seconds]
 
-// [START pubsub_subscriber_async_pull]
-// [START pubsub_quickstart_subscriber]
+// [START pubsub_optimistic_subscribe]
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
 // const subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID';
+// const topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID';
 // const timeout = 60;
 
 // Imports the Google Cloud client library
-import {PubSub, Message} from '@google-cloud/pubsub';
+const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
-function listenForMessages(subscriptionNameOrId: string, timeout: number) {
-  // References an existing subscription; if you are unsure if the
-  // subscription will exist, try the optimisticSubscribe sample.
-  const subscription = pubSubClient.subscription(subscriptionNameOrId);
+function optimisticSubscribe(subscriptionNameOrId, topicNameOrId, timeout) {
+  // Try using an existing subscription
+  let subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Create an event handler to handle messages
   let messageCount = 0;
-  const messageHandler = (message: Message) => {
+  const messageHandler = message => {
     console.log(`Received message ${message.id}:`);
     console.log(`\tData: ${message.data}`);
     console.log(`\tAttributes: ${message.attributes}`);
@@ -56,7 +59,26 @@ function listenForMessages(subscriptionNameOrId: string, timeout: number) {
     message.ack();
   };
 
-  // Listen for new messages until timeout is hit
+  // Set an error handler so that we're notified if the subscription doesn't
+  // already exist.
+  subscription.on('error', async e => {
+    // Resource Not Found
+    if (e.code === 5) {
+      console.log('Subscription not found, creating it');
+      await pubSubClient.createSubscription(
+        topicNameOrId,
+        subscriptionNameOrId
+      );
+
+      // Refresh our subscriber object and re-attach the message handler.
+      subscription = pubSubClient.subscription(subscriptionNameOrId);
+      subscription.on('message', messageHandler);
+    }
+  });
+
+  // Listen for new messages until timeout is hit; this will attempt to
+  // open the actual subscriber streams. If it fails, the error handler
+  // above will be called.
   subscription.on('message', messageHandler);
 
   // Wait a while for the subscription to run. (Part of the sample only.)
@@ -65,15 +87,15 @@ function listenForMessages(subscriptionNameOrId: string, timeout: number) {
     console.log(`${messageCount} message(s) received.`);
   }, timeout * 1000);
 }
-// [END pubsub_subscriber_async_pull]
-// [END pubsub_quickstart_subscriber]
+// [END pubsub_optimistic_subscribe]
 
 function main(
   subscriptionNameOrId = 'YOUR_SUBSCRIPTION_NAME_OR_ID',
+  topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   timeout = 60
 ) {
   timeout = Number(timeout);
-  listenForMessages(subscriptionNameOrId, timeout);
+  optimisticSubscribe(subscriptionNameOrId, topicNameOrId, timeout);
 }
 
 main(...process.argv.slice(2));

@@ -44,7 +44,8 @@ const {PubSub} = require('@google-cloud/pubsub');
 const pubSubClient = new PubSub();
 
 function listenForMessages(subscriptionNameOrId, timeout) {
-  // References an existing subscription
+  // References an existing subscription; if you are unsure if the
+  // subscription will exist, try the optimisticSubscribe sample.
   const subscription = pubSubClient.subscription(subscriptionNameOrId);
 
   // Create an event handler to handle messages
