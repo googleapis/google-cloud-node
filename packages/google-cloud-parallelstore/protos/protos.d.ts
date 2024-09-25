@@ -403,7 +403,8 @@ export namespace google {
                         CREATING = 1,
                         ACTIVE = 2,
                         DELETING = 3,
-                        FAILED = 4
+                        FAILED = 4,
+                        UPGRADING = 5
                     }
                 }
 
