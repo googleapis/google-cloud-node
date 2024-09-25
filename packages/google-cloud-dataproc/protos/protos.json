@@ -5350,7 +5350,8 @@
                       "oneofs": {
                         "sessionConfig": {
                           "oneof": [
-                            "jupyterSession"
+                            "jupyterSession",
+                            "sparkConnectSession"
                           ]
                         }
                       },
@@ -5379,6 +5380,13 @@
                         "jupyterSession": {
                           "type": "JupyterConfig",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkConnectSession": {
+                          "type": "SparkConnectConfig",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5694,7 +5702,8 @@
                       "oneofs": {
                         "sessionConfig": {
                           "oneof": [
-                            "jupyterSession"
+                            "jupyterSession",
+                            "sparkConnectSession"
                           ]
                         }
                       },
@@ -5723,6 +5732,13 @@
                         "jupyterSession": {
                           "type": "JupyterConfig",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkConnectSession": {
+                          "type": "SparkConnectConfig",
+                          "id": 17,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5872,6 +5888,9 @@
                           }
                         }
                       }
+                    },
+                    "SparkConnectConfig": {
+                      "fields": {}
                     },
                     "WorkflowTemplateService": {
                       "options": {
