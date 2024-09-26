@@ -21,9 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as onlinereturnpolicyserviceModule from '../src';
-
-import {PassThrough} from 'stream';
+import * as autofeedsettingsserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
@@ -66,79 +64,18 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
-}
-
-describe('v1beta.OnlineReturnPolicyServiceClient', () => {
+describe('v1beta.AutofeedSettingsServiceClient', () => {
   describe('Common methods', () => {
     it('has apiEndpoint', () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient();
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient();
       const apiEndpoint = client.apiEndpoint;
       assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
     });
 
     it('has universeDomain', () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient();
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient();
       const universeDomain = client.universeDomain;
       assert.strictEqual(universeDomain, 'googleapis.com');
     });
@@ -150,7 +87,7 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
       it('throws DeprecationWarning if static servicePath is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const servicePath =
-          onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient
+          autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient
             .servicePath;
         assert.strictEqual(servicePath, 'merchantapi.googleapis.com');
         assert(stub.called);
@@ -160,7 +97,7 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
       it('throws DeprecationWarning if static apiEndpoint is used', () => {
         const stub = sinon.stub(process, 'emitWarning');
         const apiEndpoint =
-          onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient
+          autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient
             .apiEndpoint;
         assert.strictEqual(apiEndpoint, 'merchantapi.googleapis.com');
         assert(stub.called);
@@ -169,18 +106,18 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {universeDomain: 'example.com'}
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          universeDomain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {universe_domain: 'example.com'}
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          universe_domain: 'example.com',
+        });
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
     });
@@ -191,7 +128,7 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient();
+            new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient();
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.example.com');
           if (saved) {
@@ -205,7 +142,7 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
-            new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
+            new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient(
               {universeDomain: 'configured.example.com'}
             );
           const servicePath = client.apiEndpoint;
@@ -220,59 +157,53 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
     }
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {universe_domain: 'example.com', universeDomain: 'example.net'}
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          universe_domain: 'example.com',
+          universeDomain: 'example.net',
+        });
       });
     });
 
     it('has port', () => {
       const port =
-        onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient
-          .port;
+        autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient();
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            fallback: true,
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          fallback: true,
+        });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.onlineReturnPolicyServiceStub, undefined);
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.autofeedSettingsServiceStub, undefined);
       await client.initialize();
-      assert(client.onlineReturnPolicyServiceStub);
+      assert(client.autofeedSettingsServiceStub);
     });
 
     it('has close method for the initialized client', done => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
-      assert(client.onlineReturnPolicyServiceStub);
+      assert(client.autofeedSettingsServiceStub);
       client.close().then(() => {
         done();
       });
@@ -280,13 +211,11 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
 
     it('has close method for the non-initialized client', done => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      assert.strictEqual(client.onlineReturnPolicyServiceStub, undefined);
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.autofeedSettingsServiceStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -295,12 +224,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -310,12 +237,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -333,71 +258,67 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
     });
   });
 
-  describe('getOnlineReturnPolicy', () => {
-    it('invokes getOnlineReturnPolicy without error', async () => {
+  describe('getAutofeedSettings', () => {
+    it('invokes getAutofeedSettings without error', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
+        new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
       );
-      client.innerApiCalls.getOnlineReturnPolicy =
+      client.innerApiCalls.getAutofeedSettings =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.getOnlineReturnPolicy(request);
+      const [response] = await client.getAutofeedSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getOnlineReturnPolicy as SinonStub
+        client.innerApiCalls.getAutofeedSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getOnlineReturnPolicy as SinonStub
+        client.innerApiCalls.getAutofeedSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getOnlineReturnPolicy without error using callback', async () => {
+    it('invokes getAutofeedSettings without error using callback', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
+        new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
       );
-      client.innerApiCalls.getOnlineReturnPolicy =
+      client.innerApiCalls.getAutofeedSettings =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getOnlineReturnPolicy(
+        client.getAutofeedSettings(
           request,
           (
             err?: Error | null,
-            result?: protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings | null
           ) => {
             if (err) {
               reject(err);
@@ -410,161 +331,131 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.getOnlineReturnPolicy as SinonStub
+        client.innerApiCalls.getAutofeedSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getOnlineReturnPolicy as SinonStub
+        client.innerApiCalls.getAutofeedSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getOnlineReturnPolicy with error', async () => {
+    it('invokes getAutofeedSettings with error', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.getOnlineReturnPolicy = stubSimpleCall(
+      client.innerApiCalls.getAutofeedSettings = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.getOnlineReturnPolicy(request),
-        expectedError
-      );
+      await assert.rejects(client.getAutofeedSettings(request), expectedError);
       const actualRequest = (
-        client.innerApiCalls.getOnlineReturnPolicy as SinonStub
+        client.innerApiCalls.getAutofeedSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.getOnlineReturnPolicy as SinonStub
+        client.innerApiCalls.getAutofeedSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes getOnlineReturnPolicy with closed client', async () => {
+    it('invokes getAutofeedSettings with closed client', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.GetOnlineReturnPolicyRequest',
+        '.google.shopping.merchant.accounts.v1beta.GetAutofeedSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
-      await assert.rejects(
-        client.getOnlineReturnPolicy(request),
-        expectedError
-      );
+      await assert.rejects(client.getAutofeedSettings(request), expectedError);
     });
   });
 
-  describe('listOnlineReturnPolicies', () => {
-    it('invokes listOnlineReturnPolicies without error', async () => {
+  describe('updateAutofeedSettings', () => {
+    it('invokes updateAutofeedSettings without error', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest()
       );
+      request.autofeedSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest',
+        ['autofeedSettings', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-      ];
-      client.innerApiCalls.listOnlineReturnPolicies =
+      request.autofeedSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
+      );
+      client.innerApiCalls.updateAutofeedSettings =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listOnlineReturnPolicies(request);
+      const [response] = await client.updateAutofeedSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listOnlineReturnPolicies as SinonStub
+        client.innerApiCalls.updateAutofeedSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listOnlineReturnPolicies as SinonStub
+        client.innerApiCalls.updateAutofeedSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listOnlineReturnPolicies without error using callback', async () => {
+    it('invokes updateAutofeedSettings without error using callback', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest()
       );
+      request.autofeedSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest',
+        ['autofeedSettings', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-      ];
-      client.innerApiCalls.listOnlineReturnPolicies =
+      request.autofeedSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings()
+      );
+      client.innerApiCalls.updateAutofeedSettings =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listOnlineReturnPolicies(
+        client.updateAutofeedSettings(
           request,
           (
             err?: Error | null,
-            result?:
-              | protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy[]
-              | null
+            result?: protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings | null
           ) => {
             if (err) {
               reject(err);
@@ -577,287 +468,72 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       const actualRequest = (
-        client.innerApiCalls.listOnlineReturnPolicies as SinonStub
+        client.innerApiCalls.updateAutofeedSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listOnlineReturnPolicies as SinonStub
+        client.innerApiCalls.updateAutofeedSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listOnlineReturnPolicies with error', async () => {
+    it('invokes updateAutofeedSettings with error', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest()
       );
+      request.autofeedSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest',
+        ['autofeedSettings', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      request.autofeedSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `autofeed_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
-      client.innerApiCalls.listOnlineReturnPolicies = stubSimpleCall(
+      client.innerApiCalls.updateAutofeedSettings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(
-        client.listOnlineReturnPolicies(request),
+        client.updateAutofeedSettings(request),
         expectedError
       );
       const actualRequest = (
-        client.innerApiCalls.listOnlineReturnPolicies as SinonStub
+        client.innerApiCalls.updateAutofeedSettings as SinonStub
       ).getCall(0).args[0];
       assert.deepStrictEqual(actualRequest, request);
       const actualHeaderRequestParams = (
-        client.innerApiCalls.listOnlineReturnPolicies as SinonStub
+        client.innerApiCalls.updateAutofeedSettings as SinonStub
       ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
       assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
-    it('invokes listOnlineReturnPoliciesStream without error', async () => {
+    it('invokes updateAutofeedSettings with closed client', async () => {
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
+        new protos.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest()
       );
+      request.autofeedSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
+        '.google.shopping.merchant.accounts.v1beta.UpdateAutofeedSettingsRequest',
+        ['autofeedSettings', 'name']
       );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-      ];
-      client.descriptors.page.listOnlineReturnPolicies.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listOnlineReturnPoliciesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOnlineReturnPolicies, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('invokes listOnlineReturnPoliciesStream with error', async () => {
-      const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOnlineReturnPolicies.createStream =
-        stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listOnlineReturnPoliciesStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy[] =
-          [];
-        stream.on(
-          'data',
-          (
-            response: protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy
-          ) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .calledWith(client.innerApiCalls.listOnlineReturnPolicies, request)
-      );
-      assert(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .createStream as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listOnlineReturnPolicies without error', async () => {
-      const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-        generateSampleMessage(
-          new protos.google.shopping.merchant.accounts.v1beta.OnlineReturnPolicy()
-        ),
-      ];
-      client.descriptors.page.listOnlineReturnPolicies.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy[] =
-        [];
-      const iterable = client.listOnlineReturnPoliciesAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
-      );
-    });
-
-    it('uses async iteration with listOnlineReturnPolicies with error', async () => {
-      const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest()
-      );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.shopping.merchant.accounts.v1beta.ListOnlineReturnPoliciesRequest',
-        ['parent']
-      );
-      request.parent = defaultValue1;
-      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
-      const expectedError = new Error('expected');
-      client.descriptors.page.listOnlineReturnPolicies.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listOnlineReturnPoliciesAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.shopping.merchant.accounts.v1beta.IOnlineReturnPolicy[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert(
-        (
-          client.descriptors.page.listOnlineReturnPolicies
-            .asyncIterate as SinonStub
-        )
-          .getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'].includes(
-            expectedHeaderRequestParams
-          )
+      request.autofeedSettings.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.updateAutofeedSettings(request),
+        expectedError
       );
     });
   });
@@ -869,12 +545,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.accountPathTemplate.render = sinon
         .stub()
@@ -911,12 +585,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         issue: 'issueValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.accountIssuePathTemplate.render = sinon
         .stub()
@@ -963,12 +635,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         tax: 'taxValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.accountTaxPathTemplate.render = sinon
         .stub()
@@ -1014,12 +684,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.autofeedSettingsPathTemplate.render = sinon
         .stub()
@@ -1058,12 +726,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.businessIdentityPathTemplate.render = sinon
         .stub()
@@ -1102,12 +768,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.businessInfoPathTemplate.render = sinon
         .stub()
@@ -1144,12 +808,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         email: 'emailValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.emailPreferencesPathTemplate.render = sinon
         .stub()
@@ -1201,12 +863,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.homepagePathTemplate.render = sinon
         .stub()
@@ -1243,12 +903,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         return_policy: 'returnPolicyValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.onlineReturnPolicyPathTemplate.render = sinon
         .stub()
@@ -1308,12 +966,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         program: 'programValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.programPathTemplate.render = sinon
         .stub()
@@ -1360,12 +1016,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         region: 'regionValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.regionPathTemplate.render = sinon
         .stub()
@@ -1411,12 +1065,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         account: 'accountValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.shippingSettingsPathTemplate.render = sinon
         .stub()
@@ -1455,12 +1107,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         version: 'versionValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.termsOfServicePathTemplate.render = sinon
         .stub()
@@ -1497,12 +1147,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         identifier: 'identifierValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.termsOfServiceAgreementStatePathTemplate.render =
         sinon.stub().returns(fakePath);
@@ -1561,12 +1209,10 @@ describe('v1beta.OnlineReturnPolicyServiceClient', () => {
         email: 'emailValue',
       };
       const client =
-        new onlinereturnpolicyserviceModule.v1beta.OnlineReturnPolicyServiceClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
+        new autofeedsettingsserviceModule.v1beta.AutofeedSettingsServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       client.pathTemplates.userPathTemplate.render = sinon
         .stub()

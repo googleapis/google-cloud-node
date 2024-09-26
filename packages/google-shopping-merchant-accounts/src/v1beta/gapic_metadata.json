@@ -163,6 +163,40 @@
         }
       }
     },
+    "AutofeedSettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutofeedSettingsServiceClient",
+          "rpcs": {
+            "GetAutofeedSettings": {
+              "methods": [
+                "getAutofeedSettings"
+              ]
+            },
+            "UpdateAutofeedSettings": {
+              "methods": [
+                "updateAutofeedSettings"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutofeedSettingsServiceClient",
+          "rpcs": {
+            "GetAutofeedSettings": {
+              "methods": [
+                "getAutofeedSettings"
+              ]
+            },
+            "UpdateAutofeedSettings": {
+              "methods": [
+                "updateAutofeedSettings"
+              ]
+            }
+          }
+        }
+      }
+    },
     "BusinessIdentityService": {
       "clients": {
         "grpc": {

@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -389,7 +392,7 @@
                               }
                             },
                             "timeZone": {
-                              "type": "google.type.TimeZone",
+                              "type": "string",
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
@@ -625,7 +628,7 @@
                               "type": "AddAccountService",
                               "id": 4,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           },
@@ -664,8 +667,8 @@
                               },
                               "fields": {
                                 "accountAggregation": {
-                                  "type": "google.protobuf.Empty",
-                                  "id": 2
+                                  "type": "AccountAggregation",
+                                  "id": 103
                                 },
                                 "provider": {
                                   "type": "string",
@@ -786,6 +789,9 @@
                               "id": 2
                             }
                           }
+                        },
+                        "AccountAggregation": {
+                          "fields": {}
                         },
                         "UserService": {
                           "options": {
@@ -1037,6 +1043,113 @@
                             }
                           }
                         },
+                        "AutofeedSettingsService": {
+                          "options": {
+                            "(google.api.default_host)": "merchantapi.googleapis.com",
+                            "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/content"
+                          },
+                          "methods": {
+                            "GetAutofeedSettings": {
+                              "requestType": "GetAutofeedSettingsRequest",
+                              "responseType": "AutofeedSettings",
+                              "options": {
+                                "(google.api.http).get": "/accounts/v1beta/{name=accounts/*/autofeedSettings}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/accounts/v1beta/{name=accounts/*/autofeedSettings}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "UpdateAutofeedSettings": {
+                              "requestType": "UpdateAutofeedSettingsRequest",
+                              "responseType": "AutofeedSettings",
+                              "options": {
+                                "(google.api.http).patch": "/accounts/v1beta/{autofeed_settings.name=accounts/*/autofeedSettings}",
+                                "(google.api.http).body": "autofeed_settings",
+                                "(google.api.method_signature)": "autofeed_settings,update_mask"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/accounts/v1beta/{autofeed_settings.name=accounts/*/autofeedSettings}",
+                                    "body": "autofeed_settings"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "autofeed_settings,update_mask"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "AutofeedSettings": {
+                          "options": {
+                            "(google.api.resource).type": "merchantapi.googleapis.com/AutofeedSettings",
+                            "(google.api.resource).pattern": "accounts/{account}/autofeedSettings",
+                            "(google.api.resource).plural": "autofeedSettings",
+                            "(google.api.resource).singular": "autofeedSettings"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "enableProducts": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "eligible": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "GetAutofeedSettingsRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "merchantapi.googleapis.com/AutofeedSettings"
+                              }
+                            }
+                          }
+                        },
+                        "UpdateAutofeedSettingsRequest": {
+                          "fields": {
+                            "autofeedSettings": {
+                              "type": "AutofeedSettings",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
                         "BusinessIdentityService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",
@@ -1274,6 +1387,11 @@
                               "oneof": [
                                 "customerService"
                               ]
+                            },
+                            "_koreanBusinessRegistrationNumber": {
+                              "oneof": [
+                                "koreanBusinessRegistrationNumber"
+                              ]
                             }
                           },
                           "fields": {
@@ -1311,6 +1429,14 @@
                             "customerService": {
                               "type": "CustomerService",
                               "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "koreanBusinessRegistrationNumber": {
+                              "type": "string",
+                              "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
@@ -3950,11 +4076,17 @@
                           "fields": {
                             "regionCode": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             },
                             "kind": {
                               "type": "TermsOfServiceKind",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
                             }
                           }
                         },
