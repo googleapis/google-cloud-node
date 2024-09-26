@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Name of the management server resource name, in the format
-   *  `projects/{project_id}/locations/{location}/managementServers/{resource_name}`
+   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
    */
   // const name = 'abc123'
 

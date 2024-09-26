@@ -30,10 +30,11 @@ function main(parent) {
    */
   /**
    *  Required. The project and location for which to retrieve management servers
-   *  information, in the format `projects/{project_id}/locations/{location}`. In
-   *  Cloud BackupDR, locations map to GCP regions, for example **us-central1**.
-   *  To retrieve management servers for all locations, use "-" for the
-   *  `{location}` value.
+   *  information, in the format 'projects/{project_id}/locations/{location}'. In
+   *  Cloud BackupDR, locations map to Google Cloud regions, for example
+   *  **us-central1**. To retrieve management servers for all locations, use "-"
+   *  for the
+   *  '{location}' value.
    */
   // const parent = 'abc123'
   /**
