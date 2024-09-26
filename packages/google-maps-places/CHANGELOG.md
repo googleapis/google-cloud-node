@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.6.0...places-v1.7.0) (2024-09-24)
+
+
+### Features
+
+* [places] add `routing_parameters` to SearchNearbyRequest and SearchTextRequest ([#5688](https://github.com/googleapis/google-cloud-node/issues/5688)) ([02aeffb](https://github.com/googleapis/google-cloud-node/commit/02aeffb9d539fb6612c53887f61f398bdd12aaab))
+
 ## [1.6.0](https://github.com/googleapis/google-cloud-node/compare/places-v1.5.0...places-v1.6.0) (2024-05-23)
 
 

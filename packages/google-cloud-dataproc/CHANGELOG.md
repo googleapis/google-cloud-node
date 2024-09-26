@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.9.0...dataproc-v5.10.0) (2024-09-24)
+
+
+### Features
+
+* [dataproc] add resource reference for KMS keys and fix comments ([#5680](https://github.com/googleapis/google-cloud-node/issues/5680)) ([8c7b907](https://github.com/googleapis/google-cloud-node/commit/8c7b907e67852a7fbb91961bce625b3387411525))
+
 ## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.8.0...dataproc-v5.9.0) (2024-09-13)
 
 
