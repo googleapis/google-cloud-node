@@ -15,6 +15,46 @@
                 "getManagementServer"
               ]
             },
+            "GetBackupVault": {
+              "methods": [
+                "getBackupVault"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetDataSource": {
+              "methods": [
+                "getDataSource"
+              ]
+            },
+            "InitiateBackup": {
+              "methods": [
+                "initiateBackup"
+              ]
+            },
+            "FetchAccessToken": {
+              "methods": [
+                "fetchAccessToken"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetBackupPlan": {
+              "methods": [
+                "getBackupPlan"
+              ]
+            },
+            "GetBackupPlanAssociation": {
+              "methods": [
+                "getBackupPlanAssociation"
+              ]
+            },
             "CreateManagementServer": {
               "methods": [
                 "createManagementServer"
@@ -25,11 +65,133 @@
                 "deleteManagementServer"
               ]
             },
+            "CreateBackupVault": {
+              "methods": [
+                "createBackupVault"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "updateBackupVault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "deleteBackupVault"
+              ]
+            },
+            "UpdateDataSource": {
+              "methods": [
+                "updateDataSource"
+              ]
+            },
+            "RemoveDataSource": {
+              "methods": [
+                "removeDataSource"
+              ]
+            },
+            "SetInternalStatus": {
+              "methods": [
+                "setInternalStatus"
+              ]
+            },
+            "AbandonBackup": {
+              "methods": [
+                "abandonBackup"
+              ]
+            },
+            "FinalizeBackup": {
+              "methods": [
+                "finalizeBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "RestoreBackup": {
+              "methods": [
+                "restoreBackup"
+              ]
+            },
+            "CreateBackupPlan": {
+              "methods": [
+                "createBackupPlan"
+              ]
+            },
+            "DeleteBackupPlan": {
+              "methods": [
+                "deleteBackupPlan"
+              ]
+            },
+            "CreateBackupPlanAssociation": {
+              "methods": [
+                "createBackupPlanAssociation"
+              ]
+            },
+            "DeleteBackupPlanAssociation": {
+              "methods": [
+                "deleteBackupPlanAssociation"
+              ]
+            },
+            "TriggerBackup": {
+              "methods": [
+                "triggerBackup"
+              ]
+            },
             "ListManagementServers": {
               "methods": [
                 "listManagementServers",
                 "listManagementServersStream",
                 "listManagementServersAsync"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "listBackupVaults",
+                "listBackupVaultsStream",
+                "listBackupVaultsAsync"
+              ]
+            },
+            "FetchUsableBackupVaults": {
+              "methods": [
+                "fetchUsableBackupVaults",
+                "fetchUsableBackupVaultsStream",
+                "fetchUsableBackupVaultsAsync"
+              ]
+            },
+            "ListDataSources": {
+              "methods": [
+                "listDataSources",
+                "listDataSourcesStream",
+                "listDataSourcesAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListBackupPlans": {
+              "methods": [
+                "listBackupPlans",
+                "listBackupPlansStream",
+                "listBackupPlansAsync"
+              ]
+            },
+            "ListBackupPlanAssociations": {
+              "methods": [
+                "listBackupPlanAssociations",
+                "listBackupPlanAssociationsStream",
+                "listBackupPlanAssociationsAsync"
               ]
             }
           }
@@ -42,6 +204,46 @@
                 "getManagementServer"
               ]
             },
+            "GetBackupVault": {
+              "methods": [
+                "getBackupVault"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetDataSource": {
+              "methods": [
+                "getDataSource"
+              ]
+            },
+            "InitiateBackup": {
+              "methods": [
+                "initiateBackup"
+              ]
+            },
+            "FetchAccessToken": {
+              "methods": [
+                "fetchAccessToken"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
+            "GetBackupPlan": {
+              "methods": [
+                "getBackupPlan"
+              ]
+            },
+            "GetBackupPlanAssociation": {
+              "methods": [
+                "getBackupPlanAssociation"
+              ]
+            },
             "CreateManagementServer": {
               "methods": [
                 "createManagementServer"
@@ -52,11 +254,133 @@
                 "deleteManagementServer"
               ]
             },
+            "CreateBackupVault": {
+              "methods": [
+                "createBackupVault"
+              ]
+            },
+            "UpdateBackupVault": {
+              "methods": [
+                "updateBackupVault"
+              ]
+            },
+            "DeleteBackupVault": {
+              "methods": [
+                "deleteBackupVault"
+              ]
+            },
+            "UpdateDataSource": {
+              "methods": [
+                "updateDataSource"
+              ]
+            },
+            "RemoveDataSource": {
+              "methods": [
+                "removeDataSource"
+              ]
+            },
+            "SetInternalStatus": {
+              "methods": [
+                "setInternalStatus"
+              ]
+            },
+            "AbandonBackup": {
+              "methods": [
+                "abandonBackup"
+              ]
+            },
+            "FinalizeBackup": {
+              "methods": [
+                "finalizeBackup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "updateBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
+            "RestoreBackup": {
+              "methods": [
+                "restoreBackup"
+              ]
+            },
+            "CreateBackupPlan": {
+              "methods": [
+                "createBackupPlan"
+              ]
+            },
+            "DeleteBackupPlan": {
+              "methods": [
+                "deleteBackupPlan"
+              ]
+            },
+            "CreateBackupPlanAssociation": {
+              "methods": [
+                "createBackupPlanAssociation"
+              ]
+            },
+            "DeleteBackupPlanAssociation": {
+              "methods": [
+                "deleteBackupPlanAssociation"
+              ]
+            },
+            "TriggerBackup": {
+              "methods": [
+                "triggerBackup"
+              ]
+            },
             "ListManagementServers": {
               "methods": [
                 "listManagementServers",
                 "listManagementServersStream",
                 "listManagementServersAsync"
+              ]
+            },
+            "ListBackupVaults": {
+              "methods": [
+                "listBackupVaults",
+                "listBackupVaultsStream",
+                "listBackupVaultsAsync"
+              ]
+            },
+            "FetchUsableBackupVaults": {
+              "methods": [
+                "fetchUsableBackupVaults",
+                "fetchUsableBackupVaultsStream",
+                "fetchUsableBackupVaultsAsync"
+              ]
+            },
+            "ListDataSources": {
+              "methods": [
+                "listDataSources",
+                "listDataSourcesStream",
+                "listDataSourcesAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
+              ]
+            },
+            "ListBackupPlans": {
+              "methods": [
+                "listBackupPlans",
+                "listBackupPlansStream",
+                "listBackupPlansAsync"
+              ]
+            },
+            "ListBackupPlanAssociations": {
+              "methods": [
+                "listBackupPlanAssociations",
+                "listBackupPlanAssociationsStream",
+                "listBackupPlanAssociationsAsync"
               ]
             }
           }
