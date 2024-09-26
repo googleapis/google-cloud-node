@@ -16,10 +16,12 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import * as v1alpha from './v1alpha';
-const MarketingplatformAdminServiceClient = v1alpha.MarketingplatformAdminServiceClient;
-type MarketingplatformAdminServiceClient = v1alpha.MarketingplatformAdminServiceClient;
-export {v1alpha, MarketingplatformAdminServiceClient};
-export default {v1alpha, MarketingplatformAdminServiceClient};
-import * as protos from '../protos/protos';
-export {protos}
+/* eslint-disable node/no-missing-require, no-unused-vars */
+const admin = require('@google-cloud/admin');
+
+function main() {
+  const marketingplatformAdminServiceClient =
+    new admin.MarketingplatformAdminServiceClient();
+}
+
+main();

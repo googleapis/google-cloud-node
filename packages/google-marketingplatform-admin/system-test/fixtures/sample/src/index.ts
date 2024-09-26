@@ -19,14 +19,19 @@
 import {MarketingplatformAdminServiceClient} from '@google-cloud/admin';
 
 // check that the client class type name can be used
-function doStuffWithMarketingplatformAdminServiceClient(client: MarketingplatformAdminServiceClient) {
+function doStuffWithMarketingplatformAdminServiceClient(
+  client: MarketingplatformAdminServiceClient
+) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const marketingplatformAdminServiceClient = new MarketingplatformAdminServiceClient();
-  doStuffWithMarketingplatformAdminServiceClient(marketingplatformAdminServiceClient);
+  const marketingplatformAdminServiceClient =
+    new MarketingplatformAdminServiceClient();
+  doStuffWithMarketingplatformAdminServiceClient(
+    marketingplatformAdminServiceClient
+  );
 }
 
 main();
