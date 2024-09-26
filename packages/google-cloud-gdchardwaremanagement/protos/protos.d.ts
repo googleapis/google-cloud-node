@@ -33,6 +33,14 @@ export namespace google {
                     POWER_SUPPLY_DC = 2
                 }
 
+                /** Entity enum. */
+                enum Entity {
+                    ENTITY_UNSPECIFIED = 0,
+                    GOOGLE = 1,
+                    CUSTOMER = 2,
+                    VENDOR = 3
+                }
+
                 /** Properties of an Order. */
                 interface IOrder {
 
@@ -227,6 +235,7 @@ export namespace google {
                         STATE_UNSPECIFIED = 0,
                         DRAFT = 1,
                         SUBMITTED = 2,
+                        INFO_COMPLETE = 12,
                         ACCEPTED = 3,
                         ADDITIONAL_INFO_NEEDED = 4,
                         BUILDING = 5,
@@ -278,6 +287,9 @@ export namespace google {
 
                     /** Site notes */
                     notes?: (string|null);
+
+                    /** Site customerSiteId */
+                    customerSiteId?: (string|null);
                 }
 
                 /** Represents a Site. */
@@ -318,6 +330,9 @@ export namespace google {
 
                     /** Site notes. */
                     public notes: string;
+
+                    /** Site customerSiteId. */
+                    public customerSiteId: string;
 
                     /**
                      * Creates a new Site instance using the specified properties.
@@ -787,6 +802,12 @@ export namespace google {
 
                     /** Comment text */
                     text?: (string|null);
+
+                    /** Comment customerViewedTime */
+                    customerViewedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Comment authorEntity */
+                    authorEntity?: (google.cloud.gdchardwaremanagement.v1alpha.Entity|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Entity|null);
                 }
 
                 /** Represents a Comment. */
@@ -812,6 +833,12 @@ export namespace google {
 
                     /** Comment text. */
                     public text: string;
+
+                    /** Comment customerViewedTime. */
+                    public customerViewedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Comment authorEntity. */
+                    public authorEntity: (google.cloud.gdchardwaremanagement.v1alpha.Entity|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Entity);
 
                     /**
                      * Creates a new Comment instance using the specified properties.
@@ -1205,6 +1232,9 @@ export namespace google {
 
                     /** Zone globallyUniqueId */
                     globallyUniqueId?: (string|null);
+
+                    /** Zone subscriptionConfigs */
+                    subscriptionConfigs?: (google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig[]|null);
                 }
 
                 /** Represents a Zone. */
@@ -1245,6 +1275,9 @@ export namespace google {
 
                     /** Zone globallyUniqueId. */
                     public globallyUniqueId: string;
+
+                    /** Zone subscriptionConfigs. */
+                    public subscriptionConfigs: google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig[];
 
                     /**
                      * Creates a new Zone instance using the specified properties.
@@ -2862,6 +2895,128 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SubscriptionConfig. */
+                interface ISubscriptionConfig {
+
+                    /** SubscriptionConfig subscriptionId */
+                    subscriptionId?: (string|null);
+
+                    /** SubscriptionConfig billingId */
+                    billingId?: (string|null);
+
+                    /** SubscriptionConfig state */
+                    state?: (google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState|null);
+                }
+
+                /** Represents a SubscriptionConfig. */
+                class SubscriptionConfig implements ISubscriptionConfig {
+
+                    /**
+                     * Constructs a new SubscriptionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig);
+
+                    /** SubscriptionConfig subscriptionId. */
+                    public subscriptionId: string;
+
+                    /** SubscriptionConfig billingId. */
+                    public billingId: string;
+
+                    /** SubscriptionConfig state. */
+                    public state: (google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.SubscriptionState);
+
+                    /**
+                     * Creates a new SubscriptionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubscriptionConfig instance
+                     */
+                    public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig): google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig;
+
+                    /**
+                     * Encodes the specified SubscriptionConfig message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify|verify} messages.
+                     * @param message SubscriptionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubscriptionConfig message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig.verify|verify} messages.
+                     * @param message SubscriptionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.ISubscriptionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubscriptionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubscriptionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig;
+
+                    /**
+                     * Decodes a SubscriptionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubscriptionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig;
+
+                    /**
+                     * Verifies a SubscriptionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubscriptionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubscriptionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig;
+
+                    /**
+                     * Creates a plain object from a SubscriptionConfig message. Also converts values to other types if specified.
+                     * @param message SubscriptionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.SubscriptionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubscriptionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubscriptionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubscriptionConfig {
+
+                    /** SubscriptionState enum. */
+                    enum SubscriptionState {
+                        SUBSCRIPTION_STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        INACTIVE = 2,
+                        ERROR = 3,
+                        FAILED_TO_RETRIEVE = 4,
+                        COMPLETED = 5
+                    }
+                }
+
                 /** Represents a GDCHardwareManagement */
                 class GDCHardwareManagement extends $protobuf.rpc.Service {
 
@@ -3205,6 +3360,20 @@ export namespace google {
                     public createComment(request: google.cloud.gdchardwaremanagement.v1alpha.ICreateCommentRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RecordActionOnComment.
+                     * @param request RecordActionOnCommentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Comment
+                     */
+                    public recordActionOnComment(request: google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest, callback: google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnCommentCallback): void;
+
+                    /**
+                     * Calls RecordActionOnComment.
+                     * @param request RecordActionOnCommentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public recordActionOnComment(request: google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest): Promise<google.cloud.gdchardwaremanagement.v1alpha.Comment>;
+
+                    /**
                      * Calls ListChangeLogEntries.
                      * @param request ListChangeLogEntriesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListChangeLogEntriesResponse
@@ -3507,6 +3676,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateCommentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|recordActionOnComment}.
+                     * @param error Error, if any
+                     * @param [response] Comment
+                     */
+                    type RecordActionOnCommentCallback = (error: (Error|null), response?: google.cloud.gdchardwaremanagement.v1alpha.Comment) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|listChangeLogEntries}.
@@ -4247,6 +4423,9 @@ export namespace google {
 
                     /** SubmitOrderRequest requestId */
                     requestId?: (string|null);
+
+                    /** SubmitOrderRequest type */
+                    type?: (google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type|null);
                 }
 
                 /** Represents a SubmitOrderRequest. */
@@ -4263,6 +4442,9 @@ export namespace google {
 
                     /** SubmitOrderRequest requestId. */
                     public requestId: string;
+
+                    /** SubmitOrderRequest type. */
+                    public type: (google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type);
 
                     /**
                      * Creates a new SubmitOrderRequest instance using the specified properties.
@@ -4340,6 +4522,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubmitOrderRequest {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        INFO_PENDING = 1,
+                        INFO_COMPLETE = 2
+                    }
                 }
 
                 /** Properties of a ListSitesRequest. */
@@ -6637,6 +6829,119 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RecordActionOnCommentRequest. */
+                interface IRecordActionOnCommentRequest {
+
+                    /** RecordActionOnCommentRequest name */
+                    name?: (string|null);
+
+                    /** RecordActionOnCommentRequest actionType */
+                    actionType?: (google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType|null);
+                }
+
+                /** Represents a RecordActionOnCommentRequest. */
+                class RecordActionOnCommentRequest implements IRecordActionOnCommentRequest {
+
+                    /**
+                     * Constructs a new RecordActionOnCommentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest);
+
+                    /** RecordActionOnCommentRequest name. */
+                    public name: string;
+
+                    /** RecordActionOnCommentRequest actionType. */
+                    public actionType: (google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType);
+
+                    /**
+                     * Creates a new RecordActionOnCommentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RecordActionOnCommentRequest instance
+                     */
+                    public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest): google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest;
+
+                    /**
+                     * Encodes the specified RecordActionOnCommentRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.verify|verify} messages.
+                     * @param message RecordActionOnCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RecordActionOnCommentRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.verify|verify} messages.
+                     * @param message RecordActionOnCommentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RecordActionOnCommentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RecordActionOnCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest;
+
+                    /**
+                     * Decodes a RecordActionOnCommentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RecordActionOnCommentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest;
+
+                    /**
+                     * Verifies a RecordActionOnCommentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RecordActionOnCommentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RecordActionOnCommentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest;
+
+                    /**
+                     * Creates a plain object from a RecordActionOnCommentRequest message. Also converts values to other types if specified.
+                     * @param message RecordActionOnCommentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RecordActionOnCommentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RecordActionOnCommentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RecordActionOnCommentRequest {
+
+                    /** ActionType enum. */
+                    enum ActionType {
+                        ACTION_TYPE_UNSPECIFIED = 0,
+                        READ = 1,
+                        UNREAD = 2
+                    }
+                }
+
                 /** Properties of a ListChangeLogEntriesRequest. */
                 interface IListChangeLogEntriesRequest {
 
@@ -8059,6 +8364,7 @@ export namespace google {
                     /** StateSignal enum. */
                     enum StateSignal {
                         STATE_SIGNAL_UNSPECIFIED = 0,
+                        FACTORY_TURNUP_CHECKS_PASSED = 1,
                         READY_FOR_SITE_TURNUP = 1,
                         FACTORY_TURNUP_CHECKS_FAILED = 2
                     }

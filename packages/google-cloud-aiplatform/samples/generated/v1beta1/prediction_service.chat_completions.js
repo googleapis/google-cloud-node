@@ -29,9 +29,9 @@ function main(endpoint) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Endpoint requested to serve the prediction.
+   *  Required. The name of the endpoint requested to serve the prediction.
    *  Format:
-   *  `projects/{project}/locations/{location}/endpoints/openapi`
+   *  `projects/{project}/locations/{location}/endpoints/{endpoint}`
    */
   // const endpoint = 'abc123'
   /**

@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -22,6 +25,14 @@
                         "POWER_SUPPLY_UNSPECIFIED": 0,
                         "POWER_SUPPLY_AC": 1,
                         "POWER_SUPPLY_DC": 2
+                      }
+                    },
+                    "Entity": {
+                      "values": {
+                        "ENTITY_UNSPECIFIED": 0,
+                        "GOOGLE": 1,
+                        "CUSTOMER": 2,
+                        "VENDOR": 3
                       }
                     },
                     "Order": {
@@ -154,6 +165,7 @@
                             "STATE_UNSPECIFIED": 0,
                             "DRAFT": 1,
                             "SUBMITTED": 2,
+                            "INFO_COMPLETE": 12,
                             "ACCEPTED": 3,
                             "ADDITIONAL_INFO_NEEDED": 4,
                             "BUILDING": 5,
@@ -250,6 +262,13 @@
                         "notes": {
                           "type": "string",
                           "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customerSiteId": {
+                          "type": "string",
+                          "id": 28,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -543,6 +562,20 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "customerViewedTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "authorEntity": {
+                          "type": "Entity",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -758,6 +791,14 @@
                         "globallyUniqueId": {
                           "type": "string",
                           "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "subscriptionConfigs": {
+                          "rule": "repeated",
+                          "type": "SubscriptionConfig",
+                          "id": 13,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -1198,6 +1239,43 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "SubscriptionConfig": {
+                      "fields": {
+                        "subscriptionId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "billingId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "SubscriptionState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SubscriptionState": {
+                          "values": {
+                            "SUBSCRIPTION_STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "INACTIVE": 2,
+                            "ERROR": 3,
+                            "FAILED_TO_RETRIEVE": 4,
+                            "COMPLETED": 5
                           }
                         }
                       }
@@ -1746,6 +1824,26 @@
                             }
                           ]
                         },
+                        "RecordActionOnComment": {
+                          "requestType": "RecordActionOnCommentRequest",
+                          "responseType": "Comment",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=projects/*/locations/*/orders/*/comments/*}:recordAction",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,action_type"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=projects/*/locations/*/orders/*/comments/*}:recordAction",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,action_type"
+                            }
+                          ]
+                        },
                         "ListChangeLogEntries": {
                           "requestType": "ListChangeLogEntriesRequest",
                           "responseType": "ListChangeLogEntriesResponse",
@@ -2135,6 +2233,22 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "INFO_PENDING": 1,
+                            "INFO_COMPLETE": 2
                           }
                         }
                       }
@@ -2658,6 +2772,34 @@
                         }
                       }
                     },
+                    "RecordActionOnCommentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "gdchardwaremanagement.googleapis.com/Comment"
+                          }
+                        },
+                        "actionType": {
+                          "type": "ActionType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ActionType": {
+                          "values": {
+                            "ACTION_TYPE_UNSPECIFIED": 0,
+                            "READ": 1,
+                            "UNREAD": 2
+                          }
+                        }
+                      }
+                    },
                     "ListChangeLogEntriesRequest": {
                       "fields": {
                         "parent": {
@@ -2976,8 +3118,17 @@
                       },
                       "nested": {
                         "StateSignal": {
+                          "options": {
+                            "allow_alias": true
+                          },
+                          "valuesOptions": {
+                            "READY_FOR_SITE_TURNUP": {
+                              "deprecated": true
+                            }
+                          },
                           "values": {
                             "STATE_SIGNAL_UNSPECIFIED": 0,
+                            "FACTORY_TURNUP_CHECKS_PASSED": 1,
                             "READY_FOR_SITE_TURNUP": 1,
                             "FACTORY_TURNUP_CHECKS_FAILED": 2
                           }

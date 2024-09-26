@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.29.0",
+        "version": "3.30.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -6514,7 +6514,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -6546,6 +6546,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_config",
+                        "type": ".google.cloud.aiplatform.v1.GenerationConfig"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1.CountTokensResponse",
@@ -11234,7 +11238,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -11262,6 +11266,10 @@
                     {
                         "name": "tool_config",
                         "type": ".google.cloud.aiplatform.v1.ToolConfig"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "safety_settings",
@@ -11298,7 +11306,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 96,
+                    "end": 105,
                     "type": "FULL"
                 }
             ],
@@ -11326,6 +11334,10 @@
                     {
                         "name": "tool_config",
                         "type": ".google.cloud.aiplatform.v1.ToolConfig"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "safety_settings",

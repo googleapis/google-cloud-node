@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.5.0...netapp-v0.6.0) (2024-09-24)
+
+
+### Features
+
+* **api:** [netapp] A new rpc 'SwitchActiveReplicaZone' is added to service 'google.cloud.netapp.v1.NetApp' ([#5681](https://github.com/googleapis/google-cloud-node/issues/5681)) ([40d5e35](https://github.com/googleapis/google-cloud-node/commit/40d5e35165672a557513e66505fa2c6c521b45e9))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.4.0...netapp-v0.5.0) (2024-05-21)
 
 

@@ -1166,6 +1166,14 @@ export class PredictionServiceClient {
    * @param {google.cloud.aiplatform.v1.ToolConfig} [request.toolConfig]
    *   Optional. Tool config. This config is shared for all tools provided in the
    *   request.
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request. It is used
+   *   for billing and reporting only.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.
@@ -1443,6 +1451,14 @@ export class PredictionServiceClient {
    * @param {google.cloud.aiplatform.v1.ToolConfig} [request.toolConfig]
    *   Optional. Tool config. This config is shared for all tools provided in the
    *   request.
+   * @param {number[]} [request.labels]
+   *   Optional. The labels with user-defined metadata for the request. It is used
+   *   for billing and reporting only.
+   *
+   *   Label keys and values can be no longer than 63 characters
+   *   (Unicode codepoints) and can only contain lowercase letters, numeric
+   *   characters, underscores, and dashes. International characters are allowed.
+   *   Label values are optional. Label keys must start with a letter.
    * @param {number[]} [request.safetySettings]
    *   Optional. Per request settings for blocking unsafe content.
    *   Enforced on GenerateContentResponse.candidates.

@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.8.0...data-v4.9.0) (2024-09-24)
+
+
+### Features
+
+* [analytics-data] add `GetPropertyQuotasSnapshot` method to the Data API v1alpha ([#5692](https://github.com/googleapis/google-cloud-node/issues/5692)) ([a143a79](https://github.com/googleapis/google-cloud-node/commit/a143a7926ab91dce75a2db2d831d498d3f3524d8))
+
 ## [4.8.0](https://github.com/googleapis/google-cloud-node/compare/data-v4.7.0...data-v4.8.0) (2024-08-09)
 
 

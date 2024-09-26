@@ -63,6 +63,11 @@ function main(endpoint) {
    *  knowledge and scope of the model.
    */
   // const tools = [1,2,3,4]
+  /**
+   *  Optional. Generation config that the model will use to generate the
+   *  response.
+   */
+  // const generationConfig = {}
 
   // Imports the Aiplatform library
   const {LlmUtilityServiceClient} = require('@google-cloud/aiplatform').v1;
