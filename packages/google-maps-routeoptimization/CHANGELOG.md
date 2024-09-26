@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.1.0...routeoptimization-v0.2.0) (2024-09-24)
+
+
+### Features
+
+* [routeoptimization] minor fields and documentation update ([#5677](https://github.com/googleapis/google-cloud-node/issues/5677)) ([90a7e94](https://github.com/googleapis/google-cloud-node/commit/90a7e94a18e2472fd3e942c1006c0d53b5ab33fb))
+
 ## 0.1.0 (2024-05-23)
 
 

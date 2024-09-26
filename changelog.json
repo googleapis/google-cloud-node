@@ -5,6 +5,211 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "ba7cd868aba5d60d8871449302212db526e31dfc",
+          "message": "[gdchardwaremanagement] add an order type field to distinguish a fulfillment request from a sales inquiry",
+          "issues": [
+            "5685"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "d93d9298-086e-439c-a041-016aabf024b5",
+      "createTime": "2024-09-24T17:54:23.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "90a7e94a18e2472fd3e942c1006c0d53b5ab33fb",
+          "message": "[routeoptimization] minor fields and documentation update",
+          "issues": [
+            "5677"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "1c5ed7c7-00dd-45d6-a420-a8cf764e1191",
+      "createTime": "2024-09-24T17:54:23.565Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "727e9971f7980f0b2c6ae14b209d10678e9b857d",
+          "message": "[cloudcontrolspartner] Field behavior for field `display_name` in message `.google.cloud.cloudcontrolspartner.v1beta.Customer` is changed",
+          "issues": [
+            "5679"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "25c82a18-c6b8-4d76-8deb-c76095a176b5",
+      "createTime": "2024-09-24T17:54:23.550Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "106d029eacd05fc890dffd1169a19d4596d93c54",
+          "message": "[dlp] action for publishing data profiles to SecOps (formelly known as Chronicle)",
+          "issues": [
+            "5691"
+          ]
+        }
+      ],
+      "version": "5.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "8e2a3d36-9892-40b3-ba82-3624a3f44621",
+      "createTime": "2024-09-24T17:54:23.528Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "02aeffb9d539fb6612c53887f61f398bdd12aaab",
+          "message": "[places] add `routing_parameters` to SearchNearbyRequest and SearchTextRequest",
+          "issues": [
+            "5688"
+          ]
+        }
+      ],
+      "version": "1.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "ee6b3dfc-a76f-4b00-9056-de9ef78948ea",
+      "createTime": "2024-09-24T17:54:23.429Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "86612677aaaf491b1c55cc850febd693b3ece358",
+          "message": "[orgpolicy] Support adding constraints to new method types REMOVE_GRANTS and GOVERN_TAGS",
+          "issues": [
+            "5687"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "4370c86e-9b86-4d48-aa40-abbdc3f41fbf",
+      "createTime": "2024-09-24T17:54:23.343Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "40d5e35165672a557513e66505fa2c6c521b45e9",
+          "message": "[netapp] A new rpc 'SwitchActiveReplicaZone' is added to service 'google.cloud.netapp.v1.NetApp'",
+          "issues": [
+            "5681"
+          ],
+          "scope": "api"
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "80214e5e-bff2-4b03-9308-7d65a50bf2a8",
+      "createTime": "2024-09-24T17:54:23.311Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8f2a38960f4abe81c7ae4d085e3168c4b7ce07b2",
+          "message": "[gkemulticloud] An optional field `security_posture_config` in message `.google.cloud.gkemulticloud.v1.AttachedCluster` is added",
+          "issues": [
+            "5682"
+          ]
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "27444b90-f795-4947-b286-3f6531abd718",
+      "createTime": "2024-09-24T17:54:23.288Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "0d37602ddd7aa47895a44838e01e4476ce91d1cf",
+          "message": "[dialogflow] created new boolean fields in conversation model for zone isolation and zone separation compliance status",
+          "issues": [
+            "5693"
+          ]
+        }
+      ],
+      "version": "6.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "801ad931-30ee-4212-bbe1-0cab950e08e7",
+      "createTime": "2024-09-24T17:54:23.273Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8c7b907e67852a7fbb91961bce625b3387411525",
+          "message": "[dataproc] add resource reference for KMS keys and fix comments",
+          "issues": [
+            "5680"
+          ]
+        }
+      ],
+      "version": "5.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "b53652f7-892a-4a14-a00d-a9ac6a2a4081",
+      "createTime": "2024-09-24T17:54:23.258Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "100e106f93010cf648295a6df58c1a2f82c01340",
+          "message": "A new field `response_logprbs` is added to message `.google.cloud.aiplatform.v1.GenerationConfig`",
+          "issues": [
+            "5664"
+          ]
+        }
+      ],
+      "version": "3.30.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "07e02664-f5ef-454d-b012-a3504ed4a3fc",
+      "createTime": "2024-09-24T17:54:23.243Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "a143a7926ab91dce75a2db2d831d498d3f3524d8",
+          "message": "[analytics-data] add `GetPropertyQuotasSnapshot` method to the Data API v1alpha",
+          "issues": [
+            "5692"
+          ]
+        }
+      ],
+      "version": "4.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "0e37e6aa-8ea4-4928-b1ed-c8912b63cc6e",
+      "createTime": "2024-09-24T17:54:23.227Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "4f0945ef49b10c71039eafc00ac7e93dd6a3ddee",
           "message": "[chat] If you're a domain administrator or a delegated administrator, you can now include the `useAdminAccess` parameter when you call the Chat API with your administrator privileges with the following methods to manage Chat spaces and membership...",
           "issues": [
@@ -36435,5 +36640,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-09-13T00:35:47.392Z"
+  "updateTime": "2024-09-24T17:54:23.620Z"
 }

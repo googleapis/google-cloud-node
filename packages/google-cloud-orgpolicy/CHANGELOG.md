@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/org-policy-v3.4.0...org-policy-v3.5.0) (2024-09-24)
+
+
+### Features
+
+* [orgpolicy] Support adding constraints to new method types REMOVE_GRANTS and GOVERN_TAGS ([#5687](https://github.com/googleapis/google-cloud-node/issues/5687)) ([8661267](https://github.com/googleapis/google-cloud-node/commit/86612677aaaf491b1c55cc850febd693b3ece358))
+
 ## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/org-policy-v3.3.0...org-policy-v3.4.0) (2024-05-21)
 
 
