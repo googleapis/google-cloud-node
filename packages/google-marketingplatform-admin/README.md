@@ -85,7 +85,8 @@ npm install @google-cloud/admin
 // const pageToken = 'abc123'
 
 // Imports the Admin library
-const {MarketingplatformAdminServiceClient} = require('@google-cloud/admin').v1alpha;
+const {MarketingplatformAdminServiceClient} =
+  require('@google-cloud/admin').v1alpha;
 
 // Instantiates a client
 const adminClient = new MarketingplatformAdminServiceClient();
@@ -99,7 +100,7 @@ async function callListAnalyticsAccountLinks() {
   // Run request
   const iterable = adminClient.listAnalyticsAccountLinksAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
