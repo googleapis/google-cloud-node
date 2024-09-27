@@ -31,6 +31,7 @@ function main(name) {
   /**
    *  Required. The resource name of the terms of service version.
    *  Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
+   *  The identifier format is: `{TermsOfServiceKind}-{country}`
    */
   // const name = 'abc123'
 
