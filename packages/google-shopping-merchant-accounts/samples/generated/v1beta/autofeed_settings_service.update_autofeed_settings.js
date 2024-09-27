@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(account, service) {
-  // [START merchantapi_v1beta_generated_AccountsService_CreateAndConfigureAccount_async]
+function main(autofeedSettings, updateMask) {
+  // [START merchantapi_v1beta_generated_AutofeedSettingsService_UpdateAutofeedSettings_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,48 +29,34 @@ function main(account, service) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The account to be created.
+   *  Required. The new version of the autofeed setting.
    */
-  // const account = {}
+  // const autofeedSettings = {}
   /**
-   *  Optional. Users to be added to the account.
+   *  Required. List of fields being updated.
    */
-  // const users = [1,2,3,4]
-  /**
-   *  Optional. The Terms of Service (ToS) to be accepted immediately upon
-   *  account creation.
-   */
-  // const acceptTermsOfService = {}
-  /**
-   *  Required. An account service between the account to be created and the
-   *  provider account is initialized as part of the creation. At least one such
-   *  service needs to be provided. Currently exactly one of these needs to be
-   *  `account_aggregation`, which means you can only create sub accounts, not
-   *  standalone account through this method. Additional `account_management` or
-   *  `product_management` services may be provided.
-   */
-  // const service = [1,2,3,4]
+  // const updateMask = {}
 
   // Imports the Accounts library
-  const {AccountsServiceClient} = require('@google-shopping/accounts').v1beta;
+  const {AutofeedSettingsServiceClient} = require('@google-shopping/accounts').v1beta;
 
   // Instantiates a client
-  const accountsClient = new AccountsServiceClient();
+  const accountsClient = new AutofeedSettingsServiceClient();
 
-  async function callCreateAndConfigureAccount() {
+  async function callUpdateAutofeedSettings() {
     // Construct request
     const request = {
-      account,
-      service,
+      autofeedSettings,
+      updateMask,
     };
 
     // Run request
-    const response = await accountsClient.createAndConfigureAccount(request);
+    const response = await accountsClient.updateAutofeedSettings(request);
     console.log(response);
   }
 
-  callCreateAndConfigureAccount();
-  // [END merchantapi_v1beta_generated_AccountsService_CreateAndConfigureAccount_async]
+  callUpdateAutofeedSettings();
+  // [END merchantapi_v1beta_generated_AutofeedSettingsService_UpdateAutofeedSettings_async]
 }
 
 process.on('unhandledRejection', err => {

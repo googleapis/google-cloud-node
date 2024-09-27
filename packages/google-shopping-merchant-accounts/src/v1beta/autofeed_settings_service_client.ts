@@ -23,27 +23,26 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
-  PaginationCallback,
-  GaxCall,
 } from 'google-gax';
-import {Transform} from 'stream';
+
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/account_issue_service_client_config.json`.
+ * `src/v1beta/autofeed_settings_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './account_issue_service_client_config.json';
+import * as gapicConfig from './autofeed_settings_service_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service to support `AccountIssueService` API.
+ *  Service to support
+ *  [autofeed](https://support.google.com/merchants/answer/7538732) setting.
  * @class
  * @memberof v1beta
  */
-export class AccountIssueServiceClient {
+export class AutofeedSettingsServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -63,10 +62,10 @@ export class AccountIssueServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  accountIssueServiceStub?: Promise<{[name: string]: Function}>;
+  autofeedSettingsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of AccountIssueServiceClient.
+   * Construct an instance of AutofeedSettingsServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -101,7 +100,7 @@ export class AccountIssueServiceClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new AccountIssueServiceClient({fallback: true}, gax);
+   *     const client = new AutofeedSettingsServiceClient({fallback: true}, gax);
    *     ```
    */
   constructor(
@@ -109,7 +108,8 @@ export class AccountIssueServiceClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof AccountIssueServiceClient;
+    const staticMembers = this
+      .constructor as typeof AutofeedSettingsServiceClient;
     if (
       opts?.universe_domain &&
       opts?.universeDomain &&
@@ -247,20 +247,9 @@ export class AccountIssueServiceClient {
       ),
     };
 
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      listAccountIssues: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'accountIssues'
-      ),
-    };
-
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.shopping.merchant.accounts.v1beta.AccountIssueService',
+      'google.shopping.merchant.accounts.v1beta.AutofeedSettingsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -288,29 +277,32 @@ export class AccountIssueServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.accountIssueServiceStub) {
-      return this.accountIssueServiceStub;
+    if (this.autofeedSettingsServiceStub) {
+      return this.autofeedSettingsServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.shopping.merchant.accounts.v1beta.AccountIssueService.
-    this.accountIssueServiceStub = this._gaxGrpc.createStub(
+    // google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.
+    this.autofeedSettingsServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.shopping.merchant.accounts.v1beta.AccountIssueService'
+            'google.shopping.merchant.accounts.v1beta.AutofeedSettingsService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.shopping.merchant.accounts.v1beta
-            .AccountIssueService,
+            .AutofeedSettingsService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const accountIssueServiceStubMethods = ['listAccountIssues'];
-    for (const methodName of accountIssueServiceStubMethods) {
-      const callPromise = this.accountIssueServiceStub.then(
+    const autofeedSettingsServiceStubMethods = [
+      'getAutofeedSettings',
+      'updateAutofeedSettings',
+    ];
+    for (const methodName of autofeedSettingsServiceStubMethods) {
+      const callPromise = this.autofeedSettingsServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -324,7 +316,7 @@ export class AccountIssueServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -335,7 +327,7 @@ export class AccountIssueServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.accountIssueServiceStub;
+    return this.autofeedSettingsServiceStub;
   }
 
   /**
@@ -422,100 +414,83 @@ export class AccountIssueServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-
   /**
-   * Lists all account issues of a Merchant Center account.
+   * Retrieves the autofeed settings of an account.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of issues.
-   *   Format: `accounts/{account}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of issues to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 users will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccountIssues` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccountIssues` must
-   *   match the call that provided the page token.
-   * @param {string} [request.languageCode]
-   *   Optional. The issues in the response will have human-readable fields in the
-   *   given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
-   *   such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
-   *   used.
-   * @param {string} [request.timeZone]
-   *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
-   *   localize times in human-readable fields. For example 'America/Los_Angeles'.
-   *   If not set, 'America/Los_Angeles' will be used.
+   * @param {string} request.name
+   *   Required. The resource name of the autofeed settings.
+   *   Format: `accounts/{account}/autofeedSettings`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.shopping.merchant.accounts.v1beta.AccountIssue|AccountIssue}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAccountIssuesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings|AutofeedSettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/autofeed_settings_service.get_autofeed_settings.js</caption>
+   * region_tag:merchantapi_v1beta_generated_AutofeedSettingsService_GetAutofeedSettings_async
    */
-  listAccountIssues(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
+  getAutofeedSettings(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IAccountIssue[],
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest | null,
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesResponse,
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
     ]
   >;
-  listAccountIssues(
-    request: protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
+  getAutofeedSettings(
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
     options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesResponse
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
       | null
       | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccountIssue
+      {} | null | undefined
     >
   ): void;
-  listAccountIssues(
-    request: protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
-    callback: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesResponse
+  getAutofeedSettings(
+    request: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
       | null
       | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccountIssue
+      {} | null | undefined
     >
   ): void;
-  listAccountIssues(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
+  getAutofeedSettings(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
-          | protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesResponse
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+          | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
           | null
           | undefined,
-          protos.google.shopping.merchant.accounts.v1beta.IAccountIssue
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
-      | protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesResponse
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
       | null
       | undefined,
-      protos.google.shopping.merchant.accounts.v1beta.IAccountIssue
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.shopping.merchant.accounts.v1beta.IAccountIssue[],
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest | null,
-      protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesResponse,
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IGetAutofeedSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
     ]
   > | void {
     request = request || {};
@@ -531,132 +506,114 @@ export class AccountIssueServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        name: request.name ?? '',
       });
     this.initialize();
-    return this.innerApiCalls.listAccountIssues(request, options, callback);
+    return this.innerApiCalls.getAutofeedSettings(request, options, callback);
   }
-
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Updates the autofeed settings of an account.
+   *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of issues.
-   *   Format: `accounts/{account}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of issues to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 users will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccountIssues` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccountIssues` must
-   *   match the call that provided the page token.
-   * @param {string} [request.languageCode]
-   *   Optional. The issues in the response will have human-readable fields in the
-   *   given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
-   *   such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
-   *   used.
-   * @param {string} [request.timeZone]
-   *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
-   *   localize times in human-readable fields. For example 'America/Los_Angeles'.
-   *   If not set, 'America/Los_Angeles' will be used.
+   * @param {google.shopping.merchant.accounts.v1beta.AutofeedSettings} request.autofeedSettings
+   *   Required. The new version of the autofeed setting.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. List of fields being updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AccountIssue|AccountIssue} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAccountIssuesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.shopping.merchant.accounts.v1beta.AutofeedSettings|AutofeedSettings}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/autofeed_settings_service.update_autofeed_settings.js</caption>
+   * region_tag:merchantapi_v1beta_generated_AutofeedSettingsService_UpdateAutofeedSettings_async
    */
-  listAccountIssuesStream(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
+  updateAutofeedSettings(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
     options?: CallOptions
-  ): Transform {
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateAutofeedSettings(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAutofeedSettings(
+    request: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+    callback: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateAutofeedSettings(
+    request?: protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+          | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.shopping.merchant.accounts.v1beta.IAutofeedSettings,
+      (
+        | protos.google.shopping.merchant.accounts.v1beta.IUpdateAutofeedSettingsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
+        'autofeed_settings.name': request.autofeedSettings!.name ?? '',
       });
-    const defaultCallSettings = this._defaults['listAccountIssues'];
-    const callSettings = defaultCallSettings.merge(options);
     this.initialize();
-    return this.descriptors.page.listAccountIssues.createStream(
-      this.innerApiCalls.listAccountIssues as GaxCall,
+    return this.innerApiCalls.updateAutofeedSettings(
       request,
-      callSettings
+      options,
+      callback
     );
   }
 
-  /**
-   * Equivalent to `listAccountIssues`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The parent, which owns this collection of issues.
-   *   Format: `accounts/{account}`
-   * @param {number} [request.pageSize]
-   *   Optional. The maximum number of issues to return. The service may return
-   *   fewer than this value. If unspecified, at most 50 users will be returned.
-   *   The maximum value is 100; values above 100 will be coerced to 100
-   * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous `ListAccountIssues` call.
-   *   Provide this to retrieve the subsequent page.
-   *
-   *   When paginating, all other parameters provided to `ListAccountIssues` must
-   *   match the call that provided the page token.
-   * @param {string} [request.languageCode]
-   *   Optional. The issues in the response will have human-readable fields in the
-   *   given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
-   *   such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
-   *   used.
-   * @param {string} [request.timeZone]
-   *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
-   *   localize times in human-readable fields. For example 'America/Los_Angeles'.
-   *   If not set, 'America/Los_Angeles' will be used.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.shopping.merchant.accounts.v1beta.AccountIssue|AccountIssue}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/account_issue_service.list_account_issues.js</caption>
-   * region_tag:merchantapi_v1beta_generated_AccountIssueService_ListAccountIssues_async
-   */
-  listAccountIssuesAsync(
-    request?: protos.google.shopping.merchant.accounts.v1beta.IListAccountIssuesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccountIssue> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        parent: request.parent ?? '',
-      });
-    const defaultCallSettings = this._defaults['listAccountIssues'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.listAccountIssues.asyncIterate(
-      this.innerApiCalls['listAccountIssues'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<protos.google.shopping.merchant.accounts.v1beta.IAccountIssue>;
-  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1145,8 +1102,8 @@ export class AccountIssueServiceClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.accountIssueServiceStub && !this._terminated) {
-      return this.accountIssueServiceStub.then(stub => {
+    if (this.autofeedSettingsServiceStub && !this._terminated) {
+      return this.autofeedSettingsServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

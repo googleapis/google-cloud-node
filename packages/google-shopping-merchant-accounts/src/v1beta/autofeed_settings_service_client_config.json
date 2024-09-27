@@ -1,6 +1,6 @@
 {
   "interfaces": {
-    "google.shopping.merchant.accounts.v1beta.RegionsService": {
+    "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService": {
       "retry_codes": {
         "non_idempotent": [],
         "idempotent": [
@@ -32,27 +32,12 @@
         }
       },
       "methods": {
-        "GetRegion": {
+        "GetAutofeedSettings": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
-        "CreateRegion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
-        },
-        "UpdateRegion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
-        },
-        "DeleteRegion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "unavailable",
-          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
-        },
-        "ListRegions": {
+        "UpdateAutofeedSettings": {
           "timeout_millis": 60000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
