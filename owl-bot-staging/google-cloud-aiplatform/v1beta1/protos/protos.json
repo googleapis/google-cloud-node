@@ -29440,7 +29440,7 @@
                           "type": "int64",
                           "id": 29,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "pipelineTaskRerunConfigs": {
@@ -29448,7 +29448,7 @@
                           "type": "PipelineTaskRerunConfig",
                           "id": 30,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -29780,35 +29780,35 @@
                           "type": "int64",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "taskName": {
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "inputs": {
                           "type": "Inputs",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "skipTask": {
                           "type": "bool",
                           "id": 4,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "skipDownstreamTasks": {
                           "type": "bool",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -29820,7 +29820,7 @@
                               "type": "RuntimeArtifact",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -29832,7 +29832,7 @@
                               "type": "ArtifactList",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "parameterValues": {
@@ -29840,7 +29840,7 @@
                               "type": "google.protobuf.Value",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
