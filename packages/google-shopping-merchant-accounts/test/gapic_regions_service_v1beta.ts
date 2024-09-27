@@ -1302,6 +1302,47 @@ describe('v1beta.RegionsServiceClient', () => {
       });
     });
 
+    describe('autofeedSettings', () => {
+      const fakePath = '/rendered/path/autofeedSettings';
+      const expectedParameters = {
+        account: 'accountValue',
+      };
+      const client = new regionsserviceModule.v1beta.RegionsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.autofeedSettingsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.autofeedSettingsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('autofeedSettingsPath', () => {
+        const result = client.autofeedSettingsPath('accountValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.autofeedSettingsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromAutofeedSettingsName', () => {
+        const result = client.matchAccountFromAutofeedSettingsName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.autofeedSettingsPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('businessIdentity', () => {
       const fakePath = '/rendered/path/businessIdentity';
       const expectedParameters = {

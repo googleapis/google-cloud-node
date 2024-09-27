@@ -22,6 +22,8 @@
   * [Accounts_service.list_accounts](#accounts_service.list_accounts)
   * [Accounts_service.list_sub_accounts](#accounts_service.list_sub_accounts)
   * [Accounts_service.update_account](#accounts_service.update_account)
+  * [Autofeed_settings_service.get_autofeed_settings](#autofeed_settings_service.get_autofeed_settings)
+  * [Autofeed_settings_service.update_autofeed_settings](#autofeed_settings_service.update_autofeed_settings)
   * [Business_identity_service.get_business_identity](#business_identity_service.get_business_identity)
   * [Business_identity_service.update_business_identity](#business_identity_service.update_business_identity)
   * [Business_info_service.get_business_info](#business_info_service.get_business_info)
@@ -235,6 +237,40 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-accounts/samples/generated/v1beta/accounts_service.update_account.js`
+
+
+-----
+
+
+
+
+### Autofeed_settings_service.get_autofeed_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.get_autofeed_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.get_autofeed_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.get_autofeed_settings.js`
+
+
+-----
+
+
+
+
+### Autofeed_settings_service.update_autofeed_settings
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.update_autofeed_settings.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.update_autofeed_settings.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-accounts/samples/generated/v1beta/autofeed_settings_service.update_autofeed_settings.js`
 
 
 -----
