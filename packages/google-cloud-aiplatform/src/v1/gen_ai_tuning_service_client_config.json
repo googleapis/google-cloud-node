@@ -35,6 +35,10 @@
         "CancelTuningJob": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "RebaseTunedModel": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

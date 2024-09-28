@@ -99,6 +99,7 @@
   * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
   * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
   * [Gen_ai_tuning_service.list_tuning_jobs](#gen_ai_tuning_service.list_tuning_jobs)
+  * [Gen_ai_tuning_service.rebase_tuned_model](#gen_ai_tuning_service.rebase_tuned_model)
   * [Index_endpoint_service.create_index_endpoint](#index_endpoint_service.create_index_endpoint)
   * [Index_endpoint_service.delete_index_endpoint](#index_endpoint_service.delete_index_endpoint)
   * [Index_endpoint_service.deploy_index](#index_endpoint_service.deploy_index)
@@ -409,6 +410,7 @@
   * [Gen_ai_tuning_service.create_tuning_job](#gen_ai_tuning_service.create_tuning_job)
   * [Gen_ai_tuning_service.get_tuning_job](#gen_ai_tuning_service.get_tuning_job)
   * [Gen_ai_tuning_service.list_tuning_jobs](#gen_ai_tuning_service.list_tuning_jobs)
+  * [Gen_ai_tuning_service.rebase_tuned_model](#gen_ai_tuning_service.rebase_tuned_model)
   * [Index_endpoint_service.create_index_endpoint](#index_endpoint_service.create_index_endpoint)
   * [Index_endpoint_service.delete_index_endpoint](#index_endpoint_service.delete_index_endpoint)
   * [Index_endpoint_service.deploy_index](#index_endpoint_service.deploy_index)
@@ -2139,6 +2141,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.list_tuning_jobs.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.rebase_tuned_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1/gen_ai_tuning_service.rebase_tuned_model.js`
 
 
 -----
@@ -7409,6 +7428,23 @@ __Usage:__
 
 
 `node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.list_tuning_jobs.js`
+
+
+-----
+
+
+
+
+### Gen_ai_tuning_service.rebase_tuned_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-aiplatform/samples/generated/v1beta1/gen_ai_tuning_service.rebase_tuned_model.js`
 
 
 -----

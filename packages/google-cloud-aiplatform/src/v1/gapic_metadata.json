@@ -1048,6 +1048,11 @@
                 "cancelTuningJob"
               ]
             },
+            "RebaseTunedModel": {
+              "methods": [
+                "rebaseTunedModel"
+              ]
+            },
             "ListTuningJobs": {
               "methods": [
                 "listTuningJobs",
@@ -1073,6 +1078,11 @@
             "CancelTuningJob": {
               "methods": [
                 "cancelTuningJob"
+              ]
+            },
+            "RebaseTunedModel": {
+              "methods": [
+                "rebaseTunedModel"
               ]
             },
             "ListTuningJobs": {
