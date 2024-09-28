@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -335,7 +338,8 @@
                             "CREATING": 1,
                             "ACTIVE": 2,
                             "DELETING": 3,
-                            "FAILED": 4
+                            "FAILED": 4,
+                            "UPGRADING": 5
                           }
                         }
                       }
