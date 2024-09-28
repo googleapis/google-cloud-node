@@ -1068,6 +1068,9 @@ export namespace google {
 
                         /** PrimaryProductDataSource countries */
                         countries?: (string[]|null);
+
+                        /** PrimaryProductDataSource defaultRule */
+                        defaultRule?: (google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule|null);
                     }
 
                     /** Represents a PrimaryProductDataSource. */
@@ -1090,6 +1093,9 @@ export namespace google {
 
                         /** PrimaryProductDataSource countries. */
                         public countries: string[];
+
+                        /** PrimaryProductDataSource defaultRule. */
+                        public defaultRule?: (google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule|null);
 
                         /** PrimaryProductDataSource _feedLabel. */
                         public _feedLabel?: "feedLabel";
@@ -1177,6 +1183,103 @@ export namespace google {
 
                     namespace PrimaryProductDataSource {
 
+                        /** Properties of a DefaultRule. */
+                        interface IDefaultRule {
+
+                            /** DefaultRule takeFromDataSources */
+                            takeFromDataSources?: (google.shopping.merchant.datasources.v1beta.IDataSourceReference[]|null);
+                        }
+
+                        /** Represents a DefaultRule. */
+                        class DefaultRule implements IDefaultRule {
+
+                            /**
+                             * Constructs a new DefaultRule.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule);
+
+                            /** DefaultRule takeFromDataSources. */
+                            public takeFromDataSources: google.shopping.merchant.datasources.v1beta.IDataSourceReference[];
+
+                            /**
+                             * Creates a new DefaultRule instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns DefaultRule instance
+                             */
+                            public static create(properties?: google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule): google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Encodes the specified DefaultRule message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.verify|verify} messages.
+                             * @param message DefaultRule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified DefaultRule message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule.verify|verify} messages.
+                             * @param message DefaultRule message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.IDefaultRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a DefaultRule message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns DefaultRule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Decodes a DefaultRule message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns DefaultRule
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Verifies a DefaultRule message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a DefaultRule message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns DefaultRule
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule;
+
+                            /**
+                             * Creates a plain object from a DefaultRule message. Also converts values to other types if specified.
+                             * @param message DefaultRule
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.datasources.v1beta.PrimaryProductDataSource.DefaultRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this DefaultRule to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for DefaultRule
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** Channel enum. */
                         enum Channel {
                             CHANNEL_UNSPECIFIED = 0,
@@ -1194,6 +1297,9 @@ export namespace google {
 
                         /** SupplementalProductDataSource contentLanguage */
                         contentLanguage?: (string|null);
+
+                        /** SupplementalProductDataSource referencingPrimaryDataSources */
+                        referencingPrimaryDataSources?: (google.shopping.merchant.datasources.v1beta.IDataSourceReference[]|null);
                     }
 
                     /** Represents a SupplementalProductDataSource. */
@@ -1210,6 +1316,9 @@ export namespace google {
 
                         /** SupplementalProductDataSource contentLanguage. */
                         public contentLanguage?: (string|null);
+
+                        /** SupplementalProductDataSource referencingPrimaryDataSources. */
+                        public referencingPrimaryDataSources: google.shopping.merchant.datasources.v1beta.IDataSourceReference[];
 
                         /** SupplementalProductDataSource _feedLabel. */
                         public _feedLabel?: "feedLabel";
@@ -1604,6 +1713,118 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a DataSourceReference. */
+                    interface IDataSourceReference {
+
+                        /** DataSourceReference self */
+                        self?: (boolean|null);
+
+                        /** DataSourceReference primaryDataSourceName */
+                        primaryDataSourceName?: (string|null);
+
+                        /** DataSourceReference supplementalDataSourceName */
+                        supplementalDataSourceName?: (string|null);
+                    }
+
+                    /** Represents a DataSourceReference. */
+                    class DataSourceReference implements IDataSourceReference {
+
+                        /**
+                         * Constructs a new DataSourceReference.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1beta.IDataSourceReference);
+
+                        /** DataSourceReference self. */
+                        public self?: (boolean|null);
+
+                        /** DataSourceReference primaryDataSourceName. */
+                        public primaryDataSourceName?: (string|null);
+
+                        /** DataSourceReference supplementalDataSourceName. */
+                        public supplementalDataSourceName?: (string|null);
+
+                        /** DataSourceReference dataSourceId. */
+                        public dataSourceId?: ("self"|"primaryDataSourceName"|"supplementalDataSourceName");
+
+                        /**
+                         * Creates a new DataSourceReference instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataSourceReference instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1beta.IDataSourceReference): google.shopping.merchant.datasources.v1beta.DataSourceReference;
+
+                        /**
+                         * Encodes the specified DataSourceReference message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.DataSourceReference.verify|verify} messages.
+                         * @param message DataSourceReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1beta.IDataSourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataSourceReference message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.DataSourceReference.verify|verify} messages.
+                         * @param message DataSourceReference message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.IDataSourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataSourceReference message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataSourceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.DataSourceReference;
+
+                        /**
+                         * Decodes a DataSourceReference message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataSourceReference
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.DataSourceReference;
+
+                        /**
+                         * Verifies a DataSourceReference message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataSourceReference message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataSourceReference
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.DataSourceReference;
+
+                        /**
+                         * Creates a plain object from a DataSourceReference message. Also converts values to other types if specified.
+                         * @param message DataSourceReference
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1beta.DataSourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataSourceReference to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DataSourceReference
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a FileInput. */
                     interface IFileInput {
 
@@ -1878,6 +2099,435 @@ export namespace google {
                             FETCH = 2,
                             GOOGLE_SHEETS = 3
                         }
+                    }
+
+                    /** Represents a FileUploadsService */
+                    class FileUploadsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new FileUploadsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new FileUploadsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): FileUploadsService;
+
+                        /**
+                         * Calls GetFileUpload.
+                         * @param request GetFileUploadRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and FileUpload
+                         */
+                        public getFileUpload(request: google.shopping.merchant.datasources.v1beta.IGetFileUploadRequest, callback: google.shopping.merchant.datasources.v1beta.FileUploadsService.GetFileUploadCallback): void;
+
+                        /**
+                         * Calls GetFileUpload.
+                         * @param request GetFileUploadRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getFileUpload(request: google.shopping.merchant.datasources.v1beta.IGetFileUploadRequest): Promise<google.shopping.merchant.datasources.v1beta.FileUpload>;
+                    }
+
+                    namespace FileUploadsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.datasources.v1beta.FileUploadsService|getFileUpload}.
+                         * @param error Error, if any
+                         * @param [response] FileUpload
+                         */
+                        type GetFileUploadCallback = (error: (Error|null), response?: google.shopping.merchant.datasources.v1beta.FileUpload) => void;
+                    }
+
+                    /** Properties of a FileUpload. */
+                    interface IFileUpload {
+
+                        /** FileUpload name */
+                        name?: (string|null);
+
+                        /** FileUpload dataSourceId */
+                        dataSourceId?: (number|Long|string|null);
+
+                        /** FileUpload processingState */
+                        processingState?: (google.shopping.merchant.datasources.v1beta.FileUpload.ProcessingState|keyof typeof google.shopping.merchant.datasources.v1beta.FileUpload.ProcessingState|null);
+
+                        /** FileUpload issues */
+                        issues?: (google.shopping.merchant.datasources.v1beta.FileUpload.IIssue[]|null);
+
+                        /** FileUpload itemsTotal */
+                        itemsTotal?: (number|Long|string|null);
+
+                        /** FileUpload itemsCreated */
+                        itemsCreated?: (number|Long|string|null);
+
+                        /** FileUpload itemsUpdated */
+                        itemsUpdated?: (number|Long|string|null);
+
+                        /** FileUpload uploadTime */
+                        uploadTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a FileUpload. */
+                    class FileUpload implements IFileUpload {
+
+                        /**
+                         * Constructs a new FileUpload.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1beta.IFileUpload);
+
+                        /** FileUpload name. */
+                        public name: string;
+
+                        /** FileUpload dataSourceId. */
+                        public dataSourceId: (number|Long|string);
+
+                        /** FileUpload processingState. */
+                        public processingState: (google.shopping.merchant.datasources.v1beta.FileUpload.ProcessingState|keyof typeof google.shopping.merchant.datasources.v1beta.FileUpload.ProcessingState);
+
+                        /** FileUpload issues. */
+                        public issues: google.shopping.merchant.datasources.v1beta.FileUpload.IIssue[];
+
+                        /** FileUpload itemsTotal. */
+                        public itemsTotal: (number|Long|string);
+
+                        /** FileUpload itemsCreated. */
+                        public itemsCreated: (number|Long|string);
+
+                        /** FileUpload itemsUpdated. */
+                        public itemsUpdated: (number|Long|string);
+
+                        /** FileUpload uploadTime. */
+                        public uploadTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new FileUpload instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns FileUpload instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1beta.IFileUpload): google.shopping.merchant.datasources.v1beta.FileUpload;
+
+                        /**
+                         * Encodes the specified FileUpload message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.FileUpload.verify|verify} messages.
+                         * @param message FileUpload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1beta.IFileUpload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified FileUpload message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.FileUpload.verify|verify} messages.
+                         * @param message FileUpload message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.IFileUpload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a FileUpload message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns FileUpload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.FileUpload;
+
+                        /**
+                         * Decodes a FileUpload message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns FileUpload
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.FileUpload;
+
+                        /**
+                         * Verifies a FileUpload message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a FileUpload message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns FileUpload
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.FileUpload;
+
+                        /**
+                         * Creates a plain object from a FileUpload message. Also converts values to other types if specified.
+                         * @param message FileUpload
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1beta.FileUpload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this FileUpload to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for FileUpload
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace FileUpload {
+
+                        /** Properties of an Issue. */
+                        interface IIssue {
+
+                            /** Issue title */
+                            title?: (string|null);
+
+                            /** Issue description */
+                            description?: (string|null);
+
+                            /** Issue code */
+                            code?: (string|null);
+
+                            /** Issue count */
+                            count?: (number|Long|string|null);
+
+                            /** Issue severity */
+                            severity?: (google.shopping.merchant.datasources.v1beta.FileUpload.Issue.Severity|keyof typeof google.shopping.merchant.datasources.v1beta.FileUpload.Issue.Severity|null);
+
+                            /** Issue documentationUri */
+                            documentationUri?: (string|null);
+                        }
+
+                        /** Represents an Issue. */
+                        class Issue implements IIssue {
+
+                            /**
+                             * Constructs a new Issue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.datasources.v1beta.FileUpload.IIssue);
+
+                            /** Issue title. */
+                            public title: string;
+
+                            /** Issue description. */
+                            public description: string;
+
+                            /** Issue code. */
+                            public code: string;
+
+                            /** Issue count. */
+                            public count: (number|Long|string);
+
+                            /** Issue severity. */
+                            public severity: (google.shopping.merchant.datasources.v1beta.FileUpload.Issue.Severity|keyof typeof google.shopping.merchant.datasources.v1beta.FileUpload.Issue.Severity);
+
+                            /** Issue documentationUri. */
+                            public documentationUri: string;
+
+                            /**
+                             * Creates a new Issue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Issue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.datasources.v1beta.FileUpload.IIssue): google.shopping.merchant.datasources.v1beta.FileUpload.Issue;
+
+                            /**
+                             * Encodes the specified Issue message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.FileUpload.Issue.verify|verify} messages.
+                             * @param message Issue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.datasources.v1beta.FileUpload.IIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Issue message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.FileUpload.Issue.verify|verify} messages.
+                             * @param message Issue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.FileUpload.IIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Issue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Issue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.FileUpload.Issue;
+
+                            /**
+                             * Decodes an Issue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Issue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.FileUpload.Issue;
+
+                            /**
+                             * Verifies an Issue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Issue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Issue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.FileUpload.Issue;
+
+                            /**
+                             * Creates a plain object from an Issue message. Also converts values to other types if specified.
+                             * @param message Issue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.datasources.v1beta.FileUpload.Issue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Issue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Issue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Issue {
+
+                            /** Severity enum. */
+                            enum Severity {
+                                SEVERITY_UNSPECIFIED = 0,
+                                WARNING = 1,
+                                ERROR = 2
+                            }
+                        }
+
+                        /** ProcessingState enum. */
+                        enum ProcessingState {
+                            PROCESSING_STATE_UNSPECIFIED = 0,
+                            FAILED = 1,
+                            IN_PROGRESS = 2,
+                            SUCCEEDED = 3
+                        }
+                    }
+
+                    /** Properties of a GetFileUploadRequest. */
+                    interface IGetFileUploadRequest {
+
+                        /** GetFileUploadRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetFileUploadRequest. */
+                    class GetFileUploadRequest implements IGetFileUploadRequest {
+
+                        /**
+                         * Constructs a new GetFileUploadRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.datasources.v1beta.IGetFileUploadRequest);
+
+                        /** GetFileUploadRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetFileUploadRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetFileUploadRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.datasources.v1beta.IGetFileUploadRequest): google.shopping.merchant.datasources.v1beta.GetFileUploadRequest;
+
+                        /**
+                         * Encodes the specified GetFileUploadRequest message. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.GetFileUploadRequest.verify|verify} messages.
+                         * @param message GetFileUploadRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.datasources.v1beta.IGetFileUploadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetFileUploadRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.datasources.v1beta.GetFileUploadRequest.verify|verify} messages.
+                         * @param message GetFileUploadRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.datasources.v1beta.IGetFileUploadRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetFileUploadRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetFileUploadRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.datasources.v1beta.GetFileUploadRequest;
+
+                        /**
+                         * Decodes a GetFileUploadRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetFileUploadRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.datasources.v1beta.GetFileUploadRequest;
+
+                        /**
+                         * Verifies a GetFileUploadRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetFileUploadRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetFileUploadRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.datasources.v1beta.GetFileUploadRequest;
+
+                        /**
+                         * Creates a plain object from a GetFileUploadRequest message. Also converts values to other types if specified.
+                         * @param message GetFileUploadRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.datasources.v1beta.GetFileUploadRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetFileUploadRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetFileUploadRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
             }
@@ -8390,6 +9040,109 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

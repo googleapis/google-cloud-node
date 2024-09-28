@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.3.0...cloudcontrolspartner-v0.3.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* [cloudcontrolspartner] Field behavior for field `display_name` in message `.google.cloud.cloudcontrolspartner.v1beta.Customer` is changed ([#5679](https://github.com/googleapis/google-cloud-node/issues/5679)) ([727e997](https://github.com/googleapis/google-cloud-node/commit/727e9971f7980f0b2c6ae14b209d10678e9b857d))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudcontrolspartner-v0.2.0...cloudcontrolspartner-v0.3.0) (2024-05-21)
 
 

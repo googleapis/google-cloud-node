@@ -1424,5 +1424,70 @@ describe('v1beta.DataSourcesServiceClient', () => {
         );
       });
     });
+
+    describe('fileUpload', () => {
+      const fakePath = '/rendered/path/fileUpload';
+      const expectedParameters = {
+        account: 'accountValue',
+        datasource: 'datasourceValue',
+        fileupload: 'fileuploadValue',
+      };
+      const client =
+        new datasourcesserviceModule.v1beta.DataSourcesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.fileUploadPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.fileUploadPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('fileUploadPath', () => {
+        const result = client.fileUploadPath(
+          'accountValue',
+          'datasourceValue',
+          'fileuploadValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.fileUploadPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccountFromFileUploadName', () => {
+        const result = client.matchAccountFromFileUploadName(fakePath);
+        assert.strictEqual(result, 'accountValue');
+        assert(
+          (client.pathTemplates.fileUploadPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasourceFromFileUploadName', () => {
+        const result = client.matchDatasourceFromFileUploadName(fakePath);
+        assert.strictEqual(result, 'datasourceValue');
+        assert(
+          (client.pathTemplates.fileUploadPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFileuploadFromFileUploadName', () => {
+        const result = client.matchFileuploadFromFileUploadName(fakePath);
+        assert.strictEqual(result, 'fileuploadValue');
+        assert(
+          (client.pathTemplates.fileUploadPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
   });
 });
