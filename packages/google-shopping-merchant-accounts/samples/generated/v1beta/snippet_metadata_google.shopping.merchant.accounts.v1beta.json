@@ -49,7 +49,7 @@
                     },
                     {
                         "name": "time_zone",
-                        "type": ".google.type.TimeZone"
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.shopping.merchant.accounts.v1beta.ListAccountIssuesResponse",
@@ -118,7 +118,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 68,
+                    "end": 72,
                     "type": "FULL"
                 }
             ],
@@ -467,6 +467,90 @@
                     "service": {
                         "shortName": "AccountTaxService",
                         "fullName": "google.shopping.merchant.accounts.v1beta.AccountTaxService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_AutofeedSettingsService_GetAutofeedSettings_async",
+            "title": "AccountIssueService getAutofeedSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the autofeed settings of an account.",
+            "canonical": true,
+            "file": "autofeed_settings_service.get_autofeed_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetAutofeedSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.GetAutofeedSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.AutofeedSettings",
+                "client": {
+                    "shortName": "AutofeedSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "GetAutofeedSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.GetAutofeedSettings",
+                    "service": {
+                        "shortName": "AutofeedSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_AutofeedSettingsService_UpdateAutofeedSettings_async",
+            "title": "AccountIssueService updateAutofeedSettings Sample",
+            "origin": "API_DEFINITION",
+            "description": " Updates the autofeed settings of an account.",
+            "canonical": true,
+            "file": "autofeed_settings_service.update_autofeed_settings.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "UpdateAutofeedSettings",
+                "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.UpdateAutofeedSettings",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "autofeed_settings",
+                        "type": ".google.shopping.merchant.accounts.v1beta.AutofeedSettings"
+                    },
+                    {
+                        "name": "update_mask",
+                        "type": ".google.protobuf.FieldMask"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.accounts.v1beta.AutofeedSettings",
+                "client": {
+                    "shortName": "AutofeedSettingsServiceClient",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsServiceClient"
+                },
+                "method": {
+                    "shortName": "UpdateAutofeedSettings",
+                    "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService.UpdateAutofeedSettings",
+                    "service": {
+                        "shortName": "AutofeedSettingsService",
+                        "fullName": "google.shopping.merchant.accounts.v1beta.AutofeedSettingsService"
                     }
                 }
             }
@@ -1458,7 +1542,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 55,
                     "type": "FULL"
                 }
             ],
@@ -1578,7 +1662,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 58,
+                    "end": 60,
                     "type": "FULL"
                 }
             ],

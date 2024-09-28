@@ -208,6 +208,9 @@ export class AccountsServiceClient {
       accountTaxPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/accounttax/{tax}'
       ),
+      autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/autofeedSettings'
+      ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
       ),
@@ -543,10 +546,13 @@ export class AccountsServiceClient {
    * @param {google.shopping.merchant.accounts.v1beta.CreateAndConfigureAccountRequest.AcceptTermsOfService} [request.acceptTermsOfService]
    *   Optional. The Terms of Service (ToS) to be accepted immediately upon
    *   account creation.
-   * @param {number[]} [request.service]
-   *   Optional. If specified, an account service between the account to be
-   *   created and the provider account is initialized as part of the
-   *   creation.
+   * @param {number[]} request.service
+   *   Required. An account service between the account to be created and the
+   *   provider account is initialized as part of the creation. At least one such
+   *   service needs to be provided. Currently exactly one of these needs to be
+   *   `account_aggregation`, which means you can only create sub accounts, not
+   *   standalone account through this method. Additional `account_management` or
+   *   `product_management` services may be provided.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1351,6 +1357,31 @@ export class AccountsServiceClient {
    */
   matchTaxFromAccountTaxName(accountTaxName: string) {
     return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).tax;
+  }
+
+  /**
+   * Return a fully-qualified autofeedSettings resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  autofeedSettingsPath(account: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutofeedSettings resource.
+   *
+   * @param {string} autofeedSettingsName
+   *   A fully-qualified path representing AutofeedSettings resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName
+    ).account;
   }
 
   /**

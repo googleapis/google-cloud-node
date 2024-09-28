@@ -19088,6 +19088,7 @@
                                     return "defaultLogsBucketBehavior: enum value expected";
                                 case 0:
                                 case 1:
+                                case 2:
                                     break;
                                 }
                             return null;
@@ -19308,6 +19309,10 @@
                             case "REGIONAL_USER_OWNED_BUCKET":
                             case 1:
                                 message.defaultLogsBucketBehavior = 1;
+                                break;
+                            case "LEGACY_BUCKET":
+                            case 2:
+                                message.defaultLogsBucketBehavior = 2;
                                 break;
                             }
                             return message;
@@ -19720,11 +19725,13 @@
                          * @enum {number}
                          * @property {number} DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED=0 DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED value
                          * @property {number} REGIONAL_USER_OWNED_BUCKET=1 REGIONAL_USER_OWNED_BUCKET value
+                         * @property {number} LEGACY_BUCKET=2 LEGACY_BUCKET value
                          */
                         BuildOptions.DefaultLogsBucketBehavior = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "REGIONAL_USER_OWNED_BUCKET"] = 1;
+                            values[valuesById[2] = "LEGACY_BUCKET"] = 2;
                             return values;
                         })();
     
