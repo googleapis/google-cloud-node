@@ -208,6 +208,9 @@ export class AccountIssueServiceClient {
       accountTaxPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/accounttax/{tax}'
       ),
+      autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/autofeedSettings'
+      ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
       ),
@@ -443,7 +446,7 @@ export class AccountIssueServiceClient {
    *   given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
    *   such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
    *   used.
-   * @param {google.type.TimeZone} [request.timeZone]
+   * @param {string} [request.timeZone]
    *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
    *   localize times in human-readable fields. For example 'America/Los_Angeles'.
    *   If not set, 'America/Los_Angeles' will be used.
@@ -556,7 +559,7 @@ export class AccountIssueServiceClient {
    *   given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
    *   such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
    *   used.
-   * @param {google.type.TimeZone} [request.timeZone]
+   * @param {string} [request.timeZone]
    *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
    *   localize times in human-readable fields. For example 'America/Los_Angeles'.
    *   If not set, 'America/Los_Angeles' will be used.
@@ -617,7 +620,7 @@ export class AccountIssueServiceClient {
    *   given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
    *   such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
    *   used.
-   * @param {google.type.TimeZone} [request.timeZone]
+   * @param {string} [request.timeZone]
    *   Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
    *   localize times in human-readable fields. For example 'America/Los_Angeles'.
    *   If not set, 'America/Los_Angeles' will be used.
@@ -754,6 +757,31 @@ export class AccountIssueServiceClient {
    */
   matchTaxFromAccountTaxName(accountTaxName: string) {
     return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).tax;
+  }
+
+  /**
+   * Return a fully-qualified autofeedSettings resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  autofeedSettingsPath(account: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutofeedSettings resource.
+   *
+   * @param {string} autofeedSettingsName
+   *   A fully-qualified path representing AutofeedSettings resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName
+    ).account;
   }
 
   /**

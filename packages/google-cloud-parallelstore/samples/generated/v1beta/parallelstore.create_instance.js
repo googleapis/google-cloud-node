@@ -31,12 +31,11 @@ function main(parent, instanceId, instance) {
   /**
    *  Required. The instance's project and location, in the format
    *  `projects/{project}/locations/{location}`.
-   *  Locations map to Google Cloud zones, for example **us-west1-b**.
+   *  Locations map to Google Cloud zones; for example, `us-west1-b`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The logical name of the Parallelstore instance in the user
-   *  project with the following restrictions:
+   *  Required. The name of the Parallelstore instance.
    *  * Must contain only lowercase letters, numbers, and hyphens.
    *  * Must start with a letter.
    *  * Must be between 1-63 characters.

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/gdchardwaremanagement-v0.1.0...gdchardwaremanagement-v0.2.0) (2024-09-24)
+
+
+### Features
+
+* [gdchardwaremanagement] add an order type field to distinguish a fulfillment request from a sales inquiry ([#5685](https://github.com/googleapis/google-cloud-node/issues/5685)) ([ba7cd86](https://github.com/googleapis/google-cloud-node/commit/ba7cd868aba5d60d8871449302212db526e31dfc))
+
 ## 0.1.0 (2024-07-22)
 
 

@@ -18,6 +18,7 @@
   * [Data_sources_service.get_data_source](#data_sources_service.get_data_source)
   * [Data_sources_service.list_data_sources](#data_sources_service.list_data_sources)
   * [Data_sources_service.update_data_source](#data_sources_service.update_data_source)
+  * [File_uploads_service.get_file_upload](#file_uploads_service.get_file_upload)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -130,6 +131,23 @@ __Usage:__
 
 
 `node packages/google-shopping-merchant-datasources/samples/generated/v1beta/data_sources_service.update_data_source.js`
+
+
+-----
+
+
+
+
+### File_uploads_service.get_file_upload
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-shopping-merchant-datasources/samples/generated/v1beta/file_uploads_service.get_file_upload.js`
 
 
 -----

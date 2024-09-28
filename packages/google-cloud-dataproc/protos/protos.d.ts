@@ -15702,6 +15702,9 @@ export namespace google {
                     /** SessionTemplate jupyterSession */
                     jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** SessionTemplate sparkConnectSession */
+                    sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** SessionTemplate creator */
                     creator?: (string|null);
 
@@ -15742,6 +15745,9 @@ export namespace google {
                     /** SessionTemplate jupyterSession. */
                     public jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** SessionTemplate sparkConnectSession. */
+                    public sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** SessionTemplate creator. */
                     public creator: string;
 
@@ -15761,7 +15767,7 @@ export namespace google {
                     public uuid: string;
 
                     /** SessionTemplate sessionConfig. */
-                    public sessionConfig?: "jupyterSession";
+                    public sessionConfig?: ("jupyterSession"|"sparkConnectSession");
 
                     /**
                      * Creates a new SessionTemplate instance using the specified properties.
@@ -16621,6 +16627,9 @@ export namespace google {
                     /** Session jupyterSession */
                     jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** Session sparkConnectSession */
+                    sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** Session runtimeInfo */
                     runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
 
@@ -16676,6 +16685,9 @@ export namespace google {
                     /** Session jupyterSession. */
                     public jupyterSession?: (google.cloud.dataproc.v1.IJupyterConfig|null);
 
+                    /** Session sparkConnectSession. */
+                    public sparkConnectSession?: (google.cloud.dataproc.v1.ISparkConnectConfig|null);
+
                     /** Session runtimeInfo. */
                     public runtimeInfo?: (google.cloud.dataproc.v1.IRuntimeInfo|null);
 
@@ -16710,7 +16722,7 @@ export namespace google {
                     public sessionTemplate: string;
 
                     /** Session sessionConfig. */
-                    public sessionConfig?: "jupyterSession";
+                    public sessionConfig?: ("jupyterSession"|"sparkConnectSession");
 
                     /**
                      * Creates a new Session instance using the specified properties.
@@ -17023,6 +17035,97 @@ export namespace google {
                         PYTHON = 1,
                         SCALA = 2
                     }
+                }
+
+                /** Properties of a SparkConnectConfig. */
+                interface ISparkConnectConfig {
+                }
+
+                /** Represents a SparkConnectConfig. */
+                class SparkConnectConfig implements ISparkConnectConfig {
+
+                    /**
+                     * Constructs a new SparkConnectConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.ISparkConnectConfig);
+
+                    /**
+                     * Creates a new SparkConnectConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SparkConnectConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.ISparkConnectConfig): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Encodes the specified SparkConnectConfig message. Does not implicitly {@link google.cloud.dataproc.v1.SparkConnectConfig.verify|verify} messages.
+                     * @param message SparkConnectConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.ISparkConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SparkConnectConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.SparkConnectConfig.verify|verify} messages.
+                     * @param message SparkConnectConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.ISparkConnectConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SparkConnectConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SparkConnectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Decodes a SparkConnectConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SparkConnectConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Verifies a SparkConnectConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SparkConnectConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SparkConnectConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.SparkConnectConfig;
+
+                    /**
+                     * Creates a plain object from a SparkConnectConfig message. Also converts values to other types if specified.
+                     * @param message SparkConnectConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.SparkConnectConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SparkConnectConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SparkConnectConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a WorkflowTemplateService */

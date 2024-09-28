@@ -206,6 +206,9 @@ export class HomepageServiceClient {
       accountTaxPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/accounttax/{tax}'
       ),
+      autofeedSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'accounts/{account}/autofeedSettings'
+      ),
       businessIdentityPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/businessIdentity'
       ),
@@ -914,6 +917,31 @@ export class HomepageServiceClient {
    */
   matchTaxFromAccountTaxName(accountTaxName: string) {
     return this.pathTemplates.accountTaxPathTemplate.match(accountTaxName).tax;
+  }
+
+  /**
+   * Return a fully-qualified autofeedSettings resource name string.
+   *
+   * @param {string} account
+   * @returns {string} Resource name string.
+   */
+  autofeedSettingsPath(account: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.render({
+      account: account,
+    });
+  }
+
+  /**
+   * Parse the account from AutofeedSettings resource.
+   *
+   * @param {string} autofeedSettingsName
+   *   A fully-qualified path representing AutofeedSettings resource.
+   * @returns {string} A string representing the account.
+   */
+  matchAccountFromAutofeedSettingsName(autofeedSettingsName: string) {
+    return this.pathTemplates.autofeedSettingsPathTemplate.match(
+      autofeedSettingsName
+    ).account;
   }
 
   /**

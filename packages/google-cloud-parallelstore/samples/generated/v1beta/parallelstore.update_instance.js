@@ -29,14 +29,14 @@ function main(updateMask, instance) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Mask of fields to update .Field mask is used to specify the
+   *  Required. Mask of fields to update. Field mask is used to specify the
    *  fields to be overwritten in the Instance resource by the update. At least
    *  one path must be supplied in this field. The fields specified in the
    *  update_mask are relative to the resource, not the full request.
    */
   // const updateMask = {}
   /**
-   *  Required. The instance to update
+   *  Required. The instance to update.
    */
   // const instance = {}
   /**
