@@ -33,6 +33,11 @@ function main(name) {
    *  Format: `accounts/{account}`
    */
   // const name = 'abc123'
+  /**
+   *  Optional. If set to `true`, the account is deleted even if it provides
+   *  services to other accounts or has processed offers.
+   */
+  // const force = true
 
   // Imports the Accounts library
   const {AccountsServiceClient} = require('@google-shopping/accounts').v1beta;
