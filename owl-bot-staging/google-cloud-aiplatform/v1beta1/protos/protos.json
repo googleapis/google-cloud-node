@@ -29457,6 +29457,13 @@
                           "type": "string",
                           "id": 25
                         },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "templateUri": {
                           "type": "string",
                           "id": 19
