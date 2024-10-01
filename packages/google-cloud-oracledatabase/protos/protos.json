@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -3733,10 +3736,7 @@
               "rule": "repeated",
               "type": "google.api.FieldBehavior",
               "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
+              "extend": "google.protobuf.FieldOptions"
             },
             "FieldBehavior": {
               "values": {
@@ -3931,11 +3931,6 @@
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
             },
-            "apiVersion": {
-              "type": "string",
-              "id": 525000001,
-              "extend": "google.protobuf.ServiceOptions"
-            },
             "CommonLanguageSettings": {
               "fields": {
                 "referenceDocsUri": {
@@ -4044,10 +4039,6 @@
                 "protoReferenceDocumentationUri": {
                   "type": "string",
                   "id": 110
-                },
-                "restReferenceDocumentationUri": {
-                  "type": "string",
-                  "id": 111
                 }
               }
             },
@@ -5350,20 +5341,8 @@
                   1001
                 ],
                 [
-                  1002,
-                  1002
-                ],
-                [
-                  9990,
-                  9990
-                ],
-                [
                   9995,
                   9999
-                ],
-                [
-                  10000,
-                  10000
                 ]
               ],
               "reserved": [
