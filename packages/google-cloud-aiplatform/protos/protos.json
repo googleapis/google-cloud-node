@@ -6326,6 +6326,24 @@
                         }
                       }
                     },
+                    "PSCAutomationConfig": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "PrivateServiceConnectConfig": {
                       "fields": {
                         "enablePrivateServiceConnect": {
@@ -16322,6 +16340,14 @@
                         "deploymentGroup": {
                           "type": "string",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pscAutomationConfigs": {
+                          "rule": "repeated",
+                          "type": "PSCAutomationConfig",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -36156,6 +36182,11 @@
                           "oneof": [
                             "searchEntryPoint"
                           ]
+                        },
+                        "_retrievalMetadata": {
+                          "oneof": [
+                            "retrievalMetadata"
+                          ]
                         }
                       },
                       "fields": {
@@ -36195,6 +36226,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "retrievalMetadata": {
+                          "type": "RetrievalMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -36209,6 +36248,17 @@
                         },
                         "sdkBlob": {
                           "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RetrievalMetadata": {
+                      "fields": {
+                        "googleSearchDynamicRetrievalScore": {
+                          "type": "float",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -36662,7 +36712,43 @@
                       }
                     },
                     "GoogleSearchRetrieval": {
-                      "fields": {}
+                      "fields": {
+                        "dynamicRetrievalConfig": {
+                          "type": "DynamicRetrievalConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DynamicRetrievalConfig": {
+                      "oneofs": {
+                        "_dynamicThreshold": {
+                          "oneof": [
+                            "dynamicThreshold"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "dynamicThreshold": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "MODE_DYNAMIC": 1
+                          }
+                        }
+                      }
                     },
                     "ToolConfig": {
                       "fields": {
@@ -61560,6 +61646,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 25
+                        },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "templateUri": {
                           "type": "string",
