@@ -54,7 +54,7 @@ function main(parent) {
   const {OracleDatabaseClient} = require('@google-cloud/oracledatabase').v1;
 
   // Instantiates a client
-  const oracledatabaseClient = new OracleDatabaseClient();
+  const oracledatabaseClient = new OracleDatabaseClient({fallback: 'rest');
 
   async function callListAutonomousDatabases() {
     // Construct request
