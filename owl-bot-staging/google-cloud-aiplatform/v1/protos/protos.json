@@ -6323,6 +6323,24 @@
                         }
                       }
                     },
+                    "PSCAutomationConfig": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "PrivateServiceConnectConfig": {
                       "fields": {
                         "enablePrivateServiceConnect": {
@@ -16319,6 +16337,14 @@
                         "deploymentGroup": {
                           "type": "string",
                           "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pscAutomationConfigs": {
+                          "rule": "repeated",
+                          "type": "PSCAutomationConfig",
+                          "id": 19,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
