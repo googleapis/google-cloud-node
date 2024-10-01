@@ -750,6 +750,7 @@
                                 case 2:
                                 case 3:
                                 case 4:
+                                case 5:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -857,6 +858,10 @@
                             case "FAILED":
                             case 4:
                                 message.state = 4;
+                                break;
+                            case "UPGRADING":
+                            case 5:
+                                message.state = 5;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -1062,6 +1067,7 @@
                          * @property {number} ACTIVE=2 ACTIVE value
                          * @property {number} DELETING=3 DELETING value
                          * @property {number} FAILED=4 FAILED value
+                         * @property {number} UPGRADING=5 UPGRADING value
                          */
                         Instance.State = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -1070,6 +1076,7 @@
                             values[valuesById[2] = "ACTIVE"] = 2;
                             values[valuesById[3] = "DELETING"] = 3;
                             values[valuesById[4] = "FAILED"] = 4;
+                            values[valuesById[5] = "UPGRADING"] = 5;
                             return values;
                         })();
     
