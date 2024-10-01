@@ -102,7 +102,7 @@ async function callListAutonomousDatabases() {
   // Run request
   const iterable = oracledatabaseClient.listAutonomousDatabasesAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
