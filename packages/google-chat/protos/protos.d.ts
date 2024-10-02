@@ -17784,6 +17784,12 @@ export namespace google {
 
                 /** Space spaceUri */
                 spaceUri?: (string|null);
+
+                /** Space predefinedPermissionSettings */
+                predefinedPermissionSettings?: (google.chat.v1.Space.PredefinedPermissionSettings|keyof typeof google.chat.v1.Space.PredefinedPermissionSettings|null);
+
+                /** Space permissionSettings */
+                permissionSettings?: (google.chat.v1.Space.IPermissionSettings|null);
             }
 
             /** Represents a Space. */
@@ -17845,6 +17851,15 @@ export namespace google {
 
                 /** Space spaceUri. */
                 public spaceUri: string;
+
+                /** Space predefinedPermissionSettings. */
+                public predefinedPermissionSettings?: (google.chat.v1.Space.PredefinedPermissionSettings|keyof typeof google.chat.v1.Space.PredefinedPermissionSettings|null);
+
+                /** Space permissionSettings. */
+                public permissionSettings?: (google.chat.v1.Space.IPermissionSettings|null);
+
+                /** Space spacePermissionSettings. */
+                public spacePermissionSettings?: ("predefinedPermissionSettings"|"permissionSettings");
 
                 /**
                  * Creates a new Space instance using the specified properties.
@@ -18266,6 +18281,279 @@ export namespace google {
                         PRIVATE = 1,
                         DISCOVERABLE = 2
                     }
+                }
+
+                /** PredefinedPermissionSettings enum. */
+                enum PredefinedPermissionSettings {
+                    PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED = 0,
+                    COLLABORATION_SPACE = 1,
+                    ANNOUNCEMENT_SPACE = 2
+                }
+
+                /** Properties of a PermissionSettings. */
+                interface IPermissionSettings {
+
+                    /** PermissionSettings manageMembersAndGroups */
+                    manageMembersAndGroups?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings modifySpaceDetails */
+                    modifySpaceDetails?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings toggleHistory */
+                    toggleHistory?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings useAtMentionAll */
+                    useAtMentionAll?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings manageApps */
+                    manageApps?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings manageWebhooks */
+                    manageWebhooks?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings postMessages */
+                    postMessages?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings replyMessages */
+                    replyMessages?: (google.chat.v1.Space.IPermissionSetting|null);
+                }
+
+                /** Represents a PermissionSettings. */
+                class PermissionSettings implements IPermissionSettings {
+
+                    /**
+                     * Constructs a new PermissionSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IPermissionSettings);
+
+                    /** PermissionSettings manageMembersAndGroups. */
+                    public manageMembersAndGroups?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings modifySpaceDetails. */
+                    public modifySpaceDetails?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings toggleHistory. */
+                    public toggleHistory?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings useAtMentionAll. */
+                    public useAtMentionAll?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings manageApps. */
+                    public manageApps?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings manageWebhooks. */
+                    public manageWebhooks?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings postMessages. */
+                    public postMessages?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings replyMessages. */
+                    public replyMessages?: (google.chat.v1.Space.IPermissionSetting|null);
+
+                    /** PermissionSettings _manageMembersAndGroups. */
+                    public _manageMembersAndGroups?: "manageMembersAndGroups";
+
+                    /** PermissionSettings _modifySpaceDetails. */
+                    public _modifySpaceDetails?: "modifySpaceDetails";
+
+                    /** PermissionSettings _toggleHistory. */
+                    public _toggleHistory?: "toggleHistory";
+
+                    /** PermissionSettings _useAtMentionAll. */
+                    public _useAtMentionAll?: "useAtMentionAll";
+
+                    /** PermissionSettings _manageApps. */
+                    public _manageApps?: "manageApps";
+
+                    /** PermissionSettings _manageWebhooks. */
+                    public _manageWebhooks?: "manageWebhooks";
+
+                    /** PermissionSettings _postMessages. */
+                    public _postMessages?: "postMessages";
+
+                    /** PermissionSettings _replyMessages. */
+                    public _replyMessages?: "replyMessages";
+
+                    /**
+                     * Creates a new PermissionSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PermissionSettings instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IPermissionSettings): google.chat.v1.Space.PermissionSettings;
+
+                    /**
+                     * Encodes the specified PermissionSettings message. Does not implicitly {@link google.chat.v1.Space.PermissionSettings.verify|verify} messages.
+                     * @param message PermissionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IPermissionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PermissionSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.PermissionSettings.verify|verify} messages.
+                     * @param message PermissionSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IPermissionSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PermissionSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PermissionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.PermissionSettings;
+
+                    /**
+                     * Decodes a PermissionSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PermissionSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.PermissionSettings;
+
+                    /**
+                     * Verifies a PermissionSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PermissionSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PermissionSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.PermissionSettings;
+
+                    /**
+                     * Creates a plain object from a PermissionSettings message. Also converts values to other types if specified.
+                     * @param message PermissionSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.PermissionSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PermissionSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PermissionSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PermissionSetting. */
+                interface IPermissionSetting {
+
+                    /** PermissionSetting managersAllowed */
+                    managersAllowed?: (boolean|null);
+
+                    /** PermissionSetting membersAllowed */
+                    membersAllowed?: (boolean|null);
+                }
+
+                /** Represents a PermissionSetting. */
+                class PermissionSetting implements IPermissionSetting {
+
+                    /**
+                     * Constructs a new PermissionSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.chat.v1.Space.IPermissionSetting);
+
+                    /** PermissionSetting managersAllowed. */
+                    public managersAllowed: boolean;
+
+                    /** PermissionSetting membersAllowed. */
+                    public membersAllowed: boolean;
+
+                    /**
+                     * Creates a new PermissionSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PermissionSetting instance
+                     */
+                    public static create(properties?: google.chat.v1.Space.IPermissionSetting): google.chat.v1.Space.PermissionSetting;
+
+                    /**
+                     * Encodes the specified PermissionSetting message. Does not implicitly {@link google.chat.v1.Space.PermissionSetting.verify|verify} messages.
+                     * @param message PermissionSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.chat.v1.Space.IPermissionSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PermissionSetting message, length delimited. Does not implicitly {@link google.chat.v1.Space.PermissionSetting.verify|verify} messages.
+                     * @param message PermissionSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.chat.v1.Space.IPermissionSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PermissionSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PermissionSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.chat.v1.Space.PermissionSetting;
+
+                    /**
+                     * Decodes a PermissionSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PermissionSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.chat.v1.Space.PermissionSetting;
+
+                    /**
+                     * Verifies a PermissionSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PermissionSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PermissionSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.chat.v1.Space.PermissionSetting;
+
+                    /**
+                     * Creates a plain object from a PermissionSetting message. Also converts values to other types if specified.
+                     * @param message PermissionSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.chat.v1.Space.PermissionSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PermissionSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PermissionSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
 
