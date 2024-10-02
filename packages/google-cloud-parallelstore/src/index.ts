@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v1 from './v1';
 import * as v1beta from './v1beta';
 
 const ParallelstoreClient = v1beta.ParallelstoreClient;
 type ParallelstoreClient = v1beta.ParallelstoreClient;
 
-export {v1beta, ParallelstoreClient};
-export default {v1beta, ParallelstoreClient};
+export {v1, v1beta, ParallelstoreClient};
+export default {v1, v1beta, ParallelstoreClient};
 import * as protos from '../protos/protos';
 export {protos};
