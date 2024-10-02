@@ -35,10 +35,9 @@ describe('Quickstart', () => {
   });
 
   it('should run quickstart', async () => {
-    const output = execSync(
-      `node ./quickstart.js organizations/google.com`,
-      {cwd}
-    );
+    const output = execSync('node ./quickstart.js organizations/google.com', {
+      cwd,
+    });
     assert(output !== null);
   });
 });
