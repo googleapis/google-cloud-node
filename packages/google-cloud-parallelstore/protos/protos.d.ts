@@ -23,6 +23,2541 @@ export namespace google {
         /** Namespace parallelstore. */
         namespace parallelstore {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Represents a Parallelstore */
+                class Parallelstore extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Parallelstore service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Parallelstore service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Parallelstore;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListInstancesResponse
+                     */
+                    public listInstances(request: google.cloud.parallelstore.v1.IListInstancesRequest, callback: google.cloud.parallelstore.v1.Parallelstore.ListInstancesCallback): void;
+
+                    /**
+                     * Calls ListInstances.
+                     * @param request ListInstancesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listInstances(request: google.cloud.parallelstore.v1.IListInstancesRequest): Promise<google.cloud.parallelstore.v1.ListInstancesResponse>;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Instance
+                     */
+                    public getInstance(request: google.cloud.parallelstore.v1.IGetInstanceRequest, callback: google.cloud.parallelstore.v1.Parallelstore.GetInstanceCallback): void;
+
+                    /**
+                     * Calls GetInstance.
+                     * @param request GetInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getInstance(request: google.cloud.parallelstore.v1.IGetInstanceRequest): Promise<google.cloud.parallelstore.v1.Instance>;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createInstance(request: google.cloud.parallelstore.v1.ICreateInstanceRequest, callback: google.cloud.parallelstore.v1.Parallelstore.CreateInstanceCallback): void;
+
+                    /**
+                     * Calls CreateInstance.
+                     * @param request CreateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createInstance(request: google.cloud.parallelstore.v1.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateInstance(request: google.cloud.parallelstore.v1.IUpdateInstanceRequest, callback: google.cloud.parallelstore.v1.Parallelstore.UpdateInstanceCallback): void;
+
+                    /**
+                     * Calls UpdateInstance.
+                     * @param request UpdateInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateInstance(request: google.cloud.parallelstore.v1.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteInstance(request: google.cloud.parallelstore.v1.IDeleteInstanceRequest, callback: google.cloud.parallelstore.v1.Parallelstore.DeleteInstanceCallback): void;
+
+                    /**
+                     * Calls DeleteInstance.
+                     * @param request DeleteInstanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteInstance(request: google.cloud.parallelstore.v1.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportData.
+                     * @param request ImportDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importData(request: google.cloud.parallelstore.v1.IImportDataRequest, callback: google.cloud.parallelstore.v1.Parallelstore.ImportDataCallback): void;
+
+                    /**
+                     * Calls ImportData.
+                     * @param request ImportDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importData(request: google.cloud.parallelstore.v1.IImportDataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ExportData.
+                     * @param request ExportDataRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportData(request: google.cloud.parallelstore.v1.IExportDataRequest, callback: google.cloud.parallelstore.v1.Parallelstore.ExportDataCallback): void;
+
+                    /**
+                     * Calls ExportData.
+                     * @param request ExportDataRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportData(request: google.cloud.parallelstore.v1.IExportDataRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace Parallelstore {
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|listInstances}.
+                     * @param error Error, if any
+                     * @param [response] ListInstancesResponse
+                     */
+                    type ListInstancesCallback = (error: (Error|null), response?: google.cloud.parallelstore.v1.ListInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|getInstance}.
+                     * @param error Error, if any
+                     * @param [response] Instance
+                     */
+                    type GetInstanceCallback = (error: (Error|null), response?: google.cloud.parallelstore.v1.Instance) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|createInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|updateInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|deleteInstance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|importData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parallelstore.v1.Parallelstore|exportData}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** TransferType enum. */
+                enum TransferType {
+                    TRANSFER_TYPE_UNSPECIFIED = 0,
+                    IMPORT = 1,
+                    EXPORT = 2
+                }
+
+                /** FileStripeLevel enum. */
+                enum FileStripeLevel {
+                    FILE_STRIPE_LEVEL_UNSPECIFIED = 0,
+                    FILE_STRIPE_LEVEL_MIN = 1,
+                    FILE_STRIPE_LEVEL_BALANCED = 2,
+                    FILE_STRIPE_LEVEL_MAX = 3
+                }
+
+                /** DirectoryStripeLevel enum. */
+                enum DirectoryStripeLevel {
+                    DIRECTORY_STRIPE_LEVEL_UNSPECIFIED = 0,
+                    DIRECTORY_STRIPE_LEVEL_MIN = 1,
+                    DIRECTORY_STRIPE_LEVEL_BALANCED = 2,
+                    DIRECTORY_STRIPE_LEVEL_MAX = 3
+                }
+
+                /** Properties of an Instance. */
+                interface IInstance {
+
+                    /** Instance name */
+                    name?: (string|null);
+
+                    /** Instance description */
+                    description?: (string|null);
+
+                    /** Instance state */
+                    state?: (google.cloud.parallelstore.v1.Instance.State|keyof typeof google.cloud.parallelstore.v1.Instance.State|null);
+
+                    /** Instance createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Instance capacityGib */
+                    capacityGib?: (number|Long|string|null);
+
+                    /** Instance daosVersion */
+                    daosVersion?: (string|null);
+
+                    /** Instance accessPoints */
+                    accessPoints?: (string[]|null);
+
+                    /** Instance network */
+                    network?: (string|null);
+
+                    /** Instance reservedIpRange */
+                    reservedIpRange?: (string|null);
+
+                    /** Instance effectiveReservedIpRange */
+                    effectiveReservedIpRange?: (string|null);
+
+                    /** Instance fileStripeLevel */
+                    fileStripeLevel?: (google.cloud.parallelstore.v1.FileStripeLevel|keyof typeof google.cloud.parallelstore.v1.FileStripeLevel|null);
+
+                    /** Instance directoryStripeLevel */
+                    directoryStripeLevel?: (google.cloud.parallelstore.v1.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1.DirectoryStripeLevel|null);
+                }
+
+                /** Represents an Instance. */
+                class Instance implements IInstance {
+
+                    /**
+                     * Constructs a new Instance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IInstance);
+
+                    /** Instance name. */
+                    public name: string;
+
+                    /** Instance description. */
+                    public description: string;
+
+                    /** Instance state. */
+                    public state: (google.cloud.parallelstore.v1.Instance.State|keyof typeof google.cloud.parallelstore.v1.Instance.State);
+
+                    /** Instance createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Instance labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Instance capacityGib. */
+                    public capacityGib: (number|Long|string);
+
+                    /** Instance daosVersion. */
+                    public daosVersion: string;
+
+                    /** Instance accessPoints. */
+                    public accessPoints: string[];
+
+                    /** Instance network. */
+                    public network: string;
+
+                    /** Instance reservedIpRange. */
+                    public reservedIpRange: string;
+
+                    /** Instance effectiveReservedIpRange. */
+                    public effectiveReservedIpRange: string;
+
+                    /** Instance fileStripeLevel. */
+                    public fileStripeLevel: (google.cloud.parallelstore.v1.FileStripeLevel|keyof typeof google.cloud.parallelstore.v1.FileStripeLevel);
+
+                    /** Instance directoryStripeLevel. */
+                    public directoryStripeLevel: (google.cloud.parallelstore.v1.DirectoryStripeLevel|keyof typeof google.cloud.parallelstore.v1.DirectoryStripeLevel);
+
+                    /**
+                     * Creates a new Instance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Instance instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IInstance): google.cloud.parallelstore.v1.Instance;
+
+                    /**
+                     * Encodes the specified Instance message. Does not implicitly {@link google.cloud.parallelstore.v1.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Instance message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.Instance.verify|verify} messages.
+                     * @param message Instance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.Instance;
+
+                    /**
+                     * Decodes an Instance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Instance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.Instance;
+
+                    /**
+                     * Verifies an Instance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Instance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Instance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.Instance;
+
+                    /**
+                     * Creates a plain object from an Instance message. Also converts values to other types if specified.
+                     * @param message Instance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.Instance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Instance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Instance
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Instance {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3,
+                        FAILED = 4,
+                        UPGRADING = 5
+                    }
+                }
+
+                /** Properties of a ListInstancesRequest. */
+                interface IListInstancesRequest {
+
+                    /** ListInstancesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListInstancesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListInstancesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListInstancesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListInstancesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListInstancesRequest. */
+                class ListInstancesRequest implements IListInstancesRequest {
+
+                    /**
+                     * Constructs a new ListInstancesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IListInstancesRequest);
+
+                    /** ListInstancesRequest parent. */
+                    public parent: string;
+
+                    /** ListInstancesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListInstancesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListInstancesRequest filter. */
+                    public filter: string;
+
+                    /** ListInstancesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListInstancesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IListInstancesRequest): google.cloud.parallelstore.v1.ListInstancesRequest;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ListInstancesRequest.verify|verify} messages.
+                     * @param message ListInstancesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IListInstancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ListInstancesRequest;
+
+                    /**
+                     * Decodes a ListInstancesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ListInstancesRequest;
+
+                    /**
+                     * Verifies a ListInstancesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ListInstancesRequest;
+
+                    /**
+                     * Creates a plain object from a ListInstancesRequest message. Also converts values to other types if specified.
+                     * @param message ListInstancesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ListInstancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInstancesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListInstancesResponse. */
+                interface IListInstancesResponse {
+
+                    /** ListInstancesResponse instances */
+                    instances?: (google.cloud.parallelstore.v1.IInstance[]|null);
+
+                    /** ListInstancesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListInstancesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListInstancesResponse. */
+                class ListInstancesResponse implements IListInstancesResponse {
+
+                    /**
+                     * Constructs a new ListInstancesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IListInstancesResponse);
+
+                    /** ListInstancesResponse instances. */
+                    public instances: google.cloud.parallelstore.v1.IInstance[];
+
+                    /** ListInstancesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListInstancesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListInstancesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListInstancesResponse instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IListInstancesResponse): google.cloud.parallelstore.v1.ListInstancesResponse;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message. Does not implicitly {@link google.cloud.parallelstore.v1.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListInstancesResponse message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ListInstancesResponse.verify|verify} messages.
+                     * @param message ListInstancesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IListInstancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ListInstancesResponse;
+
+                    /**
+                     * Decodes a ListInstancesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListInstancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ListInstancesResponse;
+
+                    /**
+                     * Verifies a ListInstancesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListInstancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListInstancesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ListInstancesResponse;
+
+                    /**
+                     * Creates a plain object from a ListInstancesResponse message. Also converts values to other types if specified.
+                     * @param message ListInstancesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ListInstancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListInstancesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListInstancesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetInstanceRequest. */
+                interface IGetInstanceRequest {
+
+                    /** GetInstanceRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetInstanceRequest. */
+                class GetInstanceRequest implements IGetInstanceRequest {
+
+                    /**
+                     * Constructs a new GetInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IGetInstanceRequest);
+
+                    /** GetInstanceRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IGetInstanceRequest): google.cloud.parallelstore.v1.GetInstanceRequest;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.GetInstanceRequest.verify|verify} messages.
+                     * @param message GetInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IGetInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.GetInstanceRequest;
+
+                    /**
+                     * Decodes a GetInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.GetInstanceRequest;
+
+                    /**
+                     * Verifies a GetInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.GetInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a GetInstanceRequest message. Also converts values to other types if specified.
+                     * @param message GetInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.GetInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateInstanceRequest. */
+                interface ICreateInstanceRequest {
+
+                    /** CreateInstanceRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateInstanceRequest instanceId */
+                    instanceId?: (string|null);
+
+                    /** CreateInstanceRequest instance */
+                    instance?: (google.cloud.parallelstore.v1.IInstance|null);
+
+                    /** CreateInstanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateInstanceRequest. */
+                class CreateInstanceRequest implements ICreateInstanceRequest {
+
+                    /**
+                     * Constructs a new CreateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ICreateInstanceRequest);
+
+                    /** CreateInstanceRequest parent. */
+                    public parent: string;
+
+                    /** CreateInstanceRequest instanceId. */
+                    public instanceId: string;
+
+                    /** CreateInstanceRequest instance. */
+                    public instance?: (google.cloud.parallelstore.v1.IInstance|null);
+
+                    /** CreateInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ICreateInstanceRequest): google.cloud.parallelstore.v1.CreateInstanceRequest;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.CreateInstanceRequest.verify|verify} messages.
+                     * @param message CreateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ICreateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.CreateInstanceRequest;
+
+                    /**
+                     * Decodes a CreateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.CreateInstanceRequest;
+
+                    /**
+                     * Verifies a CreateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.CreateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a CreateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message CreateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.CreateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateInstanceRequest. */
+                interface IUpdateInstanceRequest {
+
+                    /** UpdateInstanceRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest instance */
+                    instance?: (google.cloud.parallelstore.v1.IInstance|null);
+
+                    /** UpdateInstanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateInstanceRequest. */
+                class UpdateInstanceRequest implements IUpdateInstanceRequest {
+
+                    /**
+                     * Constructs a new UpdateInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IUpdateInstanceRequest);
+
+                    /** UpdateInstanceRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateInstanceRequest instance. */
+                    public instance?: (google.cloud.parallelstore.v1.IInstance|null);
+
+                    /** UpdateInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IUpdateInstanceRequest): google.cloud.parallelstore.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.UpdateInstanceRequest.verify|verify} messages.
+                     * @param message UpdateInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IUpdateInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Decodes an UpdateInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Verifies an UpdateInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.UpdateInstanceRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateInstanceRequest message. Also converts values to other types if specified.
+                     * @param message UpdateInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.UpdateInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteInstanceRequest. */
+                interface IDeleteInstanceRequest {
+
+                    /** DeleteInstanceRequest name */
+                    name?: (string|null);
+
+                    /** DeleteInstanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteInstanceRequest. */
+                class DeleteInstanceRequest implements IDeleteInstanceRequest {
+
+                    /**
+                     * Constructs a new DeleteInstanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IDeleteInstanceRequest);
+
+                    /** DeleteInstanceRequest name. */
+                    public name: string;
+
+                    /** DeleteInstanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteInstanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteInstanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IDeleteInstanceRequest): google.cloud.parallelstore.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteInstanceRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.DeleteInstanceRequest.verify|verify} messages.
+                     * @param message DeleteInstanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IDeleteInstanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Decodes a DeleteInstanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteInstanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Verifies a DeleteInstanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteInstanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteInstanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.DeleteInstanceRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteInstanceRequest message. Also converts values to other types if specified.
+                     * @param message DeleteInstanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.DeleteInstanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteInstanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IOperationMetadata): google.cloud.parallelstore.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SourceGcsBucket. */
+                interface ISourceGcsBucket {
+
+                    /** SourceGcsBucket uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a SourceGcsBucket. */
+                class SourceGcsBucket implements ISourceGcsBucket {
+
+                    /**
+                     * Constructs a new SourceGcsBucket.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ISourceGcsBucket);
+
+                    /** SourceGcsBucket uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new SourceGcsBucket instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceGcsBucket instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ISourceGcsBucket): google.cloud.parallelstore.v1.SourceGcsBucket;
+
+                    /**
+                     * Encodes the specified SourceGcsBucket message. Does not implicitly {@link google.cloud.parallelstore.v1.SourceGcsBucket.verify|verify} messages.
+                     * @param message SourceGcsBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ISourceGcsBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceGcsBucket message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.SourceGcsBucket.verify|verify} messages.
+                     * @param message SourceGcsBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ISourceGcsBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceGcsBucket message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceGcsBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.SourceGcsBucket;
+
+                    /**
+                     * Decodes a SourceGcsBucket message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceGcsBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.SourceGcsBucket;
+
+                    /**
+                     * Verifies a SourceGcsBucket message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceGcsBucket message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceGcsBucket
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.SourceGcsBucket;
+
+                    /**
+                     * Creates a plain object from a SourceGcsBucket message. Also converts values to other types if specified.
+                     * @param message SourceGcsBucket
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.SourceGcsBucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceGcsBucket to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceGcsBucket
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DestinationGcsBucket. */
+                interface IDestinationGcsBucket {
+
+                    /** DestinationGcsBucket uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a DestinationGcsBucket. */
+                class DestinationGcsBucket implements IDestinationGcsBucket {
+
+                    /**
+                     * Constructs a new DestinationGcsBucket.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IDestinationGcsBucket);
+
+                    /** DestinationGcsBucket uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new DestinationGcsBucket instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DestinationGcsBucket instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IDestinationGcsBucket): google.cloud.parallelstore.v1.DestinationGcsBucket;
+
+                    /**
+                     * Encodes the specified DestinationGcsBucket message. Does not implicitly {@link google.cloud.parallelstore.v1.DestinationGcsBucket.verify|verify} messages.
+                     * @param message DestinationGcsBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IDestinationGcsBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DestinationGcsBucket message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.DestinationGcsBucket.verify|verify} messages.
+                     * @param message DestinationGcsBucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IDestinationGcsBucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DestinationGcsBucket message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DestinationGcsBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.DestinationGcsBucket;
+
+                    /**
+                     * Decodes a DestinationGcsBucket message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DestinationGcsBucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.DestinationGcsBucket;
+
+                    /**
+                     * Verifies a DestinationGcsBucket message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DestinationGcsBucket message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DestinationGcsBucket
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.DestinationGcsBucket;
+
+                    /**
+                     * Creates a plain object from a DestinationGcsBucket message. Also converts values to other types if specified.
+                     * @param message DestinationGcsBucket
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.DestinationGcsBucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DestinationGcsBucket to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DestinationGcsBucket
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SourceParallelstore. */
+                interface ISourceParallelstore {
+
+                    /** SourceParallelstore path */
+                    path?: (string|null);
+                }
+
+                /** Represents a SourceParallelstore. */
+                class SourceParallelstore implements ISourceParallelstore {
+
+                    /**
+                     * Constructs a new SourceParallelstore.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ISourceParallelstore);
+
+                    /** SourceParallelstore path. */
+                    public path: string;
+
+                    /**
+                     * Creates a new SourceParallelstore instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceParallelstore instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ISourceParallelstore): google.cloud.parallelstore.v1.SourceParallelstore;
+
+                    /**
+                     * Encodes the specified SourceParallelstore message. Does not implicitly {@link google.cloud.parallelstore.v1.SourceParallelstore.verify|verify} messages.
+                     * @param message SourceParallelstore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ISourceParallelstore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceParallelstore message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.SourceParallelstore.verify|verify} messages.
+                     * @param message SourceParallelstore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ISourceParallelstore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceParallelstore message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceParallelstore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.SourceParallelstore;
+
+                    /**
+                     * Decodes a SourceParallelstore message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceParallelstore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.SourceParallelstore;
+
+                    /**
+                     * Verifies a SourceParallelstore message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceParallelstore message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceParallelstore
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.SourceParallelstore;
+
+                    /**
+                     * Creates a plain object from a SourceParallelstore message. Also converts values to other types if specified.
+                     * @param message SourceParallelstore
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.SourceParallelstore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceParallelstore to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceParallelstore
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DestinationParallelstore. */
+                interface IDestinationParallelstore {
+
+                    /** DestinationParallelstore path */
+                    path?: (string|null);
+                }
+
+                /** Represents a DestinationParallelstore. */
+                class DestinationParallelstore implements IDestinationParallelstore {
+
+                    /**
+                     * Constructs a new DestinationParallelstore.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IDestinationParallelstore);
+
+                    /** DestinationParallelstore path. */
+                    public path: string;
+
+                    /**
+                     * Creates a new DestinationParallelstore instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DestinationParallelstore instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IDestinationParallelstore): google.cloud.parallelstore.v1.DestinationParallelstore;
+
+                    /**
+                     * Encodes the specified DestinationParallelstore message. Does not implicitly {@link google.cloud.parallelstore.v1.DestinationParallelstore.verify|verify} messages.
+                     * @param message DestinationParallelstore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IDestinationParallelstore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DestinationParallelstore message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.DestinationParallelstore.verify|verify} messages.
+                     * @param message DestinationParallelstore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IDestinationParallelstore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DestinationParallelstore message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DestinationParallelstore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.DestinationParallelstore;
+
+                    /**
+                     * Decodes a DestinationParallelstore message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DestinationParallelstore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.DestinationParallelstore;
+
+                    /**
+                     * Verifies a DestinationParallelstore message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DestinationParallelstore message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DestinationParallelstore
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.DestinationParallelstore;
+
+                    /**
+                     * Creates a plain object from a DestinationParallelstore message. Also converts values to other types if specified.
+                     * @param message DestinationParallelstore
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.DestinationParallelstore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DestinationParallelstore to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DestinationParallelstore
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataRequest. */
+                interface IImportDataRequest {
+
+                    /** ImportDataRequest sourceGcsBucket */
+                    sourceGcsBucket?: (google.cloud.parallelstore.v1.ISourceGcsBucket|null);
+
+                    /** ImportDataRequest destinationParallelstore */
+                    destinationParallelstore?: (google.cloud.parallelstore.v1.IDestinationParallelstore|null);
+
+                    /** ImportDataRequest name */
+                    name?: (string|null);
+
+                    /** ImportDataRequest requestId */
+                    requestId?: (string|null);
+
+                    /** ImportDataRequest serviceAccount */
+                    serviceAccount?: (string|null);
+                }
+
+                /** Represents an ImportDataRequest. */
+                class ImportDataRequest implements IImportDataRequest {
+
+                    /**
+                     * Constructs a new ImportDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IImportDataRequest);
+
+                    /** ImportDataRequest sourceGcsBucket. */
+                    public sourceGcsBucket?: (google.cloud.parallelstore.v1.ISourceGcsBucket|null);
+
+                    /** ImportDataRequest destinationParallelstore. */
+                    public destinationParallelstore?: (google.cloud.parallelstore.v1.IDestinationParallelstore|null);
+
+                    /** ImportDataRequest name. */
+                    public name: string;
+
+                    /** ImportDataRequest requestId. */
+                    public requestId: string;
+
+                    /** ImportDataRequest serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** ImportDataRequest source. */
+                    public source?: "sourceGcsBucket";
+
+                    /** ImportDataRequest destination. */
+                    public destination?: "destinationParallelstore";
+
+                    /**
+                     * Creates a new ImportDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IImportDataRequest): google.cloud.parallelstore.v1.ImportDataRequest;
+
+                    /**
+                     * Encodes the specified ImportDataRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.ImportDataRequest.verify|verify} messages.
+                     * @param message ImportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IImportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ImportDataRequest.verify|verify} messages.
+                     * @param message ImportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IImportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ImportDataRequest;
+
+                    /**
+                     * Decodes an ImportDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ImportDataRequest;
+
+                    /**
+                     * Verifies an ImportDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ImportDataRequest;
+
+                    /**
+                     * Creates a plain object from an ImportDataRequest message. Also converts values to other types if specified.
+                     * @param message ImportDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ImportDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataRequest. */
+                interface IExportDataRequest {
+
+                    /** ExportDataRequest sourceParallelstore */
+                    sourceParallelstore?: (google.cloud.parallelstore.v1.ISourceParallelstore|null);
+
+                    /** ExportDataRequest destinationGcsBucket */
+                    destinationGcsBucket?: (google.cloud.parallelstore.v1.IDestinationGcsBucket|null);
+
+                    /** ExportDataRequest name */
+                    name?: (string|null);
+
+                    /** ExportDataRequest requestId */
+                    requestId?: (string|null);
+
+                    /** ExportDataRequest serviceAccount */
+                    serviceAccount?: (string|null);
+                }
+
+                /** Represents an ExportDataRequest. */
+                class ExportDataRequest implements IExportDataRequest {
+
+                    /**
+                     * Constructs a new ExportDataRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IExportDataRequest);
+
+                    /** ExportDataRequest sourceParallelstore. */
+                    public sourceParallelstore?: (google.cloud.parallelstore.v1.ISourceParallelstore|null);
+
+                    /** ExportDataRequest destinationGcsBucket. */
+                    public destinationGcsBucket?: (google.cloud.parallelstore.v1.IDestinationGcsBucket|null);
+
+                    /** ExportDataRequest name. */
+                    public name: string;
+
+                    /** ExportDataRequest requestId. */
+                    public requestId: string;
+
+                    /** ExportDataRequest serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** ExportDataRequest source. */
+                    public source?: "sourceParallelstore";
+
+                    /** ExportDataRequest destination. */
+                    public destination?: "destinationGcsBucket";
+
+                    /**
+                     * Creates a new ExportDataRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataRequest instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IExportDataRequest): google.cloud.parallelstore.v1.ExportDataRequest;
+
+                    /**
+                     * Encodes the specified ExportDataRequest message. Does not implicitly {@link google.cloud.parallelstore.v1.ExportDataRequest.verify|verify} messages.
+                     * @param message ExportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IExportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataRequest message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ExportDataRequest.verify|verify} messages.
+                     * @param message ExportDataRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IExportDataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ExportDataRequest;
+
+                    /**
+                     * Decodes an ExportDataRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ExportDataRequest;
+
+                    /**
+                     * Verifies an ExportDataRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ExportDataRequest;
+
+                    /**
+                     * Creates a plain object from an ExportDataRequest message. Also converts values to other types if specified.
+                     * @param message ExportDataRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ExportDataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataResponse. */
+                interface IImportDataResponse {
+                }
+
+                /** Represents an ImportDataResponse. */
+                class ImportDataResponse implements IImportDataResponse {
+
+                    /**
+                     * Constructs a new ImportDataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IImportDataResponse);
+
+                    /**
+                     * Creates a new ImportDataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataResponse instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IImportDataResponse): google.cloud.parallelstore.v1.ImportDataResponse;
+
+                    /**
+                     * Encodes the specified ImportDataResponse message. Does not implicitly {@link google.cloud.parallelstore.v1.ImportDataResponse.verify|verify} messages.
+                     * @param message ImportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IImportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataResponse message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ImportDataResponse.verify|verify} messages.
+                     * @param message ImportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IImportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ImportDataResponse;
+
+                    /**
+                     * Decodes an ImportDataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ImportDataResponse;
+
+                    /**
+                     * Verifies an ImportDataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ImportDataResponse;
+
+                    /**
+                     * Creates a plain object from an ImportDataResponse message. Also converts values to other types if specified.
+                     * @param message ImportDataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ImportDataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportDataMetadata. */
+                interface IImportDataMetadata {
+
+                    /** ImportDataMetadata operationMetadata */
+                    operationMetadata?: (google.cloud.parallelstore.v1.ITransferOperationMetadata|null);
+
+                    /** ImportDataMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata target */
+                    target?: (string|null);
+
+                    /** ImportDataMetadata verb */
+                    verb?: (string|null);
+
+                    /** ImportDataMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** ImportDataMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** ImportDataMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an ImportDataMetadata. */
+                class ImportDataMetadata implements IImportDataMetadata {
+
+                    /**
+                     * Constructs a new ImportDataMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IImportDataMetadata);
+
+                    /** ImportDataMetadata operationMetadata. */
+                    public operationMetadata?: (google.cloud.parallelstore.v1.ITransferOperationMetadata|null);
+
+                    /** ImportDataMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportDataMetadata target. */
+                    public target: string;
+
+                    /** ImportDataMetadata verb. */
+                    public verb: string;
+
+                    /** ImportDataMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** ImportDataMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** ImportDataMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new ImportDataMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportDataMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IImportDataMetadata): google.cloud.parallelstore.v1.ImportDataMetadata;
+
+                    /**
+                     * Encodes the specified ImportDataMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1.ImportDataMetadata.verify|verify} messages.
+                     * @param message ImportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IImportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ImportDataMetadata.verify|verify} messages.
+                     * @param message ImportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IImportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportDataMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ImportDataMetadata;
+
+                    /**
+                     * Decodes an ImportDataMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ImportDataMetadata;
+
+                    /**
+                     * Verifies an ImportDataMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportDataMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ImportDataMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportDataMetadata message. Also converts values to other types if specified.
+                     * @param message ImportDataMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ImportDataMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportDataMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportDataMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataResponse. */
+                interface IExportDataResponse {
+                }
+
+                /** Represents an ExportDataResponse. */
+                class ExportDataResponse implements IExportDataResponse {
+
+                    /**
+                     * Constructs a new ExportDataResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IExportDataResponse);
+
+                    /**
+                     * Creates a new ExportDataResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataResponse instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IExportDataResponse): google.cloud.parallelstore.v1.ExportDataResponse;
+
+                    /**
+                     * Encodes the specified ExportDataResponse message. Does not implicitly {@link google.cloud.parallelstore.v1.ExportDataResponse.verify|verify} messages.
+                     * @param message ExportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IExportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataResponse message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ExportDataResponse.verify|verify} messages.
+                     * @param message ExportDataResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IExportDataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ExportDataResponse;
+
+                    /**
+                     * Decodes an ExportDataResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ExportDataResponse;
+
+                    /**
+                     * Verifies an ExportDataResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ExportDataResponse;
+
+                    /**
+                     * Creates a plain object from an ExportDataResponse message. Also converts values to other types if specified.
+                     * @param message ExportDataResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ExportDataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportDataMetadata. */
+                interface IExportDataMetadata {
+
+                    /** ExportDataMetadata operationMetadata */
+                    operationMetadata?: (google.cloud.parallelstore.v1.ITransferOperationMetadata|null);
+
+                    /** ExportDataMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata target */
+                    target?: (string|null);
+
+                    /** ExportDataMetadata verb */
+                    verb?: (string|null);
+
+                    /** ExportDataMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** ExportDataMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** ExportDataMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an ExportDataMetadata. */
+                class ExportDataMetadata implements IExportDataMetadata {
+
+                    /**
+                     * Constructs a new ExportDataMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.IExportDataMetadata);
+
+                    /** ExportDataMetadata operationMetadata. */
+                    public operationMetadata?: (google.cloud.parallelstore.v1.ITransferOperationMetadata|null);
+
+                    /** ExportDataMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportDataMetadata target. */
+                    public target: string;
+
+                    /** ExportDataMetadata verb. */
+                    public verb: string;
+
+                    /** ExportDataMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** ExportDataMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** ExportDataMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new ExportDataMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportDataMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.IExportDataMetadata): google.cloud.parallelstore.v1.ExportDataMetadata;
+
+                    /**
+                     * Encodes the specified ExportDataMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1.ExportDataMetadata.verify|verify} messages.
+                     * @param message ExportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.IExportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportDataMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.ExportDataMetadata.verify|verify} messages.
+                     * @param message ExportDataMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.IExportDataMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportDataMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.ExportDataMetadata;
+
+                    /**
+                     * Decodes an ExportDataMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportDataMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.ExportDataMetadata;
+
+                    /**
+                     * Verifies an ExportDataMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportDataMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportDataMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.ExportDataMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportDataMetadata message. Also converts values to other types if specified.
+                     * @param message ExportDataMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.ExportDataMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportDataMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportDataMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransferOperationMetadata. */
+                interface ITransferOperationMetadata {
+
+                    /** TransferOperationMetadata sourceParallelstore */
+                    sourceParallelstore?: (google.cloud.parallelstore.v1.ISourceParallelstore|null);
+
+                    /** TransferOperationMetadata sourceGcsBucket */
+                    sourceGcsBucket?: (google.cloud.parallelstore.v1.ISourceGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationGcsBucket */
+                    destinationGcsBucket?: (google.cloud.parallelstore.v1.IDestinationGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationParallelstore */
+                    destinationParallelstore?: (google.cloud.parallelstore.v1.IDestinationParallelstore|null);
+
+                    /** TransferOperationMetadata counters */
+                    counters?: (google.cloud.parallelstore.v1.ITransferCounters|null);
+
+                    /** TransferOperationMetadata transferType */
+                    transferType?: (google.cloud.parallelstore.v1.TransferType|keyof typeof google.cloud.parallelstore.v1.TransferType|null);
+                }
+
+                /** Represents a TransferOperationMetadata. */
+                class TransferOperationMetadata implements ITransferOperationMetadata {
+
+                    /**
+                     * Constructs a new TransferOperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ITransferOperationMetadata);
+
+                    /** TransferOperationMetadata sourceParallelstore. */
+                    public sourceParallelstore?: (google.cloud.parallelstore.v1.ISourceParallelstore|null);
+
+                    /** TransferOperationMetadata sourceGcsBucket. */
+                    public sourceGcsBucket?: (google.cloud.parallelstore.v1.ISourceGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationGcsBucket. */
+                    public destinationGcsBucket?: (google.cloud.parallelstore.v1.IDestinationGcsBucket|null);
+
+                    /** TransferOperationMetadata destinationParallelstore. */
+                    public destinationParallelstore?: (google.cloud.parallelstore.v1.IDestinationParallelstore|null);
+
+                    /** TransferOperationMetadata counters. */
+                    public counters?: (google.cloud.parallelstore.v1.ITransferCounters|null);
+
+                    /** TransferOperationMetadata transferType. */
+                    public transferType: (google.cloud.parallelstore.v1.TransferType|keyof typeof google.cloud.parallelstore.v1.TransferType);
+
+                    /** TransferOperationMetadata source. */
+                    public source?: ("sourceParallelstore"|"sourceGcsBucket");
+
+                    /** TransferOperationMetadata destination. */
+                    public destination?: ("destinationGcsBucket"|"destinationParallelstore");
+
+                    /**
+                     * Creates a new TransferOperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferOperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ITransferOperationMetadata): google.cloud.parallelstore.v1.TransferOperationMetadata;
+
+                    /**
+                     * Encodes the specified TransferOperationMetadata message. Does not implicitly {@link google.cloud.parallelstore.v1.TransferOperationMetadata.verify|verify} messages.
+                     * @param message TransferOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ITransferOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferOperationMetadata message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.TransferOperationMetadata.verify|verify} messages.
+                     * @param message TransferOperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ITransferOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferOperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.TransferOperationMetadata;
+
+                    /**
+                     * Decodes a TransferOperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferOperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.TransferOperationMetadata;
+
+                    /**
+                     * Verifies a TransferOperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferOperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferOperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.TransferOperationMetadata;
+
+                    /**
+                     * Creates a plain object from a TransferOperationMetadata message. Also converts values to other types if specified.
+                     * @param message TransferOperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.TransferOperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferOperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferOperationMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TransferCounters. */
+                interface ITransferCounters {
+
+                    /** TransferCounters objectsFound */
+                    objectsFound?: (number|Long|string|null);
+
+                    /** TransferCounters bytesFound */
+                    bytesFound?: (number|Long|string|null);
+
+                    /** TransferCounters objectsSkipped */
+                    objectsSkipped?: (number|Long|string|null);
+
+                    /** TransferCounters bytesSkipped */
+                    bytesSkipped?: (number|Long|string|null);
+
+                    /** TransferCounters objectsCopied */
+                    objectsCopied?: (number|Long|string|null);
+
+                    /** TransferCounters bytesCopied */
+                    bytesCopied?: (number|Long|string|null);
+                }
+
+                /** Represents a TransferCounters. */
+                class TransferCounters implements ITransferCounters {
+
+                    /**
+                     * Constructs a new TransferCounters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parallelstore.v1.ITransferCounters);
+
+                    /** TransferCounters objectsFound. */
+                    public objectsFound: (number|Long|string);
+
+                    /** TransferCounters bytesFound. */
+                    public bytesFound: (number|Long|string);
+
+                    /** TransferCounters objectsSkipped. */
+                    public objectsSkipped: (number|Long|string);
+
+                    /** TransferCounters bytesSkipped. */
+                    public bytesSkipped: (number|Long|string);
+
+                    /** TransferCounters objectsCopied. */
+                    public objectsCopied: (number|Long|string);
+
+                    /** TransferCounters bytesCopied. */
+                    public bytesCopied: (number|Long|string);
+
+                    /**
+                     * Creates a new TransferCounters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TransferCounters instance
+                     */
+                    public static create(properties?: google.cloud.parallelstore.v1.ITransferCounters): google.cloud.parallelstore.v1.TransferCounters;
+
+                    /**
+                     * Encodes the specified TransferCounters message. Does not implicitly {@link google.cloud.parallelstore.v1.TransferCounters.verify|verify} messages.
+                     * @param message TransferCounters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parallelstore.v1.ITransferCounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TransferCounters message, length delimited. Does not implicitly {@link google.cloud.parallelstore.v1.TransferCounters.verify|verify} messages.
+                     * @param message TransferCounters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parallelstore.v1.ITransferCounters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TransferCounters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TransferCounters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parallelstore.v1.TransferCounters;
+
+                    /**
+                     * Decodes a TransferCounters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TransferCounters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parallelstore.v1.TransferCounters;
+
+                    /**
+                     * Verifies a TransferCounters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TransferCounters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TransferCounters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parallelstore.v1.TransferCounters;
+
+                    /**
+                     * Creates a plain object from a TransferCounters message. Also converts values to other types if specified.
+                     * @param message TransferCounters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parallelstore.v1.TransferCounters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TransferCounters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TransferCounters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Namespace v1beta. */
             namespace v1beta {
 
