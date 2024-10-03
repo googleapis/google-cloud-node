@@ -3072,6 +3072,11 @@
                           "oneof": [
                             "searchEntryPoint"
                           ]
+                        },
+                        "_retrievalMetadata": {
+                          "oneof": [
+                            "retrievalMetadata"
+                          ]
                         }
                       },
                       "fields": {
@@ -3103,6 +3108,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "retrievalMetadata": {
+                          "type": "RetrievalMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -3117,6 +3130,17 @@
                         },
                         "sdkBlob": {
                           "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RetrievalMetadata": {
+                      "fields": {
+                        "googleSearchDynamicRetrievalScore": {
+                          "type": "float",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -3420,7 +3444,43 @@
                       }
                     },
                     "GoogleSearchRetrieval": {
-                      "fields": {}
+                      "fields": {
+                        "dynamicRetrievalConfig": {
+                          "type": "DynamicRetrievalConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DynamicRetrievalConfig": {
+                      "oneofs": {
+                        "_dynamicThreshold": {
+                          "oneof": [
+                            "dynamicThreshold"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "dynamicThreshold": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "MODE_DYNAMIC": 1
+                          }
+                        }
+                      }
                     },
                     "ToolConfig": {
                       "fields": {
