@@ -26,6 +26,635 @@ export namespace google {
             /** Namespace v2. */
             namespace v2 {
 
+                /** Represents a Builds */
+                class Builds extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Builds service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Builds service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Builds;
+
+                    /**
+                     * Calls SubmitBuild.
+                     * @param request SubmitBuildRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SubmitBuildResponse
+                     */
+                    public submitBuild(request: google.cloud.run.v2.ISubmitBuildRequest, callback: google.cloud.run.v2.Builds.SubmitBuildCallback): void;
+
+                    /**
+                     * Calls SubmitBuild.
+                     * @param request SubmitBuildRequest message or plain object
+                     * @returns Promise
+                     */
+                    public submitBuild(request: google.cloud.run.v2.ISubmitBuildRequest): Promise<google.cloud.run.v2.SubmitBuildResponse>;
+                }
+
+                namespace Builds {
+
+                    /**
+                     * Callback as used by {@link google.cloud.run.v2.Builds|submitBuild}.
+                     * @param error Error, if any
+                     * @param [response] SubmitBuildResponse
+                     */
+                    type SubmitBuildCallback = (error: (Error|null), response?: google.cloud.run.v2.SubmitBuildResponse) => void;
+                }
+
+                /** Properties of a SubmitBuildRequest. */
+                interface ISubmitBuildRequest {
+
+                    /** SubmitBuildRequest parent */
+                    parent?: (string|null);
+
+                    /** SubmitBuildRequest storageSource */
+                    storageSource?: (google.cloud.run.v2.IStorageSource|null);
+
+                    /** SubmitBuildRequest imageUri */
+                    imageUri?: (string|null);
+
+                    /** SubmitBuildRequest buildpackBuild */
+                    buildpackBuild?: (google.cloud.run.v2.SubmitBuildRequest.IBuildpacksBuild|null);
+
+                    /** SubmitBuildRequest dockerBuild */
+                    dockerBuild?: (google.cloud.run.v2.SubmitBuildRequest.IDockerBuild|null);
+
+                    /** SubmitBuildRequest serviceAccount */
+                    serviceAccount?: (string|null);
+
+                    /** SubmitBuildRequest workerPool */
+                    workerPool?: (string|null);
+
+                    /** SubmitBuildRequest tags */
+                    tags?: (string[]|null);
+                }
+
+                /** Represents a SubmitBuildRequest. */
+                class SubmitBuildRequest implements ISubmitBuildRequest {
+
+                    /**
+                     * Constructs a new SubmitBuildRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ISubmitBuildRequest);
+
+                    /** SubmitBuildRequest parent. */
+                    public parent: string;
+
+                    /** SubmitBuildRequest storageSource. */
+                    public storageSource?: (google.cloud.run.v2.IStorageSource|null);
+
+                    /** SubmitBuildRequest imageUri. */
+                    public imageUri: string;
+
+                    /** SubmitBuildRequest buildpackBuild. */
+                    public buildpackBuild?: (google.cloud.run.v2.SubmitBuildRequest.IBuildpacksBuild|null);
+
+                    /** SubmitBuildRequest dockerBuild. */
+                    public dockerBuild?: (google.cloud.run.v2.SubmitBuildRequest.IDockerBuild|null);
+
+                    /** SubmitBuildRequest serviceAccount. */
+                    public serviceAccount: string;
+
+                    /** SubmitBuildRequest workerPool. */
+                    public workerPool: string;
+
+                    /** SubmitBuildRequest tags. */
+                    public tags: string[];
+
+                    /** SubmitBuildRequest source. */
+                    public source?: "storageSource";
+
+                    /** SubmitBuildRequest buildType. */
+                    public buildType?: ("buildpackBuild"|"dockerBuild");
+
+                    /**
+                     * Creates a new SubmitBuildRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitBuildRequest instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ISubmitBuildRequest): google.cloud.run.v2.SubmitBuildRequest;
+
+                    /**
+                     * Encodes the specified SubmitBuildRequest message. Does not implicitly {@link google.cloud.run.v2.SubmitBuildRequest.verify|verify} messages.
+                     * @param message SubmitBuildRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ISubmitBuildRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitBuildRequest message, length delimited. Does not implicitly {@link google.cloud.run.v2.SubmitBuildRequest.verify|verify} messages.
+                     * @param message SubmitBuildRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ISubmitBuildRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitBuildRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitBuildRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SubmitBuildRequest;
+
+                    /**
+                     * Decodes a SubmitBuildRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitBuildRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SubmitBuildRequest;
+
+                    /**
+                     * Verifies a SubmitBuildRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitBuildRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitBuildRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SubmitBuildRequest;
+
+                    /**
+                     * Creates a plain object from a SubmitBuildRequest message. Also converts values to other types if specified.
+                     * @param message SubmitBuildRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.SubmitBuildRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitBuildRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitBuildRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SubmitBuildRequest {
+
+                    /** Properties of a DockerBuild. */
+                    interface IDockerBuild {
+                    }
+
+                    /** Represents a DockerBuild. */
+                    class DockerBuild implements IDockerBuild {
+
+                        /**
+                         * Constructs a new DockerBuild.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.SubmitBuildRequest.IDockerBuild);
+
+                        /**
+                         * Creates a new DockerBuild instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DockerBuild instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.SubmitBuildRequest.IDockerBuild): google.cloud.run.v2.SubmitBuildRequest.DockerBuild;
+
+                        /**
+                         * Encodes the specified DockerBuild message. Does not implicitly {@link google.cloud.run.v2.SubmitBuildRequest.DockerBuild.verify|verify} messages.
+                         * @param message DockerBuild message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.SubmitBuildRequest.IDockerBuild, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DockerBuild message, length delimited. Does not implicitly {@link google.cloud.run.v2.SubmitBuildRequest.DockerBuild.verify|verify} messages.
+                         * @param message DockerBuild message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.SubmitBuildRequest.IDockerBuild, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DockerBuild message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DockerBuild
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SubmitBuildRequest.DockerBuild;
+
+                        /**
+                         * Decodes a DockerBuild message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DockerBuild
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SubmitBuildRequest.DockerBuild;
+
+                        /**
+                         * Verifies a DockerBuild message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DockerBuild message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DockerBuild
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SubmitBuildRequest.DockerBuild;
+
+                        /**
+                         * Creates a plain object from a DockerBuild message. Also converts values to other types if specified.
+                         * @param message DockerBuild
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.SubmitBuildRequest.DockerBuild, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DockerBuild to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DockerBuild
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a BuildpacksBuild. */
+                    interface IBuildpacksBuild {
+
+                        /** BuildpacksBuild runtime */
+                        runtime?: (string|null);
+
+                        /** BuildpacksBuild functionTarget */
+                        functionTarget?: (string|null);
+
+                        /** BuildpacksBuild cacheImageUri */
+                        cacheImageUri?: (string|null);
+
+                        /** BuildpacksBuild baseImage */
+                        baseImage?: (string|null);
+
+                        /** BuildpacksBuild environmentVariables */
+                        environmentVariables?: ({ [k: string]: string }|null);
+
+                        /** BuildpacksBuild enableAutomaticUpdates */
+                        enableAutomaticUpdates?: (boolean|null);
+                    }
+
+                    /** Represents a BuildpacksBuild. */
+                    class BuildpacksBuild implements IBuildpacksBuild {
+
+                        /**
+                         * Constructs a new BuildpacksBuild.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.run.v2.SubmitBuildRequest.IBuildpacksBuild);
+
+                        /** BuildpacksBuild runtime. */
+                        public runtime: string;
+
+                        /** BuildpacksBuild functionTarget. */
+                        public functionTarget: string;
+
+                        /** BuildpacksBuild cacheImageUri. */
+                        public cacheImageUri: string;
+
+                        /** BuildpacksBuild baseImage. */
+                        public baseImage: string;
+
+                        /** BuildpacksBuild environmentVariables. */
+                        public environmentVariables: { [k: string]: string };
+
+                        /** BuildpacksBuild enableAutomaticUpdates. */
+                        public enableAutomaticUpdates: boolean;
+
+                        /**
+                         * Creates a new BuildpacksBuild instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BuildpacksBuild instance
+                         */
+                        public static create(properties?: google.cloud.run.v2.SubmitBuildRequest.IBuildpacksBuild): google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild;
+
+                        /**
+                         * Encodes the specified BuildpacksBuild message. Does not implicitly {@link google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild.verify|verify} messages.
+                         * @param message BuildpacksBuild message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.run.v2.SubmitBuildRequest.IBuildpacksBuild, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BuildpacksBuild message, length delimited. Does not implicitly {@link google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild.verify|verify} messages.
+                         * @param message BuildpacksBuild message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.run.v2.SubmitBuildRequest.IBuildpacksBuild, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BuildpacksBuild message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BuildpacksBuild
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild;
+
+                        /**
+                         * Decodes a BuildpacksBuild message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BuildpacksBuild
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild;
+
+                        /**
+                         * Verifies a BuildpacksBuild message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BuildpacksBuild message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BuildpacksBuild
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild;
+
+                        /**
+                         * Creates a plain object from a BuildpacksBuild message. Also converts values to other types if specified.
+                         * @param message BuildpacksBuild
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BuildpacksBuild to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BuildpacksBuild
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a SubmitBuildResponse. */
+                interface ISubmitBuildResponse {
+
+                    /** SubmitBuildResponse buildOperation */
+                    buildOperation?: (google.longrunning.IOperation|null);
+
+                    /** SubmitBuildResponse baseImageUri */
+                    baseImageUri?: (string|null);
+
+                    /** SubmitBuildResponse baseImageWarning */
+                    baseImageWarning?: (string|null);
+                }
+
+                /** Represents a SubmitBuildResponse. */
+                class SubmitBuildResponse implements ISubmitBuildResponse {
+
+                    /**
+                     * Constructs a new SubmitBuildResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.ISubmitBuildResponse);
+
+                    /** SubmitBuildResponse buildOperation. */
+                    public buildOperation?: (google.longrunning.IOperation|null);
+
+                    /** SubmitBuildResponse baseImageUri. */
+                    public baseImageUri: string;
+
+                    /** SubmitBuildResponse baseImageWarning. */
+                    public baseImageWarning: string;
+
+                    /**
+                     * Creates a new SubmitBuildResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SubmitBuildResponse instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.ISubmitBuildResponse): google.cloud.run.v2.SubmitBuildResponse;
+
+                    /**
+                     * Encodes the specified SubmitBuildResponse message. Does not implicitly {@link google.cloud.run.v2.SubmitBuildResponse.verify|verify} messages.
+                     * @param message SubmitBuildResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.ISubmitBuildResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SubmitBuildResponse message, length delimited. Does not implicitly {@link google.cloud.run.v2.SubmitBuildResponse.verify|verify} messages.
+                     * @param message SubmitBuildResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.ISubmitBuildResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SubmitBuildResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SubmitBuildResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.SubmitBuildResponse;
+
+                    /**
+                     * Decodes a SubmitBuildResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SubmitBuildResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.SubmitBuildResponse;
+
+                    /**
+                     * Verifies a SubmitBuildResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SubmitBuildResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SubmitBuildResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.SubmitBuildResponse;
+
+                    /**
+                     * Creates a plain object from a SubmitBuildResponse message. Also converts values to other types if specified.
+                     * @param message SubmitBuildResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.SubmitBuildResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SubmitBuildResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SubmitBuildResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a StorageSource. */
+                interface IStorageSource {
+
+                    /** StorageSource bucket */
+                    bucket?: (string|null);
+
+                    /** StorageSource object */
+                    object?: (string|null);
+
+                    /** StorageSource generation */
+                    generation?: (number|Long|string|null);
+                }
+
+                /** Represents a StorageSource. */
+                class StorageSource implements IStorageSource {
+
+                    /**
+                     * Constructs a new StorageSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IStorageSource);
+
+                    /** StorageSource bucket. */
+                    public bucket: string;
+
+                    /** StorageSource object. */
+                    public object: string;
+
+                    /** StorageSource generation. */
+                    public generation: (number|Long|string);
+
+                    /**
+                     * Creates a new StorageSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageSource instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IStorageSource): google.cloud.run.v2.StorageSource;
+
+                    /**
+                     * Encodes the specified StorageSource message. Does not implicitly {@link google.cloud.run.v2.StorageSource.verify|verify} messages.
+                     * @param message StorageSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageSource message, length delimited. Does not implicitly {@link google.cloud.run.v2.StorageSource.verify|verify} messages.
+                     * @param message StorageSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IStorageSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.StorageSource;
+
+                    /**
+                     * Decodes a StorageSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.StorageSource;
+
+                    /**
+                     * Verifies a StorageSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.StorageSource;
+
+                    /**
+                     * Creates a plain object from a StorageSource message. Also converts values to other types if specified.
+                     * @param message StorageSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.StorageSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StorageSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Condition. */
                 interface ICondition {
 
@@ -3820,11 +4449,111 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ServiceMesh. */
+                interface IServiceMesh {
+
+                    /** ServiceMesh mesh */
+                    mesh?: (string|null);
+                }
+
+                /** Represents a ServiceMesh. */
+                class ServiceMesh implements IServiceMesh {
+
+                    /**
+                     * Constructs a new ServiceMesh.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.IServiceMesh);
+
+                    /** ServiceMesh mesh. */
+                    public mesh: string;
+
+                    /**
+                     * Creates a new ServiceMesh instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ServiceMesh instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.IServiceMesh): google.cloud.run.v2.ServiceMesh;
+
+                    /**
+                     * Encodes the specified ServiceMesh message. Does not implicitly {@link google.cloud.run.v2.ServiceMesh.verify|verify} messages.
+                     * @param message ServiceMesh message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.IServiceMesh, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ServiceMesh message, length delimited. Does not implicitly {@link google.cloud.run.v2.ServiceMesh.verify|verify} messages.
+                     * @param message ServiceMesh message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.IServiceMesh, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ServiceMesh message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ServiceMesh
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.ServiceMesh;
+
+                    /**
+                     * Decodes a ServiceMesh message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ServiceMesh
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.ServiceMesh;
+
+                    /**
+                     * Verifies a ServiceMesh message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ServiceMesh message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ServiceMesh
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.ServiceMesh;
+
+                    /**
+                     * Creates a plain object from a ServiceMesh message. Also converts values to other types if specified.
+                     * @param message ServiceMesh
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.ServiceMesh, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ServiceMesh to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ServiceMesh
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ServiceScaling. */
                 interface IServiceScaling {
 
                     /** ServiceScaling minInstanceCount */
                     minInstanceCount?: (number|null);
+
+                    /** ServiceScaling scalingMode */
+                    scalingMode?: (google.cloud.run.v2.ServiceScaling.ScalingMode|keyof typeof google.cloud.run.v2.ServiceScaling.ScalingMode|null);
                 }
 
                 /** Represents a ServiceScaling. */
@@ -3838,6 +4567,9 @@ export namespace google {
 
                     /** ServiceScaling minInstanceCount. */
                     public minInstanceCount: number;
+
+                    /** ServiceScaling scalingMode. */
+                    public scalingMode: (google.cloud.run.v2.ServiceScaling.ScalingMode|keyof typeof google.cloud.run.v2.ServiceScaling.ScalingMode);
 
                     /**
                      * Creates a new ServiceScaling instance using the specified properties.
@@ -3917,12 +4649,120 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace ServiceScaling {
+
+                    /** ScalingMode enum. */
+                    enum ScalingMode {
+                        SCALING_MODE_UNSPECIFIED = 0,
+                        AUTOMATIC = 1,
+                        MANUAL = 2
+                    }
+                }
+
+                /** Properties of a NodeSelector. */
+                interface INodeSelector {
+
+                    /** NodeSelector accelerator */
+                    accelerator?: (string|null);
+                }
+
+                /** Represents a NodeSelector. */
+                class NodeSelector implements INodeSelector {
+
+                    /**
+                     * Constructs a new NodeSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.run.v2.INodeSelector);
+
+                    /** NodeSelector accelerator. */
+                    public accelerator: string;
+
+                    /**
+                     * Creates a new NodeSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeSelector instance
+                     */
+                    public static create(properties?: google.cloud.run.v2.INodeSelector): google.cloud.run.v2.NodeSelector;
+
+                    /**
+                     * Encodes the specified NodeSelector message. Does not implicitly {@link google.cloud.run.v2.NodeSelector.verify|verify} messages.
+                     * @param message NodeSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.run.v2.INodeSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeSelector message, length delimited. Does not implicitly {@link google.cloud.run.v2.NodeSelector.verify|verify} messages.
+                     * @param message NodeSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.run.v2.INodeSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.run.v2.NodeSelector;
+
+                    /**
+                     * Decodes a NodeSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.run.v2.NodeSelector;
+
+                    /**
+                     * Verifies a NodeSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.run.v2.NodeSelector;
+
+                    /**
+                     * Creates a plain object from a NodeSelector message. Also converts values to other types if specified.
+                     * @param message NodeSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.run.v2.NodeSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeSelector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** IngressTraffic enum. */
                 enum IngressTraffic {
                     INGRESS_TRAFFIC_UNSPECIFIED = 0,
                     INGRESS_TRAFFIC_ALL = 1,
                     INGRESS_TRAFFIC_INTERNAL_ONLY = 2,
-                    INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER = 3
+                    INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER = 3,
+                    INGRESS_TRAFFIC_NONE = 4
                 }
 
                 /** ExecutionEnvironment enum. */
@@ -6224,6 +7064,9 @@ export namespace google {
                     /** Revision encryptionKey */
                     encryptionKey?: (string|null);
 
+                    /** Revision serviceMesh */
+                    serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
                     /** Revision encryptionKeyRevocationAction */
                     encryptionKeyRevocationAction?: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction|null);
 
@@ -6250,6 +7093,9 @@ export namespace google {
 
                     /** Revision scalingStatus */
                     scalingStatus?: (google.cloud.run.v2.IRevisionScalingStatus|null);
+
+                    /** Revision nodeSelector */
+                    nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
                     /** Revision etag */
                     etag?: (string|null);
@@ -6324,6 +7170,9 @@ export namespace google {
                     /** Revision encryptionKey. */
                     public encryptionKey: string;
 
+                    /** Revision serviceMesh. */
+                    public serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
                     /** Revision encryptionKeyRevocationAction. */
                     public encryptionKeyRevocationAction: (google.cloud.run.v2.EncryptionKeyRevocationAction|keyof typeof google.cloud.run.v2.EncryptionKeyRevocationAction);
 
@@ -6350,6 +7199,9 @@ export namespace google {
 
                     /** Revision scalingStatus. */
                     public scalingStatus?: (google.cloud.run.v2.IRevisionScalingStatus|null);
+
+                    /** Revision nodeSelector. */
+                    public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
                     /** Revision etag. */
                     public etag: string;
@@ -6568,11 +7420,17 @@ export namespace google {
                     /** RevisionTemplate maxInstanceRequestConcurrency */
                     maxInstanceRequestConcurrency?: (number|null);
 
+                    /** RevisionTemplate serviceMesh */
+                    serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
                     /** RevisionTemplate sessionAffinity */
                     sessionAffinity?: (boolean|null);
 
                     /** RevisionTemplate healthCheckDisabled */
                     healthCheckDisabled?: (boolean|null);
+
+                    /** RevisionTemplate nodeSelector */
+                    nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
                 }
 
                 /** Represents a RevisionTemplate. */
@@ -6620,11 +7478,17 @@ export namespace google {
                     /** RevisionTemplate maxInstanceRequestConcurrency. */
                     public maxInstanceRequestConcurrency: number;
 
+                    /** RevisionTemplate serviceMesh. */
+                    public serviceMesh?: (google.cloud.run.v2.IServiceMesh|null);
+
                     /** RevisionTemplate sessionAffinity. */
                     public sessionAffinity: boolean;
 
                     /** RevisionTemplate healthCheckDisabled. */
                     public healthCheckDisabled: boolean;
+
+                    /** RevisionTemplate nodeSelector. */
+                    public nodeSelector?: (google.cloud.run.v2.INodeSelector|null);
 
                     /**
                      * Creates a new RevisionTemplate instance using the specified properties.
@@ -7613,8 +8477,17 @@ export namespace google {
                     /** Service scaling */
                     scaling?: (google.cloud.run.v2.IServiceScaling|null);
 
+                    /** Service invokerIamDisabled */
+                    invokerIamDisabled?: (boolean|null);
+
                     /** Service defaultUriDisabled */
                     defaultUriDisabled?: (boolean|null);
+
+                    /** Service urls */
+                    urls?: (string[]|null);
+
+                    /** Service customAudiences */
+                    customAudiences?: (string[]|null);
 
                     /** Service observedGeneration */
                     observedGeneration?: (number|Long|string|null);
@@ -7636,9 +8509,6 @@ export namespace google {
 
                     /** Service uri */
                     uri?: (string|null);
-
-                    /** Service customAudiences */
-                    customAudiences?: (string[]|null);
 
                     /** Service satisfiesPzs */
                     satisfiesPzs?: (boolean|null);
@@ -7719,8 +8589,17 @@ export namespace google {
                     /** Service scaling. */
                     public scaling?: (google.cloud.run.v2.IServiceScaling|null);
 
+                    /** Service invokerIamDisabled. */
+                    public invokerIamDisabled: boolean;
+
                     /** Service defaultUriDisabled. */
                     public defaultUriDisabled: boolean;
+
+                    /** Service urls. */
+                    public urls: string[];
+
+                    /** Service customAudiences. */
+                    public customAudiences: string[];
 
                     /** Service observedGeneration. */
                     public observedGeneration: (number|Long|string);
@@ -7742,9 +8621,6 @@ export namespace google {
 
                     /** Service uri. */
                     public uri: string;
-
-                    /** Service customAudiences. */
-                    public customAudiences: string[];
 
                     /** Service satisfiesPzs. */
                     public satisfiesPzs: boolean;
@@ -8842,19 +9718,6 @@ export namespace google {
 
     /** Namespace api. */
     namespace api {
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
-        }
 
         /** Properties of a Http. */
         interface IHttp {
@@ -10701,6 +11564,19 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -15267,109 +16143,6 @@ export namespace google {
             }
         }
 
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Timestamp
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -15661,6 +16434,109 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Timestamp
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -16,6 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {BuildsClient} from './builds_client';
 export {ExecutionsClient} from './executions_client';
 export {JobsClient} from './jobs_client';
 export {RevisionsClient} from './revisions_client';

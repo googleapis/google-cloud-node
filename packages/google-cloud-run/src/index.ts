@@ -18,6 +18,8 @@
 
 import * as v2 from './v2';
 
+const BuildsClient = v2.BuildsClient;
+type BuildsClient = v2.BuildsClient;
 const ExecutionsClient = v2.ExecutionsClient;
 type ExecutionsClient = v2.ExecutionsClient;
 const JobsClient = v2.JobsClient;
@@ -31,6 +33,7 @@ type TasksClient = v2.TasksClient;
 
 export {
   v2,
+  BuildsClient,
   ExecutionsClient,
   JobsClient,
   RevisionsClient,
@@ -39,6 +42,7 @@ export {
 };
 export default {
   v2,
+  BuildsClient,
   ExecutionsClient,
   JobsClient,
   RevisionsClient,
