@@ -11172,6 +11172,13 @@
                             "cron": {
                               "type": "string",
                               "id": 1
+                            },
+                            "continuous": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
