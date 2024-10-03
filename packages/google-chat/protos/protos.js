@@ -45727,6 +45727,8 @@
                      * @property {google.chat.v1.Space.IMembershipCount|null} [membershipCount] Space membershipCount
                      * @property {google.chat.v1.Space.IAccessSettings|null} [accessSettings] Space accessSettings
                      * @property {string|null} [spaceUri] Space spaceUri
+                     * @property {google.chat.v1.Space.PredefinedPermissionSettings|null} [predefinedPermissionSettings] Space predefinedPermissionSettings
+                     * @property {google.chat.v1.Space.IPermissionSettings|null} [permissionSettings] Space permissionSettings
                      */
     
                     /**
@@ -45881,6 +45883,36 @@
                     Space.prototype.spaceUri = "";
     
                     /**
+                     * Space predefinedPermissionSettings.
+                     * @member {google.chat.v1.Space.PredefinedPermissionSettings|null|undefined} predefinedPermissionSettings
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.predefinedPermissionSettings = null;
+    
+                    /**
+                     * Space permissionSettings.
+                     * @member {google.chat.v1.Space.IPermissionSettings|null|undefined} permissionSettings
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Space.prototype.permissionSettings = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * Space spacePermissionSettings.
+                     * @member {"predefinedPermissionSettings"|"permissionSettings"|undefined} spacePermissionSettings
+                     * @memberof google.chat.v1.Space
+                     * @instance
+                     */
+                    Object.defineProperty(Space.prototype, "spacePermissionSettings", {
+                        get: $util.oneOfGetter($oneOfFields = ["predefinedPermissionSettings", "permissionSettings"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
                      * Creates a new Space instance using the specified properties.
                      * @function create
                      * @memberof google.chat.v1.Space
@@ -45938,6 +45970,10 @@
                             $root.google.chat.v1.Space.AccessSettings.encode(message.accessSettings, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                         if (message.spaceUri != null && Object.hasOwnProperty.call(message, "spaceUri"))
                             writer.uint32(/* id 25, wireType 2 =*/202).string(message.spaceUri);
+                        if (message.predefinedPermissionSettings != null && Object.hasOwnProperty.call(message, "predefinedPermissionSettings"))
+                            writer.uint32(/* id 26, wireType 0 =*/208).int32(message.predefinedPermissionSettings);
+                        if (message.permissionSettings != null && Object.hasOwnProperty.call(message, "permissionSettings"))
+                            $root.google.chat.v1.Space.PermissionSettings.encode(message.permissionSettings, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                         return writer;
                     };
     
@@ -46040,6 +46076,14 @@
                                     message.spaceUri = reader.string();
                                     break;
                                 }
+                            case 26: {
+                                    message.predefinedPermissionSettings = reader.int32();
+                                    break;
+                                }
+                            case 27: {
+                                    message.permissionSettings = $root.google.chat.v1.Space.PermissionSettings.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -46075,6 +46119,7 @@
                     Space.verify = function verify(message) {
                         if (typeof message !== "object" || message === null)
                             return "object expected";
+                        var properties = {};
                         if (message.name != null && message.hasOwnProperty("name"))
                             if (!$util.isString(message.name))
                                 return "name: string expected";
@@ -46162,6 +46207,27 @@
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
                             if (!$util.isString(message.spaceUri))
                                 return "spaceUri: string expected";
+                        if (message.predefinedPermissionSettings != null && message.hasOwnProperty("predefinedPermissionSettings")) {
+                            properties.spacePermissionSettings = 1;
+                            switch (message.predefinedPermissionSettings) {
+                            default:
+                                return "predefinedPermissionSettings: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        }
+                        if (message.permissionSettings != null && message.hasOwnProperty("permissionSettings")) {
+                            if (properties.spacePermissionSettings === 1)
+                                return "spacePermissionSettings: multiple values";
+                            properties.spacePermissionSettings = 1;
+                            {
+                                var error = $root.google.chat.v1.Space.PermissionSettings.verify(message.permissionSettings);
+                                if (error)
+                                    return "permissionSettings." + error;
+                            }
+                        }
                         return null;
                     };
     
@@ -46306,6 +46372,31 @@
                         }
                         if (object.spaceUri != null)
                             message.spaceUri = String(object.spaceUri);
+                        switch (object.predefinedPermissionSettings) {
+                        default:
+                            if (typeof object.predefinedPermissionSettings === "number") {
+                                message.predefinedPermissionSettings = object.predefinedPermissionSettings;
+                                break;
+                            }
+                            break;
+                        case "PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED":
+                        case 0:
+                            message.predefinedPermissionSettings = 0;
+                            break;
+                        case "COLLABORATION_SPACE":
+                        case 1:
+                            message.predefinedPermissionSettings = 1;
+                            break;
+                        case "ANNOUNCEMENT_SPACE":
+                        case 2:
+                            message.predefinedPermissionSettings = 2;
+                            break;
+                        }
+                        if (object.permissionSettings != null) {
+                            if (typeof object.permissionSettings !== "object")
+                                throw TypeError(".google.chat.v1.Space.permissionSettings: object expected");
+                            message.permissionSettings = $root.google.chat.v1.Space.PermissionSettings.fromObject(object.permissionSettings);
+                        }
                         return message;
                     };
     
@@ -46375,6 +46466,16 @@
                             object.accessSettings = $root.google.chat.v1.Space.AccessSettings.toObject(message.accessSettings, options);
                         if (message.spaceUri != null && message.hasOwnProperty("spaceUri"))
                             object.spaceUri = message.spaceUri;
+                        if (message.predefinedPermissionSettings != null && message.hasOwnProperty("predefinedPermissionSettings")) {
+                            object.predefinedPermissionSettings = options.enums === String ? $root.google.chat.v1.Space.PredefinedPermissionSettings[message.predefinedPermissionSettings] === undefined ? message.predefinedPermissionSettings : $root.google.chat.v1.Space.PredefinedPermissionSettings[message.predefinedPermissionSettings] : message.predefinedPermissionSettings;
+                            if (options.oneofs)
+                                object.spacePermissionSettings = "predefinedPermissionSettings";
+                        }
+                        if (message.permissionSettings != null && message.hasOwnProperty("permissionSettings")) {
+                            object.permissionSettings = $root.google.chat.v1.Space.PermissionSettings.toObject(message.permissionSettings, options);
+                            if (options.oneofs)
+                                object.spacePermissionSettings = "permissionSettings";
+                        }
                         return object;
                     };
     
@@ -47175,6 +47276,784 @@
                         })();
     
                         return AccessSettings;
+                    })();
+    
+                    /**
+                     * PredefinedPermissionSettings enum.
+                     * @name google.chat.v1.Space.PredefinedPermissionSettings
+                     * @enum {number}
+                     * @property {number} PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED=0 PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED value
+                     * @property {number} COLLABORATION_SPACE=1 COLLABORATION_SPACE value
+                     * @property {number} ANNOUNCEMENT_SPACE=2 ANNOUNCEMENT_SPACE value
+                     */
+                    Space.PredefinedPermissionSettings = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "COLLABORATION_SPACE"] = 1;
+                        values[valuesById[2] = "ANNOUNCEMENT_SPACE"] = 2;
+                        return values;
+                    })();
+    
+                    Space.PermissionSettings = (function() {
+    
+                        /**
+                         * Properties of a PermissionSettings.
+                         * @memberof google.chat.v1.Space
+                         * @interface IPermissionSettings
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [manageMembersAndGroups] PermissionSettings manageMembersAndGroups
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [modifySpaceDetails] PermissionSettings modifySpaceDetails
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [toggleHistory] PermissionSettings toggleHistory
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [useAtMentionAll] PermissionSettings useAtMentionAll
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [manageApps] PermissionSettings manageApps
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [manageWebhooks] PermissionSettings manageWebhooks
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [postMessages] PermissionSettings postMessages
+                         * @property {google.chat.v1.Space.IPermissionSetting|null} [replyMessages] PermissionSettings replyMessages
+                         */
+    
+                        /**
+                         * Constructs a new PermissionSettings.
+                         * @memberof google.chat.v1.Space
+                         * @classdesc Represents a PermissionSettings.
+                         * @implements IPermissionSettings
+                         * @constructor
+                         * @param {google.chat.v1.Space.IPermissionSettings=} [properties] Properties to set
+                         */
+                        function PermissionSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PermissionSettings manageMembersAndGroups.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} manageMembersAndGroups
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.manageMembersAndGroups = null;
+    
+                        /**
+                         * PermissionSettings modifySpaceDetails.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} modifySpaceDetails
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.modifySpaceDetails = null;
+    
+                        /**
+                         * PermissionSettings toggleHistory.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} toggleHistory
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.toggleHistory = null;
+    
+                        /**
+                         * PermissionSettings useAtMentionAll.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} useAtMentionAll
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.useAtMentionAll = null;
+    
+                        /**
+                         * PermissionSettings manageApps.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} manageApps
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.manageApps = null;
+    
+                        /**
+                         * PermissionSettings manageWebhooks.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} manageWebhooks
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.manageWebhooks = null;
+    
+                        /**
+                         * PermissionSettings postMessages.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} postMessages
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.postMessages = null;
+    
+                        /**
+                         * PermissionSettings replyMessages.
+                         * @member {google.chat.v1.Space.IPermissionSetting|null|undefined} replyMessages
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        PermissionSettings.prototype.replyMessages = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * PermissionSettings _manageMembersAndGroups.
+                         * @member {"manageMembersAndGroups"|undefined} _manageMembersAndGroups
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_manageMembersAndGroups", {
+                            get: $util.oneOfGetter($oneOfFields = ["manageMembersAndGroups"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _modifySpaceDetails.
+                         * @member {"modifySpaceDetails"|undefined} _modifySpaceDetails
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_modifySpaceDetails", {
+                            get: $util.oneOfGetter($oneOfFields = ["modifySpaceDetails"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _toggleHistory.
+                         * @member {"toggleHistory"|undefined} _toggleHistory
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_toggleHistory", {
+                            get: $util.oneOfGetter($oneOfFields = ["toggleHistory"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _useAtMentionAll.
+                         * @member {"useAtMentionAll"|undefined} _useAtMentionAll
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_useAtMentionAll", {
+                            get: $util.oneOfGetter($oneOfFields = ["useAtMentionAll"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _manageApps.
+                         * @member {"manageApps"|undefined} _manageApps
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_manageApps", {
+                            get: $util.oneOfGetter($oneOfFields = ["manageApps"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _manageWebhooks.
+                         * @member {"manageWebhooks"|undefined} _manageWebhooks
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_manageWebhooks", {
+                            get: $util.oneOfGetter($oneOfFields = ["manageWebhooks"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _postMessages.
+                         * @member {"postMessages"|undefined} _postMessages
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_postMessages", {
+                            get: $util.oneOfGetter($oneOfFields = ["postMessages"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * PermissionSettings _replyMessages.
+                         * @member {"replyMessages"|undefined} _replyMessages
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         */
+                        Object.defineProperty(PermissionSettings.prototype, "_replyMessages", {
+                            get: $util.oneOfGetter($oneOfFields = ["replyMessages"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new PermissionSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IPermissionSettings=} [properties] Properties to set
+                         * @returns {google.chat.v1.Space.PermissionSettings} PermissionSettings instance
+                         */
+                        PermissionSettings.create = function create(properties) {
+                            return new PermissionSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PermissionSettings message. Does not implicitly {@link google.chat.v1.Space.PermissionSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IPermissionSettings} message PermissionSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PermissionSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.manageMembersAndGroups != null && Object.hasOwnProperty.call(message, "manageMembersAndGroups"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.manageMembersAndGroups, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.modifySpaceDetails != null && Object.hasOwnProperty.call(message, "modifySpaceDetails"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.modifySpaceDetails, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.toggleHistory != null && Object.hasOwnProperty.call(message, "toggleHistory"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.toggleHistory, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.useAtMentionAll != null && Object.hasOwnProperty.call(message, "useAtMentionAll"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.useAtMentionAll, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.manageApps != null && Object.hasOwnProperty.call(message, "manageApps"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.manageApps, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.manageWebhooks != null && Object.hasOwnProperty.call(message, "manageWebhooks"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.manageWebhooks, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.postMessages != null && Object.hasOwnProperty.call(message, "postMessages"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.postMessages, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.replyMessages != null && Object.hasOwnProperty.call(message, "replyMessages"))
+                                $root.google.chat.v1.Space.PermissionSetting.encode(message.replyMessages, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PermissionSettings message, length delimited. Does not implicitly {@link google.chat.v1.Space.PermissionSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {google.chat.v1.Space.IPermissionSettings} message PermissionSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PermissionSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PermissionSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.chat.v1.Space.PermissionSettings} PermissionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PermissionSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.PermissionSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.manageMembersAndGroups = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.modifySpaceDetails = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.toggleHistory = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.useAtMentionAll = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.manageApps = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.manageWebhooks = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.postMessages = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.replyMessages = $root.google.chat.v1.Space.PermissionSetting.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PermissionSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.chat.v1.Space.PermissionSettings} PermissionSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PermissionSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PermissionSettings message.
+                         * @function verify
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PermissionSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.manageMembersAndGroups != null && message.hasOwnProperty("manageMembersAndGroups")) {
+                                properties._manageMembersAndGroups = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.manageMembersAndGroups);
+                                    if (error)
+                                        return "manageMembersAndGroups." + error;
+                                }
+                            }
+                            if (message.modifySpaceDetails != null && message.hasOwnProperty("modifySpaceDetails")) {
+                                properties._modifySpaceDetails = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.modifySpaceDetails);
+                                    if (error)
+                                        return "modifySpaceDetails." + error;
+                                }
+                            }
+                            if (message.toggleHistory != null && message.hasOwnProperty("toggleHistory")) {
+                                properties._toggleHistory = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.toggleHistory);
+                                    if (error)
+                                        return "toggleHistory." + error;
+                                }
+                            }
+                            if (message.useAtMentionAll != null && message.hasOwnProperty("useAtMentionAll")) {
+                                properties._useAtMentionAll = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.useAtMentionAll);
+                                    if (error)
+                                        return "useAtMentionAll." + error;
+                                }
+                            }
+                            if (message.manageApps != null && message.hasOwnProperty("manageApps")) {
+                                properties._manageApps = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.manageApps);
+                                    if (error)
+                                        return "manageApps." + error;
+                                }
+                            }
+                            if (message.manageWebhooks != null && message.hasOwnProperty("manageWebhooks")) {
+                                properties._manageWebhooks = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.manageWebhooks);
+                                    if (error)
+                                        return "manageWebhooks." + error;
+                                }
+                            }
+                            if (message.postMessages != null && message.hasOwnProperty("postMessages")) {
+                                properties._postMessages = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.postMessages);
+                                    if (error)
+                                        return "postMessages." + error;
+                                }
+                            }
+                            if (message.replyMessages != null && message.hasOwnProperty("replyMessages")) {
+                                properties._replyMessages = 1;
+                                {
+                                    var error = $root.google.chat.v1.Space.PermissionSetting.verify(message.replyMessages);
+                                    if (error)
+                                        return "replyMessages." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PermissionSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.chat.v1.Space.PermissionSettings} PermissionSettings
+                         */
+                        PermissionSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.chat.v1.Space.PermissionSettings)
+                                return object;
+                            var message = new $root.google.chat.v1.Space.PermissionSettings();
+                            if (object.manageMembersAndGroups != null) {
+                                if (typeof object.manageMembersAndGroups !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.manageMembersAndGroups: object expected");
+                                message.manageMembersAndGroups = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.manageMembersAndGroups);
+                            }
+                            if (object.modifySpaceDetails != null) {
+                                if (typeof object.modifySpaceDetails !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.modifySpaceDetails: object expected");
+                                message.modifySpaceDetails = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.modifySpaceDetails);
+                            }
+                            if (object.toggleHistory != null) {
+                                if (typeof object.toggleHistory !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.toggleHistory: object expected");
+                                message.toggleHistory = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.toggleHistory);
+                            }
+                            if (object.useAtMentionAll != null) {
+                                if (typeof object.useAtMentionAll !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.useAtMentionAll: object expected");
+                                message.useAtMentionAll = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.useAtMentionAll);
+                            }
+                            if (object.manageApps != null) {
+                                if (typeof object.manageApps !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.manageApps: object expected");
+                                message.manageApps = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.manageApps);
+                            }
+                            if (object.manageWebhooks != null) {
+                                if (typeof object.manageWebhooks !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.manageWebhooks: object expected");
+                                message.manageWebhooks = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.manageWebhooks);
+                            }
+                            if (object.postMessages != null) {
+                                if (typeof object.postMessages !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.postMessages: object expected");
+                                message.postMessages = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.postMessages);
+                            }
+                            if (object.replyMessages != null) {
+                                if (typeof object.replyMessages !== "object")
+                                    throw TypeError(".google.chat.v1.Space.PermissionSettings.replyMessages: object expected");
+                                message.replyMessages = $root.google.chat.v1.Space.PermissionSetting.fromObject(object.replyMessages);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PermissionSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {google.chat.v1.Space.PermissionSettings} message PermissionSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PermissionSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.manageMembersAndGroups != null && message.hasOwnProperty("manageMembersAndGroups")) {
+                                object.manageMembersAndGroups = $root.google.chat.v1.Space.PermissionSetting.toObject(message.manageMembersAndGroups, options);
+                                if (options.oneofs)
+                                    object._manageMembersAndGroups = "manageMembersAndGroups";
+                            }
+                            if (message.modifySpaceDetails != null && message.hasOwnProperty("modifySpaceDetails")) {
+                                object.modifySpaceDetails = $root.google.chat.v1.Space.PermissionSetting.toObject(message.modifySpaceDetails, options);
+                                if (options.oneofs)
+                                    object._modifySpaceDetails = "modifySpaceDetails";
+                            }
+                            if (message.toggleHistory != null && message.hasOwnProperty("toggleHistory")) {
+                                object.toggleHistory = $root.google.chat.v1.Space.PermissionSetting.toObject(message.toggleHistory, options);
+                                if (options.oneofs)
+                                    object._toggleHistory = "toggleHistory";
+                            }
+                            if (message.useAtMentionAll != null && message.hasOwnProperty("useAtMentionAll")) {
+                                object.useAtMentionAll = $root.google.chat.v1.Space.PermissionSetting.toObject(message.useAtMentionAll, options);
+                                if (options.oneofs)
+                                    object._useAtMentionAll = "useAtMentionAll";
+                            }
+                            if (message.manageApps != null && message.hasOwnProperty("manageApps")) {
+                                object.manageApps = $root.google.chat.v1.Space.PermissionSetting.toObject(message.manageApps, options);
+                                if (options.oneofs)
+                                    object._manageApps = "manageApps";
+                            }
+                            if (message.manageWebhooks != null && message.hasOwnProperty("manageWebhooks")) {
+                                object.manageWebhooks = $root.google.chat.v1.Space.PermissionSetting.toObject(message.manageWebhooks, options);
+                                if (options.oneofs)
+                                    object._manageWebhooks = "manageWebhooks";
+                            }
+                            if (message.postMessages != null && message.hasOwnProperty("postMessages")) {
+                                object.postMessages = $root.google.chat.v1.Space.PermissionSetting.toObject(message.postMessages, options);
+                                if (options.oneofs)
+                                    object._postMessages = "postMessages";
+                            }
+                            if (message.replyMessages != null && message.hasOwnProperty("replyMessages")) {
+                                object.replyMessages = $root.google.chat.v1.Space.PermissionSetting.toObject(message.replyMessages, options);
+                                if (options.oneofs)
+                                    object._replyMessages = "replyMessages";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PermissionSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PermissionSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PermissionSettings
+                         * @function getTypeUrl
+                         * @memberof google.chat.v1.Space.PermissionSettings
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PermissionSettings.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.chat.v1.Space.PermissionSettings";
+                        };
+    
+                        return PermissionSettings;
+                    })();
+    
+                    Space.PermissionSetting = (function() {
+    
+                        /**
+                         * Properties of a PermissionSetting.
+                         * @memberof google.chat.v1.Space
+                         * @interface IPermissionSetting
+                         * @property {boolean|null} [managersAllowed] PermissionSetting managersAllowed
+                         * @property {boolean|null} [membersAllowed] PermissionSetting membersAllowed
+                         */
+    
+                        /**
+                         * Constructs a new PermissionSetting.
+                         * @memberof google.chat.v1.Space
+                         * @classdesc Represents a PermissionSetting.
+                         * @implements IPermissionSetting
+                         * @constructor
+                         * @param {google.chat.v1.Space.IPermissionSetting=} [properties] Properties to set
+                         */
+                        function PermissionSetting(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PermissionSetting managersAllowed.
+                         * @member {boolean} managersAllowed
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @instance
+                         */
+                        PermissionSetting.prototype.managersAllowed = false;
+    
+                        /**
+                         * PermissionSetting membersAllowed.
+                         * @member {boolean} membersAllowed
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @instance
+                         */
+                        PermissionSetting.prototype.membersAllowed = false;
+    
+                        /**
+                         * Creates a new PermissionSetting instance using the specified properties.
+                         * @function create
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {google.chat.v1.Space.IPermissionSetting=} [properties] Properties to set
+                         * @returns {google.chat.v1.Space.PermissionSetting} PermissionSetting instance
+                         */
+                        PermissionSetting.create = function create(properties) {
+                            return new PermissionSetting(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PermissionSetting message. Does not implicitly {@link google.chat.v1.Space.PermissionSetting.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {google.chat.v1.Space.IPermissionSetting} message PermissionSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PermissionSetting.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.managersAllowed != null && Object.hasOwnProperty.call(message, "managersAllowed"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.managersAllowed);
+                            if (message.membersAllowed != null && Object.hasOwnProperty.call(message, "membersAllowed"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.membersAllowed);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PermissionSetting message, length delimited. Does not implicitly {@link google.chat.v1.Space.PermissionSetting.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {google.chat.v1.Space.IPermissionSetting} message PermissionSetting message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PermissionSetting.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PermissionSetting message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.chat.v1.Space.PermissionSetting} PermissionSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PermissionSetting.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.chat.v1.Space.PermissionSetting();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.managersAllowed = reader.bool();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.membersAllowed = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PermissionSetting message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.chat.v1.Space.PermissionSetting} PermissionSetting
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PermissionSetting.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PermissionSetting message.
+                         * @function verify
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PermissionSetting.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.managersAllowed != null && message.hasOwnProperty("managersAllowed"))
+                                if (typeof message.managersAllowed !== "boolean")
+                                    return "managersAllowed: boolean expected";
+                            if (message.membersAllowed != null && message.hasOwnProperty("membersAllowed"))
+                                if (typeof message.membersAllowed !== "boolean")
+                                    return "membersAllowed: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PermissionSetting message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.chat.v1.Space.PermissionSetting} PermissionSetting
+                         */
+                        PermissionSetting.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.chat.v1.Space.PermissionSetting)
+                                return object;
+                            var message = new $root.google.chat.v1.Space.PermissionSetting();
+                            if (object.managersAllowed != null)
+                                message.managersAllowed = Boolean(object.managersAllowed);
+                            if (object.membersAllowed != null)
+                                message.membersAllowed = Boolean(object.membersAllowed);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PermissionSetting message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {google.chat.v1.Space.PermissionSetting} message PermissionSetting
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PermissionSetting.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.managersAllowed = false;
+                                object.membersAllowed = false;
+                            }
+                            if (message.managersAllowed != null && message.hasOwnProperty("managersAllowed"))
+                                object.managersAllowed = message.managersAllowed;
+                            if (message.membersAllowed != null && message.hasOwnProperty("membersAllowed"))
+                                object.membersAllowed = message.membersAllowed;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PermissionSetting to JSON.
+                         * @function toJSON
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PermissionSetting.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for PermissionSetting
+                         * @function getTypeUrl
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        PermissionSetting.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.chat.v1.Space.PermissionSetting";
+                        };
+    
+                        return PermissionSetting;
                     })();
     
                     return Space;
