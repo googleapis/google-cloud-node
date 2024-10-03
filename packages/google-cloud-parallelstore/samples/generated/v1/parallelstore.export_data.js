@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  // [START parallelstore_v1_generated_Parallelstore_ExportData_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,13 +29,13 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Cloud Storage source bucket and, optionally, path inside the bucket.
+   *  Parallelstore source.
    */
-  // const sourceGcsBucket = {}
+  // const sourceParallelstore = {}
   /**
-   *  Parallelstore destination.
+   *  Cloud Storage destination.
    */
-  // const destinationParallelstore = {}
+  // const destinationGcsBucket = {}
   /**
    *  Required. Name of the resource.
    */
@@ -55,10 +55,10 @@ function main(name) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. User-specified service account credentials to be used when
+   *  Optional. User-specified Service Account (SA) credentials to be used when
    *  performing the transfer.
    *  Use one of the following formats:
-   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * {EMAIL_ADDRESS_OR_UNIQUE_ID}
    *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
    *  If unspecified, the Parallelstore service agent is used:
@@ -67,25 +67,25 @@ function main(name) {
   // const serviceAccount = 'abc123'
 
   // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1;
 
   // Instantiates a client
   const parallelstoreClient = new ParallelstoreClient();
 
-  async function callImportData() {
+  async function callExportData() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.importData(request);
+    const [operation] = await parallelstoreClient.exportData(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callImportData();
-  // [END parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  callExportData();
+  // [END parallelstore_v1_generated_Parallelstore_ExportData_async]
 }
 
 process.on('unhandledRejection', err => {

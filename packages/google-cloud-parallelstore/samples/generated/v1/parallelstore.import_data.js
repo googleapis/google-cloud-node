@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  // [START parallelstore_v1_generated_Parallelstore_ImportData_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -58,7 +58,7 @@ function main(name) {
    *  Optional. User-specified service account credentials to be used when
    *  performing the transfer.
    *  Use one of the following formats:
-   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * {EMAIL_ADDRESS_OR_UNIQUE_ID}
    *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
    *  If unspecified, the Parallelstore service agent is used:
@@ -67,7 +67,7 @@ function main(name) {
   // const serviceAccount = 'abc123'
 
   // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1;
 
   // Instantiates a client
   const parallelstoreClient = new ParallelstoreClient();
@@ -85,7 +85,7 @@ function main(name) {
   }
 
   callImportData();
-  // [END parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  // [END parallelstore_v1_generated_Parallelstore_ImportData_async]
 }
 
 process.on('unhandledRejection', err => {

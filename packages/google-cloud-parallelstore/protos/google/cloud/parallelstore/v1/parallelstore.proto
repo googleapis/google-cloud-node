@@ -14,7 +14,7 @@
 
 syntax = "proto3";
 
-package google.cloud.parallelstore.v1beta;
+package google.cloud.parallelstore.v1;
 
 import "google/api/annotations.proto";
 import "google/api/client.proto";
@@ -26,13 +26,13 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "Google.Cloud.Parallelstore.V1Beta";
-option go_package = "cloud.google.com/go/parallelstore/apiv1beta/parallelstorepb;parallelstorepb";
+option csharp_namespace = "Google.Cloud.Parallelstore.V1";
+option go_package = "cloud.google.com/go/parallelstore/apiv1/parallelstorepb;parallelstorepb";
 option java_multiple_files = true;
 option java_outer_classname = "ParallelstoreProto";
-option java_package = "com.google.cloud.parallelstore.v1beta";
-option php_namespace = "Google\\Cloud\\Parallelstore\\V1beta";
-option ruby_package = "Google::Cloud::Parallelstore::V1beta";
+option java_package = "com.google.cloud.parallelstore.v1";
+option php_namespace = "Google\\Cloud\\Parallelstore\\V1";
+option ruby_package = "Google::Cloud::Parallelstore::V1";
 option (google.api.resource_definition) = {
   type: "compute.googleapis.com/Network"
   pattern: "projects/{project}/global/networks/{network}"
@@ -69,7 +69,7 @@ service Parallelstore {
   // Lists all instances in a given project and location.
   rpc ListInstances(ListInstancesRequest) returns (ListInstancesResponse) {
     option (google.api.http) = {
-      get: "/v1beta/{parent=projects/*/locations/*}/instances"
+      get: "/v1/{parent=projects/*/locations/*}/instances"
     };
     option (google.api.method_signature) = "parent";
   }
@@ -77,7 +77,7 @@ service Parallelstore {
   // Gets details of a single instance.
   rpc GetInstance(GetInstanceRequest) returns (Instance) {
     option (google.api.http) = {
-      get: "/v1beta/{name=projects/*/locations/*/instances/*}"
+      get: "/v1/{name=projects/*/locations/*/instances/*}"
     };
     option (google.api.method_signature) = "name";
   }
@@ -86,7 +86,7 @@ service Parallelstore {
   rpc CreateInstance(CreateInstanceRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{parent=projects/*/locations/*}/instances"
+      post: "/v1/{parent=projects/*/locations/*}/instances"
       body: "instance"
     };
     option (google.api.method_signature) = "parent,instance,instance_id";
@@ -100,7 +100,7 @@ service Parallelstore {
   rpc UpdateInstance(UpdateInstanceRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      patch: "/v1beta/{instance.name=projects/*/locations/*/instances/*}"
+      patch: "/v1/{instance.name=projects/*/locations/*/instances/*}"
       body: "instance"
     };
     option (google.api.method_signature) = "instance,update_mask";
@@ -114,7 +114,7 @@ service Parallelstore {
   rpc DeleteInstance(DeleteInstanceRequest)
       returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      delete: "/v1beta/{name=projects/*/locations/*/instances/*}"
+      delete: "/v1/{name=projects/*/locations/*/instances/*}"
     };
     option (google.api.method_signature) = "name";
     option (google.longrunning.operation_info) = {
@@ -126,7 +126,7 @@ service Parallelstore {
   // Copies data from Cloud Storage to Parallelstore.
   rpc ImportData(ImportDataRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{name=projects/*/locations/*/instances/*}:importData"
+      post: "/v1/{name=projects/*/locations/*/instances/*}:importData"
       body: "*"
     };
     option (google.longrunning.operation_info) = {
@@ -138,7 +138,7 @@ service Parallelstore {
   // Copies data from Parallelstore to Cloud Storage.
   rpc ExportData(ExportDataRequest) returns (google.longrunning.Operation) {
     option (google.api.http) = {
-      post: "/v1beta/{name=projects/*/locations/*/instances/*}:exportData"
+      post: "/v1/{name=projects/*/locations/*/instances/*}:exportData"
       body: "*"
     };
     option (google.longrunning.operation_info) = {
@@ -338,7 +338,7 @@ message ListInstancesRequest {
 }
 
 // Response from
-// [ListInstances][google.cloud.parallelstore.v1beta.Parallelstore.ListInstances].
+// [ListInstances][google.cloud.parallelstore.v1.Parallelstore.ListInstances].
 message ListInstancesResponse {
   // The list of Parallelstore instances.
   repeated Instance instances = 1;
@@ -561,7 +561,7 @@ message ImportDataRequest {
   //
   // Use one of the following formats:
   //
-  // * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+  // * {EMAIL_ADDRESS_OR_UNIQUE_ID}
   // * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
   // * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
   //
@@ -619,7 +619,7 @@ message ExportDataRequest {
   // performing the transfer.
   // Use one of the following formats:
   //
-  // * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+  // * {EMAIL_ADDRESS_OR_UNIQUE_ID}
   // * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
   // * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
   //

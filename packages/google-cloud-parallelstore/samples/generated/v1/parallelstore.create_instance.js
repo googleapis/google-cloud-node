@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+function main(parent, instanceId, instance) {
+  // [START parallelstore_v1_generated_Parallelstore_CreateInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,17 +29,24 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Cloud Storage source bucket and, optionally, path inside the bucket.
+   *  Required. The instance's project and location, in the format
+   *  `projects/{project}/locations/{location}`.
+   *  Locations map to Google Cloud zones; for example, `us-west1-b`.
    */
-  // const sourceGcsBucket = {}
+  // const parent = 'abc123'
   /**
-   *  Parallelstore destination.
+   *  Required. The name of the Parallelstore instance.
+   *  * Must contain only lowercase letters, numbers, and hyphens.
+   *  * Must start with a letter.
+   *  * Must be between 1-63 characters.
+   *  * Must end with a number or a letter.
+   *  * Must be unique within the customer project / location
    */
-  // const destinationParallelstore = {}
+  // const instanceId = 'abc123'
   /**
-   *  Required. Name of the resource.
+   *  Required. The instance to create.
    */
-  // const name = 'abc123'
+  // const instance = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
@@ -54,38 +61,29 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
-  /**
-   *  Optional. User-specified service account credentials to be used when
-   *  performing the transfer.
-   *  Use one of the following formats:
-   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
-   *  If unspecified, the Parallelstore service agent is used:
-   *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
-   */
-  // const serviceAccount = 'abc123'
 
   // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1;
 
   // Instantiates a client
   const parallelstoreClient = new ParallelstoreClient();
 
-  async function callImportData() {
+  async function callCreateInstance() {
     // Construct request
     const request = {
-      name,
+      parent,
+      instanceId,
+      instance,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.importData(request);
+    const [operation] = await parallelstoreClient.createInstance(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callImportData();
-  // [END parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  callCreateInstance();
+  // [END parallelstore_v1_generated_Parallelstore_CreateInstance_async]
 }
 
 process.on('unhandledRejection', err => {

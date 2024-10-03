@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  // [START parallelstore_v1_generated_Parallelstore_DeleteInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,22 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Cloud Storage source bucket and, optionally, path inside the bucket.
-   */
-  // const sourceGcsBucket = {}
-  /**
-   *  Parallelstore destination.
-   */
-  // const destinationParallelstore = {}
-  /**
-   *  Required. Name of the resource.
+   *  Required. Name of the resource
    */
   // const name = 'abc123'
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
    *  ignore the request if it has already been completed. The server will
-   *  guarantee that for at least 60 minutes since the first request.
+   *  guarantee that for at least 60 minutes after the first request.
    *  For example, consider a situation where you make an initial request and t
    *  he request times out. If you make the request again with the same request
    *  ID, the server can check if original operation with the same request ID
@@ -54,38 +46,27 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
-  /**
-   *  Optional. User-specified service account credentials to be used when
-   *  performing the transfer.
-   *  Use one of the following formats:
-   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
-   *  If unspecified, the Parallelstore service agent is used:
-   *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
-   */
-  // const serviceAccount = 'abc123'
 
   // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1;
 
   // Instantiates a client
   const parallelstoreClient = new ParallelstoreClient();
 
-  async function callImportData() {
+  async function callDeleteInstance() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.importData(request);
+    const [operation] = await parallelstoreClient.deleteInstance(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callImportData();
-  // [END parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  callDeleteInstance();
+  // [END parallelstore_v1_generated_Parallelstore_DeleteInstance_async]
 }
 
 process.on('unhandledRejection', err => {

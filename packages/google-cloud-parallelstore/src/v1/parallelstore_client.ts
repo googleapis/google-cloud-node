@@ -36,7 +36,7 @@ import jsonProtos = require('../../protos/protos.json');
 
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta/parallelstore_client_config.json`.
+ * `src/v1/parallelstore_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './parallelstore_client_config.json';
@@ -59,7 +59,7 @@ const version = require('../../../package.json').version;
  *  Note that location_id must be a Google Cloud `zone`; for example:
  *  * `projects/12345/locations/us-central1-c/instances/my-parallelstore-share`
  * @class
- * @memberof v1beta
+ * @memberof v1
  */
 export class ParallelstoreClient {
   private _terminated = false;
@@ -267,28 +267,28 @@ export class ParallelstoreClient {
       lroOptions.httpRules = [
         {
           selector: 'google.cloud.location.Locations.GetLocation',
-          get: '/v1beta/{name=projects/*/locations/*}',
+          get: '/v1/{name=projects/*/locations/*}',
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
-          get: '/v1beta/{name=projects/*}/locations',
+          get: '/v1/{name=projects/*}/locations',
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
-          post: '/v1beta/{name=projects/*/locations/*/operations/*}:cancel',
+          post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
-          delete: '/v1beta/{name=projects/*/locations/*/operations/*}',
+          delete: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1beta/{name=projects/*/locations/*/operations/*}',
+          get: '/v1/{name=projects/*/locations/*/operations/*}',
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
-          get: '/v1beta/{name=projects/*/locations/*}/operations',
+          get: '/v1/{name=projects/*/locations/*}/operations',
         },
       ];
     }
@@ -296,34 +296,34 @@ export class ParallelstoreClient {
       .lro(lroOptions)
       .operationsClient(opts);
     const createInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.Instance'
+      '.google.cloud.parallelstore.v1.Instance'
     ) as gax.protobuf.Type;
     const createInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.OperationMetadata'
+      '.google.cloud.parallelstore.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const updateInstanceResponse = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.Instance'
+      '.google.cloud.parallelstore.v1.Instance'
     ) as gax.protobuf.Type;
     const updateInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.OperationMetadata'
+      '.google.cloud.parallelstore.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const deleteInstanceResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteInstanceMetadata = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.OperationMetadata'
+      '.google.cloud.parallelstore.v1.OperationMetadata'
     ) as gax.protobuf.Type;
     const importDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.ImportDataResponse'
+      '.google.cloud.parallelstore.v1.ImportDataResponse'
     ) as gax.protobuf.Type;
     const importDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.ImportDataMetadata'
+      '.google.cloud.parallelstore.v1.ImportDataMetadata'
     ) as gax.protobuf.Type;
     const exportDataResponse = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.ExportDataResponse'
+      '.google.cloud.parallelstore.v1.ExportDataResponse'
     ) as gax.protobuf.Type;
     const exportDataMetadata = protoFilesRoot.lookup(
-      '.google.cloud.parallelstore.v1beta.ExportDataMetadata'
+      '.google.cloud.parallelstore.v1.ExportDataMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -356,7 +356,7 @@ export class ParallelstoreClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.parallelstore.v1beta.Parallelstore',
+      'google.cloud.parallelstore.v1.Parallelstore',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -389,14 +389,14 @@ export class ParallelstoreClient {
     }
 
     // Put together the "service stub" for
-    // google.cloud.parallelstore.v1beta.Parallelstore.
+    // google.cloud.parallelstore.v1.Parallelstore.
     this.parallelstoreStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.parallelstore.v1beta.Parallelstore'
+            'google.cloud.parallelstore.v1.Parallelstore'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.parallelstore.v1beta.Parallelstore,
+          (this._protos as any).google.cloud.parallelstore.v1.Parallelstore,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
@@ -539,65 +539,65 @@ export class ParallelstoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.parallelstore.v1beta.Instance|Instance}.
+   *   The first element of the array is an object representing {@link protos.google.cloud.parallelstore.v1.Instance|Instance}.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.get_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_GetInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.get_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_GetInstance_async
    */
   getInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.IGetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.parallelstore.v1beta.IInstance,
-      protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest | undefined,
+      protos.google.cloud.parallelstore.v1.IInstance,
+      protos.google.cloud.parallelstore.v1.IGetInstanceRequest | undefined,
       {} | undefined,
     ]
   >;
   getInstance(
-    request: protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.IGetInstanceRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.parallelstore.v1beta.IInstance,
-      | protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest
+      protos.google.cloud.parallelstore.v1.IInstance,
+      | protos.google.cloud.parallelstore.v1.IGetInstanceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getInstance(
-    request: protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.IGetInstanceRequest,
     callback: Callback<
-      protos.google.cloud.parallelstore.v1beta.IInstance,
-      | protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest
+      protos.google.cloud.parallelstore.v1.IInstance,
+      | protos.google.cloud.parallelstore.v1.IGetInstanceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   getInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.IGetInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.parallelstore.v1beta.IInstance,
-          | protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest
+          protos.google.cloud.parallelstore.v1.IInstance,
+          | protos.google.cloud.parallelstore.v1.IGetInstanceRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.parallelstore.v1beta.IInstance,
-      | protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest
+      protos.google.cloud.parallelstore.v1.IInstance,
+      | protos.google.cloud.parallelstore.v1.IGetInstanceRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.parallelstore.v1beta.IInstance,
-      protos.google.cloud.parallelstore.v1beta.IGetInstanceRequest | undefined,
+      protos.google.cloud.parallelstore.v1.IInstance,
+      protos.google.cloud.parallelstore.v1.IGetInstanceRequest | undefined,
       {} | undefined,
     ]
   > | void {
@@ -637,7 +637,7 @@ export class ParallelstoreClient {
    *   * Must be between 1-63 characters.
    *   * Must end with a number or a letter.
    *   * Must be unique within the customer project / location
-   * @param {google.cloud.parallelstore.v1beta.Instance} request.instance
+   * @param {google.cloud.parallelstore.v1.Instance} request.instance
    *   Required. The instance to create.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
@@ -661,61 +661,61 @@ export class ParallelstoreClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.create_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_CreateInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.create_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_CreateInstance_async
    */
   createInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.ICreateInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.ICreateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
   createInstance(
-    request: protos.google.cloud.parallelstore.v1beta.ICreateInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.ICreateInstanceRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createInstance(
-    request: protos.google.cloud.parallelstore.v1beta.ICreateInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.ICreateInstanceRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   createInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.ICreateInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.ICreateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.parallelstore.v1beta.IInstance,
-            protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+            protos.google.cloud.parallelstore.v1.IInstance,
+            protos.google.cloud.parallelstore.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -723,8 +723,8 @@ export class ParallelstoreClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -756,15 +756,15 @@ export class ParallelstoreClient {
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.create_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_CreateInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.create_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_CreateInstance_async
    */
   async checkCreateInstanceProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.parallelstore.v1beta.Instance,
-      protos.google.cloud.parallelstore.v1beta.OperationMetadata
+      protos.google.cloud.parallelstore.v1.Instance,
+      protos.google.cloud.parallelstore.v1.OperationMetadata
     >
   > {
     const request =
@@ -778,8 +778,8 @@ export class ParallelstoreClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.parallelstore.v1beta.Instance,
-      protos.google.cloud.parallelstore.v1beta.OperationMetadata
+      protos.google.cloud.parallelstore.v1.Instance,
+      protos.google.cloud.parallelstore.v1.OperationMetadata
     >;
   }
   /**
@@ -792,7 +792,7 @@ export class ParallelstoreClient {
    *   fields to be overwritten in the Instance resource by the update. At least
    *   one path must be supplied in this field. The fields specified in the
    *   update_mask are relative to the resource, not the full request.
-   * @param {google.cloud.parallelstore.v1beta.Instance} request.instance
+   * @param {google.cloud.parallelstore.v1.Instance} request.instance
    *   Required. The instance to update.
    * @param {string} [request.requestId]
    *   Optional. An optional request ID to identify requests. Specify a unique
@@ -816,61 +816,61 @@ export class ParallelstoreClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.update_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_UpdateInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.update_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_UpdateInstance_async
    */
   updateInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.IUpdateInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.IUpdateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
   updateInstance(
-    request: protos.google.cloud.parallelstore.v1beta.IUpdateInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.IUpdateInstanceRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateInstance(
-    request: protos.google.cloud.parallelstore.v1beta.IUpdateInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.IUpdateInstanceRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   updateInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.IUpdateInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.IUpdateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.parallelstore.v1beta.IInstance,
-            protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+            protos.google.cloud.parallelstore.v1.IInstance,
+            protos.google.cloud.parallelstore.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -878,8 +878,8 @@ export class ParallelstoreClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IInstance,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IInstance,
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -911,15 +911,15 @@ export class ParallelstoreClient {
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.update_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_UpdateInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.update_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_UpdateInstance_async
    */
   async checkUpdateInstanceProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.parallelstore.v1beta.Instance,
-      protos.google.cloud.parallelstore.v1beta.OperationMetadata
+      protos.google.cloud.parallelstore.v1.Instance,
+      protos.google.cloud.parallelstore.v1.OperationMetadata
     >
   > {
     const request =
@@ -933,8 +933,8 @@ export class ParallelstoreClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.parallelstore.v1beta.Instance,
-      protos.google.cloud.parallelstore.v1beta.OperationMetadata
+      protos.google.cloud.parallelstore.v1.Instance,
+      protos.google.cloud.parallelstore.v1.OperationMetadata
     >;
   }
   /**
@@ -966,53 +966,53 @@ export class ParallelstoreClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.delete_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_DeleteInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.delete_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_DeleteInstance_async
    */
   deleteInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.IDeleteInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.IDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
   deleteInstance(
-    request: protos.google.cloud.parallelstore.v1beta.IDeleteInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.IDeleteInstanceRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteInstance(
-    request: protos.google.cloud.parallelstore.v1beta.IDeleteInstanceRequest,
+    request: protos.google.cloud.parallelstore.v1.IDeleteInstanceRequest,
     callback: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   deleteInstance(
-    request?: protos.google.cloud.parallelstore.v1beta.IDeleteInstanceRequest,
+    request?: protos.google.cloud.parallelstore.v1.IDeleteInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
             protos.google.protobuf.IEmpty,
-            protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+            protos.google.cloud.parallelstore.v1.IOperationMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1020,7 +1020,7 @@ export class ParallelstoreClient {
     callback?: Callback<
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1029,7 +1029,7 @@ export class ParallelstoreClient {
     [
       LROperation<
         protos.google.protobuf.IEmpty,
-        protos.google.cloud.parallelstore.v1beta.IOperationMetadata
+        protos.google.cloud.parallelstore.v1.IOperationMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1061,15 +1061,15 @@ export class ParallelstoreClient {
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.delete_instance.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_DeleteInstance_async
+   * @example <caption>include:samples/generated/v1/parallelstore.delete_instance.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_DeleteInstance_async
    */
   async checkDeleteInstanceProgress(
     name: string
   ): Promise<
     LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.parallelstore.v1beta.OperationMetadata
+      protos.google.cloud.parallelstore.v1.OperationMetadata
     >
   > {
     const request =
@@ -1084,7 +1084,7 @@ export class ParallelstoreClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
-      protos.google.cloud.parallelstore.v1beta.OperationMetadata
+      protos.google.cloud.parallelstore.v1.OperationMetadata
     >;
   }
   /**
@@ -1092,9 +1092,9 @@ export class ParallelstoreClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.parallelstore.v1beta.SourceGcsBucket} request.sourceGcsBucket
+   * @param {google.cloud.parallelstore.v1.SourceGcsBucket} request.sourceGcsBucket
    *   The Cloud Storage source bucket and, optionally, path inside the bucket.
-   * @param {google.cloud.parallelstore.v1beta.DestinationParallelstore} request.destinationParallelstore
+   * @param {google.cloud.parallelstore.v1.DestinationParallelstore} request.destinationParallelstore
    *   Parallelstore destination.
    * @param {string} request.name
    *   Required. Name of the resource.
@@ -1118,7 +1118,7 @@ export class ParallelstoreClient {
    *
    *   Use one of the following formats:
    *
-   *   * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * {EMAIL_ADDRESS_OR_UNIQUE_ID}
    *   * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *   * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
    *
@@ -1132,61 +1132,61 @@ export class ParallelstoreClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.import_data.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_ImportData_async
+   * @example <caption>include:samples/generated/v1/parallelstore.import_data.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_ImportData_async
    */
   importData(
-    request?: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    request?: protos.google.cloud.parallelstore.v1.IImportDataRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+        protos.google.cloud.parallelstore.v1.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1.IImportDataMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
   importData(
-    request: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    request: protos.google.cloud.parallelstore.v1.IImportDataRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+        protos.google.cloud.parallelstore.v1.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1.IImportDataMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   importData(
-    request: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    request: protos.google.cloud.parallelstore.v1.IImportDataRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+        protos.google.cloud.parallelstore.v1.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1.IImportDataMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   importData(
-    request?: protos.google.cloud.parallelstore.v1beta.IImportDataRequest,
+    request?: protos.google.cloud.parallelstore.v1.IImportDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
-            protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+            protos.google.cloud.parallelstore.v1.IImportDataResponse,
+            protos.google.cloud.parallelstore.v1.IImportDataMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+        protos.google.cloud.parallelstore.v1.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1.IImportDataMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1194,8 +1194,8 @@ export class ParallelstoreClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IImportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IImportDataMetadata
+        protos.google.cloud.parallelstore.v1.IImportDataResponse,
+        protos.google.cloud.parallelstore.v1.IImportDataMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1227,15 +1227,15 @@ export class ParallelstoreClient {
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.import_data.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_ImportData_async
+   * @example <caption>include:samples/generated/v1/parallelstore.import_data.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_ImportData_async
    */
   async checkImportDataProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.parallelstore.v1beta.ImportDataResponse,
-      protos.google.cloud.parallelstore.v1beta.ImportDataMetadata
+      protos.google.cloud.parallelstore.v1.ImportDataResponse,
+      protos.google.cloud.parallelstore.v1.ImportDataMetadata
     >
   > {
     const request =
@@ -1249,8 +1249,8 @@ export class ParallelstoreClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.parallelstore.v1beta.ImportDataResponse,
-      protos.google.cloud.parallelstore.v1beta.ImportDataMetadata
+      protos.google.cloud.parallelstore.v1.ImportDataResponse,
+      protos.google.cloud.parallelstore.v1.ImportDataMetadata
     >;
   }
   /**
@@ -1258,9 +1258,9 @@ export class ParallelstoreClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.parallelstore.v1beta.SourceParallelstore} request.sourceParallelstore
+   * @param {google.cloud.parallelstore.v1.SourceParallelstore} request.sourceParallelstore
    *   Parallelstore source.
-   * @param {google.cloud.parallelstore.v1beta.DestinationGcsBucket} request.destinationGcsBucket
+   * @param {google.cloud.parallelstore.v1.DestinationGcsBucket} request.destinationGcsBucket
    *   Cloud Storage destination.
    * @param {string} request.name
    *   Required. Name of the resource.
@@ -1283,7 +1283,7 @@ export class ParallelstoreClient {
    *   performing the transfer.
    *   Use one of the following formats:
    *
-   *   * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * {EMAIL_ADDRESS_OR_UNIQUE_ID}
    *   * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *   * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
    *
@@ -1297,61 +1297,61 @@ export class ParallelstoreClient {
    *   you can `await` for.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.export_data.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_ExportData_async
+   * @example <caption>include:samples/generated/v1/parallelstore.export_data.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_ExportData_async
    */
   exportData(
-    request?: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    request?: protos.google.cloud.parallelstore.v1.IExportDataRequest,
     options?: CallOptions
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+        protos.google.cloud.parallelstore.v1.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1.IExportDataMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
     ]
   >;
   exportData(
-    request: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    request: protos.google.cloud.parallelstore.v1.IExportDataRequest,
     options: CallOptions,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+        protos.google.cloud.parallelstore.v1.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1.IExportDataMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   exportData(
-    request: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    request: protos.google.cloud.parallelstore.v1.IExportDataRequest,
     callback: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+        protos.google.cloud.parallelstore.v1.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1.IExportDataMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
     >
   ): void;
   exportData(
-    request?: protos.google.cloud.parallelstore.v1beta.IExportDataRequest,
+    request?: protos.google.cloud.parallelstore.v1.IExportDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           LROperation<
-            protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
-            protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+            protos.google.cloud.parallelstore.v1.IExportDataResponse,
+            protos.google.cloud.parallelstore.v1.IExportDataMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+        protos.google.cloud.parallelstore.v1.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1.IExportDataMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1359,8 +1359,8 @@ export class ParallelstoreClient {
   ): Promise<
     [
       LROperation<
-        protos.google.cloud.parallelstore.v1beta.IExportDataResponse,
-        protos.google.cloud.parallelstore.v1beta.IExportDataMetadata
+        protos.google.cloud.parallelstore.v1.IExportDataResponse,
+        protos.google.cloud.parallelstore.v1.IExportDataMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined,
@@ -1392,15 +1392,15 @@ export class ParallelstoreClient {
    *   The decoded operation object has result and metadata field to get information from.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.export_data.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_ExportData_async
+   * @example <caption>include:samples/generated/v1/parallelstore.export_data.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_ExportData_async
    */
   async checkExportDataProgress(
     name: string
   ): Promise<
     LROperation<
-      protos.google.cloud.parallelstore.v1beta.ExportDataResponse,
-      protos.google.cloud.parallelstore.v1beta.ExportDataMetadata
+      protos.google.cloud.parallelstore.v1.ExportDataResponse,
+      protos.google.cloud.parallelstore.v1.ExportDataMetadata
     >
   > {
     const request =
@@ -1414,8 +1414,8 @@ export class ParallelstoreClient {
       this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
-      protos.google.cloud.parallelstore.v1beta.ExportDataResponse,
-      protos.google.cloud.parallelstore.v1beta.ExportDataMetadata
+      protos.google.cloud.parallelstore.v1.ExportDataResponse,
+      protos.google.cloud.parallelstore.v1.ExportDataMetadata
     >;
   }
   /**
@@ -1441,7 +1441,7 @@ export class ParallelstoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of {@link protos.google.cloud.parallelstore.v1beta.Instance|Instance}.
+   *   The first element of the array is Array of {@link protos.google.cloud.parallelstore.v1.Instance|Instance}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1451,59 +1451,59 @@ export class ParallelstoreClient {
    *   for more details and examples.
    */
   listInstances(
-    request?: protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
+    request?: protos.google.cloud.parallelstore.v1.IListInstancesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.parallelstore.v1beta.IInstance[],
-      protos.google.cloud.parallelstore.v1beta.IListInstancesRequest | null,
-      protos.google.cloud.parallelstore.v1beta.IListInstancesResponse,
+      protos.google.cloud.parallelstore.v1.IInstance[],
+      protos.google.cloud.parallelstore.v1.IListInstancesRequest | null,
+      protos.google.cloud.parallelstore.v1.IListInstancesResponse,
     ]
   >;
   listInstances(
-    request: protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
+    request: protos.google.cloud.parallelstore.v1.IListInstancesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
-      | protos.google.cloud.parallelstore.v1beta.IListInstancesResponse
+      protos.google.cloud.parallelstore.v1.IListInstancesRequest,
+      | protos.google.cloud.parallelstore.v1.IListInstancesResponse
       | null
       | undefined,
-      protos.google.cloud.parallelstore.v1beta.IInstance
+      protos.google.cloud.parallelstore.v1.IInstance
     >
   ): void;
   listInstances(
-    request: protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
+    request: protos.google.cloud.parallelstore.v1.IListInstancesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
-      | protos.google.cloud.parallelstore.v1beta.IListInstancesResponse
+      protos.google.cloud.parallelstore.v1.IListInstancesRequest,
+      | protos.google.cloud.parallelstore.v1.IListInstancesResponse
       | null
       | undefined,
-      protos.google.cloud.parallelstore.v1beta.IInstance
+      protos.google.cloud.parallelstore.v1.IInstance
     >
   ): void;
   listInstances(
-    request?: protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
+    request?: protos.google.cloud.parallelstore.v1.IListInstancesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
-          | protos.google.cloud.parallelstore.v1beta.IListInstancesResponse
+          protos.google.cloud.parallelstore.v1.IListInstancesRequest,
+          | protos.google.cloud.parallelstore.v1.IListInstancesResponse
           | null
           | undefined,
-          protos.google.cloud.parallelstore.v1beta.IInstance
+          protos.google.cloud.parallelstore.v1.IInstance
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
-      | protos.google.cloud.parallelstore.v1beta.IListInstancesResponse
+      protos.google.cloud.parallelstore.v1.IListInstancesRequest,
+      | protos.google.cloud.parallelstore.v1.IListInstancesResponse
       | null
       | undefined,
-      protos.google.cloud.parallelstore.v1beta.IInstance
+      protos.google.cloud.parallelstore.v1.IInstance
     >
   ): Promise<
     [
-      protos.google.cloud.parallelstore.v1beta.IInstance[],
-      protos.google.cloud.parallelstore.v1beta.IListInstancesRequest | null,
-      protos.google.cloud.parallelstore.v1beta.IListInstancesResponse,
+      protos.google.cloud.parallelstore.v1.IInstance[],
+      protos.google.cloud.parallelstore.v1.IListInstancesRequest | null,
+      protos.google.cloud.parallelstore.v1.IListInstancesResponse,
     ]
   > | void {
     request = request || {};
@@ -1547,7 +1547,7 @@ export class ParallelstoreClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing {@link protos.google.cloud.parallelstore.v1beta.Instance|Instance} on 'data' event.
+   *   An object stream which emits an object representing {@link protos.google.cloud.parallelstore.v1.Instance|Instance} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listInstancesAsync()`
@@ -1556,7 +1556,7 @@ export class ParallelstoreClient {
    *   for more details and examples.
    */
   listInstancesStream(
-    request?: protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
+    request?: protos.google.cloud.parallelstore.v1.IListInstancesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1603,17 +1603,17 @@ export class ParallelstoreClient {
    * @returns {Object}
    *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
    *   When you iterate the returned iterable, each element will be an object representing
-   *   {@link protos.google.cloud.parallelstore.v1beta.Instance|Instance}. The API will be called under the hood as needed, once per the page,
+   *   {@link protos.google.cloud.parallelstore.v1.Instance|Instance}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1beta/parallelstore.list_instances.js</caption>
-   * region_tag:parallelstore_v1beta_generated_Parallelstore_ListInstances_async
+   * @example <caption>include:samples/generated/v1/parallelstore.list_instances.js</caption>
+   * region_tag:parallelstore_v1_generated_Parallelstore_ListInstances_async
    */
   listInstancesAsync(
-    request?: protos.google.cloud.parallelstore.v1beta.IListInstancesRequest,
+    request?: protos.google.cloud.parallelstore.v1.IListInstancesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.parallelstore.v1beta.IInstance> {
+  ): AsyncIterable<protos.google.cloud.parallelstore.v1.IInstance> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1629,7 +1629,7 @@ export class ParallelstoreClient {
       this.innerApiCalls['listInstances'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.parallelstore.v1beta.IInstance>;
+    ) as AsyncIterable<protos.google.cloud.parallelstore.v1.IInstance>;
   }
   /**
    * Gets information about a location.

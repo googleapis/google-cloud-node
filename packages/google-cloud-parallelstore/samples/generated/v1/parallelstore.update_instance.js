@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+function main(updateMask, instance) {
+  // [START parallelstore_v1_generated_Parallelstore_UpdateInstance_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,17 +29,16 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The Cloud Storage source bucket and, optionally, path inside the bucket.
+   *  Required. Mask of fields to update. Field mask is used to specify the
+   *  fields to be overwritten in the Instance resource by the update. At least
+   *  one path must be supplied in this field. The fields specified in the
+   *  update_mask are relative to the resource, not the full request.
    */
-  // const sourceGcsBucket = {}
+  // const updateMask = {}
   /**
-   *  Parallelstore destination.
+   *  Required. The instance to update.
    */
-  // const destinationParallelstore = {}
-  /**
-   *  Required. Name of the resource.
-   */
-  // const name = 'abc123'
+  // const instance = {}
   /**
    *  Optional. An optional request ID to identify requests. Specify a unique
    *  request ID so that if you must retry your request, the server will know to
@@ -54,38 +53,28 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
-  /**
-   *  Optional. User-specified service account credentials to be used when
-   *  performing the transfer.
-   *  Use one of the following formats:
-   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
-   *  If unspecified, the Parallelstore service agent is used:
-   *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
-   */
-  // const serviceAccount = 'abc123'
 
   // Imports the Parallelstore library
-  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1beta;
+  const {ParallelstoreClient} = require('@google-cloud/parallelstore').v1;
 
   // Instantiates a client
   const parallelstoreClient = new ParallelstoreClient();
 
-  async function callImportData() {
+  async function callUpdateInstance() {
     // Construct request
     const request = {
-      name,
+      updateMask,
+      instance,
     };
 
     // Run request
-    const [operation] = await parallelstoreClient.importData(request);
+    const [operation] = await parallelstoreClient.updateInstance(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callImportData();
-  // [END parallelstore_v1beta_generated_Parallelstore_ImportData_async]
+  callUpdateInstance();
+  // [END parallelstore_v1_generated_Parallelstore_UpdateInstance_async]
 }
 
 process.on('unhandledRejection', err => {
