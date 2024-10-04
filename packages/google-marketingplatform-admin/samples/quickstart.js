@@ -52,7 +52,7 @@ function main(parent) {
     require('@google-cloud/admin').v1alpha;
 
   // Instantiates a client
-  const adminClient = new MarketingplatformAdminServiceClient();
+  const adminClient = new MarketingplatformAdminServiceClient({fallback: true});
 
   async function callListAnalyticsAccountLinks() {
     // Construct request
