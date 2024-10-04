@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 // Commenting out this test given that we can't use the admin organization (google)
 // 'use strict';
 
