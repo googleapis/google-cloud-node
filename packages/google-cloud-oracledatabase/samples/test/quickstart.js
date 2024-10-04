@@ -19,7 +19,7 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 const {OracleDatabaseClient} = require('@google-cloud/oracledatabase').v1;
-const oracledatabaseClient = new OracleDatabaseClient();
+const oracledatabaseClient = new OracleDatabaseClient({fallback: 'rest'});
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
