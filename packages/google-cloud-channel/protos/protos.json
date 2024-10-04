@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -2766,6 +2769,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "primaryAdminEmail": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2786,6 +2796,14 @@
                         "customerCloudIdentityId": {
                           "type": "string",
                           "id": 4
+                        },
+                        "customerType": {
+                          "type": "CloudIdentityInfo.CustomerType",
+                          "id": 5
+                        },
+                        "channelPartnerCloudIdentityId": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -2905,7 +2923,8 @@
                         "customerIdentity": {
                           "oneof": [
                             "domain",
-                            "cloudIdentityId"
+                            "cloudIdentityId",
+                            "primaryAdminEmail"
                           ]
                         }
                       },
@@ -2920,6 +2939,13 @@
                         "cloudIdentityId": {
                           "type": "string",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "primaryAdminEmail": {
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }

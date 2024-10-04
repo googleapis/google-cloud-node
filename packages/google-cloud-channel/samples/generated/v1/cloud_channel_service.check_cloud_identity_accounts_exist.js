@@ -34,9 +34,16 @@ function main(parent, domain) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. Domain to fetch for Cloud Identity account customer.
+   *  Required. Domain to fetch for Cloud Identity account customers, including
+   *  domain and team customers. For team customers, please use the domain for
+   *  their emails.
    */
   // const domain = 'abc123'
+  /**
+   *  Optional. Primary admin email to fetch for Cloud Identity account team
+   *  customer.
+   */
+  // const primaryAdminEmail = 'abc123'
 
   // Imports the Channel library
   const {CloudChannelServiceClient} = require('@google-cloud/channel').v1;
