@@ -12,9 +12,16 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Consumer_procurement_service.cancel_order](#consumer_procurement_service.cancel_order)
   * [Consumer_procurement_service.get_order](#consumer_procurement_service.get_order)
   * [Consumer_procurement_service.list_orders](#consumer_procurement_service.list_orders)
+  * [Consumer_procurement_service.modify_order](#consumer_procurement_service.modify_order)
   * [Consumer_procurement_service.place_order](#consumer_procurement_service.place_order)
+  * [License_management_service.assign](#license_management_service.assign)
+  * [License_management_service.enumerate_licensed_users](#license_management_service.enumerate_licensed_users)
+  * [License_management_service.get_license_pool](#license_management_service.get_license_pool)
+  * [License_management_service.unassign](#license_management_service.unassign)
+  * [License_management_service.update_license_pool](#license_management_service.update_license_pool)
   * [Consumer_procurement_service.get_order](#consumer_procurement_service.get_order)
   * [Consumer_procurement_service.list_orders](#consumer_procurement_service.list_orders)
   * [Consumer_procurement_service.place_order](#consumer_procurement_service.place_order)
@@ -32,6 +39,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Consumer_procurement_service.cancel_order
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.cancel_order.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.cancel_order.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.cancel_order.js`
+
+
+-----
+
 
 
 
@@ -69,6 +93,23 @@ __Usage:__
 
 
 
+### Consumer_procurement_service.modify_order
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.modify_order.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.modify_order.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.modify_order.js`
+
+
+-----
+
+
+
+
 ### Consumer_procurement_service.place_order
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.place_order.js).
@@ -79,6 +120,91 @@ __Usage:__
 
 
 `node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/consumer_procurement_service.place_order.js`
+
+
+-----
+
+
+
+
+### License_management_service.assign
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.assign.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.assign.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.assign.js`
+
+
+-----
+
+
+
+
+### License_management_service.enumerate_licensed_users
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.enumerate_licensed_users.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.enumerate_licensed_users.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.enumerate_licensed_users.js`
+
+
+-----
+
+
+
+
+### License_management_service.get_license_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.get_license_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.get_license_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.get_license_pool.js`
+
+
+-----
+
+
+
+
+### License_management_service.unassign
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.unassign.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.unassign.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.unassign.js`
+
+
+-----
+
+
+
+
+### License_management_service.update_license_pool
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.update_license_pool.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.update_license_pool.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-commerce-consumer-procurement/samples/generated/v1/license_management_service.update_license_pool.js`
 
 
 -----

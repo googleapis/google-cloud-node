@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -15,6 +18,7 @@
                             "csharp_namespace": "Google.Cloud.Commerce.Consumer.Procurement.V1",
                             "go_package": "cloud.google.com/go/commerce/consumer/procurement/apiv1/procurementpb;procurementpb",
                             "java_multiple_files": true,
+                            "java_outer_classname": "LicenseManagementServiceProto",
                             "java_package": "com.google.cloud.commerce.consumer.procurement.v1",
                             "php_namespace": "Google\\Cloud\\Commerce\\Consumer\\Procurement\\V1",
                             "ruby_package": "Google::Cloud::Commerce::Consumer::Procurement::V1",
@@ -22,6 +26,317 @@
                             "(google.api.resource_definition).pattern": "billingAccounts/{consumer_billing_account}/offers/{offer}"
                           },
                           "nested": {
+                            "LicenseManagementService": {
+                              "options": {
+                                "(google.api.default_host)": "cloudcommerceconsumerprocurement.googleapis.com",
+                                "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                              },
+                              "methods": {
+                                "GetLicensePool": {
+                                  "requestType": "GetLicensePoolRequest",
+                                  "responseType": "LicensePool",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{name=billingAccounts/*/orders/*/licensePool}",
+                                    "(google.api.method_signature)": "name"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{name=billingAccounts/*/orders/*/licensePool}"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "name"
+                                    }
+                                  ]
+                                },
+                                "UpdateLicensePool": {
+                                  "requestType": "UpdateLicensePoolRequest",
+                                  "responseType": "LicensePool",
+                                  "options": {
+                                    "(google.api.http).patch": "/v1/{license_pool.name=billingAccounts/*/orders/*/licensePool/*}",
+                                    "(google.api.http).body": "license_pool",
+                                    "(google.api.method_signature)": "license_pool,update_mask"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "patch": "/v1/{license_pool.name=billingAccounts/*/orders/*/licensePool/*}",
+                                        "body": "license_pool"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "license_pool,update_mask"
+                                    }
+                                  ]
+                                },
+                                "Assign": {
+                                  "requestType": "AssignRequest",
+                                  "responseType": "AssignResponse",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{parent=billingAccounts/*/orders/*/licensePool}:assign",
+                                    "(google.api.http).body": "*",
+                                    "(google.api.method_signature)": "parent,usernames"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{parent=billingAccounts/*/orders/*/licensePool}:assign",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent,usernames"
+                                    }
+                                  ]
+                                },
+                                "Unassign": {
+                                  "requestType": "UnassignRequest",
+                                  "responseType": "UnassignResponse",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{parent=billingAccounts/*/orders/*/licensePool}:unassign",
+                                    "(google.api.http).body": "*",
+                                    "(google.api.method_signature)": "parent,usernames"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{parent=billingAccounts/*/orders/*/licensePool}:unassign",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent,usernames"
+                                    }
+                                  ]
+                                },
+                                "EnumerateLicensedUsers": {
+                                  "requestType": "EnumerateLicensedUsersRequest",
+                                  "responseType": "EnumerateLicensedUsersResponse",
+                                  "options": {
+                                    "(google.api.http).get": "/v1/{parent=billingAccounts/*/orders/*/licensePool}:enumerateLicensedUsers",
+                                    "(google.api.method_signature)": "parent"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "get": "/v1/{parent=billingAccounts/*/orders/*/licensePool}:enumerateLicensedUsers"
+                                      }
+                                    },
+                                    {
+                                      "(google.api.method_signature)": "parent"
+                                    }
+                                  ]
+                                }
+                              }
+                            },
+                            "AssignmentProtocol": {
+                              "oneofs": {
+                                "assignmentType": {
+                                  "oneof": [
+                                    "manualAssignmentType",
+                                    "autoAssignmentType"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "manualAssignmentType": {
+                                  "type": "ManualAssignmentType",
+                                  "id": 2
+                                },
+                                "autoAssignmentType": {
+                                  "type": "AutoAssignmentType",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "ManualAssignmentType": {
+                                  "fields": {}
+                                },
+                                "AutoAssignmentType": {
+                                  "fields": {
+                                    "inactiveLicenseTtl": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "LicensePool": {
+                              "options": {
+                                "(google.api.resource).type": "cloudcommerceconsumerprocurement.googleapis.com/LicensePool",
+                                "(google.api.resource).pattern": "billingAccounts/{billing_account}/orders/{order}/licensePool",
+                                "(google.api.resource).plural": "licensePools",
+                                "(google.api.resource).singular": "licensePool"
+                              },
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "IDENTIFIER"
+                                  }
+                                },
+                                "licenseAssignmentProtocol": {
+                                  "type": "AssignmentProtocol",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "availableLicenseCount": {
+                                  "type": "int32",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "totalLicenseCount": {
+                                  "type": "int32",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "GetLicensePoolRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "UpdateLicensePoolRequest": {
+                              "fields": {
+                                "licensePool": {
+                                  "type": "LicensePool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "updateMask": {
+                                  "type": "google.protobuf.FieldMask",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "AssignRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "usernames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "AssignResponse": {
+                              "fields": {}
+                            },
+                            "UnassignRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "usernames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                }
+                              }
+                            },
+                            "UnassignResponse": {
+                              "fields": {}
+                            },
+                            "EnumerateLicensedUsersRequest": {
+                              "fields": {
+                                "parent": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "pageSize": {
+                                  "type": "int32",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "pageToken": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "LicensedUser": {
+                              "fields": {
+                                "username": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "assignTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                },
+                                "recentUsageTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
+                                  }
+                                }
+                              }
+                            },
+                            "EnumerateLicensedUsersResponse": {
+                              "fields": {
+                                "licensedUsers": {
+                                  "rule": "repeated",
+                                  "type": "LicensedUser",
+                                  "id": 1
+                                },
+                                "nextPageToken": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            },
                             "LineItemChangeType": {
                               "values": {
                                 "LINE_ITEM_CHANGE_TYPE_UNSPECIFIED": 0,
@@ -357,7 +672,62 @@
                                       "(google.api.method_signature)": "parent"
                                     }
                                   ]
+                                },
+                                "ModifyOrder": {
+                                  "requestType": "ModifyOrderRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{name=billingAccounts/*/orders/*}:modify",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "Order",
+                                    "(google.longrunning.operation_info).metadata_type": "ModifyOrderMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{name=billingAccounts/*/orders/*}:modify",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "Order",
+                                        "metadata_type": "ModifyOrderMetadata"
+                                      }
+                                    }
+                                  ]
+                                },
+                                "CancelOrder": {
+                                  "requestType": "CancelOrderRequest",
+                                  "responseType": "google.longrunning.Operation",
+                                  "options": {
+                                    "(google.api.http).post": "/v1/{name=billingAccounts/*/orders/*}:cancel",
+                                    "(google.api.http).body": "*",
+                                    "(google.longrunning.operation_info).response_type": "Order",
+                                    "(google.longrunning.operation_info).metadata_type": "CancelOrderMetadata"
+                                  },
+                                  "parsedOptions": [
+                                    {
+                                      "(google.api.http)": {
+                                        "post": "/v1/{name=billingAccounts/*/orders/*}:cancel",
+                                        "body": "*"
+                                      }
+                                    },
+                                    {
+                                      "(google.longrunning.operation_info)": {
+                                        "response_type": "Order",
+                                        "metadata_type": "CancelOrderMetadata"
+                                      }
+                                    }
+                                  ]
                                 }
+                              }
+                            },
+                            "AutoRenewalBehavior": {
+                              "values": {
+                                "AUTO_RENEWAL_BEHAVIOR_UNSPECIFIED": 0,
+                                "AUTO_RENEWAL_BEHAVIOR_ENABLE": 1,
+                                "AUTO_RENEWAL_BEHAVIOR_DISABLE": 2
                               }
                             },
                             "PlaceOrderRequest": {
@@ -443,6 +813,113 @@
                                   "id": 2
                                 }
                               }
+                            },
+                            "ModifyOrderRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "modifications": {
+                                  "rule": "repeated",
+                                  "type": "Modification",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "displayName": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "etag": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "Modification": {
+                                  "fields": {
+                                    "lineItemId": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "changeType": {
+                                      "type": "LineItemChangeType",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    },
+                                    "newLineItemInfo": {
+                                      "type": "LineItemInfo",
+                                      "id": 3,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "autoRenewalBehavior": {
+                                      "type": "AutoRenewalBehavior",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "ModifyOrderMetadata": {
+                              "fields": {}
+                            },
+                            "CancelOrderRequest": {
+                              "fields": {
+                                "name": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "etag": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "cancellationPolicy": {
+                                  "type": "CancellationPolicy",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "CancellationPolicy": {
+                                  "values": {
+                                    "CANCELLATION_POLICY_UNSPECIFIED": 0,
+                                    "CANCELLATION_POLICY_CANCEL_IMMEDIATELY": 1,
+                                    "CANCELLATION_POLICY_CANCEL_AT_TERM_END": 2
+                                  }
+                                }
+                              }
+                            },
+                            "CancelOrderMetadata": {
+                              "fields": {}
                             }
                           }
                         },
@@ -889,110 +1366,14 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -1373,6 +1754,102 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
@@ -2652,7 +3129,7 @@
                 }
               }
             },
-            "Timestamp": {
+            "Duration": {
               "fields": {
                 "seconds": {
                   "type": "int64",
@@ -2664,7 +3141,16 @@
                 }
               }
             },
-            "Duration": {
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "Timestamp": {
               "fields": {
                 "seconds": {
                   "type": "int64",
