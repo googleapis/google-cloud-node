@@ -15,7 +15,7 @@
             "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateConversation_async",
             "title": "ContactCenterInsights createConversation Sample",
             "origin": "API_DEFINITION",
-            "description": " Creates a conversation.",
+            "description": " Creates a conversation. Note that this method does not support audio transcription or redaction. Use `conversations.upload` instead.",
             "canonical": true,
             "file": "contact_center_insights.create_conversation.js",
             "language": "JAVASCRIPT",
@@ -63,7 +63,7 @@
             "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_async",
             "title": "ContactCenterInsights uploadConversation Sample",
             "origin": "API_DEFINITION",
-            "description": " Create a longrunning conversation upload operation. This method differs from CreateConversation by allowing audio transcription and optional DLP redaction.",
+            "description": " Create a long-running conversation upload operation. This method differs from `CreateConversation` by allowing audio transcription and optional DLP redaction.",
             "canonical": true,
             "file": "contact_center_insights.upload_conversation.js",
             "language": "JAVASCRIPT",
@@ -126,7 +126,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 57,
+                    "end": 69,
                     "type": "FULL"
                 }
             ],
@@ -214,7 +214,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 93,
                     "type": "FULL"
                 }
             ],
@@ -237,6 +237,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
                         "type": "TYPE_STRING"
                     },
                     {
@@ -594,7 +598,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 77,
+                    "end": 84,
                     "type": "FULL"
                 }
             ],
@@ -626,6 +630,10 @@
                     {
                         "name": "speech_config",
                         "type": ".google.cloud.contactcenterinsights.v1.SpeechConfig"
+                    },
+                    {
+                        "name": "sample_size",
+                        "type": "TYPE_INT32"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -980,6 +988,98 @@
                 "method": {
                     "shortName": "UndeployIssueModel",
                     "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UndeployIssueModel",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_ExportIssueModel_async",
+            "title": "ContactCenterInsights exportIssueModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Exports an issue model to the provided destination.",
+            "canonical": true,
+            "file": "contact_center_insights.export_issue_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 58,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ExportIssueModel",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ExportIssueModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_destination",
+                        "type": ".google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination"
+                    },
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "ExportIssueModel",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ExportIssueModel",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async",
+            "title": "ContactCenterInsights importIssueModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Imports an issue model from a Cloud Storage bucket.",
+            "canonical": true,
+            "file": "contact_center_insights.import_issue_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 64,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ImportIssueModel",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ImportIssueModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "gcs_source",
+                        "type": ".google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource"
+                    },
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "create_new_model",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "ImportIssueModel",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ImportIssueModel",
                     "service": {
                         "shortName": "ContactCenterInsights",
                         "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
@@ -1532,6 +1632,86 @@
                 "method": {
                     "shortName": "UpdateSettings",
                     "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateSettings",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetEncryptionSpec_async",
+            "title": "ContactCenterInsights getEncryptionSpec Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets location-level encryption key specification.",
+            "canonical": true,
+            "file": "contact_center_insights.get_encryption_spec.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 53,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetEncryptionSpec",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetEncryptionSpec",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.contactcenterinsights.v1.EncryptionSpec",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "GetEncryptionSpec",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetEncryptionSpec",
+                    "service": {
+                        "shortName": "ContactCenterInsights",
+                        "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async",
+            "title": "ContactCenterInsights initializeEncryptionSpec Sample",
+            "origin": "API_DEFINITION",
+            "description": " Initializes a location-level encryption key specification.  An error will be thrown if the location has resources already created before the initialization. Once the encryption specification is initialized at a location, it is immutable and all newly created resources under the location will be encrypted with the existing specification.",
+            "canonical": true,
+            "file": "contact_center_insights.initialize_encryption_spec.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 57,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "InitializeEncryptionSpec",
+                "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.InitializeEncryptionSpec",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "encryption_spec",
+                        "type": ".google.cloud.contactcenterinsights.v1.EncryptionSpec"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "ContactCenterInsightsClient",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsightsClient"
+                },
+                "method": {
+                    "shortName": "InitializeEncryptionSpec",
+                    "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.InitializeEncryptionSpec",
                     "service": {
                         "shortName": "ContactCenterInsights",
                         "fullName": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"

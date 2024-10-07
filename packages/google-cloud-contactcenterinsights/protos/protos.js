@@ -792,6 +792,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|exportIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef ExportIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ExportIssueModel.
+                         * @function exportIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest} request ExportIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.ExportIssueModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.exportIssueModel = function exportIssueModel(request, callback) {
+                            return this.rpcCall(exportIssueModel, $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ExportIssueModel" });
+    
+                        /**
+                         * Calls ExportIssueModel.
+                         * @function exportIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest} request ExportIssueModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|importIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef ImportIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ImportIssueModel.
+                         * @function importIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest} request ImportIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.ImportIssueModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.importIssueModel = function importIssueModel(request, callback) {
+                            return this.rpcCall(importIssueModel, $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ImportIssueModel" });
+    
+                        /**
+                         * Calls ImportIssueModel.
+                         * @function importIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest} request ImportIssueModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getIssue}.
                          * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
                          * @typedef GetIssueCallback
@@ -1217,6 +1283,72 @@
                          * @instance
                          * @param {google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest} request UpdateSettingsRequest message or plain object
                          * @returns {Promise<google.cloud.contactcenterinsights.v1.Settings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getEncryptionSpec}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef GetEncryptionSpecCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.contactcenterinsights.v1.EncryptionSpec} [response] EncryptionSpec
+                         */
+    
+                        /**
+                         * Calls GetEncryptionSpec.
+                         * @function getEncryptionSpec
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest} request GetEncryptionSpecRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetEncryptionSpecCallback} callback Node-style callback called with the error, if any, and EncryptionSpec
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.getEncryptionSpec = function getEncryptionSpec(request, callback) {
+                            return this.rpcCall(getEncryptionSpec, $root.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest, $root.google.cloud.contactcenterinsights.v1.EncryptionSpec, request, callback);
+                        }, "name", { value: "GetEncryptionSpec" });
+    
+                        /**
+                         * Calls GetEncryptionSpec.
+                         * @function getEncryptionSpec
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest} request GetEncryptionSpecRequest message or plain object
+                         * @returns {Promise<google.cloud.contactcenterinsights.v1.EncryptionSpec>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|initializeEncryptionSpec}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef InitializeEncryptionSpecCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls InitializeEncryptionSpec.
+                         * @function initializeEncryptionSpec
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest} request InitializeEncryptionSpecRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.InitializeEncryptionSpecCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.initializeEncryptionSpec = function initializeEncryptionSpec(request, callback) {
+                            return this.rpcCall(initializeEncryptionSpec, $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "InitializeEncryptionSpec" });
+    
+                        /**
+                         * Calls InitializeEncryptionSpec.
+                         * @function initializeEncryptionSpec
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest} request InitializeEncryptionSpecRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
     
@@ -3817,6 +3949,7 @@
                          * @property {number|null} [pageSize] ListConversationsRequest pageSize
                          * @property {string|null} [pageToken] ListConversationsRequest pageToken
                          * @property {string|null} [filter] ListConversationsRequest filter
+                         * @property {string|null} [orderBy] ListConversationsRequest orderBy
                          * @property {google.cloud.contactcenterinsights.v1.ConversationView|null} [view] ListConversationsRequest view
                          */
     
@@ -3868,6 +4001,14 @@
                         ListConversationsRequest.prototype.filter = "";
     
                         /**
+                         * ListConversationsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.contactcenterinsights.v1.ListConversationsRequest
+                         * @instance
+                         */
+                        ListConversationsRequest.prototype.orderBy = "";
+    
+                        /**
                          * ListConversationsRequest view.
                          * @member {google.cloud.contactcenterinsights.v1.ConversationView} view
                          * @memberof google.cloud.contactcenterinsights.v1.ListConversationsRequest
@@ -3909,6 +4050,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             if (message.view != null && Object.hasOwnProperty.call(message, "view"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.view);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.orderBy);
                             return writer;
                         };
     
@@ -3957,6 +4100,10 @@
                                     }
                                 case 4: {
                                         message.filter = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.orderBy = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -4010,6 +4157,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
                             if (message.view != null && message.hasOwnProperty("view"))
                                 switch (message.view) {
                                 default:
@@ -4042,6 +4192,8 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
                             switch (object.view) {
                             default:
                                 if (typeof object.view === "number") {
@@ -4084,6 +4236,7 @@
                                 object.pageToken = "";
                                 object.filter = "";
                                 object.view = options.enums === String ? "CONVERSATION_VIEW_UNSPECIFIED" : 0;
+                                object.orderBy = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4095,6 +4248,8 @@
                                 object.filter = message.filter;
                             if (message.view != null && message.hasOwnProperty("view"))
                                 object.view = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] === undefined ? message.view : $root.google.cloud.contactcenterinsights.v1.ConversationView[message.view] : message.view;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
                             return object;
                         };
     
@@ -5102,6 +5257,7 @@
                          * @property {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IConversationConfig|null} [conversationConfig] IngestConversationsRequest conversationConfig
                          * @property {google.cloud.contactcenterinsights.v1.IRedactionConfig|null} [redactionConfig] IngestConversationsRequest redactionConfig
                          * @property {google.cloud.contactcenterinsights.v1.ISpeechConfig|null} [speechConfig] IngestConversationsRequest speechConfig
+                         * @property {number|null} [sampleSize] IngestConversationsRequest sampleSize
                          */
     
                         /**
@@ -5167,6 +5323,14 @@
                          */
                         IngestConversationsRequest.prototype.speechConfig = null;
     
+                        /**
+                         * IngestConversationsRequest sampleSize.
+                         * @member {number|null|undefined} sampleSize
+                         * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest
+                         * @instance
+                         */
+                        IngestConversationsRequest.prototype.sampleSize = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -5189,6 +5353,17 @@
                          */
                         Object.defineProperty(IngestConversationsRequest.prototype, "objectConfig", {
                             get: $util.oneOfGetter($oneOfFields = ["transcriptObjectConfig"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * IngestConversationsRequest _sampleSize.
+                         * @member {"sampleSize"|undefined} _sampleSize
+                         * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest
+                         * @instance
+                         */
+                        Object.defineProperty(IngestConversationsRequest.prototype, "_sampleSize", {
+                            get: $util.oneOfGetter($oneOfFields = ["sampleSize"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -5228,6 +5403,8 @@
                                 $root.google.cloud.contactcenterinsights.v1.RedactionConfig.encode(message.redactionConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.speechConfig != null && Object.hasOwnProperty.call(message, "speechConfig"))
                                 $root.google.cloud.contactcenterinsights.v1.SpeechConfig.encode(message.speechConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.sampleSize != null && Object.hasOwnProperty.call(message, "sampleSize"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.sampleSize);
                             return writer;
                         };
     
@@ -5284,6 +5461,10 @@
                                     }
                                 case 6: {
                                         message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.sampleSize = reader.int32();
                                         break;
                                     }
                                 default:
@@ -5356,6 +5537,11 @@
                                 if (error)
                                     return "speechConfig." + error;
                             }
+                            if (message.sampleSize != null && message.hasOwnProperty("sampleSize")) {
+                                properties._sampleSize = 1;
+                                if (!$util.isInteger(message.sampleSize))
+                                    return "sampleSize: integer expected";
+                            }
                             return null;
                         };
     
@@ -5398,6 +5584,8 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.speechConfig: object expected");
                                 message.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.fromObject(object.speechConfig);
                             }
+                            if (object.sampleSize != null)
+                                message.sampleSize = object.sampleSize | 0;
                             return message;
                         };
     
@@ -5438,6 +5626,11 @@
                                 object.redactionConfig = $root.google.cloud.contactcenterinsights.v1.RedactionConfig.toObject(message.redactionConfig, options);
                             if (message.speechConfig != null && message.hasOwnProperty("speechConfig"))
                                 object.speechConfig = $root.google.cloud.contactcenterinsights.v1.SpeechConfig.toObject(message.speechConfig, options);
+                            if (message.sampleSize != null && message.hasOwnProperty("sampleSize")) {
+                                object.sampleSize = message.sampleSize;
+                                if (options.oneofs)
+                                    object._sampleSize = "sampleSize";
+                            }
                             return object;
                         };
     
@@ -5475,6 +5668,8 @@
                              * @interface IGcsSource
                              * @property {string|null} [bucketUri] GcsSource bucketUri
                              * @property {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|null} [bucketObjectType] GcsSource bucketObjectType
+                             * @property {string|null} [metadataBucketUri] GcsSource metadataBucketUri
+                             * @property {Array.<string>|null} [customMetadataKeys] GcsSource customMetadataKeys
                              */
     
                             /**
@@ -5486,6 +5681,7 @@
                              * @param {google.cloud.contactcenterinsights.v1.IngestConversationsRequest.IGcsSource=} [properties] Properties to set
                              */
                             function GcsSource(properties) {
+                                this.customMetadataKeys = [];
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -5507,6 +5703,36 @@
                              * @instance
                              */
                             GcsSource.prototype.bucketObjectType = 0;
+    
+                            /**
+                             * GcsSource metadataBucketUri.
+                             * @member {string|null|undefined} metadataBucketUri
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource
+                             * @instance
+                             */
+                            GcsSource.prototype.metadataBucketUri = null;
+    
+                            /**
+                             * GcsSource customMetadataKeys.
+                             * @member {Array.<string>} customMetadataKeys
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource
+                             * @instance
+                             */
+                            GcsSource.prototype.customMetadataKeys = $util.emptyArray;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * GcsSource _metadataBucketUri.
+                             * @member {"metadataBucketUri"|undefined} _metadataBucketUri
+                             * @memberof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource
+                             * @instance
+                             */
+                            Object.defineProperty(GcsSource.prototype, "_metadataBucketUri", {
+                                get: $util.oneOfGetter($oneOfFields = ["metadataBucketUri"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new GcsSource instance using the specified properties.
@@ -5536,6 +5762,11 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucketUri);
                                 if (message.bucketObjectType != null && Object.hasOwnProperty.call(message, "bucketObjectType"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.bucketObjectType);
+                                if (message.metadataBucketUri != null && Object.hasOwnProperty.call(message, "metadataBucketUri"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.metadataBucketUri);
+                                if (message.customMetadataKeys != null && message.customMetadataKeys.length)
+                                    for (var i = 0; i < message.customMetadataKeys.length; ++i)
+                                        writer.uint32(/* id 12, wireType 2 =*/98).string(message.customMetadataKeys[i]);
                                 return writer;
                             };
     
@@ -5578,6 +5809,16 @@
                                             message.bucketObjectType = reader.int32();
                                             break;
                                         }
+                                    case 3: {
+                                            message.metadataBucketUri = reader.string();
+                                            break;
+                                        }
+                                    case 12: {
+                                            if (!(message.customMetadataKeys && message.customMetadataKeys.length))
+                                                message.customMetadataKeys = [];
+                                            message.customMetadataKeys.push(reader.string());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -5613,6 +5854,7 @@
                             GcsSource.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.bucketUri != null && message.hasOwnProperty("bucketUri"))
                                     if (!$util.isString(message.bucketUri))
                                         return "bucketUri: string expected";
@@ -5625,6 +5867,18 @@
                                     case 2:
                                         break;
                                     }
+                                if (message.metadataBucketUri != null && message.hasOwnProperty("metadataBucketUri")) {
+                                    properties._metadataBucketUri = 1;
+                                    if (!$util.isString(message.metadataBucketUri))
+                                        return "metadataBucketUri: string expected";
+                                }
+                                if (message.customMetadataKeys != null && message.hasOwnProperty("customMetadataKeys")) {
+                                    if (!Array.isArray(message.customMetadataKeys))
+                                        return "customMetadataKeys: array expected";
+                                    for (var i = 0; i < message.customMetadataKeys.length; ++i)
+                                        if (!$util.isString(message.customMetadataKeys[i]))
+                                            return "customMetadataKeys: string[] expected";
+                                }
                                 return null;
                             };
     
@@ -5662,6 +5916,15 @@
                                     message.bucketObjectType = 2;
                                     break;
                                 }
+                                if (object.metadataBucketUri != null)
+                                    message.metadataBucketUri = String(object.metadataBucketUri);
+                                if (object.customMetadataKeys) {
+                                    if (!Array.isArray(object.customMetadataKeys))
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.customMetadataKeys: array expected");
+                                    message.customMetadataKeys = [];
+                                    for (var i = 0; i < object.customMetadataKeys.length; ++i)
+                                        message.customMetadataKeys[i] = String(object.customMetadataKeys[i]);
+                                }
                                 return message;
                             };
     
@@ -5678,6 +5941,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.customMetadataKeys = [];
                                 if (options.defaults) {
                                     object.bucketUri = "";
                                     object.bucketObjectType = options.enums === String ? "BUCKET_OBJECT_TYPE_UNSPECIFIED" : 0;
@@ -5686,6 +5951,16 @@
                                     object.bucketUri = message.bucketUri;
                                 if (message.bucketObjectType != null && message.hasOwnProperty("bucketObjectType"))
                                     object.bucketObjectType = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType[message.bucketObjectType] === undefined ? message.bucketObjectType : $root.google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType[message.bucketObjectType] : message.bucketObjectType;
+                                if (message.metadataBucketUri != null && message.hasOwnProperty("metadataBucketUri")) {
+                                    object.metadataBucketUri = message.metadataBucketUri;
+                                    if (options.oneofs)
+                                        object._metadataBucketUri = "metadataBucketUri";
+                                }
+                                if (message.customMetadataKeys && message.customMetadataKeys.length) {
+                                    object.customMetadataKeys = [];
+                                    for (var j = 0; j < message.customMetadataKeys.length; ++j)
+                                        object.customMetadataKeys[j] = message.customMetadataKeys[j];
+                                }
                                 return object;
                             };
     
@@ -14015,6 +14290,1818 @@
                         return UndeployIssueModelMetadata;
                     })();
     
+                    v1.ExportIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of an ExportIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IExportIssueModelRequest
+                         * @property {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination|null} [gcsDestination] ExportIssueModelRequest gcsDestination
+                         * @property {string|null} [name] ExportIssueModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ExportIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an ExportIssueModelRequest.
+                         * @implements IExportIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest=} [properties] Properties to set
+                         */
+                        function ExportIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportIssueModelRequest gcsDestination.
+                         * @member {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination|null|undefined} gcsDestination
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @instance
+                         */
+                        ExportIssueModelRequest.prototype.gcsDestination = null;
+    
+                        /**
+                         * ExportIssueModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @instance
+                         */
+                        ExportIssueModelRequest.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ExportIssueModelRequest Destination.
+                         * @member {"gcsDestination"|undefined} Destination
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ExportIssueModelRequest.prototype, "Destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ExportIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest} ExportIssueModelRequest instance
+                         */
+                        ExportIssueModelRequest.create = function create(properties) {
+                            return new ExportIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest} message ExportIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
+                                $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.encode(message.gcsDestination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest} message ExportIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest} ExportIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.gcsDestination = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest} ExportIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                properties.Destination = 1;
+                                {
+                                    var error = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify(message.gcsDestination);
+                                    if (error)
+                                        return "gcsDestination." + error;
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest} ExportIssueModelRequest
+                         */
+                        ExportIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest();
+                            if (object.gcsDestination != null) {
+                                if (typeof object.gcsDestination !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.gcsDestination: object expected");
+                                message.gcsDestination = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.fromObject(object.gcsDestination);
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest} message ExportIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                object.gcsDestination = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.toObject(message.gcsDestination, options);
+                                if (options.oneofs)
+                                    object.Destination = "gcsDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportIssueModelRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportIssueModelRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ExportIssueModelRequest";
+                        };
+    
+                        ExportIssueModelRequest.GcsDestination = (function() {
+    
+                            /**
+                             * Properties of a GcsDestination.
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                             * @interface IGcsDestination
+                             * @property {string|null} [objectUri] GcsDestination objectUri
+                             */
+    
+                            /**
+                             * Constructs a new GcsDestination.
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest
+                             * @classdesc Represents a GcsDestination.
+                             * @implements IGcsDestination
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination=} [properties] Properties to set
+                             */
+                            function GcsDestination(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GcsDestination objectUri.
+                             * @member {string} objectUri
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @instance
+                             */
+                            GcsDestination.prototype.objectUri = "";
+    
+                            /**
+                             * Creates a new GcsDestination instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} GcsDestination instance
+                             */
+                            GcsDestination.create = function create(properties) {
+                                return new GcsDestination(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination} message GcsDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsDestination.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.objectUri != null && Object.hasOwnProperty.call(message, "objectUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.objectUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination} message GcsDestination message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsDestination.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GcsDestination message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} GcsDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsDestination.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.objectUri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} GcsDestination
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsDestination.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GcsDestination message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GcsDestination.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.objectUri != null && message.hasOwnProperty("objectUri"))
+                                    if (!$util.isString(message.objectUri))
+                                        return "objectUri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} GcsDestination
+                             */
+                            GcsDestination.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination();
+                                if (object.objectUri != null)
+                                    message.objectUri = String(object.objectUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} message GcsDestination
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GcsDestination.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.objectUri = "";
+                                if (message.objectUri != null && message.hasOwnProperty("objectUri"))
+                                    object.objectUri = message.objectUri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GcsDestination to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GcsDestination.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GcsDestination
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GcsDestination.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination";
+                            };
+    
+                            return GcsDestination;
+                        })();
+    
+                        return ExportIssueModelRequest;
+                    })();
+    
+                    v1.ExportIssueModelResponse = (function() {
+    
+                        /**
+                         * Properties of an ExportIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IExportIssueModelResponse
+                         */
+    
+                        /**
+                         * Constructs a new ExportIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an ExportIssueModelResponse.
+                         * @implements IExportIssueModelResponse
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelResponse=} [properties] Properties to set
+                         */
+                        function ExportIssueModelResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ExportIssueModelResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelResponse=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelResponse} ExportIssueModelResponse instance
+                         */
+                        ExportIssueModelResponse.create = function create(properties) {
+                            return new ExportIssueModelResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelResponse} message ExportIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportIssueModelResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelResponse} message ExportIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportIssueModelResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportIssueModelResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelResponse} ExportIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportIssueModelResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportIssueModelResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelResponse} ExportIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportIssueModelResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportIssueModelResponse message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportIssueModelResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelResponse} ExportIssueModelResponse
+                         */
+                        ExportIssueModelResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse)
+                                return object;
+                            return new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportIssueModelResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelResponse} message ExportIssueModelResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportIssueModelResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ExportIssueModelResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportIssueModelResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportIssueModelResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportIssueModelResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ExportIssueModelResponse";
+                        };
+    
+                        return ExportIssueModelResponse;
+                    })();
+    
+                    v1.ExportIssueModelMetadata = (function() {
+    
+                        /**
+                         * Properties of an ExportIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IExportIssueModelMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ExportIssueModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ExportIssueModelMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest|null} [request] ExportIssueModelMetadata request
+                         */
+    
+                        /**
+                         * Constructs a new ExportIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an ExportIssueModelMetadata.
+                         * @implements IExportIssueModelMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata=} [properties] Properties to set
+                         */
+                        function ExportIssueModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ExportIssueModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @instance
+                         */
+                        ExportIssueModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ExportIssueModelMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @instance
+                         */
+                        ExportIssueModelMetadata.prototype.endTime = null;
+    
+                        /**
+                         * ExportIssueModelMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IExportIssueModelRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @instance
+                         */
+                        ExportIssueModelMetadata.prototype.request = null;
+    
+                        /**
+                         * Creates a new ExportIssueModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata} ExportIssueModelMetadata instance
+                         */
+                        ExportIssueModelMetadata.create = function create(properties) {
+                            return new ExportIssueModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ExportIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata} message ExportIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportIssueModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ExportIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata} message ExportIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ExportIssueModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ExportIssueModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata} ExportIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportIssueModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.request = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ExportIssueModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata} ExportIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ExportIssueModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ExportIssueModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ExportIssueModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ExportIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata} ExportIssueModelMetadata
+                         */
+                        ExportIssueModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.fromObject(object.request);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ExportIssueModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata} message ExportIssueModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ExportIssueModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.toObject(message.request, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ExportIssueModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ExportIssueModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ExportIssueModelMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ExportIssueModelMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata";
+                        };
+    
+                        return ExportIssueModelMetadata;
+                    })();
+    
+                    v1.ImportIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IImportIssueModelRequest
+                         * @property {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource|null} [gcsSource] ImportIssueModelRequest gcsSource
+                         * @property {string|null} [parent] ImportIssueModelRequest parent
+                         * @property {boolean|null} [createNewModel] ImportIssueModelRequest createNewModel
+                         */
+    
+                        /**
+                         * Constructs a new ImportIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an ImportIssueModelRequest.
+                         * @implements IImportIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest=} [properties] Properties to set
+                         */
+                        function ImportIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportIssueModelRequest gcsSource.
+                         * @member {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource|null|undefined} gcsSource
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @instance
+                         */
+                        ImportIssueModelRequest.prototype.gcsSource = null;
+    
+                        /**
+                         * ImportIssueModelRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @instance
+                         */
+                        ImportIssueModelRequest.prototype.parent = "";
+    
+                        /**
+                         * ImportIssueModelRequest createNewModel.
+                         * @member {boolean} createNewModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @instance
+                         */
+                        ImportIssueModelRequest.prototype.createNewModel = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportIssueModelRequest Source.
+                         * @member {"gcsSource"|undefined} Source
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ImportIssueModelRequest.prototype, "Source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest} ImportIssueModelRequest instance
+                         */
+                        ImportIssueModelRequest.create = function create(properties) {
+                            return new ImportIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest} message ImportIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.encode(message.gcsSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.createNewModel != null && Object.hasOwnProperty.call(message, "createNewModel"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.createNewModel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest} message ImportIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest} ImportIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2: {
+                                        message.gcsSource = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.createNewModel = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest} ImportIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.Source = 1;
+                                {
+                                    var error = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.createNewModel != null && message.hasOwnProperty("createNewModel"))
+                                if (typeof message.createNewModel !== "boolean")
+                                    return "createNewModel: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest} ImportIssueModelRequest
+                         */
+                        ImportIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.gcsSource: object expected");
+                                message.gcsSource = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.createNewModel != null)
+                                message.createNewModel = Boolean(object.createNewModel);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest} message ImportIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.createNewModel = false;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.Source = "gcsSource";
+                            }
+                            if (message.createNewModel != null && message.hasOwnProperty("createNewModel"))
+                                object.createNewModel = message.createNewModel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportIssueModelRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportIssueModelRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ImportIssueModelRequest";
+                        };
+    
+                        ImportIssueModelRequest.GcsSource = (function() {
+    
+                            /**
+                             * Properties of a GcsSource.
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                             * @interface IGcsSource
+                             * @property {string|null} [objectUri] GcsSource objectUri
+                             */
+    
+                            /**
+                             * Constructs a new GcsSource.
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest
+                             * @classdesc Represents a GcsSource.
+                             * @implements IGcsSource
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource=} [properties] Properties to set
+                             */
+                            function GcsSource(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GcsSource objectUri.
+                             * @member {string} objectUri
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @instance
+                             */
+                            GcsSource.prototype.objectUri = "";
+    
+                            /**
+                             * Creates a new GcsSource instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} GcsSource instance
+                             */
+                            GcsSource.create = function create(properties) {
+                                return new GcsSource(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GcsSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource} message GcsSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsSource.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.objectUri != null && Object.hasOwnProperty.call(message, "objectUri"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.objectUri);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource} message GcsSource message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GcsSource.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GcsSource message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} GcsSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsSource.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.objectUri = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} GcsSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GcsSource.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GcsSource message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GcsSource.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.objectUri != null && message.hasOwnProperty("objectUri"))
+                                    if (!$util.isString(message.objectUri))
+                                        return "objectUri: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} GcsSource
+                             */
+                            GcsSource.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource();
+                                if (object.objectUri != null)
+                                    message.objectUri = String(object.objectUri);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} message GcsSource
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GcsSource.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.objectUri = "";
+                                if (message.objectUri != null && message.hasOwnProperty("objectUri"))
+                                    object.objectUri = message.objectUri;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GcsSource to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GcsSource.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GcsSource
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GcsSource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource";
+                            };
+    
+                            return GcsSource;
+                        })();
+    
+                        return ImportIssueModelRequest;
+                    })();
+    
+                    v1.ImportIssueModelResponse = (function() {
+    
+                        /**
+                         * Properties of an ImportIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IImportIssueModelResponse
+                         */
+    
+                        /**
+                         * Constructs a new ImportIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an ImportIssueModelResponse.
+                         * @implements IImportIssueModelResponse
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelResponse=} [properties] Properties to set
+                         */
+                        function ImportIssueModelResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new ImportIssueModelResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelResponse=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelResponse} ImportIssueModelResponse instance
+                         */
+                        ImportIssueModelResponse.create = function create(properties) {
+                            return new ImportIssueModelResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelResponse} message ImportIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportIssueModelResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelResponse} message ImportIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportIssueModelResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportIssueModelResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelResponse} ImportIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportIssueModelResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportIssueModelResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelResponse} ImportIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportIssueModelResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportIssueModelResponse message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportIssueModelResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelResponse} ImportIssueModelResponse
+                         */
+                        ImportIssueModelResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse)
+                                return object;
+                            return new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportIssueModelResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelResponse} message ImportIssueModelResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportIssueModelResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this ImportIssueModelResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportIssueModelResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportIssueModelResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportIssueModelResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ImportIssueModelResponse";
+                        };
+    
+                        return ImportIssueModelResponse;
+                    })();
+    
+                    v1.ImportIssueModelMetadata = (function() {
+    
+                        /**
+                         * Properties of an ImportIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IImportIssueModelMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ImportIssueModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] ImportIssueModelMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest|null} [request] ImportIssueModelMetadata request
+                         */
+    
+                        /**
+                         * Constructs a new ImportIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an ImportIssueModelMetadata.
+                         * @implements IImportIssueModelMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata=} [properties] Properties to set
+                         */
+                        function ImportIssueModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportIssueModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @instance
+                         */
+                        ImportIssueModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * ImportIssueModelMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @instance
+                         */
+                        ImportIssueModelMetadata.prototype.endTime = null;
+    
+                        /**
+                         * ImportIssueModelMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IImportIssueModelRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @instance
+                         */
+                        ImportIssueModelMetadata.prototype.request = null;
+    
+                        /**
+                         * Creates a new ImportIssueModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata} ImportIssueModelMetadata instance
+                         */
+                        ImportIssueModelMetadata.create = function create(properties) {
+                            return new ImportIssueModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata} message ImportIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportIssueModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata} message ImportIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportIssueModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportIssueModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata} ImportIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportIssueModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.request = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportIssueModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata} ImportIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportIssueModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportIssueModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportIssueModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata} ImportIssueModelMetadata
+                         */
+                        ImportIssueModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.fromObject(object.request);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportIssueModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata} message ImportIssueModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportIssueModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.toObject(message.request, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportIssueModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportIssueModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ImportIssueModelMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ImportIssueModelMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata";
+                        };
+    
+                        return ImportIssueModelMetadata;
+                    })();
+    
                     v1.GetIssueRequest = (function() {
     
                         /**
@@ -17332,6 +19419,902 @@
                         return UpdateSettingsRequest;
                     })();
     
+                    v1.GetEncryptionSpecRequest = (function() {
+    
+                        /**
+                         * Properties of a GetEncryptionSpecRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IGetEncryptionSpecRequest
+                         * @property {string|null} [name] GetEncryptionSpecRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetEncryptionSpecRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a GetEncryptionSpecRequest.
+                         * @implements IGetEncryptionSpecRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest=} [properties] Properties to set
+                         */
+                        function GetEncryptionSpecRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetEncryptionSpecRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @instance
+                         */
+                        GetEncryptionSpecRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetEncryptionSpecRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest} GetEncryptionSpecRequest instance
+                         */
+                        GetEncryptionSpecRequest.create = function create(properties) {
+                            return new GetEncryptionSpecRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetEncryptionSpecRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest} message GetEncryptionSpecRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEncryptionSpecRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetEncryptionSpecRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest} message GetEncryptionSpecRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetEncryptionSpecRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetEncryptionSpecRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest} GetEncryptionSpecRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEncryptionSpecRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetEncryptionSpecRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest} GetEncryptionSpecRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetEncryptionSpecRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetEncryptionSpecRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetEncryptionSpecRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetEncryptionSpecRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest} GetEncryptionSpecRequest
+                         */
+                        GetEncryptionSpecRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetEncryptionSpecRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest} message GetEncryptionSpecRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetEncryptionSpecRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetEncryptionSpecRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetEncryptionSpecRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetEncryptionSpecRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetEncryptionSpecRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest";
+                        };
+    
+                        return GetEncryptionSpecRequest;
+                    })();
+    
+                    v1.InitializeEncryptionSpecRequest = (function() {
+    
+                        /**
+                         * Properties of an InitializeEncryptionSpecRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IInitializeEncryptionSpecRequest
+                         * @property {google.cloud.contactcenterinsights.v1.IEncryptionSpec|null} [encryptionSpec] InitializeEncryptionSpecRequest encryptionSpec
+                         */
+    
+                        /**
+                         * Constructs a new InitializeEncryptionSpecRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an InitializeEncryptionSpecRequest.
+                         * @implements IInitializeEncryptionSpecRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest=} [properties] Properties to set
+                         */
+                        function InitializeEncryptionSpecRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InitializeEncryptionSpecRequest encryptionSpec.
+                         * @member {google.cloud.contactcenterinsights.v1.IEncryptionSpec|null|undefined} encryptionSpec
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @instance
+                         */
+                        InitializeEncryptionSpecRequest.prototype.encryptionSpec = null;
+    
+                        /**
+                         * Creates a new InitializeEncryptionSpecRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest} InitializeEncryptionSpecRequest instance
+                         */
+                        InitializeEncryptionSpecRequest.create = function create(properties) {
+                            return new InitializeEncryptionSpecRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeEncryptionSpecRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest} message InitializeEncryptionSpecRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeEncryptionSpecRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.encryptionSpec != null && Object.hasOwnProperty.call(message, "encryptionSpec"))
+                                $root.google.cloud.contactcenterinsights.v1.EncryptionSpec.encode(message.encryptionSpec, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeEncryptionSpecRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest} message InitializeEncryptionSpecRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeEncryptionSpecRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeEncryptionSpecRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest} InitializeEncryptionSpecRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeEncryptionSpecRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.encryptionSpec = $root.google.cloud.contactcenterinsights.v1.EncryptionSpec.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeEncryptionSpecRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest} InitializeEncryptionSpecRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeEncryptionSpecRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeEncryptionSpecRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeEncryptionSpecRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.EncryptionSpec.verify(message.encryptionSpec);
+                                if (error)
+                                    return "encryptionSpec." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeEncryptionSpecRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest} InitializeEncryptionSpecRequest
+                         */
+                        InitializeEncryptionSpecRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest();
+                            if (object.encryptionSpec != null) {
+                                if (typeof object.encryptionSpec !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.encryptionSpec: object expected");
+                                message.encryptionSpec = $root.google.cloud.contactcenterinsights.v1.EncryptionSpec.fromObject(object.encryptionSpec);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeEncryptionSpecRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest} message InitializeEncryptionSpecRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeEncryptionSpecRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.encryptionSpec = null;
+                            if (message.encryptionSpec != null && message.hasOwnProperty("encryptionSpec"))
+                                object.encryptionSpec = $root.google.cloud.contactcenterinsights.v1.EncryptionSpec.toObject(message.encryptionSpec, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InitializeEncryptionSpecRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeEncryptionSpecRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeEncryptionSpecRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeEncryptionSpecRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest";
+                        };
+    
+                        return InitializeEncryptionSpecRequest;
+                    })();
+    
+                    v1.InitializeEncryptionSpecResponse = (function() {
+    
+                        /**
+                         * Properties of an InitializeEncryptionSpecResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IInitializeEncryptionSpecResponse
+                         */
+    
+                        /**
+                         * Constructs a new InitializeEncryptionSpecResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an InitializeEncryptionSpecResponse.
+                         * @implements IInitializeEncryptionSpecResponse
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse=} [properties] Properties to set
+                         */
+                        function InitializeEncryptionSpecResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new InitializeEncryptionSpecResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse} InitializeEncryptionSpecResponse instance
+                         */
+                        InitializeEncryptionSpecResponse.create = function create(properties) {
+                            return new InitializeEncryptionSpecResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeEncryptionSpecResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse} message InitializeEncryptionSpecResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeEncryptionSpecResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeEncryptionSpecResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse} message InitializeEncryptionSpecResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeEncryptionSpecResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeEncryptionSpecResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse} InitializeEncryptionSpecResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeEncryptionSpecResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeEncryptionSpecResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse} InitializeEncryptionSpecResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeEncryptionSpecResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeEncryptionSpecResponse message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeEncryptionSpecResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeEncryptionSpecResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse} InitializeEncryptionSpecResponse
+                         */
+                        InitializeEncryptionSpecResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse)
+                                return object;
+                            return new $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeEncryptionSpecResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse} message InitializeEncryptionSpecResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeEncryptionSpecResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this InitializeEncryptionSpecResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeEncryptionSpecResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeEncryptionSpecResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeEncryptionSpecResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse";
+                        };
+    
+                        return InitializeEncryptionSpecResponse;
+                    })();
+    
+                    v1.InitializeEncryptionSpecMetadata = (function() {
+    
+                        /**
+                         * Properties of an InitializeEncryptionSpecMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IInitializeEncryptionSpecMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] InitializeEncryptionSpecMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] InitializeEncryptionSpecMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest|null} [request] InitializeEncryptionSpecMetadata request
+                         * @property {Array.<google.rpc.IStatus>|null} [partialErrors] InitializeEncryptionSpecMetadata partialErrors
+                         */
+    
+                        /**
+                         * Constructs a new InitializeEncryptionSpecMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an InitializeEncryptionSpecMetadata.
+                         * @implements IInitializeEncryptionSpecMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata=} [properties] Properties to set
+                         */
+                        function InitializeEncryptionSpecMetadata(properties) {
+                            this.partialErrors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InitializeEncryptionSpecMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @instance
+                         */
+                        InitializeEncryptionSpecMetadata.prototype.createTime = null;
+    
+                        /**
+                         * InitializeEncryptionSpecMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @instance
+                         */
+                        InitializeEncryptionSpecMetadata.prototype.endTime = null;
+    
+                        /**
+                         * InitializeEncryptionSpecMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @instance
+                         */
+                        InitializeEncryptionSpecMetadata.prototype.request = null;
+    
+                        /**
+                         * InitializeEncryptionSpecMetadata partialErrors.
+                         * @member {Array.<google.rpc.IStatus>} partialErrors
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @instance
+                         */
+                        InitializeEncryptionSpecMetadata.prototype.partialErrors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new InitializeEncryptionSpecMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata} InitializeEncryptionSpecMetadata instance
+                         */
+                        InitializeEncryptionSpecMetadata.create = function create(properties) {
+                            return new InitializeEncryptionSpecMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeEncryptionSpecMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata} message InitializeEncryptionSpecMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeEncryptionSpecMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.partialErrors != null && message.partialErrors.length)
+                                for (var i = 0; i < message.partialErrors.length; ++i)
+                                    $root.google.rpc.Status.encode(message.partialErrors[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeEncryptionSpecMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata} message InitializeEncryptionSpecMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeEncryptionSpecMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeEncryptionSpecMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata} InitializeEncryptionSpecMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeEncryptionSpecMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.request = $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.partialErrors && message.partialErrors.length))
+                                            message.partialErrors = [];
+                                        message.partialErrors.push($root.google.rpc.Status.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeEncryptionSpecMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata} InitializeEncryptionSpecMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeEncryptionSpecMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeEncryptionSpecMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeEncryptionSpecMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            if (message.partialErrors != null && message.hasOwnProperty("partialErrors")) {
+                                if (!Array.isArray(message.partialErrors))
+                                    return "partialErrors: array expected";
+                                for (var i = 0; i < message.partialErrors.length; ++i) {
+                                    var error = $root.google.rpc.Status.verify(message.partialErrors[i]);
+                                    if (error)
+                                        return "partialErrors." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeEncryptionSpecMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata} InitializeEncryptionSpecMetadata
+                         */
+                        InitializeEncryptionSpecMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.fromObject(object.request);
+                            }
+                            if (object.partialErrors) {
+                                if (!Array.isArray(object.partialErrors))
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.partialErrors: array expected");
+                                message.partialErrors = [];
+                                for (var i = 0; i < object.partialErrors.length; ++i) {
+                                    if (typeof object.partialErrors[i] !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.partialErrors: object expected");
+                                    message.partialErrors[i] = $root.google.rpc.Status.fromObject(object.partialErrors[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeEncryptionSpecMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata} message InitializeEncryptionSpecMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeEncryptionSpecMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.partialErrors = [];
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.toObject(message.request, options);
+                            if (message.partialErrors && message.partialErrors.length) {
+                                object.partialErrors = [];
+                                for (var j = 0; j < message.partialErrors.length; ++j)
+                                    object.partialErrors[j] = $root.google.rpc.Status.toObject(message.partialErrors[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InitializeEncryptionSpecMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeEncryptionSpecMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeEncryptionSpecMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeEncryptionSpecMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata";
+                        };
+    
+                        return InitializeEncryptionSpecMetadata;
+                    })();
+    
                     v1.CreateViewRequest = (function() {
     
                         /**
@@ -18723,6 +21706,7 @@
                          * @property {string|null} [agentId] Conversation agentId
                          * @property {Object.<string,string>|null} [labels] Conversation labels
                          * @property {google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null} [qualityMetadata] Conversation qualityMetadata
+                         * @property {string|null} [metadataJson] Conversation metadataJson
                          * @property {google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null} [transcript] Conversation transcript
                          * @property {google.cloud.contactcenterinsights.v1.Conversation.Medium|null} [medium] Conversation medium
                          * @property {google.protobuf.IDuration|null} [duration] Conversation duration
@@ -18847,6 +21831,14 @@
                          * @instance
                          */
                         Conversation.prototype.qualityMetadata = null;
+    
+                        /**
+                         * Conversation metadataJson.
+                         * @member {string} metadataJson
+                         * @memberof google.cloud.contactcenterinsights.v1.Conversation
+                         * @instance
+                         */
+                        Conversation.prototype.metadataJson = "";
     
                         /**
                          * Conversation transcript.
@@ -19016,6 +22008,8 @@
                                 writer.uint32(/* id 21, wireType 2 =*/170).string(message.obfuscatedUserId);
                             if (message.qualityMetadata != null && Object.hasOwnProperty.call(message, "qualityMetadata"))
                                 $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.encode(message.qualityMetadata, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                            if (message.metadataJson != null && Object.hasOwnProperty.call(message, "metadataJson"))
+                                writer.uint32(/* id 25, wireType 2 =*/202).string(message.metadataJson);
                             return writer;
                         };
     
@@ -19115,6 +22109,10 @@
                                     }
                                 case 24: {
                                         message.qualityMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 25: {
+                                        message.metadataJson = reader.string();
                                         break;
                                     }
                                 case 8: {
@@ -19278,6 +22276,9 @@
                                 if (error)
                                     return "qualityMetadata." + error;
                             }
+                            if (message.metadataJson != null && message.hasOwnProperty("metadataJson"))
+                                if (!$util.isString(message.metadataJson))
+                                    return "metadataJson: string expected";
                             if (message.transcript != null && message.hasOwnProperty("transcript")) {
                                 var error = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.verify(message.transcript);
                                 if (error)
@@ -19400,6 +22401,8 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.qualityMetadata: object expected");
                                 message.qualityMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.fromObject(object.qualityMetadata);
                             }
+                            if (object.metadataJson != null)
+                                message.metadataJson = String(object.metadataJson);
                             if (object.transcript != null) {
                                 if (typeof object.transcript !== "object")
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.transcript: object expected");
@@ -19502,6 +22505,7 @@
                                 object.latestSummary = null;
                                 object.obfuscatedUserId = "";
                                 object.qualityMetadata = null;
+                                object.metadataJson = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -19564,6 +22568,8 @@
                                 object.obfuscatedUserId = message.obfuscatedUserId;
                             if (message.qualityMetadata != null && message.hasOwnProperty("qualityMetadata"))
                                 object.qualityMetadata = $root.google.cloud.contactcenterinsights.v1.Conversation.QualityMetadata.toObject(message.qualityMetadata, options);
+                            if (message.metadataJson != null && message.hasOwnProperty("metadataJson"))
+                                object.metadataJson = message.metadataJson;
                             return object;
                         };
     
@@ -22846,6 +25852,7 @@
                              * @property {Array.<google.cloud.contactcenterinsights.v1.ICallAnnotation>|null} [annotations] CallAnalysisMetadata annotations
                              * @property {Object.<string,google.cloud.contactcenterinsights.v1.IEntity>|null} [entities] CallAnalysisMetadata entities
                              * @property {Array.<google.cloud.contactcenterinsights.v1.IConversationLevelSentiment>|null} [sentiments] CallAnalysisMetadata sentiments
+                             * @property {google.cloud.contactcenterinsights.v1.IConversationLevelSilence|null} [silence] CallAnalysisMetadata silence
                              * @property {Object.<string,google.cloud.contactcenterinsights.v1.IIntent>|null} [intents] CallAnalysisMetadata intents
                              * @property {Object.<string,google.cloud.contactcenterinsights.v1.IPhraseMatchData>|null} [phraseMatchers] CallAnalysisMetadata phraseMatchers
                              * @property {google.cloud.contactcenterinsights.v1.IIssueModelResult|null} [issueModelResult] CallAnalysisMetadata issueModelResult
@@ -22894,6 +25901,14 @@
                              * @instance
                              */
                             CallAnalysisMetadata.prototype.sentiments = $util.emptyArray;
+    
+                            /**
+                             * CallAnalysisMetadata silence.
+                             * @member {google.cloud.contactcenterinsights.v1.IConversationLevelSilence|null|undefined} silence
+                             * @memberof google.cloud.contactcenterinsights.v1.AnalysisResult.CallAnalysisMetadata
+                             * @instance
+                             */
+                            CallAnalysisMetadata.prototype.silence = null;
     
                             /**
                              * CallAnalysisMetadata intents.
@@ -22966,6 +25981,8 @@
                                     }
                                 if (message.issueModelResult != null && Object.hasOwnProperty.call(message, "issueModelResult"))
                                     $root.google.cloud.contactcenterinsights.v1.IssueModelResult.encode(message.issueModelResult, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.silence != null && Object.hasOwnProperty.call(message, "silence"))
+                                    $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence.encode(message.silence, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
                             };
     
@@ -23033,6 +26050,10 @@
                                             if (!(message.sentiments && message.sentiments.length))
                                                 message.sentiments = [];
                                             message.sentiments.push($root.google.cloud.contactcenterinsights.v1.ConversationLevelSentiment.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 11: {
+                                            message.silence = $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 6: {
@@ -23148,6 +26169,11 @@
                                             return "sentiments." + error;
                                     }
                                 }
+                                if (message.silence != null && message.hasOwnProperty("silence")) {
+                                    var error = $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify(message.silence);
+                                    if (error)
+                                        return "silence." + error;
+                                }
                                 if (message.intents != null && message.hasOwnProperty("intents")) {
                                     if (!$util.isObject(message.intents))
                                         return "intents: object expected";
@@ -23218,6 +26244,11 @@
                                         message.sentiments[i] = $root.google.cloud.contactcenterinsights.v1.ConversationLevelSentiment.fromObject(object.sentiments[i]);
                                     }
                                 }
+                                if (object.silence != null) {
+                                    if (typeof object.silence !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.AnalysisResult.CallAnalysisMetadata.silence: object expected");
+                                    message.silence = $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence.fromObject(object.silence);
+                                }
                                 if (object.intents) {
                                     if (typeof object.intents !== "object")
                                         throw TypeError(".google.cloud.contactcenterinsights.v1.AnalysisResult.CallAnalysisMetadata.intents: object expected");
@@ -23268,8 +26299,10 @@
                                     object.intents = {};
                                     object.phraseMatchers = {};
                                 }
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.issueModelResult = null;
+                                    object.silence = null;
+                                }
                                 if (message.annotations && message.annotations.length) {
                                     object.annotations = [];
                                     for (var j = 0; j < message.annotations.length; ++j)
@@ -23298,6 +26331,8 @@
                                 }
                                 if (message.issueModelResult != null && message.hasOwnProperty("issueModelResult"))
                                     object.issueModelResult = $root.google.cloud.contactcenterinsights.v1.IssueModelResult.toObject(message.issueModelResult, options);
+                                if (message.silence != null && message.hasOwnProperty("silence"))
+                                    object.silence = $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence.toObject(message.silence, options);
                                 return object;
                             };
     
@@ -23811,6 +26846,238 @@
                         };
     
                         return ConversationLevelSentiment;
+                    })();
+    
+                    v1.ConversationLevelSilence = (function() {
+    
+                        /**
+                         * Properties of a ConversationLevelSilence.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IConversationLevelSilence
+                         * @property {google.protobuf.IDuration|null} [silenceDuration] ConversationLevelSilence silenceDuration
+                         * @property {number|null} [silencePercentage] ConversationLevelSilence silencePercentage
+                         */
+    
+                        /**
+                         * Constructs a new ConversationLevelSilence.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a ConversationLevelSilence.
+                         * @implements IConversationLevelSilence
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationLevelSilence=} [properties] Properties to set
+                         */
+                        function ConversationLevelSilence(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationLevelSilence silenceDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} silenceDuration
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @instance
+                         */
+                        ConversationLevelSilence.prototype.silenceDuration = null;
+    
+                        /**
+                         * ConversationLevelSilence silencePercentage.
+                         * @member {number} silencePercentage
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @instance
+                         */
+                        ConversationLevelSilence.prototype.silencePercentage = 0;
+    
+                        /**
+                         * Creates a new ConversationLevelSilence instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationLevelSilence=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationLevelSilence} ConversationLevelSilence instance
+                         */
+                        ConversationLevelSilence.create = function create(properties) {
+                            return new ConversationLevelSilence(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationLevelSilence message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationLevelSilence} message ConversationLevelSilence message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationLevelSilence.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.silenceDuration != null && Object.hasOwnProperty.call(message, "silenceDuration"))
+                                $root.google.protobuf.Duration.encode(message.silenceDuration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.silencePercentage != null && Object.hasOwnProperty.call(message, "silencePercentage"))
+                                writer.uint32(/* id 2, wireType 5 =*/21).float(message.silencePercentage);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationLevelSilence message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationLevelSilence} message ConversationLevelSilence message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationLevelSilence.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationLevelSilence message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationLevelSilence} ConversationLevelSilence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationLevelSilence.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.silenceDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.silencePercentage = reader.float();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationLevelSilence message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationLevelSilence} ConversationLevelSilence
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationLevelSilence.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationLevelSilence message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationLevelSilence.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.silenceDuration != null && message.hasOwnProperty("silenceDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.silenceDuration);
+                                if (error)
+                                    return "silenceDuration." + error;
+                            }
+                            if (message.silencePercentage != null && message.hasOwnProperty("silencePercentage"))
+                                if (typeof message.silencePercentage !== "number")
+                                    return "silencePercentage: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationLevelSilence message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationLevelSilence} ConversationLevelSilence
+                         */
+                        ConversationLevelSilence.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ConversationLevelSilence();
+                            if (object.silenceDuration != null) {
+                                if (typeof object.silenceDuration !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.ConversationLevelSilence.silenceDuration: object expected");
+                                message.silenceDuration = $root.google.protobuf.Duration.fromObject(object.silenceDuration);
+                            }
+                            if (object.silencePercentage != null)
+                                message.silencePercentage = Number(object.silencePercentage);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationLevelSilence message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ConversationLevelSilence} message ConversationLevelSilence
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationLevelSilence.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.silenceDuration = null;
+                                object.silencePercentage = 0;
+                            }
+                            if (message.silenceDuration != null && message.hasOwnProperty("silenceDuration"))
+                                object.silenceDuration = $root.google.protobuf.Duration.toObject(message.silenceDuration, options);
+                            if (message.silencePercentage != null && message.hasOwnProperty("silencePercentage"))
+                                object.silencePercentage = options.json && !isFinite(message.silencePercentage) ? String(message.silencePercentage) : message.silencePercentage;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationLevelSilence to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationLevelSilence.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConversationLevelSilence
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationLevelSilence
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConversationLevelSilence.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.ConversationLevelSilence";
+                        };
+    
+                        return ConversationLevelSilence;
                     })();
     
                     v1.IssueAssignment = (function() {
@@ -28268,6 +31535,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Issue createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] Issue updateTime
                          * @property {Array.<string>|null} [sampleUtterances] Issue sampleUtterances
+                         * @property {string|null} [displayDescription] Issue displayDescription
                          */
     
                         /**
@@ -28327,6 +31595,14 @@
                         Issue.prototype.sampleUtterances = $util.emptyArray;
     
                         /**
+                         * Issue displayDescription.
+                         * @member {string} displayDescription
+                         * @memberof google.cloud.contactcenterinsights.v1.Issue
+                         * @instance
+                         */
+                        Issue.prototype.displayDescription = "";
+    
+                        /**
                          * Creates a new Issue instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.Issue
@@ -28361,6 +31637,8 @@
                             if (message.sampleUtterances != null && message.sampleUtterances.length)
                                 for (var i = 0; i < message.sampleUtterances.length; ++i)
                                     writer.uint32(/* id 6, wireType 2 =*/50).string(message.sampleUtterances[i]);
+                            if (message.displayDescription != null && Object.hasOwnProperty.call(message, "displayDescription"))
+                                writer.uint32(/* id 14, wireType 2 =*/114).string(message.displayDescription);
                             return writer;
                         };
     
@@ -28415,6 +31693,10 @@
                                         if (!(message.sampleUtterances && message.sampleUtterances.length))
                                             message.sampleUtterances = [];
                                         message.sampleUtterances.push(reader.string());
+                                        break;
+                                    }
+                                case 14: {
+                                        message.displayDescription = reader.string();
                                         break;
                                     }
                                 default:
@@ -28475,6 +31757,9 @@
                                     if (!$util.isString(message.sampleUtterances[i]))
                                         return "sampleUtterances: string[] expected";
                             }
+                            if (message.displayDescription != null && message.hasOwnProperty("displayDescription"))
+                                if (!$util.isString(message.displayDescription))
+                                    return "displayDescription: string expected";
                             return null;
                         };
     
@@ -28511,6 +31796,8 @@
                                 for (var i = 0; i < object.sampleUtterances.length; ++i)
                                     message.sampleUtterances[i] = String(object.sampleUtterances[i]);
                             }
+                            if (object.displayDescription != null)
+                                message.displayDescription = String(object.displayDescription);
                             return message;
                         };
     
@@ -28534,6 +31821,7 @@
                                 object.displayName = "";
                                 object.createTime = null;
                                 object.updateTime = null;
+                                object.displayDescription = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -28548,6 +31836,8 @@
                                 for (var j = 0; j < message.sampleUtterances.length; ++j)
                                     object.sampleUtterances[j] = message.sampleUtterances[j];
                             }
+                            if (message.displayDescription != null && message.hasOwnProperty("displayDescription"))
+                                object.displayDescription = message.displayDescription;
                             return object;
                         };
     
@@ -31392,6 +34682,233 @@
                         return Settings;
                     })();
     
+                    v1.EncryptionSpec = (function() {
+    
+                        /**
+                         * Properties of an EncryptionSpec.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IEncryptionSpec
+                         * @property {string|null} [name] EncryptionSpec name
+                         * @property {string|null} [kmsKey] EncryptionSpec kmsKey
+                         */
+    
+                        /**
+                         * Constructs a new EncryptionSpec.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an EncryptionSpec.
+                         * @implements IEncryptionSpec
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IEncryptionSpec=} [properties] Properties to set
+                         */
+                        function EncryptionSpec(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * EncryptionSpec name.
+                         * @member {string} name
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @instance
+                         */
+                        EncryptionSpec.prototype.name = "";
+    
+                        /**
+                         * EncryptionSpec kmsKey.
+                         * @member {string} kmsKey
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @instance
+                         */
+                        EncryptionSpec.prototype.kmsKey = "";
+    
+                        /**
+                         * Creates a new EncryptionSpec instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IEncryptionSpec=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.EncryptionSpec} EncryptionSpec instance
+                         */
+                        EncryptionSpec.create = function create(properties) {
+                            return new EncryptionSpec(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.EncryptionSpec.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionSpec.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.kmsKey != null && Object.hasOwnProperty.call(message, "kmsKey"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kmsKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.EncryptionSpec.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IEncryptionSpec} message EncryptionSpec message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        EncryptionSpec.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.EncryptionSpec} EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionSpec.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.EncryptionSpec();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kmsKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.EncryptionSpec} EncryptionSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        EncryptionSpec.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an EncryptionSpec message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        EncryptionSpec.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                if (!$util.isString(message.kmsKey))
+                                    return "kmsKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.EncryptionSpec} EncryptionSpec
+                         */
+                        EncryptionSpec.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.EncryptionSpec)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.EncryptionSpec();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.kmsKey != null)
+                                message.kmsKey = String(object.kmsKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.EncryptionSpec} message EncryptionSpec
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        EncryptionSpec.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.kmsKey = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.kmsKey != null && message.hasOwnProperty("kmsKey"))
+                                object.kmsKey = message.kmsKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this EncryptionSpec to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        EncryptionSpec.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for EncryptionSpec
+                         * @function getTypeUrl
+                         * @memberof google.cloud.contactcenterinsights.v1.EncryptionSpec
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        EncryptionSpec.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.EncryptionSpec";
+                        };
+    
+                        return EncryptionSpec;
+                    })();
+    
                     v1.RedactionConfig = (function() {
     
                         /**
@@ -31839,6 +35356,7 @@
                          * @property {google.cloud.contactcenterinsights.v1.IAnnotationBoundary|null} [startBoundary] RuntimeAnnotation startBoundary
                          * @property {google.cloud.contactcenterinsights.v1.IAnnotationBoundary|null} [endBoundary] RuntimeAnnotation endBoundary
                          * @property {google.cloud.contactcenterinsights.v1.IAnswerFeedback|null} [answerFeedback] RuntimeAnnotation answerFeedback
+                         * @property {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput|null} [userInput] RuntimeAnnotation userInput
                          */
     
                         /**
@@ -31944,6 +35462,14 @@
                          */
                         RuntimeAnnotation.prototype.answerFeedback = null;
     
+                        /**
+                         * RuntimeAnnotation userInput.
+                         * @member {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput|null|undefined} userInput
+                         * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation
+                         * @instance
+                         */
+                        RuntimeAnnotation.prototype.userInput = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -32004,6 +35530,8 @@
                                 $root.google.cloud.contactcenterinsights.v1.DialogflowInteractionData.encode(message.dialogflowInteraction, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.conversationSummarizationSuggestion != null && Object.hasOwnProperty.call(message, "conversationSummarizationSuggestion"))
                                 $root.google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData.encode(message.conversationSummarizationSuggestion, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.userInput != null && Object.hasOwnProperty.call(message, "userInput"))
+                                $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.encode(message.userInput, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             return writer;
                         };
     
@@ -32080,6 +35608,10 @@
                                     }
                                 case 5: {
                                         message.answerFeedback = $root.google.cloud.contactcenterinsights.v1.AnswerFeedback.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 16: {
+                                        message.userInput = $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -32199,6 +35731,11 @@
                                 if (error)
                                     return "answerFeedback." + error;
                             }
+                            if (message.userInput != null && message.hasOwnProperty("userInput")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify(message.userInput);
+                                if (error)
+                                    return "userInput." + error;
+                            }
                             return null;
                         };
     
@@ -32266,6 +35803,11 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.RuntimeAnnotation.answerFeedback: object expected");
                                 message.answerFeedback = $root.google.cloud.contactcenterinsights.v1.AnswerFeedback.fromObject(object.answerFeedback);
                             }
+                            if (object.userInput != null) {
+                                if (typeof object.userInput !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.RuntimeAnnotation.userInput: object expected");
+                                message.userInput = $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.fromObject(object.userInput);
+                            }
                             return message;
                         };
     
@@ -32288,6 +35830,7 @@
                                 object.startBoundary = null;
                                 object.endBoundary = null;
                                 object.answerFeedback = null;
+                                object.userInput = null;
                             }
                             if (message.annotationId != null && message.hasOwnProperty("annotationId"))
                                 object.annotationId = message.annotationId;
@@ -32329,6 +35872,8 @@
                                 if (options.oneofs)
                                     object.data = "conversationSummarizationSuggestion";
                             }
+                            if (message.userInput != null && message.hasOwnProperty("userInput"))
+                                object.userInput = $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.toObject(message.userInput, options);
                             return object;
                         };
     
@@ -32357,6 +35902,296 @@
                             }
                             return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.RuntimeAnnotation";
                         };
+    
+                        RuntimeAnnotation.UserInput = (function() {
+    
+                            /**
+                             * Properties of a UserInput.
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation
+                             * @interface IUserInput
+                             * @property {string|null} [query] UserInput query
+                             * @property {string|null} [generatorName] UserInput generatorName
+                             * @property {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|null} [querySource] UserInput querySource
+                             */
+    
+                            /**
+                             * Constructs a new UserInput.
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation
+                             * @classdesc Represents a UserInput.
+                             * @implements IUserInput
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput=} [properties] Properties to set
+                             */
+                            function UserInput(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * UserInput query.
+                             * @member {string} query
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @instance
+                             */
+                            UserInput.prototype.query = "";
+    
+                            /**
+                             * UserInput generatorName.
+                             * @member {string} generatorName
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @instance
+                             */
+                            UserInput.prototype.generatorName = "";
+    
+                            /**
+                             * UserInput querySource.
+                             * @member {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource} querySource
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @instance
+                             */
+                            UserInput.prototype.querySource = 0;
+    
+                            /**
+                             * Creates a new UserInput instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput} UserInput instance
+                             */
+                            UserInput.create = function create(properties) {
+                                return new UserInput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified UserInput message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput} message UserInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserInput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.query);
+                                if (message.generatorName != null && Object.hasOwnProperty.call(message, "generatorName"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.generatorName);
+                                if (message.querySource != null && Object.hasOwnProperty.call(message, "querySource"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.querySource);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified UserInput message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput} message UserInput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            UserInput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a UserInput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput} UserInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserInput.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.query = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.generatorName = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.querySource = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a UserInput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput} UserInput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            UserInput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a UserInput message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            UserInput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.generatorName != null && message.hasOwnProperty("generatorName"))
+                                    if (!$util.isString(message.generatorName))
+                                        return "generatorName: string expected";
+                                if (message.querySource != null && message.hasOwnProperty("querySource"))
+                                    switch (message.querySource) {
+                                    default:
+                                        return "querySource: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a UserInput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput} UserInput
+                             */
+                            UserInput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput();
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.generatorName != null)
+                                    message.generatorName = String(object.generatorName);
+                                switch (object.querySource) {
+                                default:
+                                    if (typeof object.querySource === "number") {
+                                        message.querySource = object.querySource;
+                                        break;
+                                    }
+                                    break;
+                                case "QUERY_SOURCE_UNSPECIFIED":
+                                case 0:
+                                    message.querySource = 0;
+                                    break;
+                                case "AGENT_QUERY":
+                                case 1:
+                                    message.querySource = 1;
+                                    break;
+                                case "SUGGESTED_QUERY":
+                                case 2:
+                                    message.querySource = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a UserInput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput} message UserInput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            UserInput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.query = "";
+                                    object.generatorName = "";
+                                    object.querySource = options.enums === String ? "QUERY_SOURCE_UNSPECIFIED" : 0;
+                                }
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.generatorName != null && message.hasOwnProperty("generatorName"))
+                                    object.generatorName = message.generatorName;
+                                if (message.querySource != null && message.hasOwnProperty("querySource"))
+                                    object.querySource = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource[message.querySource] === undefined ? message.querySource : $root.google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource[message.querySource] : message.querySource;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this UserInput to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            UserInput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for UserInput
+                             * @function getTypeUrl
+                             * @memberof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            UserInput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput";
+                            };
+    
+                            /**
+                             * QuerySource enum.
+                             * @name google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource
+                             * @enum {number}
+                             * @property {number} QUERY_SOURCE_UNSPECIFIED=0 QUERY_SOURCE_UNSPECIFIED value
+                             * @property {number} AGENT_QUERY=1 AGENT_QUERY value
+                             * @property {number} SUGGESTED_QUERY=2 SUGGESTED_QUERY value
+                             */
+                            UserInput.QuerySource = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "QUERY_SOURCE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "AGENT_QUERY"] = 1;
+                                values[valuesById[2] = "SUGGESTED_QUERY"] = 2;
+                                return values;
+                            })();
+    
+                            return UserInput;
+                        })();
     
                         return RuntimeAnnotation;
                     })();
@@ -35929,6 +39764,7 @@
                                         return "summarizationModel: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 2:
                                         break;
                                     }
                                 }
@@ -35963,6 +39799,10 @@
                                 case "BASELINE_MODEL":
                                 case 1:
                                     message.summarizationModel = 1;
+                                    break;
+                                case "BASELINE_MODEL_V2_0":
+                                case 2:
+                                    message.summarizationModel = 2;
                                     break;
                                 }
                                 return message;
@@ -36026,11 +39866,13 @@
                              * @enum {number}
                              * @property {number} SUMMARIZATION_MODEL_UNSPECIFIED=0 SUMMARIZATION_MODEL_UNSPECIFIED value
                              * @property {number} BASELINE_MODEL=1 BASELINE_MODEL value
+                             * @property {number} BASELINE_MODEL_V2_0=2 BASELINE_MODEL_V2_0 value
                              */
                             SummarizationConfig.SummarizationModel = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "SUMMARIZATION_MODEL_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "BASELINE_MODEL"] = 1;
+                                values[valuesById[2] = "BASELINE_MODEL_V2_0"] = 2;
                                 return values;
                             })();
     
