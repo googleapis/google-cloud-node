@@ -21,7 +21,16 @@ logging.basicConfig(level=logging.DEBUG)
 
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(source_location='build/src')
-s.copy(templates, excludes=['.jsdoc.js', '.github/release-please.yml', '.github/sync-repo-settings.yaml', '.prettierrc.js', '.mocharc.js'])
+s.copy(templates, excludes=['.jsdoc.js',
+                            '.github/release-please.yml',
+                            '.github/sync-repo-settings.yaml',
+                            '.prettierrc.js',
+                            '.mocharc.js',
+                            '.kokoro/continuous/node14/system-test.cfg',
+                            '.kokoro/presubmit/node14/system-test.cfg',
+                            '.kokoro/release/publish.cfg',
+                            '.kokoro/system-test.sh'
+                            ])
 
 # Create .config directory under $HOME to get around permissions issues
 # with resumable upload.
