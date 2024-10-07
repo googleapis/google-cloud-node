@@ -20,24 +20,9 @@
                 "getBackupVault"
               ]
             },
-            "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
-            },
             "GetDataSource": {
               "methods": [
                 "getDataSource"
-              ]
-            },
-            "InitiateBackup": {
-              "methods": [
-                "initiateBackup"
-              ]
-            },
-            "FetchAccessToken": {
-              "methods": [
-                "fetchAccessToken"
               ]
             },
             "GetBackup": {
@@ -83,26 +68,6 @@
             "UpdateDataSource": {
               "methods": [
                 "updateDataSource"
-              ]
-            },
-            "RemoveDataSource": {
-              "methods": [
-                "removeDataSource"
-              ]
-            },
-            "SetInternalStatus": {
-              "methods": [
-                "setInternalStatus"
-              ]
-            },
-            "AbandonBackup": {
-              "methods": [
-                "abandonBackup"
-              ]
-            },
-            "FinalizeBackup": {
-              "methods": [
-                "finalizeBackup"
               ]
             },
             "UpdateBackup": {
@@ -209,24 +174,9 @@
                 "getBackupVault"
               ]
             },
-            "TestIamPermissions": {
-              "methods": [
-                "testIamPermissions"
-              ]
-            },
             "GetDataSource": {
               "methods": [
                 "getDataSource"
-              ]
-            },
-            "InitiateBackup": {
-              "methods": [
-                "initiateBackup"
-              ]
-            },
-            "FetchAccessToken": {
-              "methods": [
-                "fetchAccessToken"
               ]
             },
             "GetBackup": {
@@ -272,26 +222,6 @@
             "UpdateDataSource": {
               "methods": [
                 "updateDataSource"
-              ]
-            },
-            "RemoveDataSource": {
-              "methods": [
-                "removeDataSource"
-              ]
-            },
-            "SetInternalStatus": {
-              "methods": [
-                "setInternalStatus"
-              ]
-            },
-            "AbandonBackup": {
-              "methods": [
-                "abandonBackup"
-              ]
-            },
-            "FinalizeBackup": {
-              "methods": [
-                "finalizeBackup"
               ]
             },
             "UpdateBackup": {
