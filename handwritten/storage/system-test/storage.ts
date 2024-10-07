@@ -3866,6 +3866,68 @@ describe('storage', function () {
     });
   });
 
+  describe('universeDomainTests', () => {
+    let universeDomainStorage: Storage;
+    const bucketName = generateName();
+    const localFile = fs.readFileSync(FILES.logo.path);
+    let file: File;
+
+    before(async () => {
+      const TEST_UNIVERSE_DOMAIN = isNullOrUndefined('TEST_UNIVERSE_DOMAIN');
+      const TEST_PROJECT_ID = isNullOrUndefined('TEST_UNIVERSE_PROJECT_ID');
+      const TEST_UNIVERSE_LOCATION = isNullOrUndefined(
+        'TEST_UNIVERSE_LOCATION'
+      );
+      const CREDENTIAL_PATH = isNullOrUndefined(
+        'TEST_UNIVERSE_DOMAIN_CREDENTIAL'
+      );
+      // Create a client with universe domain credentials
+      universeDomainStorage = new Storage({
+        projectId: TEST_PROJECT_ID,
+        keyFilename: CREDENTIAL_PATH,
+        universeDomain: TEST_UNIVERSE_DOMAIN,
+      });
+
+      const [bucket] = await universeDomainStorage.createBucket(bucketName, {
+        location: TEST_UNIVERSE_LOCATION,
+      });
+
+      file = bucket.file('LogoToSign.jpg');
+      fs.createReadStream(FILES.logo.path).pipe(file.createWriteStream());
+    });
+
+    after(async () => {
+      await deleteFileAsync(file);
+      await deleteBucketAsync(bucket);
+    });
+
+    it('should get bucket', async () => {
+      const [buckets] = await universeDomainStorage.getBuckets();
+      const getBucket = buckets.filter(item => item.name === bucketName);
+      assert.strictEqual(getBucket[0].name, bucketName);
+    });
+
+    it('should get files', async () => {
+      const fileName = await universeDomainStorage
+        .bucket(bucketName)
+        .file(file.name).name;
+      assert.strictEqual(fileName, file.name);
+    });
+
+    it('should create a signed read url', async () => {
+      const [signedReadUrl] = await file.getSignedUrl({
+        version: 'v2',
+        action: 'read',
+        expires: Date.now() + 5000,
+        virtualHostedStyle: true,
+      });
+
+      const res = await fetch(signedReadUrl);
+      const body = await res.text();
+      assert.strictEqual(body, localFile.toString());
+    });
+  });
+
   async function deleteBucketAsync(bucket: Bucket, options?: {}) {
     // After files are deleted, eventual consistency may require a bit of a
     // delay to ensure that the bucket recognizes that the files don't exist
@@ -4014,5 +4076,13 @@ describe('storage', function () {
 
   function createFileWithContentPromise(content: string) {
     return bucket.file(`${generateName()}.txt`).save(content);
+  }
+
+  function isNullOrUndefined(envVarName: string) {
+    const value = process.env[envVarName];
+    if (value === undefined || value === null) {
+      throw new Error(`Please set the ${envVarName} environment variable.`);
+    }
+    return value;
   }
 });

@@ -22,6 +22,12 @@ export NPM_CONFIG_PREFIX=${HOME}/.npm-global
 export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/secret_manager/long-door-651-kokoro-system-test-service-account
 export GCLOUD_PROJECT=long-door-651
 
+# For universe domain testing
+export TEST_UNIVERSE_DOMAIN_CREDENTIAL=${KOKORO_GFILE_DIR}/secret_manager/client-library-test-universe-domain-credential
+export TEST_UNIVERSE_DOMAIN=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-domain)
+export TEST_UNIVERSE_PROJECT_ID=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-project-id)
+export TEST_UNIVERSE_LOCATION=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-storage-location)
+
 cd $(dirname $0)/..
 
 # Run a pre-test hook, if a pre-system-test.sh is in the project
