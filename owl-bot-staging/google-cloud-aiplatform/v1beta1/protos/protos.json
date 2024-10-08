@@ -16865,7 +16865,8 @@
                         "tuningSpec": {
                           "oneof": [
                             "supervisedTuningSpec",
-                            "distillationSpec"
+                            "distillationSpec",
+                            "partnerModelTuningSpec"
                           ]
                         }
                       },
@@ -16881,6 +16882,10 @@
                         "distillationSpec": {
                           "type": "DistillationSpec",
                           "id": 17
+                        },
+                        "partnerModelTuningSpec": {
+                          "type": "PartnerModelTuningSpec",
+                          "id": 21
                         },
                         "name": {
                           "type": "string",
@@ -17531,6 +17536,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "PartnerModelTuningSpec": {
+                      "fields": {
+                        "trainingDatasetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validationDatasetUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hyperParameters": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 3
                         }
                       }
                     },
