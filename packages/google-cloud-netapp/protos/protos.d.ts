@@ -3389,6 +3389,20 @@ export namespace google {
                     public deleteStoragePool(request: google.cloud.netapp.v1.IDeleteStoragePoolRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls SwitchActiveReplicaZone.
+                     * @param request SwitchActiveReplicaZoneRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public switchActiveReplicaZone(request: google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest, callback: google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZoneCallback): void;
+
+                    /**
+                     * Calls SwitchActiveReplicaZone.
+                     * @param request SwitchActiveReplicaZoneRequest message or plain object
+                     * @returns Promise
+                     */
+                    public switchActiveReplicaZone(request: google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListVolumes.
                      * @param request ListVolumesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListVolumesResponse
@@ -4069,6 +4083,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteStoragePoolCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|switchActiveReplicaZone}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SwitchActiveReplicaZoneCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.netapp.v1.NetApp|listVolumes}.
@@ -8480,6 +8501,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a SwitchActiveReplicaZoneRequest. */
+                interface ISwitchActiveReplicaZoneRequest {
+
+                    /** SwitchActiveReplicaZoneRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a SwitchActiveReplicaZoneRequest. */
+                class SwitchActiveReplicaZoneRequest implements ISwitchActiveReplicaZoneRequest {
+
+                    /**
+                     * Constructs a new SwitchActiveReplicaZoneRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest);
+
+                    /** SwitchActiveReplicaZoneRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new SwitchActiveReplicaZoneRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SwitchActiveReplicaZoneRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest): google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest;
+
+                    /**
+                     * Encodes the specified SwitchActiveReplicaZoneRequest message. Does not implicitly {@link google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest.verify|verify} messages.
+                     * @param message SwitchActiveReplicaZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SwitchActiveReplicaZoneRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest.verify|verify} messages.
+                     * @param message SwitchActiveReplicaZoneRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SwitchActiveReplicaZoneRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SwitchActiveReplicaZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest;
+
+                    /**
+                     * Decodes a SwitchActiveReplicaZoneRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SwitchActiveReplicaZoneRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest;
+
+                    /**
+                     * Verifies a SwitchActiveReplicaZoneRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SwitchActiveReplicaZoneRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SwitchActiveReplicaZoneRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest;
+
+                    /**
+                     * Creates a plain object from a SwitchActiveReplicaZoneRequest message. Also converts values to other types if specified.
+                     * @param message SwitchActiveReplicaZoneRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SwitchActiveReplicaZoneRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SwitchActiveReplicaZoneRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a StoragePool. */
                 interface IStoragePool {
 
@@ -8533,6 +8651,9 @@ export namespace google {
 
                     /** StoragePool globalAccessAllowed */
                     globalAccessAllowed?: (boolean|null);
+
+                    /** StoragePool allowAutoTiering */
+                    allowAutoTiering?: (boolean|null);
 
                     /** StoragePool replicaZone */
                     replicaZone?: (string|null);
@@ -8600,6 +8721,9 @@ export namespace google {
 
                     /** StoragePool globalAccessAllowed. */
                     public globalAccessAllowed?: (boolean|null);
+
+                    /** StoragePool allowAutoTiering. */
+                    public allowAutoTiering: boolean;
 
                     /** StoragePool replicaZone. */
                     public replicaZone: string;
@@ -9714,6 +9838,9 @@ export namespace google {
 
                     /** Volume zone */
                     zone?: (string|null);
+
+                    /** Volume coldTierSizeGib */
+                    coldTierSizeGib?: (number|Long|string|null);
                 }
 
                 /** Represents a Volume. */
@@ -9832,6 +9959,9 @@ export namespace google {
 
                     /** Volume zone. */
                     public zone: string;
+
+                    /** Volume coldTierSizeGib. */
+                    public coldTierSizeGib: (number|Long|string);
 
                     /** Volume _backupConfig. */
                     public _backupConfig?: "backupConfig";

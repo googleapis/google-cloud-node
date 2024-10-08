@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -169,6 +172,13 @@
                         "binaryAuthorization": {
                           "type": "BinaryAuthorization",
                           "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "securityPostureConfig": {
+                          "type": "SecurityPostureConfig",
+                          "id": 26,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -453,6 +463,71 @@
                         }
                       }
                     },
+                    "NodeKubeletConfig": {
+                      "oneofs": {
+                        "_cpuManagerPolicy": {
+                          "oneof": [
+                            "cpuManagerPolicy"
+                          ]
+                        },
+                        "_cpuCfsQuota": {
+                          "oneof": [
+                            "cpuCfsQuota"
+                          ]
+                        },
+                        "_cpuCfsQuotaPeriod": {
+                          "oneof": [
+                            "cpuCfsQuotaPeriod"
+                          ]
+                        },
+                        "_podPidsLimit": {
+                          "oneof": [
+                            "podPidsLimit"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "insecureKubeletReadonlyPortEnabled": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cpuManagerPolicy": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "cpuCfsQuota": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "cpuCfsQuotaPeriod": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "podPidsLimit": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Fleet": {
                       "fields": {
                         "project": {
@@ -526,6 +601,23 @@
                             "EVALUATION_MODE_UNSPECIFIED": 0,
                             "DISABLED": 1,
                             "PROJECT_SINGLETON_POLICY_ENFORCE": 2
+                          }
+                        }
+                      }
+                    },
+                    "SecurityPostureConfig": {
+                      "fields": {
+                        "vulnerabilityMode": {
+                          "type": "VulnerabilityMode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "VulnerabilityMode": {
+                          "values": {
+                            "VULNERABILITY_MODE_UNSPECIFIED": 0,
+                            "VULNERABILITY_DISABLED": 1,
+                            "VULNERABILITY_ENTERPRISE": 2
                           }
                         }
                       }
@@ -1567,6 +1659,13 @@
                         "management": {
                           "type": "AwsNodeManagement",
                           "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "kubeletConfig": {
+                          "type": "NodeKubeletConfig",
+                          "id": 31,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

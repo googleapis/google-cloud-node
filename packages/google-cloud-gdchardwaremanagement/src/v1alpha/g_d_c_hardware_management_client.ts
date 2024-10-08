@@ -594,6 +594,7 @@ export class GDCHardwareManagementClient {
       'listComments',
       'getComment',
       'createComment',
+      'recordActionOnComment',
       'listChangeLogEntries',
       'getChangeLogEntry',
       'listSkus',
@@ -1206,6 +1207,109 @@ export class GDCHardwareManagementClient {
       });
     this.initialize();
     return this.innerApiCalls.getComment(request, options, callback);
+  }
+  /**
+   * Record Action on a Comment. If the Action specified in the request is READ,
+   * the viewed time in the comment is set to the time the request was received.
+   * If the comment is already marked as read, subsequent calls will be ignored.
+   * If the Action is UNREAD, the viewed time is cleared from the comment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the comment.
+   *   Format:
+   *   `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType} request.actionType
+   *   Required. The action type of the recorded action.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.gdchardwaremanagement.v1alpha.Comment|Comment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/g_d_c_hardware_management.record_action_on_comment.js</caption>
+   * region_tag:gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async
+   */
+  recordActionOnComment(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      (
+        | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  recordActionOnComment(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recordActionOnComment(
+    request: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    callback: Callback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  recordActionOnComment(
+    request?: protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+          | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.gdchardwaremanagement.v1alpha.IComment,
+      (
+        | protos.google.cloud.gdchardwaremanagement.v1alpha.IRecordActionOnCommentRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.recordActionOnComment(request, options, callback);
   }
   /**
    * Gets details of a change to an order.
@@ -1951,6 +2055,9 @@ export class GDCHardwareManagementClient {
    * @param {string} [request.requestId]
    *   Optional. An optional unique identifier for this request. See
    *   [AIP-155](https://google.aip.dev/155).
+   * @param {google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type} [request.type]
+   *   Optional. Type of this request. If unset, the request type is assumed to be
+   *   `INFO_PENDING`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

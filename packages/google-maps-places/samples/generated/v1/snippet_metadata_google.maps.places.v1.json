@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-places",
-        "version": "1.6.0",
+        "version": "1.7.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 152,
+                    "end": 156,
                     "type": "FULL"
                 }
             ],
@@ -66,6 +66,10 @@
                     {
                         "name": "rank_preference",
                         "type": ".google.maps.places.v1.SearchNearbyRequest.RankPreference"
+                    },
+                    {
+                        "name": "routing_parameters",
+                        "type": ".google.maps.places.v1.RoutingParameters"
                     }
                 ],
                 "resultType": ".google.maps.places.v1.SearchNearbyResponse",
@@ -94,7 +98,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 129,
+                    "end": 137,
                     "type": "FULL"
                 }
             ],
@@ -154,6 +158,14 @@
                     {
                         "name": "ev_options",
                         "type": ".google.maps.places.v1.SearchTextRequest.EVOptions"
+                    },
+                    {
+                        "name": "routing_parameters",
+                        "type": ".google.maps.places.v1.RoutingParameters"
+                    },
+                    {
+                        "name": "search_along_route_parameters",
+                        "type": ".google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters"
                     }
                 ],
                 "resultType": ".google.maps.places.v1.SearchTextResponse",

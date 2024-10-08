@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-aiplatform",
-        "version": "3.29.0",
+        "version": "3.30.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -4268,6 +4268,62 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1_generated_GenAiTuningService_RebaseTunedModel_async",
+            "title": "DatasetService rebaseTunedModel Sample",
+            "origin": "API_DEFINITION",
+            "description": " Rebase a TunedModel. Creates a LongRunningOperation that takes a legacy Tuned GenAI model Reference and creates a TuningJob based on newly available model.",
+            "canonical": true,
+            "file": "gen_ai_tuning_service.rebase_tuned_model.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 75,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RebaseTunedModel",
+                "fullName": "google.cloud.aiplatform.v1.GenAiTuningService.RebaseTunedModel",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tuned_model_ref",
+                        "type": ".google.cloud.aiplatform.v1.TunedModelRef"
+                    },
+                    {
+                        "name": "tuning_job",
+                        "type": ".google.cloud.aiplatform.v1.TuningJob"
+                    },
+                    {
+                        "name": "artifact_destination",
+                        "type": ".google.cloud.aiplatform.v1.GcsDestination"
+                    },
+                    {
+                        "name": "deploy_to_same_endpoint",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "GenAiTuningServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiTuningServiceClient"
+                },
+                "method": {
+                    "shortName": "RebaseTunedModel",
+                    "fullName": "google.cloud.aiplatform.v1.GenAiTuningService.RebaseTunedModel",
+                    "service": {
+                        "shortName": "GenAiTuningService",
+                        "fullName": "google.cloud.aiplatform.v1.GenAiTuningService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1_generated_IndexEndpointService_CreateIndexEndpoint_async",
             "title": "DatasetService createIndexEndpoint Sample",
             "origin": "API_DEFINITION",
@@ -6514,7 +6570,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 84,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],
@@ -6546,6 +6602,10 @@
                     {
                         "name": "tools",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_config",
+                        "type": ".google.cloud.aiplatform.v1.GenerationConfig"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1.CountTokensResponse",
@@ -11234,7 +11294,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 94,
+                    "end": 103,
                     "type": "FULL"
                 }
             ],
@@ -11262,6 +11322,10 @@
                     {
                         "name": "tool_config",
                         "type": ".google.cloud.aiplatform.v1.ToolConfig"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "safety_settings",
@@ -11298,7 +11362,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 96,
+                    "end": 105,
                     "type": "FULL"
                 }
             ],
@@ -11326,6 +11390,10 @@
                     {
                         "name": "tool_config",
                         "type": ".google.cloud.aiplatform.v1.ToolConfig"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "TYPE_MESSAGE[]"
                     },
                     {
                         "name": "safety_settings",

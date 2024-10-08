@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1514,6 +1517,24 @@
                             }
                           ]
                         },
+                        "GetPropertyQuotasSnapshot": {
+                          "requestType": "GetPropertyQuotasSnapshotRequest",
+                          "responseType": "PropertyQuotasSnapshot",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/propertyQuotasSnapshot}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/propertyQuotasSnapshot}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "CreateReportTask": {
                           "requestType": "CreateReportTaskRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1784,6 +1805,47 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "GetPropertyQuotasSnapshotRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/PropertyQuotasSnapshot"
+                          }
+                        }
+                      }
+                    },
+                    "PropertyQuotasSnapshot": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/PropertyQuotasSnapshot",
+                        "(google.api.resource).pattern": "properties/{property}/propertyQuotasSnapshot",
+                        "(google.api.resource).plural": "propertyQuotasSnapshots",
+                        "(google.api.resource).singular": "propertyQuotasSnapshot"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "corePropertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 1
+                        },
+                        "realtimePropertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 2
+                        },
+                        "funnelPropertyQuota": {
+                          "type": "PropertyQuota",
+                          "id": 3
                         }
                       }
                     },

@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
 1.  [Enable the Cloud Run API][enable_api].
-1.  [Set up authentication with a service account][auth] so you can access the
+1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -111,6 +111,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Builds.submit_build | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/builds.submit_build.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/builds.submit_build.js,packages/google-cloud-run/samples/README.md) |
 | Executions.cancel_execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.cancel_execution.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.cancel_execution.js,packages/google-cloud-run/samples/README.md) |
 | Executions.delete_execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.delete_execution.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.delete_execution.js,packages/google-cloud-run/samples/README.md) |
 | Executions.get_execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-run/samples/generated/v2/executions.get_execution.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-run/samples/generated/v2/executions.get_execution.js,packages/google-cloud-run/samples/README.md) |
@@ -207,4 +208,4 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=run.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+[auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local

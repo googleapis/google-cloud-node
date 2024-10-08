@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -2450,7 +2453,8 @@
                         "AUDIO_ENCODING_AMR": 4,
                         "AUDIO_ENCODING_AMR_WB": 5,
                         "AUDIO_ENCODING_OGG_OPUS": 6,
-                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7
+                        "AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE": 7,
+                        "AUDIO_ENCODING_ALAW": 8
                       }
                     },
                     "SpeechModelVariant": {
@@ -2476,7 +2480,8 @@
                         "OUTPUT_AUDIO_ENCODING_MP3": 2,
                         "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS": 4,
                         "OUTPUT_AUDIO_ENCODING_OGG_OPUS": 3,
-                        "OUTPUT_AUDIO_ENCODING_MULAW": 5
+                        "OUTPUT_AUDIO_ENCODING_MULAW": 5,
+                        "OUTPUT_AUDIO_ENCODING_ALAW": 6
                       }
                     },
                     "Sessions": {
@@ -8254,6 +8259,18 @@
                         "(google.api.resource).type": "dialogflow.googleapis.com/ConversationDataset",
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/conversationDatasets/{conversation_dataset}"
                       },
+                      "oneofs": {
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -8302,6 +8319,22 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -8773,6 +8806,16 @@
                             "articleSuggestionModelMetadata",
                             "smartReplyModelMetadata"
                           ]
+                        },
+                        "_satisfiesPzs": {
+                          "oneof": [
+                            "satisfiesPzs"
+                          ]
+                        },
+                        "_satisfiesPzi": {
+                          "oneof": [
+                            "satisfiesPzi"
+                          ]
                         }
                       },
                       "fields": {
@@ -8820,6 +8863,22 @@
                         "smartReplyModelMetadata": {
                           "type": "SmartReplyModelMetadata",
                           "id": 9
+                        },
+                        "satisfiesPzs": {
+                          "type": "bool",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "satisfiesPzi": {
+                          "type": "bool",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {

@@ -348,6 +348,12 @@ export class NetAppClient {
     const deleteStoragePoolMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const switchActiveReplicaZoneResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.StoragePool'
+    ) as gax.protobuf.Type;
+    const switchActiveReplicaZoneMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
     const createVolumeResponse = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.Volume'
     ) as gax.protobuf.Type;
@@ -538,6 +544,15 @@ export class NetAppClient {
         this.operationsClient,
         deleteStoragePoolResponse.decode.bind(deleteStoragePoolResponse),
         deleteStoragePoolMetadata.decode.bind(deleteStoragePoolMetadata)
+      ),
+      switchActiveReplicaZone: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        switchActiveReplicaZoneResponse.decode.bind(
+          switchActiveReplicaZoneResponse
+        ),
+        switchActiveReplicaZoneMetadata.decode.bind(
+          switchActiveReplicaZoneMetadata
+        )
       ),
       createVolume: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -751,6 +766,7 @@ export class NetAppClient {
       'getStoragePool',
       'updateStoragePool',
       'deleteStoragePool',
+      'switchActiveReplicaZone',
       'listVolumes',
       'getVolume',
       'createVolume',
@@ -2176,6 +2192,147 @@ export class NetAppClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * This operation will switch the active/replica zone for a regional
+   * storagePool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the storage pool
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.switch_active_replica_zone.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async
+   */
+  switchActiveReplicaZone(
+    request?: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  switchActiveReplicaZone(
+    request: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchActiveReplicaZone(
+    request: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  switchActiveReplicaZone(
+    request?: protos.google.cloud.netapp.v1.ISwitchActiveReplicaZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IStoragePool,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IStoragePool,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.switchActiveReplicaZone(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `switchActiveReplicaZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.switch_active_replica_zone.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async
+   */
+  async checkSwitchActiveReplicaZoneProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.StoragePool,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.switchActiveReplicaZone,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.StoragePool,
       protos.google.cloud.netapp.v1.OperationMetadata
     >;
   }

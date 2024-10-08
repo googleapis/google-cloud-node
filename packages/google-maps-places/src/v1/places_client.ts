@@ -489,6 +489,8 @@ export class PlacesClient {
    *   Required. The region to search.
    * @param {google.maps.places.v1.SearchNearbyRequest.RankPreference} request.rankPreference
    *   How results will be ranked in the response.
+   * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
+   *   Optional. Parameters that affect the routing to the search results.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -623,6 +625,10 @@ export class PlacesClient {
    *   with location_bias.
    * @param {google.maps.places.v1.SearchTextRequest.EVOptions} [request.evOptions]
    *   Optional. Set the searchable EV options of a place search request.
+   * @param {google.maps.places.v1.RoutingParameters} [request.routingParameters]
+   *   Optional. Additional parameters for routing to results.
+   * @param {google.maps.places.v1.SearchTextRequest.SearchAlongRouteParameters} [request.searchAlongRouteParameters]
+   *   Optional. Additional parameters proto for searching along a route.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

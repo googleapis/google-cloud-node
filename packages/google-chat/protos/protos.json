@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -4602,6 +4605,14 @@
                     "(google.api.resource).type": "chat.googleapis.com/Space",
                     "(google.api.resource).pattern": "spaces/{space}"
                   },
+                  "oneofs": {
+                    "spacePermissionSettings": {
+                      "oneof": [
+                        "predefinedPermissionSettings",
+                        "permissionSettings"
+                      ]
+                    }
+                  },
                   "fields": {
                     "name": {
                       "type": "string",
@@ -4708,6 +4719,20 @@
                       "options": {
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
+                    },
+                    "predefinedPermissionSettings": {
+                      "type": "PredefinedPermissionSettings",
+                      "id": 26,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "permissionSettings": {
+                      "type": "PermissionSettings",
+                      "id": 27,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   },
                   "nested": {
@@ -4782,6 +4807,128 @@
                             "PRIVATE": 1,
                             "DISCOVERABLE": 2
                           }
+                        }
+                      }
+                    },
+                    "PredefinedPermissionSettings": {
+                      "values": {
+                        "PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED": 0,
+                        "COLLABORATION_SPACE": 1,
+                        "ANNOUNCEMENT_SPACE": 2
+                      }
+                    },
+                    "PermissionSettings": {
+                      "oneofs": {
+                        "_manageMembersAndGroups": {
+                          "oneof": [
+                            "manageMembersAndGroups"
+                          ]
+                        },
+                        "_modifySpaceDetails": {
+                          "oneof": [
+                            "modifySpaceDetails"
+                          ]
+                        },
+                        "_toggleHistory": {
+                          "oneof": [
+                            "toggleHistory"
+                          ]
+                        },
+                        "_useAtMentionAll": {
+                          "oneof": [
+                            "useAtMentionAll"
+                          ]
+                        },
+                        "_manageApps": {
+                          "oneof": [
+                            "manageApps"
+                          ]
+                        },
+                        "_manageWebhooks": {
+                          "oneof": [
+                            "manageWebhooks"
+                          ]
+                        },
+                        "_postMessages": {
+                          "oneof": [
+                            "postMessages"
+                          ]
+                        },
+                        "_replyMessages": {
+                          "oneof": [
+                            "replyMessages"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "manageMembersAndGroups": {
+                          "type": "PermissionSetting",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "modifySpaceDetails": {
+                          "type": "PermissionSetting",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "toggleHistory": {
+                          "type": "PermissionSetting",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "useAtMentionAll": {
+                          "type": "PermissionSetting",
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "manageApps": {
+                          "type": "PermissionSetting",
+                          "id": 5,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "manageWebhooks": {
+                          "type": "PermissionSetting",
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "postMessages": {
+                          "type": "PermissionSetting",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
+                        },
+                        "replyMessages": {
+                          "type": "PermissionSetting",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PermissionSetting": {
+                      "fields": {
+                        "managersAllowed": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "membersAllowed": {
+                          "type": "bool",
+                          "id": 2
                         }
                       }
                     }

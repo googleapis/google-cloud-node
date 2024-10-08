@@ -53,6 +53,7 @@ function main(attachedCluster, updateMask) {
    *   *   `platform_version`.
    *   *   `proxy_config.kubernetes_secret.name`.
    *   *   `proxy_config.kubernetes_secret.namespace`.
+   *   *   `security_posture_config.vulnerability_mode`
    */
   // const updateMask = {}
 

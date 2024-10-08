@@ -266,6 +266,46 @@
                     }
                 }
             }
+        },
+        {
+            "regionTag": "merchantapi_v1beta_generated_FileUploadsService_GetFileUpload_async",
+            "title": "DataSourcesService getFileUpload Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the latest data source file upload. Only the `latest` alias is accepted for a file upload.",
+            "canonical": true,
+            "file": "file_uploads_service.get_file_upload.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 55,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetFileUpload",
+                "fullName": "google.shopping.merchant.datasources.v1beta.FileUploadsService.GetFileUpload",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.shopping.merchant.datasources.v1beta.FileUpload",
+                "client": {
+                    "shortName": "FileUploadsServiceClient",
+                    "fullName": "google.shopping.merchant.datasources.v1beta.FileUploadsServiceClient"
+                },
+                "method": {
+                    "shortName": "GetFileUpload",
+                    "fullName": "google.shopping.merchant.datasources.v1beta.FileUploadsService.GetFileUpload",
+                    "service": {
+                        "shortName": "FileUploadsService",
+                        "fullName": "google.shopping.merchant.datasources.v1beta.FileUploadsService"
+                    }
+                }
+            }
         }
     ]
 }

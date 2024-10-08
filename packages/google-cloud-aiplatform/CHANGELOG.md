@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.30.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.29.0...aiplatform-v3.30.0) (2024-09-24)
+
+
+### Features
+
+* A new field `response_logprbs` is added to message `.google.cloud.aiplatform.v1.GenerationConfig` ([#5664](https://github.com/googleapis/google-cloud-node/issues/5664)) ([100e106](https://github.com/googleapis/google-cloud-node/commit/100e106f93010cf648295a6df58c1a2f82c01340))
+
 ## [3.29.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.28.0...aiplatform-v3.29.0) (2024-09-10)
 
 

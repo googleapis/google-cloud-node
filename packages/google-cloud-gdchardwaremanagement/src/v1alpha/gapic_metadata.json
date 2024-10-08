@@ -35,6 +35,11 @@
                 "getComment"
               ]
             },
+            "RecordActionOnComment": {
+              "methods": [
+                "recordActionOnComment"
+              ]
+            },
             "GetChangeLogEntry": {
               "methods": [
                 "getChangeLogEntry"
@@ -219,6 +224,11 @@
             "GetComment": {
               "methods": [
                 "getComment"
+              ]
+            },
+            "RecordActionOnComment": {
+              "methods": [
+                "recordActionOnComment"
               ]
             },
             "GetChangeLogEntry": {

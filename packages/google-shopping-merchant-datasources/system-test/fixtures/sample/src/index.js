@@ -21,6 +21,7 @@ const datasources = require('@google-shopping/datasources');
 
 function main() {
   const dataSourcesServiceClient = new datasources.DataSourcesServiceClient();
+  const fileUploadsServiceClient = new datasources.FileUploadsServiceClient();
 }
 
 main();

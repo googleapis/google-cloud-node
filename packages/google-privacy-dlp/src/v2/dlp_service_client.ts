@@ -7849,6 +7849,7 @@ export class DlpServiceClient {
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
    *       - `project_id` - The Google Cloud project ID.
+   *       - `account_id` - The AWS account ID.
    *       - `file_store_path` - The path like "gs://bucket".
    *       - `data_source_type` - The profile's data source type, like
    *       "google/storage/bucket".
@@ -8007,6 +8008,7 @@ export class DlpServiceClient {
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
    *       - `project_id` - The Google Cloud project ID.
+   *       - `account_id` - The AWS account ID.
    *       - `file_store_path` - The path like "gs://bucket".
    *       - `data_source_type` - The profile's data source type, like
    *       "google/storage/bucket".
@@ -8109,6 +8111,7 @@ export class DlpServiceClient {
    *   * A restriction has the form of `{field} {operator} {value}`.
    *   * Supported fields/values:
    *       - `project_id` - The Google Cloud project ID.
+   *       - `account_id` - The AWS account ID.
    *       - `file_store_path` - The path like "gs://bucket".
    *       - `data_source_type` - The profile's data source type, like
    *       "google/storage/bucket".

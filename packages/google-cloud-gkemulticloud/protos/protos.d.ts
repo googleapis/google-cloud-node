@@ -94,6 +94,9 @@ export namespace google {
 
                     /** AttachedCluster binaryAuthorization */
                     binaryAuthorization?: (google.cloud.gkemulticloud.v1.IBinaryAuthorization|null);
+
+                    /** AttachedCluster securityPostureConfig */
+                    securityPostureConfig?: (google.cloud.gkemulticloud.v1.ISecurityPostureConfig|null);
                 }
 
                 /** Represents an AttachedCluster. */
@@ -170,6 +173,9 @@ export namespace google {
 
                     /** AttachedCluster binaryAuthorization. */
                     public binaryAuthorization?: (google.cloud.gkemulticloud.v1.IBinaryAuthorization|null);
+
+                    /** AttachedCluster securityPostureConfig. */
+                    public securityPostureConfig?: (google.cloud.gkemulticloud.v1.ISecurityPostureConfig|null);
 
                     /**
                      * Creates a new AttachedCluster instance using the specified properties.
@@ -1764,6 +1770,139 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a NodeKubeletConfig. */
+                interface INodeKubeletConfig {
+
+                    /** NodeKubeletConfig insecureKubeletReadonlyPortEnabled */
+                    insecureKubeletReadonlyPortEnabled?: (boolean|null);
+
+                    /** NodeKubeletConfig cpuManagerPolicy */
+                    cpuManagerPolicy?: (string|null);
+
+                    /** NodeKubeletConfig cpuCfsQuota */
+                    cpuCfsQuota?: (boolean|null);
+
+                    /** NodeKubeletConfig cpuCfsQuotaPeriod */
+                    cpuCfsQuotaPeriod?: (string|null);
+
+                    /** NodeKubeletConfig podPidsLimit */
+                    podPidsLimit?: (number|Long|string|null);
+                }
+
+                /** Represents a NodeKubeletConfig. */
+                class NodeKubeletConfig implements INodeKubeletConfig {
+
+                    /**
+                     * Constructs a new NodeKubeletConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkemulticloud.v1.INodeKubeletConfig);
+
+                    /** NodeKubeletConfig insecureKubeletReadonlyPortEnabled. */
+                    public insecureKubeletReadonlyPortEnabled: boolean;
+
+                    /** NodeKubeletConfig cpuManagerPolicy. */
+                    public cpuManagerPolicy?: (string|null);
+
+                    /** NodeKubeletConfig cpuCfsQuota. */
+                    public cpuCfsQuota?: (boolean|null);
+
+                    /** NodeKubeletConfig cpuCfsQuotaPeriod. */
+                    public cpuCfsQuotaPeriod?: (string|null);
+
+                    /** NodeKubeletConfig podPidsLimit. */
+                    public podPidsLimit?: (number|Long|string|null);
+
+                    /** NodeKubeletConfig _cpuManagerPolicy. */
+                    public _cpuManagerPolicy?: "cpuManagerPolicy";
+
+                    /** NodeKubeletConfig _cpuCfsQuota. */
+                    public _cpuCfsQuota?: "cpuCfsQuota";
+
+                    /** NodeKubeletConfig _cpuCfsQuotaPeriod. */
+                    public _cpuCfsQuotaPeriod?: "cpuCfsQuotaPeriod";
+
+                    /** NodeKubeletConfig _podPidsLimit. */
+                    public _podPidsLimit?: "podPidsLimit";
+
+                    /**
+                     * Creates a new NodeKubeletConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns NodeKubeletConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkemulticloud.v1.INodeKubeletConfig): google.cloud.gkemulticloud.v1.NodeKubeletConfig;
+
+                    /**
+                     * Encodes the specified NodeKubeletConfig message. Does not implicitly {@link google.cloud.gkemulticloud.v1.NodeKubeletConfig.verify|verify} messages.
+                     * @param message NodeKubeletConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkemulticloud.v1.INodeKubeletConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified NodeKubeletConfig message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.NodeKubeletConfig.verify|verify} messages.
+                     * @param message NodeKubeletConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkemulticloud.v1.INodeKubeletConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a NodeKubeletConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns NodeKubeletConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkemulticloud.v1.NodeKubeletConfig;
+
+                    /**
+                     * Decodes a NodeKubeletConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns NodeKubeletConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkemulticloud.v1.NodeKubeletConfig;
+
+                    /**
+                     * Verifies a NodeKubeletConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a NodeKubeletConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns NodeKubeletConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkemulticloud.v1.NodeKubeletConfig;
+
+                    /**
+                     * Creates a plain object from a NodeKubeletConfig message. Also converts values to other types if specified.
+                     * @param message NodeKubeletConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkemulticloud.v1.NodeKubeletConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this NodeKubeletConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for NodeKubeletConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Fleet. */
                 interface IFleet {
 
@@ -2369,6 +2508,113 @@ export namespace google {
                         EVALUATION_MODE_UNSPECIFIED = 0,
                         DISABLED = 1,
                         PROJECT_SINGLETON_POLICY_ENFORCE = 2
+                    }
+                }
+
+                /** Properties of a SecurityPostureConfig. */
+                interface ISecurityPostureConfig {
+
+                    /** SecurityPostureConfig vulnerabilityMode */
+                    vulnerabilityMode?: (google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode|keyof typeof google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode|null);
+                }
+
+                /** Represents a SecurityPostureConfig. */
+                class SecurityPostureConfig implements ISecurityPostureConfig {
+
+                    /**
+                     * Constructs a new SecurityPostureConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkemulticloud.v1.ISecurityPostureConfig);
+
+                    /** SecurityPostureConfig vulnerabilityMode. */
+                    public vulnerabilityMode: (google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode|keyof typeof google.cloud.gkemulticloud.v1.SecurityPostureConfig.VulnerabilityMode);
+
+                    /**
+                     * Creates a new SecurityPostureConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SecurityPostureConfig instance
+                     */
+                    public static create(properties?: google.cloud.gkemulticloud.v1.ISecurityPostureConfig): google.cloud.gkemulticloud.v1.SecurityPostureConfig;
+
+                    /**
+                     * Encodes the specified SecurityPostureConfig message. Does not implicitly {@link google.cloud.gkemulticloud.v1.SecurityPostureConfig.verify|verify} messages.
+                     * @param message SecurityPostureConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkemulticloud.v1.ISecurityPostureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SecurityPostureConfig message, length delimited. Does not implicitly {@link google.cloud.gkemulticloud.v1.SecurityPostureConfig.verify|verify} messages.
+                     * @param message SecurityPostureConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkemulticloud.v1.ISecurityPostureConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SecurityPostureConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SecurityPostureConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkemulticloud.v1.SecurityPostureConfig;
+
+                    /**
+                     * Decodes a SecurityPostureConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SecurityPostureConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkemulticloud.v1.SecurityPostureConfig;
+
+                    /**
+                     * Verifies a SecurityPostureConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SecurityPostureConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SecurityPostureConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkemulticloud.v1.SecurityPostureConfig;
+
+                    /**
+                     * Creates a plain object from a SecurityPostureConfig message. Also converts values to other types if specified.
+                     * @param message SecurityPostureConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkemulticloud.v1.SecurityPostureConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SecurityPostureConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SecurityPostureConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace SecurityPostureConfig {
+
+                    /** VulnerabilityMode enum. */
+                    enum VulnerabilityMode {
+                        VULNERABILITY_MODE_UNSPECIFIED = 0,
+                        VULNERABILITY_DISABLED = 1,
+                        VULNERABILITY_ENTERPRISE = 2
                     }
                 }
 
@@ -5126,6 +5372,9 @@ export namespace google {
                     /** AwsNodePool management */
                     management?: (google.cloud.gkemulticloud.v1.IAwsNodeManagement|null);
 
+                    /** AwsNodePool kubeletConfig */
+                    kubeletConfig?: (google.cloud.gkemulticloud.v1.INodeKubeletConfig|null);
+
                     /** AwsNodePool updateSettings */
                     updateSettings?: (google.cloud.gkemulticloud.v1.IUpdateSettings|null);
                 }
@@ -5183,6 +5432,9 @@ export namespace google {
 
                     /** AwsNodePool management. */
                     public management?: (google.cloud.gkemulticloud.v1.IAwsNodeManagement|null);
+
+                    /** AwsNodePool kubeletConfig. */
+                    public kubeletConfig?: (google.cloud.gkemulticloud.v1.INodeKubeletConfig|null);
 
                     /** AwsNodePool updateSettings. */
                     public updateSettings?: (google.cloud.gkemulticloud.v1.IUpdateSettings|null);

@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-data",
-        "version": "4.8.0",
+        "version": "4.9.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -448,10 +448,50 @@
             }
         },
         {
+            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async",
+            "title": "AlphaAnalyticsData getPropertyQuotasSnapshot Sample",
+            "origin": "API_DEFINITION",
+            "description": " Get all property quotas organized by quota category for a given property. This will charge 1 property quota from the category with the most quota.",
+            "canonical": true,
+            "file": "alpha_analytics_data.get_property_quotas_snapshot.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 54,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetPropertyQuotasSnapshot",
+                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshot",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.analytics.data.v1alpha.PropertyQuotasSnapshot",
+                "client": {
+                    "shortName": "AlphaAnalyticsDataClient",
+                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+                },
+                "method": {
+                    "shortName": "GetPropertyQuotasSnapshot",
+                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshot",
+                    "service": {
+                        "shortName": "AlphaAnalyticsData",
+                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async",
             "title": "AlphaAnalyticsData createReportTask Sample",
             "origin": "API_DEFINITION",
-            "description": " Initiates the creation of a report task. This method quickly returns a report task and initiates a long running asynchronous request to form a customized report of your Google Analytics event data.",
+            "description": " Initiates the creation of a report task. This method quickly returns a report task and initiates a long running asynchronous request to form a customized report of your Google Analytics event data. A report task will be retained and available for querying for 72 hours after it has been created. A report task created by one user can be listed and queried by all users who have access to the property.",
             "canonical": true,
             "file": "alpha_analytics_data.create_report_task.js",
             "language": "JAVASCRIPT",

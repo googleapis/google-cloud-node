@@ -44,7 +44,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
 1.  [Enable the NetApp API API][enable_api].
-1.  [Set up authentication with a service account][auth] so you can access the
+1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
 
 ### Installing the client library
@@ -157,6 +157,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Net_app.reverse_replication_direction | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.reverse_replication_direction.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.reverse_replication_direction.js,packages/google-cloud-netapp/samples/README.md) |
 | Net_app.revert_volume | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.revert_volume.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.revert_volume.js,packages/google-cloud-netapp/samples/README.md) |
 | Net_app.stop_replication | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.stop_replication.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.stop_replication.js,packages/google-cloud-netapp/samples/README.md) |
+| Net_app.switch_active_replica_zone | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js,packages/google-cloud-netapp/samples/README.md) |
 | Net_app.update_active_directory | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js,packages/google-cloud-netapp/samples/README.md) |
 | Net_app.update_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js,packages/google-cloud-netapp/samples/README.md) |
 | Net_app.update_backup_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js,packages/google-cloud-netapp/samples/README.md) |
@@ -237,4 +238,4 @@ See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=netapp.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+[auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local

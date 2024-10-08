@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -1998,7 +2001,8 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         }
                       }
@@ -5346,7 +5350,8 @@
                       "oneofs": {
                         "sessionConfig": {
                           "oneof": [
-                            "jupyterSession"
+                            "jupyterSession",
+                            "sparkConnectSession"
                           ]
                         }
                       },
@@ -5375,6 +5380,13 @@
                         "jupyterSession": {
                           "type": "JupyterConfig",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkConnectSession": {
+                          "type": "SparkConnectConfig",
+                          "id": 11,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5690,7 +5702,8 @@
                       "oneofs": {
                         "sessionConfig": {
                           "oneof": [
-                            "jupyterSession"
+                            "jupyterSession",
+                            "sparkConnectSession"
                           ]
                         }
                       },
@@ -5719,6 +5732,13 @@
                         "jupyterSession": {
                           "type": "JupyterConfig",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sparkConnectSession": {
+                          "type": "SparkConnectConfig",
+                          "id": 17,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5868,6 +5888,9 @@
                           }
                         }
                       }
+                    },
+                    "SparkConnectConfig": {
+                      "fields": {}
                     },
                     "WorkflowTemplateService": {
                       "options": {
@@ -6161,7 +6184,8 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                               }
                             }
                           }

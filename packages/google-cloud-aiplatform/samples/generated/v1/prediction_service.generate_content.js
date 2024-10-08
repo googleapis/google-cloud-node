@@ -64,6 +64,15 @@ function main(model, contents) {
    */
   // const toolConfig = {}
   /**
+   *  Optional. The labels with user-defined metadata for the request. It is used
+   *  for billing and reporting only.
+   *  Label keys and values can be no longer than 63 characters
+   *  (Unicode codepoints) and can only contain lowercase letters, numeric
+   *  characters, underscores, and dashes. International characters are allowed.
+   *  Label values are optional. Label keys must start with a letter.
+   */
+  // const labels = [1,2,3,4]
+  /**
    *  Optional. Per request settings for blocking unsafe content.
    *  Enforced on GenerateContentResponse.candidates.
    */

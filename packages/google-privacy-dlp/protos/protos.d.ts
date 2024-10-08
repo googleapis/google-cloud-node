@@ -20111,6 +20111,12 @@ export namespace google {
                     /** DataProfileAction pubSubNotification */
                     pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
 
+                    /** DataProfileAction publishToChronicle */
+                    publishToChronicle?: (google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle|null);
+
+                    /** DataProfileAction publishToScc */
+                    publishToScc?: (google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter|null);
+
                     /** DataProfileAction tagResources */
                     tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
                 }
@@ -20130,11 +20136,17 @@ export namespace google {
                     /** DataProfileAction pubSubNotification. */
                     public pubSubNotification?: (google.privacy.dlp.v2.DataProfileAction.IPubSubNotification|null);
 
+                    /** DataProfileAction publishToChronicle. */
+                    public publishToChronicle?: (google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle|null);
+
+                    /** DataProfileAction publishToScc. */
+                    public publishToScc?: (google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter|null);
+
                     /** DataProfileAction tagResources. */
                     public tagResources?: (google.privacy.dlp.v2.DataProfileAction.ITagResources|null);
 
                     /** DataProfileAction action. */
-                    public action?: ("exportData"|"pubSubNotification"|"tagResources");
+                    public action?: ("exportData"|"pubSubNotification"|"publishToChronicle"|"publishToScc"|"tagResources");
 
                     /**
                      * Creates a new DataProfileAction instance using the specified properties.
@@ -20446,6 +20458,188 @@ export namespace google {
                         CHANGED_PROFILE = 2,
                         SCORE_INCREASED = 3,
                         ERROR_CHANGED = 4
+                    }
+
+                    /** Properties of a PublishToChronicle. */
+                    interface IPublishToChronicle {
+                    }
+
+                    /** Represents a PublishToChronicle. */
+                    class PublishToChronicle implements IPublishToChronicle {
+
+                        /**
+                         * Constructs a new PublishToChronicle.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle);
+
+                        /**
+                         * Creates a new PublishToChronicle instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishToChronicle instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Encodes the specified PublishToChronicle message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToChronicle.verify|verify} messages.
+                         * @param message PublishToChronicle message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishToChronicle message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToChronicle.verify|verify} messages.
+                         * @param message PublishToChronicle message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IPublishToChronicle, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishToChronicle message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishToChronicle
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Decodes a PublishToChronicle message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishToChronicle
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Verifies a PublishToChronicle message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishToChronicle message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishToChronicle
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.PublishToChronicle;
+
+                        /**
+                         * Creates a plain object from a PublishToChronicle message. Also converts values to other types if specified.
+                         * @param message PublishToChronicle
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.PublishToChronicle, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishToChronicle to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishToChronicle
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PublishToSecurityCommandCenter. */
+                    interface IPublishToSecurityCommandCenter {
+                    }
+
+                    /** Represents a PublishToSecurityCommandCenter. */
+                    class PublishToSecurityCommandCenter implements IPublishToSecurityCommandCenter {
+
+                        /**
+                         * Constructs a new PublishToSecurityCommandCenter.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter);
+
+                        /**
+                         * Creates a new PublishToSecurityCommandCenter instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishToSecurityCommandCenter instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Encodes the specified PublishToSecurityCommandCenter message. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter.verify|verify} messages.
+                         * @param message PublishToSecurityCommandCenter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishToSecurityCommandCenter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter.verify|verify} messages.
+                         * @param message PublishToSecurityCommandCenter message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.DataProfileAction.IPublishToSecurityCommandCenter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishToSecurityCommandCenter message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishToSecurityCommandCenter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Decodes a PublishToSecurityCommandCenter message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishToSecurityCommandCenter
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Verifies a PublishToSecurityCommandCenter message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishToSecurityCommandCenter message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishToSecurityCommandCenter
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter;
+
+                        /**
+                         * Creates a plain object from a PublishToSecurityCommandCenter message. Also converts values to other types if specified.
+                         * @param message PublishToSecurityCommandCenter
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishToSecurityCommandCenter to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishToSecurityCommandCenter
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a TagResources. */
@@ -20776,6 +20970,9 @@ export namespace google {
                     /** DataProfileJobConfig projectId */
                     projectId?: (string|null);
 
+                    /** DataProfileJobConfig otherCloudStartingLocation */
+                    otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
+
                     /** DataProfileJobConfig inspectTemplates */
                     inspectTemplates?: (string[]|null);
 
@@ -20797,6 +20994,9 @@ export namespace google {
 
                     /** DataProfileJobConfig projectId. */
                     public projectId: string;
+
+                    /** DataProfileJobConfig otherCloudStartingLocation. */
+                    public otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
 
                     /** DataProfileJobConfig inspectTemplates. */
                     public inspectTemplates: string[];
@@ -21416,6 +21616,9 @@ export namespace google {
                     /** DiscoveryConfig orgConfig */
                     orgConfig?: (google.privacy.dlp.v2.DiscoveryConfig.IOrgConfig|null);
 
+                    /** DiscoveryConfig otherCloudStartingLocation */
+                    otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
+
                     /** DiscoveryConfig inspectTemplates */
                     inspectTemplates?: (string[]|null);
 
@@ -21458,6 +21661,9 @@ export namespace google {
 
                     /** DiscoveryConfig orgConfig. */
                     public orgConfig?: (google.privacy.dlp.v2.DiscoveryConfig.IOrgConfig|null);
+
+                    /** DiscoveryConfig otherCloudStartingLocation. */
+                    public otherCloudStartingLocation?: (google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation|null);
 
                     /** DiscoveryConfig inspectTemplates. */
                     public inspectTemplates: string[];
@@ -21688,6 +21894,9 @@ export namespace google {
 
                     /** DiscoveryTarget cloudStorageTarget */
                     cloudStorageTarget?: (google.privacy.dlp.v2.ICloudStorageDiscoveryTarget|null);
+
+                    /** DiscoveryTarget otherCloudTarget */
+                    otherCloudTarget?: (google.privacy.dlp.v2.IOtherCloudDiscoveryTarget|null);
                 }
 
                 /** Represents a DiscoveryTarget. */
@@ -21711,8 +21920,11 @@ export namespace google {
                     /** DiscoveryTarget cloudStorageTarget. */
                     public cloudStorageTarget?: (google.privacy.dlp.v2.ICloudStorageDiscoveryTarget|null);
 
+                    /** DiscoveryTarget otherCloudTarget. */
+                    public otherCloudTarget?: (google.privacy.dlp.v2.IOtherCloudDiscoveryTarget|null);
+
                     /** DiscoveryTarget target. */
-                    public target?: ("bigQueryTarget"|"cloudSqlTarget"|"secretsTarget"|"cloudStorageTarget");
+                    public target?: ("bigQueryTarget"|"cloudSqlTarget"|"secretsTarget"|"cloudStorageTarget"|"otherCloudTarget");
 
                     /**
                      * Creates a new DiscoveryTarget instance using the specified properties.
@@ -25131,6 +25343,1371 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an OtherCloudDiscoveryTarget. */
+                interface IOtherCloudDiscoveryTarget {
+
+                    /** OtherCloudDiscoveryTarget dataSourceType */
+                    dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
+                    /** OtherCloudDiscoveryTarget filter */
+                    filter?: (google.privacy.dlp.v2.IDiscoveryOtherCloudFilter|null);
+
+                    /** OtherCloudDiscoveryTarget conditions */
+                    conditions?: (google.privacy.dlp.v2.IDiscoveryOtherCloudConditions|null);
+
+                    /** OtherCloudDiscoveryTarget generationCadence */
+                    generationCadence?: (google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence|null);
+
+                    /** OtherCloudDiscoveryTarget disabled */
+                    disabled?: (google.privacy.dlp.v2.IDisabled|null);
+                }
+
+                /** Represents an OtherCloudDiscoveryTarget. */
+                class OtherCloudDiscoveryTarget implements IOtherCloudDiscoveryTarget {
+
+                    /**
+                     * Constructs a new OtherCloudDiscoveryTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget);
+
+                    /** OtherCloudDiscoveryTarget dataSourceType. */
+                    public dataSourceType?: (google.privacy.dlp.v2.IDataSourceType|null);
+
+                    /** OtherCloudDiscoveryTarget filter. */
+                    public filter?: (google.privacy.dlp.v2.IDiscoveryOtherCloudFilter|null);
+
+                    /** OtherCloudDiscoveryTarget conditions. */
+                    public conditions?: (google.privacy.dlp.v2.IDiscoveryOtherCloudConditions|null);
+
+                    /** OtherCloudDiscoveryTarget generationCadence. */
+                    public generationCadence?: (google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence|null);
+
+                    /** OtherCloudDiscoveryTarget disabled. */
+                    public disabled?: (google.privacy.dlp.v2.IDisabled|null);
+
+                    /** OtherCloudDiscoveryTarget cadence. */
+                    public cadence?: ("generationCadence"|"disabled");
+
+                    /**
+                     * Creates a new OtherCloudDiscoveryTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudDiscoveryTarget instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryTarget message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryTarget.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryTarget message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryTarget.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudDiscoveryTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudDiscoveryTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Verifies an OtherCloudDiscoveryTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudDiscoveryTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudDiscoveryTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudDiscoveryTarget;
+
+                    /**
+                     * Creates a plain object from an OtherCloudDiscoveryTarget message. Also converts values to other types if specified.
+                     * @param message OtherCloudDiscoveryTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudDiscoveryTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudDiscoveryTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudDiscoveryTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryOtherCloudFilter. */
+                interface IDiscoveryOtherCloudFilter {
+
+                    /** DiscoveryOtherCloudFilter collection */
+                    collection?: (google.privacy.dlp.v2.IOtherCloudResourceCollection|null);
+
+                    /** DiscoveryOtherCloudFilter singleResource */
+                    singleResource?: (google.privacy.dlp.v2.IOtherCloudSingleResourceReference|null);
+
+                    /** DiscoveryOtherCloudFilter others */
+                    others?: (google.privacy.dlp.v2.IAllOtherResources|null);
+                }
+
+                /** Represents a DiscoveryOtherCloudFilter. */
+                class DiscoveryOtherCloudFilter implements IDiscoveryOtherCloudFilter {
+
+                    /**
+                     * Constructs a new DiscoveryOtherCloudFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter);
+
+                    /** DiscoveryOtherCloudFilter collection. */
+                    public collection?: (google.privacy.dlp.v2.IOtherCloudResourceCollection|null);
+
+                    /** DiscoveryOtherCloudFilter singleResource. */
+                    public singleResource?: (google.privacy.dlp.v2.IOtherCloudSingleResourceReference|null);
+
+                    /** DiscoveryOtherCloudFilter others. */
+                    public others?: (google.privacy.dlp.v2.IAllOtherResources|null);
+
+                    /** DiscoveryOtherCloudFilter filter. */
+                    public filter?: ("collection"|"singleResource"|"others");
+
+                    /**
+                     * Creates a new DiscoveryOtherCloudFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryOtherCloudFilter instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudFilter message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudFilter.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudFilter.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryOtherCloudFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryOtherCloudFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryOtherCloudFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Verifies a DiscoveryOtherCloudFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryOtherCloudFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryOtherCloudFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryOtherCloudFilter;
+
+                    /**
+                     * Creates a plain object from a DiscoveryOtherCloudFilter message. Also converts values to other types if specified.
+                     * @param message DiscoveryOtherCloudFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryOtherCloudFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryOtherCloudFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryOtherCloudFilter
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudResourceCollection. */
+                interface IOtherCloudResourceCollection {
+
+                    /** OtherCloudResourceCollection includeRegexes */
+                    includeRegexes?: (google.privacy.dlp.v2.IOtherCloudResourceRegexes|null);
+                }
+
+                /** Represents an OtherCloudResourceCollection. */
+                class OtherCloudResourceCollection implements IOtherCloudResourceCollection {
+
+                    /**
+                     * Constructs a new OtherCloudResourceCollection.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudResourceCollection);
+
+                    /** OtherCloudResourceCollection includeRegexes. */
+                    public includeRegexes?: (google.privacy.dlp.v2.IOtherCloudResourceRegexes|null);
+
+                    /** OtherCloudResourceCollection pattern. */
+                    public pattern?: "includeRegexes";
+
+                    /**
+                     * Creates a new OtherCloudResourceCollection instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudResourceCollection instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudResourceCollection): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceCollection message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceCollection.verify|verify} messages.
+                     * @param message OtherCloudResourceCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudResourceCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceCollection message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceCollection.verify|verify} messages.
+                     * @param message OtherCloudResourceCollection message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudResourceCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudResourceCollection message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudResourceCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Decodes an OtherCloudResourceCollection message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudResourceCollection
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Verifies an OtherCloudResourceCollection message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudResourceCollection message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudResourceCollection
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudResourceCollection;
+
+                    /**
+                     * Creates a plain object from an OtherCloudResourceCollection message. Also converts values to other types if specified.
+                     * @param message OtherCloudResourceCollection
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudResourceCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudResourceCollection to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudResourceCollection
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudResourceRegexes. */
+                interface IOtherCloudResourceRegexes {
+
+                    /** OtherCloudResourceRegexes patterns */
+                    patterns?: (google.privacy.dlp.v2.IOtherCloudResourceRegex[]|null);
+                }
+
+                /** Represents an OtherCloudResourceRegexes. */
+                class OtherCloudResourceRegexes implements IOtherCloudResourceRegexes {
+
+                    /**
+                     * Constructs a new OtherCloudResourceRegexes.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegexes);
+
+                    /** OtherCloudResourceRegexes patterns. */
+                    public patterns: google.privacy.dlp.v2.IOtherCloudResourceRegex[];
+
+                    /**
+                     * Creates a new OtherCloudResourceRegexes instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudResourceRegexes instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegexes): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegexes message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegexes.verify|verify} messages.
+                     * @param message OtherCloudResourceRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudResourceRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegexes message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegexes.verify|verify} messages.
+                     * @param message OtherCloudResourceRegexes message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudResourceRegexes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegexes message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudResourceRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegexes message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudResourceRegexes
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Verifies an OtherCloudResourceRegexes message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudResourceRegexes message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudResourceRegexes
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudResourceRegexes;
+
+                    /**
+                     * Creates a plain object from an OtherCloudResourceRegexes message. Also converts values to other types if specified.
+                     * @param message OtherCloudResourceRegexes
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudResourceRegexes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudResourceRegexes to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudResourceRegexes
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudResourceRegex. */
+                interface IOtherCloudResourceRegex {
+
+                    /** OtherCloudResourceRegex amazonS3BucketRegex */
+                    amazonS3BucketRegex?: (google.privacy.dlp.v2.IAmazonS3BucketRegex|null);
+                }
+
+                /** Represents an OtherCloudResourceRegex. */
+                class OtherCloudResourceRegex implements IOtherCloudResourceRegex {
+
+                    /**
+                     * Constructs a new OtherCloudResourceRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegex);
+
+                    /** OtherCloudResourceRegex amazonS3BucketRegex. */
+                    public amazonS3BucketRegex?: (google.privacy.dlp.v2.IAmazonS3BucketRegex|null);
+
+                    /** OtherCloudResourceRegex resourceRegex. */
+                    public resourceRegex?: "amazonS3BucketRegex";
+
+                    /**
+                     * Creates a new OtherCloudResourceRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudResourceRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudResourceRegex): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegex message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegex.verify|verify} messages.
+                     * @param message OtherCloudResourceRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudResourceRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudResourceRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudResourceRegex.verify|verify} messages.
+                     * @param message OtherCloudResourceRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudResourceRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudResourceRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Decodes an OtherCloudResourceRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudResourceRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Verifies an OtherCloudResourceRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudResourceRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudResourceRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudResourceRegex;
+
+                    /**
+                     * Creates a plain object from an OtherCloudResourceRegex message. Also converts values to other types if specified.
+                     * @param message OtherCloudResourceRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudResourceRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudResourceRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudResourceRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AwsAccountRegex. */
+                interface IAwsAccountRegex {
+
+                    /** AwsAccountRegex accountIdRegex */
+                    accountIdRegex?: (string|null);
+                }
+
+                /** Represents an AwsAccountRegex. */
+                class AwsAccountRegex implements IAwsAccountRegex {
+
+                    /**
+                     * Constructs a new AwsAccountRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAwsAccountRegex);
+
+                    /** AwsAccountRegex accountIdRegex. */
+                    public accountIdRegex: string;
+
+                    /**
+                     * Creates a new AwsAccountRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsAccountRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAwsAccountRegex): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Encodes the specified AwsAccountRegex message. Does not implicitly {@link google.privacy.dlp.v2.AwsAccountRegex.verify|verify} messages.
+                     * @param message AwsAccountRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAwsAccountRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsAccountRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AwsAccountRegex.verify|verify} messages.
+                     * @param message AwsAccountRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAwsAccountRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsAccountRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsAccountRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Decodes an AwsAccountRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsAccountRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Verifies an AwsAccountRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsAccountRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsAccountRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AwsAccountRegex;
+
+                    /**
+                     * Creates a plain object from an AwsAccountRegex message. Also converts values to other types if specified.
+                     * @param message AwsAccountRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AwsAccountRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsAccountRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsAccountRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AmazonS3BucketRegex. */
+                interface IAmazonS3BucketRegex {
+
+                    /** AmazonS3BucketRegex awsAccountRegex */
+                    awsAccountRegex?: (google.privacy.dlp.v2.IAwsAccountRegex|null);
+
+                    /** AmazonS3BucketRegex bucketNameRegex */
+                    bucketNameRegex?: (string|null);
+                }
+
+                /** Represents an AmazonS3BucketRegex. */
+                class AmazonS3BucketRegex implements IAmazonS3BucketRegex {
+
+                    /**
+                     * Constructs a new AmazonS3BucketRegex.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAmazonS3BucketRegex);
+
+                    /** AmazonS3BucketRegex awsAccountRegex. */
+                    public awsAccountRegex?: (google.privacy.dlp.v2.IAwsAccountRegex|null);
+
+                    /** AmazonS3BucketRegex bucketNameRegex. */
+                    public bucketNameRegex: string;
+
+                    /**
+                     * Creates a new AmazonS3BucketRegex instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3BucketRegex instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAmazonS3BucketRegex): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketRegex message. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketRegex.verify|verify} messages.
+                     * @param message AmazonS3BucketRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAmazonS3BucketRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketRegex message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketRegex.verify|verify} messages.
+                     * @param message AmazonS3BucketRegex message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAmazonS3BucketRegex, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3BucketRegex message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3BucketRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Decodes an AmazonS3BucketRegex message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3BucketRegex
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Verifies an AmazonS3BucketRegex message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3BucketRegex message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3BucketRegex
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AmazonS3BucketRegex;
+
+                    /**
+                     * Creates a plain object from an AmazonS3BucketRegex message. Also converts values to other types if specified.
+                     * @param message AmazonS3BucketRegex
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AmazonS3BucketRegex, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3BucketRegex to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3BucketRegex
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudSingleResourceReference. */
+                interface IOtherCloudSingleResourceReference {
+
+                    /** OtherCloudSingleResourceReference amazonS3Bucket */
+                    amazonS3Bucket?: (google.privacy.dlp.v2.IAmazonS3Bucket|null);
+                }
+
+                /** Represents an OtherCloudSingleResourceReference. */
+                class OtherCloudSingleResourceReference implements IOtherCloudSingleResourceReference {
+
+                    /**
+                     * Constructs a new OtherCloudSingleResourceReference.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudSingleResourceReference);
+
+                    /** OtherCloudSingleResourceReference amazonS3Bucket. */
+                    public amazonS3Bucket?: (google.privacy.dlp.v2.IAmazonS3Bucket|null);
+
+                    /** OtherCloudSingleResourceReference resource. */
+                    public resource?: "amazonS3Bucket";
+
+                    /**
+                     * Creates a new OtherCloudSingleResourceReference instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudSingleResourceReference instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudSingleResourceReference): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Encodes the specified OtherCloudSingleResourceReference message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudSingleResourceReference.verify|verify} messages.
+                     * @param message OtherCloudSingleResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudSingleResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudSingleResourceReference message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudSingleResourceReference.verify|verify} messages.
+                     * @param message OtherCloudSingleResourceReference message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudSingleResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudSingleResourceReference message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudSingleResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Decodes an OtherCloudSingleResourceReference message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudSingleResourceReference
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Verifies an OtherCloudSingleResourceReference message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudSingleResourceReference message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudSingleResourceReference
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudSingleResourceReference;
+
+                    /**
+                     * Creates a plain object from an OtherCloudSingleResourceReference message. Also converts values to other types if specified.
+                     * @param message OtherCloudSingleResourceReference
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudSingleResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudSingleResourceReference to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudSingleResourceReference
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AwsAccount. */
+                interface IAwsAccount {
+
+                    /** AwsAccount accountId */
+                    accountId?: (string|null);
+                }
+
+                /** Represents an AwsAccount. */
+                class AwsAccount implements IAwsAccount {
+
+                    /**
+                     * Constructs a new AwsAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAwsAccount);
+
+                    /** AwsAccount accountId. */
+                    public accountId: string;
+
+                    /**
+                     * Creates a new AwsAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AwsAccount instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAwsAccount): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Encodes the specified AwsAccount message. Does not implicitly {@link google.privacy.dlp.v2.AwsAccount.verify|verify} messages.
+                     * @param message AwsAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAwsAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AwsAccount message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AwsAccount.verify|verify} messages.
+                     * @param message AwsAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAwsAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AwsAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AwsAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Decodes an AwsAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AwsAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Verifies an AwsAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AwsAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AwsAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AwsAccount;
+
+                    /**
+                     * Creates a plain object from an AwsAccount message. Also converts values to other types if specified.
+                     * @param message AwsAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AwsAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AwsAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AwsAccount
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AmazonS3Bucket. */
+                interface IAmazonS3Bucket {
+
+                    /** AmazonS3Bucket awsAccount */
+                    awsAccount?: (google.privacy.dlp.v2.IAwsAccount|null);
+
+                    /** AmazonS3Bucket bucketName */
+                    bucketName?: (string|null);
+                }
+
+                /** Represents an AmazonS3Bucket. */
+                class AmazonS3Bucket implements IAmazonS3Bucket {
+
+                    /**
+                     * Constructs a new AmazonS3Bucket.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAmazonS3Bucket);
+
+                    /** AmazonS3Bucket awsAccount. */
+                    public awsAccount?: (google.privacy.dlp.v2.IAwsAccount|null);
+
+                    /** AmazonS3Bucket bucketName. */
+                    public bucketName: string;
+
+                    /**
+                     * Creates a new AmazonS3Bucket instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3Bucket instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAmazonS3Bucket): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Encodes the specified AmazonS3Bucket message. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3Bucket.verify|verify} messages.
+                     * @param message AmazonS3Bucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAmazonS3Bucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3Bucket message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3Bucket.verify|verify} messages.
+                     * @param message AmazonS3Bucket message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAmazonS3Bucket, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3Bucket message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3Bucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Decodes an AmazonS3Bucket message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3Bucket
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Verifies an AmazonS3Bucket message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3Bucket message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3Bucket
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AmazonS3Bucket;
+
+                    /**
+                     * Creates a plain object from an AmazonS3Bucket message. Also converts values to other types if specified.
+                     * @param message AmazonS3Bucket
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AmazonS3Bucket, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3Bucket to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3Bucket
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DiscoveryOtherCloudConditions. */
+                interface IDiscoveryOtherCloudConditions {
+
+                    /** DiscoveryOtherCloudConditions minAge */
+                    minAge?: (google.protobuf.IDuration|null);
+
+                    /** DiscoveryOtherCloudConditions amazonS3BucketConditions */
+                    amazonS3BucketConditions?: (google.privacy.dlp.v2.IAmazonS3BucketConditions|null);
+                }
+
+                /** Represents a DiscoveryOtherCloudConditions. */
+                class DiscoveryOtherCloudConditions implements IDiscoveryOtherCloudConditions {
+
+                    /**
+                     * Constructs a new DiscoveryOtherCloudConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions);
+
+                    /** DiscoveryOtherCloudConditions minAge. */
+                    public minAge?: (google.protobuf.IDuration|null);
+
+                    /** DiscoveryOtherCloudConditions amazonS3BucketConditions. */
+                    public amazonS3BucketConditions?: (google.privacy.dlp.v2.IAmazonS3BucketConditions|null);
+
+                    /** DiscoveryOtherCloudConditions conditions. */
+                    public conditions?: "amazonS3BucketConditions";
+
+                    /**
+                     * Creates a new DiscoveryOtherCloudConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryOtherCloudConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudConditions message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudConditions.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudConditions.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryOtherCloudConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryOtherCloudConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryOtherCloudConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Verifies a DiscoveryOtherCloudConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryOtherCloudConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryOtherCloudConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryOtherCloudConditions;
+
+                    /**
+                     * Creates a plain object from a DiscoveryOtherCloudConditions message. Also converts values to other types if specified.
+                     * @param message DiscoveryOtherCloudConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryOtherCloudConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryOtherCloudConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryOtherCloudConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AmazonS3BucketConditions. */
+                interface IAmazonS3BucketConditions {
+
+                    /** AmazonS3BucketConditions bucketTypes */
+                    bucketTypes?: (google.privacy.dlp.v2.AmazonS3BucketConditions.BucketType[]|null);
+
+                    /** AmazonS3BucketConditions objectStorageClasses */
+                    objectStorageClasses?: (google.privacy.dlp.v2.AmazonS3BucketConditions.ObjectStorageClass[]|null);
+                }
+
+                /** Represents an AmazonS3BucketConditions. */
+                class AmazonS3BucketConditions implements IAmazonS3BucketConditions {
+
+                    /**
+                     * Constructs a new AmazonS3BucketConditions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IAmazonS3BucketConditions);
+
+                    /** AmazonS3BucketConditions bucketTypes. */
+                    public bucketTypes: google.privacy.dlp.v2.AmazonS3BucketConditions.BucketType[];
+
+                    /** AmazonS3BucketConditions objectStorageClasses. */
+                    public objectStorageClasses: google.privacy.dlp.v2.AmazonS3BucketConditions.ObjectStorageClass[];
+
+                    /**
+                     * Creates a new AmazonS3BucketConditions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AmazonS3BucketConditions instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IAmazonS3BucketConditions): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketConditions message. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketConditions.verify|verify} messages.
+                     * @param message AmazonS3BucketConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IAmazonS3BucketConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AmazonS3BucketConditions message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.AmazonS3BucketConditions.verify|verify} messages.
+                     * @param message AmazonS3BucketConditions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IAmazonS3BucketConditions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AmazonS3BucketConditions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AmazonS3BucketConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Decodes an AmazonS3BucketConditions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AmazonS3BucketConditions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Verifies an AmazonS3BucketConditions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AmazonS3BucketConditions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AmazonS3BucketConditions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.AmazonS3BucketConditions;
+
+                    /**
+                     * Creates a plain object from an AmazonS3BucketConditions message. Also converts values to other types if specified.
+                     * @param message AmazonS3BucketConditions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.AmazonS3BucketConditions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AmazonS3BucketConditions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AmazonS3BucketConditions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AmazonS3BucketConditions {
+
+                    /** BucketType enum. */
+                    enum BucketType {
+                        TYPE_UNSPECIFIED = 0,
+                        TYPE_ALL_SUPPORTED = 1,
+                        TYPE_GENERAL_PURPOSE = 2
+                    }
+
+                    /** ObjectStorageClass enum. */
+                    enum ObjectStorageClass {
+                        UNSPECIFIED = 0,
+                        ALL_SUPPORTED_CLASSES = 1,
+                        STANDARD = 2,
+                        STANDARD_INFREQUENT_ACCESS = 4,
+                        GLACIER_INSTANT_RETRIEVAL = 6,
+                        INTELLIGENT_TIERING = 7
+                    }
+                }
+
+                /** Properties of a DiscoveryOtherCloudGenerationCadence. */
+                interface IDiscoveryOtherCloudGenerationCadence {
+
+                    /** DiscoveryOtherCloudGenerationCadence refreshFrequency */
+                    refreshFrequency?: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency|null);
+
+                    /** DiscoveryOtherCloudGenerationCadence inspectTemplateModifiedCadence */
+                    inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+                }
+
+                /** Represents a DiscoveryOtherCloudGenerationCadence. */
+                class DiscoveryOtherCloudGenerationCadence implements IDiscoveryOtherCloudGenerationCadence {
+
+                    /**
+                     * Constructs a new DiscoveryOtherCloudGenerationCadence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence);
+
+                    /** DiscoveryOtherCloudGenerationCadence refreshFrequency. */
+                    public refreshFrequency: (google.privacy.dlp.v2.DataProfileUpdateFrequency|keyof typeof google.privacy.dlp.v2.DataProfileUpdateFrequency);
+
+                    /** DiscoveryOtherCloudGenerationCadence inspectTemplateModifiedCadence. */
+                    public inspectTemplateModifiedCadence?: (google.privacy.dlp.v2.IDiscoveryInspectTemplateModifiedCadence|null);
+
+                    /**
+                     * Creates a new DiscoveryOtherCloudGenerationCadence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DiscoveryOtherCloudGenerationCadence instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudGenerationCadence message. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DiscoveryOtherCloudGenerationCadence message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence.verify|verify} messages.
+                     * @param message DiscoveryOtherCloudGenerationCadence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IDiscoveryOtherCloudGenerationCadence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudGenerationCadence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DiscoveryOtherCloudGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Decodes a DiscoveryOtherCloudGenerationCadence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DiscoveryOtherCloudGenerationCadence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Verifies a DiscoveryOtherCloudGenerationCadence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DiscoveryOtherCloudGenerationCadence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DiscoveryOtherCloudGenerationCadence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence;
+
+                    /**
+                     * Creates a plain object from a DiscoveryOtherCloudGenerationCadence message. Also converts values to other types if specified.
+                     * @param message DiscoveryOtherCloudGenerationCadence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.DiscoveryOtherCloudGenerationCadence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DiscoveryOtherCloudGenerationCadence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DiscoveryOtherCloudGenerationCadence
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DiscoveryStartingLocation. */
                 interface IDiscoveryStartingLocation {
 
@@ -25235,6 +26812,215 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OtherCloudDiscoveryStartingLocation. */
+                interface IOtherCloudDiscoveryStartingLocation {
+
+                    /** OtherCloudDiscoveryStartingLocation awsLocation */
+                    awsLocation?: (google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation|null);
+                }
+
+                /** Represents an OtherCloudDiscoveryStartingLocation. */
+                class OtherCloudDiscoveryStartingLocation implements IOtherCloudDiscoveryStartingLocation {
+
+                    /**
+                     * Constructs a new OtherCloudDiscoveryStartingLocation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation);
+
+                    /** OtherCloudDiscoveryStartingLocation awsLocation. */
+                    public awsLocation?: (google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation|null);
+
+                    /** OtherCloudDiscoveryStartingLocation location. */
+                    public location?: "awsLocation";
+
+                    /**
+                     * Creates a new OtherCloudDiscoveryStartingLocation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OtherCloudDiscoveryStartingLocation instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryStartingLocation message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryStartingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OtherCloudDiscoveryStartingLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.verify|verify} messages.
+                     * @param message OtherCloudDiscoveryStartingLocation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.IOtherCloudDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryStartingLocation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OtherCloudDiscoveryStartingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Decodes an OtherCloudDiscoveryStartingLocation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OtherCloudDiscoveryStartingLocation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Verifies an OtherCloudDiscoveryStartingLocation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OtherCloudDiscoveryStartingLocation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OtherCloudDiscoveryStartingLocation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation;
+
+                    /**
+                     * Creates a plain object from an OtherCloudDiscoveryStartingLocation message. Also converts values to other types if specified.
+                     * @param message OtherCloudDiscoveryStartingLocation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OtherCloudDiscoveryStartingLocation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OtherCloudDiscoveryStartingLocation
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OtherCloudDiscoveryStartingLocation {
+
+                    /** Properties of an AwsDiscoveryStartingLocation. */
+                    interface IAwsDiscoveryStartingLocation {
+
+                        /** AwsDiscoveryStartingLocation accountId */
+                        accountId?: (string|null);
+
+                        /** AwsDiscoveryStartingLocation allAssetInventoryAssets */
+                        allAssetInventoryAssets?: (boolean|null);
+                    }
+
+                    /** Represents an AwsDiscoveryStartingLocation. */
+                    class AwsDiscoveryStartingLocation implements IAwsDiscoveryStartingLocation {
+
+                        /**
+                         * Constructs a new AwsDiscoveryStartingLocation.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation);
+
+                        /** AwsDiscoveryStartingLocation accountId. */
+                        public accountId?: (string|null);
+
+                        /** AwsDiscoveryStartingLocation allAssetInventoryAssets. */
+                        public allAssetInventoryAssets?: (boolean|null);
+
+                        /** AwsDiscoveryStartingLocation scope. */
+                        public scope?: ("accountId"|"allAssetInventoryAssets");
+
+                        /**
+                         * Creates a new AwsDiscoveryStartingLocation instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsDiscoveryStartingLocation instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Encodes the specified AwsDiscoveryStartingLocation message. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation.verify|verify} messages.
+                         * @param message AwsDiscoveryStartingLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsDiscoveryStartingLocation message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation.verify|verify} messages.
+                         * @param message AwsDiscoveryStartingLocation message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.IAwsDiscoveryStartingLocation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsDiscoveryStartingLocation message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsDiscoveryStartingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Decodes an AwsDiscoveryStartingLocation message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsDiscoveryStartingLocation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Verifies an AwsDiscoveryStartingLocation message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsDiscoveryStartingLocation message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsDiscoveryStartingLocation
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation;
+
+                        /**
+                         * Creates a plain object from an AwsDiscoveryStartingLocation message. Also converts values to other types if specified.
+                         * @param message AwsDiscoveryStartingLocation
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.OtherCloudDiscoveryStartingLocation.AwsDiscoveryStartingLocation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsDiscoveryStartingLocation to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AwsDiscoveryStartingLocation
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an AllOtherResources. */

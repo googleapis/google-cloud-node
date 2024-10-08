@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Cloud Storage source.
+   *  The Cloud Storage source bucket and, optionally, path inside the bucket.
    */
   // const sourceGcsBucket = {}
   /**
@@ -55,11 +55,14 @@ function main(name) {
    */
   // const requestId = 'abc123'
   /**
-   *  Optional. User-specified Service Account (SA) credentials to be used when
+   *  Optional. User-specified service account credentials to be used when
    *  performing the transfer.
-   *  Format: `projects/{project_id}/serviceAccounts/{service_account}`
+   *  Use one of the following formats:
+   *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
    *  If unspecified, the Parallelstore service agent is used:
-   *  service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+   *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
    */
   // const serviceAccount = 'abc123'
 
