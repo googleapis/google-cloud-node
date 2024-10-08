@@ -841,6 +841,18 @@ export namespace google {
 
                     /** GenerationConfig topK */
                     topK?: (number|null);
+
+                    /** GenerationConfig presencePenalty */
+                    presencePenalty?: (number|null);
+
+                    /** GenerationConfig frequencyPenalty */
+                    frequencyPenalty?: (number|null);
+
+                    /** GenerationConfig responseLogprobs */
+                    responseLogprobs?: (boolean|null);
+
+                    /** GenerationConfig logprobs */
+                    logprobs?: (number|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -870,6 +882,18 @@ export namespace google {
                     /** GenerationConfig topK. */
                     public topK?: (number|null);
 
+                    /** GenerationConfig presencePenalty. */
+                    public presencePenalty?: (number|null);
+
+                    /** GenerationConfig frequencyPenalty. */
+                    public frequencyPenalty?: (number|null);
+
+                    /** GenerationConfig responseLogprobs. */
+                    public responseLogprobs?: (boolean|null);
+
+                    /** GenerationConfig logprobs. */
+                    public logprobs?: (number|null);
+
                     /** GenerationConfig _candidateCount. */
                     public _candidateCount?: "candidateCount";
 
@@ -884,6 +908,18 @@ export namespace google {
 
                     /** GenerationConfig _topK. */
                     public _topK?: "topK";
+
+                    /** GenerationConfig _presencePenalty. */
+                    public _presencePenalty?: "presencePenalty";
+
+                    /** GenerationConfig _frequencyPenalty. */
+                    public _frequencyPenalty?: "frequencyPenalty";
+
+                    /** GenerationConfig _responseLogprobs. */
+                    public _responseLogprobs?: "responseLogprobs";
+
+                    /** GenerationConfig _logprobs. */
+                    public _logprobs?: "logprobs";
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
@@ -1319,6 +1355,12 @@ export namespace google {
 
                     /** Candidate tokenCount */
                     tokenCount?: (number|null);
+
+                    /** Candidate avgLogprobs */
+                    avgLogprobs?: (number|null);
+
+                    /** Candidate logprobsResult */
+                    logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
                 }
 
                 /** Represents a Candidate. */
@@ -1347,6 +1389,12 @@ export namespace google {
 
                     /** Candidate tokenCount. */
                     public tokenCount: number;
+
+                    /** Candidate avgLogprobs. */
+                    public avgLogprobs: number;
+
+                    /** Candidate logprobsResult. */
+                    public logprobsResult?: (google.ai.generativelanguage.v1.ILogprobsResult|null);
 
                     /** Candidate _index. */
                     public _index?: "index";
@@ -1444,6 +1492,327 @@ export namespace google {
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10
+                    }
+                }
+
+                /** Properties of a LogprobsResult. */
+                interface ILogprobsResult {
+
+                    /** LogprobsResult topCandidates */
+                    topCandidates?: (google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[]|null);
+
+                    /** LogprobsResult chosenCandidates */
+                    chosenCandidates?: (google.ai.generativelanguage.v1.LogprobsResult.ICandidate[]|null);
+                }
+
+                /** Represents a LogprobsResult. */
+                class LogprobsResult implements ILogprobsResult {
+
+                    /**
+                     * Constructs a new LogprobsResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1.ILogprobsResult);
+
+                    /** LogprobsResult topCandidates. */
+                    public topCandidates: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[];
+
+                    /** LogprobsResult chosenCandidates. */
+                    public chosenCandidates: google.ai.generativelanguage.v1.LogprobsResult.ICandidate[];
+
+                    /**
+                     * Creates a new LogprobsResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LogprobsResult instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1.ILogprobsResult): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Encodes the specified LogprobsResult message. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.verify|verify} messages.
+                     * @param message LogprobsResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1.ILogprobsResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LogprobsResult message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.verify|verify} messages.
+                     * @param message LogprobsResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1.ILogprobsResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LogprobsResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LogprobsResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Decodes a LogprobsResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LogprobsResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Verifies a LogprobsResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LogprobsResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LogprobsResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.LogprobsResult;
+
+                    /**
+                     * Creates a plain object from a LogprobsResult message. Also converts values to other types if specified.
+                     * @param message LogprobsResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1.LogprobsResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LogprobsResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LogprobsResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace LogprobsResult {
+
+                    /** Properties of a Candidate. */
+                    interface ICandidate {
+
+                        /** Candidate token */
+                        token?: (string|null);
+
+                        /** Candidate tokenId */
+                        tokenId?: (number|null);
+
+                        /** Candidate logProbability */
+                        logProbability?: (number|null);
+                    }
+
+                    /** Represents a Candidate. */
+                    class Candidate implements ICandidate {
+
+                        /**
+                         * Constructs a new Candidate.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1.LogprobsResult.ICandidate);
+
+                        /** Candidate token. */
+                        public token?: (string|null);
+
+                        /** Candidate tokenId. */
+                        public tokenId?: (number|null);
+
+                        /** Candidate logProbability. */
+                        public logProbability?: (number|null);
+
+                        /** Candidate _token. */
+                        public _token?: "token";
+
+                        /** Candidate _tokenId. */
+                        public _tokenId?: "tokenId";
+
+                        /** Candidate _logProbability. */
+                        public _logProbability?: "logProbability";
+
+                        /**
+                         * Creates a new Candidate instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Candidate instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1.LogprobsResult.ICandidate): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Encodes the specified Candidate message. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.Candidate.verify|verify} messages.
+                         * @param message Candidate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1.LogprobsResult.ICandidate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Candidate message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.Candidate.verify|verify} messages.
+                         * @param message Candidate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1.LogprobsResult.ICandidate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Candidate message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Candidate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Decodes a Candidate message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Candidate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Verifies a Candidate message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Candidate message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Candidate
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.LogprobsResult.Candidate;
+
+                        /**
+                         * Creates a plain object from a Candidate message. Also converts values to other types if specified.
+                         * @param message Candidate
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1.LogprobsResult.Candidate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Candidate to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Candidate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TopCandidates. */
+                    interface ITopCandidates {
+
+                        /** TopCandidates candidates */
+                        candidates?: (google.ai.generativelanguage.v1.LogprobsResult.ICandidate[]|null);
+                    }
+
+                    /** Represents a TopCandidates. */
+                    class TopCandidates implements ITopCandidates {
+
+                        /**
+                         * Constructs a new TopCandidates.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates);
+
+                        /** TopCandidates candidates. */
+                        public candidates: google.ai.generativelanguage.v1.LogprobsResult.ICandidate[];
+
+                        /**
+                         * Creates a new TopCandidates instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TopCandidates instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Encodes the specified TopCandidates message. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.TopCandidates.verify|verify} messages.
+                         * @param message TopCandidates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TopCandidates message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1.LogprobsResult.TopCandidates.verify|verify} messages.
+                         * @param message TopCandidates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TopCandidates message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TopCandidates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Decodes a TopCandidates message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TopCandidates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Verifies a TopCandidates message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TopCandidates message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TopCandidates
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Creates a plain object from a TopCandidates message. Also converts values to other types if specified.
+                         * @param message TopCandidates
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1.LogprobsResult.TopCandidates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TopCandidates to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TopCandidates
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -2189,7 +2558,8 @@ export namespace google {
                     HARM_CATEGORY_HARASSMENT = 7,
                     HARM_CATEGORY_HATE_SPEECH = 8,
                     HARM_CATEGORY_SEXUALLY_EXPLICIT = 9,
-                    HARM_CATEGORY_DANGEROUS_CONTENT = 10
+                    HARM_CATEGORY_DANGEROUS_CONTENT = 10,
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 11
                 }
 
                 /** Properties of a SafetyRating. */
@@ -2424,7 +2794,8 @@ export namespace google {
                         BLOCK_LOW_AND_ABOVE = 1,
                         BLOCK_MEDIUM_AND_ABOVE = 2,
                         BLOCK_ONLY_HIGH = 3,
-                        BLOCK_NONE = 4
+                        BLOCK_NONE = 4,
+                        OFF = 5
                     }
                 }
 
@@ -4674,6 +5045,9 @@ export namespace google {
                     /** Tool functionDeclarations */
                     functionDeclarations?: (google.ai.generativelanguage.v1beta.IFunctionDeclaration[]|null);
 
+                    /** Tool googleSearchRetrieval */
+                    googleSearchRetrieval?: (google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval|null);
+
                     /** Tool codeExecution */
                     codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
                 }
@@ -4689,6 +5063,9 @@ export namespace google {
 
                     /** Tool functionDeclarations. */
                     public functionDeclarations: google.ai.generativelanguage.v1beta.IFunctionDeclaration[];
+
+                    /** Tool googleSearchRetrieval. */
+                    public googleSearchRetrieval?: (google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval|null);
 
                     /** Tool codeExecution. */
                     public codeExecution?: (google.ai.generativelanguage.v1beta.ICodeExecution|null);
@@ -4769,6 +5146,218 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GoogleSearchRetrieval. */
+                interface IGoogleSearchRetrieval {
+
+                    /** GoogleSearchRetrieval dynamicRetrievalConfig */
+                    dynamicRetrievalConfig?: (google.ai.generativelanguage.v1beta.IDynamicRetrievalConfig|null);
+                }
+
+                /** Represents a GoogleSearchRetrieval. */
+                class GoogleSearchRetrieval implements IGoogleSearchRetrieval {
+
+                    /**
+                     * Constructs a new GoogleSearchRetrieval.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval);
+
+                    /** GoogleSearchRetrieval dynamicRetrievalConfig. */
+                    public dynamicRetrievalConfig?: (google.ai.generativelanguage.v1beta.IDynamicRetrievalConfig|null);
+
+                    /**
+                     * Creates a new GoogleSearchRetrieval instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GoogleSearchRetrieval instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval): google.ai.generativelanguage.v1beta.GoogleSearchRetrieval;
+
+                    /**
+                     * Encodes the specified GoogleSearchRetrieval message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleSearchRetrieval.verify|verify} messages.
+                     * @param message GoogleSearchRetrieval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GoogleSearchRetrieval message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GoogleSearchRetrieval.verify|verify} messages.
+                     * @param message GoogleSearchRetrieval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGoogleSearchRetrieval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GoogleSearchRetrieval message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GoogleSearchRetrieval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GoogleSearchRetrieval;
+
+                    /**
+                     * Decodes a GoogleSearchRetrieval message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GoogleSearchRetrieval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GoogleSearchRetrieval;
+
+                    /**
+                     * Verifies a GoogleSearchRetrieval message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GoogleSearchRetrieval message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GoogleSearchRetrieval
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GoogleSearchRetrieval;
+
+                    /**
+                     * Creates a plain object from a GoogleSearchRetrieval message. Also converts values to other types if specified.
+                     * @param message GoogleSearchRetrieval
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.GoogleSearchRetrieval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GoogleSearchRetrieval to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GoogleSearchRetrieval
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DynamicRetrievalConfig. */
+                interface IDynamicRetrievalConfig {
+
+                    /** DynamicRetrievalConfig mode */
+                    mode?: (google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.Mode|keyof typeof google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.Mode|null);
+
+                    /** DynamicRetrievalConfig dynamicThreshold */
+                    dynamicThreshold?: (number|null);
+                }
+
+                /** Represents a DynamicRetrievalConfig. */
+                class DynamicRetrievalConfig implements IDynamicRetrievalConfig {
+
+                    /**
+                     * Constructs a new DynamicRetrievalConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IDynamicRetrievalConfig);
+
+                    /** DynamicRetrievalConfig mode. */
+                    public mode: (google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.Mode|keyof typeof google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.Mode);
+
+                    /** DynamicRetrievalConfig dynamicThreshold. */
+                    public dynamicThreshold?: (number|null);
+
+                    /** DynamicRetrievalConfig _dynamicThreshold. */
+                    public _dynamicThreshold?: "dynamicThreshold";
+
+                    /**
+                     * Creates a new DynamicRetrievalConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DynamicRetrievalConfig instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IDynamicRetrievalConfig): google.ai.generativelanguage.v1beta.DynamicRetrievalConfig;
+
+                    /**
+                     * Encodes the specified DynamicRetrievalConfig message. Does not implicitly {@link google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.verify|verify} messages.
+                     * @param message DynamicRetrievalConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IDynamicRetrievalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DynamicRetrievalConfig message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.DynamicRetrievalConfig.verify|verify} messages.
+                     * @param message DynamicRetrievalConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IDynamicRetrievalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DynamicRetrievalConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DynamicRetrievalConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.DynamicRetrievalConfig;
+
+                    /**
+                     * Decodes a DynamicRetrievalConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DynamicRetrievalConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.DynamicRetrievalConfig;
+
+                    /**
+                     * Verifies a DynamicRetrievalConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DynamicRetrievalConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DynamicRetrievalConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.DynamicRetrievalConfig;
+
+                    /**
+                     * Creates a plain object from a DynamicRetrievalConfig message. Also converts values to other types if specified.
+                     * @param message DynamicRetrievalConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.DynamicRetrievalConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DynamicRetrievalConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DynamicRetrievalConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DynamicRetrievalConfig {
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        MODE_DYNAMIC = 1
+                    }
                 }
 
                 /** Properties of a CodeExecution. */
@@ -5418,6 +6007,9 @@ export namespace google {
                     /** Schema maxItems */
                     maxItems?: (number|Long|string|null);
 
+                    /** Schema minItems */
+                    minItems?: (number|Long|string|null);
+
                     /** Schema properties */
                     properties?: ({ [k: string]: google.ai.generativelanguage.v1beta.ISchema }|null);
 
@@ -5454,6 +6046,9 @@ export namespace google {
 
                     /** Schema maxItems. */
                     public maxItems: (number|Long|string);
+
+                    /** Schema minItems. */
+                    public minItems: (number|Long|string);
 
                     /** Schema properties. */
                     public properties: { [k: string]: google.ai.generativelanguage.v1beta.ISchema };
@@ -6816,7 +7411,8 @@ export namespace google {
                     HARM_CATEGORY_HARASSMENT = 7,
                     HARM_CATEGORY_HATE_SPEECH = 8,
                     HARM_CATEGORY_SEXUALLY_EXPLICIT = 9,
-                    HARM_CATEGORY_DANGEROUS_CONTENT = 10
+                    HARM_CATEGORY_DANGEROUS_CONTENT = 10,
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 11
                 }
 
                 /** Properties of a ContentFilter. */
@@ -7270,7 +7866,8 @@ export namespace google {
                         BLOCK_LOW_AND_ABOVE = 1,
                         BLOCK_MEDIUM_AND_ABOVE = 2,
                         BLOCK_ONLY_HIGH = 3,
-                        BLOCK_NONE = 4
+                        BLOCK_NONE = 4,
+                        OFF = 5
                     }
                 }
 
@@ -8586,6 +9183,18 @@ export namespace google {
 
                     /** GenerationConfig responseSchema */
                     responseSchema?: (google.ai.generativelanguage.v1beta.ISchema|null);
+
+                    /** GenerationConfig presencePenalty */
+                    presencePenalty?: (number|null);
+
+                    /** GenerationConfig frequencyPenalty */
+                    frequencyPenalty?: (number|null);
+
+                    /** GenerationConfig responseLogprobs */
+                    responseLogprobs?: (boolean|null);
+
+                    /** GenerationConfig logprobs */
+                    logprobs?: (number|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -8621,6 +9230,18 @@ export namespace google {
                     /** GenerationConfig responseSchema. */
                     public responseSchema?: (google.ai.generativelanguage.v1beta.ISchema|null);
 
+                    /** GenerationConfig presencePenalty. */
+                    public presencePenalty?: (number|null);
+
+                    /** GenerationConfig frequencyPenalty. */
+                    public frequencyPenalty?: (number|null);
+
+                    /** GenerationConfig responseLogprobs. */
+                    public responseLogprobs?: (boolean|null);
+
+                    /** GenerationConfig logprobs. */
+                    public logprobs?: (number|null);
+
                     /** GenerationConfig _candidateCount. */
                     public _candidateCount?: "candidateCount";
 
@@ -8635,6 +9256,18 @@ export namespace google {
 
                     /** GenerationConfig _topK. */
                     public _topK?: "topK";
+
+                    /** GenerationConfig _presencePenalty. */
+                    public _presencePenalty?: "presencePenalty";
+
+                    /** GenerationConfig _frequencyPenalty. */
+                    public _frequencyPenalty?: "frequencyPenalty";
+
+                    /** GenerationConfig _responseLogprobs. */
+                    public _responseLogprobs?: "responseLogprobs";
+
+                    /** GenerationConfig _logprobs. */
+                    public _logprobs?: "logprobs";
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
@@ -9206,6 +9839,15 @@ export namespace google {
 
                     /** Candidate groundingAttributions */
                     groundingAttributions?: (google.ai.generativelanguage.v1beta.IGroundingAttribution[]|null);
+
+                    /** Candidate groundingMetadata */
+                    groundingMetadata?: (google.ai.generativelanguage.v1beta.IGroundingMetadata|null);
+
+                    /** Candidate avgLogprobs */
+                    avgLogprobs?: (number|null);
+
+                    /** Candidate logprobsResult */
+                    logprobsResult?: (google.ai.generativelanguage.v1beta.ILogprobsResult|null);
                 }
 
                 /** Represents a Candidate. */
@@ -9237,6 +9879,15 @@ export namespace google {
 
                     /** Candidate groundingAttributions. */
                     public groundingAttributions: google.ai.generativelanguage.v1beta.IGroundingAttribution[];
+
+                    /** Candidate groundingMetadata. */
+                    public groundingMetadata?: (google.ai.generativelanguage.v1beta.IGroundingMetadata|null);
+
+                    /** Candidate avgLogprobs. */
+                    public avgLogprobs: number;
+
+                    /** Candidate logprobsResult. */
+                    public logprobsResult?: (google.ai.generativelanguage.v1beta.ILogprobsResult|null);
 
                     /** Candidate _index. */
                     public _index?: "index";
@@ -9334,6 +9985,327 @@ export namespace google {
                         PROHIBITED_CONTENT = 8,
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10
+                    }
+                }
+
+                /** Properties of a LogprobsResult. */
+                interface ILogprobsResult {
+
+                    /** LogprobsResult topCandidates */
+                    topCandidates?: (google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates[]|null);
+
+                    /** LogprobsResult chosenCandidates */
+                    chosenCandidates?: (google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate[]|null);
+                }
+
+                /** Represents a LogprobsResult. */
+                class LogprobsResult implements ILogprobsResult {
+
+                    /**
+                     * Constructs a new LogprobsResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ILogprobsResult);
+
+                    /** LogprobsResult topCandidates. */
+                    public topCandidates: google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates[];
+
+                    /** LogprobsResult chosenCandidates. */
+                    public chosenCandidates: google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate[];
+
+                    /**
+                     * Creates a new LogprobsResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LogprobsResult instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ILogprobsResult): google.ai.generativelanguage.v1beta.LogprobsResult;
+
+                    /**
+                     * Encodes the specified LogprobsResult message. Does not implicitly {@link google.ai.generativelanguage.v1beta.LogprobsResult.verify|verify} messages.
+                     * @param message LogprobsResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ILogprobsResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LogprobsResult message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.LogprobsResult.verify|verify} messages.
+                     * @param message LogprobsResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ILogprobsResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LogprobsResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LogprobsResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.LogprobsResult;
+
+                    /**
+                     * Decodes a LogprobsResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LogprobsResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.LogprobsResult;
+
+                    /**
+                     * Verifies a LogprobsResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LogprobsResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LogprobsResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.LogprobsResult;
+
+                    /**
+                     * Creates a plain object from a LogprobsResult message. Also converts values to other types if specified.
+                     * @param message LogprobsResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.LogprobsResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LogprobsResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for LogprobsResult
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace LogprobsResult {
+
+                    /** Properties of a Candidate. */
+                    interface ICandidate {
+
+                        /** Candidate token */
+                        token?: (string|null);
+
+                        /** Candidate tokenId */
+                        tokenId?: (number|null);
+
+                        /** Candidate logProbability */
+                        logProbability?: (number|null);
+                    }
+
+                    /** Represents a Candidate. */
+                    class Candidate implements ICandidate {
+
+                        /**
+                         * Constructs a new Candidate.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate);
+
+                        /** Candidate token. */
+                        public token?: (string|null);
+
+                        /** Candidate tokenId. */
+                        public tokenId?: (number|null);
+
+                        /** Candidate logProbability. */
+                        public logProbability?: (number|null);
+
+                        /** Candidate _token. */
+                        public _token?: "token";
+
+                        /** Candidate _tokenId. */
+                        public _tokenId?: "tokenId";
+
+                        /** Candidate _logProbability. */
+                        public _logProbability?: "logProbability";
+
+                        /**
+                         * Creates a new Candidate instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Candidate instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate): google.ai.generativelanguage.v1beta.LogprobsResult.Candidate;
+
+                        /**
+                         * Encodes the specified Candidate message. Does not implicitly {@link google.ai.generativelanguage.v1beta.LogprobsResult.Candidate.verify|verify} messages.
+                         * @param message Candidate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Candidate message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.LogprobsResult.Candidate.verify|verify} messages.
+                         * @param message Candidate message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Candidate message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Candidate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.LogprobsResult.Candidate;
+
+                        /**
+                         * Decodes a Candidate message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Candidate
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.LogprobsResult.Candidate;
+
+                        /**
+                         * Verifies a Candidate message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Candidate message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Candidate
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.LogprobsResult.Candidate;
+
+                        /**
+                         * Creates a plain object from a Candidate message. Also converts values to other types if specified.
+                         * @param message Candidate
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.LogprobsResult.Candidate, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Candidate to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Candidate
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TopCandidates. */
+                    interface ITopCandidates {
+
+                        /** TopCandidates candidates */
+                        candidates?: (google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate[]|null);
+                    }
+
+                    /** Represents a TopCandidates. */
+                    class TopCandidates implements ITopCandidates {
+
+                        /**
+                         * Constructs a new TopCandidates.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates);
+
+                        /** TopCandidates candidates. */
+                        public candidates: google.ai.generativelanguage.v1beta.LogprobsResult.ICandidate[];
+
+                        /**
+                         * Creates a new TopCandidates instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TopCandidates instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates): google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Encodes the specified TopCandidates message. Does not implicitly {@link google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates.verify|verify} messages.
+                         * @param message TopCandidates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TopCandidates message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates.verify|verify} messages.
+                         * @param message TopCandidates message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.LogprobsResult.ITopCandidates, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TopCandidates message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TopCandidates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Decodes a TopCandidates message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TopCandidates
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Verifies a TopCandidates message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TopCandidates message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TopCandidates
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates;
+
+                        /**
+                         * Creates a plain object from a TopCandidates message. Also converts values to other types if specified.
+                         * @param message TopCandidates
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.LogprobsResult.TopCandidates, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TopCandidates to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TopCandidates
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -9749,6 +10721,766 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GroundingAttribution
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RetrievalMetadata. */
+                interface IRetrievalMetadata {
+
+                    /** RetrievalMetadata googleSearchDynamicRetrievalScore */
+                    googleSearchDynamicRetrievalScore?: (number|null);
+                }
+
+                /** Represents a RetrievalMetadata. */
+                class RetrievalMetadata implements IRetrievalMetadata {
+
+                    /**
+                     * Constructs a new RetrievalMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IRetrievalMetadata);
+
+                    /** RetrievalMetadata googleSearchDynamicRetrievalScore. */
+                    public googleSearchDynamicRetrievalScore: number;
+
+                    /**
+                     * Creates a new RetrievalMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RetrievalMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IRetrievalMetadata): google.ai.generativelanguage.v1beta.RetrievalMetadata;
+
+                    /**
+                     * Encodes the specified RetrievalMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalMetadata.verify|verify} messages.
+                     * @param message RetrievalMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IRetrievalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RetrievalMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.RetrievalMetadata.verify|verify} messages.
+                     * @param message RetrievalMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IRetrievalMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RetrievalMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RetrievalMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.RetrievalMetadata;
+
+                    /**
+                     * Decodes a RetrievalMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RetrievalMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.RetrievalMetadata;
+
+                    /**
+                     * Verifies a RetrievalMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RetrievalMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RetrievalMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.RetrievalMetadata;
+
+                    /**
+                     * Creates a plain object from a RetrievalMetadata message. Also converts values to other types if specified.
+                     * @param message RetrievalMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.RetrievalMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RetrievalMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RetrievalMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GroundingMetadata. */
+                interface IGroundingMetadata {
+
+                    /** GroundingMetadata searchEntryPoint */
+                    searchEntryPoint?: (google.ai.generativelanguage.v1beta.ISearchEntryPoint|null);
+
+                    /** GroundingMetadata groundingChunks */
+                    groundingChunks?: (google.ai.generativelanguage.v1beta.IGroundingChunk[]|null);
+
+                    /** GroundingMetadata groundingSupports */
+                    groundingSupports?: (google.ai.generativelanguage.v1beta.IGroundingSupport[]|null);
+
+                    /** GroundingMetadata retrievalMetadata */
+                    retrievalMetadata?: (google.ai.generativelanguage.v1beta.IRetrievalMetadata|null);
+                }
+
+                /** Represents a GroundingMetadata. */
+                class GroundingMetadata implements IGroundingMetadata {
+
+                    /**
+                     * Constructs a new GroundingMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IGroundingMetadata);
+
+                    /** GroundingMetadata searchEntryPoint. */
+                    public searchEntryPoint?: (google.ai.generativelanguage.v1beta.ISearchEntryPoint|null);
+
+                    /** GroundingMetadata groundingChunks. */
+                    public groundingChunks: google.ai.generativelanguage.v1beta.IGroundingChunk[];
+
+                    /** GroundingMetadata groundingSupports. */
+                    public groundingSupports: google.ai.generativelanguage.v1beta.IGroundingSupport[];
+
+                    /** GroundingMetadata retrievalMetadata. */
+                    public retrievalMetadata?: (google.ai.generativelanguage.v1beta.IRetrievalMetadata|null);
+
+                    /** GroundingMetadata _searchEntryPoint. */
+                    public _searchEntryPoint?: "searchEntryPoint";
+
+                    /** GroundingMetadata _retrievalMetadata. */
+                    public _retrievalMetadata?: "retrievalMetadata";
+
+                    /**
+                     * Creates a new GroundingMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GroundingMetadata instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IGroundingMetadata): google.ai.generativelanguage.v1beta.GroundingMetadata;
+
+                    /**
+                     * Encodes the specified GroundingMetadata message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingMetadata.verify|verify} messages.
+                     * @param message GroundingMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IGroundingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GroundingMetadata message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingMetadata.verify|verify} messages.
+                     * @param message GroundingMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGroundingMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GroundingMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GroundingMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingMetadata;
+
+                    /**
+                     * Decodes a GroundingMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GroundingMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingMetadata;
+
+                    /**
+                     * Verifies a GroundingMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GroundingMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GroundingMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingMetadata;
+
+                    /**
+                     * Creates a plain object from a GroundingMetadata message. Also converts values to other types if specified.
+                     * @param message GroundingMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.GroundingMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GroundingMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GroundingMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SearchEntryPoint. */
+                interface ISearchEntryPoint {
+
+                    /** SearchEntryPoint renderedContent */
+                    renderedContent?: (string|null);
+
+                    /** SearchEntryPoint sdkBlob */
+                    sdkBlob?: (Uint8Array|string|null);
+                }
+
+                /** Represents a SearchEntryPoint. */
+                class SearchEntryPoint implements ISearchEntryPoint {
+
+                    /**
+                     * Constructs a new SearchEntryPoint.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ISearchEntryPoint);
+
+                    /** SearchEntryPoint renderedContent. */
+                    public renderedContent: string;
+
+                    /** SearchEntryPoint sdkBlob. */
+                    public sdkBlob: (Uint8Array|string);
+
+                    /**
+                     * Creates a new SearchEntryPoint instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SearchEntryPoint instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ISearchEntryPoint): google.ai.generativelanguage.v1beta.SearchEntryPoint;
+
+                    /**
+                     * Encodes the specified SearchEntryPoint message. Does not implicitly {@link google.ai.generativelanguage.v1beta.SearchEntryPoint.verify|verify} messages.
+                     * @param message SearchEntryPoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ISearchEntryPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SearchEntryPoint message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.SearchEntryPoint.verify|verify} messages.
+                     * @param message SearchEntryPoint message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ISearchEntryPoint, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SearchEntryPoint message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SearchEntryPoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.SearchEntryPoint;
+
+                    /**
+                     * Decodes a SearchEntryPoint message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SearchEntryPoint
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.SearchEntryPoint;
+
+                    /**
+                     * Verifies a SearchEntryPoint message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SearchEntryPoint message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SearchEntryPoint
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.SearchEntryPoint;
+
+                    /**
+                     * Creates a plain object from a SearchEntryPoint message. Also converts values to other types if specified.
+                     * @param message SearchEntryPoint
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.SearchEntryPoint, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SearchEntryPoint to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SearchEntryPoint
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GroundingChunk. */
+                interface IGroundingChunk {
+
+                    /** GroundingChunk web */
+                    web?: (google.ai.generativelanguage.v1beta.GroundingChunk.IWeb|null);
+                }
+
+                /** Represents a GroundingChunk. */
+                class GroundingChunk implements IGroundingChunk {
+
+                    /**
+                     * Constructs a new GroundingChunk.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IGroundingChunk);
+
+                    /** GroundingChunk web. */
+                    public web?: (google.ai.generativelanguage.v1beta.GroundingChunk.IWeb|null);
+
+                    /** GroundingChunk chunkType. */
+                    public chunkType?: "web";
+
+                    /**
+                     * Creates a new GroundingChunk instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GroundingChunk instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IGroundingChunk): google.ai.generativelanguage.v1beta.GroundingChunk;
+
+                    /**
+                     * Encodes the specified GroundingChunk message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.verify|verify} messages.
+                     * @param message GroundingChunk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IGroundingChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GroundingChunk message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.verify|verify} messages.
+                     * @param message GroundingChunk message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGroundingChunk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GroundingChunk message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GroundingChunk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingChunk;
+
+                    /**
+                     * Decodes a GroundingChunk message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GroundingChunk
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingChunk;
+
+                    /**
+                     * Verifies a GroundingChunk message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GroundingChunk message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GroundingChunk
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingChunk;
+
+                    /**
+                     * Creates a plain object from a GroundingChunk message. Also converts values to other types if specified.
+                     * @param message GroundingChunk
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.GroundingChunk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GroundingChunk to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GroundingChunk
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GroundingChunk {
+
+                    /** Properties of a Web. */
+                    interface IWeb {
+
+                        /** Web uri */
+                        uri?: (string|null);
+
+                        /** Web title */
+                        title?: (string|null);
+                    }
+
+                    /** Represents a Web. */
+                    class Web implements IWeb {
+
+                        /**
+                         * Constructs a new Web.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.IWeb);
+
+                        /** Web uri. */
+                        public uri?: (string|null);
+
+                        /** Web title. */
+                        public title?: (string|null);
+
+                        /** Web _uri. */
+                        public _uri?: "uri";
+
+                        /** Web _title. */
+                        public _title?: "title";
+
+                        /**
+                         * Creates a new Web instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Web instance
+                         */
+                        public static create(properties?: google.ai.generativelanguage.v1beta.GroundingChunk.IWeb): google.ai.generativelanguage.v1beta.GroundingChunk.Web;
+
+                        /**
+                         * Encodes the specified Web message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Web.verify|verify} messages.
+                         * @param message Web message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.ai.generativelanguage.v1beta.GroundingChunk.IWeb, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Web message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingChunk.Web.verify|verify} messages.
+                         * @param message Web message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.ai.generativelanguage.v1beta.GroundingChunk.IWeb, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Web message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Web
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingChunk.Web;
+
+                        /**
+                         * Decodes a Web message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Web
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingChunk.Web;
+
+                        /**
+                         * Verifies a Web message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Web message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Web
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingChunk.Web;
+
+                        /**
+                         * Creates a plain object from a Web message. Also converts values to other types if specified.
+                         * @param message Web
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.ai.generativelanguage.v1beta.GroundingChunk.Web, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Web to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Web
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a Segment. */
+                interface ISegment {
+
+                    /** Segment partIndex */
+                    partIndex?: (number|null);
+
+                    /** Segment startIndex */
+                    startIndex?: (number|null);
+
+                    /** Segment endIndex */
+                    endIndex?: (number|null);
+
+                    /** Segment text */
+                    text?: (string|null);
+                }
+
+                /** Represents a Segment. */
+                class Segment implements ISegment {
+
+                    /**
+                     * Constructs a new Segment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.ISegment);
+
+                    /** Segment partIndex. */
+                    public partIndex: number;
+
+                    /** Segment startIndex. */
+                    public startIndex: number;
+
+                    /** Segment endIndex. */
+                    public endIndex: number;
+
+                    /** Segment text. */
+                    public text: string;
+
+                    /**
+                     * Creates a new Segment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Segment instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.ISegment): google.ai.generativelanguage.v1beta.Segment;
+
+                    /**
+                     * Encodes the specified Segment message. Does not implicitly {@link google.ai.generativelanguage.v1beta.Segment.verify|verify} messages.
+                     * @param message Segment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.ISegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Segment message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.Segment.verify|verify} messages.
+                     * @param message Segment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.ISegment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Segment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Segment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.Segment;
+
+                    /**
+                     * Decodes a Segment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Segment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.Segment;
+
+                    /**
+                     * Verifies a Segment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Segment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Segment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.Segment;
+
+                    /**
+                     * Creates a plain object from a Segment message. Also converts values to other types if specified.
+                     * @param message Segment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.Segment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Segment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Segment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GroundingSupport. */
+                interface IGroundingSupport {
+
+                    /** GroundingSupport segment */
+                    segment?: (google.ai.generativelanguage.v1beta.ISegment|null);
+
+                    /** GroundingSupport groundingChunkIndices */
+                    groundingChunkIndices?: (number[]|null);
+
+                    /** GroundingSupport confidenceScores */
+                    confidenceScores?: (number[]|null);
+                }
+
+                /** Represents a GroundingSupport. */
+                class GroundingSupport implements IGroundingSupport {
+
+                    /**
+                     * Constructs a new GroundingSupport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IGroundingSupport);
+
+                    /** GroundingSupport segment. */
+                    public segment?: (google.ai.generativelanguage.v1beta.ISegment|null);
+
+                    /** GroundingSupport groundingChunkIndices. */
+                    public groundingChunkIndices: number[];
+
+                    /** GroundingSupport confidenceScores. */
+                    public confidenceScores: number[];
+
+                    /** GroundingSupport _segment. */
+                    public _segment?: "segment";
+
+                    /**
+                     * Creates a new GroundingSupport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GroundingSupport instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IGroundingSupport): google.ai.generativelanguage.v1beta.GroundingSupport;
+
+                    /**
+                     * Encodes the specified GroundingSupport message. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingSupport.verify|verify} messages.
+                     * @param message GroundingSupport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IGroundingSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GroundingSupport message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.GroundingSupport.verify|verify} messages.
+                     * @param message GroundingSupport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IGroundingSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GroundingSupport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GroundingSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.GroundingSupport;
+
+                    /**
+                     * Decodes a GroundingSupport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GroundingSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.GroundingSupport;
+
+                    /**
+                     * Verifies a GroundingSupport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GroundingSupport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GroundingSupport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.GroundingSupport;
+
+                    /**
+                     * Creates a plain object from a GroundingSupport message. Also converts values to other types if specified.
+                     * @param message GroundingSupport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.GroundingSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GroundingSupport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GroundingSupport
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13218,6 +14950,9 @@ export namespace google {
 
                     /** TunedModel tuningTask */
                     tuningTask?: (google.ai.generativelanguage.v1beta.ITuningTask|null);
+
+                    /** TunedModel readerProjectNumbers */
+                    readerProjectNumbers?: ((number|Long|string)[]|null);
                 }
 
                 /** Represents a TunedModel. */
@@ -13264,6 +14999,9 @@ export namespace google {
 
                     /** TunedModel tuningTask. */
                     public tuningTask?: (google.ai.generativelanguage.v1beta.ITuningTask|null);
+
+                    /** TunedModel readerProjectNumbers. */
+                    public readerProjectNumbers: (number|Long|string)[];
 
                     /** TunedModel sourceModel. */
                     public sourceModel?: ("tunedModelSource"|"baseModel");
@@ -15225,6 +16963,257 @@ export namespace google {
 
                     /**
                      * Gets the default type url for TransferOwnershipResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a PredictionService */
+                class PredictionService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new PredictionService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new PredictionService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PredictionService;
+
+                    /**
+                     * Calls Predict.
+                     * @param request PredictRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PredictResponse
+                     */
+                    public predict(request: google.ai.generativelanguage.v1beta.IPredictRequest, callback: google.ai.generativelanguage.v1beta.PredictionService.PredictCallback): void;
+
+                    /**
+                     * Calls Predict.
+                     * @param request PredictRequest message or plain object
+                     * @returns Promise
+                     */
+                    public predict(request: google.ai.generativelanguage.v1beta.IPredictRequest): Promise<google.ai.generativelanguage.v1beta.PredictResponse>;
+                }
+
+                namespace PredictionService {
+
+                    /**
+                     * Callback as used by {@link google.ai.generativelanguage.v1beta.PredictionService|predict}.
+                     * @param error Error, if any
+                     * @param [response] PredictResponse
+                     */
+                    type PredictCallback = (error: (Error|null), response?: google.ai.generativelanguage.v1beta.PredictResponse) => void;
+                }
+
+                /** Properties of a PredictRequest. */
+                interface IPredictRequest {
+
+                    /** PredictRequest model */
+                    model?: (string|null);
+
+                    /** PredictRequest instances */
+                    instances?: (google.protobuf.IValue[]|null);
+
+                    /** PredictRequest parameters */
+                    parameters?: (google.protobuf.IValue|null);
+                }
+
+                /** Represents a PredictRequest. */
+                class PredictRequest implements IPredictRequest {
+
+                    /**
+                     * Constructs a new PredictRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IPredictRequest);
+
+                    /** PredictRequest model. */
+                    public model: string;
+
+                    /** PredictRequest instances. */
+                    public instances: google.protobuf.IValue[];
+
+                    /** PredictRequest parameters. */
+                    public parameters?: (google.protobuf.IValue|null);
+
+                    /**
+                     * Creates a new PredictRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PredictRequest instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IPredictRequest): google.ai.generativelanguage.v1beta.PredictRequest;
+
+                    /**
+                     * Encodes the specified PredictRequest message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictRequest.verify|verify} messages.
+                     * @param message PredictRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IPredictRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PredictRequest message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictRequest.verify|verify} messages.
+                     * @param message PredictRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IPredictRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PredictRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PredictRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.PredictRequest;
+
+                    /**
+                     * Decodes a PredictRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PredictRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.PredictRequest;
+
+                    /**
+                     * Verifies a PredictRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PredictRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PredictRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.PredictRequest;
+
+                    /**
+                     * Creates a plain object from a PredictRequest message. Also converts values to other types if specified.
+                     * @param message PredictRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.PredictRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PredictRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PredictRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PredictResponse. */
+                interface IPredictResponse {
+
+                    /** PredictResponse predictions */
+                    predictions?: (google.protobuf.IValue[]|null);
+                }
+
+                /** Represents a PredictResponse. */
+                class PredictResponse implements IPredictResponse {
+
+                    /**
+                     * Constructs a new PredictResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ai.generativelanguage.v1beta.IPredictResponse);
+
+                    /** PredictResponse predictions. */
+                    public predictions: google.protobuf.IValue[];
+
+                    /**
+                     * Creates a new PredictResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PredictResponse instance
+                     */
+                    public static create(properties?: google.ai.generativelanguage.v1beta.IPredictResponse): google.ai.generativelanguage.v1beta.PredictResponse;
+
+                    /**
+                     * Encodes the specified PredictResponse message. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictResponse.verify|verify} messages.
+                     * @param message PredictResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ai.generativelanguage.v1beta.IPredictResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PredictResponse message, length delimited. Does not implicitly {@link google.ai.generativelanguage.v1beta.PredictResponse.verify|verify} messages.
+                     * @param message PredictResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ai.generativelanguage.v1beta.IPredictResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PredictResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PredictResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ai.generativelanguage.v1beta.PredictResponse;
+
+                    /**
+                     * Decodes a PredictResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PredictResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ai.generativelanguage.v1beta.PredictResponse;
+
+                    /**
+                     * Verifies a PredictResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PredictResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PredictResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ai.generativelanguage.v1beta.PredictResponse;
+
+                    /**
+                     * Creates a plain object from a PredictResponse message. Also converts values to other types if specified.
+                     * @param message PredictResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ai.generativelanguage.v1beta.PredictResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PredictResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PredictResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
