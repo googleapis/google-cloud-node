@@ -12,8 +12,76 @@
     },
     "snippets": [
         {
+            "regionTag": "run_v2_generated_Builds_SubmitBuild_async",
+            "title": "Builds submitBuild Sample",
+            "origin": "API_DEFINITION",
+            "description": " Submits a build in a given project.",
+            "canonical": true,
+            "file": "builds.submit_build.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 92,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SubmitBuild",
+                "fullName": "google.cloud.run.v2.Builds.SubmitBuild",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "parent",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "storage_source",
+                        "type": ".google.cloud.run.v2.StorageSource"
+                    },
+                    {
+                        "name": "image_uri",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "buildpack_build",
+                        "type": ".google.cloud.run.v2.SubmitBuildRequest.BuildpacksBuild"
+                    },
+                    {
+                        "name": "docker_build",
+                        "type": ".google.cloud.run.v2.SubmitBuildRequest.DockerBuild"
+                    },
+                    {
+                        "name": "service_account",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "worker_pool",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "tags",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.run.v2.SubmitBuildResponse",
+                "client": {
+                    "shortName": "BuildsClient",
+                    "fullName": "google.cloud.run.v2.BuildsClient"
+                },
+                "method": {
+                    "shortName": "SubmitBuild",
+                    "fullName": "google.cloud.run.v2.Builds.SubmitBuild",
+                    "service": {
+                        "shortName": "Builds",
+                        "fullName": "google.cloud.run.v2.Builds"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "run_v2_generated_Executions_GetExecution_async",
-            "title": "Executions getExecution Sample",
+            "title": "Builds getExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Gets information about an Execution.",
             "canonical": true,
@@ -53,7 +121,7 @@
         },
         {
             "regionTag": "run_v2_generated_Executions_ListExecutions_async",
-            "title": "Executions listExecutions Sample",
+            "title": "Builds listExecutions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Executions from a Job. Results are sorted by creation time, descending.",
             "canonical": true,
@@ -105,7 +173,7 @@
         },
         {
             "regionTag": "run_v2_generated_Executions_DeleteExecution_async",
-            "title": "Executions deleteExecution Sample",
+            "title": "Builds deleteExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes an Execution.",
             "canonical": true,
@@ -153,7 +221,7 @@
         },
         {
             "regionTag": "run_v2_generated_Executions_CancelExecution_async",
-            "title": "Executions cancelExecution Sample",
+            "title": "Builds cancelExecution Sample",
             "origin": "API_DEFINITION",
             "description": " Cancels an Execution.",
             "canonical": true,
@@ -201,7 +269,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_CreateJob_async",
-            "title": "Executions createJob Sample",
+            "title": "Builds createJob Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a Job.",
             "canonical": true,
@@ -253,7 +321,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_GetJob_async",
-            "title": "Executions getJob Sample",
+            "title": "Builds getJob Sample",
             "origin": "API_DEFINITION",
             "description": " Gets information about a Job.",
             "canonical": true,
@@ -293,7 +361,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_ListJobs_async",
-            "title": "Executions listJobs Sample",
+            "title": "Builds listJobs Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Jobs. Results are sorted by creation time, descending.",
             "canonical": true,
@@ -345,7 +413,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_UpdateJob_async",
-            "title": "Executions updateJob Sample",
+            "title": "Builds updateJob Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Job.",
             "canonical": true,
@@ -393,7 +461,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_DeleteJob_async",
-            "title": "Executions deleteJob Sample",
+            "title": "Builds deleteJob Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Job.",
             "canonical": true,
@@ -441,7 +509,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_RunJob_async",
-            "title": "Executions runJob Sample",
+            "title": "Builds runJob Sample",
             "origin": "API_DEFINITION",
             "description": " Triggers creation of a new Execution of this Job.",
             "canonical": true,
@@ -493,7 +561,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_GetIamPolicy_async",
-            "title": "Executions getIamPolicy Sample",
+            "title": "Builds getIamPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the IAM Access Control policy currently in effect for the given Job. This result does not include any inherited policies.",
             "canonical": true,
@@ -537,7 +605,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_SetIamPolicy_async",
-            "title": "Executions setIamPolicy Sample",
+            "title": "Builds setIamPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Sets the IAM Access control policy for the specified Job. Overwrites any existing policy.",
             "canonical": true,
@@ -585,7 +653,7 @@
         },
         {
             "regionTag": "run_v2_generated_Jobs_TestIamPermissions_async",
-            "title": "Executions testIamPermissions Sample",
+            "title": "Builds testIamPermissions Sample",
             "origin": "API_DEFINITION",
             "description": " Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.",
             "canonical": true,
@@ -629,7 +697,7 @@
         },
         {
             "regionTag": "run_v2_generated_Revisions_GetRevision_async",
-            "title": "Executions getRevision Sample",
+            "title": "Builds getRevision Sample",
             "origin": "API_DEFINITION",
             "description": " Gets information about a Revision.",
             "canonical": true,
@@ -669,7 +737,7 @@
         },
         {
             "regionTag": "run_v2_generated_Revisions_ListRevisions_async",
-            "title": "Executions listRevisions Sample",
+            "title": "Builds listRevisions Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Revisions from a given Service, or from a given location.  Results are sorted by creation time, descending.",
             "canonical": true,
@@ -721,7 +789,7 @@
         },
         {
             "regionTag": "run_v2_generated_Revisions_DeleteRevision_async",
-            "title": "Executions deleteRevision Sample",
+            "title": "Builds deleteRevision Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Revision.",
             "canonical": true,
@@ -769,7 +837,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_CreateService_async",
-            "title": "Executions createService Sample",
+            "title": "Builds createService Sample",
             "origin": "API_DEFINITION",
             "description": " Creates a new Service in a given project and location.",
             "canonical": true,
@@ -821,7 +889,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_GetService_async",
-            "title": "Executions getService Sample",
+            "title": "Builds getService Sample",
             "origin": "API_DEFINITION",
             "description": " Gets information about a Service.",
             "canonical": true,
@@ -861,7 +929,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_ListServices_async",
-            "title": "Executions listServices Sample",
+            "title": "Builds listServices Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Services. Results are sorted by creation time, descending.",
             "canonical": true,
@@ -913,7 +981,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_UpdateService_async",
-            "title": "Executions updateService Sample",
+            "title": "Builds updateService Sample",
             "origin": "API_DEFINITION",
             "description": " Updates a Service.",
             "canonical": true,
@@ -965,7 +1033,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_DeleteService_async",
-            "title": "Executions deleteService Sample",
+            "title": "Builds deleteService Sample",
             "origin": "API_DEFINITION",
             "description": " Deletes a Service. This will cause the Service to stop serving traffic and will delete all revisions.",
             "canonical": true,
@@ -1013,7 +1081,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_GetIamPolicy_async",
-            "title": "Executions getIamPolicy Sample",
+            "title": "Builds getIamPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Gets the IAM Access Control policy currently in effect for the given Cloud Run Service. This result does not include any inherited policies.",
             "canonical": true,
@@ -1057,7 +1125,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_SetIamPolicy_async",
-            "title": "Executions setIamPolicy Sample",
+            "title": "Builds setIamPolicy Sample",
             "origin": "API_DEFINITION",
             "description": " Sets the IAM Access control policy for the specified Service. Overwrites any existing policy.",
             "canonical": true,
@@ -1105,7 +1173,7 @@
         },
         {
             "regionTag": "run_v2_generated_Services_TestIamPermissions_async",
-            "title": "Executions testIamPermissions Sample",
+            "title": "Builds testIamPermissions Sample",
             "origin": "API_DEFINITION",
             "description": " Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.",
             "canonical": true,
@@ -1149,7 +1217,7 @@
         },
         {
             "regionTag": "run_v2_generated_Tasks_GetTask_async",
-            "title": "Executions getTask Sample",
+            "title": "Builds getTask Sample",
             "origin": "API_DEFINITION",
             "description": " Gets information about a Task.",
             "canonical": true,
@@ -1189,7 +1257,7 @@
         },
         {
             "regionTag": "run_v2_generated_Tasks_ListTasks_async",
-            "title": "Executions listTasks Sample",
+            "title": "Builds listTasks Sample",
             "origin": "API_DEFINITION",
             "description": " Lists Tasks from an Execution of a Job.",
             "canonical": true,

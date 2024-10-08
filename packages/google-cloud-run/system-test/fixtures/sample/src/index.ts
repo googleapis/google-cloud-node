@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  BuildsClient,
   ExecutionsClient,
   JobsClient,
   RevisionsClient,
@@ -25,6 +26,9 @@ import {
 } from '@google-cloud/run';
 
 // check that the client class type name can be used
+function doStuffWithBuildsClient(client: BuildsClient) {
+  client.close();
+}
 function doStuffWithExecutionsClient(client: ExecutionsClient) {
   client.close();
 }
@@ -42,6 +46,9 @@ function doStuffWithTasksClient(client: TasksClient) {
 }
 
 function main() {
+  // check that the client instance can be created
+  const buildsClient = new BuildsClient();
+  doStuffWithBuildsClient(buildsClient);
   // check that the client instance can be created
   const executionsClient = new ExecutionsClient();
   doStuffWithExecutionsClient(executionsClient);
