@@ -23,6 +23,8 @@ function main() {
   const accountIssueServiceClient = new accounts.AccountIssueServiceClient();
   const accountsServiceClient = new accounts.AccountsServiceClient();
   const accountTaxServiceClient = new accounts.AccountTaxServiceClient();
+  const autofeedSettingsServiceClient =
+    new accounts.AutofeedSettingsServiceClient();
   const businessIdentityServiceClient =
     new accounts.BusinessIdentityServiceClient();
   const businessInfoServiceClient = new accounts.BusinessInfoServiceClient();

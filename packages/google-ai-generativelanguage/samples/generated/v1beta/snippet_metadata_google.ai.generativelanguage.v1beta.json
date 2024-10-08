@@ -1396,6 +1396,54 @@
             }
         },
         {
+            "regionTag": "generativelanguage_v1beta_generated_PredictionService_Predict_async",
+            "title": "CacheService predict Sample",
+            "origin": "API_DEFINITION",
+            "description": " Performs a prediction request.",
+            "canonical": true,
+            "file": "prediction_service.predict.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Predict",
+                "fullName": "google.ai.generativelanguage.v1beta.PredictionService.Predict",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "model",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "instances",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "parameters",
+                        "type": ".google.protobuf.Value"
+                    }
+                ],
+                "resultType": ".google.ai.generativelanguage.v1beta.PredictResponse",
+                "client": {
+                    "shortName": "PredictionServiceClient",
+                    "fullName": "google.ai.generativelanguage.v1beta.PredictionServiceClient"
+                },
+                "method": {
+                    "shortName": "Predict",
+                    "fullName": "google.ai.generativelanguage.v1beta.PredictionService.Predict",
+                    "service": {
+                        "shortName": "PredictionService",
+                        "fullName": "google.ai.generativelanguage.v1beta.PredictionService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "generativelanguage_v1beta_generated_RetrieverService_CreateCorpus_async",
             "title": "CacheService createCorpus Sample",
             "origin": "API_DEFINITION",

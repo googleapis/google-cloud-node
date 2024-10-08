@@ -28,6 +28,8 @@ function main() {
   const modelServiceClient = new generativelanguage.ModelServiceClient();
   const permissionServiceClient =
     new generativelanguage.PermissionServiceClient();
+  const predictionServiceClient =
+    new generativelanguage.PredictionServiceClient();
   const retrieverServiceClient =
     new generativelanguage.RetrieverServiceClient();
   const textServiceClient = new generativelanguage.TextServiceClient();

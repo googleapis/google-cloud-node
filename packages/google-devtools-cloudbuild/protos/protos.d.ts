@@ -7468,7 +7468,8 @@ export namespace google {
                     /** DefaultLogsBucketBehavior enum. */
                     enum DefaultLogsBucketBehavior {
                         DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED = 0,
-                        REGIONAL_USER_OWNED_BUCKET = 1
+                        REGIONAL_USER_OWNED_BUCKET = 1,
+                        LEGACY_BUCKET = 2
                     }
                 }
 
