@@ -303,6 +303,70 @@
         }
       }
     },
+    "GenerativeQuestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MerchantCenterAccountLinkService": {
       "clients": {
         "grpc": {
@@ -504,6 +568,11 @@
                 "importProducts"
               ]
             },
+            "ExportProducts": {
+              "methods": [
+                "exportProducts"
+              ]
+            },
             "SetInventory": {
               "methods": [
                 "setInventory"
@@ -569,6 +638,11 @@
             "ImportProducts": {
               "methods": [
                 "importProducts"
+              ]
+            },
+            "ExportProducts": {
+              "methods": [
+                "exportProducts"
               ]
             },
             "SetInventory": {
@@ -842,6 +916,11 @@
                 "importUserEvents"
               ]
             },
+            "ExportUserEvents": {
+              "methods": [
+                "exportUserEvents"
+              ]
+            },
             "RejoinUserEvents": {
               "methods": [
                 "rejoinUserEvents"
@@ -870,6 +949,11 @@
             "ImportUserEvents": {
               "methods": [
                 "importUserEvents"
+              ]
+            },
+            "ExportUserEvents": {
+              "methods": [
+                "exportUserEvents"
               ]
             },
             "RejoinUserEvents": {

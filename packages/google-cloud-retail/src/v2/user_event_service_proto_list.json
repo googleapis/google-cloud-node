@@ -7,6 +7,8 @@
   "../../protos/google/cloud/retail/v2/control.proto",
   "../../protos/google/cloud/retail/v2/control_service.proto",
   "../../protos/google/cloud/retail/v2/export_config.proto",
+  "../../protos/google/cloud/retail/v2/generative_question.proto",
+  "../../protos/google/cloud/retail/v2/generative_question_service.proto",
   "../../protos/google/cloud/retail/v2/import_config.proto",
   "../../protos/google/cloud/retail/v2/model.proto",
   "../../protos/google/cloud/retail/v2/model_service.proto",

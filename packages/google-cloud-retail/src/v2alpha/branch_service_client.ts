@@ -455,8 +455,8 @@ export class BranchServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Lists all {@link protos.google.cloud.retail.v2alpha.Branch|Branch}s under the specified
-   * parent {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
+   * Lists all instances of {@link protos.google.cloud.retail.v2alpha.Branch|Branch} under
+   * the specified parent {@link protos.google.cloud.retail.v2alpha.Catalog|Catalog}.
    *
    * @param {Object} request
    *   The request object that will be sent.

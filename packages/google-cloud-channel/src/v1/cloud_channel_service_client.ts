@@ -852,7 +852,12 @@ export class CloudChannelServiceClient {
    *   Required. The reseller account's resource name.
    *   Parent uses the format: accounts/{account_id}
    * @param {string} request.domain
-   *   Required. Domain to fetch for Cloud Identity account customer.
+   *   Required. Domain to fetch for Cloud Identity account customers, including
+   *   domain and team customers. For team customers, please use the domain for
+   *   their emails.
+   * @param {string} [request.primaryAdminEmail]
+   *   Optional. Primary admin email to fetch for Cloud Identity account team
+   *   customer.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1268,6 +1273,8 @@ export class CloudChannelServiceClient {
    *   Required. Customer domain.
    * @param {string} request.cloudIdentityId
    *   Required. Customer's Cloud Identity ID
+   * @param {string} request.primaryAdminEmail
+   *   Required. Customer's primary admin email.
    * @param {string} request.parent
    *   Required. The resource name of the reseller's account.
    *   Parent takes the format: accounts/{account_id} or

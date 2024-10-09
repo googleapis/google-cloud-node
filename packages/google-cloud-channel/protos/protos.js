@@ -19628,6 +19628,7 @@
                          * @interface ICheckCloudIdentityAccountsExistRequest
                          * @property {string|null} [parent] CheckCloudIdentityAccountsExistRequest parent
                          * @property {string|null} [domain] CheckCloudIdentityAccountsExistRequest domain
+                         * @property {string|null} [primaryAdminEmail] CheckCloudIdentityAccountsExistRequest primaryAdminEmail
                          */
     
                         /**
@@ -19662,6 +19663,14 @@
                         CheckCloudIdentityAccountsExistRequest.prototype.domain = "";
     
                         /**
+                         * CheckCloudIdentityAccountsExistRequest primaryAdminEmail.
+                         * @member {string} primaryAdminEmail
+                         * @memberof google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest
+                         * @instance
+                         */
+                        CheckCloudIdentityAccountsExistRequest.prototype.primaryAdminEmail = "";
+    
+                        /**
                          * Creates a new CheckCloudIdentityAccountsExistRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest
@@ -19689,6 +19698,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                             if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.domain);
+                            if (message.primaryAdminEmail != null && Object.hasOwnProperty.call(message, "primaryAdminEmail"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.primaryAdminEmail);
                             return writer;
                         };
     
@@ -19729,6 +19740,10 @@
                                     }
                                 case 2: {
                                         message.domain = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.primaryAdminEmail = reader.string();
                                         break;
                                     }
                                 default:
@@ -19772,6 +19787,9 @@
                             if (message.domain != null && message.hasOwnProperty("domain"))
                                 if (!$util.isString(message.domain))
                                     return "domain: string expected";
+                            if (message.primaryAdminEmail != null && message.hasOwnProperty("primaryAdminEmail"))
+                                if (!$util.isString(message.primaryAdminEmail))
+                                    return "primaryAdminEmail: string expected";
                             return null;
                         };
     
@@ -19791,6 +19809,8 @@
                                 message.parent = String(object.parent);
                             if (object.domain != null)
                                 message.domain = String(object.domain);
+                            if (object.primaryAdminEmail != null)
+                                message.primaryAdminEmail = String(object.primaryAdminEmail);
                             return message;
                         };
     
@@ -19810,11 +19830,14 @@
                             if (options.defaults) {
                                 object.parent = "";
                                 object.domain = "";
+                                object.primaryAdminEmail = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
                             if (message.domain != null && message.hasOwnProperty("domain"))
                                 object.domain = message.domain;
+                            if (message.primaryAdminEmail != null && message.hasOwnProperty("primaryAdminEmail"))
+                                object.primaryAdminEmail = message.primaryAdminEmail;
                             return object;
                         };
     
@@ -19857,6 +19880,8 @@
                          * @property {boolean|null} [owned] CloudIdentityCustomerAccount owned
                          * @property {string|null} [customerName] CloudIdentityCustomerAccount customerName
                          * @property {string|null} [customerCloudIdentityId] CloudIdentityCustomerAccount customerCloudIdentityId
+                         * @property {google.cloud.channel.v1.CloudIdentityInfo.CustomerType|null} [customerType] CloudIdentityCustomerAccount customerType
+                         * @property {string|null} [channelPartnerCloudIdentityId] CloudIdentityCustomerAccount channelPartnerCloudIdentityId
                          */
     
                         /**
@@ -19907,6 +19932,22 @@
                         CloudIdentityCustomerAccount.prototype.customerCloudIdentityId = "";
     
                         /**
+                         * CloudIdentityCustomerAccount customerType.
+                         * @member {google.cloud.channel.v1.CloudIdentityInfo.CustomerType} customerType
+                         * @memberof google.cloud.channel.v1.CloudIdentityCustomerAccount
+                         * @instance
+                         */
+                        CloudIdentityCustomerAccount.prototype.customerType = 0;
+    
+                        /**
+                         * CloudIdentityCustomerAccount channelPartnerCloudIdentityId.
+                         * @member {string} channelPartnerCloudIdentityId
+                         * @memberof google.cloud.channel.v1.CloudIdentityCustomerAccount
+                         * @instance
+                         */
+                        CloudIdentityCustomerAccount.prototype.channelPartnerCloudIdentityId = "";
+    
+                        /**
                          * Creates a new CloudIdentityCustomerAccount instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.channel.v1.CloudIdentityCustomerAccount
@@ -19938,6 +19979,10 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.customerName);
                             if (message.customerCloudIdentityId != null && Object.hasOwnProperty.call(message, "customerCloudIdentityId"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.customerCloudIdentityId);
+                            if (message.customerType != null && Object.hasOwnProperty.call(message, "customerType"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.customerType);
+                            if (message.channelPartnerCloudIdentityId != null && Object.hasOwnProperty.call(message, "channelPartnerCloudIdentityId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.channelPartnerCloudIdentityId);
                             return writer;
                         };
     
@@ -19988,6 +20033,14 @@
                                         message.customerCloudIdentityId = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.customerType = reader.int32();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.channelPartnerCloudIdentityId = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -20035,6 +20088,18 @@
                             if (message.customerCloudIdentityId != null && message.hasOwnProperty("customerCloudIdentityId"))
                                 if (!$util.isString(message.customerCloudIdentityId))
                                     return "customerCloudIdentityId: string expected";
+                            if (message.customerType != null && message.hasOwnProperty("customerType"))
+                                switch (message.customerType) {
+                                default:
+                                    return "customerType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.channelPartnerCloudIdentityId != null && message.hasOwnProperty("channelPartnerCloudIdentityId"))
+                                if (!$util.isString(message.channelPartnerCloudIdentityId))
+                                    return "channelPartnerCloudIdentityId: string expected";
                             return null;
                         };
     
@@ -20058,6 +20123,28 @@
                                 message.customerName = String(object.customerName);
                             if (object.customerCloudIdentityId != null)
                                 message.customerCloudIdentityId = String(object.customerCloudIdentityId);
+                            switch (object.customerType) {
+                            default:
+                                if (typeof object.customerType === "number") {
+                                    message.customerType = object.customerType;
+                                    break;
+                                }
+                                break;
+                            case "CUSTOMER_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.customerType = 0;
+                                break;
+                            case "DOMAIN":
+                            case 1:
+                                message.customerType = 1;
+                                break;
+                            case "TEAM":
+                            case 2:
+                                message.customerType = 2;
+                                break;
+                            }
+                            if (object.channelPartnerCloudIdentityId != null)
+                                message.channelPartnerCloudIdentityId = String(object.channelPartnerCloudIdentityId);
                             return message;
                         };
     
@@ -20079,6 +20166,8 @@
                                 object.owned = false;
                                 object.customerName = "";
                                 object.customerCloudIdentityId = "";
+                                object.customerType = options.enums === String ? "CUSTOMER_TYPE_UNSPECIFIED" : 0;
+                                object.channelPartnerCloudIdentityId = "";
                             }
                             if (message.existing != null && message.hasOwnProperty("existing"))
                                 object.existing = message.existing;
@@ -20088,6 +20177,10 @@
                                 object.customerName = message.customerName;
                             if (message.customerCloudIdentityId != null && message.hasOwnProperty("customerCloudIdentityId"))
                                 object.customerCloudIdentityId = message.customerCloudIdentityId;
+                            if (message.customerType != null && message.hasOwnProperty("customerType"))
+                                object.customerType = options.enums === String ? $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.customerType] === undefined ? message.customerType : $root.google.cloud.channel.v1.CloudIdentityInfo.CustomerType[message.customerType] : message.customerType;
+                            if (message.channelPartnerCloudIdentityId != null && message.hasOwnProperty("channelPartnerCloudIdentityId"))
+                                object.channelPartnerCloudIdentityId = message.channelPartnerCloudIdentityId;
                             return object;
                         };
     
@@ -21748,6 +21841,7 @@
                          * @interface IImportCustomerRequest
                          * @property {string|null} [domain] ImportCustomerRequest domain
                          * @property {string|null} [cloudIdentityId] ImportCustomerRequest cloudIdentityId
+                         * @property {string|null} [primaryAdminEmail] ImportCustomerRequest primaryAdminEmail
                          * @property {string|null} [parent] ImportCustomerRequest parent
                          * @property {string|null} [authToken] ImportCustomerRequest authToken
                          * @property {boolean|null} [overwriteIfExists] ImportCustomerRequest overwriteIfExists
@@ -21785,6 +21879,14 @@
                          * @instance
                          */
                         ImportCustomerRequest.prototype.cloudIdentityId = null;
+    
+                        /**
+                         * ImportCustomerRequest primaryAdminEmail.
+                         * @member {string|null|undefined} primaryAdminEmail
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.primaryAdminEmail = null;
     
                         /**
                          * ImportCustomerRequest parent.
@@ -21831,12 +21933,12 @@
     
                         /**
                          * ImportCustomerRequest customerIdentity.
-                         * @member {"domain"|"cloudIdentityId"|undefined} customerIdentity
+                         * @member {"domain"|"cloudIdentityId"|"primaryAdminEmail"|undefined} customerIdentity
                          * @memberof google.cloud.channel.v1.ImportCustomerRequest
                          * @instance
                          */
                         Object.defineProperty(ImportCustomerRequest.prototype, "customerIdentity", {
-                            get: $util.oneOfGetter($oneOfFields = ["domain", "cloudIdentityId"]),
+                            get: $util.oneOfGetter($oneOfFields = ["domain", "cloudIdentityId", "primaryAdminEmail"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -21878,6 +21980,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.channelPartnerId);
                             if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.customer);
+                            if (message.primaryAdminEmail != null && Object.hasOwnProperty.call(message, "primaryAdminEmail"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.primaryAdminEmail);
                             return writer;
                         };
     
@@ -21918,6 +22022,10 @@
                                     }
                                 case 3: {
                                         message.cloudIdentityId = reader.string();
+                                        break;
+                                    }
+                                case 8: {
+                                        message.primaryAdminEmail = reader.string();
                                         break;
                                     }
                                 case 1: {
@@ -21988,6 +22096,13 @@
                                 if (!$util.isString(message.cloudIdentityId))
                                     return "cloudIdentityId: string expected";
                             }
+                            if (message.primaryAdminEmail != null && message.hasOwnProperty("primaryAdminEmail")) {
+                                if (properties.customerIdentity === 1)
+                                    return "customerIdentity: multiple values";
+                                properties.customerIdentity = 1;
+                                if (!$util.isString(message.primaryAdminEmail))
+                                    return "primaryAdminEmail: string expected";
+                            }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
@@ -22022,6 +22137,8 @@
                                 message.domain = String(object.domain);
                             if (object.cloudIdentityId != null)
                                 message.cloudIdentityId = String(object.cloudIdentityId);
+                            if (object.primaryAdminEmail != null)
+                                message.primaryAdminEmail = String(object.primaryAdminEmail);
                             if (object.parent != null)
                                 message.parent = String(object.parent);
                             if (object.authToken != null)
@@ -22075,6 +22192,11 @@
                                 object.channelPartnerId = message.channelPartnerId;
                             if (message.customer != null && message.hasOwnProperty("customer"))
                                 object.customer = message.customer;
+                            if (message.primaryAdminEmail != null && message.hasOwnProperty("primaryAdminEmail")) {
+                                object.primaryAdminEmail = message.primaryAdminEmail;
+                                if (options.oneofs)
+                                    object.customerIdentity = "primaryAdminEmail";
+                            }
                             return object;
                         };
     
