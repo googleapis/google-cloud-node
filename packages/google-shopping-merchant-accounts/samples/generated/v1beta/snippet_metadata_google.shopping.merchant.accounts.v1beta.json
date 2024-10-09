@@ -163,14 +163,14 @@
             "regionTag": "merchantapi_v1beta_generated_AccountsService_DeleteAccount_async",
             "title": "AccountIssueService deleteAccount Sample",
             "origin": "API_DEFINITION",
-            "description": " Deletes the specified account regardless of its type: standalone, MCA or sub-account. Deleting an MCA leads to the deletion of all of its sub-accounts. Executing this method requires admin access.",
+            "description": " Deletes the specified account regardless of its type: standalone, MCA or sub-account. Deleting an MCA leads to the deletion of all of its sub-accounts. Executing this method requires admin access. The deletion succeeds only if the account does not provide services to any other account and has no processed offers. You can use the `force` parameter to override this.",
             "canonical": true,
             "file": "accounts_service.delete_account.js",
             "language": "JAVASCRIPT",
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -182,6 +182,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "force",
+                        "type": "TYPE_BOOL"
                     }
                 ],
                 "resultType": ".google.protobuf.Empty",
@@ -247,7 +251,7 @@
             "regionTag": "merchantapi_v1beta_generated_AccountsService_ListAccounts_async",
             "title": "AccountIssueService listAccounts Sample",
             "origin": "API_DEFINITION",
-            "description": " Lists accounts accessible to the calling user and matching the constraints of the request such as page size or filters. This is not just listing the sub-accounts of an MCA, but all accounts the calling user has access to including other MCAs, linked accounts, standalone accounts and so on.",
+            "description": " Lists accounts accessible to the calling user and matching the constraints of the request such as page size or filters. This is not just listing the sub-accounts of an MCA, but all accounts the calling user has access to including other MCAs, linked accounts, standalone accounts and so on. If no filter is provided, then it returns accounts the user is directly added to.",
             "canonical": true,
             "file": "accounts_service.list_accounts.js",
             "language": "JAVASCRIPT",

@@ -11,6 +11,7 @@
   "../../protos/google/ai/generativelanguage/v1beta/model_service.proto",
   "../../protos/google/ai/generativelanguage/v1beta/permission.proto",
   "../../protos/google/ai/generativelanguage/v1beta/permission_service.proto",
+  "../../protos/google/ai/generativelanguage/v1beta/prediction_service.proto",
   "../../protos/google/ai/generativelanguage/v1beta/retriever.proto",
   "../../protos/google/ai/generativelanguage/v1beta/retriever_service.proto",
   "../../protos/google/ai/generativelanguage/v1beta/safety.proto",
