@@ -646,12 +646,18 @@ export class AccountsServiceClient {
    * Deletes the specified account regardless of its type: standalone, MCA or
    * sub-account. Deleting an MCA leads to the deletion of all of its
    * sub-accounts. Executing this method requires admin access.
+   * The deletion succeeds only if the account does not provide services
+   * to any other account and has no processed offers. You can use the `force`
+   * parameter to override this.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The name of the account to delete.
    *   Format: `accounts/{account}`
+   * @param {boolean} [request.force]
+   *   Optional. If set to `true`, the account is deleted even if it provides
+   *   services to other accounts or has processed offers.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -846,7 +852,8 @@ export class AccountsServiceClient {
    * constraints of the request such as page size or filters.
    * This is not just listing the sub-accounts of an MCA, but all accounts the
    * calling user has access to including other MCAs, linked accounts,
-   * standalone accounts and so on.
+   * standalone accounts and so on. If no filter is provided, then it returns
+   * accounts the user is directly added to.
    *
    * @param {Object} request
    *   The request object that will be sent.

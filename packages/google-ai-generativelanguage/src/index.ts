@@ -33,6 +33,8 @@ const ModelServiceClient = v1beta.ModelServiceClient;
 type ModelServiceClient = v1beta.ModelServiceClient;
 const PermissionServiceClient = v1beta.PermissionServiceClient;
 type PermissionServiceClient = v1beta.PermissionServiceClient;
+const PredictionServiceClient = v1beta.PredictionServiceClient;
+type PredictionServiceClient = v1beta.PredictionServiceClient;
 const RetrieverServiceClient = v1beta.RetrieverServiceClient;
 type RetrieverServiceClient = v1beta.RetrieverServiceClient;
 const TextServiceClient = v1beta.TextServiceClient;
@@ -49,6 +51,7 @@ export {
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
+  PredictionServiceClient,
   RetrieverServiceClient,
   TextServiceClient,
 };
@@ -63,6 +66,7 @@ export default {
   GenerativeServiceClient,
   ModelServiceClient,
   PermissionServiceClient,
+  PredictionServiceClient,
   RetrieverServiceClient,
   TextServiceClient,
 };

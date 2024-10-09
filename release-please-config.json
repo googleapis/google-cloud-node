@@ -191,7 +191,8 @@
     "packages/google-shopping-merchant-accounts": {},
     "packages/google-cloud-gdchardwaremanagement": {},
     "packages/google-cloud-apihub": {},
-    "packages/google-marketingplatform-admin": {}
+    "packages/google-marketingplatform-admin": {},
+    "packages/google-cloud-oracledatabase": {}
   },
   "plugins": [
     {

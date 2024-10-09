@@ -49,6 +49,7 @@
   * [Permission_service.list_permissions](#permission_service.list_permissions)
   * [Permission_service.transfer_ownership](#permission_service.transfer_ownership)
   * [Permission_service.update_permission](#permission_service.update_permission)
+  * [Prediction_service.predict](#prediction_service.predict)
   * [Retriever_service.batch_create_chunks](#retriever_service.batch_create_chunks)
   * [Retriever_service.batch_delete_chunks](#retriever_service.batch_delete_chunks)
   * [Retriever_service.batch_update_chunks](#retriever_service.batch_update_chunks)
@@ -737,6 +738,23 @@ __Usage:__
 
 
 `node packages/google-ai-generativelanguage/samples/generated/v1beta/permission_service.update_permission.js`
+
+
+-----
+
+
+
+
+### Prediction_service.predict
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-ai-generativelanguage/samples/generated/v1beta/prediction_service.predict.js`
 
 
 -----

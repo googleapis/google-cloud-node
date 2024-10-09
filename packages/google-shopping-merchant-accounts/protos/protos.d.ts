@@ -2227,6 +2227,9 @@ export namespace google {
 
                         /** DeleteAccountRequest name */
                         name?: (string|null);
+
+                        /** DeleteAccountRequest force */
+                        force?: (boolean|null);
                     }
 
                     /** Represents a DeleteAccountRequest. */
@@ -2240,6 +2243,9 @@ export namespace google {
 
                         /** DeleteAccountRequest name. */
                         public name: string;
+
+                        /** DeleteAccountRequest force. */
+                        public force: boolean;
 
                         /**
                          * Creates a new DeleteAccountRequest instance using the specified properties.
