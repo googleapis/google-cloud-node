@@ -31,6 +31,11 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Generative_question_service.batch_update_generative_question_configs](#generative_question_service.batch_update_generative_question_configs)
+  * [Generative_question_service.get_generative_questions_feature_config](#generative_question_service.get_generative_questions_feature_config)
+  * [Generative_question_service.list_generative_question_configs](#generative_question_service.list_generative_question_configs)
+  * [Generative_question_service.update_generative_question_config](#generative_question_service.update_generative_question_config)
+  * [Generative_question_service.update_generative_questions_feature_config](#generative_question_service.update_generative_questions_feature_config)
   * [Model_service.create_model](#model_service.create_model)
   * [Model_service.delete_model](#model_service.delete_model)
   * [Model_service.get_model](#model_service.get_model)
@@ -526,6 +531,91 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2/control_service.update_control.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.batch_update_generative_question_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/generative_question_service.batch_update_generative_question_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/generative_question_service.batch_update_generative_question_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/generative_question_service.batch_update_generative_question_configs.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.get_generative_questions_feature_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/generative_question_service.get_generative_questions_feature_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/generative_question_service.get_generative_questions_feature_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/generative_question_service.get_generative_questions_feature_config.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.list_generative_question_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/generative_question_service.list_generative_question_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/generative_question_service.list_generative_question_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/generative_question_service.list_generative_question_configs.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.update_generative_question_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/generative_question_service.update_generative_question_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/generative_question_service.update_generative_question_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/generative_question_service.update_generative_question_config.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.update_generative_questions_feature_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/generative_question_service.update_generative_questions_feature_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2/generative_question_service.update_generative_questions_feature_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2/generative_question_service.update_generative_questions_feature_config.js`
 
 
 -----

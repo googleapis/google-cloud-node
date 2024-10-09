@@ -2316,6 +2316,11 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "attributeResults": {
+                          "keyType": "string",
+                          "type": "AttributeResult",
+                          "id": 4
                         }
                       },
                       "nested": {
@@ -2338,6 +2343,15 @@
                           },
                           "fields": {
                             "recentSearch": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "AttributeResult": {
+                          "fields": {
+                            "suggestions": {
+                              "rule": "repeated",
                               "type": "string",
                               "id": 1
                             }
@@ -2609,6 +2623,290 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "GenerativeQuestionsFeatureConfig": {
+                      "fields": {
+                        "catalog": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureEnabled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "minimumProducts": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerativeQuestionConfig": {
+                      "fields": {
+                        "catalog": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "facet": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "generatedQuestion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finalQuestion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "exampleValues": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "frequency": {
+                          "type": "float",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "allowedInConversation": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerativeQuestionService": {
+                      "options": {
+                        "(google.api.default_host)": "retail.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "UpdateGenerativeQuestionsFeatureConfig": {
+                          "requestType": "UpdateGenerativeQuestionsFeatureConfigRequest",
+                          "responseType": "GenerativeQuestionsFeatureConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{generative_questions_feature_config.catalog=projects/*/locations/*/catalogs/*}/generativeQuestionFeature",
+                            "(google.api.http).body": "generative_questions_feature_config",
+                            "(google.api.method_signature)": "generative_questions_feature_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{generative_questions_feature_config.catalog=projects/*/locations/*/catalogs/*}/generativeQuestionFeature",
+                                "body": "generative_questions_feature_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "generative_questions_feature_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetGenerativeQuestionsFeatureConfig": {
+                          "requestType": "GetGenerativeQuestionsFeatureConfigRequest",
+                          "responseType": "GenerativeQuestionsFeatureConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{catalog=projects/*/locations/*/catalogs/*}/generativeQuestionFeature",
+                            "(google.api.method_signature)": "catalog"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{catalog=projects/*/locations/*/catalogs/*}/generativeQuestionFeature"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "catalog"
+                            }
+                          ]
+                        },
+                        "ListGenerativeQuestionConfigs": {
+                          "requestType": "ListGenerativeQuestionConfigsRequest",
+                          "responseType": "ListGenerativeQuestionConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v2/{parent=projects/*/locations/*/catalogs/*}/generativeQuestions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{parent=projects/*/locations/*/catalogs/*}/generativeQuestions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateGenerativeQuestionConfig": {
+                          "requestType": "UpdateGenerativeQuestionConfigRequest",
+                          "responseType": "GenerativeQuestionConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{generative_question_config.catalog=projects/*/locations/*/catalogs/*}/generativeQuestion",
+                            "(google.api.http).body": "generative_question_config",
+                            "(google.api.method_signature)": "generative_question_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{generative_question_config.catalog=projects/*/locations/*/catalogs/*}/generativeQuestion",
+                                "body": "generative_question_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "generative_question_config,update_mask"
+                            }
+                          ]
+                        },
+                        "BatchUpdateGenerativeQuestionConfigs": {
+                          "requestType": "BatchUpdateGenerativeQuestionConfigsRequest",
+                          "responseType": "BatchUpdateGenerativeQuestionConfigsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/catalogs/*}/generativeQuestion:batchUpdate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/catalogs/*}/generativeQuestion:batchUpdate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UpdateGenerativeQuestionsFeatureConfigRequest": {
+                      "fields": {
+                        "generativeQuestionsFeatureConfig": {
+                          "type": "GenerativeQuestionsFeatureConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetGenerativeQuestionsFeatureConfigRequest": {
+                      "fields": {
+                        "catalog": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        }
+                      }
+                    },
+                    "ListGenerativeQuestionConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        }
+                      }
+                    },
+                    "ListGenerativeQuestionConfigsResponse": {
+                      "fields": {
+                        "generativeQuestionConfigs": {
+                          "rule": "repeated",
+                          "type": "GenerativeQuestionConfig",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UpdateGenerativeQuestionConfigRequest": {
+                      "fields": {
+                        "generativeQuestionConfig": {
+                          "type": "GenerativeQuestionConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateGenerativeQuestionConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "retail.googleapis.com/Catalog"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "UpdateGenerativeQuestionConfigRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchUpdateGenerativeQuestionConfigsResponse": {
+                      "fields": {
+                        "generativeQuestionConfigs": {
+                          "rule": "repeated",
+                          "type": "GenerativeQuestionConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -3962,6 +4260,54 @@
                         }
                       }
                     },
+                    "ProductAttributeValue": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProductAttributeInterval": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "interval": {
+                          "type": "Interval",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Tile": {
+                      "oneofs": {
+                        "productAttribute": {
+                          "oneof": [
+                            "productAttributeValue",
+                            "productAttributeInterval"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "productAttributeValue": {
+                          "type": "ProductAttributeValue",
+                          "id": 1
+                        },
+                        "productAttributeInterval": {
+                          "type": "ProductAttributeInterval",
+                          "id": 2
+                        },
+                        "representativeProductId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
                     "SearchRequest": {
                       "oneofs": {
                         "_spellCorrectionSpec": {
@@ -4077,6 +4423,20 @@
                         "entity": {
                           "type": "string",
                           "id": 38
+                        },
+                        "conversationalSearchSpec": {
+                          "type": "ConversationalSearchSpec",
+                          "id": 40,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tileNavigationSpec": {
+                          "type": "TileNavigationSpec",
+                          "id": 41,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -4262,6 +4622,75 @@
                             }
                           }
                         },
+                        "ConversationalSearchSpec": {
+                          "fields": {
+                            "followupConversationRequested": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "conversationId": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "userAnswer": {
+                              "type": "UserAnswer",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "UserAnswer": {
+                              "oneofs": {
+                                "type": {
+                                  "oneof": [
+                                    "textAnswer",
+                                    "selectedAnswer"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "textAnswer": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "selectedAnswer": {
+                                  "type": "SelectedAnswer",
+                                  "id": 2
+                                }
+                              },
+                              "nested": {
+                                "SelectedAnswer": {
+                                  "fields": {
+                                    "productAttributeValues": {
+                                      "rule": "repeated",
+                                      "type": "ProductAttributeValue",
+                                      "id": 1,
+                                      "options": {
+                                        "deprecated": true
+                                      }
+                                    },
+                                    "productAttributeValue": {
+                                      "type": "ProductAttributeValue",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "TileNavigationSpec": {
+                          "fields": {
+                            "tileNavigationRequested": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "appliedTiles": {
+                              "rule": "repeated",
+                              "type": "Tile",
+                              "id": 2
+                            }
+                          }
+                        },
                         "SearchMode": {
                           "values": {
                             "SEARCH_MODE_UNSPECIFIED": 0,
@@ -4321,6 +4750,14 @@
                           "rule": "repeated",
                           "type": "ExperimentInfo",
                           "id": 17
+                        },
+                        "conversationalSearchResult": {
+                          "type": "ConversationalSearchResult",
+                          "id": 18
+                        },
+                        "tileNavigationResult": {
+                          "type": "TileNavigationResult",
+                          "id": 19
                         }
                       },
                       "nested": {
@@ -4415,6 +4852,66 @@
                             "pinnedResultCount": {
                               "type": "int64",
                               "id": 2
+                            }
+                          }
+                        },
+                        "ConversationalSearchResult": {
+                          "fields": {
+                            "conversationId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "refinedQuery": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "additionalFilters": {
+                              "rule": "repeated",
+                              "type": "AdditionalFilter",
+                              "id": 3,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "followupQuestion": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "suggestedAnswers": {
+                              "rule": "repeated",
+                              "type": "SuggestedAnswer",
+                              "id": 5
+                            },
+                            "additionalFilter": {
+                              "type": "AdditionalFilter",
+                              "id": 6
+                            }
+                          },
+                          "nested": {
+                            "SuggestedAnswer": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "AdditionalFilter": {
+                              "fields": {
+                                "productAttributeValue": {
+                                  "type": "ProductAttributeValue",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "TileNavigationResult": {
+                          "fields": {
+                            "tiles": {
+                              "rule": "repeated",
+                              "type": "Tile",
+                              "id": 1
                             }
                           }
                         }

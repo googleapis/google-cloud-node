@@ -259,6 +259,70 @@
         }
       }
     },
+    "GenerativeQuestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
