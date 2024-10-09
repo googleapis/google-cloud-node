@@ -87,6 +87,11 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Generative_question_service.batch_update_generative_question_configs](#generative_question_service.batch_update_generative_question_configs)
+  * [Generative_question_service.get_generative_questions_feature_config](#generative_question_service.get_generative_questions_feature_config)
+  * [Generative_question_service.list_generative_question_configs](#generative_question_service.list_generative_question_configs)
+  * [Generative_question_service.update_generative_question_config](#generative_question_service.update_generative_question_config)
+  * [Generative_question_service.update_generative_questions_feature_config](#generative_question_service.update_generative_questions_feature_config)
   * [Merchant_center_account_link_service.create_merchant_center_account_link](#merchant_center_account_link_service.create_merchant_center_account_link)
   * [Merchant_center_account_link_service.delete_merchant_center_account_link](#merchant_center_account_link_service.delete_merchant_center_account_link)
   * [Merchant_center_account_link_service.list_merchant_center_account_links](#merchant_center_account_link_service.list_merchant_center_account_links)
@@ -103,6 +108,7 @@
   * [Product_service.add_local_inventories](#product_service.add_local_inventories)
   * [Product_service.create_product](#product_service.create_product)
   * [Product_service.delete_product](#product_service.delete_product)
+  * [Product_service.export_products](#product_service.export_products)
   * [Product_service.get_product](#product_service.get_product)
   * [Product_service.import_products](#product_service.import_products)
   * [Product_service.list_products](#product_service.list_products)
@@ -128,6 +134,7 @@
   * [Serving_config_service.remove_control](#serving_config_service.remove_control)
   * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
   * [User_event_service.collect_user_event](#user_event_service.collect_user_event)
+  * [User_event_service.export_user_events](#user_event_service.export_user_events)
   * [User_event_service.import_user_events](#user_event_service.import_user_events)
   * [User_event_service.purge_user_events](#user_event_service.purge_user_events)
   * [User_event_service.rejoin_user_events](#user_event_service.rejoin_user_events)
@@ -1478,6 +1485,91 @@ __Usage:__
 
 
 
+### Generative_question_service.batch_update_generative_question_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.batch_update_generative_question_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.batch_update_generative_question_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.batch_update_generative_question_configs.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.get_generative_questions_feature_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.get_generative_questions_feature_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.get_generative_questions_feature_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.get_generative_questions_feature_config.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.list_generative_question_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.list_generative_question_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.list_generative_question_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.list_generative_question_configs.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.update_generative_question_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.update_generative_question_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.update_generative_question_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.update_generative_question_config.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.update_generative_questions_feature_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.update_generative_questions_feature_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.update_generative_questions_feature_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/generative_question_service.update_generative_questions_feature_config.js`
+
+
+-----
+
+
+
+
 ### Merchant_center_account_link_service.create_merchant_center_account_link
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/merchant_center_account_link_service.create_merchant_center_account_link.js).
@@ -1743,6 +1835,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2alpha/product_service.delete_product.js`
+
+
+-----
+
+
+
+
+### Product_service.export_products
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/product_service.export_products.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/product_service.export_products.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/product_service.export_products.js`
 
 
 -----
@@ -2168,6 +2277,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.collect_user_event.js`
+
+
+-----
+
+
+
+
+### User_event_service.export_user_events
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.export_user_events.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.export_user_events.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.export_user_events.js`
 
 
 -----

@@ -9,6 +9,8 @@
   "../../protos/google/cloud/retail/v2alpha/control.proto",
   "../../protos/google/cloud/retail/v2alpha/control_service.proto",
   "../../protos/google/cloud/retail/v2alpha/export_config.proto",
+  "../../protos/google/cloud/retail/v2alpha/generative_question.proto",
+  "../../protos/google/cloud/retail/v2alpha/generative_question_service.proto",
   "../../protos/google/cloud/retail/v2alpha/import_config.proto",
   "../../protos/google/cloud/retail/v2alpha/merchant_center_account_link.proto",
   "../../protos/google/cloud/retail/v2alpha/merchant_center_account_link_service.proto",
