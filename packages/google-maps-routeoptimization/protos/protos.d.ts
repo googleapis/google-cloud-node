@@ -4155,6 +4155,9 @@ export namespace google {
                         /** Transition routePolyline */
                         routePolyline?: (google.maps.routeoptimization.v1.ShipmentRoute.IEncodedPolyline|null);
 
+                        /** Transition routeToken */
+                        routeToken?: (string|null);
+
                         /** Transition vehicleLoads */
                         vehicleLoads?: ({ [k: string]: google.maps.routeoptimization.v1.ShipmentRoute.IVehicleLoad }|null);
                     }
@@ -4194,6 +4197,9 @@ export namespace google {
 
                         /** Transition routePolyline. */
                         public routePolyline?: (google.maps.routeoptimization.v1.ShipmentRoute.IEncodedPolyline|null);
+
+                        /** Transition routeToken. */
+                        public routeToken: string;
 
                         /** Transition vehicleLoads. */
                         public vehicleLoads: { [k: string]: google.maps.routeoptimization.v1.ShipmentRoute.IVehicleLoad };

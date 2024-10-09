@@ -523,9 +523,9 @@ export class CompletionServiceClient {
    *   The maximum allowed max suggestions is 20. If it is set higher, it will be
    *   capped by 20.
    * @param {boolean} request.enableAttributeSuggestions
-   *   If true, attribute suggestions are enabled and provided in response.
+   *   If true, attribute suggestions are enabled and provided in the response.
    *
-   *   This field is only available for "cloud-retail" dataset.
+   *   This field is only available for the "cloud-retail" dataset.
    * @param {string} request.entity
    *   The entity for customers who run multiple entities, domains, sites, or
    *   regions, for example, `Google US`, `Google Ads`, `Waymo`,
