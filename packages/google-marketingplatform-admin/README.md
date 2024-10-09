@@ -5,7 +5,7 @@
 # [Google Marketing Platform Admin API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-marketingplatform-admin)
 
 [![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/admin.svg)](https://www.npmjs.org/package/@google-cloud/admin)
+[![npm version](https://img.shields.io/npm/v/@google-ads/marketing-platform-admin.svg)](https://www.npmjs.org/package/@google-ads/marketing-platform-admin)
 
 
 
@@ -50,7 +50,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/admin
+npm install @google-ads/marketing-platform-admin
 ```
 
 
@@ -86,7 +86,7 @@ npm install @google-cloud/admin
 
 // Imports the Admin library
 const {MarketingplatformAdminServiceClient} =
-  require('@google-cloud/admin').v1alpha;
+  require('@google-ads/marketing-platform-admin').v1alpha;
 
 // Instantiates a client
 const adminClient = new MarketingplatformAdminServiceClient({fallback: true});
@@ -146,7 +146,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/admin@legacy-8` installs client libraries
+For example, `npm install @google-ads/marketing-platform-admin@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

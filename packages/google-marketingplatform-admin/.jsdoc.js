@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2024 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/admin',
+    systemName: '@google-ads/marketing-platform-admin',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

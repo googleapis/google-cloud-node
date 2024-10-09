@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.marketingplatform.admin.v1alpha",
-  "libraryPackage": "@google-cloud/admin",
+  "libraryPackage": "@google-ads/marketing-platform-admin",
   "services": {
     "MarketingplatformAdminService": {
       "clients": {

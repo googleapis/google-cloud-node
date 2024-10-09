@@ -50,7 +50,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Admin library
-  const {MarketingplatformAdminServiceClient} = require('@google-cloud/admin').v1alpha;
+  const {MarketingplatformAdminServiceClient} = require('@google-ads/marketing-platform-admin').v1alpha;
 
   // Instantiates a client
   const adminClient = new MarketingplatformAdminServiceClient();

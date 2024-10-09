@@ -49,7 +49,7 @@ function main(parent) {
 
   // Imports the Admin library
   const {MarketingplatformAdminServiceClient} =
-    require('@google-cloud/admin').v1alpha;
+    require('@google-ads/marketing-platform-admin').v1alpha;
 
   // Instantiates a client
   const adminClient = new MarketingplatformAdminServiceClient({fallback: true});

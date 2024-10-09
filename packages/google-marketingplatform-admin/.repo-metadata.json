@@ -7,7 +7,7 @@
   "release_level": "preview",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/admin",
+  "distribution_name": "@google-ads/marketing-platform-admin",
   "api_id": "marketingplatformadmin.googleapis.com",
   "default_version": "v1alpha",
   "requires_billing": true,

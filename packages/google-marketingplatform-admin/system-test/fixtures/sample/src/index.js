@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const admin = require('@google-cloud/admin');
+const admin = require('@google-ads/marketing-platform-admin');
 
 function main() {
   const marketingplatformAdminServiceClient =

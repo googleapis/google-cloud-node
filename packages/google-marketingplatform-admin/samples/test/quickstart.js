@@ -20,7 +20,7 @@
 // const cp = require('child_process');
 // const {describe, it, before} = require('mocha');
 // const {MarketingplatformAdminServiceClient} =
-//   require('@google-cloud/admin').v1alpha;
+//   require('@google-ads/marketing-platform-admin').v1alpha;
 // const marketingplatformadminapiClient =
 //   new MarketingplatformAdminServiceClient();
 
