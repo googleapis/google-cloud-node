@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  // [START backupdr_v1_generated_BackupDR_GetBackup_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,10 +29,15 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the management server resource name, in the format
-   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
+   *  Required. Name of the data source resource name, in the format
+   *  'projects/{project_id}/locations/{location}/backupVaults/{backupVault}/dataSources/{datasource}/backups/{backup}'
    */
   // const name = 'abc123'
+  /**
+   *  Optional. Reserved for future use to provide a BASIC & FULL view of Backup
+   *  resource.
+   */
+  // const view = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -40,19 +45,19 @@ function main(name) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callGetManagementServer() {
+  async function callGetBackup() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await backupdrClient.getManagementServer(request);
+    const response = await backupdrClient.getBackup(request);
     console.log(response);
   }
 
-  callGetManagementServer();
-  // [END backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  callGetBackup();
+  // [END backupdr_v1_generated_BackupDR_GetBackup_async]
 }
 
 process.on('unhandledRejection', err => {

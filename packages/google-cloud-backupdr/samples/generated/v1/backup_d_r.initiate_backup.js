@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START backupdr_v1_generated_BackupDR_GetManagementServer_async]
+function main(dataSource, backupId) {
+  // [START backupdr_v1_generated_BackupDR_InitiateBackup_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,10 +29,28 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the management server resource name, in the format
-   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
+   *  Required. The resource name of the instance, in the format
+   *  'projects/* /locations/* /backupVaults/* /dataSources/'.
    */
-  // const name = 'abc123'
+  // const dataSource = 'abc123'
+  /**
+   *  Optional. An optional request ID to identify requests. Specify a unique
+   *  request ID so that if you must retry your request, the server will know to
+   *  ignore the request if it has already been completed. The server will
+   *  guarantee that for at least 60 minutes since the first request.
+   *  For example, consider a situation where you make an initial request and
+   *  the request times out. If you make the request again with the same request
+   *  ID, the server can check if original operation with the same request ID
+   *  was received, and if so, will ignore the second request. This prevents
+   *  clients from accidentally creating duplicate commitments.
+   *  The request ID must be a valid UUID with the exception that zero UUID is
+   *  not supported (00000000-0000-0000-0000-000000000000).
+   */
+  // const requestId = 'abc123'
+  /**
+   *  Required. Resource ID of the Backup resource.
+   */
+  // const backupId = 'abc123'
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -40,19 +58,20 @@ function main(name) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callGetManagementServer() {
+  async function callInitiateBackup() {
     // Construct request
     const request = {
-      name,
+      dataSource,
+      backupId,
     };
 
     // Run request
-    const response = await backupdrClient.getManagementServer(request);
+    const response = await backupdrClient.initiateBackup(request);
     console.log(response);
   }
 
-  callGetManagementServer();
-  // [END backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  callInitiateBackup();
+  // [END backupdr_v1_generated_BackupDR_InitiateBackup_async]
 }
 
 process.on('unhandledRejection', err => {
