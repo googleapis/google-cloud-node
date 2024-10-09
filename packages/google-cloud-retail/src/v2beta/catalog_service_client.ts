@@ -208,6 +208,9 @@ export class CatalogServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
       ),
@@ -2153,6 +2156,30 @@ export class CatalogServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
 
   /**
    * Return a fully-qualified attributesConfig resource name string.

@@ -164,6 +164,11 @@
   * [Control_service.get_control](#control_service.get_control)
   * [Control_service.list_controls](#control_service.list_controls)
   * [Control_service.update_control](#control_service.update_control)
+  * [Generative_question_service.batch_update_generative_question_configs](#generative_question_service.batch_update_generative_question_configs)
+  * [Generative_question_service.get_generative_questions_feature_config](#generative_question_service.get_generative_questions_feature_config)
+  * [Generative_question_service.list_generative_question_configs](#generative_question_service.list_generative_question_configs)
+  * [Generative_question_service.update_generative_question_config](#generative_question_service.update_generative_question_config)
+  * [Generative_question_service.update_generative_questions_feature_config](#generative_question_service.update_generative_questions_feature_config)
   * [Model_service.create_model](#model_service.create_model)
   * [Model_service.delete_model](#model_service.delete_model)
   * [Model_service.get_model](#model_service.get_model)
@@ -177,6 +182,7 @@
   * [Product_service.add_local_inventories](#product_service.add_local_inventories)
   * [Product_service.create_product](#product_service.create_product)
   * [Product_service.delete_product](#product_service.delete_product)
+  * [Product_service.export_products](#product_service.export_products)
   * [Product_service.get_product](#product_service.get_product)
   * [Product_service.import_products](#product_service.import_products)
   * [Product_service.list_products](#product_service.list_products)
@@ -185,6 +191,8 @@
   * [Product_service.remove_local_inventories](#product_service.remove_local_inventories)
   * [Product_service.set_inventory](#product_service.set_inventory)
   * [Product_service.update_product](#product_service.update_product)
+  * [Project_service.get_alert_config](#project_service.get_alert_config)
+  * [Project_service.update_alert_config](#project_service.update_alert_config)
   * [Search_service.search](#search_service.search)
   * [Serving_config_service.add_control](#serving_config_service.add_control)
   * [Serving_config_service.create_serving_config](#serving_config_service.create_serving_config)
@@ -194,6 +202,7 @@
   * [Serving_config_service.remove_control](#serving_config_service.remove_control)
   * [Serving_config_service.update_serving_config](#serving_config_service.update_serving_config)
   * [User_event_service.collect_user_event](#user_event_service.collect_user_event)
+  * [User_event_service.export_user_events](#user_event_service.export_user_events)
   * [User_event_service.import_user_events](#user_event_service.import_user_events)
   * [User_event_service.purge_user_events](#user_event_service.purge_user_events)
   * [User_event_service.rejoin_user_events](#user_event_service.rejoin_user_events)
@@ -2799,6 +2808,91 @@ __Usage:__
 
 
 
+### Generative_question_service.batch_update_generative_question_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.batch_update_generative_question_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.batch_update_generative_question_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.batch_update_generative_question_configs.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.get_generative_questions_feature_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.get_generative_questions_feature_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.get_generative_questions_feature_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.get_generative_questions_feature_config.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.list_generative_question_configs
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.list_generative_question_configs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.list_generative_question_configs.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.list_generative_question_configs.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.update_generative_question_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.update_generative_question_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.update_generative_question_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.update_generative_question_config.js`
+
+
+-----
+
+
+
+
+### Generative_question_service.update_generative_questions_feature_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.update_generative_questions_feature_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.update_generative_questions_feature_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/generative_question_service.update_generative_questions_feature_config.js`
+
+
+-----
+
+
+
+
 ### Model_service.create_model
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/model_service.create_model.js).
@@ -3020,6 +3114,23 @@ __Usage:__
 
 
 
+### Product_service.export_products
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/product_service.export_products.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/product_service.export_products.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/product_service.export_products.js`
+
+
+-----
+
+
+
+
 ### Product_service.get_product
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/product_service.get_product.js).
@@ -3149,6 +3260,40 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2beta/product_service.update_product.js`
+
+
+-----
+
+
+
+
+### Project_service.get_alert_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/project_service.get_alert_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/project_service.get_alert_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/project_service.get_alert_config.js`
+
+
+-----
+
+
+
+
+### Project_service.update_alert_config
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/project_service.update_alert_config.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/project_service.update_alert_config.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/project_service.update_alert_config.js`
 
 
 -----
@@ -3302,6 +3447,23 @@ __Usage:__
 
 
 `node packages/google-cloud-retail/samples/generated/v2beta/user_event_service.collect_user_event.js`
+
+
+-----
+
+
+
+
+### User_event_service.export_user_events
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/user_event_service.export_user_events.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-retail/samples/generated/v2beta/user_event_service.export_user_events.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-retail/samples/generated/v2beta/user_event_service.export_user_events.js`
 
 
 -----
