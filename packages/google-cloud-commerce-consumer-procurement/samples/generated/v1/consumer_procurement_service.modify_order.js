@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, displayName) {
-  // [START cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_async]
+function main(name) {
+  // [START cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ModifyOrder_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,27 +29,26 @@ function main(parent, displayName) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the parent resource.
-   *  This field has the form  `billingAccounts/{billing-account-id}`.
+   *  Required. Name of the order to update.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Required. The user-specified name of the order being placed.
+   *  Optional. Modifications for an existing Order created by an Offer.
+   *  Required when Offer based Order is being modified, except for when going
+   *  from an offer to a public plan.
+   */
+  // const modifications = [1,2,3,4]
+  /**
+   *  Optional. Updated display name of the order, leave as empty if you do not
+   *  want to update current display name.
    */
   // const displayName = 'abc123'
   /**
-   *  Optional. Places order for offer. Required when an offer-based order is
-   *  being placed.
+   *  Optional. The weak etag, which can be optionally populated, of the order
+   *  that this modify request is based on. Validation checking will only happen
+   *  if the invoker supplies this field.
    */
-  // const lineItemInfo = [1,2,3,4]
-  /**
-   *  Optional. A unique identifier for this request.
-   *  The server will ignore subsequent requests that provide a duplicate request
-   *  ID for at least 24 hours after the first request.
-   *  The request ID must be a valid
-   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
-   */
-  // const requestId = 'abc123'
+  // const etag = 'abc123'
 
   // Imports the Procurement library
   const {ConsumerProcurementServiceClient} = require('@google-cloud/procurement').v1;
@@ -57,21 +56,20 @@ function main(parent, displayName) {
   // Instantiates a client
   const procurementClient = new ConsumerProcurementServiceClient();
 
-  async function callPlaceOrder() {
+  async function callModifyOrder() {
     // Construct request
     const request = {
-      parent,
-      displayName,
+      name,
     };
 
     // Run request
-    const [operation] = await procurementClient.placeOrder(request);
+    const [operation] = await procurementClient.modifyOrder(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callPlaceOrder();
-  // [END cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_async]
+  callModifyOrder();
+  // [END cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ModifyOrder_async]
 }
 
 process.on('unhandledRejection', err => {

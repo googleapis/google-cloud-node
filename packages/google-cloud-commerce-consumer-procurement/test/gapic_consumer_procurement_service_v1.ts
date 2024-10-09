@@ -733,6 +733,422 @@ describe('v1.ConsumerProcurementServiceClient', () => {
     });
   });
 
+  describe('modifyOrder', () => {
+    it('invokes modifyOrder without error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.modifyOrder = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.modifyOrder(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes modifyOrder without error using callback', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.modifyOrder =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.modifyOrder(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+              protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.IModifyOrderMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes modifyOrder with call error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.modifyOrder = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.modifyOrder(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes modifyOrder with LRO error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.modifyOrder = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.modifyOrder(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkModifyOrderProgress without error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkModifyOrderProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkModifyOrderProgress with error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkModifyOrderProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('cancelOrder', () => {
+    it('invokes cancelOrder without error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.cancelOrder = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.cancelOrder(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelOrder without error using callback', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.cancelOrder =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelOrder(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+              protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.commerce.consumer.procurement.v1.IOrder,
+        protos.google.cloud.commerce.consumer.procurement.v1.ICancelOrderMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelOrder with call error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelOrder = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.cancelOrder(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelOrder with LRO error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.commerce.consumer.procurement.v1.CancelOrderRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelOrder = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.cancelOrder(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelOrder as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCancelOrderProgress without error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCancelOrderProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCancelOrderProgress with error', async () => {
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCancelOrderProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listOrders', () => {
     it('invokes listOrders without error', async () => {
       const client =
@@ -1468,6 +1884,61 @@ describe('v1.ConsumerProcurementServiceClient', () => {
         assert.strictEqual(result, 'billingAccountValue');
         assert(
           (client.pathTemplates.billingAccountPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('licensePool', () => {
+      const fakePath = '/rendered/path/licensePool';
+      const expectedParameters = {
+        billing_account: 'billingAccountValue',
+        order: 'orderValue',
+      };
+      const client =
+        new consumerprocurementserviceModule.v1.ConsumerProcurementServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.licensePoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.licensePoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('licensePoolPath', () => {
+        const result = client.licensePoolPath(
+          'billingAccountValue',
+          'orderValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.licensePoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchBillingAccountFromLicensePoolName', () => {
+        const result = client.matchBillingAccountFromLicensePoolName(fakePath);
+        assert.strictEqual(result, 'billingAccountValue');
+        assert(
+          (client.pathTemplates.licensePoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchOrderFromLicensePoolName', () => {
+        const result = client.matchOrderFromLicensePoolName(fakePath);
+        assert.strictEqual(result, 'orderValue');
+        assert(
+          (client.pathTemplates.licensePoolPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

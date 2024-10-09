@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent, displayName) {
-  // [START cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_async]
+function main(licensePool, updateMask) {
+  // [START cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_UpdateLicensePool_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,49 +29,37 @@ function main(parent, displayName) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the parent resource.
-   *  This field has the form  `billingAccounts/{billing-account-id}`.
+   *  Required. The license pool to update.
+   *  The license pool's name field is used to identify the license pool to
+   *  update. Format:
+   *  `billingAccounts/{billing_account}/orders/{order}/licensePool`.
    */
-  // const parent = 'abc123'
+  // const licensePool = {}
   /**
-   *  Required. The user-specified name of the order being placed.
+   *  Required. The list of fields to update.
    */
-  // const displayName = 'abc123'
-  /**
-   *  Optional. Places order for offer. Required when an offer-based order is
-   *  being placed.
-   */
-  // const lineItemInfo = [1,2,3,4]
-  /**
-   *  Optional. A unique identifier for this request.
-   *  The server will ignore subsequent requests that provide a duplicate request
-   *  ID for at least 24 hours after the first request.
-   *  The request ID must be a valid
-   *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
-   */
-  // const requestId = 'abc123'
+  // const updateMask = {}
 
   // Imports the Procurement library
-  const {ConsumerProcurementServiceClient} = require('@google-cloud/procurement').v1;
+  const {LicenseManagementServiceClient} = require('@google-cloud/procurement').v1;
 
   // Instantiates a client
-  const procurementClient = new ConsumerProcurementServiceClient();
+  const procurementClient = new LicenseManagementServiceClient();
 
-  async function callPlaceOrder() {
+  async function callUpdateLicensePool() {
     // Construct request
     const request = {
-      parent,
-      displayName,
+      licensePool,
+      updateMask,
     };
 
     // Run request
-    const [operation] = await procurementClient.placeOrder(request);
-    const [response] = await operation.promise();
+    const response = await procurementClient.updateLicensePool(request);
     console.log(response);
   }
 
-  callPlaceOrder();
-  // [END cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_async]
+  callUpdateLicensePool();
+  // [END cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_UpdateLicensePool_async]
 }
 
 process.on('unhandledRejection', err => {

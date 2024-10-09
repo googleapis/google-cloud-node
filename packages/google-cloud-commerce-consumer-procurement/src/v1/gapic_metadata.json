@@ -20,6 +20,16 @@
                 "placeOrder"
               ]
             },
+            "ModifyOrder": {
+              "methods": [
+                "modifyOrder"
+              ]
+            },
+            "CancelOrder": {
+              "methods": [
+                "cancelOrder"
+              ]
+            },
             "ListOrders": {
               "methods": [
                 "listOrders",
@@ -42,11 +52,89 @@
                 "placeOrder"
               ]
             },
+            "ModifyOrder": {
+              "methods": [
+                "modifyOrder"
+              ]
+            },
+            "CancelOrder": {
+              "methods": [
+                "cancelOrder"
+              ]
+            },
             "ListOrders": {
               "methods": [
                 "listOrders",
                 "listOrdersStream",
                 "listOrdersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LicenseManagementServiceClient",
+          "rpcs": {
+            "GetLicensePool": {
+              "methods": [
+                "getLicensePool"
+              ]
+            },
+            "UpdateLicensePool": {
+              "methods": [
+                "updateLicensePool"
+              ]
+            },
+            "Assign": {
+              "methods": [
+                "assign"
+              ]
+            },
+            "Unassign": {
+              "methods": [
+                "unassign"
+              ]
+            },
+            "EnumerateLicensedUsers": {
+              "methods": [
+                "enumerateLicensedUsers",
+                "enumerateLicensedUsersStream",
+                "enumerateLicensedUsersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LicenseManagementServiceClient",
+          "rpcs": {
+            "GetLicensePool": {
+              "methods": [
+                "getLicensePool"
+              ]
+            },
+            "UpdateLicensePool": {
+              "methods": [
+                "updateLicensePool"
+              ]
+            },
+            "Assign": {
+              "methods": [
+                "assign"
+              ]
+            },
+            "Unassign": {
+              "methods": [
+                "unassign"
+              ]
+            },
+            "EnumerateLicensedUsers": {
+              "methods": [
+                "enumerateLicensedUsers",
+                "enumerateLicensedUsersStream",
+                "enumerateLicensedUsersAsync"
               ]
             }
           }
