@@ -211,6 +211,9 @@ export class SearchServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
       ),
@@ -699,6 +702,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2beta.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2beta.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2beta.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1020,6 +1028,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2beta.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2beta.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2beta.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1297,6 +1310,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2beta.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2beta.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2beta.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1586,6 +1604,30 @@ export class SearchServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
 
   /**
    * Return a fully-qualified attributesConfig resource name string.

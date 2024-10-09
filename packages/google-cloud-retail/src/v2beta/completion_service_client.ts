@@ -210,6 +210,9 @@ export class CompletionServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertConfig'
+      ),
       attributesConfigPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig'
       ),
@@ -523,9 +526,9 @@ export class CompletionServiceClient {
    *   The maximum allowed max suggestions is 20. If it is set higher, it will be
    *   capped by 20.
    * @param {boolean} request.enableAttributeSuggestions
-   *   If true, attribute suggestions are enabled and provided in response.
+   *   If true, attribute suggestions are enabled and provided in the response.
    *
-   *   This field is only available for "cloud-retail" dataset.
+   *   This field is only available for the "cloud-retail" dataset.
    * @param {string} request.entity
    *   The entity for customers who run multiple entities, domains, sites, or
    *   regions, for example, `Google US`, `Google Ads`, `Waymo`,
@@ -1027,6 +1030,30 @@ export class CompletionServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified alertConfig resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  alertConfigPath(project: string) {
+    return this.pathTemplates.alertConfigPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from AlertConfig resource.
+   *
+   * @param {string} alertConfigName
+   *   A fully-qualified path representing AlertConfig resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertConfigName(alertConfigName: string) {
+    return this.pathTemplates.alertConfigPathTemplate.match(alertConfigName)
+      .project;
+  }
 
   /**
    * Return a fully-qualified attributesConfig resource name string.

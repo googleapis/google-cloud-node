@@ -280,6 +280,15 @@ function main(placement, visitorId) {
    *  search results boosted by entity.
    */
   // const entity = 'abc123'
+  /**
+   *  Optional. This field specifies all conversational related parameters
+   *  addition to traditional retail search.
+   */
+  // const conversationalSearchSpec = {}
+  /**
+   *  Optional. This field specifies tile navigation related parameters.
+   */
+  // const tileNavigationSpec = {}
 
   // Imports the Retail library
   const {SearchServiceClient} = require('@google-cloud/retail').v2beta;

@@ -732,6 +732,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1071,6 +1076,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1366,6 +1376,11 @@ export class SearchServiceClient {
    *   If this is set, it should be exactly matched with
    *   {@link protos.google.cloud.retail.v2alpha.UserEvent.entity|UserEvent.entity} to get
    *   search results boosted by entity.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.ConversationalSearchSpec} [request.conversationalSearchSpec]
+   *   Optional. This field specifies all conversational related parameters
+   *   addition to traditional retail search.
+   * @param {google.cloud.retail.v2alpha.SearchRequest.TileNavigationSpec} [request.tileNavigationSpec]
+   *   Optional. This field specifies tile navigation related parameters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
