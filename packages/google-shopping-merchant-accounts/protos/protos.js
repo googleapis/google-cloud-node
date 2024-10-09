@@ -5345,6 +5345,7 @@
                              * @memberof google.shopping.merchant.accounts.v1beta
                              * @interface IDeleteAccountRequest
                              * @property {string|null} [name] DeleteAccountRequest name
+                             * @property {boolean|null} [force] DeleteAccountRequest force
                              */
     
                             /**
@@ -5369,6 +5370,14 @@
                              * @instance
                              */
                             DeleteAccountRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteAccountRequest force.
+                             * @member {boolean} force
+                             * @memberof google.shopping.merchant.accounts.v1beta.DeleteAccountRequest
+                             * @instance
+                             */
+                            DeleteAccountRequest.prototype.force = false;
     
                             /**
                              * Creates a new DeleteAccountRequest instance using the specified properties.
@@ -5396,6 +5405,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.force);
                                 return writer;
                             };
     
@@ -5432,6 +5443,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.force = reader.bool();
                                             break;
                                         }
                                     default:
@@ -5472,6 +5487,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.force != null && message.hasOwnProperty("force"))
+                                    if (typeof message.force !== "boolean")
+                                        return "force: boolean expected";
                                 return null;
                             };
     
@@ -5489,6 +5507,8 @@
                                 var message = new $root.google.shopping.merchant.accounts.v1beta.DeleteAccountRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.force != null)
+                                    message.force = Boolean(object.force);
                                 return message;
                             };
     
@@ -5505,10 +5525,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.force = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.force != null && message.hasOwnProperty("force"))
+                                    object.force = message.force;
                                 return object;
                             };
     
