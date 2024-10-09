@@ -128,7 +128,7 @@ function main() {
   // const expandGroups = true
 
   // Imports the Admin library
-  const {AnalyticsAdminServiceClient} = require('@google-ads/marketing-platform-admin').v1beta;
+  const {AnalyticsAdminServiceClient} = require('@google-cloud/admin').v1beta;
 
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
