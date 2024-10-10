@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.11.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.10.0...documentai-v8.11.0) (2024-10-10)
+
+
+### Features
+
+* [documentai] Removed deprecated api versions ([#5735](https://github.com/googleapis/google-cloud-node/issues/5735)) ([05a5acf](https://github.com/googleapis/google-cloud-node/commit/05a5acff50e5fe8cf9d1806dee652d522c88a206))
+
 ## [8.10.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v8.9.0...documentai-v8.10.0) (2024-09-13)
 
 

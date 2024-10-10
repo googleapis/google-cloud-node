@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/accounts-v0.1.0...accounts-v1.0.0) (2024-10-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* [merchantapi] The type of an existing field `time_zone` is changed from `message` to `string` in message `.google.shopping.merchant.accounts.v1beta.ListAccountIssuesRequest` ([#5714](https://github.com/googleapis/google-cloud-node/issues/5714))
+
+### Features
+
+* [merchantapi] add 'force' parameter for accounts.delete method ([#5720](https://github.com/googleapis/google-cloud-node/issues/5720)) ([e3ff2cc](https://github.com/googleapis/google-cloud-node/commit/e3ff2cc87bbfd68621de91c43e7e90d1248c194d))
+
+
+### Bug Fixes
+
+* [merchantapi] The type of an existing field `time_zone` is changed from `message` to `string` in message `.google.shopping.merchant.accounts.v1beta.ListAccountIssuesRequest` ([#5714](https://github.com/googleapis/google-cloud-node/issues/5714)) ([8928489](https://github.com/googleapis/google-cloud-node/commit/8928489a31a942397429023dca61da026522856a))
+
 ## 0.1.0 (2024-07-22)
 
 

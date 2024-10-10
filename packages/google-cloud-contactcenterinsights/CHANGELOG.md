@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.5.0...contact-center-insights-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [contactcenterinsights] Add import / export IssueModel ([#5738](https://github.com/googleapis/google-cloud-node/issues/5738)) ([f3060f2](https://github.com/googleapis/google-cloud-node/commit/f3060f2fad34867307825e591ae49ad38c221371))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/contact-center-insights-v3.4.0...contact-center-insights-v3.5.0) (2024-05-21)
 
 

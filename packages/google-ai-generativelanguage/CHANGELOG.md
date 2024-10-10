@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.6.0...generativelanguage-v2.7.0) (2024-10-10)
+
+
+### Features
+
+* [generativelanguage] Add GoogleSearchRetrieval tool and candidate.grounding_metadata ([#5699](https://github.com/googleapis/google-cloud-node/issues/5699)) ([3eb6375](https://github.com/googleapis/google-cloud-node/commit/3eb6375a4e4f28565de5e921c33e8547654a0fa2))
+
 ## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/generativelanguage-v2.5.0...generativelanguage-v2.6.0) (2024-06-26)
 
 
