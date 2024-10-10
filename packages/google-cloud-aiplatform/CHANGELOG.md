@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.30.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.30.0...aiplatform-v3.30.1) (2024-10-10)
+
+
+### Bug Fixes
+
+* Annotate PipelineJob and PipelineTaskRerunConfig fields as optional ([#5698](https://github.com/googleapis/google-cloud-node/issues/5698)) ([183c038](https://github.com/googleapis/google-cloud-node/commit/183c038dde5d49727ebc066990c3217629d3fa61))
+
 ## [3.30.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.29.0...aiplatform-v3.30.0) (2024-09-24)
 
 

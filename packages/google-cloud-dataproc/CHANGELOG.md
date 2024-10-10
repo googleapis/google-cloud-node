@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.10.0...dataproc-v5.11.0) (2024-10-10)
+
+
+### Features
+
+* [dataproc] add support for Spark Connect sessions in Dataproc Serverless for Spark ([#5709](https://github.com/googleapis/google-cloud-node/issues/5709)) ([fe95238](https://github.com/googleapis/google-cloud-node/commit/fe95238882e9c30570e025d11dc3a8ef5d4614a8))
+
 ## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/dataproc-v5.9.0...dataproc-v5.10.0) (2024-09-24)
 
 

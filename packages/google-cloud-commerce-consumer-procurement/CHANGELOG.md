@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.4.0...procurement-v0.5.0) (2024-10-10)
+
+
+### Features
+
+* [cloudcommerceconsumerprocurement] add Order modification RPCs and License Management Service ([#5737](https://github.com/googleapis/google-cloud-node/issues/5737)) ([d0c0db8](https://github.com/googleapis/google-cloud-node/commit/d0c0db86f34912a0015bc368e2e1299a8dfc2cb8))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/procurement-v0.3.0...procurement-v0.4.0) (2024-05-21)
 
 

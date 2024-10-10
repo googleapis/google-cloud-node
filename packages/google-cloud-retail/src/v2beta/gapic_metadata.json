@@ -269,6 +269,70 @@
         }
       }
     },
+    "GenerativeQuestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GenerativeQuestionServiceClient",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "updateGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "getGenerativeQuestionsFeatureConfig"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "listGenerativeQuestionConfigs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "updateGenerativeQuestionConfig"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batchUpdateGenerativeQuestionConfigs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {
@@ -426,6 +490,11 @@
                 "importProducts"
               ]
             },
+            "ExportProducts": {
+              "methods": [
+                "exportProducts"
+              ]
+            },
             "SetInventory": {
               "methods": [
                 "setInventory"
@@ -493,6 +562,11 @@
                 "importProducts"
               ]
             },
+            "ExportProducts": {
+              "methods": [
+                "exportProducts"
+              ]
+            },
             "SetInventory": {
               "methods": [
                 "setInventory"
@@ -523,6 +597,40 @@
                 "listProducts",
                 "listProductsStream",
                 "listProductsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProjectService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetAlertConfig": {
+              "methods": [
+                "getAlertConfig"
+              ]
+            },
+            "UpdateAlertConfig": {
+              "methods": [
+                "updateAlertConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectServiceClient",
+          "rpcs": {
+            "GetAlertConfig": {
+              "methods": [
+                "getAlertConfig"
+              ]
+            },
+            "UpdateAlertConfig": {
+              "methods": [
+                "updateAlertConfig"
               ]
             }
           }
@@ -670,6 +778,11 @@
                 "importUserEvents"
               ]
             },
+            "ExportUserEvents": {
+              "methods": [
+                "exportUserEvents"
+              ]
+            },
             "RejoinUserEvents": {
               "methods": [
                 "rejoinUserEvents"
@@ -698,6 +811,11 @@
             "ImportUserEvents": {
               "methods": [
                 "importUserEvents"
+              ]
+            },
+            "ExportUserEvents": {
+              "methods": [
+                "exportUserEvents"
               ]
             },
             "RejoinUserEvents": {

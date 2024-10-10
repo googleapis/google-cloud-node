@@ -62,6 +62,7 @@ export class ClusterManagerClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   clusterManagerStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -193,6 +194,18 @@ export class ClusterManagerClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+      caPoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/caPools/{ca_pool}'
+      ),
+      cryptoKeyVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}'
+      ),
+    };
 
     // Some of the methods on this service return "paged" results,
     // (e.g. 50 results at a time, with tokens to get subsequent
@@ -924,6 +937,9 @@ export class ClusterManagerClient {
    *   config.
    * @param {google.container.v1.NodePool.QueuedProvisioning} request.queuedProvisioning
    *   Specifies the configuration of queued provisioning.
+   * @param {string[]} request.storagePools
+   *   List of Storage Pools where boot disks are provisioned.
+   *   Existing Storage Pools will be replaced with storage-pools.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4129,6 +4145,149 @@ export class ClusterManagerClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.container.v1.IUsableSubnetwork>;
+  }
+  // --------------------
+  // -- Path templates --
+  // --------------------
+
+  /**
+   * Return a fully-qualified caPool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} ca_pool
+   * @returns {string} Resource name string.
+   */
+  caPoolPath(project: string, location: string, caPool: string) {
+    return this.pathTemplates.caPoolPathTemplate.render({
+      project: project,
+      location: location,
+      ca_pool: caPool,
+    });
+  }
+
+  /**
+   * Parse the project from CaPool resource.
+   *
+   * @param {string} caPoolName
+   *   A fully-qualified path representing CaPool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCaPoolName(caPoolName: string) {
+    return this.pathTemplates.caPoolPathTemplate.match(caPoolName).project;
+  }
+
+  /**
+   * Parse the location from CaPool resource.
+   *
+   * @param {string} caPoolName
+   *   A fully-qualified path representing CaPool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCaPoolName(caPoolName: string) {
+    return this.pathTemplates.caPoolPathTemplate.match(caPoolName).location;
+  }
+
+  /**
+   * Parse the ca_pool from CaPool resource.
+   *
+   * @param {string} caPoolName
+   *   A fully-qualified path representing CaPool resource.
+   * @returns {string} A string representing the ca_pool.
+   */
+  matchCaPoolFromCaPoolName(caPoolName: string) {
+    return this.pathTemplates.caPoolPathTemplate.match(caPoolName).ca_pool;
+  }
+
+  /**
+   * Return a fully-qualified cryptoKeyVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} key_ring
+   * @param {string} crypto_key
+   * @param {string} crypto_key_version
+   * @returns {string} Resource name string.
+   */
+  cryptoKeyVersionPath(
+    project: string,
+    location: string,
+    keyRing: string,
+    cryptoKey: string,
+    cryptoKeyVersion: string
+  ) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.render({
+      project: project,
+      location: location,
+      key_ring: keyRing,
+      crypto_key: cryptoKey,
+      crypto_key_version: cryptoKeyVersion,
+    });
+  }
+
+  /**
+   * Parse the project from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the key_ring from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the key_ring.
+   */
+  matchKeyRingFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).key_ring;
+  }
+
+  /**
+   * Parse the crypto_key from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key.
+   */
+  matchCryptoKeyFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).crypto_key;
+  }
+
+  /**
+   * Parse the crypto_key_version from CryptoKeyVersion resource.
+   *
+   * @param {string} cryptoKeyVersionName
+   *   A fully-qualified path representing CryptoKeyVersion resource.
+   * @returns {string} A string representing the crypto_key_version.
+   */
+  matchCryptoKeyVersionFromCryptoKeyVersionName(cryptoKeyVersionName: string) {
+    return this.pathTemplates.cryptoKeyVersionPathTemplate.match(
+      cryptoKeyVersionName
+    ).crypto_key_version;
   }
 
   /**

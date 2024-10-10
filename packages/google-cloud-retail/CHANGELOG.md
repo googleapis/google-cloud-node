@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.5.0...retail-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [retail] add conversational search ([#5740](https://github.com/googleapis/google-cloud-node/issues/5740)) ([1a182cc](https://github.com/googleapis/google-cloud-node/commit/1a182cc261b9df04154dfeb123196a539fd25129))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/retail-v3.4.0...retail-v3.5.0) (2024-06-21)
 
 

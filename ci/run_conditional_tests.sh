@@ -37,7 +37,7 @@ if [ ${BUILD_TYPE} == "presubmit" ]; then
     GIT_DIFF_ARG="origin/main..."
 
     # Then fetch enough history for finding the common commit.
-    git fetch origin main --deepen=200
+    git fetch origin main --deepen=300
 
 elif [ ${BUILD_TYPE} == "continuous" ]; then
     # For continuous build, we want to know the difference in the last
