@@ -209,6 +209,9 @@ export class ContactCenterInsightsClient {
       conversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}'
       ),
+      encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/encryptionSpec'
+      ),
       issuePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/issueModels/{issue_model}/issues/{issue}'
       ),
@@ -343,6 +346,24 @@ export class ContactCenterInsightsClient {
     const undeployIssueModelMetadata = protoFilesRoot.lookup(
       '.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata'
     ) as gax.protobuf.Type;
+    const exportIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse'
+    ) as gax.protobuf.Type;
+    const exportIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const importIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse'
+    ) as gax.protobuf.Type;
+    const importIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const initializeEncryptionSpecResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse'
+    ) as gax.protobuf.Type;
+    const initializeEncryptionSpecMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       uploadConversation: new this._gaxModule.LongrunningDescriptor(
@@ -402,6 +423,25 @@ export class ContactCenterInsightsClient {
         this.operationsClient,
         undeployIssueModelResponse.decode.bind(undeployIssueModelResponse),
         undeployIssueModelMetadata.decode.bind(undeployIssueModelMetadata)
+      ),
+      exportIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportIssueModelResponse.decode.bind(exportIssueModelResponse),
+        exportIssueModelMetadata.decode.bind(exportIssueModelMetadata)
+      ),
+      importIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importIssueModelResponse.decode.bind(importIssueModelResponse),
+        importIssueModelMetadata.decode.bind(importIssueModelMetadata)
+      ),
+      initializeEncryptionSpec: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        initializeEncryptionSpecResponse.decode.bind(
+          initializeEncryptionSpecResponse
+        ),
+        initializeEncryptionSpecMetadata.decode.bind(
+          initializeEncryptionSpecMetadata
+        )
       ),
     };
 
@@ -477,6 +517,8 @@ export class ContactCenterInsightsClient {
       'deleteIssueModel',
       'deployIssueModel',
       'undeployIssueModel',
+      'exportIssueModel',
+      'importIssueModel',
       'getIssue',
       'listIssues',
       'updateIssue',
@@ -490,6 +532,8 @@ export class ContactCenterInsightsClient {
       'calculateStats',
       'getSettings',
       'updateSettings',
+      'getEncryptionSpec',
+      'initializeEncryptionSpec',
       'createView',
       'getView',
       'listViews',
@@ -614,6 +658,8 @@ export class ContactCenterInsightsClient {
   // -------------------
   /**
    * Creates a conversation.
+   * Note that this method does not support audio transcription or redaction.
+   * Use `conversations.upload` instead.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -725,7 +771,20 @@ export class ContactCenterInsightsClient {
    * @param {google.cloud.contactcenterinsights.v1.Conversation} request.conversation
    *   Required. The new values for the conversation.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The list of fields to be updated.
+   *   The list of fields to be updated. All possible fields can be updated by
+   *   passing `*`, or a subset of the following updateable fields can be
+   *   provided:
+   *
+   *   * `agent_id`
+   *   * `language_code`
+   *   * `labels`
+   *   * `metadata`
+   *   * `quality_metadata`
+   *   * `call_metadata`
+   *   * `start_time`
+   *   * `expire_time` or `ttl`
+   *   * `data_source.gcs_source.audio_uri` or
+   *   `data_source.dialogflow_source.audio_uri`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2660,6 +2719,102 @@ export class ContactCenterInsightsClient {
     return this.innerApiCalls.updateSettings(request, options, callback);
   }
   /**
+   * Gets location-level encryption key specification.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the encryption spec resource to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.contactcenterinsights.v1.EncryptionSpec|EncryptionSpec}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.get_encryption_spec.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_GetEncryptionSpec_async
+   */
+  getEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+          | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IEncryptionSpec,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEncryptionSpec(request, options, callback);
+  }
+  /**
    * Creates a view.
    *
    * @param {Object} request
@@ -3046,8 +3201,8 @@ export class ContactCenterInsightsClient {
   }
 
   /**
-   * Create a longrunning conversation upload operation. This method differs
-   * from CreateConversation by allowing audio transcription and optional DLP
+   * Create a long-running conversation upload operation. This method differs
+   * from `CreateConversation` by allowing audio transcription and optional DLP
    * redaction.
    *
    * @param {Object} request
@@ -3656,6 +3811,11 @@ export class ContactCenterInsightsClient {
    * @param {google.cloud.contactcenterinsights.v1.SpeechConfig} [request.speechConfig]
    *   Optional. Default Speech-to-Text configuration. Optional, will default to
    *   the config specified in Settings.
+   * @param {number} [request.sampleSize]
+   *   Optional. If set, this fields indicates the number of objects to ingest
+   *   from the Cloud Storage bucket. If empty, the entire bucket will be
+   *   ingested. Unless they are first deleted, conversations produced through
+   *   sampling won't be ingested by subsequent ingest requests.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4481,6 +4641,433 @@ export class ContactCenterInsightsClient {
     >;
   }
   /**
+   * Exports an issue model to the provided destination.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination} request.gcsDestination
+   *   Google Cloud Storage URI to export the issue model to.
+   * @param {string} request.name
+   *   Required. The issue model to export.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.export_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ExportIssueModel_async
+   */
+  exportIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  exportIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IExportIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.exportIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `exportIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.export_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ExportIssueModel_async
+   */
+  async checkExportIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportIssueModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata
+    >;
+  }
+  /**
+   * Imports an issue model from a Cloud Storage bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource} request.gcsSource
+   *   Google Cloud Storage source message.
+   * @param {string} request.parent
+   *   Required. The parent resource of the issue model.
+   * @param {boolean} [request.createNewModel]
+   *   Optional. If set to true, will create an issue model from the imported file
+   *   with randomly generated IDs for the issue model and corresponding issues.
+   *   Otherwise, replaces an existing model with the same ID as the file.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.import_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async
+   */
+  importIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  importIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IImportIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `importIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.import_issue_model.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async
+   */
+  async checkImportIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.importIssueModel,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata
+    >;
+  }
+  /**
+   * Initializes a location-level encryption key specification.  An error will
+   * be thrown if the location has resources already created before the
+   * initialization. Once the encryption specification is initialized at a
+   * location, it is immutable and all newly created resources under the
+   * location will be encrypted with the existing specification.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.EncryptionSpec} request.encryptionSpec
+   *   Required. The encryption spec used for CMEK encryption. It is required that
+   *   the kms key is in the same region as the endpoint. The same key will be
+   *   used for all provisioned resources, if encryption is available. If the
+   *   kms_key_name is left empty, no encryption will be enforced.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.initialize_encryption_spec.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async
+   */
+  initializeEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  initializeEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  initializeEncryptionSpec(
+    request: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  initializeEncryptionSpec(
+    request?: protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+            protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse,
+        protos.google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'encryption_spec.name': request.encryptionSpec!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.initializeEncryptionSpec(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `initializeEncryptionSpec()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/contact_center_insights.initialize_encryption_spec.js</caption>
+   * region_tag:contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async
+   */
+  async checkInitializeEncryptionSpecProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse,
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.initializeEncryptionSpec,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse,
+      protos.google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata
+    >;
+  }
+  /**
    * Lists conversations.
    *
    * @param {Object} request
@@ -4489,7 +5076,7 @@ export class ContactCenterInsightsClient {
    *   Required. The parent resource of the conversation.
    * @param {number} request.pageSize
    *   The maximum number of conversations to return in the response. A valid page
-   *   size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *   size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *   unspecified, a default page size of 100 will be chosen. Note that a call
    *   might return fewer results than the requested page size.
    * @param {string} request.pageToken
@@ -4499,6 +5086,22 @@ export class ContactCenterInsightsClient {
    * @param {string} request.filter
    *   A filter to reduce results to a specific subset. Useful for querying
    *   conversations with specific properties.
+   * @param {string} [request.orderBy]
+   *   Optional. The attribute by which to order conversations in the response.
+   *   If empty, conversations will be ordered by descending creation time.
+   *   Supported values are one of the following:
+   *
+   *   * create_time
+   *   * customer_satisfaction_rating
+   *   * duration
+   *   * latest_analysis
+   *   * start_time
+   *   * turn_count
+   *
+   *   The default sort order is ascending. To specify order, append `asc` or
+   *   `desc` (`create_time desc`).
+   *   For more details, see [Google AIPs
+   *   Ordering](https://google.aip.dev/132#ordering).
    * @param {google.cloud.contactcenterinsights.v1.ConversationView} request.view
    *   The level of details of the conversation. Default is `BASIC`.
    * @param {object} [options]
@@ -4596,7 +5199,7 @@ export class ContactCenterInsightsClient {
    *   Required. The parent resource of the conversation.
    * @param {number} request.pageSize
    *   The maximum number of conversations to return in the response. A valid page
-   *   size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *   size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *   unspecified, a default page size of 100 will be chosen. Note that a call
    *   might return fewer results than the requested page size.
    * @param {string} request.pageToken
@@ -4606,6 +5209,22 @@ export class ContactCenterInsightsClient {
    * @param {string} request.filter
    *   A filter to reduce results to a specific subset. Useful for querying
    *   conversations with specific properties.
+   * @param {string} [request.orderBy]
+   *   Optional. The attribute by which to order conversations in the response.
+   *   If empty, conversations will be ordered by descending creation time.
+   *   Supported values are one of the following:
+   *
+   *   * create_time
+   *   * customer_satisfaction_rating
+   *   * duration
+   *   * latest_analysis
+   *   * start_time
+   *   * turn_count
+   *
+   *   The default sort order is ascending. To specify order, append `asc` or
+   *   `desc` (`create_time desc`).
+   *   For more details, see [Google AIPs
+   *   Ordering](https://google.aip.dev/132#ordering).
    * @param {google.cloud.contactcenterinsights.v1.ConversationView} request.view
    *   The level of details of the conversation. Default is `BASIC`.
    * @param {object} [options]
@@ -4651,7 +5270,7 @@ export class ContactCenterInsightsClient {
    *   Required. The parent resource of the conversation.
    * @param {number} request.pageSize
    *   The maximum number of conversations to return in the response. A valid page
-   *   size ranges from 0 to 1,000 inclusive. If the page size is zero or
+   *   size ranges from 0 to 100,000 inclusive. If the page size is zero or
    *   unspecified, a default page size of 100 will be chosen. Note that a call
    *   might return fewer results than the requested page size.
    * @param {string} request.pageToken
@@ -4661,6 +5280,22 @@ export class ContactCenterInsightsClient {
    * @param {string} request.filter
    *   A filter to reduce results to a specific subset. Useful for querying
    *   conversations with specific properties.
+   * @param {string} [request.orderBy]
+   *   Optional. The attribute by which to order conversations in the response.
+   *   If empty, conversations will be ordered by descending creation time.
+   *   Supported values are one of the following:
+   *
+   *   * create_time
+   *   * customer_satisfaction_rating
+   *   * duration
+   *   * latest_analysis
+   *   * start_time
+   *   * turn_count
+   *
+   *   The default sort order is ascending. To specify order, append `asc` or
+   *   `desc` (`create_time desc`).
+   *   For more details, see [Google AIPs
+   *   Ordering](https://google.aip.dev/132#ordering).
    * @param {google.cloud.contactcenterinsights.v1.ConversationView} request.view
    *   The level of details of the conversation. Default is `BASIC`.
    * @param {object} [options]
@@ -5614,6 +6249,46 @@ export class ContactCenterInsightsClient {
   matchConversationFromConversationName(conversationName: string) {
     return this.pathTemplates.conversationPathTemplate.match(conversationName)
       .conversation;
+  }
+
+  /**
+   * Return a fully-qualified encryptionSpec resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  encryptionSpecPath(project: string, location: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).project;
+  }
+
+  /**
+   * Parse the location from EncryptionSpec resource.
+   *
+   * @param {string} encryptionSpecName
+   *   A fully-qualified path representing EncryptionSpec resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromEncryptionSpecName(encryptionSpecName: string) {
+    return this.pathTemplates.encryptionSpecPathTemplate.match(
+      encryptionSpecName
+    ).location;
   }
 
   /**

@@ -5,6 +5,413 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "73973c441885b512790a6a4f6c9a37a09ca8e60c",
+          "message": "Add initial files for google.cloud.oracledatabase.v1",
+          "issues": [
+            "5727"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "e33d9fc4-6d45-4979-b773-0a64b4b39670",
+      "createTime": "2024-10-10T01:06:13.413Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "38b46462a436347327f56c81ea3ae8dcbada1c14",
+          "message": "Add initial files for google.marketingplatform.admin.v1alpha",
+          "issues": [
+            "5716"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "a9784ed3db6ee96d171762308bbbcd57390b6866",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5354"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "01f48fce63ec4ddf801d59ee2b8c0db9f6fb8372",
+          "message": "[Many APIs] update Nodejs generator to send API versions in headers for GAPICs",
+          "issues": [
+            "5351"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "c7b3e5e3-65f1-45ad-99d6-9182caa34ce6",
+      "createTime": "2024-10-10T01:06:13.397Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "e3ff2cc87bbfd68621de91c43e7e90d1248c194d",
+          "message": "[merchantapi] add 'force' parameter for accounts.delete method",
+          "issues": [
+            "5720"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "8928489a31a942397429023dca61da026522856a",
+          "message": "[merchantapi] The type of an existing field `time_zone` is changed from `message` to `string` in message `.google.shopping.merchant.accounts.v1beta.ListAccountIssuesRequest`",
+          "issues": [
+            "5714"
+          ],
+          "breakingChangeNote": "[merchantapi] The type of an existing field `time_zone` is changed from `message` to `string` in message `.google.shopping.merchant.accounts.v1beta.ListAccountIssuesRequest` ([#5714](https://github.com/googleapis/google-cloud-node/issues/5714))"
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "93a0471f-7a48-4a2a-a81d-f15b68e50981",
+      "createTime": "2024-10-10T01:06:13.381Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3a101aaf6fa743f4f0854973b7a22202fef29f0f",
+          "message": "[merchantapi] adding some more information about supplemental data sources",
+          "issues": [
+            "5733"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "667316b70270f59b10cfb41c687ef9375b683f53",
+          "message": "[merchantapi] Add FileUploads service",
+          "issues": [
+            "5711"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "7cf528df-bad8-4024-909c-d3a9d6bd6312",
+      "createTime": "2024-10-10T01:06:13.362Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ade97eddd23ffa8e89526221b564c0eacd3b078e",
+          "message": "[routeoptimization] Add support for generating route tokens",
+          "issues": [
+            "5706"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "ade97eddd23ffa8e89526221b564c0eacd3b078e",
+          "message": "A new field `route_token` is added to message `.google.maps.routeoptimization.v1.ShipmentRoute.Transition`",
+          "issues": []
+        }
+      ],
+      "version": "0.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "7159a69e-172a-4504-9f96-43b0a9cbe70d",
+      "createTime": "2024-10-10T01:06:13.347Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d5a4a469cfc03b75356e33e9659aa720ff6ee71d",
+          "message": "[chat] Add doc for permission settings & announcement space support",
+          "issues": [
+            "5731"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "05eed183-285c-4144-b52a-a97fb7d4fce6",
+      "createTime": "2024-10-10T01:06:13.332Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7cbf6b20d0e4944779ba71aaa3388abbf3840ed5",
+          "message": "[cloudbuild] Add LEGACY_BUCKET option to DefaultLogsBucketBehavior",
+          "issues": [
+            "5700"
+          ]
+        }
+      ],
+      "version": "4.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "df3fe3c7-a1fa-4c8c-8895-cce1f1d2e5a5",
+      "createTime": "2024-10-10T01:06:13.316Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "88083e4a879ef6963eca9183c037ef84b861efed",
+          "message": "[container] add an effective_cgroup_mode field in node config",
+          "issues": [
+            "5741"
+          ]
+        }
+      ],
+      "version": "5.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "0ae1a993-c4d7-482e-a3c8-768d41d5705d",
+      "createTime": "2024-10-10T01:06:13.300Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4676845917595486602363397352b393eedc587a",
+          "message": "Remove extra protos file",
+          "issues": [
+            "5696"
+          ]
+        }
+      ],
+      "version": "5.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "9a3c3e4e-970b-49e2-b1bc-07ce129bf35e",
+      "createTime": "2024-10-10T01:06:13.281Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "1a182cc261b9df04154dfeb123196a539fd25129",
+          "message": "[retail] add conversational search",
+          "issues": [
+            "5740"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "e9e79c3d-160f-4218-ace5-2840a55aebfd",
+      "createTime": "2024-10-10T01:06:13.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "05a5acff50e5fe8cf9d1806dee652d522c88a206",
+          "message": "[documentai] Removed deprecated api versions",
+          "issues": [
+            "5735"
+          ]
+        }
+      ],
+      "version": "8.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "267f45ad-6bde-4231-bc08-0172cdcbfa4e",
+      "createTime": "2024-10-10T01:06:13.250Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fd737ecc5e6681fbd97d7a20e39cbbdb4ec0595a",
+          "message": "[dialogflow] created new boolean fields in conversation dataset for zone isolation and zone separation compliance status",
+          "issues": [
+            "5710"
+          ]
+        }
+      ],
+      "version": "6.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "eb8e4ce4-b137-472b-a789-f7cef026015d",
+      "createTime": "2024-10-10T01:06:13.234Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d51ea34e6efd1e88e0394b8e8d9dadf1a37c406",
+          "message": "[deploy] added support for deploy policies",
+          "issues": [
+            "5717"
+          ]
+        }
+      ],
+      "version": "4.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "2a4b59d8-ea20-46e7-9ee4-95cb17c33775",
+      "createTime": "2024-10-10T01:06:13.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fe95238882e9c30570e025d11dc3a8ef5d4614a8",
+          "message": "[dataproc] add support for Spark Connect sessions in Dataproc Serverless for Spark",
+          "issues": [
+            "5709"
+          ]
+        }
+      ],
+      "version": "5.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "5af692af-4f68-4a88-b2f5-1d72fd154cd8",
+      "createTime": "2024-10-10T01:06:13.134Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f3060f2fad34867307825e591ae49ad38c221371",
+          "message": "[contactcenterinsights] Add import / export IssueModel",
+          "issues": [
+            "5738"
+          ]
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "00f13d7f-8888-44ba-994a-06d5ead234cb",
+      "createTime": "2024-10-10T01:06:13.028Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d0c0db86f34912a0015bc368e2e1299a8dfc2cb8",
+          "message": "[cloudcommerceconsumerprocurement] add Order modification RPCs and License Management Service",
+          "issues": [
+            "5737"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "f1f19979-5b3d-4aab-997e-7334978fdfbf",
+      "createTime": "2024-10-10T01:06:12.978Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8c6127917d14c6d06c56f1061a5ac293d333f397",
+          "message": "[channel] Add support for primary_admin_email as customer_identity for ImportCustomer",
+          "issues": [
+            "5736"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8c6127917d14c6d06c56f1061a5ac293d333f397",
+          "message": "Add support to look up team customer Cloud Identity information",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "8c6127917d14c6d06c56f1061a5ac293d333f397",
+          "message": "Add support for importing team customer from a different reseller",
+          "issues": []
+        }
+      ],
+      "version": "3.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "97b098e3-af09-4141-b282-20dd5f9657f3",
+      "createTime": "2024-10-10T01:06:12.959Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "2f97f7619629efda2977805d8be657fe7ee48e1a",
+          "message": "[bigquery-datatransfer]Add scheduleOptionsV2 and Error fields for TransferConfig",
+          "issues": [
+            "5722"
+          ]
+        }
+      ],
+      "version": "4.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "e22534ae-b5a7-4681-9ee1-8046fc042431",
+      "createTime": "2024-10-10T01:06:12.937Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "183c038dde5d49727ebc066990c3217629d3fa61",
+          "message": "Annotate PipelineJob and PipelineTaskRerunConfig fields as optional",
+          "issues": [
+            "5698"
+          ]
+        }
+      ],
+      "version": "3.30.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "2918c2db-1722-4ab4-8cb0-64d754b8ed74",
+      "createTime": "2024-10-10T01:06:12.906Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3eb6375a4e4f28565de5e921c33e8547654a0fa2",
+          "message": "[generativelanguage] Add GoogleSearchRetrieval tool and candidate.grounding_metadata",
+          "issues": [
+            "5699"
+          ]
+        }
+      ],
+      "version": "2.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "6c78b347-9c99-41fc-820f-589d0faf192e",
+      "createTime": "2024-10-10T01:06:12.886Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "ba7cd868aba5d60d8871449302212db526e31dfc",
           "message": "[gdchardwaremanagement] add an order type field to distinguish a fulfillment request from a sales inquiry",
           "issues": [
@@ -36640,5 +37047,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-09-24T17:54:23.620Z"
+  "updateTime": "2024-10-10T01:06:13.413Z"
 }

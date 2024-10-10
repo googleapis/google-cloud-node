@@ -29,7 +29,7 @@ function main(parent, assessment) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the project in which the assessment will be created,
+   *  Required. The name of the project in which the assessment is created,
    *  in the format `projects/{project_number}`.
    */
   // const parent = 'abc123'

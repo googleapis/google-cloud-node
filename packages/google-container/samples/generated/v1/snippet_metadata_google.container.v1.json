@@ -1,7 +1,7 @@
 {
     "clientLibrary": {
         "name": "nodejs-container",
-        "version": "5.17.0",
+        "version": "5.18.0",
         "language": "TYPESCRIPT",
         "apis": [
             {
@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 199,
+                    "end": 204,
                     "type": "FULL"
                 }
             ],
@@ -362,6 +362,10 @@
                     {
                         "name": "queued_provisioning",
                         "type": ".google.container.v1.NodePool.QueuedProvisioning"
+                    },
+                    {
+                        "name": "storage_pools",
+                        "type": "TYPE_STRING[]"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

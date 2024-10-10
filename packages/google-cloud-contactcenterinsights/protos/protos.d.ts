@@ -341,6 +341,34 @@ export namespace google {
                     public undeployIssueModel(request: google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ExportIssueModel.
+                     * @param request ExportIssueModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public exportIssueModel(request: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ExportIssueModelCallback): void;
+
+                    /**
+                     * Calls ExportIssueModel.
+                     * @param request ExportIssueModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exportIssueModel(request: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ImportIssueModel.
+                     * @param request ImportIssueModelRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public importIssueModel(request: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.ImportIssueModelCallback): void;
+
+                    /**
+                     * Calls ImportIssueModel.
+                     * @param request ImportIssueModelRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importIssueModel(request: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls GetIssue.
                      * @param request GetIssueRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Issue
@@ -521,6 +549,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateSettings(request: google.cloud.contactcenterinsights.v1.IUpdateSettingsRequest): Promise<google.cloud.contactcenterinsights.v1.Settings>;
+
+                    /**
+                     * Calls GetEncryptionSpec.
+                     * @param request GetEncryptionSpecRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EncryptionSpec
+                     */
+                    public getEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetEncryptionSpecCallback): void;
+
+                    /**
+                     * Calls GetEncryptionSpec.
+                     * @param request GetEncryptionSpecRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest): Promise<google.cloud.contactcenterinsights.v1.EncryptionSpec>;
+
+                    /**
+                     * Calls InitializeEncryptionSpec.
+                     * @param request InitializeEncryptionSpecRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public initializeEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest, callback: google.cloud.contactcenterinsights.v1.ContactCenterInsights.InitializeEncryptionSpecCallback): void;
+
+                    /**
+                     * Calls InitializeEncryptionSpec.
+                     * @param request InitializeEncryptionSpecRequest message or plain object
+                     * @returns Promise
+                     */
+                    public initializeEncryptionSpec(request: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls CreateView.
@@ -743,6 +799,20 @@ export namespace google {
                     type UndeployIssueModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|exportIssueModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ExportIssueModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|importIssueModel}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ImportIssueModelCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getIssue}.
                      * @param error Error, if any
                      * @param [response] Issue
@@ -832,6 +902,20 @@ export namespace google {
                      * @param [response] Settings
                      */
                     type UpdateSettingsCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.Settings) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|getEncryptionSpec}.
+                     * @param error Error, if any
+                     * @param [response] EncryptionSpec
+                     */
+                    type GetEncryptionSpecCallback = (error: (Error|null), response?: google.cloud.contactcenterinsights.v1.EncryptionSpec) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|initializeEncryptionSpec}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type InitializeEncryptionSpecCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights|createView}.
@@ -1811,6 +1895,9 @@ export namespace google {
                     /** ListConversationsRequest filter */
                     filter?: (string|null);
 
+                    /** ListConversationsRequest orderBy */
+                    orderBy?: (string|null);
+
                     /** ListConversationsRequest view */
                     view?: (google.cloud.contactcenterinsights.v1.ConversationView|keyof typeof google.cloud.contactcenterinsights.v1.ConversationView|null);
                 }
@@ -1835,6 +1922,9 @@ export namespace google {
 
                     /** ListConversationsRequest filter. */
                     public filter: string;
+
+                    /** ListConversationsRequest orderBy. */
+                    public orderBy: string;
 
                     /** ListConversationsRequest view. */
                     public view: (google.cloud.contactcenterinsights.v1.ConversationView|keyof typeof google.cloud.contactcenterinsights.v1.ConversationView);
@@ -2349,6 +2439,9 @@ export namespace google {
 
                     /** IngestConversationsRequest speechConfig */
                     speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
+
+                    /** IngestConversationsRequest sampleSize */
+                    sampleSize?: (number|null);
                 }
 
                 /** Represents an IngestConversationsRequest. */
@@ -2378,11 +2471,17 @@ export namespace google {
                     /** IngestConversationsRequest speechConfig. */
                     public speechConfig?: (google.cloud.contactcenterinsights.v1.ISpeechConfig|null);
 
+                    /** IngestConversationsRequest sampleSize. */
+                    public sampleSize?: (number|null);
+
                     /** IngestConversationsRequest source. */
                     public source?: "gcsSource";
 
                     /** IngestConversationsRequest objectConfig. */
                     public objectConfig?: "transcriptObjectConfig";
+
+                    /** IngestConversationsRequest _sampleSize. */
+                    public _sampleSize?: "sampleSize";
 
                     /**
                      * Creates a new IngestConversationsRequest instance using the specified properties.
@@ -2472,6 +2571,12 @@ export namespace google {
 
                         /** GcsSource bucketObjectType */
                         bucketObjectType?: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|keyof typeof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|null);
+
+                        /** GcsSource metadataBucketUri */
+                        metadataBucketUri?: (string|null);
+
+                        /** GcsSource customMetadataKeys */
+                        customMetadataKeys?: (string[]|null);
                     }
 
                     /** Represents a GcsSource. */
@@ -2488,6 +2593,15 @@ export namespace google {
 
                         /** GcsSource bucketObjectType. */
                         public bucketObjectType: (google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType|keyof typeof google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource.BucketObjectType);
+
+                        /** GcsSource metadataBucketUri. */
+                        public metadataBucketUri?: (string|null);
+
+                        /** GcsSource customMetadataKeys. */
+                        public customMetadataKeys: string[];
+
+                        /** GcsSource _metadataBucketUri. */
+                        public _metadataBucketUri?: "metadataBucketUri";
 
                         /**
                          * Creates a new GcsSource instance using the specified properties.
@@ -6156,6 +6270,824 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ExportIssueModelRequest. */
+                interface IExportIssueModelRequest {
+
+                    /** ExportIssueModelRequest gcsDestination */
+                    gcsDestination?: (google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination|null);
+
+                    /** ExportIssueModelRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an ExportIssueModelRequest. */
+                class ExportIssueModelRequest implements IExportIssueModelRequest {
+
+                    /**
+                     * Constructs a new ExportIssueModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest);
+
+                    /** ExportIssueModelRequest gcsDestination. */
+                    public gcsDestination?: (google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination|null);
+
+                    /** ExportIssueModelRequest name. */
+                    public name: string;
+
+                    /** ExportIssueModelRequest Destination. */
+                    public Destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new ExportIssueModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportIssueModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Encodes the specified ExportIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify|verify} messages.
+                     * @param message ExportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.verify|verify} messages.
+                     * @param message ExportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IExportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportIssueModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Decodes an ExportIssueModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Verifies an ExportIssueModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportIssueModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest;
+
+                    /**
+                     * Creates a plain object from an ExportIssueModelRequest message. Also converts values to other types if specified.
+                     * @param message ExportIssueModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportIssueModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIssueModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExportIssueModelRequest {
+
+                    /** Properties of a GcsDestination. */
+                    interface IGcsDestination {
+
+                        /** GcsDestination objectUri */
+                        objectUri?: (string|null);
+                    }
+
+                    /** Represents a GcsDestination. */
+                    class GcsDestination implements IGcsDestination {
+
+                        /**
+                         * Constructs a new GcsDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination);
+
+                        /** GcsDestination objectUri. */
+                        public objectUri: string;
+
+                        /**
+                         * Creates a new GcsDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsDestination instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Encodes the specified GcsDestination message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsDestination message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination.verify|verify} messages.
+                         * @param message GcsDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.IGcsDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Decodes a GcsDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Verifies a GcsDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination;
+
+                        /**
+                         * Creates a plain object from a GcsDestination message. Also converts values to other types if specified.
+                         * @param message GcsDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ExportIssueModelResponse. */
+                interface IExportIssueModelResponse {
+                }
+
+                /** Represents an ExportIssueModelResponse. */
+                class ExportIssueModelResponse implements IExportIssueModelResponse {
+
+                    /**
+                     * Constructs a new ExportIssueModelResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse);
+
+                    /**
+                     * Creates a new ExportIssueModelResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportIssueModelResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Encodes the specified ExportIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelResponse.verify|verify} messages.
+                     * @param message ExportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelResponse.verify|verify} messages.
+                     * @param message ExportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IExportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportIssueModelResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Decodes an ExportIssueModelResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Verifies an ExportIssueModelResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportIssueModelResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelResponse;
+
+                    /**
+                     * Creates a plain object from an ExportIssueModelResponse message. Also converts values to other types if specified.
+                     * @param message ExportIssueModelResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportIssueModelResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIssueModelResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExportIssueModelMetadata. */
+                interface IExportIssueModelMetadata {
+
+                    /** ExportIssueModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IExportIssueModelRequest|null);
+                }
+
+                /** Represents an ExportIssueModelMetadata. */
+                class ExportIssueModelMetadata implements IExportIssueModelMetadata {
+
+                    /**
+                     * Constructs a new ExportIssueModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata);
+
+                    /** ExportIssueModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExportIssueModelMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IExportIssueModelRequest|null);
+
+                    /**
+                     * Creates a new ExportIssueModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExportIssueModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Encodes the specified ExportIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.verify|verify} messages.
+                     * @param message ExportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExportIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata.verify|verify} messages.
+                     * @param message ExportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IExportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExportIssueModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Decodes an ExportIssueModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Verifies an ExportIssueModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExportIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExportIssueModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata;
+
+                    /**
+                     * Creates a plain object from an ExportIssueModelMetadata message. Also converts values to other types if specified.
+                     * @param message ExportIssueModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ExportIssueModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExportIssueModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExportIssueModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportIssueModelRequest. */
+                interface IImportIssueModelRequest {
+
+                    /** ImportIssueModelRequest gcsSource */
+                    gcsSource?: (google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource|null);
+
+                    /** ImportIssueModelRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportIssueModelRequest createNewModel */
+                    createNewModel?: (boolean|null);
+                }
+
+                /** Represents an ImportIssueModelRequest. */
+                class ImportIssueModelRequest implements IImportIssueModelRequest {
+
+                    /**
+                     * Constructs a new ImportIssueModelRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest);
+
+                    /** ImportIssueModelRequest gcsSource. */
+                    public gcsSource?: (google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource|null);
+
+                    /** ImportIssueModelRequest parent. */
+                    public parent: string;
+
+                    /** ImportIssueModelRequest createNewModel. */
+                    public createNewModel: boolean;
+
+                    /** ImportIssueModelRequest Source. */
+                    public Source?: "gcsSource";
+
+                    /**
+                     * Creates a new ImportIssueModelRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportIssueModelRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Encodes the specified ImportIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify|verify} messages.
+                     * @param message ImportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.verify|verify} messages.
+                     * @param message ImportIssueModelRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IImportIssueModelRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportIssueModelRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Decodes an ImportIssueModelRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportIssueModelRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Verifies an ImportIssueModelRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportIssueModelRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest;
+
+                    /**
+                     * Creates a plain object from an ImportIssueModelRequest message. Also converts values to other types if specified.
+                     * @param message ImportIssueModelRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportIssueModelRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportIssueModelRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ImportIssueModelRequest {
+
+                    /** Properties of a GcsSource. */
+                    interface IGcsSource {
+
+                        /** GcsSource objectUri */
+                        objectUri?: (string|null);
+                    }
+
+                    /** Represents a GcsSource. */
+                    class GcsSource implements IGcsSource {
+
+                        /**
+                         * Constructs a new GcsSource.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource);
+
+                        /** GcsSource objectUri. */
+                        public objectUri: string;
+
+                        /**
+                         * Creates a new GcsSource instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GcsSource instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Encodes the specified GcsSource message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GcsSource message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource.verify|verify} messages.
+                         * @param message GcsSource message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.IGcsSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Decodes a GcsSource message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GcsSource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Verifies a GcsSource message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GcsSource message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GcsSource
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource;
+
+                        /**
+                         * Creates a plain object from a GcsSource message. Also converts values to other types if specified.
+                         * @param message GcsSource
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelRequest.GcsSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GcsSource to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GcsSource
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an ImportIssueModelResponse. */
+                interface IImportIssueModelResponse {
+                }
+
+                /** Represents an ImportIssueModelResponse. */
+                class ImportIssueModelResponse implements IImportIssueModelResponse {
+
+                    /**
+                     * Constructs a new ImportIssueModelResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse);
+
+                    /**
+                     * Creates a new ImportIssueModelResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportIssueModelResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Encodes the specified ImportIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelResponse.verify|verify} messages.
+                     * @param message ImportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelResponse.verify|verify} messages.
+                     * @param message ImportIssueModelResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IImportIssueModelResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportIssueModelResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Decodes an ImportIssueModelResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportIssueModelResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Verifies an ImportIssueModelResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportIssueModelResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelResponse;
+
+                    /**
+                     * Creates a plain object from an ImportIssueModelResponse message. Also converts values to other types if specified.
+                     * @param message ImportIssueModelResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportIssueModelResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportIssueModelResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ImportIssueModelMetadata. */
+                interface IImportIssueModelMetadata {
+
+                    /** ImportIssueModelMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IImportIssueModelRequest|null);
+                }
+
+                /** Represents an ImportIssueModelMetadata. */
+                class ImportIssueModelMetadata implements IImportIssueModelMetadata {
+
+                    /**
+                     * Constructs a new ImportIssueModelMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata);
+
+                    /** ImportIssueModelMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ImportIssueModelMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IImportIssueModelRequest|null);
+
+                    /**
+                     * Creates a new ImportIssueModelMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportIssueModelMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Encodes the specified ImportIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.verify|verify} messages.
+                     * @param message ImportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata.verify|verify} messages.
+                     * @param message ImportIssueModelMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IImportIssueModelMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportIssueModelMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Decodes an ImportIssueModelMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportIssueModelMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Verifies an ImportIssueModelMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportIssueModelMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata;
+
+                    /**
+                     * Creates a plain object from an ImportIssueModelMetadata message. Also converts values to other types if specified.
+                     * @param message ImportIssueModelMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ImportIssueModelMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportIssueModelMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImportIssueModelMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetIssueRequest. */
                 interface IGetIssueRequest {
 
@@ -7659,6 +8591,406 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetEncryptionSpecRequest. */
+                interface IGetEncryptionSpecRequest {
+
+                    /** GetEncryptionSpecRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetEncryptionSpecRequest. */
+                class GetEncryptionSpecRequest implements IGetEncryptionSpecRequest {
+
+                    /**
+                     * Constructs a new GetEncryptionSpecRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest);
+
+                    /** GetEncryptionSpecRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetEncryptionSpecRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetEncryptionSpecRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Encodes the specified GetEncryptionSpecRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest.verify|verify} messages.
+                     * @param message GetEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetEncryptionSpecRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest.verify|verify} messages.
+                     * @param message GetEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IGetEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetEncryptionSpecRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Decodes a GetEncryptionSpecRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Verifies a GetEncryptionSpecRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetEncryptionSpecRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetEncryptionSpecRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest;
+
+                    /**
+                     * Creates a plain object from a GetEncryptionSpecRequest message. Also converts values to other types if specified.
+                     * @param message GetEncryptionSpecRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.GetEncryptionSpecRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetEncryptionSpecRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetEncryptionSpecRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeEncryptionSpecRequest. */
+                interface IInitializeEncryptionSpecRequest {
+
+                    /** InitializeEncryptionSpecRequest encryptionSpec */
+                    encryptionSpec?: (google.cloud.contactcenterinsights.v1.IEncryptionSpec|null);
+                }
+
+                /** Represents an InitializeEncryptionSpecRequest. */
+                class InitializeEncryptionSpecRequest implements IInitializeEncryptionSpecRequest {
+
+                    /**
+                     * Constructs a new InitializeEncryptionSpecRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest);
+
+                    /** InitializeEncryptionSpecRequest encryptionSpec. */
+                    public encryptionSpec?: (google.cloud.contactcenterinsights.v1.IEncryptionSpec|null);
+
+                    /**
+                     * Creates a new InitializeEncryptionSpecRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeEncryptionSpecRequest instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeEncryptionSpecRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Verifies an InitializeEncryptionSpecRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeEncryptionSpecRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeEncryptionSpecRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest;
+
+                    /**
+                     * Creates a plain object from an InitializeEncryptionSpecRequest message. Also converts values to other types if specified.
+                     * @param message InitializeEncryptionSpecRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeEncryptionSpecRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeEncryptionSpecRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeEncryptionSpecResponse. */
+                interface IInitializeEncryptionSpecResponse {
+                }
+
+                /** Represents an InitializeEncryptionSpecResponse. */
+                class InitializeEncryptionSpecResponse implements IInitializeEncryptionSpecResponse {
+
+                    /**
+                     * Constructs a new InitializeEncryptionSpecResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse);
+
+                    /**
+                     * Creates a new InitializeEncryptionSpecResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeEncryptionSpecResponse instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeEncryptionSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeEncryptionSpecResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Verifies an InitializeEncryptionSpecResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeEncryptionSpecResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeEncryptionSpecResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse;
+
+                    /**
+                     * Creates a plain object from an InitializeEncryptionSpecResponse message. Also converts values to other types if specified.
+                     * @param message InitializeEncryptionSpecResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeEncryptionSpecResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeEncryptionSpecResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an InitializeEncryptionSpecMetadata. */
+                interface IInitializeEncryptionSpecMetadata {
+
+                    /** InitializeEncryptionSpecMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata request */
+                    request?: (google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest|null);
+
+                    /** InitializeEncryptionSpecMetadata partialErrors */
+                    partialErrors?: (google.rpc.IStatus[]|null);
+                }
+
+                /** Represents an InitializeEncryptionSpecMetadata. */
+                class InitializeEncryptionSpecMetadata implements IInitializeEncryptionSpecMetadata {
+
+                    /**
+                     * Constructs a new InitializeEncryptionSpecMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata);
+
+                    /** InitializeEncryptionSpecMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** InitializeEncryptionSpecMetadata request. */
+                    public request?: (google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecRequest|null);
+
+                    /** InitializeEncryptionSpecMetadata partialErrors. */
+                    public partialErrors: google.rpc.IStatus[];
+
+                    /**
+                     * Creates a new InitializeEncryptionSpecMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InitializeEncryptionSpecMetadata instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InitializeEncryptionSpecMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata.verify|verify} messages.
+                     * @param message InitializeEncryptionSpecMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IInitializeEncryptionSpecMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InitializeEncryptionSpecMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Decodes an InitializeEncryptionSpecMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InitializeEncryptionSpecMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Verifies an InitializeEncryptionSpecMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InitializeEncryptionSpecMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InitializeEncryptionSpecMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata;
+
+                    /**
+                     * Creates a plain object from an InitializeEncryptionSpecMetadata message. Also converts values to other types if specified.
+                     * @param message InitializeEncryptionSpecMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.InitializeEncryptionSpecMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InitializeEncryptionSpecMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InitializeEncryptionSpecMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CreateViewRequest. */
                 interface ICreateViewRequest {
 
@@ -8310,6 +9642,9 @@ export namespace google {
                     /** Conversation qualityMetadata */
                     qualityMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null);
 
+                    /** Conversation metadataJson */
+                    metadataJson?: (string|null);
+
                     /** Conversation transcript */
                     transcript?: (google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null);
 
@@ -8382,6 +9717,9 @@ export namespace google {
 
                     /** Conversation qualityMetadata. */
                     public qualityMetadata?: (google.cloud.contactcenterinsights.v1.Conversation.IQualityMetadata|null);
+
+                    /** Conversation metadataJson. */
+                    public metadataJson: string;
 
                     /** Conversation transcript. */
                     public transcript?: (google.cloud.contactcenterinsights.v1.Conversation.ITranscript|null);
@@ -9853,6 +11191,9 @@ export namespace google {
                         /** CallAnalysisMetadata sentiments */
                         sentiments?: (google.cloud.contactcenterinsights.v1.IConversationLevelSentiment[]|null);
 
+                        /** CallAnalysisMetadata silence */
+                        silence?: (google.cloud.contactcenterinsights.v1.IConversationLevelSilence|null);
+
                         /** CallAnalysisMetadata intents */
                         intents?: ({ [k: string]: google.cloud.contactcenterinsights.v1.IIntent }|null);
 
@@ -9880,6 +11221,9 @@ export namespace google {
 
                         /** CallAnalysisMetadata sentiments. */
                         public sentiments: google.cloud.contactcenterinsights.v1.IConversationLevelSentiment[];
+
+                        /** CallAnalysisMetadata silence. */
+                        public silence?: (google.cloud.contactcenterinsights.v1.IConversationLevelSilence|null);
 
                         /** CallAnalysisMetadata intents. */
                         public intents: { [k: string]: google.cloud.contactcenterinsights.v1.IIntent };
@@ -10169,6 +11513,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ConversationLevelSentiment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ConversationLevelSilence. */
+                interface IConversationLevelSilence {
+
+                    /** ConversationLevelSilence silenceDuration */
+                    silenceDuration?: (google.protobuf.IDuration|null);
+
+                    /** ConversationLevelSilence silencePercentage */
+                    silencePercentage?: (number|null);
+                }
+
+                /** Represents a ConversationLevelSilence. */
+                class ConversationLevelSilence implements IConversationLevelSilence {
+
+                    /**
+                     * Constructs a new ConversationLevelSilence.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IConversationLevelSilence);
+
+                    /** ConversationLevelSilence silenceDuration. */
+                    public silenceDuration?: (google.protobuf.IDuration|null);
+
+                    /** ConversationLevelSilence silencePercentage. */
+                    public silencePercentage: number;
+
+                    /**
+                     * Creates a new ConversationLevelSilence instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationLevelSilence instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IConversationLevelSilence): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Encodes the specified ConversationLevelSilence message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify|verify} messages.
+                     * @param message ConversationLevelSilence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IConversationLevelSilence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationLevelSilence message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationLevelSilence.verify|verify} messages.
+                     * @param message ConversationLevelSilence message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IConversationLevelSilence, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationLevelSilence message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationLevelSilence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Decodes a ConversationLevelSilence message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationLevelSilence
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Verifies a ConversationLevelSilence message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationLevelSilence message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationLevelSilence
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ConversationLevelSilence;
+
+                    /**
+                     * Creates a plain object from a ConversationLevelSilence message. Also converts values to other types if specified.
+                     * @param message ConversationLevelSilence
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ConversationLevelSilence, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationLevelSilence to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConversationLevelSilence
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11980,6 +13427,9 @@ export namespace google {
 
                     /** Issue sampleUtterances */
                     sampleUtterances?: (string[]|null);
+
+                    /** Issue displayDescription */
+                    displayDescription?: (string|null);
                 }
 
                 /** Represents an Issue. */
@@ -12005,6 +13455,9 @@ export namespace google {
 
                     /** Issue sampleUtterances. */
                     public sampleUtterances: string[];
+
+                    /** Issue displayDescription. */
+                    public displayDescription: string;
 
                     /**
                      * Creates a new Issue instance using the specified properties.
@@ -13148,6 +14601,109 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an EncryptionSpec. */
+                interface IEncryptionSpec {
+
+                    /** EncryptionSpec name */
+                    name?: (string|null);
+
+                    /** EncryptionSpec kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents an EncryptionSpec. */
+                class EncryptionSpec implements IEncryptionSpec {
+
+                    /**
+                     * Constructs a new EncryptionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IEncryptionSpec);
+
+                    /** EncryptionSpec name. */
+                    public name: string;
+
+                    /** EncryptionSpec kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new EncryptionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionSpec instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IEncryptionSpec): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionSpec message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.EncryptionSpec.verify|verify} messages.
+                     * @param message EncryptionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IEncryptionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Decodes an EncryptionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Verifies an EncryptionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.EncryptionSpec;
+
+                    /**
+                     * Creates a plain object from an EncryptionSpec message. Also converts values to other types if specified.
+                     * @param message EncryptionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.EncryptionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionSpec
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a RedactionConfig. */
                 interface IRedactionConfig {
 
@@ -13383,6 +14939,9 @@ export namespace google {
 
                     /** RuntimeAnnotation answerFeedback */
                     answerFeedback?: (google.cloud.contactcenterinsights.v1.IAnswerFeedback|null);
+
+                    /** RuntimeAnnotation userInput */
+                    userInput?: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput|null);
                 }
 
                 /** Represents a RuntimeAnnotation. */
@@ -13426,6 +14985,9 @@ export namespace google {
 
                     /** RuntimeAnnotation answerFeedback. */
                     public answerFeedback?: (google.cloud.contactcenterinsights.v1.IAnswerFeedback|null);
+
+                    /** RuntimeAnnotation userInput. */
+                    public userInput?: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput|null);
 
                     /** RuntimeAnnotation data. */
                     public data?: ("articleSuggestion"|"faqAnswer"|"smartReply"|"smartComposeSuggestion"|"dialogflowInteraction"|"conversationSummarizationSuggestion");
@@ -13506,6 +15068,128 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RuntimeAnnotation {
+
+                    /** Properties of a UserInput. */
+                    interface IUserInput {
+
+                        /** UserInput query */
+                        query?: (string|null);
+
+                        /** UserInput generatorName */
+                        generatorName?: (string|null);
+
+                        /** UserInput querySource */
+                        querySource?: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|keyof typeof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|null);
+                    }
+
+                    /** Represents a UserInput. */
+                    class UserInput implements IUserInput {
+
+                        /**
+                         * Constructs a new UserInput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput);
+
+                        /** UserInput query. */
+                        public query: string;
+
+                        /** UserInput generatorName. */
+                        public generatorName: string;
+
+                        /** UserInput querySource. */
+                        public querySource: (google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource|keyof typeof google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.QuerySource);
+
+                        /**
+                         * Creates a new UserInput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UserInput instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Encodes the specified UserInput message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify|verify} messages.
+                         * @param message UserInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UserInput message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput.verify|verify} messages.
+                         * @param message UserInput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.IUserInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a UserInput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UserInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Decodes a UserInput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UserInput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Verifies a UserInput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a UserInput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UserInput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput;
+
+                        /**
+                         * Creates a plain object from a UserInput message. Also converts values to other types if specified.
+                         * @param message UserInput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UserInput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UserInput
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace UserInput {
+
+                        /** QuerySource enum. */
+                        enum QuerySource {
+                            QUERY_SOURCE_UNSPECIFIED = 0,
+                            AGENT_QUERY = 1,
+                            SUGGESTED_QUERY = 2
+                        }
+                    }
                 }
 
                 /** Properties of an AnswerFeedback. */
@@ -14869,7 +16553,8 @@ export namespace google {
                         /** SummarizationModel enum. */
                         enum SummarizationModel {
                             SUMMARIZATION_MODEL_UNSPECIFIED = 0,
-                            BASELINE_MODEL = 1
+                            BASELINE_MODEL = 1,
+                            BASELINE_MODEL_V2_0 = 2
                         }
                     }
                 }
