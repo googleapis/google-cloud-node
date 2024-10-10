@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(rankingConfig, records) {
-  // [START discoveryengine_v1_generated_RankService_Rank_async]
+function main(location) {
+  // [START discoveryengine_v1_generated_GroundedGenerationService_GenerateGroundedContent_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,32 @@ function main(rankingConfig, records) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the rank service config, such as
-   *  `projects/{project_num}/locations/{location}/rankingConfigs/default_ranking_config`.
+   *  Required. Location resource.
+   *  Format: `projects/{project}/locations/{location}`.
    */
-  // const rankingConfig = 'abc123'
+  // const location = 'abc123'
   /**
-   *  The identifier of the model to use. It is one of:
-   *  * `semantic-ranker-512@latest`: Semantic ranking model with maxiumn input
-   *  token size 512.
-   *  It is set to `semantic-ranker-512@latest` by default if unspecified.
+   *  Content of the system instruction for the current API.
+   *  These instructions will take priority over any other prompt instructions
+   *  if the selected model is supporting them.
    */
-  // const model = 'abc123'
+  // const systemInstruction = {}
   /**
-   *  The number of results to return. If this is unset or no bigger than zero,
-   *  returns all results.
+   *  Content of the current conversation with the model.
+   *  For single-turn queries, this is a single instance. For multi-turn queries,
+   *  this is a repeated field that contains conversation history + latest
+   *  request.
+   *  Only a single-turn query is supported currently.
    */
-  // const topN = 1234
+  // const contents = [1,2,3,4]
   /**
-   *  The query to use.
+   *  Content generation specification.
    */
-  // const query = 'abc123'
+  // const generationSpec = {}
   /**
-   *  Required. A list of records to rank. At most 200 records to rank.
+   *  Grounding specification.
    */
-  // const records = [1,2,3,4]
-  /**
-   *  If true, the response will contain only record ID and score. By default, it
-   *  is false, the response will contain record details.
-   */
-  // const ignoreRecordDetailsInResponse = true
+  // const groundingSpec = {}
   /**
    *  The user labels applied to a resource must meet the following requirements:
    *  * Each resource can have multiple labels, up to a maximum of 64.
@@ -78,25 +75,24 @@ function main(rankingConfig, records) {
   // const userLabels = [1,2,3,4]
 
   // Imports the Discoveryengine library
-  const {RankServiceClient} = require('@google-cloud/discoveryengine').v1;
+  const {GroundedGenerationServiceClient} = require('@google-cloud/discoveryengine').v1;
 
   // Instantiates a client
-  const discoveryengineClient = new RankServiceClient();
+  const discoveryengineClient = new GroundedGenerationServiceClient();
 
-  async function callRank() {
+  async function callGenerateGroundedContent() {
     // Construct request
     const request = {
-      rankingConfig,
-      records,
+      location,
     };
 
     // Run request
-    const response = await discoveryengineClient.rank(request);
+    const response = await discoveryengineClient.generateGroundedContent(request);
     console.log(response);
   }
 
-  callRank();
-  // [END discoveryengine_v1_generated_RankService_Rank_async]
+  callGenerateGroundedContent();
+  // [END discoveryengine_v1_generated_GroundedGenerationService_GenerateGroundedContent_async]
 }
 
 process.on('unhandledRejection', err => {

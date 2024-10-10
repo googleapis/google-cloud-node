@@ -54,6 +54,8 @@
   * [Engine_service.list_engines](#engine_service.list_engines)
   * [Engine_service.update_engine](#engine_service.update_engine)
   * [Grounded_generation_service.check_grounding](#grounded_generation_service.check_grounding)
+  * [Grounded_generation_service.generate_grounded_content](#grounded_generation_service.generate_grounded_content)
+  * [Grounded_generation_service.stream_generate_grounded_content](#grounded_generation_service.stream_generate_grounded_content)
   * [Project_service.provision_project](#project_service.provision_project)
   * [Rank_service.rank](#rank_service.rank)
   * [Recommendation_service.recommend](#recommendation_service.recommend)
@@ -997,6 +999,40 @@ __Usage:__
 
 
 `node packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.check_grounding.js`
+
+
+-----
+
+
+
+
+### Grounded_generation_service.generate_grounded_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.generate_grounded_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.generate_grounded_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.generate_grounded_content.js`
+
+
+-----
+
+
+
+
+### Grounded_generation_service.stream_generate_grounded_content
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.stream_generate_grounded_content.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.stream_generate_grounded_content.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-discoveryengine/samples/generated/v1/grounded_generation_service.stream_generate_grounded_content.js`
 
 
 -----

@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. The resource name of the Conversation to delete. Format:
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
    */
   // const name = 'abc123'
 
