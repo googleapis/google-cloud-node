@@ -525,6 +525,12 @@ export namespace google {
                     /** ListKeyHandlesRequest parent */
                     parent?: (string|null);
 
+                    /** ListKeyHandlesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListKeyHandlesRequest pageToken */
+                    pageToken?: (string|null);
+
                     /** ListKeyHandlesRequest filter */
                     filter?: (string|null);
                 }
@@ -540,6 +546,12 @@ export namespace google {
 
                     /** ListKeyHandlesRequest parent. */
                     public parent: string;
+
+                    /** ListKeyHandlesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListKeyHandlesRequest pageToken. */
+                    public pageToken: string;
 
                     /** ListKeyHandlesRequest filter. */
                     public filter: string;
@@ -627,6 +639,9 @@ export namespace google {
 
                     /** ListKeyHandlesResponse keyHandles */
                     keyHandles?: (google.cloud.kms.v1.IKeyHandle[]|null);
+
+                    /** ListKeyHandlesResponse nextPageToken */
+                    nextPageToken?: (string|null);
                 }
 
                 /** Represents a ListKeyHandlesResponse. */
@@ -640,6 +655,9 @@ export namespace google {
 
                     /** ListKeyHandlesResponse keyHandles. */
                     public keyHandles: google.cloud.kms.v1.IKeyHandle[];
+
+                    /** ListKeyHandlesResponse nextPageToken. */
+                    public nextPageToken: string;
 
                     /**
                      * Creates a new ListKeyHandlesResponse instance using the specified properties.
@@ -1014,6 +1032,9 @@ export namespace google {
 
                     /** AutokeyConfig keyProject */
                     keyProject?: (string|null);
+
+                    /** AutokeyConfig state */
+                    state?: (google.cloud.kms.v1.AutokeyConfig.State|keyof typeof google.cloud.kms.v1.AutokeyConfig.State|null);
                 }
 
                 /** Represents an AutokeyConfig. */
@@ -1030,6 +1051,9 @@ export namespace google {
 
                     /** AutokeyConfig keyProject. */
                     public keyProject: string;
+
+                    /** AutokeyConfig state. */
+                    public state: (google.cloud.kms.v1.AutokeyConfig.State|keyof typeof google.cloud.kms.v1.AutokeyConfig.State);
 
                     /**
                      * Creates a new AutokeyConfig instance using the specified properties.
@@ -1107,6 +1131,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AutokeyConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        KEY_PROJECT_DELETED = 2,
+                        UNINITIALIZED = 3
+                    }
                 }
 
                 /** Properties of a ShowEffectiveAutokeyConfigRequest. */

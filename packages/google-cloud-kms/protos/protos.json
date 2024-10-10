@@ -174,6 +174,20 @@
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "filter": {
                           "type": "string",
                           "id": 4,
@@ -189,6 +203,10 @@
                           "rule": "repeated",
                           "type": "KeyHandle",
                           "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -306,6 +324,23 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ACTIVE": 1,
+                            "KEY_PROJECT_DELETED": 2,
+                            "UNINITIALIZED": 3
                           }
                         }
                       }
@@ -704,7 +739,10 @@
                         "serviceResolvers": {
                           "rule": "repeated",
                           "type": "ServiceResolver",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "etag": {
                           "type": "string",

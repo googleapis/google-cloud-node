@@ -15,14 +15,16 @@
                 "getKeyHandle"
               ]
             },
-            "ListKeyHandles": {
-              "methods": [
-                "listKeyHandles"
-              ]
-            },
             "CreateKeyHandle": {
               "methods": [
                 "createKeyHandle"
+              ]
+            },
+            "ListKeyHandles": {
+              "methods": [
+                "listKeyHandles",
+                "listKeyHandlesStream",
+                "listKeyHandlesAsync"
               ]
             }
           }
@@ -35,14 +37,16 @@
                 "getKeyHandle"
               ]
             },
-            "ListKeyHandles": {
-              "methods": [
-                "listKeyHandles"
-              ]
-            },
             "CreateKeyHandle": {
               "methods": [
                 "createKeyHandle"
+              ]
+            },
+            "ListKeyHandles": {
+              "methods": [
+                "listKeyHandles",
+                "listKeyHandlesStream",
+                "listKeyHandlesAsync"
               ]
             }
           }
