@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.5.0...cloudbuild-v4.6.0) (2024-10-10)
+
+
+### Features
+
+* [cloudbuild] Add LEGACY_BUCKET option to DefaultLogsBucketBehavior ([#5700](https://github.com/googleapis/google-cloud-node/issues/5700)) ([7cbf6b2](https://github.com/googleapis/google-cloud-node/commit/7cbf6b20d0e4944779ba71aaa3388abbf3840ed5))
+
 ## [4.5.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v4.4.0...cloudbuild-v4.5.0) (2024-05-21)
 
 

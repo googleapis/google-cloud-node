@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.3.0...bigquery-data-transfer-v4.4.0) (2024-10-10)
+
+
+### Features
+
+* [bigquery-datatransfer]Add scheduleOptionsV2 and Error fields for TransferConfig ([#5722](https://github.com/googleapis/google-cloud-node/issues/5722)) ([2f97f76](https://github.com/googleapis/google-cloud-node/commit/2f97f7619629efda2977805d8be657fe7ee48e1a))
+
 ## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-transfer-v4.2.1...bigquery-data-transfer-v4.3.0) (2024-05-21)
 
 

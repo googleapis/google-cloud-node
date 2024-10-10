@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.9.0...chat-v0.10.0) (2024-10-10)
+
+
+### Features
+
+* [chat] Add doc for permission settings & announcement space support ([#5731](https://github.com/googleapis/google-cloud-node/issues/5731)) ([d5a4a46](https://github.com/googleapis/google-cloud-node/commit/d5a4a469cfc03b75356e33e9659aa720ff6ee71d))
+
 ## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.8.0...chat-v0.9.0) (2024-09-13)
 
 
