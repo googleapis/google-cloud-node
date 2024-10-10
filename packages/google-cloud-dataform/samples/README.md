@@ -118,7 +118,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Dataform.cancel_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.cancel_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.cancel_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.cancel_workflow_invocation.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Dataform.commit_workspace_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.commit_workspace_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.commit_workspace_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.commit_workspace_changes.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Dataform.create_compilation_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_compilation_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_compilation_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_compilation_result.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Dataform.create_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_repository.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Dataform.create_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_workflow_invocation.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Dataform.create_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_workspace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.create_workspace.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Dataform.delete_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_repository.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Dataform.delete_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_workflow_invocation.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Dataform.delete_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_workspace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.delete_workspace.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Dataform.fetch_file_diff
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_file_diff.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_file_diff.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_file_diff.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Dataform.fetch_file_git_statuses
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_file_git_statuses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_file_git_statuses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_file_git_statuses.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Dataform.fetch_git_ahead_behind
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_git_ahead_behind.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_git_ahead_behind.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_git_ahead_behind.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Dataform.fetch_remote_branches
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_remote_branches.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_remote_branches.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.fetch_remote_branches.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Dataform.get_compilation_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_compilation_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_compilation_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_compilation_result.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Dataform.get_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_repository.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Dataform.get_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_workflow_invocation.js,samples/README.md)
 
@@ -390,7 +390,7 @@ __Usage:__
 
 ### Dataform.get_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_workspace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.get_workspace.js,samples/README.md)
 
@@ -407,7 +407,7 @@ __Usage:__
 
 ### Dataform.install_npm_packages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.install_npm_packages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.install_npm_packages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.install_npm_packages.js,samples/README.md)
 
@@ -424,7 +424,7 @@ __Usage:__
 
 ### Dataform.list_compilation_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_compilation_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_compilation_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_compilation_results.js,samples/README.md)
 
@@ -441,7 +441,7 @@ __Usage:__
 
 ### Dataform.list_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_repositories.js,samples/README.md)
 
@@ -458,7 +458,7 @@ __Usage:__
 
 ### Dataform.list_workflow_invocations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_workflow_invocations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_workflow_invocations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_workflow_invocations.js,samples/README.md)
 
@@ -475,7 +475,7 @@ __Usage:__
 
 ### Dataform.list_workspaces
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_workspaces.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_workspaces.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.list_workspaces.js,samples/README.md)
 
@@ -492,7 +492,7 @@ __Usage:__
 
 ### Dataform.make_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.make_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.make_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.make_directory.js,samples/README.md)
 
@@ -509,7 +509,7 @@ __Usage:__
 
 ### Dataform.move_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.move_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.move_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.move_directory.js,samples/README.md)
 
@@ -526,7 +526,7 @@ __Usage:__
 
 ### Dataform.move_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.move_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.move_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.move_file.js,samples/README.md)
 
@@ -543,7 +543,7 @@ __Usage:__
 
 ### Dataform.pull_git_commits
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.pull_git_commits.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.pull_git_commits.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.pull_git_commits.js,samples/README.md)
 
@@ -560,7 +560,7 @@ __Usage:__
 
 ### Dataform.push_git_commits
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.push_git_commits.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.push_git_commits.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.push_git_commits.js,samples/README.md)
 
@@ -577,7 +577,7 @@ __Usage:__
 
 ### Dataform.query_compilation_result_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_compilation_result_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_compilation_result_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_compilation_result_actions.js,samples/README.md)
 
@@ -594,7 +594,7 @@ __Usage:__
 
 ### Dataform.query_directory_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_directory_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_directory_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_directory_contents.js,samples/README.md)
 
@@ -611,7 +611,7 @@ __Usage:__
 
 ### Dataform.query_workflow_invocation_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_workflow_invocation_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_workflow_invocation_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.query_workflow_invocation_actions.js,samples/README.md)
 
@@ -628,7 +628,7 @@ __Usage:__
 
 ### Dataform.read_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.read_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.read_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.read_file.js,samples/README.md)
 
@@ -645,7 +645,7 @@ __Usage:__
 
 ### Dataform.remove_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.remove_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.remove_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.remove_directory.js,samples/README.md)
 
@@ -662,7 +662,7 @@ __Usage:__
 
 ### Dataform.remove_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.remove_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.remove_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.remove_file.js,samples/README.md)
 
@@ -679,7 +679,7 @@ __Usage:__
 
 ### Dataform.reset_workspace_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.reset_workspace_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.reset_workspace_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.reset_workspace_changes.js,samples/README.md)
 
@@ -696,7 +696,7 @@ __Usage:__
 
 ### Dataform.update_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.update_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.update_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.update_repository.js,samples/README.md)
 
@@ -713,7 +713,7 @@ __Usage:__
 
 ### Dataform.write_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.write_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.write_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1alpha2/dataform.write_file.js,samples/README.md)
 
@@ -730,7 +730,7 @@ __Usage:__
 
 ### Dataform.cancel_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.cancel_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.cancel_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.cancel_workflow_invocation.js,samples/README.md)
 
@@ -747,7 +747,7 @@ __Usage:__
 
 ### Dataform.commit_repository_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_repository_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_repository_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_repository_changes.js,samples/README.md)
 
@@ -764,7 +764,7 @@ __Usage:__
 
 ### Dataform.commit_workspace_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_workspace_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_workspace_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_workspace_changes.js,samples/README.md)
 
@@ -781,7 +781,7 @@ __Usage:__
 
 ### Dataform.compute_repository_access_token_status
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.compute_repository_access_token_status.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.compute_repository_access_token_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.compute_repository_access_token_status.js,samples/README.md)
 
@@ -798,7 +798,7 @@ __Usage:__
 
 ### Dataform.create_compilation_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_compilation_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_compilation_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_compilation_result.js,samples/README.md)
 
@@ -815,7 +815,7 @@ __Usage:__
 
 ### Dataform.create_release_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_release_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_release_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_release_config.js,samples/README.md)
 
@@ -832,7 +832,7 @@ __Usage:__
 
 ### Dataform.create_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_repository.js,samples/README.md)
 
@@ -849,7 +849,7 @@ __Usage:__
 
 ### Dataform.create_workflow_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workflow_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workflow_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workflow_config.js,samples/README.md)
 
@@ -866,7 +866,7 @@ __Usage:__
 
 ### Dataform.create_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workflow_invocation.js,samples/README.md)
 
@@ -883,7 +883,7 @@ __Usage:__
 
 ### Dataform.create_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workspace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.create_workspace.js,samples/README.md)
 
@@ -900,7 +900,7 @@ __Usage:__
 
 ### Dataform.delete_release_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_release_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_release_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_release_config.js,samples/README.md)
 
@@ -917,7 +917,7 @@ __Usage:__
 
 ### Dataform.delete_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_repository.js,samples/README.md)
 
@@ -934,7 +934,7 @@ __Usage:__
 
 ### Dataform.delete_workflow_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workflow_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workflow_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workflow_config.js,samples/README.md)
 
@@ -951,7 +951,7 @@ __Usage:__
 
 ### Dataform.delete_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workflow_invocation.js,samples/README.md)
 
@@ -968,7 +968,7 @@ __Usage:__
 
 ### Dataform.delete_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workspace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.delete_workspace.js,samples/README.md)
 
@@ -985,7 +985,7 @@ __Usage:__
 
 ### Dataform.fetch_file_diff
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_file_diff.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_file_diff.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_file_diff.js,samples/README.md)
 
@@ -1002,7 +1002,7 @@ __Usage:__
 
 ### Dataform.fetch_file_git_statuses
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_file_git_statuses.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_file_git_statuses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_file_git_statuses.js,samples/README.md)
 
@@ -1019,7 +1019,7 @@ __Usage:__
 
 ### Dataform.fetch_git_ahead_behind
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_git_ahead_behind.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_git_ahead_behind.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_git_ahead_behind.js,samples/README.md)
 
@@ -1036,7 +1036,7 @@ __Usage:__
 
 ### Dataform.fetch_remote_branches
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_remote_branches.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_remote_branches.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_remote_branches.js,samples/README.md)
 
@@ -1053,7 +1053,7 @@ __Usage:__
 
 ### Dataform.fetch_repository_history
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_repository_history.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_repository_history.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.fetch_repository_history.js,samples/README.md)
 
@@ -1070,7 +1070,7 @@ __Usage:__
 
 ### Dataform.get_compilation_result
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_compilation_result.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_compilation_result.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_compilation_result.js,samples/README.md)
 
@@ -1087,7 +1087,7 @@ __Usage:__
 
 ### Dataform.get_release_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_release_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_release_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_release_config.js,samples/README.md)
 
@@ -1104,7 +1104,7 @@ __Usage:__
 
 ### Dataform.get_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_repository.js,samples/README.md)
 
@@ -1121,7 +1121,7 @@ __Usage:__
 
 ### Dataform.get_workflow_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workflow_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workflow_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workflow_config.js,samples/README.md)
 
@@ -1138,7 +1138,7 @@ __Usage:__
 
 ### Dataform.get_workflow_invocation
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workflow_invocation.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workflow_invocation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workflow_invocation.js,samples/README.md)
 
@@ -1155,7 +1155,7 @@ __Usage:__
 
 ### Dataform.get_workspace
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workspace.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workspace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.get_workspace.js,samples/README.md)
 
@@ -1172,7 +1172,7 @@ __Usage:__
 
 ### Dataform.install_npm_packages
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.install_npm_packages.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.install_npm_packages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.install_npm_packages.js,samples/README.md)
 
@@ -1189,7 +1189,7 @@ __Usage:__
 
 ### Dataform.list_compilation_results
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_compilation_results.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_compilation_results.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_compilation_results.js,samples/README.md)
 
@@ -1206,7 +1206,7 @@ __Usage:__
 
 ### Dataform.list_release_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_release_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_release_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_release_configs.js,samples/README.md)
 
@@ -1223,7 +1223,7 @@ __Usage:__
 
 ### Dataform.list_repositories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_repositories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_repositories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_repositories.js,samples/README.md)
 
@@ -1240,7 +1240,7 @@ __Usage:__
 
 ### Dataform.list_workflow_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workflow_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workflow_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workflow_configs.js,samples/README.md)
 
@@ -1257,7 +1257,7 @@ __Usage:__
 
 ### Dataform.list_workflow_invocations
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workflow_invocations.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workflow_invocations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workflow_invocations.js,samples/README.md)
 
@@ -1274,7 +1274,7 @@ __Usage:__
 
 ### Dataform.list_workspaces
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workspaces.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workspaces.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.list_workspaces.js,samples/README.md)
 
@@ -1291,7 +1291,7 @@ __Usage:__
 
 ### Dataform.make_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.make_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.make_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.make_directory.js,samples/README.md)
 
@@ -1308,7 +1308,7 @@ __Usage:__
 
 ### Dataform.move_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.move_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.move_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.move_directory.js,samples/README.md)
 
@@ -1325,7 +1325,7 @@ __Usage:__
 
 ### Dataform.move_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.move_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.move_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.move_file.js,samples/README.md)
 
@@ -1342,7 +1342,7 @@ __Usage:__
 
 ### Dataform.pull_git_commits
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.pull_git_commits.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.pull_git_commits.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.pull_git_commits.js,samples/README.md)
 
@@ -1359,7 +1359,7 @@ __Usage:__
 
 ### Dataform.push_git_commits
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.push_git_commits.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.push_git_commits.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.push_git_commits.js,samples/README.md)
 
@@ -1376,7 +1376,7 @@ __Usage:__
 
 ### Dataform.query_compilation_result_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_compilation_result_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_compilation_result_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_compilation_result_actions.js,samples/README.md)
 
@@ -1393,7 +1393,7 @@ __Usage:__
 
 ### Dataform.query_directory_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_directory_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_directory_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_directory_contents.js,samples/README.md)
 
@@ -1410,7 +1410,7 @@ __Usage:__
 
 ### Dataform.query_repository_directory_contents
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_repository_directory_contents.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_repository_directory_contents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_repository_directory_contents.js,samples/README.md)
 
@@ -1427,7 +1427,7 @@ __Usage:__
 
 ### Dataform.query_workflow_invocation_actions
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_workflow_invocation_actions.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_workflow_invocation_actions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.query_workflow_invocation_actions.js,samples/README.md)
 
@@ -1444,7 +1444,7 @@ __Usage:__
 
 ### Dataform.read_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.read_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.read_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.read_file.js,samples/README.md)
 
@@ -1461,7 +1461,7 @@ __Usage:__
 
 ### Dataform.read_repository_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.read_repository_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.read_repository_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.read_repository_file.js,samples/README.md)
 
@@ -1478,7 +1478,7 @@ __Usage:__
 
 ### Dataform.remove_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.remove_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.remove_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.remove_directory.js,samples/README.md)
 
@@ -1495,7 +1495,7 @@ __Usage:__
 
 ### Dataform.remove_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.remove_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.remove_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.remove_file.js,samples/README.md)
 
@@ -1512,7 +1512,7 @@ __Usage:__
 
 ### Dataform.reset_workspace_changes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.reset_workspace_changes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.reset_workspace_changes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.reset_workspace_changes.js,samples/README.md)
 
@@ -1529,7 +1529,7 @@ __Usage:__
 
 ### Dataform.update_release_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_release_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_release_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_release_config.js,samples/README.md)
 
@@ -1546,7 +1546,7 @@ __Usage:__
 
 ### Dataform.update_repository
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_repository.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_repository.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_repository.js,samples/README.md)
 
@@ -1563,7 +1563,7 @@ __Usage:__
 
 ### Dataform.update_workflow_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_workflow_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_workflow_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_workflow_config.js,samples/README.md)
 
@@ -1580,7 +1580,7 @@ __Usage:__
 
 ### Dataform.write_file
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.write_file.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.write_file.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/generated/v1beta1/dataform.write_file.js,samples/README.md)
 
@@ -1597,7 +1597,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-dataform/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataform/samples/quickstart.js,samples/README.md)
 

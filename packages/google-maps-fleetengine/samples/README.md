@@ -44,7 +44,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Trip_service.create_trip
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.create_trip.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/trip_service.create_trip.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/trip_service.create_trip.js,samples/README.md)
 
@@ -61,7 +61,7 @@ __Usage:__
 
 ### Trip_service.get_trip
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.get_trip.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/trip_service.get_trip.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/trip_service.get_trip.js,samples/README.md)
 
@@ -78,7 +78,7 @@ __Usage:__
 
 ### Trip_service.report_billable_trip
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.report_billable_trip.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/trip_service.report_billable_trip.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/trip_service.report_billable_trip.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 ### Trip_service.search_trips
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.search_trips.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/trip_service.search_trips.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/trip_service.search_trips.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Trip_service.update_trip
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.update_trip.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/trip_service.update_trip.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/trip_service.update_trip.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### Vehicle_service.create_vehicle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.create_vehicle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.create_vehicle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.create_vehicle.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Vehicle_service.get_vehicle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.get_vehicle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.get_vehicle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.get_vehicle.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Vehicle_service.list_vehicles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.list_vehicles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.list_vehicles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.list_vehicles.js,samples/README.md)
 
@@ -180,7 +180,7 @@ __Usage:__
 
 ### Vehicle_service.search_fuzzed_vehicles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.search_fuzzed_vehicles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.search_fuzzed_vehicles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.search_fuzzed_vehicles.js,samples/README.md)
 
@@ -197,7 +197,7 @@ __Usage:__
 
 ### Vehicle_service.search_vehicles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.search_vehicles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.search_vehicles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.search_vehicles.js,samples/README.md)
 
@@ -214,7 +214,7 @@ __Usage:__
 
 ### Vehicle_service.update_vehicle
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle.js,samples/README.md)
 
@@ -231,7 +231,7 @@ __Usage:__
 
 ### Vehicle_service.update_vehicle_attributes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle_attributes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle_attributes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle_attributes.js,samples/README.md)
 
@@ -248,7 +248,7 @@ __Usage:__
 
 ### Vehicle_service.update_vehicle_location
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle_location.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle_location.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/generated/v1/vehicle_service.update_vehicle_location.js,samples/README.md)
 
@@ -265,7 +265,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-fleetengine/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-fleetengine/samples/quickstart.js,samples/README.md)
 

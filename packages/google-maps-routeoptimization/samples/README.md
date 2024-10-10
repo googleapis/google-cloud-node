@@ -33,7 +33,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Route_optimization.batch_optimize_tours
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.batch_optimize_tours.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.batch_optimize_tours.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.batch_optimize_tours.js,samples/README.md)
 
@@ -50,7 +50,7 @@ __Usage:__
 
 ### Route_optimization.optimize_tours
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.optimize_tours.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.optimize_tours.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routeoptimization/samples/generated/v1/route_optimization.optimize_tours.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-routeoptimization/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-maps-routeoptimization/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-routeoptimization/samples/quickstart.js,samples/README.md)
 

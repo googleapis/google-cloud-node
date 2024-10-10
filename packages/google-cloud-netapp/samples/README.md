@@ -83,7 +83,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Net_app.create_active_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_active_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_active_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_active_directory.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Net_app.create_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Net_app.create_backup_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_policy.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Net_app.create_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_backup_vault.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Net_app.create_kms_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_kms_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_kms_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_kms_config.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Net_app.create_replication
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_replication.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_replication.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_replication.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Net_app.create_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_snapshot.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Net_app.create_storage_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_storage_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_storage_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_storage_pool.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Net_app.create_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.create_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.create_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.create_volume.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Net_app.delete_active_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_active_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_active_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_active_directory.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Net_app.delete_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Net_app.delete_backup_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_policy.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Net_app.delete_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_backup_vault.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Net_app.delete_kms_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_kms_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_kms_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_kms_config.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Net_app.delete_replication
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_replication.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_replication.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_replication.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Net_app.delete_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_snapshot.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Net_app.delete_storage_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_storage_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_storage_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_storage_pool.js,samples/README.md)
 
@@ -372,7 +372,7 @@ __Usage:__
 
 ### Net_app.delete_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.delete_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.delete_volume.js,samples/README.md)
 
@@ -389,7 +389,7 @@ __Usage:__
 
 ### Net_app.encrypt_volumes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.encrypt_volumes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.encrypt_volumes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.encrypt_volumes.js,samples/README.md)
 
@@ -406,7 +406,7 @@ __Usage:__
 
 ### Net_app.get_active_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_active_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_active_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_active_directory.js,samples/README.md)
 
@@ -423,7 +423,7 @@ __Usage:__
 
 ### Net_app.get_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup.js,samples/README.md)
 
@@ -440,7 +440,7 @@ __Usage:__
 
 ### Net_app.get_backup_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_policy.js,samples/README.md)
 
@@ -457,7 +457,7 @@ __Usage:__
 
 ### Net_app.get_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_backup_vault.js,samples/README.md)
 
@@ -474,7 +474,7 @@ __Usage:__
 
 ### Net_app.get_kms_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_kms_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_kms_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_kms_config.js,samples/README.md)
 
@@ -491,7 +491,7 @@ __Usage:__
 
 ### Net_app.get_replication
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_replication.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_replication.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_replication.js,samples/README.md)
 
@@ -508,7 +508,7 @@ __Usage:__
 
 ### Net_app.get_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_snapshot.js,samples/README.md)
 
@@ -525,7 +525,7 @@ __Usage:__
 
 ### Net_app.get_storage_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_storage_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_storage_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_storage_pool.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 ### Net_app.get_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.get_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.get_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.get_volume.js,samples/README.md)
 
@@ -559,7 +559,7 @@ __Usage:__
 
 ### Net_app.list_active_directories
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_active_directories.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_active_directories.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_active_directories.js,samples/README.md)
 
@@ -576,7 +576,7 @@ __Usage:__
 
 ### Net_app.list_backup_policies
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_policies.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_policies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_policies.js,samples/README.md)
 
@@ -593,7 +593,7 @@ __Usage:__
 
 ### Net_app.list_backup_vaults
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_vaults.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_vaults.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_backup_vaults.js,samples/README.md)
 
@@ -610,7 +610,7 @@ __Usage:__
 
 ### Net_app.list_backups
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backups.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_backups.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_backups.js,samples/README.md)
 
@@ -627,7 +627,7 @@ __Usage:__
 
 ### Net_app.list_kms_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_kms_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_kms_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_kms_configs.js,samples/README.md)
 
@@ -644,7 +644,7 @@ __Usage:__
 
 ### Net_app.list_replications
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_replications.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_replications.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_replications.js,samples/README.md)
 
@@ -661,7 +661,7 @@ __Usage:__
 
 ### Net_app.list_snapshots
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_snapshots.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_snapshots.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_snapshots.js,samples/README.md)
 
@@ -678,7 +678,7 @@ __Usage:__
 
 ### Net_app.list_storage_pools
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_storage_pools.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_storage_pools.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_storage_pools.js,samples/README.md)
 
@@ -695,7 +695,7 @@ __Usage:__
 
 ### Net_app.list_volumes
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.list_volumes.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.list_volumes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.list_volumes.js,samples/README.md)
 
@@ -712,7 +712,7 @@ __Usage:__
 
 ### Net_app.resume_replication
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.resume_replication.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.resume_replication.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.resume_replication.js,samples/README.md)
 
@@ -729,7 +729,7 @@ __Usage:__
 
 ### Net_app.reverse_replication_direction
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.reverse_replication_direction.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.reverse_replication_direction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.reverse_replication_direction.js,samples/README.md)
 
@@ -746,7 +746,7 @@ __Usage:__
 
 ### Net_app.revert_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.revert_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.revert_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.revert_volume.js,samples/README.md)
 
@@ -763,7 +763,7 @@ __Usage:__
 
 ### Net_app.stop_replication
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.stop_replication.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.stop_replication.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.stop_replication.js,samples/README.md)
 
@@ -780,7 +780,7 @@ __Usage:__
 
 ### Net_app.switch_active_replica_zone
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.switch_active_replica_zone.js,samples/README.md)
 
@@ -797,7 +797,7 @@ __Usage:__
 
 ### Net_app.update_active_directory
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_active_directory.js,samples/README.md)
 
@@ -814,7 +814,7 @@ __Usage:__
 
 ### Net_app.update_backup
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup.js,samples/README.md)
 
@@ -831,7 +831,7 @@ __Usage:__
 
 ### Net_app.update_backup_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_policy.js,samples/README.md)
 
@@ -848,7 +848,7 @@ __Usage:__
 
 ### Net_app.update_backup_vault
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_vault.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_vault.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_backup_vault.js,samples/README.md)
 
@@ -865,7 +865,7 @@ __Usage:__
 
 ### Net_app.update_kms_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_kms_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_kms_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_kms_config.js,samples/README.md)
 
@@ -882,7 +882,7 @@ __Usage:__
 
 ### Net_app.update_replication
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_replication.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_replication.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_replication.js,samples/README.md)
 
@@ -899,7 +899,7 @@ __Usage:__
 
 ### Net_app.update_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_snapshot.js,samples/README.md)
 
@@ -916,7 +916,7 @@ __Usage:__
 
 ### Net_app.update_storage_pool
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_storage_pool.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_storage_pool.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_storage_pool.js,samples/README.md)
 
@@ -933,7 +933,7 @@ __Usage:__
 
 ### Net_app.update_volume
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.update_volume.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.update_volume.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.update_volume.js,samples/README.md)
 
@@ -950,7 +950,7 @@ __Usage:__
 
 ### Net_app.verify_kms_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/generated/v1/net_app.verify_kms_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/generated/v1/net_app.verify_kms_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/generated/v1/net_app.verify_kms_config.js,samples/README.md)
 
@@ -967,7 +967,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-netapp/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-netapp/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-netapp/samples/quickstart.js,samples/README.md)
 

@@ -3075,6 +3075,11 @@
                           "oneof": [
                             "searchEntryPoint"
                           ]
+                        },
+                        "_retrievalMetadata": {
+                          "oneof": [
+                            "retrievalMetadata"
+                          ]
                         }
                       },
                       "fields": {
@@ -3106,6 +3111,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "retrievalMetadata": {
+                          "type": "RetrievalMetadata",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -3120,6 +3133,17 @@
                         },
                         "sdkBlob": {
                           "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RetrievalMetadata": {
+                      "fields": {
+                        "googleSearchDynamicRetrievalScore": {
+                          "type": "float",
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -3423,7 +3447,43 @@
                       }
                     },
                     "GoogleSearchRetrieval": {
-                      "fields": {}
+                      "fields": {
+                        "dynamicRetrievalConfig": {
+                          "type": "DynamicRetrievalConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DynamicRetrievalConfig": {
+                      "oneofs": {
+                        "_dynamicThreshold": {
+                          "oneof": [
+                            "dynamicThreshold"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        },
+                        "dynamicThreshold": {
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "MODE_DYNAMIC": 1
+                          }
+                        }
+                      }
                     },
                     "ToolConfig": {
                       "fields": {
@@ -11175,6 +11235,13 @@
                             "cron": {
                               "type": "string",
                               "id": 1
+                            },
+                            "continuous": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -39629,6 +39696,13 @@
                           "type": "string",
                           "id": 2
                         },
+                        "enableSecurePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "serviceAttachment": {
                           "type": "string",
                           "id": 5,
@@ -49048,7 +49122,8 @@
                         "tuningSpec": {
                           "oneof": [
                             "supervisedTuningSpec",
-                            "distillationSpec"
+                            "distillationSpec",
+                            "partnerModelTuningSpec"
                           ]
                         }
                       },
@@ -49064,6 +49139,10 @@
                         "distillationSpec": {
                           "type": "DistillationSpec",
                           "id": 17
+                        },
+                        "partnerModelTuningSpec": {
+                          "type": "PartnerModelTuningSpec",
+                          "id": 21
                         },
                         "name": {
                           "type": "string",
@@ -49714,6 +49793,29 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "PartnerModelTuningSpec": {
+                      "fields": {
+                        "trainingDatasetUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validationDatasetUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hyperParameters": {
+                          "keyType": "string",
+                          "type": "google.protobuf.Value",
+                          "id": 3
                         }
                       }
                     },
