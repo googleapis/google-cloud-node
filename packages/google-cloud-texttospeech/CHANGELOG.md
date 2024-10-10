@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.4.0...text-to-speech-v5.5.0) (2024-10-10)
+
+
+### Features
+
+* [texttospeech] Add low latency journey option to proto ([#5742](https://github.com/googleapis/google-cloud-node/issues/5742)) ([d34249c](https://github.com/googleapis/google-cloud-node/commit/d34249ca58b1738b1b46d46ac940587a9f1cca73))
+
 ## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v5.3.0...text-to-speech-v5.4.0) (2024-08-19)
 
 

@@ -5,6 +5,57 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "cec22abd4f27d8acf3c7c1d87b2bd6873e505841",
+          "message": "Add partner_model_tuning_spec to TuningJob",
+          "issues": [
+            "5721"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "0107f335-06b2-415d-b245-87a8f71200e6",
+      "createTime": "2024-10-10T19:23:48.665Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d34249ca58b1738b1b46d46ac940587a9f1cca73",
+          "message": "[texttospeech] Add low latency journey option to proto",
+          "issues": [
+            "5742"
+          ]
+        }
+      ],
+      "version": "5.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "3777af40-2899-4d23-b490-78403d022bcc",
+      "createTime": "2024-10-10T19:23:48.641Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cec22abd4f27d8acf3c7c1d87b2bd6873e505841",
+          "message": "Add partner_model_tuning_spec to TuningJob",
+          "issues": [
+            "5721"
+          ]
+        }
+      ],
+      "version": "3.31.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "2c048dd6-ccad-4737-9c93-fc76f6d71230",
+      "createTime": "2024-10-10T19:23:48.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "73973c441885b512790a6a4f6c9a37a09ca8e60c",
           "message": "Add initial files for google.cloud.oracledatabase.v1",
           "issues": [
@@ -37047,5 +37098,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2024-10-10T01:06:13.413Z"
+  "updateTime": "2024-10-10T19:23:48.665Z"
 }

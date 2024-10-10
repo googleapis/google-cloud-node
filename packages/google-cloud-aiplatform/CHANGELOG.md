@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.31.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.30.1...aiplatform-v3.31.0) (2024-10-10)
+
+
+### Features
+
+* Add partner_model_tuning_spec to TuningJob ([#5721](https://github.com/googleapis/google-cloud-node/issues/5721)) ([cec22ab](https://github.com/googleapis/google-cloud-node/commit/cec22abd4f27d8acf3c7c1d87b2bd6873e505841))
+
 ## [3.30.1](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v3.30.0...aiplatform-v3.30.1) (2024-10-10)
 
 
