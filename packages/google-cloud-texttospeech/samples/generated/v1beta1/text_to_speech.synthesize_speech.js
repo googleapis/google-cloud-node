@@ -44,6 +44,10 @@ function main(input, voice, audioConfig) {
    *  Whether and what timepoints are returned in the response.
    */
   // const enableTimePointing = [1,2,3,4]
+  /**
+   *  Advanced voice options.
+   */
+  // const advancedVoiceOptions = {}
 
   // Imports the Texttospeech library
   const {TextToSpeechClient} = require('@google-cloud/text-to-speech').v1beta1;
