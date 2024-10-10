@@ -40,6 +40,10 @@ function main(input, voice, audioConfig) {
    *  Required. The configuration of the synthesized audio.
    */
   // const audioConfig = {}
+  /**
+   *  Advanced voice options.
+   */
+  // const advancedVoiceOptions = {}
 
   // Imports the Texttospeech library
   const {TextToSpeechClient} = require('@google-cloud/text-to-speech').v1;
