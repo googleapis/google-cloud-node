@@ -177,6 +177,11 @@ function main(nodeVersion, imageType) {
    *  Specifies the configuration of queued provisioning.
    */
   // const queuedProvisioning = {}
+  /**
+   *  List of Storage Pools where boot disks are provisioned.
+   *  Existing Storage Pools will be replaced with storage-pools.
+   */
+  // const storagePools = ['abc','def']
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;
