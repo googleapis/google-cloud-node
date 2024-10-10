@@ -86,7 +86,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Dlp_service.activate_job_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.activate_job_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.activate_job_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.activate_job_trigger.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Dlp_service.cancel_dlp_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.cancel_dlp_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.cancel_dlp_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.cancel_dlp_job.js,samples/README.md)
 
@@ -120,7 +120,7 @@ __Usage:__
 
 ### Dlp_service.create_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_connection.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 ### Dlp_service.create_deidentify_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_deidentify_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_deidentify_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_deidentify_template.js,samples/README.md)
 
@@ -154,7 +154,7 @@ __Usage:__
 
 ### Dlp_service.create_discovery_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_discovery_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_discovery_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_discovery_config.js,samples/README.md)
 
@@ -171,7 +171,7 @@ __Usage:__
 
 ### Dlp_service.create_dlp_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_dlp_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_dlp_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_dlp_job.js,samples/README.md)
 
@@ -188,7 +188,7 @@ __Usage:__
 
 ### Dlp_service.create_inspect_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_inspect_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_inspect_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_inspect_template.js,samples/README.md)
 
@@ -205,7 +205,7 @@ __Usage:__
 
 ### Dlp_service.create_job_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_job_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_job_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_job_trigger.js,samples/README.md)
 
@@ -222,7 +222,7 @@ __Usage:__
 
 ### Dlp_service.create_stored_info_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_stored_info_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_stored_info_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.create_stored_info_type.js,samples/README.md)
 
@@ -239,7 +239,7 @@ __Usage:__
 
 ### Dlp_service.deidentify_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.deidentify_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.deidentify_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.deidentify_content.js,samples/README.md)
 
@@ -256,7 +256,7 @@ __Usage:__
 
 ### Dlp_service.delete_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_connection.js,samples/README.md)
 
@@ -273,7 +273,7 @@ __Usage:__
 
 ### Dlp_service.delete_deidentify_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_deidentify_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_deidentify_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_deidentify_template.js,samples/README.md)
 
@@ -290,7 +290,7 @@ __Usage:__
 
 ### Dlp_service.delete_discovery_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_discovery_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_discovery_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_discovery_config.js,samples/README.md)
 
@@ -307,7 +307,7 @@ __Usage:__
 
 ### Dlp_service.delete_dlp_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_dlp_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_dlp_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_dlp_job.js,samples/README.md)
 
@@ -324,7 +324,7 @@ __Usage:__
 
 ### Dlp_service.delete_file_store_data_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_file_store_data_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_file_store_data_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_file_store_data_profile.js,samples/README.md)
 
@@ -341,7 +341,7 @@ __Usage:__
 
 ### Dlp_service.delete_inspect_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_inspect_template.js,samples/README.md)
 
@@ -358,7 +358,7 @@ __Usage:__
 
 ### Dlp_service.delete_job_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_job_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_job_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_job_trigger.js,samples/README.md)
 
@@ -375,7 +375,7 @@ __Usage:__
 
 ### Dlp_service.delete_stored_info_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_stored_info_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_stored_info_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_stored_info_type.js,samples/README.md)
 
@@ -392,7 +392,7 @@ __Usage:__
 
 ### Dlp_service.delete_table_data_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_table_data_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_table_data_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.delete_table_data_profile.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 ### Dlp_service.finish_dlp_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.finish_dlp_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.finish_dlp_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.finish_dlp_job.js,samples/README.md)
 
@@ -426,7 +426,7 @@ __Usage:__
 
 ### Dlp_service.get_column_data_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_column_data_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_column_data_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_column_data_profile.js,samples/README.md)
 
@@ -443,7 +443,7 @@ __Usage:__
 
 ### Dlp_service.get_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_connection.js,samples/README.md)
 
@@ -460,7 +460,7 @@ __Usage:__
 
 ### Dlp_service.get_deidentify_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_deidentify_template.js,samples/README.md)
 
@@ -477,7 +477,7 @@ __Usage:__
 
 ### Dlp_service.get_discovery_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_discovery_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_discovery_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_discovery_config.js,samples/README.md)
 
@@ -494,7 +494,7 @@ __Usage:__
 
 ### Dlp_service.get_dlp_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_dlp_job.js,samples/README.md)
 
@@ -511,7 +511,7 @@ __Usage:__
 
 ### Dlp_service.get_file_store_data_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_file_store_data_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_file_store_data_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_file_store_data_profile.js,samples/README.md)
 
@@ -528,7 +528,7 @@ __Usage:__
 
 ### Dlp_service.get_inspect_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_inspect_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_inspect_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_inspect_template.js,samples/README.md)
 
@@ -545,7 +545,7 @@ __Usage:__
 
 ### Dlp_service.get_job_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_job_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_job_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_job_trigger.js,samples/README.md)
 
@@ -562,7 +562,7 @@ __Usage:__
 
 ### Dlp_service.get_project_data_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_project_data_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_project_data_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_project_data_profile.js,samples/README.md)
 
@@ -579,7 +579,7 @@ __Usage:__
 
 ### Dlp_service.get_stored_info_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_stored_info_type.js,samples/README.md)
 
@@ -596,7 +596,7 @@ __Usage:__
 
 ### Dlp_service.get_table_data_profile
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_table_data_profile.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_table_data_profile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.get_table_data_profile.js,samples/README.md)
 
@@ -613,7 +613,7 @@ __Usage:__
 
 ### Dlp_service.hybrid_inspect_dlp_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_dlp_job.js,samples/README.md)
 
@@ -630,7 +630,7 @@ __Usage:__
 
 ### Dlp_service.hybrid_inspect_job_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.hybrid_inspect_job_trigger.js,samples/README.md)
 
@@ -647,7 +647,7 @@ __Usage:__
 
 ### Dlp_service.inspect_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.inspect_content.js,samples/README.md)
 
@@ -664,7 +664,7 @@ __Usage:__
 
 ### Dlp_service.list_column_data_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_column_data_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_column_data_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_column_data_profiles.js,samples/README.md)
 
@@ -681,7 +681,7 @@ __Usage:__
 
 ### Dlp_service.list_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_connections.js,samples/README.md)
 
@@ -698,7 +698,7 @@ __Usage:__
 
 ### Dlp_service.list_deidentify_templates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_deidentify_templates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_deidentify_templates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_deidentify_templates.js,samples/README.md)
 
@@ -715,7 +715,7 @@ __Usage:__
 
 ### Dlp_service.list_discovery_configs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_discovery_configs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_discovery_configs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_discovery_configs.js,samples/README.md)
 
@@ -732,7 +732,7 @@ __Usage:__
 
 ### Dlp_service.list_dlp_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_dlp_jobs.js,samples/README.md)
 
@@ -749,7 +749,7 @@ __Usage:__
 
 ### Dlp_service.list_file_store_data_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_file_store_data_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_file_store_data_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_file_store_data_profiles.js,samples/README.md)
 
@@ -766,7 +766,7 @@ __Usage:__
 
 ### Dlp_service.list_info_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_info_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_info_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_info_types.js,samples/README.md)
 
@@ -783,7 +783,7 @@ __Usage:__
 
 ### Dlp_service.list_inspect_templates
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_inspect_templates.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_inspect_templates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_inspect_templates.js,samples/README.md)
 
@@ -800,7 +800,7 @@ __Usage:__
 
 ### Dlp_service.list_job_triggers
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_job_triggers.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_job_triggers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_job_triggers.js,samples/README.md)
 
@@ -817,7 +817,7 @@ __Usage:__
 
 ### Dlp_service.list_project_data_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_project_data_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_project_data_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_project_data_profiles.js,samples/README.md)
 
@@ -834,7 +834,7 @@ __Usage:__
 
 ### Dlp_service.list_stored_info_types
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_stored_info_types.js,samples/README.md)
 
@@ -851,7 +851,7 @@ __Usage:__
 
 ### Dlp_service.list_table_data_profiles
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_table_data_profiles.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_table_data_profiles.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.list_table_data_profiles.js,samples/README.md)
 
@@ -868,7 +868,7 @@ __Usage:__
 
 ### Dlp_service.redact_image
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.redact_image.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.redact_image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.redact_image.js,samples/README.md)
 
@@ -885,7 +885,7 @@ __Usage:__
 
 ### Dlp_service.reidentify_content
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.reidentify_content.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.reidentify_content.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.reidentify_content.js,samples/README.md)
 
@@ -902,7 +902,7 @@ __Usage:__
 
 ### Dlp_service.search_connections
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.search_connections.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.search_connections.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.search_connections.js,samples/README.md)
 
@@ -919,7 +919,7 @@ __Usage:__
 
 ### Dlp_service.update_connection
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_connection.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_connection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_connection.js,samples/README.md)
 
@@ -936,7 +936,7 @@ __Usage:__
 
 ### Dlp_service.update_deidentify_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_deidentify_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_deidentify_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_deidentify_template.js,samples/README.md)
 
@@ -953,7 +953,7 @@ __Usage:__
 
 ### Dlp_service.update_discovery_config
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_discovery_config.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_discovery_config.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_discovery_config.js,samples/README.md)
 
@@ -970,7 +970,7 @@ __Usage:__
 
 ### Dlp_service.update_inspect_template
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_inspect_template.js,samples/README.md)
 
@@ -987,7 +987,7 @@ __Usage:__
 
 ### Dlp_service.update_job_trigger
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_job_trigger.js,samples/README.md)
 
@@ -1004,7 +1004,7 @@ __Usage:__
 
 ### Dlp_service.update_stored_info_type
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/generated/v2/dlp_service.update_stored_info_type.js,samples/README.md)
 
@@ -1023,7 +1023,7 @@ __Usage:__
 
 Inspects and assesses a string.
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-privacy-dlp/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-privacy-dlp/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-privacy-dlp/samples/quickstart.js,samples/README.md)
 

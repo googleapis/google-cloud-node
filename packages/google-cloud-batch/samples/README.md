@@ -50,7 +50,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Batch_service.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1/batch_service.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.create_job.js,samples/README.md)
 
@@ -67,7 +67,7 @@ __Usage:__
 
 ### Batch_service.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1/batch_service.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.delete_job.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 ### Batch_service.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1/batch_service.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.get_job.js,samples/README.md)
 
@@ -101,7 +101,7 @@ __Usage:__
 
 ### Batch_service.get_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1/batch_service.get_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.get_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.get_task.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 ### Batch_service.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1/batch_service.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.list_jobs.js,samples/README.md)
 
@@ -135,7 +135,7 @@ __Usage:__
 
 ### Batch_service.list_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1/batch_service.list_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1/batch_service.list_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1/batch_service.list_tasks.js,samples/README.md)
 
@@ -152,7 +152,7 @@ __Usage:__
 
 ### Batch_service.cancel_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.cancel_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.cancel_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.cancel_job.js,samples/README.md)
 
@@ -169,7 +169,7 @@ __Usage:__
 
 ### Batch_service.create_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_job.js,samples/README.md)
 
@@ -186,7 +186,7 @@ __Usage:__
 
 ### Batch_service.create_resource_allowance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_resource_allowance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_resource_allowance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.create_resource_allowance.js,samples/README.md)
 
@@ -203,7 +203,7 @@ __Usage:__
 
 ### Batch_service.delete_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.delete_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.delete_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.delete_job.js,samples/README.md)
 
@@ -220,7 +220,7 @@ __Usage:__
 
 ### Batch_service.delete_resource_allowance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.delete_resource_allowance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.delete_resource_allowance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.delete_resource_allowance.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 ### Batch_service.get_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_job.js,samples/README.md)
 
@@ -254,7 +254,7 @@ __Usage:__
 
 ### Batch_service.get_resource_allowance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_resource_allowance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_resource_allowance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_resource_allowance.js,samples/README.md)
 
@@ -271,7 +271,7 @@ __Usage:__
 
 ### Batch_service.get_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.get_task.js,samples/README.md)
 
@@ -288,7 +288,7 @@ __Usage:__
 
 ### Batch_service.list_jobs
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_jobs.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_jobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_jobs.js,samples/README.md)
 
@@ -305,7 +305,7 @@ __Usage:__
 
 ### Batch_service.list_resource_allowances
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_resource_allowances.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_resource_allowances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_resource_allowances.js,samples/README.md)
 
@@ -322,7 +322,7 @@ __Usage:__
 
 ### Batch_service.list_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.list_tasks.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 ### Batch_service.update_job
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_job.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Batch_service.update_resource_allowance
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_resource_allowance.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_resource_allowance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/generated/v1alpha/batch_service.update_resource_allowance.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-cloud-batch/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-batch/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-batch/samples/quickstart.js,samples/README.md)
 

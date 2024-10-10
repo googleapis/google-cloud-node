@@ -56,7 +56,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Alpha_analytics_data.create_audience_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_audience_list.js,samples/README.md)
 
@@ -73,7 +73,7 @@ __Usage:__
 
 ### Alpha_analytics_data.create_recurring_audience_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_recurring_audience_list.js,samples/README.md)
 
@@ -90,7 +90,7 @@ __Usage:__
 
 ### Alpha_analytics_data.create_report_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.create_report_task.js,samples/README.md)
 
@@ -107,7 +107,7 @@ __Usage:__
 
 ### Alpha_analytics_data.get_audience_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_audience_list.js,samples/README.md)
 
@@ -124,7 +124,7 @@ __Usage:__
 
 ### Alpha_analytics_data.get_property_quotas_snapshot
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_property_quotas_snapshot.js,samples/README.md)
 
@@ -141,7 +141,7 @@ __Usage:__
 
 ### Alpha_analytics_data.get_recurring_audience_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_recurring_audience_list.js,samples/README.md)
 
@@ -158,7 +158,7 @@ __Usage:__
 
 ### Alpha_analytics_data.get_report_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.get_report_task.js,samples/README.md)
 
@@ -175,7 +175,7 @@ __Usage:__
 
 ### Alpha_analytics_data.list_audience_lists
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_audience_lists.js,samples/README.md)
 
@@ -192,7 +192,7 @@ __Usage:__
 
 ### Alpha_analytics_data.list_recurring_audience_lists
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_recurring_audience_lists.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_recurring_audience_lists.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_recurring_audience_lists.js,samples/README.md)
 
@@ -209,7 +209,7 @@ __Usage:__
 
 ### Alpha_analytics_data.list_report_tasks
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.list_report_tasks.js,samples/README.md)
 
@@ -226,7 +226,7 @@ __Usage:__
 
 ### Alpha_analytics_data.query_audience_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_audience_list.js,samples/README.md)
 
@@ -243,7 +243,7 @@ __Usage:__
 
 ### Alpha_analytics_data.query_report_task
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.query_report_task.js,samples/README.md)
 
@@ -260,7 +260,7 @@ __Usage:__
 
 ### Alpha_analytics_data.run_funnel_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.run_funnel_report.js,samples/README.md)
 
@@ -277,7 +277,7 @@ __Usage:__
 
 ### Alpha_analytics_data.sheet_export_audience_list
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1alpha/alpha_analytics_data.sheet_export_audience_list.js,samples/README.md)
 
@@ -294,7 +294,7 @@ __Usage:__
 
 ### Beta_analytics_data.batch_run_pivot_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_pivot_reports.js,samples/README.md)
 
@@ -311,7 +311,7 @@ __Usage:__
 
 ### Beta_analytics_data.batch_run_reports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.batch_run_reports.js,samples/README.md)
 
@@ -328,7 +328,7 @@ __Usage:__
 
 ### Beta_analytics_data.check_compatibility
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.check_compatibility.js,samples/README.md)
 
@@ -345,7 +345,7 @@ __Usage:__
 
 ### Beta_analytics_data.create_audience_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.create_audience_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.create_audience_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.create_audience_export.js,samples/README.md)
 
@@ -362,7 +362,7 @@ __Usage:__
 
 ### Beta_analytics_data.get_audience_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_audience_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_audience_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_audience_export.js,samples/README.md)
 
@@ -379,7 +379,7 @@ __Usage:__
 
 ### Beta_analytics_data.get_metadata
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_metadata.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.get_metadata.js,samples/README.md)
 
@@ -396,7 +396,7 @@ __Usage:__
 
 ### Beta_analytics_data.list_audience_exports
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.list_audience_exports.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.list_audience_exports.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.list_audience_exports.js,samples/README.md)
 
@@ -413,7 +413,7 @@ __Usage:__
 
 ### Beta_analytics_data.query_audience_export
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.query_audience_export.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.query_audience_export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.query_audience_export.js,samples/README.md)
 
@@ -430,7 +430,7 @@ __Usage:__
 
 ### Beta_analytics_data.run_pivot_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_pivot_report.js,samples/README.md)
 
@@ -447,7 +447,7 @@ __Usage:__
 
 ### Beta_analytics_data.run_realtime_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_realtime_report.js,samples/README.md)
 
@@ -464,7 +464,7 @@ __Usage:__
 
 ### Beta_analytics_data.run_report
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/generated/v1beta/beta_analytics_data.run_report.js,samples/README.md)
 
@@ -481,7 +481,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/master/packages/google-analytics-data/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-analytics-data/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-analytics-data/samples/quickstart.js,samples/README.md)
 
