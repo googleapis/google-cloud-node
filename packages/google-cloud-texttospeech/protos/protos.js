@@ -5313,6 +5313,227 @@
                         return Voice;
                     })();
     
+                    v1beta1.AdvancedVoiceOptions = (function() {
+    
+                        /**
+                         * Properties of an AdvancedVoiceOptions.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface IAdvancedVoiceOptions
+                         * @property {boolean|null} [lowLatencyJourneySynthesis] AdvancedVoiceOptions lowLatencyJourneySynthesis
+                         */
+    
+                        /**
+                         * Constructs a new AdvancedVoiceOptions.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents an AdvancedVoiceOptions.
+                         * @implements IAdvancedVoiceOptions
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions=} [properties] Properties to set
+                         */
+                        function AdvancedVoiceOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AdvancedVoiceOptions lowLatencyJourneySynthesis.
+                         * @member {boolean|null|undefined} lowLatencyJourneySynthesis
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        AdvancedVoiceOptions.prototype.lowLatencyJourneySynthesis = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * AdvancedVoiceOptions _lowLatencyJourneySynthesis.
+                         * @member {"lowLatencyJourneySynthesis"|undefined} _lowLatencyJourneySynthesis
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         */
+                        Object.defineProperty(AdvancedVoiceOptions.prototype, "_lowLatencyJourneySynthesis", {
+                            get: $util.oneOfGetter($oneOfFields = ["lowLatencyJourneySynthesis"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new AdvancedVoiceOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} AdvancedVoiceOptions instance
+                         */
+                        AdvancedVoiceOptions.create = function create(properties) {
+                            return new AdvancedVoiceOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AdvancedVoiceOptions message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions} message AdvancedVoiceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdvancedVoiceOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.lowLatencyJourneySynthesis != null && Object.hasOwnProperty.call(message, "lowLatencyJourneySynthesis"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.lowLatencyJourneySynthesis);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AdvancedVoiceOptions message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions} message AdvancedVoiceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AdvancedVoiceOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AdvancedVoiceOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} AdvancedVoiceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdvancedVoiceOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.lowLatencyJourneySynthesis = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AdvancedVoiceOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} AdvancedVoiceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AdvancedVoiceOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AdvancedVoiceOptions message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AdvancedVoiceOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
+                                properties._lowLatencyJourneySynthesis = 1;
+                                if (typeof message.lowLatencyJourneySynthesis !== "boolean")
+                                    return "lowLatencyJourneySynthesis: boolean expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AdvancedVoiceOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} AdvancedVoiceOptions
+                         */
+                        AdvancedVoiceOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions();
+                            if (object.lowLatencyJourneySynthesis != null)
+                                message.lowLatencyJourneySynthesis = Boolean(object.lowLatencyJourneySynthesis);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AdvancedVoiceOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions} message AdvancedVoiceOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AdvancedVoiceOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.lowLatencyJourneySynthesis != null && message.hasOwnProperty("lowLatencyJourneySynthesis")) {
+                                object.lowLatencyJourneySynthesis = message.lowLatencyJourneySynthesis;
+                                if (options.oneofs)
+                                    object._lowLatencyJourneySynthesis = "lowLatencyJourneySynthesis";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AdvancedVoiceOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AdvancedVoiceOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for AdvancedVoiceOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        AdvancedVoiceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions";
+                        };
+    
+                        return AdvancedVoiceOptions;
+                    })();
+    
                     v1beta1.SynthesizeSpeechRequest = (function() {
     
                         /**
@@ -5323,6 +5544,7 @@
                          * @property {google.cloud.texttospeech.v1beta1.IVoiceSelectionParams|null} [voice] SynthesizeSpeechRequest voice
                          * @property {google.cloud.texttospeech.v1beta1.IAudioConfig|null} [audioConfig] SynthesizeSpeechRequest audioConfig
                          * @property {Array.<google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType>|null} [enableTimePointing] SynthesizeSpeechRequest enableTimePointing
+                         * @property {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions|null} [advancedVoiceOptions] SynthesizeSpeechRequest advancedVoiceOptions
                          */
     
                         /**
@@ -5374,6 +5596,28 @@
                         SynthesizeSpeechRequest.prototype.enableTimePointing = $util.emptyArray;
     
                         /**
+                         * SynthesizeSpeechRequest advancedVoiceOptions.
+                         * @member {google.cloud.texttospeech.v1beta1.IAdvancedVoiceOptions|null|undefined} advancedVoiceOptions
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest
+                         * @instance
+                         */
+                        SynthesizeSpeechRequest.prototype.advancedVoiceOptions = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * SynthesizeSpeechRequest _advancedVoiceOptions.
+                         * @member {"advancedVoiceOptions"|undefined} _advancedVoiceOptions
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest
+                         * @instance
+                         */
+                        Object.defineProperty(SynthesizeSpeechRequest.prototype, "_advancedVoiceOptions", {
+                            get: $util.oneOfGetter($oneOfFields = ["advancedVoiceOptions"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new SynthesizeSpeechRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest
@@ -5409,6 +5653,8 @@
                                     writer.int32(message.enableTimePointing[i]);
                                 writer.ldelim();
                             }
+                            if (message.advancedVoiceOptions != null && Object.hasOwnProperty.call(message, "advancedVoiceOptions"))
+                                $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.encode(message.advancedVoiceOptions, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -5466,6 +5712,10 @@
                                             message.enableTimePointing.push(reader.int32());
                                         break;
                                     }
+                                case 8: {
+                                        message.advancedVoiceOptions = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -5501,6 +5751,7 @@
                         SynthesizeSpeechRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.input != null && message.hasOwnProperty("input")) {
                                 var error = $root.google.cloud.texttospeech.v1beta1.SynthesisInput.verify(message.input);
                                 if (error)
@@ -5527,6 +5778,14 @@
                                     case 1:
                                         break;
                                     }
+                            }
+                            if (message.advancedVoiceOptions != null && message.hasOwnProperty("advancedVoiceOptions")) {
+                                properties._advancedVoiceOptions = 1;
+                                {
+                                    var error = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.verify(message.advancedVoiceOptions);
+                                    if (error)
+                                        return "advancedVoiceOptions." + error;
+                                }
                             }
                             return null;
                         };
@@ -5579,6 +5838,11 @@
                                         break;
                                     }
                             }
+                            if (object.advancedVoiceOptions != null) {
+                                if (typeof object.advancedVoiceOptions !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.advancedVoiceOptions: object expected");
+                                message.advancedVoiceOptions = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.fromObject(object.advancedVoiceOptions);
+                            }
                             return message;
                         };
     
@@ -5612,6 +5876,11 @@
                                 object.enableTimePointing = [];
                                 for (var j = 0; j < message.enableTimePointing.length; ++j)
                                     object.enableTimePointing[j] = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType[message.enableTimePointing[j]] === undefined ? message.enableTimePointing[j] : $root.google.cloud.texttospeech.v1beta1.SynthesizeSpeechRequest.TimepointType[message.enableTimePointing[j]] : message.enableTimePointing[j];
+                            }
+                            if (message.advancedVoiceOptions != null && message.hasOwnProperty("advancedVoiceOptions")) {
+                                object.advancedVoiceOptions = $root.google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions.toObject(message.advancedVoiceOptions, options);
+                                if (options.oneofs)
+                                    object._advancedVoiceOptions = "advancedVoiceOptions";
                             }
                             return object;
                         };
@@ -5659,6 +5928,567 @@
                         return SynthesizeSpeechRequest;
                     })();
     
+                    v1beta1.CustomPronunciationParams = (function() {
+    
+                        /**
+                         * Properties of a CustomPronunciationParams.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface ICustomPronunciationParams
+                         * @property {string|null} [phrase] CustomPronunciationParams phrase
+                         * @property {google.cloud.texttospeech.v1beta1.CustomPronunciationParams.PhoneticEncoding|null} [phoneticEncoding] CustomPronunciationParams phoneticEncoding
+                         * @property {string|null} [pronunciation] CustomPronunciationParams pronunciation
+                         */
+    
+                        /**
+                         * Constructs a new CustomPronunciationParams.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a CustomPronunciationParams.
+                         * @implements ICustomPronunciationParams
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciationParams=} [properties] Properties to set
+                         */
+                        function CustomPronunciationParams(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomPronunciationParams phrase.
+                         * @member {string|null|undefined} phrase
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         */
+                        CustomPronunciationParams.prototype.phrase = null;
+    
+                        /**
+                         * CustomPronunciationParams phoneticEncoding.
+                         * @member {google.cloud.texttospeech.v1beta1.CustomPronunciationParams.PhoneticEncoding|null|undefined} phoneticEncoding
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         */
+                        CustomPronunciationParams.prototype.phoneticEncoding = null;
+    
+                        /**
+                         * CustomPronunciationParams pronunciation.
+                         * @member {string|null|undefined} pronunciation
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         */
+                        CustomPronunciationParams.prototype.pronunciation = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * CustomPronunciationParams _phrase.
+                         * @member {"phrase"|undefined} _phrase
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         */
+                        Object.defineProperty(CustomPronunciationParams.prototype, "_phrase", {
+                            get: $util.oneOfGetter($oneOfFields = ["phrase"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * CustomPronunciationParams _phoneticEncoding.
+                         * @member {"phoneticEncoding"|undefined} _phoneticEncoding
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         */
+                        Object.defineProperty(CustomPronunciationParams.prototype, "_phoneticEncoding", {
+                            get: $util.oneOfGetter($oneOfFields = ["phoneticEncoding"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * CustomPronunciationParams _pronunciation.
+                         * @member {"pronunciation"|undefined} _pronunciation
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         */
+                        Object.defineProperty(CustomPronunciationParams.prototype, "_pronunciation", {
+                            get: $util.oneOfGetter($oneOfFields = ["pronunciation"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new CustomPronunciationParams instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciationParams=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciationParams} CustomPronunciationParams instance
+                         */
+                        CustomPronunciationParams.create = function create(properties) {
+                            return new CustomPronunciationParams(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomPronunciationParams message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.CustomPronunciationParams.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciationParams} message CustomPronunciationParams message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomPronunciationParams.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.phrase != null && Object.hasOwnProperty.call(message, "phrase"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.phrase);
+                            if (message.phoneticEncoding != null && Object.hasOwnProperty.call(message, "phoneticEncoding"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.phoneticEncoding);
+                            if (message.pronunciation != null && Object.hasOwnProperty.call(message, "pronunciation"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pronunciation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomPronunciationParams message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.CustomPronunciationParams.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciationParams} message CustomPronunciationParams message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomPronunciationParams.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomPronunciationParams message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciationParams} CustomPronunciationParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomPronunciationParams.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.phrase = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.phoneticEncoding = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pronunciation = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomPronunciationParams message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciationParams} CustomPronunciationParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomPronunciationParams.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomPronunciationParams message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomPronunciationParams.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.phrase != null && message.hasOwnProperty("phrase")) {
+                                properties._phrase = 1;
+                                if (!$util.isString(message.phrase))
+                                    return "phrase: string expected";
+                            }
+                            if (message.phoneticEncoding != null && message.hasOwnProperty("phoneticEncoding")) {
+                                properties._phoneticEncoding = 1;
+                                switch (message.phoneticEncoding) {
+                                default:
+                                    return "phoneticEncoding: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            if (message.pronunciation != null && message.hasOwnProperty("pronunciation")) {
+                                properties._pronunciation = 1;
+                                if (!$util.isString(message.pronunciation))
+                                    return "pronunciation: string expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomPronunciationParams message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciationParams} CustomPronunciationParams
+                         */
+                        CustomPronunciationParams.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams();
+                            if (object.phrase != null)
+                                message.phrase = String(object.phrase);
+                            switch (object.phoneticEncoding) {
+                            default:
+                                if (typeof object.phoneticEncoding === "number") {
+                                    message.phoneticEncoding = object.phoneticEncoding;
+                                    break;
+                                }
+                                break;
+                            case "PHONETIC_ENCODING_UNSPECIFIED":
+                            case 0:
+                                message.phoneticEncoding = 0;
+                                break;
+                            case "PHONETIC_ENCODING_IPA":
+                            case 1:
+                                message.phoneticEncoding = 1;
+                                break;
+                            case "PHONETIC_ENCODING_X_SAMPA":
+                            case 2:
+                                message.phoneticEncoding = 2;
+                                break;
+                            }
+                            if (object.pronunciation != null)
+                                message.pronunciation = String(object.pronunciation);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomPronunciationParams message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.CustomPronunciationParams} message CustomPronunciationParams
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomPronunciationParams.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.phrase != null && message.hasOwnProperty("phrase")) {
+                                object.phrase = message.phrase;
+                                if (options.oneofs)
+                                    object._phrase = "phrase";
+                            }
+                            if (message.phoneticEncoding != null && message.hasOwnProperty("phoneticEncoding")) {
+                                object.phoneticEncoding = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.PhoneticEncoding[message.phoneticEncoding] === undefined ? message.phoneticEncoding : $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.PhoneticEncoding[message.phoneticEncoding] : message.phoneticEncoding;
+                                if (options.oneofs)
+                                    object._phoneticEncoding = "phoneticEncoding";
+                            }
+                            if (message.pronunciation != null && message.hasOwnProperty("pronunciation")) {
+                                object.pronunciation = message.pronunciation;
+                                if (options.oneofs)
+                                    object._pronunciation = "pronunciation";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomPronunciationParams to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomPronunciationParams.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomPronunciationParams
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciationParams
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomPronunciationParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.CustomPronunciationParams";
+                        };
+    
+                        /**
+                         * PhoneticEncoding enum.
+                         * @name google.cloud.texttospeech.v1beta1.CustomPronunciationParams.PhoneticEncoding
+                         * @enum {number}
+                         * @property {number} PHONETIC_ENCODING_UNSPECIFIED=0 PHONETIC_ENCODING_UNSPECIFIED value
+                         * @property {number} PHONETIC_ENCODING_IPA=1 PHONETIC_ENCODING_IPA value
+                         * @property {number} PHONETIC_ENCODING_X_SAMPA=2 PHONETIC_ENCODING_X_SAMPA value
+                         */
+                        CustomPronunciationParams.PhoneticEncoding = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "PHONETIC_ENCODING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PHONETIC_ENCODING_IPA"] = 1;
+                            values[valuesById[2] = "PHONETIC_ENCODING_X_SAMPA"] = 2;
+                            return values;
+                        })();
+    
+                        return CustomPronunciationParams;
+                    })();
+    
+                    v1beta1.CustomPronunciations = (function() {
+    
+                        /**
+                         * Properties of a CustomPronunciations.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface ICustomPronunciations
+                         * @property {Array.<google.cloud.texttospeech.v1beta1.ICustomPronunciationParams>|null} [pronunciations] CustomPronunciations pronunciations
+                         */
+    
+                        /**
+                         * Constructs a new CustomPronunciations.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a CustomPronunciations.
+                         * @implements ICustomPronunciations
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciations=} [properties] Properties to set
+                         */
+                        function CustomPronunciations(properties) {
+                            this.pronunciations = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomPronunciations pronunciations.
+                         * @member {Array.<google.cloud.texttospeech.v1beta1.ICustomPronunciationParams>} pronunciations
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @instance
+                         */
+                        CustomPronunciations.prototype.pronunciations = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CustomPronunciations instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciations=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciations} CustomPronunciations instance
+                         */
+                        CustomPronunciations.create = function create(properties) {
+                            return new CustomPronunciations(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomPronunciations message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.CustomPronunciations.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciations} message CustomPronunciations message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomPronunciations.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.pronunciations != null && message.pronunciations.length)
+                                for (var i = 0; i < message.pronunciations.length; ++i)
+                                    $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.encode(message.pronunciations[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomPronunciations message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.CustomPronunciations.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.ICustomPronunciations} message CustomPronunciations message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomPronunciations.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomPronunciations message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciations} CustomPronunciations
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomPronunciations.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.CustomPronunciations();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.pronunciations && message.pronunciations.length))
+                                            message.pronunciations = [];
+                                        message.pronunciations.push($root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomPronunciations message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciations} CustomPronunciations
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomPronunciations.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomPronunciations message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomPronunciations.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.pronunciations != null && message.hasOwnProperty("pronunciations")) {
+                                if (!Array.isArray(message.pronunciations))
+                                    return "pronunciations: array expected";
+                                for (var i = 0; i < message.pronunciations.length; ++i) {
+                                    var error = $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.verify(message.pronunciations[i]);
+                                    if (error)
+                                        return "pronunciations." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomPronunciations message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.CustomPronunciations} CustomPronunciations
+                         */
+                        CustomPronunciations.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.CustomPronunciations)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.CustomPronunciations();
+                            if (object.pronunciations) {
+                                if (!Array.isArray(object.pronunciations))
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.CustomPronunciations.pronunciations: array expected");
+                                message.pronunciations = [];
+                                for (var i = 0; i < object.pronunciations.length; ++i) {
+                                    if (typeof object.pronunciations[i] !== "object")
+                                        throw TypeError(".google.cloud.texttospeech.v1beta1.CustomPronunciations.pronunciations: object expected");
+                                    message.pronunciations[i] = $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.fromObject(object.pronunciations[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomPronunciations message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.CustomPronunciations} message CustomPronunciations
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomPronunciations.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.pronunciations = [];
+                            if (message.pronunciations && message.pronunciations.length) {
+                                object.pronunciations = [];
+                                for (var j = 0; j < message.pronunciations.length; ++j)
+                                    object.pronunciations[j] = $root.google.cloud.texttospeech.v1beta1.CustomPronunciationParams.toObject(message.pronunciations[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomPronunciations to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomPronunciations.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CustomPronunciations
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.CustomPronunciations
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CustomPronunciations.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.CustomPronunciations";
+                        };
+    
+                        return CustomPronunciations;
+                    })();
+    
                     v1beta1.SynthesisInput = (function() {
     
                         /**
@@ -5667,6 +6497,7 @@
                          * @interface ISynthesisInput
                          * @property {string|null} [text] SynthesisInput text
                          * @property {string|null} [ssml] SynthesisInput ssml
+                         * @property {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null} [customPronunciations] SynthesisInput customPronunciations
                          */
     
                         /**
@@ -5699,6 +6530,14 @@
                          * @instance
                          */
                         SynthesisInput.prototype.ssml = null;
+    
+                        /**
+                         * SynthesisInput customPronunciations.
+                         * @member {google.cloud.texttospeech.v1beta1.ICustomPronunciations|null|undefined} customPronunciations
+                         * @memberof google.cloud.texttospeech.v1beta1.SynthesisInput
+                         * @instance
+                         */
+                        SynthesisInput.prototype.customPronunciations = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -5742,6 +6581,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
                             if (message.ssml != null && Object.hasOwnProperty.call(message, "ssml"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.ssml);
+                            if (message.customPronunciations != null && Object.hasOwnProperty.call(message, "customPronunciations"))
+                                $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.encode(message.customPronunciations, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -5782,6 +6623,10 @@
                                     }
                                 case 2: {
                                         message.ssml = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -5832,6 +6677,11 @@
                                 if (!$util.isString(message.ssml))
                                     return "ssml: string expected";
                             }
+                            if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.verify(message.customPronunciations);
+                                if (error)
+                                    return "customPronunciations." + error;
+                            }
                             return null;
                         };
     
@@ -5851,6 +6701,11 @@
                                 message.text = String(object.text);
                             if (object.ssml != null)
                                 message.ssml = String(object.ssml);
+                            if (object.customPronunciations != null) {
+                                if (typeof object.customPronunciations !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.SynthesisInput.customPronunciations: object expected");
+                                message.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.fromObject(object.customPronunciations);
+                            }
                             return message;
                         };
     
@@ -5867,6 +6722,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.defaults)
+                                object.customPronunciations = null;
                             if (message.text != null && message.hasOwnProperty("text")) {
                                 object.text = message.text;
                                 if (options.oneofs)
@@ -5877,6 +6734,8 @@
                                 if (options.oneofs)
                                     object.inputSource = "ssml";
                             }
+                            if (message.customPronunciations != null && message.hasOwnProperty("customPronunciations"))
+                                object.customPronunciations = $root.google.cloud.texttospeech.v1beta1.CustomPronunciations.toObject(message.customPronunciations, options);
                             return object;
                         };
     

@@ -62,7 +62,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 67,
+                    "end": 71,
                     "type": "FULL"
                 }
             ],
@@ -86,6 +86,10 @@
                     {
                         "name": "enable_time_pointing",
                         "type": "TYPE_ENUM[]"
+                    },
+                    {
+                        "name": "advanced_voice_options",
+                        "type": ".google.cloud.texttospeech.v1beta1.AdvancedVoiceOptions"
                     }
                 ],
                 "resultType": ".google.cloud.texttospeech.v1beta1.SynthesizeSpeechResponse",

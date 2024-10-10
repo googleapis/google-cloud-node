@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -557,7 +560,32 @@
                         }
                       }
                     },
+                    "AdvancedVoiceOptions": {
+                      "oneofs": {
+                        "_lowLatencyJourneySynthesis": {
+                          "oneof": [
+                            "lowLatencyJourneySynthesis"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "lowLatencyJourneySynthesis": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "SynthesizeSpeechRequest": {
+                      "oneofs": {
+                        "_advancedVoiceOptions": {
+                          "oneof": [
+                            "advancedVoiceOptions"
+                          ]
+                        }
+                      },
                       "fields": {
                         "input": {
                           "type": "SynthesisInput",
@@ -584,6 +612,13 @@
                           "rule": "repeated",
                           "type": "TimepointType",
                           "id": 4
+                        },
+                        "advancedVoiceOptions": {
+                          "type": "AdvancedVoiceOptions",
+                          "id": 8,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -592,6 +627,66 @@
                             "TIMEPOINT_TYPE_UNSPECIFIED": 0,
                             "SSML_MARK": 1
                           }
+                        }
+                      }
+                    },
+                    "CustomPronunciationParams": {
+                      "oneofs": {
+                        "_phrase": {
+                          "oneof": [
+                            "phrase"
+                          ]
+                        },
+                        "_phoneticEncoding": {
+                          "oneof": [
+                            "phoneticEncoding"
+                          ]
+                        },
+                        "_pronunciation": {
+                          "oneof": [
+                            "pronunciation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "phrase": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "phoneticEncoding": {
+                          "type": "PhoneticEncoding",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pronunciation": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PhoneticEncoding": {
+                          "values": {
+                            "PHONETIC_ENCODING_UNSPECIFIED": 0,
+                            "PHONETIC_ENCODING_IPA": 1,
+                            "PHONETIC_ENCODING_X_SAMPA": 2
+                          }
+                        }
+                      }
+                    },
+                    "CustomPronunciations": {
+                      "fields": {
+                        "pronunciations": {
+                          "rule": "repeated",
+                          "type": "CustomPronunciationParams",
+                          "id": 1
                         }
                       }
                     },
@@ -612,6 +707,13 @@
                         "ssml": {
                           "type": "string",
                           "id": 2
+                        },
+                        "customPronunciations": {
+                          "type": "CustomPronunciations",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
