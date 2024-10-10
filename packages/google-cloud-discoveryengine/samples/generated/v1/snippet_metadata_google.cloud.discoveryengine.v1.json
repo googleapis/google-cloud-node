@@ -782,7 +782,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 129,
+                    "end": 118,
                     "type": "FULL"
                 }
             ],
@@ -1996,6 +1996,126 @@
             }
         },
         {
+            "regionTag": "discoveryengine_v1_generated_GroundedGenerationService_StreamGenerateGroundedContent_async",
+            "title": "CompletionService streamGenerateGroundedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates grounded content in a streaming fashion.",
+            "canonical": true,
+            "file": "grounded_generation_service.stream_generate_grounded_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 98,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "StreamGenerateGroundedContent",
+                "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationService.StreamGenerateGroundedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.discoveryengine.v1.GroundedGenerationContent"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GenerationSpec"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.GenerateGroundedContentResponse",
+                "client": {
+                    "shortName": "GroundedGenerationServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationServiceClient"
+                },
+                "method": {
+                    "shortName": "StreamGenerateGroundedContent",
+                    "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationService.StreamGenerateGroundedContent",
+                    "service": {
+                        "shortName": "GroundedGenerationService",
+                        "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationService"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "discoveryengine_v1_generated_GroundedGenerationService_GenerateGroundedContent_async",
+            "title": "CompletionService generateGroundedContent Sample",
+            "origin": "API_DEFINITION",
+            "description": " Generates grounded content.",
+            "canonical": true,
+            "file": "grounded_generation_service.generate_grounded_content.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 94,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GenerateGroundedContent",
+                "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationService.GenerateGroundedContent",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "location",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "system_instruction",
+                        "type": ".google.cloud.discoveryengine.v1.GroundedGenerationContent"
+                    },
+                    {
+                        "name": "contents",
+                        "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "generation_spec",
+                        "type": ".google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GenerationSpec"
+                    },
+                    {
+                        "name": "grounding_spec",
+                        "type": ".google.cloud.discoveryengine.v1.GenerateGroundedContentRequest.GroundingSpec"
+                    },
+                    {
+                        "name": "user_labels",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.discoveryengine.v1.GenerateGroundedContentResponse",
+                "client": {
+                    "shortName": "GroundedGenerationServiceClient",
+                    "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationServiceClient"
+                },
+                "method": {
+                    "shortName": "GenerateGroundedContent",
+                    "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationService.GenerateGroundedContent",
+                    "service": {
+                        "shortName": "GroundedGenerationService",
+                        "fullName": "google.cloud.discoveryengine.v1.GroundedGenerationService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "discoveryengine_v1_generated_GroundedGenerationService_CheckGrounding_async",
             "title": "CompletionService checkGrounding Sample",
             "origin": "API_DEFINITION",
@@ -2458,7 +2578,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 281,
+                    "end": 287,
                     "type": "FULL"
                 }
             ],
@@ -2493,6 +2613,10 @@
                     },
                     {
                         "name": "offset",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "one_box_page_size",
                         "type": "TYPE_INT32"
                     },
                     {
@@ -3066,7 +3190,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 64,
+                    "end": 70,
                     "type": "FULL"
                 }
             ],
@@ -3082,6 +3206,10 @@
                     {
                         "name": "uris",
                         "type": "TYPE_STRING[]"
+                    },
+                    {
+                        "name": "site_credential",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",

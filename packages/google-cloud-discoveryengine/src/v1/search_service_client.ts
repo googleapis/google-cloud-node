@@ -570,6 +570,10 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
    *   Specs defining dataStores to filter on in a search call and configurations
    *   for those dataStores. This is only considered for engines with multiple
@@ -862,6 +866,10 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
    *   Specs defining dataStores to filter on in a search call and configurations
    *   for those dataStores. This is only considered for engines with multiple
@@ -1108,6 +1116,10 @@ export class SearchServiceClient {
    *   unset.
    *
    *   If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+   * @param {number} request.oneBoxPageSize
+   *   The maximum number of results to return for OneBox.
+   *   This applies to each OneBox type individually.
+   *   Default number is 10.
    * @param {number[]} request.dataStoreSpecs
    *   Specs defining dataStores to filter on in a search call and configurations
    *   for those dataStores. This is only considered for engines with multiple
