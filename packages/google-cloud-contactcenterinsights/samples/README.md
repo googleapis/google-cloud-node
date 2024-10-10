@@ -29,14 +29,18 @@
   * [Contact_center_insights.delete_view](#contact_center_insights.delete_view)
   * [Contact_center_insights.deploy_issue_model](#contact_center_insights.deploy_issue_model)
   * [Contact_center_insights.export_insights_data](#contact_center_insights.export_insights_data)
+  * [Contact_center_insights.export_issue_model](#contact_center_insights.export_issue_model)
   * [Contact_center_insights.get_analysis](#contact_center_insights.get_analysis)
   * [Contact_center_insights.get_conversation](#contact_center_insights.get_conversation)
+  * [Contact_center_insights.get_encryption_spec](#contact_center_insights.get_encryption_spec)
   * [Contact_center_insights.get_issue](#contact_center_insights.get_issue)
   * [Contact_center_insights.get_issue_model](#contact_center_insights.get_issue_model)
   * [Contact_center_insights.get_phrase_matcher](#contact_center_insights.get_phrase_matcher)
   * [Contact_center_insights.get_settings](#contact_center_insights.get_settings)
   * [Contact_center_insights.get_view](#contact_center_insights.get_view)
+  * [Contact_center_insights.import_issue_model](#contact_center_insights.import_issue_model)
   * [Contact_center_insights.ingest_conversations](#contact_center_insights.ingest_conversations)
+  * [Contact_center_insights.initialize_encryption_spec](#contact_center_insights.initialize_encryption_spec)
   * [Contact_center_insights.list_analyses](#contact_center_insights.list_analyses)
   * [Contact_center_insights.list_conversations](#contact_center_insights.list_conversations)
   * [Contact_center_insights.list_issue_models](#contact_center_insights.list_issue_models)
@@ -357,6 +361,23 @@ __Usage:__
 
 
 
+### Contact_center_insights.export_issue_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_issue_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_issue_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.export_issue_model.js`
+
+
+-----
+
+
+
+
 ### Contact_center_insights.get_analysis
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_analysis.js).
@@ -384,6 +405,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_conversation.js`
+
+
+-----
+
+
+
+
+### Contact_center_insights.get_encryption_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_encryption_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_encryption_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.get_encryption_spec.js`
 
 
 -----
@@ -476,6 +514,23 @@ __Usage:__
 
 
 
+### Contact_center_insights.import_issue_model
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.import_issue_model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.import_issue_model.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.import_issue_model.js`
+
+
+-----
+
+
+
+
 ### Contact_center_insights.ingest_conversations
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js).
@@ -486,6 +541,23 @@ __Usage:__
 
 
 `node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.ingest_conversations.js`
+
+
+-----
+
+
+
+
+### Contact_center_insights.initialize_encryption_spec
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.initialize_encryption_spec.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.initialize_encryption_spec.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-contactcenterinsights/samples/generated/v1/contact_center_insights.initialize_encryption_spec.js`
 
 
 -----

@@ -60,7 +60,7 @@ function main(name) {
    *  Use one of the following formats:
    *  * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *  * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
-   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
+   *  * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    *  If unspecified, the Parallelstore service agent is used:
    *  `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
    */

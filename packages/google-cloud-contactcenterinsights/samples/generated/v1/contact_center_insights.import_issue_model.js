@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(conversation) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+function main(parent) {
+  // [START contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,25 +29,19 @@ function main(conversation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values for the conversation.
+   *  Google Cloud Storage source message.
    */
-  // const conversation = {}
+  // const gcsSource = {}
   /**
-   *  The list of fields to be updated. All possible fields can be updated by
-   *  passing `*`, or a subset of the following updateable fields can be
-   *  provided:
-   *  * `agent_id`
-   *  * `language_code`
-   *  * `labels`
-   *  * `metadata`
-   *  * `quality_metadata`
-   *  * `call_metadata`
-   *  * `start_time`
-   *  * `expire_time` or `ttl`
-   *  * `data_source.gcs_source.audio_uri` or
-   *  `data_source.dialogflow_source.audio_uri`
+   *  Required. The parent resource of the issue model.
    */
-  // const updateMask = {}
+  // const parent = 'abc123'
+  /**
+   *  Optional. If set to true, will create an issue model from the imported file
+   *  with randomly generated IDs for the issue model and corresponding issues.
+   *  Otherwise, replaces an existing model with the same ID as the file.
+   */
+  // const createNewModel = true
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
@@ -55,19 +49,20 @@ function main(conversation) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function callUpdateConversation() {
+  async function callImportIssueModel() {
     // Construct request
     const request = {
-      conversation,
+      parent,
     };
 
     // Run request
-    const response = await contactcenterinsightsClient.updateConversation(request);
+    const [operation] = await contactcenterinsightsClient.importIssueModel(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callUpdateConversation();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+  callImportIssueModel();
+  // [END contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(conversation) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+function main(name) {
+  // [START cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_CancelOrder_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,40 @@ function main(conversation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values for the conversation.
+   *  Required. The resource name of the order.
    */
-  // const conversation = {}
+  // const name = 'abc123'
   /**
-   *  The list of fields to be updated. All possible fields can be updated by
-   *  passing `*`, or a subset of the following updateable fields can be
-   *  provided:
-   *  * `agent_id`
-   *  * `language_code`
-   *  * `labels`
-   *  * `metadata`
-   *  * `quality_metadata`
-   *  * `call_metadata`
-   *  * `start_time`
-   *  * `expire_time` or `ttl`
-   *  * `data_source.gcs_source.audio_uri` or
-   *  `data_source.dialogflow_source.audio_uri`
+   *  Optional. The weak etag, which can be optionally populated, of the order
+   *  that this cancel request is based on. Validation checking will only happen
+   *  if the invoker supplies this field.
    */
-  // const updateMask = {}
+  // const etag = 'abc123'
+  /**
+   *  Optional. Cancellation policy of this request.
+   */
+  // const cancellationPolicy = {}
 
-  // Imports the Contactcenterinsights library
-  const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
+  // Imports the Procurement library
+  const {ConsumerProcurementServiceClient} = require('@google-cloud/procurement').v1;
 
   // Instantiates a client
-  const contactcenterinsightsClient = new ContactCenterInsightsClient();
+  const procurementClient = new ConsumerProcurementServiceClient();
 
-  async function callUpdateConversation() {
+  async function callCancelOrder() {
     // Construct request
     const request = {
-      conversation,
+      name,
     };
 
     // Run request
-    const response = await contactcenterinsightsClient.updateConversation(request);
+    const [operation] = await procurementClient.cancelOrder(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callUpdateConversation();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+  callCancelOrder();
+  // [END cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_CancelOrder_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(conversation) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+function main(encryptionSpec) {
+  // [START contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,25 +29,12 @@ function main(conversation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values for the conversation.
+   *  Required. The encryption spec used for CMEK encryption. It is required that
+   *  the kms key is in the same region as the endpoint. The same key will be
+   *  used for all provisioned resources, if encryption is available. If the
+   *  kms_key_name is left empty, no encryption will be enforced.
    */
-  // const conversation = {}
-  /**
-   *  The list of fields to be updated. All possible fields can be updated by
-   *  passing `*`, or a subset of the following updateable fields can be
-   *  provided:
-   *  * `agent_id`
-   *  * `language_code`
-   *  * `labels`
-   *  * `metadata`
-   *  * `quality_metadata`
-   *  * `call_metadata`
-   *  * `start_time`
-   *  * `expire_time` or `ttl`
-   *  * `data_source.gcs_source.audio_uri` or
-   *  `data_source.dialogflow_source.audio_uri`
-   */
-  // const updateMask = {}
+  // const encryptionSpec = {}
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
@@ -55,19 +42,20 @@ function main(conversation) {
   // Instantiates a client
   const contactcenterinsightsClient = new ContactCenterInsightsClient();
 
-  async function callUpdateConversation() {
+  async function callInitializeEncryptionSpec() {
     // Construct request
     const request = {
-      conversation,
+      encryptionSpec,
     };
 
     // Run request
-    const response = await contactcenterinsightsClient.updateConversation(request);
+    const [operation] = await contactcenterinsightsClient.initializeEncryptionSpec(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callUpdateConversation();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+  callInitializeEncryptionSpec();
+  // [END contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_async]
 }
 
 process.on('unhandledRejection', err => {

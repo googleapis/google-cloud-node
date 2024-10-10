@@ -22,6 +22,8 @@ const procurement = require('@google-cloud/procurement');
 function main() {
   const consumerProcurementServiceClient =
     new procurement.ConsumerProcurementServiceClient();
+  const licenseManagementServiceClient =
+    new procurement.LicenseManagementServiceClient();
 }
 
 main();

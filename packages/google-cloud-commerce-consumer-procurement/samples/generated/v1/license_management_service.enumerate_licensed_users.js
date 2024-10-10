@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(conversation) {
-  // [START contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+function main(parent) {
+  // [START cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_EnumerateLicensedUsers_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,45 +29,41 @@ function main(conversation) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The new values for the conversation.
+   *  Required. License pool name.
    */
-  // const conversation = {}
+  // const parent = 'abc123'
   /**
-   *  The list of fields to be updated. All possible fields can be updated by
-   *  passing `*`, or a subset of the following updateable fields can be
-   *  provided:
-   *  * `agent_id`
-   *  * `language_code`
-   *  * `labels`
-   *  * `metadata`
-   *  * `quality_metadata`
-   *  * `call_metadata`
-   *  * `start_time`
-   *  * `expire_time` or `ttl`
-   *  * `data_source.gcs_source.audio_uri` or
-   *  `data_source.dialogflow_source.audio_uri`
+   *  Optional. The maximum number of users to return. The service may return
+   *  fewer than this value.
    */
-  // const updateMask = {}
+  // const pageSize = 1234
+  /**
+   *  Optional. A page token, received from a previous `EnumerateLicensedUsers`
+   *  call. Provide this to retrieve the subsequent page.
+   */
+  // const pageToken = 'abc123'
 
-  // Imports the Contactcenterinsights library
-  const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
+  // Imports the Procurement library
+  const {LicenseManagementServiceClient} = require('@google-cloud/procurement').v1;
 
   // Instantiates a client
-  const contactcenterinsightsClient = new ContactCenterInsightsClient();
+  const procurementClient = new LicenseManagementServiceClient();
 
-  async function callUpdateConversation() {
+  async function callEnumerateLicensedUsers() {
     // Construct request
     const request = {
-      conversation,
+      parent,
     };
 
     // Run request
-    const response = await contactcenterinsightsClient.updateConversation(request);
-    console.log(response);
+    const iterable = procurementClient.enumerateLicensedUsersAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callUpdateConversation();
-  // [END contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_async]
+  callEnumerateLicensedUsers();
+  // [END cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_EnumerateLicensedUsers_async]
 }
 
 process.on('unhandledRejection', err => {

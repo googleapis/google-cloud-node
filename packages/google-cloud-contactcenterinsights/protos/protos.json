@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -503,6 +506,62 @@
                             }
                           ]
                         },
+                        "ExportIssueModel": {
+                          "requestType": "ExportIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/issueModels/*}:export",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "ExportIssueModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ExportIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/issueModels/*}:export",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ExportIssueModelResponse",
+                                "metadata_type": "ExportIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ImportIssueModel": {
+                          "requestType": "ImportIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/issueModels:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent",
+                            "(google.longrunning.operation_info).response_type": "ImportIssueModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "ImportIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/issueModels:import",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "ImportIssueModelResponse",
+                                "metadata_type": "ImportIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetIssue": {
                           "requestType": "GetIssueRequest",
                           "responseType": "Issue",
@@ -742,6 +801,52 @@
                             },
                             {
                               "(google.api.method_signature)": "settings,update_mask"
+                            }
+                          ]
+                        },
+                        "GetEncryptionSpec": {
+                          "requestType": "GetEncryptionSpecRequest",
+                          "responseType": "EncryptionSpec",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/encryptionSpec}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/encryptionSpec}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "InitializeEncryptionSpec": {
+                          "requestType": "InitializeEncryptionSpecRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{encryption_spec.name=projects/*/locations/*/encryptionSpec}:initialize",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "encryption_spec",
+                            "(google.longrunning.operation_info).response_type": "InitializeEncryptionSpecResponse",
+                            "(google.longrunning.operation_info).metadata_type": "InitializeEncryptionSpecMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{encryption_spec.name=projects/*/locations/*/encryptionSpec}:initialize",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "encryption_spec"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "InitializeEncryptionSpecResponse",
+                                "metadata_type": "InitializeEncryptionSpecMetadata"
+                              }
                             }
                           ]
                         },
@@ -1093,6 +1198,13 @@
                           "type": "string",
                           "id": 4
                         },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "view": {
                           "type": "ConversationView",
                           "id": 5
@@ -1170,6 +1282,11 @@
                           "oneof": [
                             "transcriptObjectConfig"
                           ]
+                        },
+                        "_sampleSize": {
+                          "oneof": [
+                            "sampleSize"
+                          ]
                         }
                       },
                       "fields": {
@@ -1206,10 +1323,25 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "sampleSize": {
+                          "type": "int32",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
                         "GcsSource": {
+                          "oneofs": {
+                            "_metadataBucketUri": {
+                              "oneof": [
+                                "metadataBucketUri"
+                              ]
+                            }
+                          },
                           "fields": {
                             "bucketUri": {
                               "type": "string",
@@ -1221,6 +1353,22 @@
                             "bucketObjectType": {
                               "type": "BucketObjectType",
                               "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "metadataBucketUri": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "customMetadataKeys": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 12,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -1251,7 +1399,10 @@
                           "fields": {
                             "agentId": {
                               "type": "string",
-                              "id": 1
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "agentChannel": {
                               "type": "int32",
@@ -1844,6 +1995,123 @@
                         }
                       }
                     },
+                    "ExportIssueModelRequest": {
+                      "oneofs": {
+                        "Destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsDestination": {
+                          "fields": {
+                            "objectUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ExportIssueModelResponse": {
+                      "fields": {}
+                    },
+                    "ExportIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "ExportIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ImportIssueModelRequest": {
+                      "oneofs": {
+                        "Source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "createNewModel": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "GcsSource": {
+                          "fields": {
+                            "objectUri": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ImportIssueModelResponse": {
+                      "fields": {}
+                    },
+                    "ImportIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "request": {
+                          "type": "ImportIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
                     "GetIssueRequest": {
                       "fields": {
                         "name": {
@@ -2049,6 +2317,62 @@
                         }
                       }
                     },
+                    "GetEncryptionSpecRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/EncryptionSpec"
+                          }
+                        }
+                      }
+                    },
+                    "InitializeEncryptionSpecRequest": {
+                      "fields": {
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "InitializeEncryptionSpecResponse": {
+                      "fields": {}
+                    },
+                    "InitializeEncryptionSpecMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "InitializeEncryptionSpecRequest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "partialErrors": {
+                          "rule": "repeated",
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      }
+                    },
                     "CreateViewRequest": {
                       "fields": {
                         "parent": {
@@ -2219,6 +2543,13 @@
                         "qualityMetadata": {
                           "type": "QualityMetadata",
                           "id": 24
+                        },
+                        "metadataJson": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
                         },
                         "transcript": {
                           "type": "Transcript",
@@ -2556,6 +2887,10 @@
                               "type": "ConversationLevelSentiment",
                               "id": 4
                             },
+                            "silence": {
+                              "type": "ConversationLevelSilence",
+                              "id": 11
+                            },
                             "intents": {
                               "keyType": "string",
                               "type": "Intent",
@@ -2598,6 +2933,18 @@
                         },
                         "sentimentData": {
                           "type": "SentimentData",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ConversationLevelSilence": {
+                      "fields": {
+                        "silenceDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "silencePercentage": {
+                          "type": "float",
                           "id": 2
                         }
                       }
@@ -2985,6 +3332,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "displayDescription": {
+                          "type": "string",
+                          "id": 14
                         }
                       }
                     },
@@ -3242,6 +3593,28 @@
                         }
                       }
                     },
+                    "EncryptionSpec": {
+                      "options": {
+                        "(google.api.resource).type": "contactcenterinsights.googleapis.com/EncryptionSpec",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/encryptionSpec"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "RedactionConfig": {
                       "fields": {
                         "deidentifyTemplate": {
@@ -3322,6 +3695,37 @@
                         "answerFeedback": {
                           "type": "AnswerFeedback",
                           "id": 5
+                        },
+                        "userInput": {
+                          "type": "UserInput",
+                          "id": 16
+                        }
+                      },
+                      "nested": {
+                        "UserInput": {
+                          "fields": {
+                            "query": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "generatorName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "querySource": {
+                              "type": "QuerySource",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "QuerySource": {
+                              "values": {
+                                "QUERY_SOURCE_UNSPECIFIED": 0,
+                                "AGENT_QUERY": 1,
+                                "SUGGESTED_QUERY": 2
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -3661,7 +4065,8 @@
                             "SummarizationModel": {
                               "values": {
                                 "SUMMARIZATION_MODEL_UNSPECIFIED": 0,
-                                "BASELINE_MODEL": 1
+                                "BASELINE_MODEL": 1,
+                                "BASELINE_MODEL_V2_0": 2
                               }
                             }
                           }

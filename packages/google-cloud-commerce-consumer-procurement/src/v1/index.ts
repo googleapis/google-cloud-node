@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {ConsumerProcurementServiceClient} from './consumer_procurement_service_client';
+export {LicenseManagementServiceClient} from './license_management_service_client';

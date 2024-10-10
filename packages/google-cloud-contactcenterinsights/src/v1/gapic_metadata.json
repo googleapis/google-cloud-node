@@ -115,6 +115,11 @@
                 "updateSettings"
               ]
             },
+            "GetEncryptionSpec": {
+              "methods": [
+                "getEncryptionSpec"
+              ]
+            },
             "CreateView": {
               "methods": [
                 "createView"
@@ -183,6 +188,21 @@
             "UndeployIssueModel": {
               "methods": [
                 "undeployIssueModel"
+              ]
+            },
+            "ExportIssueModel": {
+              "methods": [
+                "exportIssueModel"
+              ]
+            },
+            "ImportIssueModel": {
+              "methods": [
+                "importIssueModel"
+              ]
+            },
+            "InitializeEncryptionSpec": {
+              "methods": [
+                "initializeEncryptionSpec"
               ]
             },
             "ListConversations": {
@@ -323,6 +343,11 @@
                 "updateSettings"
               ]
             },
+            "GetEncryptionSpec": {
+              "methods": [
+                "getEncryptionSpec"
+              ]
+            },
             "CreateView": {
               "methods": [
                 "createView"
@@ -391,6 +416,21 @@
             "UndeployIssueModel": {
               "methods": [
                 "undeployIssueModel"
+              ]
+            },
+            "ExportIssueModel": {
+              "methods": [
+                "exportIssueModel"
+              ]
+            },
+            "ImportIssueModel": {
+              "methods": [
+                "importIssueModel"
+              ]
+            },
+            "InitializeEncryptionSpec": {
+              "methods": [
+                "initializeEncryptionSpec"
               ]
             },
             "ListConversations": {

@@ -45,7 +45,7 @@ function main(parent, displayName) {
   /**
    *  Optional. A unique identifier for this request.
    *  The server will ignore subsequent requests that provide a duplicate request
-   *  ID for at least 120 minutes after the first request.
+   *  ID for at least 24 hours after the first request.
    *  The request ID must be a valid
    *  UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
    */

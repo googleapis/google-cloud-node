@@ -186,7 +186,7 @@ function main(parent) {
    */
   // const populatePolylines = true
   /**
-   *  If true, polylines will be populated in response
+   *  If true, polylines and route tokens will be populated in response
    *  ShipmentRoute.transitions google.maps.routeoptimization.v1.ShipmentRoute.transitions.
    */
   // const populateTransitionPolylines = true

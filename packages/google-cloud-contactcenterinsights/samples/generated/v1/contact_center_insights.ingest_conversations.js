@@ -55,6 +55,13 @@ function main(parent) {
    *  the config specified in Settings.
    */
   // const speechConfig = {}
+  /**
+   *  Optional. If set, this fields indicates the number of objects to ingest
+   *  from the Cloud Storage bucket. If empty, the entire bucket will be
+   *  ingested. Unless they are first deleted, conversations produced through
+   *  sampling won't be ingested by subsequent ingest requests.
+   */
+  // const sampleSize = 1234
 
   // Imports the Contactcenterinsights library
   const {ContactCenterInsightsClient} = require('@google-cloud/contact-center-insights').v1;
