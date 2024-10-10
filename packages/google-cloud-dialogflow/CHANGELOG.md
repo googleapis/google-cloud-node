@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.9.0...dialogflow-v6.10.0) (2024-10-10)
+
+
+### Features
+
+* [dialogflow] created new boolean fields in conversation dataset for zone isolation and zone separation compliance status ([#5710](https://github.com/googleapis/google-cloud-node/issues/5710)) ([fd737ec](https://github.com/googleapis/google-cloud-node/commit/fd737ecc5e6681fbd97d7a20e39cbbdb4ec0595a))
+
 ## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v6.8.0...dialogflow-v6.9.0) (2024-09-24)
 
 

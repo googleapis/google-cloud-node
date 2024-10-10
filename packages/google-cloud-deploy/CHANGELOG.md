@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v4.0.0...deploy-v4.1.0) (2024-10-10)
+
+
+### Features
+
+* [deploy] added support for deploy policies ([#5717](https://github.com/googleapis/google-cloud-node/issues/5717)) ([8d51ea3](https://github.com/googleapis/google-cloud-node/commit/8d51ea34e6efd1e88e0394b8e8d9dadf1a37c406))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node/compare/deploy-v3.8.0...deploy-v4.0.0) (2024-08-09)
 
 

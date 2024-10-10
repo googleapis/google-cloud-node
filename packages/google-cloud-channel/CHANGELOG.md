@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.6.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.5.0...channel-v3.6.0) (2024-10-10)
+
+
+### Features
+
+* [channel] Add support for primary_admin_email as customer_identity for ImportCustomer ([#5736](https://github.com/googleapis/google-cloud-node/issues/5736)) ([8c61279](https://github.com/googleapis/google-cloud-node/commit/8c6127917d14c6d06c56f1061a5ac293d333f397))
+* Add support for importing team customer from a different reseller ([8c61279](https://github.com/googleapis/google-cloud-node/commit/8c6127917d14c6d06c56f1061a5ac293d333f397))
+* Add support to look up team customer Cloud Identity information ([8c61279](https://github.com/googleapis/google-cloud-node/commit/8c6127917d14c6d06c56f1061a5ac293d333f397))
+
 ## [3.5.0](https://github.com/googleapis/google-cloud-node/compare/channel-v3.4.0...channel-v3.5.0) (2024-05-21)
 
 

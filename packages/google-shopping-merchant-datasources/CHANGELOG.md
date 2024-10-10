@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/datasources-v0.1.0...datasources-v0.2.0) (2024-10-10)
+
+
+### Features
+
+* [merchantapi] Add FileUploads service ([#5711](https://github.com/googleapis/google-cloud-node/issues/5711)) ([667316b](https://github.com/googleapis/google-cloud-node/commit/667316b70270f59b10cfb41c687ef9375b683f53))
+* [merchantapi] adding some more information about supplemental data sources ([#5733](https://github.com/googleapis/google-cloud-node/issues/5733)) ([3a101aa](https://github.com/googleapis/google-cloud-node/commit/3a101aaf6fa743f4f0854973b7a22202fef29f0f))
+
 ## 0.1.0 (2024-06-05)
 
 
