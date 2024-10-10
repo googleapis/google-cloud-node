@@ -31,7 +31,7 @@ function main(parent, filter) {
   /**
    *  Required. The resource name of the catalog under which the events are
    *  created. The format is
-   *  `projects/{project}/locations/global/collections/{collection}/dataStores/{dataStore}`
+   *  `projects/{project}/locations/global/collections/{collection}/dataStores/{dataStore}`.
    */
   // const parent = 'abc123'
   /**

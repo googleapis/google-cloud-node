@@ -412,7 +412,7 @@ export class SiteSearchEngineServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
@@ -455,7 +455,7 @@ export class SiteSearchEngineServiceClient {
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},
@@ -1833,6 +1833,10 @@ export class SiteSearchEngineServiceClient {
    *   an INVALID_ARGUMENT error is thrown. Each URI should match at least one
    *   {@link protos.google.cloud.discoveryengine.v1.TargetSite|TargetSite} in
    *   `site_search_engine`.
+   * @param {string} [request.siteCredential]
+   *   Optional. Full resource name of the {@link protos.|SiteCredential}, such as
+   *   `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine/siteCredentials/*`.
+   *   Only set to crawl private URIs.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

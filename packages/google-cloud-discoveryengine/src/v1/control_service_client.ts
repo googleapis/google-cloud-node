@@ -523,9 +523,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Full resource name of parent data store. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {google.cloud.discoveryengine.v1.Control} request.control
    *   Required. The Control to create.
    * @param {string} request.controlId
@@ -627,7 +627,7 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Control to delete. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -821,7 +821,7 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the Control to get. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -914,9 +914,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1022,9 +1022,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.
@@ -1078,9 +1078,9 @@ export class ControlServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The data store resource name. Format:
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
    *   or
-   *   `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+   *   `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 50. Max allowed value is 1000.

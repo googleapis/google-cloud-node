@@ -30,7 +30,7 @@ function main(rankingConfig, records) {
    */
   /**
    *  Required. The resource name of the rank service config, such as
-   *  `projects/{project_num}/locations/{location_id}/rankingConfigs/default_ranking_config`.
+   *  `projects/{project_num}/locations/{location}/rankingConfigs/default_ranking_config`.
    */
   // const rankingConfig = 'abc123'
   /**
