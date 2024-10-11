@@ -6475,7 +6475,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                            "(google.api.resource_reference).type": "discoveryengine.googleapis.com/Location"
                           }
                         },
                         "systemInstruction": {
