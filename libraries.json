@@ -3170,6 +3170,24 @@
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-routing"
   },
   {
+    "name": "marketingplatformadminapi",
+    "name_pretty": "Google Marketing Platform Admin API",
+    "product_documentation": "https://developers.google.com/analytics/devguides/config/gmp/v1",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/marketingplatformadminapi/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-ads/marketing-platform-admin",
+    "api_id": "marketingplatformadmin.googleapis.com",
+    "default_version": "v1alpha",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "marketingplatformadminapi",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-marketingplatform-admin",
+    "support_documentation": "https://developers.google.com/analytics/devguides/config/gmp/v1/docs/getting-support"
+  },
+  {
     "name": "meet",
     "name_pretty": "Google Meet API",
     "product_documentation": "https://developers.google.com/meet/api/guides/overview",
@@ -3420,6 +3438,24 @@
     "api_shortname": "merchantapi",
     "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-shopping-merchant-reports",
     "support_documentation": "https://developers.google.com/merchant/api/docs/getting-support"
+  },
+  {
+    "name": "oracledatabase",
+    "name_pretty": "Oracle Database@Google Cloud API",
+    "product_documentation": "https://cloud.google.com/oracle/database/docs",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/oracledatabase/latest",
+    "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+    "release_level": "preview",
+    "language": "nodejs",
+    "repo": "googleapis/google-cloud-node",
+    "distribution_name": "@google-cloud/oracledatabase",
+    "api_id": "oracledatabase.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "api_shortname": "oracledatabase",
+    "linkToRepoHomepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-oracledatabase",
+    "support_documentation": "https://cloud.google.com/oracle/database/docs/getting-support"
   },
   {
     "name": "parallelstore",
