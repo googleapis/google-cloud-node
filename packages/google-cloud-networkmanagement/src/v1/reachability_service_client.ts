@@ -224,6 +224,9 @@ export class ReachabilityServiceClient {
       connectivityTestPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/global/connectivityTests/{test}'
       ),
+      projectPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -804,7 +807,7 @@ export class ReachabilityServiceClient {
    *
    * If the endpoint specifications in `ConnectivityTest` are incomplete, the
    * reachability result returns a value of `AMBIGUOUS`. See the documentation
-   * in `ConnectivityTest` for for more details.
+   * in `ConnectivityTest` for more details.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1920,6 +1923,29 @@ export class ReachabilityServiceClient {
     return this.pathTemplates.connectivityTestPathTemplate.match(
       connectivityTestName
     ).test;
+  }
+
+  /**
+   * Return a fully-qualified project resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectPath(project: string) {
+    return this.pathTemplates.projectPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from Project resource.
+   *
+   * @param {string} projectName
+   *   A fully-qualified path representing Project resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectName(projectName: string) {
+    return this.pathTemplates.projectPathTemplate.match(projectName).project;
   }
 
   /**
