@@ -48,8 +48,7 @@ async function createTopicWithKinesisIngestion(
   streamArn: string,
   consumerArn: string
 ) {
-  // Creates a new topic with a schema. Note that you might also
-  // pass Encodings.Json or Encodings.Binary here.
+  // Creates a new topic with Kinesis ingestion.
   await pubSubClient.createTopic({
     name: topicNameOrId,
     ingestionDataSourceSettings: {

@@ -35,6 +35,7 @@ guides.
   * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Subscription With Retry Policy](#create-subscription-with-retry-policy)
   * [Create Topic](#create-topic)
+  * [Create Topic With Cloud Storage Ingestion](#create-topic-with-cloud-storage-ingestion)
   * [Create Topic With Kinesis Ingestion](#create-topic-with-kinesis-ingestion)
   * [Create Topic With Schema](#create-topic-with-schema)
   * [Create Topic With Schema Revisions](#create-topic-with-schema-revisions)
@@ -382,6 +383,25 @@ __Usage:__
 
 
 `node createTopic.js <topic-name-or-id>`
+
+
+-----
+
+
+
+
+### Create Topic With Cloud Storage Ingestion
+
+Creates a new topic, with Cloud Storage ingestion enabled.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithCloudStorageIngestion.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithCloudStorageIngestion.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithCloudStorageIngestion.js <topic-name> <bucket> <input-format> <text-delimiter> <match-glob> <minimum-object-creation-time>`
 
 
 -----

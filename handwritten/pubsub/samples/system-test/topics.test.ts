@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import {Message, PubSub, Topic, Subscription} from '@google-cloud/pubsub';
+import {Bucket, Storage} from '@google-cloud/storage';
 import {assert} from 'chai';
 import {describe, it, after} from 'mocha';
 import {execSync, commandFor} from './common';
@@ -50,6 +51,17 @@ describe('topics', () => {
     const [sub] = await topic.subscription(sname).get({autoCreate: true});
 
     return {t: topic, tname, s: sub};
+  }
+
+  async function createStorageBucket(testName: string): Promise<Bucket> {
+    const storage = new Storage({
+      projectId,
+    });
+
+    const name = resources.generateStorageName(testName);
+
+    const [bucket] = await storage.createBucket(name);
+    return bucket;
   }
 
   async function cleanSubs() {
@@ -119,6 +131,27 @@ describe('topics', () => {
     const [topics] = await pubsub.getTopics();
     const exists = topics.some(t => t.name === fullTopicName(name));
     assert.ok(exists, 'Topic was created');
+  });
+
+  it('should create a topic with cloud storage ingestion', async () => {
+    const testId = 'create-gcs-ingestion';
+    const name = topicName(testId);
+    const bucket = await createStorageBucket(testId);
+    const bucketName = bucket.name;
+
+    try {
+      const output = execSync(
+        `${commandFor('createTopicWithCloudStorageIngestion')} ${name} ${
+          bucketName
+        } text '\n' '**.txt' '2024-10-10T00:00:00Z'`
+      );
+      assert.include(output, `Topic ${name} created with Cloud Storage ingestion.`);
+      const [topics] = await pubsub.getTopics();
+      const exists = topics.some(t => t.name === fullTopicName(name));
+      assert.ok(exists, 'Topic was created');
+    } finally {
+      await bucket.delete();
+    }
   });
 
   it('should update a topic with kinesis integration', async () => {
