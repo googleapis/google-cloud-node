@@ -41,6 +41,12 @@ function main(siteSearchEngine, uris) {
    *  `site_search_engine`.
    */
   // const uris = ['abc','def']
+  /**
+   *  Optional. Full resource name of the SiteCredential , such as
+   *  `projects/* /locations/* /collections/* /dataStores/* /siteSearchEngine/siteCredentials/*`.
+   *  Only set to crawl private URIs.
+   */
+  // const siteCredential = 'abc123'
 
   // Imports the Discoveryengine library
   const {SiteSearchEngineServiceClient} = require('@google-cloud/discoveryengine').v1;

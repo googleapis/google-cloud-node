@@ -410,7 +410,7 @@ export class EngineServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
@@ -453,7 +453,7 @@ export class EngineServiceClient {
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},

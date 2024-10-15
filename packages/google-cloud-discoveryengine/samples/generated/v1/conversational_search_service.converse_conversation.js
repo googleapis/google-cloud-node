@@ -30,9 +30,9 @@ function main(name, query) {
    */
   /**
    *  Required. The resource name of the Conversation to get. Format:
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`.
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`.
    *  Use
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/-`
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/-`
    *  to activate auto session mode, which automatically creates a new
    *  conversation inside a ConverseConversation session.
    */
@@ -43,7 +43,7 @@ function main(name, query) {
   // const query = {}
   /**
    *  The resource name of the Serving Config to use. Format:
-   *  `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
+   *  `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
    *  If this is not set, the default serving config will be used.
    */
   // const servingConfig = 'abc123'
