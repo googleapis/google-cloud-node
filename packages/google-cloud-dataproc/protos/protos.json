@@ -2368,6 +2368,13 @@
                     },
                     "InstanceFlexibilityPolicy": {
                       "fields": {
+                        "provisioningModelMix": {
+                          "type": "ProvisioningModelMix",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "instanceSelectionList": {
                           "rule": "repeated",
                           "type": "InstanceSelection",
@@ -2386,6 +2393,38 @@
                         }
                       },
                       "nested": {
+                        "ProvisioningModelMix": {
+                          "oneofs": {
+                            "_standardCapacityBase": {
+                              "oneof": [
+                                "standardCapacityBase"
+                              ]
+                            },
+                            "_standardCapacityPercentAboveBase": {
+                              "oneof": [
+                                "standardCapacityPercentAboveBase"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "standardCapacityBase": {
+                              "type": "int32",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            },
+                            "standardCapacityPercentAboveBase": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "InstanceSelection": {
                           "fields": {
                             "machineTypes": {
@@ -2452,6 +2491,18 @@
                       }
                     },
                     "DiskConfig": {
+                      "oneofs": {
+                        "_bootDiskProvisionedIops": {
+                          "oneof": [
+                            "bootDiskProvisionedIops"
+                          ]
+                        },
+                        "_bootDiskProvisionedThroughput": {
+                          "oneof": [
+                            "bootDiskProvisionedThroughput"
+                          ]
+                        }
+                      },
                       "fields": {
                         "bootDiskType": {
                           "type": "string",
@@ -2479,6 +2530,22 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootDiskProvisionedIops": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "bootDiskProvisionedThroughput": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       }

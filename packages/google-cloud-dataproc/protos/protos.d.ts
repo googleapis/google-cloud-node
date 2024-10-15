@@ -6889,6 +6889,9 @@ export namespace google {
                 /** Properties of an InstanceFlexibilityPolicy. */
                 interface IInstanceFlexibilityPolicy {
 
+                    /** InstanceFlexibilityPolicy provisioningModelMix */
+                    provisioningModelMix?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix|null);
+
                     /** InstanceFlexibilityPolicy instanceSelectionList */
                     instanceSelectionList?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection[]|null);
 
@@ -6904,6 +6907,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.cloud.dataproc.v1.IInstanceFlexibilityPolicy);
+
+                    /** InstanceFlexibilityPolicy provisioningModelMix. */
+                    public provisioningModelMix?: (google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix|null);
 
                     /** InstanceFlexibilityPolicy instanceSelectionList. */
                     public instanceSelectionList: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IInstanceSelection[];
@@ -6990,6 +6996,115 @@ export namespace google {
                 }
 
                 namespace InstanceFlexibilityPolicy {
+
+                    /** Properties of a ProvisioningModelMix. */
+                    interface IProvisioningModelMix {
+
+                        /** ProvisioningModelMix standardCapacityBase */
+                        standardCapacityBase?: (number|null);
+
+                        /** ProvisioningModelMix standardCapacityPercentAboveBase */
+                        standardCapacityPercentAboveBase?: (number|null);
+                    }
+
+                    /** Represents a ProvisioningModelMix. */
+                    class ProvisioningModelMix implements IProvisioningModelMix {
+
+                        /**
+                         * Constructs a new ProvisioningModelMix.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix);
+
+                        /** ProvisioningModelMix standardCapacityBase. */
+                        public standardCapacityBase?: (number|null);
+
+                        /** ProvisioningModelMix standardCapacityPercentAboveBase. */
+                        public standardCapacityPercentAboveBase?: (number|null);
+
+                        /** ProvisioningModelMix _standardCapacityBase. */
+                        public _standardCapacityBase?: "standardCapacityBase";
+
+                        /** ProvisioningModelMix _standardCapacityPercentAboveBase. */
+                        public _standardCapacityPercentAboveBase?: "standardCapacityPercentAboveBase";
+
+                        /**
+                         * Creates a new ProvisioningModelMix instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProvisioningModelMix instance
+                         */
+                        public static create(properties?: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Encodes the specified ProvisioningModelMix message. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix.verify|verify} messages.
+                         * @param message ProvisioningModelMix message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProvisioningModelMix message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix.verify|verify} messages.
+                         * @param message ProvisioningModelMix message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.IProvisioningModelMix, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProvisioningModelMix message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProvisioningModelMix
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Decodes a ProvisioningModelMix message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProvisioningModelMix
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Verifies a ProvisioningModelMix message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProvisioningModelMix message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProvisioningModelMix
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix;
+
+                        /**
+                         * Creates a plain object from a ProvisioningModelMix message. Also converts values to other types if specified.
+                         * @param message ProvisioningModelMix
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataproc.v1.InstanceFlexibilityPolicy.ProvisioningModelMix, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProvisioningModelMix to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProvisioningModelMix
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** Properties of an InstanceSelection. */
                     interface IInstanceSelection {
@@ -7321,6 +7436,12 @@ export namespace google {
 
                     /** DiskConfig localSsdInterface */
                     localSsdInterface?: (string|null);
+
+                    /** DiskConfig bootDiskProvisionedIops */
+                    bootDiskProvisionedIops?: (number|Long|string|null);
+
+                    /** DiskConfig bootDiskProvisionedThroughput */
+                    bootDiskProvisionedThroughput?: (number|Long|string|null);
                 }
 
                 /** Represents a DiskConfig. */
@@ -7343,6 +7464,18 @@ export namespace google {
 
                     /** DiskConfig localSsdInterface. */
                     public localSsdInterface: string;
+
+                    /** DiskConfig bootDiskProvisionedIops. */
+                    public bootDiskProvisionedIops?: (number|Long|string|null);
+
+                    /** DiskConfig bootDiskProvisionedThroughput. */
+                    public bootDiskProvisionedThroughput?: (number|Long|string|null);
+
+                    /** DiskConfig _bootDiskProvisionedIops. */
+                    public _bootDiskProvisionedIops?: "bootDiskProvisionedIops";
+
+                    /** DiskConfig _bootDiskProvisionedThroughput. */
+                    public _bootDiskProvisionedThroughput?: "bootDiskProvisionedThroughput";
 
                     /**
                      * Creates a new DiskConfig instance using the specified properties.
