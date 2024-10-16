@@ -61842,6 +61842,13 @@
                               "keyType": "string",
                               "type": "InputArtifact",
                               "id": 5
+                            },
+                            "defaultRuntime": {
+                              "type": "DefaultRuntime",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -61856,6 +61863,46 @@
                               "fields": {
                                 "artifactId": {
                                   "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            },
+                            "PersistentResourceRuntimeDetail": {
+                              "fields": {
+                                "persistentResourceName": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "taskResourceUnavailableWaitTimeMs": {
+                                  "type": "int64",
+                                  "id": 2
+                                },
+                                "taskResourceUnavailableTimeoutBehavior": {
+                                  "type": "TaskResourceUnavailableTimeoutBehavior",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "TaskResourceUnavailableTimeoutBehavior": {
+                                  "values": {
+                                    "TASK_RESOURCE_UNAVAILABLE_TIMEOUT_BEHAVIOR_UNSPECIFIED": 0,
+                                    "FAIL": 1,
+                                    "FALL_BACK_TO_ON_DEMAND": 2
+                                  }
+                                }
+                              }
+                            },
+                            "DefaultRuntime": {
+                              "oneofs": {
+                                "runtimeDetail": {
+                                  "oneof": [
+                                    "persistentResourceRuntimeDetail"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "persistentResourceRuntimeDetail": {
+                                  "type": "PersistentResourceRuntimeDetail",
                                   "id": 1
                                 }
                               }
