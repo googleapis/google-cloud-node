@@ -21396,7 +21396,8 @@ export namespace google {
                 enum BigQueryTableType {
                     BIG_QUERY_TABLE_TYPE_UNSPECIFIED = 0,
                     BIG_QUERY_TABLE_TYPE_TABLE = 1,
-                    BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2
+                    BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2,
+                    BIG_QUERY_TABLE_TYPE_SNAPSHOT = 3
                 }
 
                 /** DataProfileUpdateFrequency enum. */
