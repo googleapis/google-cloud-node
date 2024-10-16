@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -27,7 +30,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "description": {
@@ -169,6 +172,14 @@
                         "cloudSqlInstance": {
                           "type": "string",
                           "id": 8
+                        },
+                        "redisInstance": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "redisCluster": {
+                          "type": "string",
+                          "id": 18
                         },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
@@ -395,13 +406,16 @@
                             "network",
                             "gkeMaster",
                             "cloudSqlInstance",
+                            "redisInstance",
+                            "redisCluster",
                             "cloudFunction",
                             "appEngineVersion",
                             "cloudRunRevision",
                             "nat",
                             "proxyConnection",
                             "loadBalancerBackendInfo",
-                            "storageBucket"
+                            "storageBucket",
+                            "serverlessNeg"
                           ]
                         }
                       },
@@ -493,6 +507,14 @@
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
                         },
+                        "redisInstance": {
+                          "type": "RedisInstanceInfo",
+                          "id": 30
+                        },
+                        "redisCluster": {
+                          "type": "RedisClusterInfo",
+                          "id": 31
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionInfo",
                           "id": 20
@@ -520,6 +542,10 @@
                         "storageBucket": {
                           "type": "StorageBucketInfo",
                           "id": 28
+                        },
+                        "serverlessNeg": {
+                          "type": "ServerlessNegInfo",
+                          "id": 29
                         }
                       },
                       "nested": {
@@ -540,11 +566,14 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_REDIS_INSTANCE": 32,
+                            "START_FROM_REDIS_CLUSTER": 33,
                             "START_FROM_CLOUD_FUNCTION": 23,
                             "START_FROM_APP_ENGINE_VERSION": 25,
                             "START_FROM_CLOUD_RUN_REVISION": 26,
                             "START_FROM_STORAGE_BUCKET": 29,
                             "START_FROM_PSC_PUBLISHED_SERVICE": 30,
+                            "START_FROM_SERVERLESS_NEG": 31,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -605,6 +634,10 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "pscNetworkAttachmentUri": {
+                          "type": "string",
+                          "id": 9
                         }
                       }
                     },
@@ -618,9 +651,17 @@
                           "type": "string",
                           "id": 2
                         },
+                        "matchedSubnetUri": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "matchedIpRange": {
                           "type": "string",
                           "id": 4
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -664,6 +705,10 @@
                           "type": "string",
                           "id": 9
                         },
+                        "policyUri": {
+                          "type": "string",
+                          "id": 11
+                        },
                         "firewallRuleType": {
                           "type": "FirewallRuleType",
                           "id": 10
@@ -696,6 +741,16 @@
                           "oneof": [
                             "nccSpokeUri"
                           ]
+                        },
+                        "_advertisedRouteSourceRouterUri": {
+                          "oneof": [
+                            "advertisedRouteSourceRouterUri"
+                          ]
+                        },
+                        "_advertisedRouteNextHopUri": {
+                          "oneof": [
+                            "advertisedRouteNextHopUri"
+                          ]
                         }
                       },
                       "fields": {
@@ -718,6 +773,10 @@
                         "uri": {
                           "type": "string",
                           "id": 2
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 19
                         },
                         "destIpRange": {
                           "type": "string",
@@ -772,6 +831,20 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "advertisedRouteSourceRouterUri": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "advertisedRouteNextHopUri": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -784,7 +857,8 @@
                             "PEERING_SUBNET": 4,
                             "PEERING_STATIC": 5,
                             "PEERING_DYNAMIC": 6,
-                            "POLICY_BASED": 7
+                            "POLICY_BASED": 7,
+                            "ADVERTISED": 101
                           }
                         },
                         "NextHopType": {
@@ -867,6 +941,22 @@
                         "networkUri": {
                           "type": "string",
                           "id": 7
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "loadBalancerName": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "pscServiceAttachmentUri": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "pscGoogleApiTarget": {
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -1083,6 +1173,14 @@
                           "options": {
                             "(google.api.field_info).format": "IPV4_OR_IPV6"
                           }
+                        },
+                        "storageBucket": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "pscGoogleApiTarget": {
+                          "type": "string",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -1102,7 +1200,10 @@
                             "PRIVATE_NETWORK": 11,
                             "CLOUD_FUNCTION": 12,
                             "APP_ENGINE_VERSION": 13,
-                            "CLOUD_RUN_REVISION": 14
+                            "CLOUD_RUN_REVISION": 14,
+                            "GOOGLE_MANAGED_SERVICE": 15,
+                            "REDIS_INSTANCE": 16,
+                            "REDIS_CLUSTER": 17
                           }
                         }
                       }
@@ -1212,10 +1313,12 @@
                             "DESTINATION_ENDPOINT_NOT_FOUND": 13,
                             "MISMATCHED_DESTINATION_NETWORK": 14,
                             "UNKNOWN_IP": 2,
+                            "GOOGLE_MANAGED_SERVICE_UNKNOWN_IP": 32,
                             "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK": 23,
                             "PERMISSION_DENIED": 4,
                             "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS": 28,
                             "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS": 29,
+                            "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS": 36,
                             "NO_SOURCE_LOCATION": 5,
                             "INVALID_ARGUMENT": 6,
                             "TRACE_TOO_LONG": 9,
@@ -1230,6 +1333,8 @@
                             "ROUTE_CONFIG_NOT_FOUND": 27,
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT": 19,
                             "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED": 20,
+                            "SOURCE_REDIS_CLUSTER_UNSUPPORTED": 34,
+                            "SOURCE_REDIS_INSTANCE_UNSUPPORTED": 35,
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
@@ -1292,6 +1397,8 @@
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
+                            "REDIS_INSTANCE_NOT_RUNNING": 68,
+                            "REDIS_CLUSTER_NOT_RUNNING": 69,
                             "TRAFFIC_TYPE_BLOCKED": 15,
                             "GKE_MASTER_UNAUTHORIZED_ACCESS": 16,
                             "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS": 17,
@@ -1307,9 +1414,12 @@
                             "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC": 33,
                             "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION": 34,
                             "CLOUD_SQL_INSTANCE_NO_ROUTE": 35,
+                            "CLOUD_SQL_CONNECTOR_REQUIRED": 63,
                             "CLOUD_FUNCTION_NOT_ACTIVE": 22,
                             "VPC_CONNECTOR_NOT_SET": 23,
                             "VPC_CONNECTOR_NOT_RUNNING": 24,
+                            "VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED": 60,
+                            "VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED": 61,
                             "FORWARDING_RULE_REGION_MISMATCH": 25,
                             "PSC_CONNECTION_NOT_ACCEPTED": 26,
                             "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK": 41,
@@ -1317,13 +1427,31 @@
                             "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS": 54,
                             "CLOUD_SQL_PSC_NEG_UNSUPPORTED": 58,
                             "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT": 57,
+                            "PSC_TRANSITIVITY_NOT_PROPAGATED": 64,
                             "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED": 55,
                             "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED": 56,
                             "CLOUD_RUN_REVISION_NOT_READY": 29,
                             "DROPPED_INSIDE_PSC_SERVICE_PRODUCER": 37,
                             "LOAD_BALANCER_HAS_NO_PROXY_SUBNET": 39,
                             "CLOUD_NAT_NO_ADDRESSES": 40,
-                            "ROUTING_LOOP": 59
+                            "ROUTING_LOOP": 59,
+                            "DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE": 62,
+                            "LOAD_BALANCER_BACKEND_INVALID_NETWORK": 65,
+                            "BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED": 66,
+                            "DESTINATION_IS_PRIVATE_NAT_IP_RANGE": 67,
+                            "DROPPED_INSIDE_REDIS_INSTANCE_SERVICE": 70,
+                            "REDIS_INSTANCE_UNSUPPORTED_PORT": 71,
+                            "REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS": 72,
+                            "REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK": 73,
+                            "REDIS_INSTANCE_NO_EXTERNAL_IP": 74,
+                            "REDIS_INSTANCE_UNSUPPORTED_PROTOCOL": 78,
+                            "DROPPED_INSIDE_REDIS_CLUSTER_SERVICE": 75,
+                            "REDIS_CLUSTER_UNSUPPORTED_PORT": 76,
+                            "REDIS_CLUSTER_NO_EXTERNAL_IP": 77,
+                            "REDIS_CLUSTER_UNSUPPORTED_PROTOCOL": 79,
+                            "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION": 80,
+                            "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION": 81,
+                            "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION": 82
                           }
                         }
                       }
@@ -1373,6 +1501,68 @@
                         "region": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "RedisInstanceInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "primaryEndpointIp": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readEndpointIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RedisClusterInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "discoveryEndpointIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "secondaryEndpointIpAddress": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -1643,6 +1833,14 @@
                     "StorageBucketInfo": {
                       "fields": {
                         "bucket": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ServerlessNegInfo": {
+                      "fields": {
+                        "negUri": {
                           "type": "string",
                           "id": 1
                         }
@@ -1804,7 +2002,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "pageSize": {
@@ -1849,7 +2048,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkmanagement.googleapis.com/ConnectivityTest"
                           }
                         }
                       }
@@ -1860,7 +2060,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "testId": {
@@ -1903,7 +2104,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkmanagement.googleapis.com/ConnectivityTest"
                           }
                         }
                       }
@@ -1914,7 +2116,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkmanagement.googleapis.com/ConnectivityTest"
                           }
                         }
                       }
@@ -1974,7 +2177,7 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "IDENTIFIER"
                           }
                         },
                         "description": {
@@ -2116,6 +2319,14 @@
                         "cloudSqlInstance": {
                           "type": "string",
                           "id": 8
+                        },
+                        "redisInstance": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "redisCluster": {
+                          "type": "string",
+                          "id": 18
                         },
                         "cloudFunction": {
                           "type": "CloudFunctionEndpoint",
@@ -2342,13 +2553,16 @@
                             "network",
                             "gkeMaster",
                             "cloudSqlInstance",
+                            "redisInstance",
+                            "redisCluster",
                             "cloudFunction",
                             "appEngineVersion",
                             "cloudRunRevision",
                             "nat",
                             "proxyConnection",
                             "loadBalancerBackendInfo",
-                            "storageBucket"
+                            "storageBucket",
+                            "serverlessNeg"
                           ]
                         }
                       },
@@ -2440,6 +2654,14 @@
                           "type": "CloudSQLInstanceInfo",
                           "id": 19
                         },
+                        "redisInstance": {
+                          "type": "RedisInstanceInfo",
+                          "id": 30
+                        },
+                        "redisCluster": {
+                          "type": "RedisClusterInfo",
+                          "id": 31
+                        },
                         "cloudFunction": {
                           "type": "CloudFunctionInfo",
                           "id": 20
@@ -2467,6 +2689,10 @@
                         "storageBucket": {
                           "type": "StorageBucketInfo",
                           "id": 28
+                        },
+                        "serverlessNeg": {
+                          "type": "ServerlessNegInfo",
+                          "id": 29
                         }
                       },
                       "nested": {
@@ -2487,11 +2713,14 @@
                             "START_FROM_PRIVATE_NETWORK": 3,
                             "START_FROM_GKE_MASTER": 21,
                             "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "START_FROM_REDIS_INSTANCE": 32,
+                            "START_FROM_REDIS_CLUSTER": 33,
                             "START_FROM_CLOUD_FUNCTION": 23,
                             "START_FROM_APP_ENGINE_VERSION": 25,
                             "START_FROM_CLOUD_RUN_REVISION": 26,
                             "START_FROM_STORAGE_BUCKET": 29,
                             "START_FROM_PSC_PUBLISHED_SERVICE": 30,
+                            "START_FROM_SERVERLESS_NEG": 31,
                             "APPLY_INGRESS_FIREWALL_RULE": 4,
                             "APPLY_EGRESS_FIREWALL_RULE": 5,
                             "APPLY_ROUTE": 6,
@@ -2552,6 +2781,10 @@
                           "options": {
                             "deprecated": true
                           }
+                        },
+                        "pscNetworkAttachmentUri": {
+                          "type": "string",
+                          "id": 9
                         }
                       }
                     },
@@ -2565,9 +2798,17 @@
                           "type": "string",
                           "id": 2
                         },
+                        "matchedSubnetUri": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "matchedIpRange": {
                           "type": "string",
                           "id": 4
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -2611,6 +2852,10 @@
                           "type": "string",
                           "id": 9
                         },
+                        "policyUri": {
+                          "type": "string",
+                          "id": 11
+                        },
                         "firewallRuleType": {
                           "type": "FirewallRuleType",
                           "id": 10
@@ -2643,6 +2888,16 @@
                           "oneof": [
                             "nccSpokeUri"
                           ]
+                        },
+                        "_advertisedRouteSourceRouterUri": {
+                          "oneof": [
+                            "advertisedRouteSourceRouterUri"
+                          ]
+                        },
+                        "_advertisedRouteNextHopUri": {
+                          "oneof": [
+                            "advertisedRouteNextHopUri"
+                          ]
                         }
                       },
                       "fields": {
@@ -2665,6 +2920,10 @@
                         "uri": {
                           "type": "string",
                           "id": 2
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 19
                         },
                         "destIpRange": {
                           "type": "string",
@@ -2719,6 +2978,20 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "advertisedRouteSourceRouterUri": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "advertisedRouteNextHopUri": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -2731,7 +3004,8 @@
                             "PEERING_SUBNET": 4,
                             "PEERING_STATIC": 5,
                             "PEERING_DYNAMIC": 6,
-                            "POLICY_BASED": 7
+                            "POLICY_BASED": 7,
+                            "ADVERTISED": 101
                           }
                         },
                         "NextHopType": {
@@ -2814,6 +3088,22 @@
                         "networkUri": {
                           "type": "string",
                           "id": 7
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "loadBalancerName": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "pscServiceAttachmentUri": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "pscGoogleApiTarget": {
+                          "type": "string",
+                          "id": 11
                         }
                       }
                     },
@@ -3030,6 +3320,14 @@
                           "options": {
                             "(google.api.field_info).format": "IPV4_OR_IPV6"
                           }
+                        },
+                        "storageBucket": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "pscGoogleApiTarget": {
+                          "type": "string",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -3049,7 +3347,10 @@
                             "PRIVATE_NETWORK": 11,
                             "CLOUD_FUNCTION": 12,
                             "APP_ENGINE_VERSION": 13,
-                            "CLOUD_RUN_REVISION": 14
+                            "CLOUD_RUN_REVISION": 14,
+                            "GOOGLE_MANAGED_SERVICE": 15,
+                            "REDIS_INSTANCE": 16,
+                            "REDIS_CLUSTER": 17
                           }
                         }
                       }
@@ -3159,10 +3460,12 @@
                             "DESTINATION_ENDPOINT_NOT_FOUND": 13,
                             "MISMATCHED_DESTINATION_NETWORK": 14,
                             "UNKNOWN_IP": 2,
+                            "GOOGLE_MANAGED_SERVICE_UNKNOWN_IP": 32,
                             "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK": 23,
                             "PERMISSION_DENIED": 4,
                             "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS": 28,
                             "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS": 29,
+                            "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS": 36,
                             "NO_SOURCE_LOCATION": 5,
                             "INVALID_ARGUMENT": 6,
                             "TRACE_TOO_LONG": 9,
@@ -3177,6 +3480,8 @@
                             "ROUTE_CONFIG_NOT_FOUND": 27,
                             "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT": 19,
                             "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED": 20,
+                            "SOURCE_REDIS_CLUSTER_UNSUPPORTED": 34,
+                            "SOURCE_REDIS_INSTANCE_UNSUPPORTED": 35,
                             "SOURCE_FORWARDING_RULE_UNSUPPORTED": 21,
                             "NON_ROUTABLE_IP_ADDRESS": 22,
                             "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT": 30,
@@ -3239,6 +3544,8 @@
                             "INSTANCE_NOT_RUNNING": 14,
                             "GKE_CLUSTER_NOT_RUNNING": 27,
                             "CLOUD_SQL_INSTANCE_NOT_RUNNING": 28,
+                            "REDIS_INSTANCE_NOT_RUNNING": 68,
+                            "REDIS_CLUSTER_NOT_RUNNING": 69,
                             "TRAFFIC_TYPE_BLOCKED": 15,
                             "GKE_MASTER_UNAUTHORIZED_ACCESS": 16,
                             "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS": 17,
@@ -3254,9 +3561,12 @@
                             "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC": 33,
                             "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION": 34,
                             "CLOUD_SQL_INSTANCE_NO_ROUTE": 35,
+                            "CLOUD_SQL_CONNECTOR_REQUIRED": 63,
                             "CLOUD_FUNCTION_NOT_ACTIVE": 22,
                             "VPC_CONNECTOR_NOT_SET": 23,
                             "VPC_CONNECTOR_NOT_RUNNING": 24,
+                            "VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED": 60,
+                            "VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED": 61,
                             "FORWARDING_RULE_REGION_MISMATCH": 25,
                             "PSC_CONNECTION_NOT_ACCEPTED": 26,
                             "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK": 41,
@@ -3264,13 +3574,31 @@
                             "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS": 54,
                             "CLOUD_SQL_PSC_NEG_UNSUPPORTED": 58,
                             "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT": 57,
+                            "PSC_TRANSITIVITY_NOT_PROPAGATED": 64,
                             "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED": 55,
                             "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED": 56,
                             "CLOUD_RUN_REVISION_NOT_READY": 29,
                             "DROPPED_INSIDE_PSC_SERVICE_PRODUCER": 37,
                             "LOAD_BALANCER_HAS_NO_PROXY_SUBNET": 39,
                             "CLOUD_NAT_NO_ADDRESSES": 40,
-                            "ROUTING_LOOP": 59
+                            "ROUTING_LOOP": 59,
+                            "DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE": 62,
+                            "LOAD_BALANCER_BACKEND_INVALID_NETWORK": 65,
+                            "BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED": 66,
+                            "DESTINATION_IS_PRIVATE_NAT_IP_RANGE": 67,
+                            "DROPPED_INSIDE_REDIS_INSTANCE_SERVICE": 70,
+                            "REDIS_INSTANCE_UNSUPPORTED_PORT": 71,
+                            "REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS": 72,
+                            "REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK": 73,
+                            "REDIS_INSTANCE_NO_EXTERNAL_IP": 74,
+                            "REDIS_INSTANCE_UNSUPPORTED_PROTOCOL": 78,
+                            "DROPPED_INSIDE_REDIS_CLUSTER_SERVICE": 75,
+                            "REDIS_CLUSTER_UNSUPPORTED_PORT": 76,
+                            "REDIS_CLUSTER_NO_EXTERNAL_IP": 77,
+                            "REDIS_CLUSTER_UNSUPPORTED_PROTOCOL": 79,
+                            "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION": 80,
+                            "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION": 81,
+                            "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION": 82
                           }
                         }
                       }
@@ -3320,6 +3648,68 @@
                         "region": {
                           "type": "string",
                           "id": 7
+                        }
+                      }
+                    },
+                    "RedisInstanceInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "primaryEndpointIp": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readEndpointIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "RedisClusterInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "discoveryEndpointIpAddress": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "secondaryEndpointIpAddress": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_info).format": "IPV4_OR_IPV6"
+                          }
+                        },
+                        "location": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -3595,6 +3985,14 @@
                         }
                       }
                     },
+                    "ServerlessNegInfo": {
+                      "fields": {
+                        "negUri": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "ReachabilityService": {
                       "options": {
                         "(google.api.default_host)": "networkmanagement.googleapis.com",
@@ -3731,7 +4129,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "pageSize": {
@@ -3776,7 +4175,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkmanagement.googleapis.com/ConnectivityTest"
                           }
                         }
                       }
@@ -3787,7 +4187,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
                           }
                         },
                         "testId": {
@@ -3830,7 +4231,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkmanagement.googleapis.com/ConnectivityTest"
                           }
                         }
                       }
@@ -3841,7 +4243,8 @@
                           "type": "string",
                           "id": 1,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "networkmanagement.googleapis.com/ConnectivityTest"
                           }
                         }
                       }
