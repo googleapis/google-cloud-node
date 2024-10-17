@@ -2393,6 +2393,13 @@
                       },
                       "nested": {
                         "ReportDefinition": {
+                          "oneofs": {
+                            "_samplingLevel": {
+                              "oneof": [
+                                "samplingLevel"
+                              ]
+                            }
+                          },
                           "fields": {
                             "dimensions": {
                               "rule": "repeated",
@@ -2481,6 +2488,14 @@
                               "id": 13,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "samplingLevel": {
+                              "type": "SamplingLevel",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "proto3_optional": true
                               }
                             }
                           }
@@ -4152,6 +4167,14 @@
                         "RESTRICTED_METRIC_TYPE_UNSPECIFIED": 0,
                         "COST_DATA": 1,
                         "REVENUE_DATA": 2
+                      }
+                    },
+                    "SamplingLevel": {
+                      "values": {
+                        "SAMPLING_LEVEL_UNSPECIFIED": 0,
+                        "LOW": 1,
+                        "MEDIUM": 2,
+                        "UNSAMPLED": 3
                       }
                     }
                   }
