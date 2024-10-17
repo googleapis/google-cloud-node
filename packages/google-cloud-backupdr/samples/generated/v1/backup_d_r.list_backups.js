@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START backupdr_v1_generated_BackupDR_GetManagementServer_async]
+function main(parent) {
+  // [START backupdr_v1_generated_BackupDR_ListBackups_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,10 +29,36 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the management server resource name, in the format
-   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
+   *  Required. The project and location for which to retrieve backup
+   *  information, in the format
+   *  'projects/{project_id}/locations/{location}'. In Cloud Backup and DR,
+   *  locations map to Google Cloud regions, for example **us-central1**.
+   *  To retrieve data sources for all locations, use "-" for the
+   *  '{location}' value.
    */
-  // const name = 'abc123'
+  // const parent = 'abc123'
+  /**
+   *  Optional. Requested page size. Server may return fewer items than
+   *  requested. If unspecified, server will pick an appropriate default.
+   */
+  // const pageSize = 1234
+  /**
+   *  Optional. A token identifying a page of results the server should return.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  Optional. Filtering results.
+   */
+  // const filter = 'abc123'
+  /**
+   *  Optional. Hint for how to order the results.
+   */
+  // const orderBy = 'abc123'
+  /**
+   *  Optional. Reserved for future use to provide a BASIC & FULL view of Backup
+   *  resource.
+   */
+  // const view = {}
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -40,19 +66,21 @@ function main(name) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callGetManagementServer() {
+  async function callListBackups() {
     // Construct request
     const request = {
-      name,
+      parent,
     };
 
     // Run request
-    const response = await backupdrClient.getManagementServer(request);
-    console.log(response);
+    const iterable = backupdrClient.listBackupsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callGetManagementServer();
-  // [END backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  callListBackups();
+  // [END backupdr_v1_generated_BackupDR_ListBackups_async]
 }
 
 process.on('unhandledRejection', err => {
