@@ -1740,6 +1740,9 @@ export namespace google {
 
                     /** ListRepositoriesRequest filter */
                     filter?: (string|null);
+
+                    /** ListRepositoriesRequest instance */
+                    instance?: (string|null);
                 }
 
                 /** Represents a ListRepositoriesRequest. */
@@ -1762,6 +1765,9 @@ export namespace google {
 
                     /** ListRepositoriesRequest filter. */
                     public filter: string;
+
+                    /** ListRepositoriesRequest instance. */
+                    public instance: string;
 
                     /**
                      * Creates a new ListRepositoriesRequest instance using the specified properties.

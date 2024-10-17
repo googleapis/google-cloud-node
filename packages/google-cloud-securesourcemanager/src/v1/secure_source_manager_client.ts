@@ -1827,6 +1827,14 @@ export class SecureSourceManagerClient {
    *   A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via
+   *   securesourcemanager.googleapis.com (Control Plane API), this field is
+   *   required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *   API), this field is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1927,6 +1935,14 @@ export class SecureSourceManagerClient {
    *   A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via
+   *   securesourcemanager.googleapis.com (Control Plane API), this field is
+   *   required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *   API), this field is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1975,6 +1991,14 @@ export class SecureSourceManagerClient {
    *   A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via
+   *   securesourcemanager.googleapis.com (Control Plane API), this field is
+   *   required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *   API), this field is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

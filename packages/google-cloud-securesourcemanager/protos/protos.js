@@ -4157,6 +4157,7 @@
                          * @property {number|null} [pageSize] ListRepositoriesRequest pageSize
                          * @property {string|null} [pageToken] ListRepositoriesRequest pageToken
                          * @property {string|null} [filter] ListRepositoriesRequest filter
+                         * @property {string|null} [instance] ListRepositoriesRequest instance
                          */
     
                         /**
@@ -4207,6 +4208,14 @@
                         ListRepositoriesRequest.prototype.filter = "";
     
                         /**
+                         * ListRepositoriesRequest instance.
+                         * @member {string} instance
+                         * @memberof google.cloud.securesourcemanager.v1.ListRepositoriesRequest
+                         * @instance
+                         */
+                        ListRepositoriesRequest.prototype.instance = "";
+    
+                        /**
                          * Creates a new ListRepositoriesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securesourcemanager.v1.ListRepositoriesRequest
@@ -4238,6 +4247,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.instance != null && Object.hasOwnProperty.call(message, "instance"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.instance);
                             return writer;
                         };
     
@@ -4288,6 +4299,10 @@
                                         message.filter = reader.string();
                                         break;
                                     }
+                                case 5: {
+                                        message.instance = reader.string();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4335,6 +4350,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                if (!$util.isString(message.instance))
+                                    return "instance: string expected";
                             return null;
                         };
     
@@ -4358,6 +4376,8 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.instance != null)
+                                message.instance = String(object.instance);
                             return message;
                         };
     
@@ -4379,6 +4399,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.filter = "";
+                                object.instance = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4388,6 +4409,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.instance != null && message.hasOwnProperty("instance"))
+                                object.instance = message.instance;
                             return object;
                         };
     
