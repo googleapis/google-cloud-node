@@ -1090,6 +1090,8 @@
                          * @memberof google.cloud.kms.v1
                          * @interface IListKeyHandlesRequest
                          * @property {string|null} [parent] ListKeyHandlesRequest parent
+                         * @property {number|null} [pageSize] ListKeyHandlesRequest pageSize
+                         * @property {string|null} [pageToken] ListKeyHandlesRequest pageToken
                          * @property {string|null} [filter] ListKeyHandlesRequest filter
                          */
     
@@ -1115,6 +1117,22 @@
                          * @instance
                          */
                         ListKeyHandlesRequest.prototype.parent = "";
+    
+                        /**
+                         * ListKeyHandlesRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.kms.v1.ListKeyHandlesRequest
+                         * @instance
+                         */
+                        ListKeyHandlesRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListKeyHandlesRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.kms.v1.ListKeyHandlesRequest
+                         * @instance
+                         */
+                        ListKeyHandlesRequest.prototype.pageToken = "";
     
                         /**
                          * ListKeyHandlesRequest filter.
@@ -1150,6 +1168,10 @@
                                 writer = $Writer.create();
                             if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             return writer;
@@ -1188,6 +1210,14 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
                                         break;
                                     }
                                 case 4: {
@@ -1232,6 +1262,12 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
@@ -1252,6 +1288,10 @@
                             var message = new $root.google.cloud.kms.v1.ListKeyHandlesRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
                             if (object.filter != null)
                                 message.filter = String(object.filter);
                             return message;
@@ -1272,10 +1312,16 @@
                             var object = {};
                             if (options.defaults) {
                                 object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
                                 object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
                             return object;
@@ -1317,6 +1363,7 @@
                          * @memberof google.cloud.kms.v1
                          * @interface IListKeyHandlesResponse
                          * @property {Array.<google.cloud.kms.v1.IKeyHandle>|null} [keyHandles] ListKeyHandlesResponse keyHandles
+                         * @property {string|null} [nextPageToken] ListKeyHandlesResponse nextPageToken
                          */
     
                         /**
@@ -1342,6 +1389,14 @@
                          * @instance
                          */
                         ListKeyHandlesResponse.prototype.keyHandles = $util.emptyArray;
+    
+                        /**
+                         * ListKeyHandlesResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.kms.v1.ListKeyHandlesResponse
+                         * @instance
+                         */
+                        ListKeyHandlesResponse.prototype.nextPageToken = "";
     
                         /**
                          * Creates a new ListKeyHandlesResponse instance using the specified properties.
@@ -1370,6 +1425,8 @@
                             if (message.keyHandles != null && message.keyHandles.length)
                                 for (var i = 0; i < message.keyHandles.length; ++i)
                                     $root.google.cloud.kms.v1.KeyHandle.encode(message.keyHandles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
                             return writer;
                         };
     
@@ -1408,6 +1465,10 @@
                                         if (!(message.keyHandles && message.keyHandles.length))
                                             message.keyHandles = [];
                                         message.keyHandles.push($root.google.cloud.kms.v1.KeyHandle.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
                                         break;
                                     }
                                 default:
@@ -1454,6 +1515,9 @@
                                         return "keyHandles." + error;
                                 }
                             }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
                             return null;
                         };
     
@@ -1479,6 +1543,8 @@
                                     message.keyHandles[i] = $root.google.cloud.kms.v1.KeyHandle.fromObject(object.keyHandles[i]);
                                 }
                             }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
                             return message;
                         };
     
@@ -1497,11 +1563,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.keyHandles = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
                             if (message.keyHandles && message.keyHandles.length) {
                                 object.keyHandles = [];
                                 for (var j = 0; j < message.keyHandles.length; ++j)
                                     object.keyHandles[j] = $root.google.cloud.kms.v1.KeyHandle.toObject(message.keyHandles[j], options);
                             }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
                             return object;
                         };
     
@@ -2116,6 +2186,7 @@
                          * @interface IAutokeyConfig
                          * @property {string|null} [name] AutokeyConfig name
                          * @property {string|null} [keyProject] AutokeyConfig keyProject
+                         * @property {google.cloud.kms.v1.AutokeyConfig.State|null} [state] AutokeyConfig state
                          */
     
                         /**
@@ -2150,6 +2221,14 @@
                         AutokeyConfig.prototype.keyProject = "";
     
                         /**
+                         * AutokeyConfig state.
+                         * @member {google.cloud.kms.v1.AutokeyConfig.State} state
+                         * @memberof google.cloud.kms.v1.AutokeyConfig
+                         * @instance
+                         */
+                        AutokeyConfig.prototype.state = 0;
+    
+                        /**
                          * Creates a new AutokeyConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AutokeyConfig
@@ -2177,6 +2256,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
                             if (message.keyProject != null && Object.hasOwnProperty.call(message, "keyProject"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.keyProject);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
                             return writer;
                         };
     
@@ -2217,6 +2298,10 @@
                                     }
                                 case 2: {
                                         message.keyProject = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.state = reader.int32();
                                         break;
                                     }
                                 default:
@@ -2260,6 +2345,16 @@
                             if (message.keyProject != null && message.hasOwnProperty("keyProject"))
                                 if (!$util.isString(message.keyProject))
                                     return "keyProject: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2279,6 +2374,30 @@
                                 message.name = String(object.name);
                             if (object.keyProject != null)
                                 message.keyProject = String(object.keyProject);
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "ACTIVE":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "KEY_PROJECT_DELETED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "UNINITIALIZED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2298,11 +2417,14 @@
                             if (options.defaults) {
                                 object.name = "";
                                 object.keyProject = "";
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.keyProject != null && message.hasOwnProperty("keyProject"))
                                 object.keyProject = message.keyProject;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] === undefined ? message.state : $root.google.cloud.kms.v1.AutokeyConfig.State[message.state] : message.state;
                             return object;
                         };
     
@@ -2331,6 +2453,24 @@
                             }
                             return typeUrlPrefix + "/google.cloud.kms.v1.AutokeyConfig";
                         };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.kms.v1.AutokeyConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} ACTIVE=1 ACTIVE value
+                         * @property {number} KEY_PROJECT_DELETED=2 KEY_PROJECT_DELETED value
+                         * @property {number} UNINITIALIZED=3 UNINITIALIZED value
+                         */
+                        AutokeyConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ACTIVE"] = 1;
+                            values[valuesById[2] = "KEY_PROJECT_DELETED"] = 2;
+                            values[valuesById[3] = "UNINITIALIZED"] = 3;
+                            return values;
+                        })();
     
                         return AutokeyConfig;
                     })();
