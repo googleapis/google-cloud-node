@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -454,7 +457,8 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "securesourcemanager.googleapis.com/Instance"
                           }
                         },
                         "uid": {
@@ -738,6 +742,14 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "securesourcemanager.googleapis.com/Instance"
                           }
                         }
                       }
