@@ -1,4 +1,4 @@
-// Copyright 2019-2023 Google LLC
+// Copyright 2019-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -61,14 +61,18 @@ async function publishOrderedMessage(topicNameOrId, data, orderingKey) {
     orderingKey: orderingKey,
   };
 
+  // Cache topic objects (publishers) and reuse them.
+  //
+  // Pub/Sub's ordered delivery guarantee only applies when publishes for an ordering
+  // key are in the same region. For list of locational endpoints for Pub/Sub, see:
+  // https://cloud.google.com/pubsub/docs/reference/service_apis_overview#list_of_locational_endpoints
   const publishOptions = {
     messageOrdering: true,
   };
+  const topic = pubSubClient.topic(topicNameOrId, publishOptions);
 
   // Publishes the message
-  const messageId = await pubSubClient
-    .topic(topicNameOrId, publishOptions)
-    .publishMessage(message);
+  const messageId = topic.publishMessage(message);
 
   console.log(`Message ${messageId} published.`);
 

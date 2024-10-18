@@ -1,4 +1,4 @@
-// Copyright 2019-2023 Google LLC
+// Copyright 2019-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,34 +39,20 @@
 
 // Imports the Google Cloud client library. v1 is for the lower level
 // proto access.
-const {v1} = require('@google-cloud/pubsub');
+const {PubSub} = require('@google-cloud/pubsub');
 
-// Creates a publisher client.
-const publisherClient = new v1.PublisherClient({
-  // optional auth parameters
-});
-async function publishWithRetrySettings(projectId, topicNameOrId, data) {
-  const formattedTopic = publisherClient.projectTopicPath(
-    projectId,
-    topicNameOrId
-  );
-
-  // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
-  const dataBuffer = Buffer.from(data);
-  const messagesElement = {
-    data: dataBuffer,
-  };
-  const messages = [messagesElement];
-
-  // Build the request
-  const request = {
-    topic: formattedTopic,
-    messages: messages,
-  };
+async function publishWithRetrySettings(topicNameOrId, data) {
+  const pubsubClient = new PubSub();
 
   // Retry settings control how the publisher handles retryable failures. Default values are shown.
   // The `retryCodes` array determines which grpc errors will trigger an automatic retry.
   // The `backoffSettings` object lets you specify the behaviour of retries over time.
+  //
+  // Reference this document to see the current defaults for publishing:
+  // https://github.com/googleapis/nodejs-pubsub/blob/6e2c28a9298a49dc1b194ce747ff5258c8df6deb/src/v1/publisher_client_config.json#L59
+  //
+  // Please note that _all_ items must be included when passing these settings to topic().
+  // Otherwise, unpredictable (incorrect) defaults may be assumed.
   const retrySettings = {
     retryCodes: [
       10, // 'ABORTED'
@@ -83,36 +69,42 @@ async function publishWithRetrySettings(projectId, topicNameOrId, data) {
       initialRetryDelayMillis: 100,
       // The multiplier by which to increase the delay time between the completion
       // of failed requests, and the initiation of the subsequent retrying request.
-      retryDelayMultiplier: 1.3,
+      retryDelayMultiplier: 4,
       // The maximum delay time, in milliseconds, between requests.
       // When this value is reached, retryDelayMultiplier will no longer be used to increase delay time.
       maxRetryDelayMillis: 60000,
       // The initial timeout parameter to the request.
-      initialRpcTimeoutMillis: 5000,
+      initialRpcTimeoutMillis: 60000,
       // The multiplier by which to increase the timeout parameter between failed requests.
       rpcTimeoutMultiplier: 1.0,
       // The maximum timeout parameter, in milliseconds, for a request. When this value is reached,
       // rpcTimeoutMultiplier will no longer be used to increase the timeout.
-      maxRpcTimeoutMillis: 600000,
+      maxRpcTimeoutMillis: 60000,
       // The total time, in milliseconds, starting from when the initial request is sent,
       // after which an error will be returned, regardless of the retrying attempts made meanwhile.
       totalTimeoutMillis: 600000,
     },
   };
 
-  const [response] = await publisherClient.publish(request, {
-    retry: retrySettings,
+  // Cache topic objects (publishers) and reuse them.
+  const topic = pubsubClient.topic(topicNameOrId, {
+    gaxOpts: {
+      retry: retrySettings,
+    },
   });
-  console.log(`Message ${response.messageIds} published.`);
+
+  // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
+  const dataBuffer = Buffer.from(data);
+  const messageId = await topic.publishMessage({data: dataBuffer});
+  console.log(`Message ${messageId} published.`);
 }
 // [END pubsub_publisher_retry_settings]
 
 function main(
-  projectId = 'YOUR_PROJECT_ID',
   topicNameOrId = 'YOUR_TOPIC_NAME_OR_ID',
   data = JSON.stringify({foo: 'bar'})
 ) {
-  publishWithRetrySettings(projectId, topicNameOrId, data).catch(err => {
+  publishWithRetrySettings(topicNameOrId, data).catch(err => {
     console.error(err.message);
     process.exitCode = 1;
   });

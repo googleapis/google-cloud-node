@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2021-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ async function publishWithFlowControl(topicNameOrId: string) {
     },
   };
 
-  // Get a publisher.
+  // Get a publisher. Cache topic objects (publishers) and reuse them.
   const topic = pubSubClient.topic(topicNameOrId, options);
 
   // For flow controlled publishing, we'll use a publisher flow controller

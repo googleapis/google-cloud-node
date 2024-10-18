@@ -1,4 +1,4 @@
-// Copyright 2019-2023 Google LLC
+// Copyright 2019-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -55,9 +55,13 @@ async function publishMessageWithCustomAttributes(
     username: 'gcp',
   };
 
-  const messageId = await pubSubClient
-    .topic(topicNameOrId)
-    .publishMessage({data: dataBuffer, attributes: customAttributes});
+  // Cache topic objects (publishers) and reuse them.
+  const topic = pubSubClient.topic(topicNameOrId);
+
+  const messageId = topic.publishMessage({
+    data: dataBuffer,
+    attributes: customAttributes,
+  });
   console.log(`Message ${messageId} published.`);
 }
 // [END pubsub_publish_custom_attributes]

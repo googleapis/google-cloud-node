@@ -1,4 +1,4 @@
-// Copyright 2019-2021 Google LLC
+// Copyright 2019-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,8 +45,10 @@ const protobuf = require('protobufjs');
 const pubSubClient = new PubSub();
 
 async function publishProtobufMessages(topicNameOrId) {
-  // Get the topic metadata to learn about its schema.
+  // Cache topic objects (publishers) and reuse them.
   const topic = pubSubClient.topic(topicNameOrId);
+
+  // Get the topic metadata to learn about its schema.
   const [topicMetadata] = await topic.getMetadata();
   const topicSchemaMetadata = topicMetadata.schemaSettings;
 
@@ -87,7 +89,7 @@ async function publishProtobufMessages(topicNameOrId) {
     return;
   }
 
-  const messageId = await topic.publish(dataBuffer);
+  const messageId = await topic.publishMessage({data: dataBuffer});
   console.log(`Protobuf message ${messageId} published.`);
 }
 // [END pubsub_publish_proto_messages]

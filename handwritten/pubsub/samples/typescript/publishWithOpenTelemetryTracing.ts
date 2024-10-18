@@ -78,7 +78,10 @@ async function publishMessage(topicNameOrId: string, data: string) {
   // Publishes the message as a string, e.g. "Hello, world!"
   // or JSON.stringify(someObject)
   const dataBuffer = Buffer.from(data);
+
+  // Cache topic objects (publishers) and reuse them.
   const publisher = pubSubClient.topic(topicNameOrId);
+
   const messageId = await publisher.publishMessage({data: dataBuffer});
   console.log(`Message ${messageId} published.`);
 

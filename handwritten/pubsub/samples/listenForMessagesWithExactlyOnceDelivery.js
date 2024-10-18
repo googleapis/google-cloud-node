@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2022-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,8 +38,11 @@
 // Imports the Google Cloud client library
 const {PubSub} = require('@google-cloud/pubsub');
 
-// Creates a client; cache this for further use
-const pubSubClient = new PubSub();
+// Pub/Sub's exactly once delivery guarantee only applies when subscribers connect to the service in the same region.
+// For list of locational endpoints for Pub/Sub, see https://cloud.google.com/pubsub/docs/reference/service_apis_overview#list_of_locational_endpoints
+const pubSubClient = new PubSub({
+  apiEndpoint: 'us-west1-pubsub.googleapis.com:443',
+});
 
 async function listenForMessagesWithExactlyOnceDelivery(
   subscriptionNameOrId,

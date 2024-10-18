@@ -1,4 +1,4 @@
-// Copyright 2019-2021 Google LLC
+// Copyright 2019-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -47,8 +47,10 @@ interface ProvinceObject {
 }
 
 async function publishAvroRecords(topicNameOrId: string) {
-  // Get the topic metadata to learn about its schema encoding.
+  // Cache topic objects (publishers) and reuse them.
   const topic = pubSubClient.topic(topicNameOrId);
+
+  // Get the topic metadata to learn about its schema encoding.
   const [topicMetadata] = await topic.getMetadata();
   const topicSchemaMetadata = topicMetadata.schemaSettings;
 

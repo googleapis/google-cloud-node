@@ -1,4 +1,4 @@
-// Copyright 2019-2023 Google LLC
+// Copyright 2019-2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -52,8 +52,14 @@ async function resumePublish(
     messageOrdering: true,
   };
 
-  // Publishes the message
+  // Cache topic objects (publishers) and reuse them.
+  //
+  // Pub/Sub's ordered delivery guarantee only applies when publishes for an ordering
+  // key are in the same region. For list of locational endpoints for Pub/Sub, see:
+  // https://cloud.google.com/pubsub/docs/reference/service_apis_overview#list_of_locational_endpoints
   const publisher = pubSubClient.topic(topicNameOrId, publishOptions);
+
+  // Publishes the message
   try {
     const message = {
       data: dataBuffer,
