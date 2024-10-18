@@ -7637,6 +7637,7 @@
                          * @property {string|null} [name] VoiceSelectionParams name
                          * @property {google.cloud.texttospeech.v1beta1.SsmlVoiceGender|null} [ssmlGender] VoiceSelectionParams ssmlGender
                          * @property {google.cloud.texttospeech.v1beta1.ICustomVoiceParams|null} [customVoice] VoiceSelectionParams customVoice
+                         * @property {google.cloud.texttospeech.v1beta1.IVoiceCloneParams|null} [voiceClone] VoiceSelectionParams voiceClone
                          */
     
                         /**
@@ -7687,6 +7688,14 @@
                         VoiceSelectionParams.prototype.customVoice = null;
     
                         /**
+                         * VoiceSelectionParams voiceClone.
+                         * @member {google.cloud.texttospeech.v1beta1.IVoiceCloneParams|null|undefined} voiceClone
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceSelectionParams
+                         * @instance
+                         */
+                        VoiceSelectionParams.prototype.voiceClone = null;
+    
+                        /**
                          * Creates a new VoiceSelectionParams instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.texttospeech.v1beta1.VoiceSelectionParams
@@ -7718,6 +7727,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.ssmlGender);
                             if (message.customVoice != null && Object.hasOwnProperty.call(message, "customVoice"))
                                 $root.google.cloud.texttospeech.v1beta1.CustomVoiceParams.encode(message.customVoice, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.voiceClone != null && Object.hasOwnProperty.call(message, "voiceClone"))
+                                $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.encode(message.voiceClone, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -7766,6 +7777,10 @@
                                     }
                                 case 4: {
                                         message.customVoice = $root.google.cloud.texttospeech.v1beta1.CustomVoiceParams.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.voiceClone = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -7824,6 +7839,11 @@
                                 if (error)
                                     return "customVoice." + error;
                             }
+                            if (message.voiceClone != null && message.hasOwnProperty("voiceClone")) {
+                                var error = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.verify(message.voiceClone);
+                                if (error)
+                                    return "voiceClone." + error;
+                            }
                             return null;
                         };
     
@@ -7872,6 +7892,11 @@
                                     throw TypeError(".google.cloud.texttospeech.v1beta1.VoiceSelectionParams.customVoice: object expected");
                                 message.customVoice = $root.google.cloud.texttospeech.v1beta1.CustomVoiceParams.fromObject(object.customVoice);
                             }
+                            if (object.voiceClone != null) {
+                                if (typeof object.voiceClone !== "object")
+                                    throw TypeError(".google.cloud.texttospeech.v1beta1.VoiceSelectionParams.voiceClone: object expected");
+                                message.voiceClone = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.fromObject(object.voiceClone);
+                            }
                             return message;
                         };
     
@@ -7893,6 +7918,7 @@
                                 object.name = "";
                                 object.ssmlGender = options.enums === String ? "SSML_VOICE_GENDER_UNSPECIFIED" : 0;
                                 object.customVoice = null;
+                                object.voiceClone = null;
                             }
                             if (message.languageCode != null && message.hasOwnProperty("languageCode"))
                                 object.languageCode = message.languageCode;
@@ -7902,6 +7928,8 @@
                                 object.ssmlGender = options.enums === String ? $root.google.cloud.texttospeech.v1beta1.SsmlVoiceGender[message.ssmlGender] === undefined ? message.ssmlGender : $root.google.cloud.texttospeech.v1beta1.SsmlVoiceGender[message.ssmlGender] : message.ssmlGender;
                             if (message.customVoice != null && message.hasOwnProperty("customVoice"))
                                 object.customVoice = $root.google.cloud.texttospeech.v1beta1.CustomVoiceParams.toObject(message.customVoice, options);
+                            if (message.voiceClone != null && message.hasOwnProperty("voiceClone"))
+                                object.voiceClone = $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams.toObject(message.voiceClone, options);
                             return object;
                         };
     
@@ -8579,6 +8607,209 @@
                         })();
     
                         return CustomVoiceParams;
+                    })();
+    
+                    v1beta1.VoiceCloneParams = (function() {
+    
+                        /**
+                         * Properties of a VoiceCloneParams.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @interface IVoiceCloneParams
+                         * @property {string|null} [voiceCloningKey] VoiceCloneParams voiceCloningKey
+                         */
+    
+                        /**
+                         * Constructs a new VoiceCloneParams.
+                         * @memberof google.cloud.texttospeech.v1beta1
+                         * @classdesc Represents a VoiceCloneParams.
+                         * @implements IVoiceCloneParams
+                         * @constructor
+                         * @param {google.cloud.texttospeech.v1beta1.IVoiceCloneParams=} [properties] Properties to set
+                         */
+                        function VoiceCloneParams(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VoiceCloneParams voiceCloningKey.
+                         * @member {string} voiceCloningKey
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @instance
+                         */
+                        VoiceCloneParams.prototype.voiceCloningKey = "";
+    
+                        /**
+                         * Creates a new VoiceCloneParams instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IVoiceCloneParams=} [properties] Properties to set
+                         * @returns {google.cloud.texttospeech.v1beta1.VoiceCloneParams} VoiceCloneParams instance
+                         */
+                        VoiceCloneParams.create = function create(properties) {
+                            return new VoiceCloneParams(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VoiceCloneParams message. Does not implicitly {@link google.cloud.texttospeech.v1beta1.VoiceCloneParams.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IVoiceCloneParams} message VoiceCloneParams message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VoiceCloneParams.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.voiceCloningKey != null && Object.hasOwnProperty.call(message, "voiceCloningKey"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.voiceCloningKey);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VoiceCloneParams message, length delimited. Does not implicitly {@link google.cloud.texttospeech.v1beta1.VoiceCloneParams.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.IVoiceCloneParams} message VoiceCloneParams message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VoiceCloneParams.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VoiceCloneParams message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.texttospeech.v1beta1.VoiceCloneParams} VoiceCloneParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VoiceCloneParams.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.voiceCloningKey = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VoiceCloneParams message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.texttospeech.v1beta1.VoiceCloneParams} VoiceCloneParams
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VoiceCloneParams.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VoiceCloneParams message.
+                         * @function verify
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VoiceCloneParams.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.voiceCloningKey != null && message.hasOwnProperty("voiceCloningKey"))
+                                if (!$util.isString(message.voiceCloningKey))
+                                    return "voiceCloningKey: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VoiceCloneParams message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.texttospeech.v1beta1.VoiceCloneParams} VoiceCloneParams
+                         */
+                        VoiceCloneParams.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams)
+                                return object;
+                            var message = new $root.google.cloud.texttospeech.v1beta1.VoiceCloneParams();
+                            if (object.voiceCloningKey != null)
+                                message.voiceCloningKey = String(object.voiceCloningKey);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VoiceCloneParams message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {google.cloud.texttospeech.v1beta1.VoiceCloneParams} message VoiceCloneParams
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VoiceCloneParams.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.voiceCloningKey = "";
+                            if (message.voiceCloningKey != null && message.hasOwnProperty("voiceCloningKey"))
+                                object.voiceCloningKey = message.voiceCloningKey;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VoiceCloneParams to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VoiceCloneParams.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for VoiceCloneParams
+                         * @function getTypeUrl
+                         * @memberof google.cloud.texttospeech.v1beta1.VoiceCloneParams
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        VoiceCloneParams.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.texttospeech.v1beta1.VoiceCloneParams";
+                        };
+    
+                        return VoiceCloneParams;
                     })();
     
                     v1beta1.SynthesizeSpeechResponse = (function() {
