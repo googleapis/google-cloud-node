@@ -393,7 +393,7 @@ export class UserEventServiceClient {
               get: '/v1/{name=projects/*/locations/*/dataStores/*/operations/*}',
             },
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*/operations/*}',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*/operations/*}',
             },
             {get: '/v1/{name=projects/*/locations/*/operations/*}'},
             {get: '/v1/{name=projects/*/operations/*}'},
@@ -436,7 +436,7 @@ export class UserEventServiceClient {
             },
             {get: '/v1/{name=projects/*/locations/*/dataStores/*}/operations'},
             {
-              get: '/v1/{name=projects/*/locations/*/identity_mapping_stores/*}/operations',
+              get: '/v1/{name=projects/*/locations/*/identityMappingStores/*}/operations',
             },
             {get: '/v1/{name=projects/*/locations/*}/operations'},
             {get: '/v1/{name=projects/*}/operations'},
@@ -871,7 +871,7 @@ export class UserEventServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the catalog under which the events are
    *   created. The format is
-   *   `projects/{project}/locations/global/collections/{collection}/dataStores/{dataStore}`
+   *   `projects/{project}/locations/global/collections/{collection}/dataStores/{dataStore}`.
    * @param {string} request.filter
    *   Required. The filter string to specify the events to be deleted with a
    *   length limit of 5,000 characters. The eligible fields for filtering are:
