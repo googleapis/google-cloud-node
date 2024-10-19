@@ -21,7 +21,7 @@
 'use strict';
 
 function main(name) {
-  // [START backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  // [START backupdr_v1_generated_BackupDR_GetBackupPlan_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,8 +29,8 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the management server resource name, in the format
-   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
+   *  Required. The resource name of the `BackupPlan` to retrieve.
+   *  Format: `projects/{project}/locations/{location}/backupPlans/{backup_plan}`
    */
   // const name = 'abc123'
 
@@ -40,19 +40,19 @@ function main(name) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callGetManagementServer() {
+  async function callGetBackupPlan() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await backupdrClient.getManagementServer(request);
+    const response = await backupdrClient.getBackupPlan(request);
     console.log(response);
   }
 
-  callGetManagementServer();
-  // [END backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  callGetBackupPlan();
+  // [END backupdr_v1_generated_BackupDR_GetBackupPlan_async]
 }
 
 process.on('unhandledRejection', err => {

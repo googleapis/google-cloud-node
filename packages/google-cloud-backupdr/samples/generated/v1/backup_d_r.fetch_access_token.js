@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START backupdr_v1_generated_BackupDR_GetManagementServer_async]
+function main(name, generationId) {
+  // [START backupdr_v1_generated_BackupDR_FetchAccessToken_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,10 +29,16 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Name of the management server resource name, in the format
-   *  'projects/{project_id}/locations/{location}/managementServers/{resource_name}'
+   *  Required. The resource name for the location for which static IPs should be
+   *  returned.
+   *  Must be in the format
+   *  'projects/* /locations/* /backupVaults/* /dataSources'.
    */
   // const name = 'abc123'
+  /**
+   *  Required. The generation of the backup to update.
+   */
+  // const generationId = 1234
 
   // Imports the Backupdr library
   const {BackupDRClient} = require('@google-cloud/backupdr').v1;
@@ -40,19 +46,20 @@ function main(name) {
   // Instantiates a client
   const backupdrClient = new BackupDRClient();
 
-  async function callGetManagementServer() {
+  async function callFetchAccessToken() {
     // Construct request
     const request = {
       name,
+      generationId,
     };
 
     // Run request
-    const response = await backupdrClient.getManagementServer(request);
+    const response = await backupdrClient.fetchAccessToken(request);
     console.log(response);
   }
 
-  callGetManagementServer();
-  // [END backupdr_v1_generated_BackupDR_GetManagementServer_async]
+  callFetchAccessToken();
+  // [END backupdr_v1_generated_BackupDR_FetchAccessToken_async]
 }
 
 process.on('unhandledRejection', err => {
