@@ -233,6 +233,9 @@ export class SecureSourceManagerClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      branchRulePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}'
+      ),
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}'
       ),
@@ -263,6 +266,11 @@ export class SecureSourceManagerClient {
         'pageToken',
         'nextPageToken',
         'repositories'
+      ),
+      listBranchRules: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'branchRules'
       ),
     };
 
@@ -345,6 +353,24 @@ export class SecureSourceManagerClient {
     const deleteRepositoryMetadata = protoFilesRoot.lookup(
       '.google.cloud.securesourcemanager.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const createBranchRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.securesourcemanager.v1.BranchRule'
+    ) as gax.protobuf.Type;
+    const createBranchRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.securesourcemanager.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateBranchRuleResponse = protoFilesRoot.lookup(
+      '.google.cloud.securesourcemanager.v1.BranchRule'
+    ) as gax.protobuf.Type;
+    const updateBranchRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.securesourcemanager.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteBranchRuleResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteBranchRuleMetadata = protoFilesRoot.lookup(
+      '.google.cloud.securesourcemanager.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createInstance: new this._gaxModule.LongrunningDescriptor(
@@ -366,6 +392,21 @@ export class SecureSourceManagerClient {
         this.operationsClient,
         deleteRepositoryResponse.decode.bind(deleteRepositoryResponse),
         deleteRepositoryMetadata.decode.bind(deleteRepositoryMetadata)
+      ),
+      createBranchRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createBranchRuleResponse.decode.bind(createBranchRuleResponse),
+        createBranchRuleMetadata.decode.bind(createBranchRuleMetadata)
+      ),
+      updateBranchRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateBranchRuleResponse.decode.bind(updateBranchRuleResponse),
+        updateBranchRuleMetadata.decode.bind(updateBranchRuleMetadata)
+      ),
+      deleteBranchRule: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteBranchRuleResponse.decode.bind(deleteBranchRuleResponse),
+        deleteBranchRuleMetadata.decode.bind(deleteBranchRuleMetadata)
       ),
     };
 
@@ -431,6 +472,11 @@ export class SecureSourceManagerClient {
       'getIamPolicyRepo',
       'setIamPolicyRepo',
       'testIamPermissionsRepo',
+      'createBranchRule',
+      'listBranchRules',
+      'getBranchRule',
+      'updateBranchRule',
+      'deleteBranchRule',
     ];
     for (const methodName of secureSourceManagerStubMethods) {
       const callPromise = this.secureSourceManagerStub.then(
@@ -1016,6 +1062,104 @@ export class SecureSourceManagerClient {
       options,
       callback
     );
+  }
+  /**
+   * GetBranchRule gets a branch rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the repository to retrieve.
+   *   The format is
+   *   `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.get_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_async
+   */
+  getBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    callback: Callback<
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.securesourcemanager.v1.IBranchRule,
+          | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule,
+      (
+        | protos.google.cloud.securesourcemanager.v1.IGetBranchRuleRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBranchRule(request, options, callback);
   }
 
   /**
@@ -1611,6 +1755,425 @@ export class SecureSourceManagerClient {
     >;
   }
   /**
+   * CreateBranchRule creates a branch rule in a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {google.cloud.securesourcemanager.v1.BranchRule} request.branchRule
+   * @param {string} request.branchRuleId
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async
+   */
+  createBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.ICreateBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createBranchRule(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createBranchRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.create_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async
+   */
+  async checkCreateBranchRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createBranchRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
+  }
+  /**
+   * UpdateBranchRule updates a branch rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.securesourcemanager.v1.BranchRule} request.branchRule
+   * @param {boolean} [request.validateOnly]
+   *   Optional. If set, validate the request and preview the review, but do not
+   *   actually post it.  (https://google.aip.dev/163, for declarative friendly)
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   branchRule resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   *   The special value "*" means full replacement.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async
+   */
+  updateBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.IUpdateBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.securesourcemanager.v1.IBranchRule,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'branch_rule.name': request.branchRule!.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateBranchRule(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateBranchRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.update_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async
+   */
+  async checkUpdateBranchRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateBranchRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.securesourcemanager.v1.BranchRule,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
+  }
+  /**
+   * DeleteBranchRule deletes a branch rule.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   * @param {boolean} [request.allowMissing]
+   *   Optional. If set to true, and the branch rule is not found, the request
+   *   will succeed but no action will be taken on the server.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async
+   */
+  deleteBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBranchRule(
+    request: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBranchRule(
+    request?: protos.google.cloud.securesourcemanager.v1.IDeleteBranchRuleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteBranchRule(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteBranchRule()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.delete_branch_rule.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async
+   */
+  async checkDeleteBranchRuleProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >
+  > {
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteBranchRule,
+      this._gaxModule.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.securesourcemanager.v1.OperationMetadata
+    >;
+  }
+  /**
    * Lists Instances in a given project and location.
    *
    * @param {Object} request
@@ -1827,6 +2390,14 @@ export class SecureSourceManagerClient {
    *   A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via
+   *   securesourcemanager.googleapis.com (Control Plane API), this field is
+   *   required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *   API), this field is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1927,6 +2498,14 @@ export class SecureSourceManagerClient {
    *   A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via
+   *   securesourcemanager.googleapis.com (Control Plane API), this field is
+   *   required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *   API), this field is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1975,6 +2554,14 @@ export class SecureSourceManagerClient {
    *   A token identifying a page of results the server should return.
    * @param {string} [request.filter]
    *   Optional. Filter results.
+   * @param {string} [request.instance]
+   *   Optional. The name of the instance in which the repository is hosted,
+   *   formatted as
+   *   `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *   When listing repositories via
+   *   securesourcemanager.googleapis.com (Control Plane API), this field is
+   *   required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *   API), this field is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2007,6 +2594,183 @@ export class SecureSourceManagerClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IRepository>;
+  }
+  /**
+   * ListBranchRules lists branch rules in a given repository.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {number} [request.pageSize]
+   * @param {string} [request.pageToken]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBranchRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBranchRules(
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule[],
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse,
+    ]
+  >;
+  listBranchRules(
+    request: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IBranchRule
+    >
+  ): void;
+  listBranchRules(
+    request: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IBranchRule
+    >
+  ): void;
+  listBranchRules(
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+          | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+          | null
+          | undefined,
+          protos.google.cloud.securesourcemanager.v1.IBranchRule
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+      | protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse
+      | null
+      | undefined,
+      protos.google.cloud.securesourcemanager.v1.IBranchRule
+    >
+  ): Promise<
+    [
+      protos.google.cloud.securesourcemanager.v1.IBranchRule[],
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest | null,
+      protos.google.cloud.securesourcemanager.v1.IListBranchRulesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBranchRules(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {number} [request.pageSize]
+   * @param {string} [request.pageToken]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBranchRulesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBranchRulesStream(
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBranchRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBranchRules.createStream(
+      this.innerApiCalls.listBranchRules as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listBranchRules`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   * @param {number} [request.pageSize]
+   * @param {string} [request.pageToken]
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.securesourcemanager.v1.BranchRule|BranchRule}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secure_source_manager.list_branch_rules.js</caption>
+   * region_tag:securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_async
+   */
+  listBranchRulesAsync(
+    request?: protos.google.cloud.securesourcemanager.v1.IListBranchRulesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.securesourcemanager.v1.IBranchRule> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBranchRules'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listBranchRules.asyncIterate(
+      this.innerApiCalls['listBranchRules'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.securesourcemanager.v1.IBranchRule>;
   }
   /**
    * Gets the access control policy for a resource. Returns an empty policy
@@ -2402,6 +3166,77 @@ export class SecureSourceManagerClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified branchRule resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} repository
+   * @param {string} branch_rule
+   * @returns {string} Resource name string.
+   */
+  branchRulePath(
+    project: string,
+    location: string,
+    repository: string,
+    branchRule: string
+  ) {
+    return this.pathTemplates.branchRulePathTemplate.render({
+      project: project,
+      location: location,
+      repository: repository,
+      branch_rule: branchRule,
+    });
+  }
+
+  /**
+   * Parse the project from BranchRule resource.
+   *
+   * @param {string} branchRuleName
+   *   A fully-qualified path representing BranchRule resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBranchRuleName(branchRuleName: string) {
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .project;
+  }
+
+  /**
+   * Parse the location from BranchRule resource.
+   *
+   * @param {string} branchRuleName
+   *   A fully-qualified path representing BranchRule resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBranchRuleName(branchRuleName: string) {
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .location;
+  }
+
+  /**
+   * Parse the repository from BranchRule resource.
+   *
+   * @param {string} branchRuleName
+   *   A fully-qualified path representing BranchRule resource.
+   * @returns {string} A string representing the repository.
+   */
+  matchRepositoryFromBranchRuleName(branchRuleName: string) {
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .repository;
+  }
+
+  /**
+   * Parse the branch_rule from BranchRule resource.
+   *
+   * @param {string} branchRuleName
+   *   A fully-qualified path representing BranchRule resource.
+   * @returns {string} A string representing the branch_rule.
+   */
+  matchBranchRuleFromBranchRuleName(branchRuleName: string) {
+    return this.pathTemplates.branchRulePathTemplate.match(branchRuleName)
+      .branch_rule;
+  }
 
   /**
    * Return a fully-qualified cryptoKey resource name string.

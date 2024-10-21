@@ -1060,6 +1060,144 @@ describe('v1.SecureSourceManagerClient', () => {
     });
   });
 
+  describe('getBranchRule', () => {
+    it('invokes getBranchRule without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.GetBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.GetBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.BranchRule()
+      );
+      client.innerApiCalls.getBranchRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.getBranchRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBranchRule without error using callback', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.GetBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.GetBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.BranchRule()
+      );
+      client.innerApiCalls.getBranchRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getBranchRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.securesourcemanager.v1.IBranchRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBranchRule with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.GetBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.GetBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getBranchRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getBranchRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getBranchRule with closed client', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.GetBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.GetBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getBranchRule(request), expectedError);
+    });
+  });
+
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
@@ -1884,6 +2022,628 @@ describe('v1.SecureSourceManagerClient', () => {
     });
   });
 
+  describe('createBranchRule', () => {
+    it('invokes createBranchRule without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBranchRule =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createBranchRule(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBranchRule without error using callback', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createBranchRule =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createBranchRule(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.securesourcemanager.v1.IBranchRule,
+              protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBranchRule with call error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBranchRule = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createBranchRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createBranchRule with LRO error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.CreateBranchRuleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createBranchRule = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createBranchRule(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateBranchRuleProgress without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateBranchRuleProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateBranchRuleProgress with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateBranchRuleProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateBranchRule', () => {
+    it('invokes updateBranchRule without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest()
+      );
+      request.branchRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest',
+        ['branchRule', 'name']
+      );
+      request.branchRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `branch_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBranchRule =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateBranchRule(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBranchRule without error using callback', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest()
+      );
+      request.branchRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest',
+        ['branchRule', 'name']
+      );
+      request.branchRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `branch_rule.name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateBranchRule =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateBranchRule(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.securesourcemanager.v1.IBranchRule,
+              protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.securesourcemanager.v1.IBranchRule,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBranchRule with call error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest()
+      );
+      request.branchRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest',
+        ['branchRule', 'name']
+      );
+      request.branchRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `branch_rule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBranchRule = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateBranchRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateBranchRule with LRO error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest()
+      );
+      request.branchRule ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.UpdateBranchRuleRequest',
+        ['branchRule', 'name']
+      );
+      request.branchRule.name = defaultValue1;
+      const expectedHeaderRequestParams = `branch_rule.name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateBranchRule = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateBranchRule(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkUpdateBranchRuleProgress without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateBranchRuleProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateBranchRuleProgress with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateBranchRuleProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteBranchRule', () => {
+    it('invokes deleteBranchRule without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBranchRule =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteBranchRule(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBranchRule without error using callback', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteBranchRule =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteBranchRule(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.securesourcemanager.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBranchRule with call error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBranchRule = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteBranchRule(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteBranchRule with LRO error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.DeleteBranchRuleRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteBranchRule = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteBranchRule(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBranchRule as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteBranchRuleProgress without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteBranchRuleProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteBranchRuleProgress with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteBranchRuleProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
@@ -2566,6 +3326,351 @@ describe('v1.SecureSourceManagerClient', () => {
       );
       assert(
         (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listBranchRules', () => {
+    it('invokes listBranchRules without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+      ];
+      client.innerApiCalls.listBranchRules = stubSimpleCall(expectedResponse);
+      const [response] = await client.listBranchRules(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBranchRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBranchRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBranchRules without error using callback', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+      ];
+      client.innerApiCalls.listBranchRules =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listBranchRules(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.securesourcemanager.v1.IBranchRule[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listBranchRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBranchRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBranchRules with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listBranchRules = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listBranchRules(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listBranchRules as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBranchRules as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listBranchRulesStream without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+      ];
+      client.descriptors.page.listBranchRules.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listBranchRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securesourcemanager.v1.BranchRule[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securesourcemanager.v1.BranchRule) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listBranchRules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBranchRules, request)
+      );
+      assert(
+        (client.descriptors.page.listBranchRules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listBranchRulesStream with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBranchRules.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listBranchRulesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.securesourcemanager.v1.BranchRule[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.securesourcemanager.v1.BranchRule) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listBranchRules.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listBranchRules, request)
+      );
+      assert(
+        (client.descriptors.page.listBranchRules.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listBranchRules without error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.securesourcemanager.v1.BranchRule()
+        ),
+      ];
+      client.descriptors.page.listBranchRules.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.securesourcemanager.v1.IBranchRule[] =
+        [];
+      const iterable = client.listBranchRulesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBranchRules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listBranchRules with error', async () => {
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.securesourcemanager.v1.ListBranchRulesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securesourcemanager.v1.ListBranchRulesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listBranchRules.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listBranchRulesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.securesourcemanager.v1.IBranchRule[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listBranchRules.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listBranchRules.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
@@ -3452,6 +4557,84 @@ describe('v1.SecureSourceManagerClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('branchRule', () => {
+      const fakePath = '/rendered/path/branchRule';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        repository: 'repositoryValue',
+        branch_rule: 'branchRuleValue',
+      };
+      const client = new securesourcemanagerModule.v1.SecureSourceManagerClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      client.pathTemplates.branchRulePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.branchRulePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('branchRulePath', () => {
+        const result = client.branchRulePath(
+          'projectValue',
+          'locationValue',
+          'repositoryValue',
+          'branchRuleValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.branchRulePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBranchRuleName', () => {
+        const result = client.matchProjectFromBranchRuleName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.branchRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBranchRuleName', () => {
+        const result = client.matchLocationFromBranchRuleName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.branchRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRepositoryFromBranchRuleName', () => {
+        const result = client.matchRepositoryFromBranchRuleName(fakePath);
+        assert.strictEqual(result, 'repositoryValue');
+        assert(
+          (client.pathTemplates.branchRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBranchRuleFromBranchRuleName', () => {
+        const result = client.matchBranchRuleFromBranchRuleName(fakePath);
+        assert.strictEqual(result, 'branchRuleValue');
+        assert(
+          (client.pathTemplates.branchRulePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('cryptoKey', () => {
       const fakePath = '/rendered/path/cryptoKey';
       const expectedParameters = {
