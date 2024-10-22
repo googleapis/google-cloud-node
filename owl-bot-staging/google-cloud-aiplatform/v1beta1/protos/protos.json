@@ -3950,6 +3950,11 @@
                               "oneof": [
                                 "title"
                               ]
+                            },
+                            "_text": {
+                              "oneof": [
+                                "text"
+                              ]
                             }
                           },
                           "fields": {
@@ -3963,6 +3968,13 @@
                             "title": {
                               "type": "string",
                               "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 3,
                               "options": {
                                 "proto3_optional": true
                               }
