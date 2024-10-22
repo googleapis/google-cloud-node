@@ -11,7 +11,6 @@
               "nested": {
                 "v1": {
                   "options": {
-                    "cc_enable_arenas": true,
                     "csharp_namespace": "Google.Cloud.TextToSpeech.V1",
                     "go_package": "cloud.google.com/go/texttospeech/apiv1/texttospeechpb;texttospeechpb",
                     "java_multiple_files": true,
@@ -299,6 +298,13 @@
                         "customVoice": {
                           "type": "CustomVoiceParams",
                           "id": 4
+                        },
+                        "voiceClone": {
+                          "type": "VoiceCloneParams",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -374,6 +380,17 @@
                             "REPORTED_USAGE_UNSPECIFIED": 0,
                             "REALTIME": 1,
                             "OFFLINE": 2
+                          }
+                        }
+                      }
+                    },
+                    "VoiceCloneParams": {
+                      "fields": {
+                        "voiceCloningKey": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
