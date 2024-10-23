@@ -873,6 +873,13 @@
                     "limit": {
                       "type": "google.protobuf.Int32Value",
                       "id": 12
+                    },
+                    "findNearest": {
+                      "type": "FindNearest",
+                      "id": 13,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
                     }
                   }
                 },
@@ -1077,6 +1084,62 @@
                         "NOT_EQUAL": 9,
                         "HAS_ANCESTOR": 11,
                         "NOT_IN": 13
+                      }
+                    }
+                  }
+                },
+                "FindNearest": {
+                  "fields": {
+                    "vectorProperty": {
+                      "type": "PropertyReference",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "queryVector": {
+                      "type": "Value",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "distanceMeasure": {
+                      "type": "DistanceMeasure",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "limit": {
+                      "type": "google.protobuf.Int32Value",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "distanceResultProperty": {
+                      "type": "string",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "distanceThreshold": {
+                      "type": "google.protobuf.DoubleValue",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "DistanceMeasure": {
+                      "values": {
+                        "DISTANCE_MEASURE_UNSPECIFIED": 0,
+                        "EUCLIDEAN": 1,
+                        "COSINE": 2,
+                        "DOT_PRODUCT": 3
                       }
                     }
                   }
@@ -1850,9 +1913,85 @@
                       "type": "google.protobuf.Timestamp",
                       "id": 11
                     },
+                    "conflictResolutionStrategy": {
+                      "type": "ConflictResolutionStrategy",
+                      "id": 10
+                    },
                     "propertyMask": {
                       "type": "PropertyMask",
                       "id": 9
+                    },
+                    "propertyTransforms": {
+                      "rule": "repeated",
+                      "type": "PropertyTransform",
+                      "id": 12,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "ConflictResolutionStrategy": {
+                      "values": {
+                        "STRATEGY_UNSPECIFIED": 0,
+                        "SERVER_VALUE": 1,
+                        "FAIL": 3
+                      }
+                    }
+                  }
+                },
+                "PropertyTransform": {
+                  "oneofs": {
+                    "transformType": {
+                      "oneof": [
+                        "setToServerValue",
+                        "increment",
+                        "maximum",
+                        "minimum",
+                        "appendMissingElements",
+                        "removeAllFromArray"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "property": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "setToServerValue": {
+                      "type": "ServerValue",
+                      "id": 2
+                    },
+                    "increment": {
+                      "type": "Value",
+                      "id": 3
+                    },
+                    "maximum": {
+                      "type": "Value",
+                      "id": 4
+                    },
+                    "minimum": {
+                      "type": "Value",
+                      "id": 5
+                    },
+                    "appendMissingElements": {
+                      "type": "ArrayValue",
+                      "id": 6
+                    },
+                    "removeAllFromArray": {
+                      "type": "ArrayValue",
+                      "id": 7
+                    }
+                  },
+                  "nested": {
+                    "ServerValue": {
+                      "values": {
+                        "SERVER_VALUE_UNSPECIFIED": 0,
+                        "REQUEST_TIME": 1
+                      }
                     }
                   }
                 },
@@ -1877,6 +2016,11 @@
                     "conflictDetected": {
                       "type": "bool",
                       "id": 5
+                    },
+                    "transformResults": {
+                      "rule": "repeated",
+                      "type": "Value",
+                      "id": 8
                     }
                   }
                 },
