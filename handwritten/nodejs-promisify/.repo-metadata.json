@@ -7,5 +7,6 @@
   "name_pretty": "Google Cloud Common Promisify",
   "name": "promisify",
   "api_shortname": "promisify",
-  "library_type": "OTHER"
+  "library_type": "OTHER",
+  "codeowner_team": "@googleapis/jsteam-handwritten-libraries"
 }
