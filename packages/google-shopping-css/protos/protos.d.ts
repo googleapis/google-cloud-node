@@ -1631,6 +1631,12 @@ export namespace google {
 
                     /** Attributes customLabel_4 */
                     customLabel_4?: (string|null);
+
+                    /** Attributes headlineOfferInstallment */
+                    headlineOfferInstallment?: (google.shopping.css.v1.IHeadlineOfferInstallment|null);
+
+                    /** Attributes headlineOfferSubscriptionCost */
+                    headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
                 }
 
                 /** Represents an Attributes. */
@@ -1785,6 +1791,12 @@ export namespace google {
 
                     /** Attributes customLabel_4. */
                     public customLabel_4?: (string|null);
+
+                    /** Attributes headlineOfferInstallment. */
+                    public headlineOfferInstallment?: (google.shopping.css.v1.IHeadlineOfferInstallment|null);
+
+                    /** Attributes headlineOfferSubscriptionCost. */
+                    public headlineOfferSubscriptionCost?: (google.shopping.css.v1.IHeadlineOfferSubscriptionCost|null);
 
                     /** Attributes _cppLink. */
                     public _cppLink?: "cppLink";
@@ -2763,6 +2775,231 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a HeadlineOfferSubscriptionCost. */
+                interface IHeadlineOfferSubscriptionCost {
+
+                    /** HeadlineOfferSubscriptionCost period */
+                    period?: (google.shopping.css.v1.SubscriptionPeriod|keyof typeof google.shopping.css.v1.SubscriptionPeriod|null);
+
+                    /** HeadlineOfferSubscriptionCost periodLength */
+                    periodLength?: (number|Long|string|null);
+
+                    /** HeadlineOfferSubscriptionCost amount */
+                    amount?: (google.shopping.type.IPrice|null);
+                }
+
+                /** Represents a HeadlineOfferSubscriptionCost. */
+                class HeadlineOfferSubscriptionCost implements IHeadlineOfferSubscriptionCost {
+
+                    /**
+                     * Constructs a new HeadlineOfferSubscriptionCost.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.shopping.css.v1.IHeadlineOfferSubscriptionCost);
+
+                    /** HeadlineOfferSubscriptionCost period. */
+                    public period: (google.shopping.css.v1.SubscriptionPeriod|keyof typeof google.shopping.css.v1.SubscriptionPeriod);
+
+                    /** HeadlineOfferSubscriptionCost periodLength. */
+                    public periodLength: (number|Long|string);
+
+                    /** HeadlineOfferSubscriptionCost amount. */
+                    public amount?: (google.shopping.type.IPrice|null);
+
+                    /**
+                     * Creates a new HeadlineOfferSubscriptionCost instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HeadlineOfferSubscriptionCost instance
+                     */
+                    public static create(properties?: google.shopping.css.v1.IHeadlineOfferSubscriptionCost): google.shopping.css.v1.HeadlineOfferSubscriptionCost;
+
+                    /**
+                     * Encodes the specified HeadlineOfferSubscriptionCost message. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferSubscriptionCost.verify|verify} messages.
+                     * @param message HeadlineOfferSubscriptionCost message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.shopping.css.v1.IHeadlineOfferSubscriptionCost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HeadlineOfferSubscriptionCost message, length delimited. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferSubscriptionCost.verify|verify} messages.
+                     * @param message HeadlineOfferSubscriptionCost message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.shopping.css.v1.IHeadlineOfferSubscriptionCost, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HeadlineOfferSubscriptionCost message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HeadlineOfferSubscriptionCost
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.css.v1.HeadlineOfferSubscriptionCost;
+
+                    /**
+                     * Decodes a HeadlineOfferSubscriptionCost message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HeadlineOfferSubscriptionCost
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.css.v1.HeadlineOfferSubscriptionCost;
+
+                    /**
+                     * Verifies a HeadlineOfferSubscriptionCost message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HeadlineOfferSubscriptionCost message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HeadlineOfferSubscriptionCost
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.shopping.css.v1.HeadlineOfferSubscriptionCost;
+
+                    /**
+                     * Creates a plain object from a HeadlineOfferSubscriptionCost message. Also converts values to other types if specified.
+                     * @param message HeadlineOfferSubscriptionCost
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.shopping.css.v1.HeadlineOfferSubscriptionCost, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HeadlineOfferSubscriptionCost to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HeadlineOfferSubscriptionCost
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a HeadlineOfferInstallment. */
+                interface IHeadlineOfferInstallment {
+
+                    /** HeadlineOfferInstallment months */
+                    months?: (number|Long|string|null);
+
+                    /** HeadlineOfferInstallment amount */
+                    amount?: (google.shopping.type.IPrice|null);
+
+                    /** HeadlineOfferInstallment downpayment */
+                    downpayment?: (google.shopping.type.IPrice|null);
+                }
+
+                /** Represents a HeadlineOfferInstallment. */
+                class HeadlineOfferInstallment implements IHeadlineOfferInstallment {
+
+                    /**
+                     * Constructs a new HeadlineOfferInstallment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.shopping.css.v1.IHeadlineOfferInstallment);
+
+                    /** HeadlineOfferInstallment months. */
+                    public months: (number|Long|string);
+
+                    /** HeadlineOfferInstallment amount. */
+                    public amount?: (google.shopping.type.IPrice|null);
+
+                    /** HeadlineOfferInstallment downpayment. */
+                    public downpayment?: (google.shopping.type.IPrice|null);
+
+                    /**
+                     * Creates a new HeadlineOfferInstallment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns HeadlineOfferInstallment instance
+                     */
+                    public static create(properties?: google.shopping.css.v1.IHeadlineOfferInstallment): google.shopping.css.v1.HeadlineOfferInstallment;
+
+                    /**
+                     * Encodes the specified HeadlineOfferInstallment message. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferInstallment.verify|verify} messages.
+                     * @param message HeadlineOfferInstallment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.shopping.css.v1.IHeadlineOfferInstallment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified HeadlineOfferInstallment message, length delimited. Does not implicitly {@link google.shopping.css.v1.HeadlineOfferInstallment.verify|verify} messages.
+                     * @param message HeadlineOfferInstallment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.shopping.css.v1.IHeadlineOfferInstallment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a HeadlineOfferInstallment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns HeadlineOfferInstallment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.css.v1.HeadlineOfferInstallment;
+
+                    /**
+                     * Decodes a HeadlineOfferInstallment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns HeadlineOfferInstallment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.css.v1.HeadlineOfferInstallment;
+
+                    /**
+                     * Verifies a HeadlineOfferInstallment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a HeadlineOfferInstallment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns HeadlineOfferInstallment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.shopping.css.v1.HeadlineOfferInstallment;
+
+                    /**
+                     * Creates a plain object from a HeadlineOfferInstallment message. Also converts values to other types if specified.
+                     * @param message HeadlineOfferInstallment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.shopping.css.v1.HeadlineOfferInstallment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this HeadlineOfferInstallment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for HeadlineOfferInstallment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** SubscriptionPeriod enum. */
+                enum SubscriptionPeriod {
+                    SUBSCRIPTION_PERIOD_UNSPECIFIED = 0,
+                    MONTH = 1,
+                    YEAR = 2
                 }
 
                 /** Represents a CssProductInputsService */

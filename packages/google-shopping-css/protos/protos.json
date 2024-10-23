@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -979,6 +982,14 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "headlineOfferInstallment": {
+                          "type": "HeadlineOfferInstallment",
+                          "id": 51
+                        },
+                        "headlineOfferSubscriptionCost": {
+                          "type": "HeadlineOfferSubscriptionCost",
+                          "id": 52
                         }
                       }
                     },
@@ -1140,6 +1151,45 @@
                             }
                           }
                         }
+                      }
+                    },
+                    "HeadlineOfferSubscriptionCost": {
+                      "fields": {
+                        "period": {
+                          "type": "SubscriptionPeriod",
+                          "id": 1
+                        },
+                        "periodLength": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "amount": {
+                          "type": "google.shopping.type.Price",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "HeadlineOfferInstallment": {
+                      "fields": {
+                        "months": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "amount": {
+                          "type": "google.shopping.type.Price",
+                          "id": 2
+                        },
+                        "downpayment": {
+                          "type": "google.shopping.type.Price",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "SubscriptionPeriod": {
+                      "values": {
+                        "SUBSCRIPTION_PERIOD_UNSPECIFIED": 0,
+                        "MONTH": 1,
+                        "YEAR": 2
                       }
                     },
                     "CssProductInputsService": {
