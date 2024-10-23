@@ -32,7 +32,7 @@
     "winston"
   ],
   "scripts": {
-    "docs": "compodoc src/",
+    "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "presamples-test": "npm run compile",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
@@ -56,7 +56,6 @@
     "winston-transport": "^4.3.0"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "^1.1.10",
     "@google-cloud/common": "^5.0.0",
     "@types/lodash.mapvalues": "^4.6.6",
     "@types/mocha": "^9.0.0",
@@ -67,7 +66,10 @@
     "c8": "^9.0.0",
     "codecov": "^3.5.0",
     "gts": "^5.0.0",
-    "linkinator": "^4.0.0",
+    "jsdoc": "^4.0.0",
+    "jsdoc-fresh": "^3.0.0",
+    "jsdoc-region-tag": "^3.0.0",
+    "linkinator": "^3.0.0",
     "mocha": "^9.2.2",
     "post-install-check": "0.0.1",
     "proxyquire": "^2.1.0",
