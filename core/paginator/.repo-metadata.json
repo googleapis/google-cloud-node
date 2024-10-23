@@ -6,5 +6,6 @@
   "repo": "googleapis/nodejs-paginator",
   "distribution_name": "@google-cloud/paginator",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/paginator/latest",
-  "library_type": "OTHER"
+  "library_type": "OTHER",
+  "codeowner_team": "jsteam-handwritten-libraries"
 }

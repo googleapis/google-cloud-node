@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2018 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-docker:
-  image: gcr.io/cloud-devrel-public-resources/owlbot-nodejs:latest
-  digest: sha256:609822e3c09b7a1bd90b99655904609f162cc15acb4704f1edf778284c36f429
-# created: 2024-10-01T19:34:30.797530443Z
+import synthtool as s
+import synthtool.gcp as gcp
+
+common_templates = gcp.CommonTemplates()
+templates = common_templates.node_library()
+s.copy(sources=templates, excludes=["LICENSE", "README.md", ".github/ISSUE_TEMPLATE", ".github/scripts", ".kokoro", ".github/workflows/issues-no-repro.yaml", ".jsdoc.js"])
