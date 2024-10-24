@@ -196,8 +196,7 @@ export enum TransactionState {
 }
 
 /**
- * Handle logic for Datastore API operations. Handles request logic for
- * Datastore.
+ * Handles request logic for Datastore API operations.
  *
  * Creates requests to the Datastore endpoint. Designed to be inherited by
  * the {@link Datastore} and {@link Transaction} classes.
