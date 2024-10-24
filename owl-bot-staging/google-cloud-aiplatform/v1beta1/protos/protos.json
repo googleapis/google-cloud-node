@@ -4836,6 +4836,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "pscInterfaceConfig": {
+                          "type": "PscInterfaceConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "baseOutputDirectory": {
                           "type": "GcsDestination",
                           "id": 6
@@ -5050,6 +5057,82 @@
                             "STANDARD": 3,
                             "SPOT": 4,
                             "FLEX_START": 6
+                          }
+                        }
+                      }
+                    },
+                    "PSCAutomationConfig": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PrivateServiceConnectConfig": {
+                      "fields": {
+                        "enablePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "projectAllowlist": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "enableSecurePrivateServiceConnect": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAttachment": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PscAutomatedEndpoints": {
+                      "fields": {
+                        "projectId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchAddress": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "PscInterfaceConfig": {
+                      "fields": {
+                        "networkAttachment": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/NetworkAttachment"
                           }
                         }
                       }
@@ -7429,82 +7512,6 @@
                         "bigqueryDestination": {
                           "type": "BigQueryDestination",
                           "id": 3
-                        }
-                      }
-                    },
-                    "PSCAutomationConfig": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "PrivateServiceConnectConfig": {
-                      "fields": {
-                        "enablePrivateServiceConnect": {
-                          "type": "bool",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "projectAllowlist": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2
-                        },
-                        "enableSecurePrivateServiceConnect": {
-                          "type": "bool",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAttachment": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "PscAutomatedEndpoints": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "network": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "matchAddress": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "PscInterfaceConfig": {
-                      "fields": {
-                        "networkAttachment": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL",
-                            "(google.api.resource_reference).type": "compute.googleapis.com/NetworkAttachment"
-                          }
                         }
                       }
                     },
