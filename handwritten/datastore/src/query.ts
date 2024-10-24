@@ -53,10 +53,10 @@ export interface Filter {
 }
 
 /**
- * Build a Query object.
+ * A Query object is used to build and execute queries for entities stored in Datastore.
  *
- * **Queries are built with {module:datastore#createQuery} and
- * {@link Transaction#createQuery}.**
+ * Create a Query object with {@link Datastore#createQuery} or
+ * {@link Transaction#createQuery}.
  *
  * @see {@link http://goo.gl/Cag0r6| Datastore Queries}
  *
