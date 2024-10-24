@@ -805,12 +805,45 @@
                         }
                       }
                     },
+                    "MultiSpeakerMarkup": {
+                      "fields": {
+                        "turns": {
+                          "rule": "repeated",
+                          "type": "Turn",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Turn": {
+                          "fields": {
+                            "speaker": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "SynthesisInput": {
                       "oneofs": {
                         "inputSource": {
                           "oneof": [
                             "text",
-                            "ssml"
+                            "ssml",
+                            "multiSpeakerMarkup"
                           ]
                         }
                       },
@@ -822,6 +855,10 @@
                         "ssml": {
                           "type": "string",
                           "id": 2
+                        },
+                        "multiSpeakerMarkup": {
+                          "type": "MultiSpeakerMarkup",
+                          "id": 4
                         },
                         "customPronunciations": {
                           "type": "CustomPronunciations",
