@@ -795,21 +795,6 @@
     "support_documentation": "https://cloud.google.com/datastore/docs/getting-support"
   },
   {
-    "name": "connect-datastore",
-    "name_pretty": "Datastore Session",
-    "product_documentation": "https://cloud.google.com/datastore",
-    "client_documentation": "https://github.com/googleapis/nodejs-datastore-session/blob/master/README.md",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-datastore-session",
-    "distribution_name": "@google-cloud/connect-datastore",
-    "api_id": "datastore.googleapis.com",
-    "codeowner_team": "@googleapis/cloud-native-db-dpes",
-    "library_type": "INTEGRATION",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-datastore-session",
-    "support_documentation": "https://cloud.google.com/datastore/docs/getting-support"
-  },
-  {
     "name": "datastream",
     "name_pretty": "Datastream",
     "product_documentation": "https://cloud.google.com/datastream/",
@@ -1116,23 +1101,6 @@
     "api_shortname": "firestore",
     "library_type": "GAPIC_COMBO",
     "linkToRepoHomepage": "https://github.com/googleapis/nodejs-firestore",
-    "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
-  },
-  {
-    "name": "firestore-session",
-    "name_pretty": "Firestore Session",
-    "product_documentation": "https://cloud.google.com/firestore",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/connect-firestore/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/5337669",
-    "release_level": "stable",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-firestore-session",
-    "distribution_name": "@google-cloud/connect-firestore",
-    "api_id": "firestore.googleapis.com",
-    "requires_billing": false,
-    "codeowner_team": "@googleapis/firestore-dpe",
-    "library_type": "OTHER",
-    "linkToRepoHomepage": "https://github.com/googleapis/nodejs-firestore-session",
     "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
   },
   {
