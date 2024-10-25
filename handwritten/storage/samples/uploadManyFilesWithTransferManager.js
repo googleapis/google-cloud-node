@@ -32,10 +32,10 @@ function main(
   // The ID of your GCS bucket
   // const bucketName = 'your-unique-bucket-name';
 
-  // The ID of the first GCS file to download
+  // The ID of the first GCS file to upload
   // const firstFilePath = 'your-first-file-name';
 
-  // The ID of the second GCS file to download
+  // The ID of the second GCS file to upload
   // const secondFilePath = 'your-second-file-name';
 
   // Imports the Google Cloud client library
