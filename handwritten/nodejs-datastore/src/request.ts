@@ -820,7 +820,7 @@ class DatastoreRequest {
    * that uses the end cursor from the previous query as the starting cursor for
    * the next query. You can pass that object back to this method to see if more
    * results exist.
-   * @param {Query} query Query object.
+   * @param {Query} query A Query object
    * @param {object} [options] Optional configuration.
    * @param {string} [options.consistency] Specify either `strong` or `eventual`.
    *     If not specified, default values are chosen by Datastore for the
@@ -949,7 +949,7 @@ class DatastoreRequest {
    *
    * See {@link Datastore#runQuery} for a list of all available options.
    *
-   * @param {Query} query Query object.
+   * @param {Query} query A Query object
    * @param {object} [options] Optional configuration.
    * @param {object} [options.gaxOptions] Request configuration options, outlined
    *     here: https://googleapis.github.io/gax-nodejs/global.html#CallOptions.

@@ -33,7 +33,7 @@ class AggregateQuery {
   /**
    * Build an AggregateQuery object.
    *
-   * @param {Query} query
+   * @param {Query} query A Query object
    */
   constructor(query: Query) {
     this.query = query;
@@ -43,7 +43,8 @@ class AggregateQuery {
   /**
    * Add a `count` aggregate query to the list of aggregations.
    *
-   * @param {string} alias
+   * @param {string} alias The label used in the results to describe this
+   * aggregate field when a query is run.
    * @returns {AggregateQuery}
    */
   count(alias?: string): AggregateQuery {
@@ -54,8 +55,9 @@ class AggregateQuery {
   /**
    * Add a `sum` aggregate query to the list of aggregations.
    *
-   * @param {string} property
-   * @param {string} alias
+   * @param {string} property The property to use for the sum calculation.
+   * @param {string} alias The label used in the results to describe this
+   * aggregate field when a query is run.
    * @returns {AggregateQuery}
    */
   sum(property: string, alias?: string): AggregateQuery {
@@ -66,8 +68,9 @@ class AggregateQuery {
   /**
    * Add a `average` aggregate query to the list of aggregations.
    *
-   * @param {string} property
-   * @param {string} alias
+   * @param {string} property The property to use for the average calculation.
+   * @param {string} alias The label used in the results to describe this
+   * aggregate field when a query is run.
    * @returns {AggregateQuery}
    */
   average(property: string, alias?: string): AggregateQuery {
@@ -78,7 +81,8 @@ class AggregateQuery {
   /**
    * Add a custom aggregation to the list of aggregations.
    *
-   * @param {AggregateField} aggregation
+   * @param {AggregateField} aggregation The aggregate field to perform the
+   * aggregation query over.
    * @returns {AggregateQuery}
    */
   addAggregation(aggregation: AggregateField): AggregateQuery {
@@ -89,7 +93,8 @@ class AggregateQuery {
   /**
    * Add a list of custom aggregations to the list of aggregations.
    *
-   * @param {AggregateField[]} aggregation
+   * @param {AggregateField[]} aggregations The aggregate fields to perform the
+   * aggregation query over.
    * @returns {AggregateQuery}
    */
   addAggregations(aggregations: AggregateField[]): AggregateQuery {
@@ -147,6 +152,7 @@ abstract class AggregateField {
   /**
    * Gets a copy of the Sum aggregate field.
    *
+   * @param {string} property The property to use for the average calculation.
    * @returns {Sum}
    */
   static sum(property: string): Sum {
@@ -156,6 +162,7 @@ abstract class AggregateField {
   /**
    * Gets a copy of the Average aggregate field.
    *
+   * @param {string} property The property to use for the average calculation.
    * @returns {Average}
    */
   static average(property: string): Average {
@@ -209,7 +216,7 @@ abstract class PropertyAggregateField extends AggregateField {
   /**
    * Build a PropertyAggregateField object.
    *
-   * @param {string} property
+   * @param {string} property The property to aggregate over.
    */
   constructor(public property_: string) {
     super();
