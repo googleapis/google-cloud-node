@@ -631,6 +631,9 @@ export namespace google {
 
                     /** Hardware actualInstallationDate */
                     actualInstallationDate?: (google.type.IDate|null);
+
+                    /** Hardware machineInfos */
+                    machineInfos?: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo[]|null);
                 }
 
                 /** Represents a Hardware. */
@@ -692,6 +695,9 @@ export namespace google {
 
                     /** Hardware actualInstallationDate. */
                     public actualInstallationDate?: (google.type.IDate|null);
+
+                    /** Hardware machineInfos. */
+                    public machineInfos: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo[];
 
                     /**
                      * Creates a new Hardware instance using the specified properties.
@@ -772,6 +778,362 @@ export namespace google {
                 }
 
                 namespace Hardware {
+
+                    /** Properties of a MacAddress. */
+                    interface IMacAddress {
+
+                        /** MacAddress address */
+                        address?: (string|null);
+
+                        /** MacAddress type */
+                        type?: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|null);
+                    }
+
+                    /** Represents a MacAddress. */
+                    class MacAddress implements IMacAddress {
+
+                        /**
+                         * Constructs a new MacAddress.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress);
+
+                        /** MacAddress address. */
+                        public address: string;
+
+                        /** MacAddress type. */
+                        public type: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType|keyof typeof google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.AddressType);
+
+                        /**
+                         * Creates a new MacAddress instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MacAddress instance
+                         */
+                        public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress;
+
+                        /**
+                         * Encodes the specified MacAddress message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.verify|verify} messages.
+                         * @param message MacAddress message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MacAddress message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress.verify|verify} messages.
+                         * @param message MacAddress message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MacAddress message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MacAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress;
+
+                        /**
+                         * Decodes a MacAddress message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MacAddress
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress;
+
+                        /**
+                         * Verifies a MacAddress message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MacAddress message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MacAddress
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress;
+
+                        /**
+                         * Creates a plain object from a MacAddress message. Also converts values to other types if specified.
+                         * @param message MacAddress
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.MacAddress, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MacAddress to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MacAddress
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace MacAddress {
+
+                        /** AddressType enum. */
+                        enum AddressType {
+                            ADDRESS_TYPE_UNSPECIFIED = 0,
+                            NIC = 1,
+                            BMC = 2,
+                            VIRTUAL = 3
+                        }
+                    }
+
+                    /** Properties of a DiskInfo. */
+                    interface IDiskInfo {
+
+                        /** DiskInfo manufacturer */
+                        manufacturer?: (string|null);
+
+                        /** DiskInfo slot */
+                        slot?: (number|null);
+
+                        /** DiskInfo serialNumber */
+                        serialNumber?: (string|null);
+
+                        /** DiskInfo psid */
+                        psid?: (string|null);
+
+                        /** DiskInfo partNumber */
+                        partNumber?: (string|null);
+
+                        /** DiskInfo modelNumber */
+                        modelNumber?: (string|null);
+                    }
+
+                    /** Represents a DiskInfo. */
+                    class DiskInfo implements IDiskInfo {
+
+                        /**
+                         * Constructs a new DiskInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo);
+
+                        /** DiskInfo manufacturer. */
+                        public manufacturer: string;
+
+                        /** DiskInfo slot. */
+                        public slot: number;
+
+                        /** DiskInfo serialNumber. */
+                        public serialNumber: string;
+
+                        /** DiskInfo psid. */
+                        public psid: string;
+
+                        /** DiskInfo partNumber. */
+                        public partNumber: string;
+
+                        /** DiskInfo modelNumber. */
+                        public modelNumber: string;
+
+                        /**
+                         * Creates a new DiskInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DiskInfo instance
+                         */
+                        public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo): google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo;
+
+                        /**
+                         * Encodes the specified DiskInfo message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.verify|verify} messages.
+                         * @param message DiskInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DiskInfo message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo.verify|verify} messages.
+                         * @param message DiskInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DiskInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DiskInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo;
+
+                        /**
+                         * Decodes a DiskInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DiskInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo;
+
+                        /**
+                         * Verifies a DiskInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DiskInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DiskInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo;
+
+                        /**
+                         * Creates a plain object from a DiskInfo message. Also converts values to other types if specified.
+                         * @param message DiskInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.DiskInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DiskInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DiskInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MachineInfo. */
+                    interface IMachineInfo {
+
+                        /** MachineInfo serviceTag */
+                        serviceTag?: (string|null);
+
+                        /** MachineInfo macAddresses */
+                        macAddresses?: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress[]|null);
+
+                        /** MachineInfo name */
+                        name?: (string|null);
+
+                        /** MachineInfo diskInfos */
+                        diskInfos?: (google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo[]|null);
+                    }
+
+                    /** Represents a MachineInfo. */
+                    class MachineInfo implements IMachineInfo {
+
+                        /**
+                         * Constructs a new MachineInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo);
+
+                        /** MachineInfo serviceTag. */
+                        public serviceTag: string;
+
+                        /** MachineInfo macAddresses. */
+                        public macAddresses: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMacAddress[];
+
+                        /** MachineInfo name. */
+                        public name: string;
+
+                        /** MachineInfo diskInfos. */
+                        public diskInfos: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IDiskInfo[];
+
+                        /**
+                         * Creates a new MachineInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MachineInfo instance
+                         */
+                        public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo;
+
+                        /**
+                         * Encodes the specified MachineInfo message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.verify|verify} messages.
+                         * @param message MachineInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MachineInfo message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo.verify|verify} messages.
+                         * @param message MachineInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.IMachineInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MachineInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MachineInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo;
+
+                        /**
+                         * Decodes a MachineInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MachineInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo;
+
+                        /**
+                         * Verifies a MachineInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MachineInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MachineInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo;
+
+                        /**
+                         * Creates a plain object from a MachineInfo message. Also converts values to other types if specified.
+                         * @param message MachineInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.Hardware.MachineInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MachineInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MachineInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** State enum. */
                     enum State {
@@ -3178,6 +3540,20 @@ export namespace google {
                     public updateSite(request: google.cloud.gdchardwaremanagement.v1alpha.IUpdateSiteRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls DeleteSite.
+                     * @param request DeleteSiteRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSite(request: google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest, callback: google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSiteCallback): void;
+
+                    /**
+                     * Calls DeleteSite.
+                     * @param request DeleteSiteRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSite(request: google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ListHardwareGroups.
                      * @param request ListHardwareGroupsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListHardwareGroupsResponse
@@ -3585,6 +3961,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type UpdateSiteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|deleteSite}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSiteCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement|listHardwareGroups}.
@@ -5079,6 +5462,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateSiteRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteSiteRequest. */
+                interface IDeleteSiteRequest {
+
+                    /** DeleteSiteRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSiteRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteSiteRequest. */
+                class DeleteSiteRequest implements IDeleteSiteRequest {
+
+                    /**
+                     * Constructs a new DeleteSiteRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest);
+
+                    /** DeleteSiteRequest name. */
+                    public name: string;
+
+                    /** DeleteSiteRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteSiteRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSiteRequest instance
+                     */
+                    public static create(properties?: google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest): google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest;
+
+                    /**
+                     * Encodes the specified DeleteSiteRequest message. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest.verify|verify} messages.
+                     * @param message DeleteSiteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSiteRequest message, length delimited. Does not implicitly {@link google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest.verify|verify} messages.
+                     * @param message DeleteSiteRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gdchardwaremanagement.v1alpha.IDeleteSiteRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSiteRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSiteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest;
+
+                    /**
+                     * Decodes a DeleteSiteRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSiteRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest;
+
+                    /**
+                     * Verifies a DeleteSiteRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSiteRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSiteRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSiteRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSiteRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gdchardwaremanagement.v1alpha.DeleteSiteRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSiteRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteSiteRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

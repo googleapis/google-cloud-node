@@ -31,6 +31,9 @@ function main(parent) {
   /**
    *  Required. The project and location to list hardware in.
    *  Format: `projects/{project}/locations/{location}`
+   *  To list hardware across all locations, substitute `-` (the hyphen or
+   *  dash character) for the location and check the unreachable field in
+   *  the response message.
    */
   // const parent = 'abc123'
   /**

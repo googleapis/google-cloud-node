@@ -22,7 +22,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -314,7 +314,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -492,6 +492,50 @@
                 "method": {
                     "shortName": "UpdateSite",
                     "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
+                    "service": {
+                        "shortName": "GDCHardwareManagement",
+                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async",
+            "title": "GDCHardwareManagement deleteSite Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a site.",
+            "canonical": true,
+            "file": "g_d_c_hardware_management.delete_site.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteSite",
+                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.longrunning.Operation",
+                "client": {
+                    "shortName": "GDCHardwareManagementClient",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+                },
+                "method": {
+                    "shortName": "DeleteSite",
+                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
                     "service": {
                         "shortName": "GDCHardwareManagement",
                         "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
@@ -750,7 +794,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -1274,7 +1318,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
@@ -1370,7 +1414,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 73,
+                    "end": 76,
                     "type": "FULL"
                 }
             ],
