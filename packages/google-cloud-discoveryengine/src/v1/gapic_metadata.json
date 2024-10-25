@@ -713,6 +713,13 @@
                 "searchStream",
                 "searchAsync"
               ]
+            },
+            "SearchLite": {
+              "methods": [
+                "searchLite",
+                "searchLiteStream",
+                "searchLiteAsync"
+              ]
             }
           }
         },
@@ -724,6 +731,13 @@
                 "search",
                 "searchStream",
                 "searchAsync"
+              ]
+            },
+            "SearchLite": {
+              "methods": [
+                "searchLite",
+                "searchLiteStream",
+                "searchLiteAsync"
               ]
             }
           }
