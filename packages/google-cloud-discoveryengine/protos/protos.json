@@ -467,7 +467,8 @@
                             "NO_RELEVANT_CONTENT": 5,
                             "JAIL_BREAKING_QUERY_IGNORED": 6,
                             "CUSTOMER_POLICY_VIOLATION": 7,
-                            "NON_ANSWER_SEEKING_QUERY_IGNORED_V2": 8
+                            "NON_ANSWER_SEEKING_QUERY_IGNORED_V2": 8,
+                            "LOW_GROUNDED_ANSWER": 9
                           }
                         }
                       }
@@ -2368,6 +2369,13 @@
                           "rule": "repeated",
                           "type": "TimeRange",
                           "id": 3
+                        },
+                        "queryRegex": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2942,6 +2950,34 @@
                                   },
                                   {
                                     "post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:search",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        "SearchLite": {
+                          "requestType": "SearchRequest",
+                          "responseType": "SearchResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{serving_config=projects/*/locations/*/dataStores/*/servingConfigs/*}:searchLite",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/dataStores/*/servingConfigs/*}:searchLite",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{serving_config=projects/*/locations/*/collections/*/engines/*/servingConfigs/*}:searchLite",
                                     "body": "*"
                                   }
                                 ]
