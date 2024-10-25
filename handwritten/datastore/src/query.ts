@@ -334,7 +334,7 @@ class Query {
    *
    * Queries that select a subset of properties are called Projection Queries.
    *
-   * @see {@link https://cloud.google.com/datastore/docs/concepts/projectionqueries| Projection Queries}
+   * @see {@link https://cloud.google.com/datastore/docs/samples/datastore-projection-query| Projection Queries}
    *
    * @param {string|string[]} fieldNames Properties to return from the matched
    *     entities.

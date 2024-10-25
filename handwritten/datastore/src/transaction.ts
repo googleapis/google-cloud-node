@@ -755,7 +755,7 @@ class Transaction extends DatastoreRequest {
    * has not been started yet then the transaction is started before the
    * runQuery call is made.
    *
-   * @param {Query} query Query object.
+   * @param {Query} query A Query object
    * @param {object} [options] Optional configuration.
    * @param {function} [callback] The callback function. If omitted, a readable
    *     stream instance is returned.
