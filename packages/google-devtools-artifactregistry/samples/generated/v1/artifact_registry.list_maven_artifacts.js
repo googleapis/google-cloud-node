@@ -34,7 +34,7 @@ function main(parent) {
    */
   // const parent = 'abc123'
   /**
-   *  The maximum number of artifacts to return.
+   *  The maximum number of artifacts to return. Maximum page size is 1,000.
    */
   // const pageSize = 1234
   /**

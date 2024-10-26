@@ -2440,6 +2440,672 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an Attachment. */
+                interface IAttachment {
+
+                    /** Attachment name */
+                    name?: (string|null);
+
+                    /** Attachment target */
+                    target?: (string|null);
+
+                    /** Attachment type */
+                    type?: (string|null);
+
+                    /** Attachment attachmentNamespace */
+                    attachmentNamespace?: (string|null);
+
+                    /** Attachment annotations */
+                    annotations?: ({ [k: string]: string }|null);
+
+                    /** Attachment createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attachment updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attachment files */
+                    files?: (string[]|null);
+
+                    /** Attachment ociVersionName */
+                    ociVersionName?: (string|null);
+                }
+
+                /** Represents an Attachment. */
+                class Attachment implements IAttachment {
+
+                    /**
+                     * Constructs a new Attachment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IAttachment);
+
+                    /** Attachment name. */
+                    public name: string;
+
+                    /** Attachment target. */
+                    public target: string;
+
+                    /** Attachment type. */
+                    public type: string;
+
+                    /** Attachment attachmentNamespace. */
+                    public attachmentNamespace: string;
+
+                    /** Attachment annotations. */
+                    public annotations: { [k: string]: string };
+
+                    /** Attachment createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attachment updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Attachment files. */
+                    public files: string[];
+
+                    /** Attachment ociVersionName. */
+                    public ociVersionName: string;
+
+                    /**
+                     * Creates a new Attachment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Attachment instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IAttachment): google.devtools.artifactregistry.v1.Attachment;
+
+                    /**
+                     * Encodes the specified Attachment message. Does not implicitly {@link google.devtools.artifactregistry.v1.Attachment.verify|verify} messages.
+                     * @param message Attachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Attachment message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Attachment.verify|verify} messages.
+                     * @param message Attachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Attachment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Attachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.Attachment;
+
+                    /**
+                     * Decodes an Attachment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Attachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.Attachment;
+
+                    /**
+                     * Verifies an Attachment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Attachment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Attachment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.Attachment;
+
+                    /**
+                     * Creates a plain object from an Attachment message. Also converts values to other types if specified.
+                     * @param message Attachment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.Attachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Attachment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Attachment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAttachmentsRequest. */
+                interface IListAttachmentsRequest {
+
+                    /** ListAttachmentsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAttachmentsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListAttachmentsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAttachmentsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAttachmentsRequest. */
+                class ListAttachmentsRequest implements IListAttachmentsRequest {
+
+                    /**
+                     * Constructs a new ListAttachmentsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IListAttachmentsRequest);
+
+                    /** ListAttachmentsRequest parent. */
+                    public parent: string;
+
+                    /** ListAttachmentsRequest filter. */
+                    public filter: string;
+
+                    /** ListAttachmentsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAttachmentsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAttachmentsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAttachmentsRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IListAttachmentsRequest): google.devtools.artifactregistry.v1.ListAttachmentsRequest;
+
+                    /**
+                     * Encodes the specified ListAttachmentsRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListAttachmentsRequest.verify|verify} messages.
+                     * @param message ListAttachmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IListAttachmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAttachmentsRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListAttachmentsRequest.verify|verify} messages.
+                     * @param message ListAttachmentsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IListAttachmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAttachmentsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAttachmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.ListAttachmentsRequest;
+
+                    /**
+                     * Decodes a ListAttachmentsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAttachmentsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.ListAttachmentsRequest;
+
+                    /**
+                     * Verifies a ListAttachmentsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAttachmentsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAttachmentsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.ListAttachmentsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAttachmentsRequest message. Also converts values to other types if specified.
+                     * @param message ListAttachmentsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.ListAttachmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAttachmentsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAttachmentsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAttachmentsResponse. */
+                interface IListAttachmentsResponse {
+
+                    /** ListAttachmentsResponse attachments */
+                    attachments?: (google.devtools.artifactregistry.v1.IAttachment[]|null);
+
+                    /** ListAttachmentsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAttachmentsResponse. */
+                class ListAttachmentsResponse implements IListAttachmentsResponse {
+
+                    /**
+                     * Constructs a new ListAttachmentsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IListAttachmentsResponse);
+
+                    /** ListAttachmentsResponse attachments. */
+                    public attachments: google.devtools.artifactregistry.v1.IAttachment[];
+
+                    /** ListAttachmentsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAttachmentsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAttachmentsResponse instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IListAttachmentsResponse): google.devtools.artifactregistry.v1.ListAttachmentsResponse;
+
+                    /**
+                     * Encodes the specified ListAttachmentsResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListAttachmentsResponse.verify|verify} messages.
+                     * @param message ListAttachmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IListAttachmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAttachmentsResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListAttachmentsResponse.verify|verify} messages.
+                     * @param message ListAttachmentsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IListAttachmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAttachmentsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAttachmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.ListAttachmentsResponse;
+
+                    /**
+                     * Decodes a ListAttachmentsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAttachmentsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.ListAttachmentsResponse;
+
+                    /**
+                     * Verifies a ListAttachmentsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAttachmentsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAttachmentsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.ListAttachmentsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAttachmentsResponse message. Also converts values to other types if specified.
+                     * @param message ListAttachmentsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.ListAttachmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAttachmentsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAttachmentsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAttachmentRequest. */
+                interface IGetAttachmentRequest {
+
+                    /** GetAttachmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAttachmentRequest. */
+                class GetAttachmentRequest implements IGetAttachmentRequest {
+
+                    /**
+                     * Constructs a new GetAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IGetAttachmentRequest);
+
+                    /** GetAttachmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAttachmentRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IGetAttachmentRequest): google.devtools.artifactregistry.v1.GetAttachmentRequest;
+
+                    /**
+                     * Encodes the specified GetAttachmentRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetAttachmentRequest.verify|verify} messages.
+                     * @param message GetAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IGetAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAttachmentRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetAttachmentRequest.verify|verify} messages.
+                     * @param message GetAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IGetAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.GetAttachmentRequest;
+
+                    /**
+                     * Decodes a GetAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.GetAttachmentRequest;
+
+                    /**
+                     * Verifies a GetAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.GetAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a GetAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message GetAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.GetAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAttachmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAttachmentRequest. */
+                interface ICreateAttachmentRequest {
+
+                    /** CreateAttachmentRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAttachmentRequest attachmentId */
+                    attachmentId?: (string|null);
+
+                    /** CreateAttachmentRequest attachment */
+                    attachment?: (google.devtools.artifactregistry.v1.IAttachment|null);
+                }
+
+                /** Represents a CreateAttachmentRequest. */
+                class CreateAttachmentRequest implements ICreateAttachmentRequest {
+
+                    /**
+                     * Constructs a new CreateAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.ICreateAttachmentRequest);
+
+                    /** CreateAttachmentRequest parent. */
+                    public parent: string;
+
+                    /** CreateAttachmentRequest attachmentId. */
+                    public attachmentId: string;
+
+                    /** CreateAttachmentRequest attachment. */
+                    public attachment?: (google.devtools.artifactregistry.v1.IAttachment|null);
+
+                    /**
+                     * Creates a new CreateAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAttachmentRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.ICreateAttachmentRequest): google.devtools.artifactregistry.v1.CreateAttachmentRequest;
+
+                    /**
+                     * Encodes the specified CreateAttachmentRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateAttachmentRequest.verify|verify} messages.
+                     * @param message CreateAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.ICreateAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAttachmentRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateAttachmentRequest.verify|verify} messages.
+                     * @param message CreateAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.ICreateAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.CreateAttachmentRequest;
+
+                    /**
+                     * Decodes a CreateAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.CreateAttachmentRequest;
+
+                    /**
+                     * Verifies a CreateAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.CreateAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message CreateAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.CreateAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAttachmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAttachmentRequest. */
+                interface IDeleteAttachmentRequest {
+
+                    /** DeleteAttachmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteAttachmentRequest. */
+                class DeleteAttachmentRequest implements IDeleteAttachmentRequest {
+
+                    /**
+                     * Constructs a new DeleteAttachmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IDeleteAttachmentRequest);
+
+                    /** DeleteAttachmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteAttachmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAttachmentRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IDeleteAttachmentRequest): google.devtools.artifactregistry.v1.DeleteAttachmentRequest;
+
+                    /**
+                     * Encodes the specified DeleteAttachmentRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteAttachmentRequest.verify|verify} messages.
+                     * @param message DeleteAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IDeleteAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAttachmentRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteAttachmentRequest.verify|verify} messages.
+                     * @param message DeleteAttachmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IDeleteAttachmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAttachmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.DeleteAttachmentRequest;
+
+                    /**
+                     * Decodes a DeleteAttachmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAttachmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.DeleteAttachmentRequest;
+
+                    /**
+                     * Verifies a DeleteAttachmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAttachmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAttachmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.DeleteAttachmentRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAttachmentRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAttachmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.DeleteAttachmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAttachmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAttachmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Hash. */
                 interface IHash {
 
@@ -2576,6 +3242,9 @@ export namespace google {
 
                     /** File fetchTime */
                     fetchTime?: (google.protobuf.ITimestamp|null);
+
+                    /** File annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a File. */
@@ -2607,6 +3276,9 @@ export namespace google {
 
                     /** File fetchTime. */
                     public fetchTime?: (google.protobuf.ITimestamp|null);
+
+                    /** File annotations. */
+                    public annotations: { [k: string]: string };
 
                     /**
                      * Creates a new File instance using the specified properties.
@@ -3007,6 +3679,321 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DeleteFileRequest. */
+                interface IDeleteFileRequest {
+
+                    /** DeleteFileRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteFileRequest. */
+                class DeleteFileRequest implements IDeleteFileRequest {
+
+                    /**
+                     * Constructs a new DeleteFileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IDeleteFileRequest);
+
+                    /** DeleteFileRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteFileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteFileRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IDeleteFileRequest): google.devtools.artifactregistry.v1.DeleteFileRequest;
+
+                    /**
+                     * Encodes the specified DeleteFileRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteFileRequest.verify|verify} messages.
+                     * @param message DeleteFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IDeleteFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteFileRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteFileRequest.verify|verify} messages.
+                     * @param message DeleteFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IDeleteFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteFileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.DeleteFileRequest;
+
+                    /**
+                     * Decodes a DeleteFileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.DeleteFileRequest;
+
+                    /**
+                     * Verifies a DeleteFileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteFileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteFileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.DeleteFileRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteFileRequest message. Also converts values to other types if specified.
+                     * @param message DeleteFileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.DeleteFileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteFileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteFileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateFileRequest. */
+                interface IUpdateFileRequest {
+
+                    /** UpdateFileRequest file */
+                    file?: (google.devtools.artifactregistry.v1.IFile|null);
+
+                    /** UpdateFileRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateFileRequest. */
+                class UpdateFileRequest implements IUpdateFileRequest {
+
+                    /**
+                     * Constructs a new UpdateFileRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IUpdateFileRequest);
+
+                    /** UpdateFileRequest file. */
+                    public file?: (google.devtools.artifactregistry.v1.IFile|null);
+
+                    /** UpdateFileRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateFileRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateFileRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IUpdateFileRequest): google.devtools.artifactregistry.v1.UpdateFileRequest;
+
+                    /**
+                     * Encodes the specified UpdateFileRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateFileRequest.verify|verify} messages.
+                     * @param message UpdateFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IUpdateFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateFileRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateFileRequest.verify|verify} messages.
+                     * @param message UpdateFileRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IUpdateFileRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateFileRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.UpdateFileRequest;
+
+                    /**
+                     * Decodes an UpdateFileRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateFileRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.UpdateFileRequest;
+
+                    /**
+                     * Verifies an UpdateFileRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateFileRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateFileRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.UpdateFileRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateFileRequest message. Also converts values to other types if specified.
+                     * @param message UpdateFileRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.UpdateFileRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateFileRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateFileRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenericArtifact. */
+                interface IGenericArtifact {
+
+                    /** GenericArtifact name */
+                    name?: (string|null);
+
+                    /** GenericArtifact version */
+                    version?: (string|null);
+
+                    /** GenericArtifact createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenericArtifact updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GenericArtifact. */
+                class GenericArtifact implements IGenericArtifact {
+
+                    /**
+                     * Constructs a new GenericArtifact.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IGenericArtifact);
+
+                    /** GenericArtifact name. */
+                    public name: string;
+
+                    /** GenericArtifact version. */
+                    public version: string;
+
+                    /** GenericArtifact createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** GenericArtifact updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GenericArtifact instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenericArtifact instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IGenericArtifact): google.devtools.artifactregistry.v1.GenericArtifact;
+
+                    /**
+                     * Encodes the specified GenericArtifact message. Does not implicitly {@link google.devtools.artifactregistry.v1.GenericArtifact.verify|verify} messages.
+                     * @param message GenericArtifact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IGenericArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenericArtifact message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GenericArtifact.verify|verify} messages.
+                     * @param message GenericArtifact message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IGenericArtifact, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenericArtifact message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenericArtifact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.GenericArtifact;
+
+                    /**
+                     * Decodes a GenericArtifact message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenericArtifact
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.GenericArtifact;
+
+                    /**
+                     * Verifies a GenericArtifact message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenericArtifact message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenericArtifact
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.GenericArtifact;
+
+                    /**
+                     * Creates a plain object from a GenericArtifact message. Also converts values to other types if specified.
+                     * @param message GenericArtifact
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.GenericArtifact, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenericArtifact to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenericArtifact
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Package. */
                 interface IPackage {
 
@@ -3021,6 +4008,9 @@ export namespace google {
 
                     /** Package updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Package annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Package. */
@@ -3043,6 +4033,9 @@ export namespace google {
 
                     /** Package updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Package annotations. */
+                    public annotations: { [k: string]: string };
 
                     /**
                      * Creates a new Package instance using the specified properties.
@@ -3133,6 +4126,12 @@ export namespace google {
 
                     /** ListPackagesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListPackagesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListPackagesRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a ListPackagesRequest. */
@@ -3152,6 +4151,12 @@ export namespace google {
 
                     /** ListPackagesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListPackagesRequest filter. */
+                    public filter: string;
+
+                    /** ListPackagesRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new ListPackagesRequest instance using the specified properties.
@@ -3522,6 +4527,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DeletePackageRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdatePackageRequest. */
+                interface IUpdatePackageRequest {
+
+                    /** UpdatePackageRequest package */
+                    "package"?: (google.devtools.artifactregistry.v1.IPackage|null);
+
+                    /** UpdatePackageRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdatePackageRequest. */
+                class UpdatePackageRequest implements IUpdatePackageRequest {
+
+                    /**
+                     * Constructs a new UpdatePackageRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IUpdatePackageRequest);
+
+                    /** UpdatePackageRequest package. */
+                    public package?: (google.devtools.artifactregistry.v1.IPackage|null);
+
+                    /** UpdatePackageRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdatePackageRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdatePackageRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IUpdatePackageRequest): google.devtools.artifactregistry.v1.UpdatePackageRequest;
+
+                    /**
+                     * Encodes the specified UpdatePackageRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdatePackageRequest.verify|verify} messages.
+                     * @param message UpdatePackageRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IUpdatePackageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdatePackageRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdatePackageRequest.verify|verify} messages.
+                     * @param message UpdatePackageRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IUpdatePackageRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdatePackageRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdatePackageRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.UpdatePackageRequest;
+
+                    /**
+                     * Decodes an UpdatePackageRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdatePackageRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.UpdatePackageRequest;
+
+                    /**
+                     * Verifies an UpdatePackageRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdatePackageRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdatePackageRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.UpdatePackageRequest;
+
+                    /**
+                     * Creates a plain object from an UpdatePackageRequest message. Also converts values to other types if specified.
+                     * @param message UpdatePackageRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.UpdatePackageRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdatePackageRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdatePackageRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4136,11 +5244,17 @@ export namespace google {
                     /** RemoteRepositoryConfig yumRepository */
                     yumRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.IYumRepository|null);
 
+                    /** RemoteRepositoryConfig commonRepository */
+                    commonRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.ICommonRemoteRepository|null);
+
                     /** RemoteRepositoryConfig description */
                     description?: (string|null);
 
                     /** RemoteRepositoryConfig upstreamCredentials */
                     upstreamCredentials?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.IUpstreamCredentials|null);
+
+                    /** RemoteRepositoryConfig disableUpstreamValidation */
+                    disableUpstreamValidation?: (boolean|null);
                 }
 
                 /** Represents a RemoteRepositoryConfig. */
@@ -4170,14 +5284,20 @@ export namespace google {
                     /** RemoteRepositoryConfig yumRepository. */
                     public yumRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.IYumRepository|null);
 
+                    /** RemoteRepositoryConfig commonRepository. */
+                    public commonRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.ICommonRemoteRepository|null);
+
                     /** RemoteRepositoryConfig description. */
                     public description: string;
 
                     /** RemoteRepositoryConfig upstreamCredentials. */
                     public upstreamCredentials?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.IUpstreamCredentials|null);
 
+                    /** RemoteRepositoryConfig disableUpstreamValidation. */
+                    public disableUpstreamValidation: boolean;
+
                     /** RemoteRepositoryConfig remoteSource. */
-                    public remoteSource?: ("dockerRepository"|"mavenRepository"|"npmRepository"|"pythonRepository"|"aptRepository"|"yumRepository");
+                    public remoteSource?: ("dockerRepository"|"mavenRepository"|"npmRepository"|"pythonRepository"|"aptRepository"|"yumRepository"|"commonRepository");
 
                     /**
                      * Creates a new RemoteRepositoryConfig instance using the specified properties.
@@ -4470,6 +5590,9 @@ export namespace google {
 
                         /** DockerRepository publicRepository */
                         publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.PublicRepository|null);
+
+                        /** DockerRepository customRepository */
+                        customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.ICustomRepository|null);
                     }
 
                     /** Represents a DockerRepository. */
@@ -4484,8 +5607,11 @@ export namespace google {
                         /** DockerRepository publicRepository. */
                         public publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.PublicRepository|null);
 
+                        /** DockerRepository customRepository. */
+                        public customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.ICustomRepository|null);
+
                         /** DockerRepository upstream. */
-                        public upstream?: "publicRepository";
+                        public upstream?: ("publicRepository"|"customRepository");
 
                         /**
                          * Creates a new DockerRepository instance using the specified properties.
@@ -4567,6 +5693,103 @@ export namespace google {
 
                     namespace DockerRepository {
 
+                        /** Properties of a CustomRepository. */
+                        interface ICustomRepository {
+
+                            /** CustomRepository uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a CustomRepository. */
+                        class CustomRepository implements ICustomRepository {
+
+                            /**
+                             * Constructs a new CustomRepository.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.ICustomRepository);
+
+                            /** CustomRepository uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new CustomRepository instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomRepository instance
+                             */
+                            public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.ICustomRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository;
+
+                            /**
+                             * Encodes the specified CustomRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository;
+
+                            /**
+                             * Verifies a CustomRepository message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomRepository message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomRepository
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository;
+
+                            /**
+                             * Creates a plain object from a CustomRepository message. Also converts values to other types if specified.
+                             * @param message CustomRepository
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.DockerRepository.CustomRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomRepository to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomRepository
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** PublicRepository enum. */
                         enum PublicRepository {
                             PUBLIC_REPOSITORY_UNSPECIFIED = 0,
@@ -4579,6 +5802,9 @@ export namespace google {
 
                         /** MavenRepository publicRepository */
                         publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.PublicRepository|null);
+
+                        /** MavenRepository customRepository */
+                        customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.ICustomRepository|null);
                     }
 
                     /** Represents a MavenRepository. */
@@ -4593,8 +5819,11 @@ export namespace google {
                         /** MavenRepository publicRepository. */
                         public publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.PublicRepository|null);
 
+                        /** MavenRepository customRepository. */
+                        public customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.ICustomRepository|null);
+
                         /** MavenRepository upstream. */
-                        public upstream?: "publicRepository";
+                        public upstream?: ("publicRepository"|"customRepository");
 
                         /**
                          * Creates a new MavenRepository instance using the specified properties.
@@ -4676,6 +5905,103 @@ export namespace google {
 
                     namespace MavenRepository {
 
+                        /** Properties of a CustomRepository. */
+                        interface ICustomRepository {
+
+                            /** CustomRepository uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a CustomRepository. */
+                        class CustomRepository implements ICustomRepository {
+
+                            /**
+                             * Constructs a new CustomRepository.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.ICustomRepository);
+
+                            /** CustomRepository uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new CustomRepository instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomRepository instance
+                             */
+                            public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.ICustomRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository;
+
+                            /**
+                             * Encodes the specified CustomRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository;
+
+                            /**
+                             * Verifies a CustomRepository message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomRepository message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomRepository
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository;
+
+                            /**
+                             * Creates a plain object from a CustomRepository message. Also converts values to other types if specified.
+                             * @param message CustomRepository
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.MavenRepository.CustomRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomRepository to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomRepository
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** PublicRepository enum. */
                         enum PublicRepository {
                             PUBLIC_REPOSITORY_UNSPECIFIED = 0,
@@ -4688,6 +6014,9 @@ export namespace google {
 
                         /** NpmRepository publicRepository */
                         publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.PublicRepository|null);
+
+                        /** NpmRepository customRepository */
+                        customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.ICustomRepository|null);
                     }
 
                     /** Represents a NpmRepository. */
@@ -4702,8 +6031,11 @@ export namespace google {
                         /** NpmRepository publicRepository. */
                         public publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.PublicRepository|null);
 
+                        /** NpmRepository customRepository. */
+                        public customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.ICustomRepository|null);
+
                         /** NpmRepository upstream. */
-                        public upstream?: "publicRepository";
+                        public upstream?: ("publicRepository"|"customRepository");
 
                         /**
                          * Creates a new NpmRepository instance using the specified properties.
@@ -4785,6 +6117,103 @@ export namespace google {
 
                     namespace NpmRepository {
 
+                        /** Properties of a CustomRepository. */
+                        interface ICustomRepository {
+
+                            /** CustomRepository uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a CustomRepository. */
+                        class CustomRepository implements ICustomRepository {
+
+                            /**
+                             * Constructs a new CustomRepository.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.ICustomRepository);
+
+                            /** CustomRepository uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new CustomRepository instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomRepository instance
+                             */
+                            public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.ICustomRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository;
+
+                            /**
+                             * Encodes the specified CustomRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository;
+
+                            /**
+                             * Verifies a CustomRepository message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomRepository message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomRepository
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository;
+
+                            /**
+                             * Creates a plain object from a CustomRepository message. Also converts values to other types if specified.
+                             * @param message CustomRepository
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.NpmRepository.CustomRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomRepository to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomRepository
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** PublicRepository enum. */
                         enum PublicRepository {
                             PUBLIC_REPOSITORY_UNSPECIFIED = 0,
@@ -4797,6 +6226,9 @@ export namespace google {
 
                         /** PythonRepository publicRepository */
                         publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.PublicRepository|null);
+
+                        /** PythonRepository customRepository */
+                        customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.ICustomRepository|null);
                     }
 
                     /** Represents a PythonRepository. */
@@ -4811,8 +6243,11 @@ export namespace google {
                         /** PythonRepository publicRepository. */
                         public publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.PublicRepository|keyof typeof google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.PublicRepository|null);
 
+                        /** PythonRepository customRepository. */
+                        public customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.ICustomRepository|null);
+
                         /** PythonRepository upstream. */
-                        public upstream?: "publicRepository";
+                        public upstream?: ("publicRepository"|"customRepository");
 
                         /**
                          * Creates a new PythonRepository instance using the specified properties.
@@ -4894,6 +6329,103 @@ export namespace google {
 
                     namespace PythonRepository {
 
+                        /** Properties of a CustomRepository. */
+                        interface ICustomRepository {
+
+                            /** CustomRepository uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a CustomRepository. */
+                        class CustomRepository implements ICustomRepository {
+
+                            /**
+                             * Constructs a new CustomRepository.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.ICustomRepository);
+
+                            /** CustomRepository uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new CustomRepository instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomRepository instance
+                             */
+                            public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.ICustomRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository;
+
+                            /**
+                             * Encodes the specified CustomRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository;
+
+                            /**
+                             * Verifies a CustomRepository message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomRepository message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomRepository
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository;
+
+                            /**
+                             * Creates a plain object from a CustomRepository message. Also converts values to other types if specified.
+                             * @param message CustomRepository
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.PythonRepository.CustomRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomRepository to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomRepository
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
                         /** PublicRepository enum. */
                         enum PublicRepository {
                             PUBLIC_REPOSITORY_UNSPECIFIED = 0,
@@ -4906,6 +6438,9 @@ export namespace google {
 
                         /** AptRepository publicRepository */
                         publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.IPublicRepository|null);
+
+                        /** AptRepository customRepository */
+                        customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.ICustomRepository|null);
                     }
 
                     /** Represents an AptRepository. */
@@ -4920,8 +6455,11 @@ export namespace google {
                         /** AptRepository publicRepository. */
                         public publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.IPublicRepository|null);
 
+                        /** AptRepository customRepository. */
+                        public customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.ICustomRepository|null);
+
                         /** AptRepository upstream. */
-                        public upstream?: "publicRepository";
+                        public upstream?: ("publicRepository"|"customRepository");
 
                         /**
                          * Creates a new AptRepository instance using the specified properties.
@@ -5112,8 +6650,106 @@ export namespace google {
                             enum RepositoryBase {
                                 REPOSITORY_BASE_UNSPECIFIED = 0,
                                 DEBIAN = 1,
-                                UBUNTU = 2
+                                UBUNTU = 2,
+                                DEBIAN_SNAPSHOT = 3
                             }
+                        }
+
+                        /** Properties of a CustomRepository. */
+                        interface ICustomRepository {
+
+                            /** CustomRepository uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a CustomRepository. */
+                        class CustomRepository implements ICustomRepository {
+
+                            /**
+                             * Constructs a new CustomRepository.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.ICustomRepository);
+
+                            /** CustomRepository uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new CustomRepository instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomRepository instance
+                             */
+                            public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.ICustomRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository;
+
+                            /**
+                             * Encodes the specified CustomRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository;
+
+                            /**
+                             * Verifies a CustomRepository message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomRepository message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomRepository
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository;
+
+                            /**
+                             * Creates a plain object from a CustomRepository message. Also converts values to other types if specified.
+                             * @param message CustomRepository
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.AptRepository.CustomRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomRepository to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomRepository
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
                     }
 
@@ -5122,6 +6758,9 @@ export namespace google {
 
                         /** YumRepository publicRepository */
                         publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.IPublicRepository|null);
+
+                        /** YumRepository customRepository */
+                        customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.ICustomRepository|null);
                     }
 
                     /** Represents a YumRepository. */
@@ -5136,8 +6775,11 @@ export namespace google {
                         /** YumRepository publicRepository. */
                         public publicRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.IPublicRepository|null);
 
+                        /** YumRepository customRepository. */
+                        public customRepository?: (google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.ICustomRepository|null);
+
                         /** YumRepository upstream. */
-                        public upstream?: "publicRepository";
+                        public upstream?: ("publicRepository"|"customRepository");
 
                         /**
                          * Creates a new YumRepository instance using the specified properties.
@@ -5335,6 +6977,200 @@ export namespace google {
                                 EPEL = 6
                             }
                         }
+
+                        /** Properties of a CustomRepository. */
+                        interface ICustomRepository {
+
+                            /** CustomRepository uri */
+                            uri?: (string|null);
+                        }
+
+                        /** Represents a CustomRepository. */
+                        class CustomRepository implements ICustomRepository {
+
+                            /**
+                             * Constructs a new CustomRepository.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.ICustomRepository);
+
+                            /** CustomRepository uri. */
+                            public uri: string;
+
+                            /**
+                             * Creates a new CustomRepository instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CustomRepository instance
+                             */
+                            public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.ICustomRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository;
+
+                            /**
+                             * Encodes the specified CustomRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CustomRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository.verify|verify} messages.
+                             * @param message CustomRepository message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.ICustomRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository;
+
+                            /**
+                             * Decodes a CustomRepository message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CustomRepository
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository;
+
+                            /**
+                             * Verifies a CustomRepository message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CustomRepository message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CustomRepository
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository;
+
+                            /**
+                             * Creates a plain object from a CustomRepository message. Also converts values to other types if specified.
+                             * @param message CustomRepository
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.YumRepository.CustomRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CustomRepository to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CustomRepository
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
+
+                    /** Properties of a CommonRemoteRepository. */
+                    interface ICommonRemoteRepository {
+
+                        /** CommonRemoteRepository uri */
+                        uri?: (string|null);
+                    }
+
+                    /** Represents a CommonRemoteRepository. */
+                    class CommonRemoteRepository implements ICommonRemoteRepository {
+
+                        /**
+                         * Constructs a new CommonRemoteRepository.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.ICommonRemoteRepository);
+
+                        /** CommonRemoteRepository uri. */
+                        public uri: string;
+
+                        /**
+                         * Creates a new CommonRemoteRepository instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CommonRemoteRepository instance
+                         */
+                        public static create(properties?: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.ICommonRemoteRepository): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository;
+
+                        /**
+                         * Encodes the specified CommonRemoteRepository message. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository.verify|verify} messages.
+                         * @param message CommonRemoteRepository message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.ICommonRemoteRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CommonRemoteRepository message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository.verify|verify} messages.
+                         * @param message CommonRemoteRepository message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.ICommonRemoteRepository, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CommonRemoteRepository message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CommonRemoteRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository;
+
+                        /**
+                         * Decodes a CommonRemoteRepository message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CommonRemoteRepository
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository;
+
+                        /**
+                         * Verifies a CommonRemoteRepository message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CommonRemoteRepository message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CommonRemoteRepository
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository;
+
+                        /**
+                         * Creates a plain object from a CommonRemoteRepository message. Also converts values to other types if specified.
+                         * @param message CommonRemoteRepository
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.artifactregistry.v1.RemoteRepositoryConfig.CommonRemoteRepository, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CommonRemoteRepository to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CommonRemoteRepository
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 
@@ -5388,6 +7224,15 @@ export namespace google {
 
                     /** Repository cleanupPolicyDryRun */
                     cleanupPolicyDryRun?: (boolean|null);
+
+                    /** Repository vulnerabilityScanningConfig */
+                    vulnerabilityScanningConfig?: (google.devtools.artifactregistry.v1.Repository.IVulnerabilityScanningConfig|null);
+
+                    /** Repository disallowUnspecifiedMode */
+                    disallowUnspecifiedMode?: (boolean|null);
+
+                    /** Repository satisfiesPzi */
+                    satisfiesPzi?: (boolean|null);
                 }
 
                 /** Represents a Repository. */
@@ -5446,6 +7291,15 @@ export namespace google {
 
                     /** Repository cleanupPolicyDryRun. */
                     public cleanupPolicyDryRun: boolean;
+
+                    /** Repository vulnerabilityScanningConfig. */
+                    public vulnerabilityScanningConfig?: (google.devtools.artifactregistry.v1.Repository.IVulnerabilityScanningConfig|null);
+
+                    /** Repository disallowUnspecifiedMode. */
+                    public disallowUnspecifiedMode: boolean;
+
+                    /** Repository satisfiesPzi. */
+                    public satisfiesPzi: boolean;
 
                     /** Repository formatConfig. */
                     public formatConfig?: ("mavenConfig"|"dockerConfig");
@@ -5743,6 +7597,139 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a VulnerabilityScanningConfig. */
+                    interface IVulnerabilityScanningConfig {
+
+                        /** VulnerabilityScanningConfig enablementConfig */
+                        enablementConfig?: (google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementConfig|keyof typeof google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementConfig|null);
+
+                        /** VulnerabilityScanningConfig lastEnableTime */
+                        lastEnableTime?: (google.protobuf.ITimestamp|null);
+
+                        /** VulnerabilityScanningConfig enablementState */
+                        enablementState?: (google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementState|keyof typeof google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementState|null);
+
+                        /** VulnerabilityScanningConfig enablementStateReason */
+                        enablementStateReason?: (string|null);
+                    }
+
+                    /** Represents a VulnerabilityScanningConfig. */
+                    class VulnerabilityScanningConfig implements IVulnerabilityScanningConfig {
+
+                        /**
+                         * Constructs a new VulnerabilityScanningConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.artifactregistry.v1.Repository.IVulnerabilityScanningConfig);
+
+                        /** VulnerabilityScanningConfig enablementConfig. */
+                        public enablementConfig: (google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementConfig|keyof typeof google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementConfig);
+
+                        /** VulnerabilityScanningConfig lastEnableTime. */
+                        public lastEnableTime?: (google.protobuf.ITimestamp|null);
+
+                        /** VulnerabilityScanningConfig enablementState. */
+                        public enablementState: (google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementState|keyof typeof google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.EnablementState);
+
+                        /** VulnerabilityScanningConfig enablementStateReason. */
+                        public enablementStateReason: string;
+
+                        /**
+                         * Creates a new VulnerabilityScanningConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns VulnerabilityScanningConfig instance
+                         */
+                        public static create(properties?: google.devtools.artifactregistry.v1.Repository.IVulnerabilityScanningConfig): google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig;
+
+                        /**
+                         * Encodes the specified VulnerabilityScanningConfig message. Does not implicitly {@link google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.verify|verify} messages.
+                         * @param message VulnerabilityScanningConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.artifactregistry.v1.Repository.IVulnerabilityScanningConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified VulnerabilityScanningConfig message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig.verify|verify} messages.
+                         * @param message VulnerabilityScanningConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.artifactregistry.v1.Repository.IVulnerabilityScanningConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a VulnerabilityScanningConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns VulnerabilityScanningConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig;
+
+                        /**
+                         * Decodes a VulnerabilityScanningConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns VulnerabilityScanningConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig;
+
+                        /**
+                         * Verifies a VulnerabilityScanningConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a VulnerabilityScanningConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns VulnerabilityScanningConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig;
+
+                        /**
+                         * Creates a plain object from a VulnerabilityScanningConfig message. Also converts values to other types if specified.
+                         * @param message VulnerabilityScanningConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this VulnerabilityScanningConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for VulnerabilityScanningConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace VulnerabilityScanningConfig {
+
+                        /** EnablementConfig enum. */
+                        enum EnablementConfig {
+                            ENABLEMENT_CONFIG_UNSPECIFIED = 0,
+                            INHERITED = 1,
+                            DISABLED = 2
+                        }
+
+                        /** EnablementState enum. */
+                        enum EnablementState {
+                            ENABLEMENT_STATE_UNSPECIFIED = 0,
+                            SCANNING_UNSUPPORTED = 1,
+                            SCANNING_DISABLED = 2,
+                            SCANNING_ACTIVE = 3
+                        }
+                    }
+
                     /** Format enum. */
                     enum Format {
                         FORMAT_UNSPECIFIED = 0,
@@ -5753,7 +7740,8 @@ export namespace google {
                         YUM = 6,
                         PYTHON = 8,
                         KFP = 9,
-                        GO = 10
+                        GO = 10,
+                        GENERIC = 11
                     }
 
                     /** Mode enum. */
@@ -5776,6 +7764,12 @@ export namespace google {
 
                     /** ListRepositoriesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListRepositoriesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListRepositoriesRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a ListRepositoriesRequest. */
@@ -5795,6 +7789,12 @@ export namespace google {
 
                     /** ListRepositoriesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListRepositoriesRequest filter. */
+                    public filter: string;
+
+                    /** ListRepositoriesRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new ListRepositoriesRequest instance using the specified properties.
@@ -6383,6 +8383,761 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Rule. */
+                interface IRule {
+
+                    /** Rule name */
+                    name?: (string|null);
+
+                    /** Rule action */
+                    action?: (google.devtools.artifactregistry.v1.Rule.Action|keyof typeof google.devtools.artifactregistry.v1.Rule.Action|null);
+
+                    /** Rule operation */
+                    operation?: (google.devtools.artifactregistry.v1.Rule.Operation|keyof typeof google.devtools.artifactregistry.v1.Rule.Operation|null);
+
+                    /** Rule condition */
+                    condition?: (google.type.IExpr|null);
+
+                    /** Rule packageId */
+                    packageId?: (string|null);
+                }
+
+                /** Represents a Rule. */
+                class Rule implements IRule {
+
+                    /**
+                     * Constructs a new Rule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IRule);
+
+                    /** Rule name. */
+                    public name: string;
+
+                    /** Rule action. */
+                    public action: (google.devtools.artifactregistry.v1.Rule.Action|keyof typeof google.devtools.artifactregistry.v1.Rule.Action);
+
+                    /** Rule operation. */
+                    public operation: (google.devtools.artifactregistry.v1.Rule.Operation|keyof typeof google.devtools.artifactregistry.v1.Rule.Operation);
+
+                    /** Rule condition. */
+                    public condition?: (google.type.IExpr|null);
+
+                    /** Rule packageId. */
+                    public packageId: string;
+
+                    /**
+                     * Creates a new Rule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Rule instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IRule): google.devtools.artifactregistry.v1.Rule;
+
+                    /**
+                     * Encodes the specified Rule message. Does not implicitly {@link google.devtools.artifactregistry.v1.Rule.verify|verify} messages.
+                     * @param message Rule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Rule message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.Rule.verify|verify} messages.
+                     * @param message Rule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Rule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Rule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.Rule;
+
+                    /**
+                     * Decodes a Rule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Rule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.Rule;
+
+                    /**
+                     * Verifies a Rule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Rule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Rule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.Rule;
+
+                    /**
+                     * Creates a plain object from a Rule message. Also converts values to other types if specified.
+                     * @param message Rule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.Rule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Rule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Rule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Rule {
+
+                    /** Action enum. */
+                    enum Action {
+                        ACTION_UNSPECIFIED = 0,
+                        ALLOW = 1,
+                        DENY = 2
+                    }
+
+                    /** Operation enum. */
+                    enum Operation {
+                        OPERATION_UNSPECIFIED = 0,
+                        DOWNLOAD = 1
+                    }
+                }
+
+                /** Properties of a ListRulesRequest. */
+                interface IListRulesRequest {
+
+                    /** ListRulesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListRulesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListRulesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListRulesRequest. */
+                class ListRulesRequest implements IListRulesRequest {
+
+                    /**
+                     * Constructs a new ListRulesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IListRulesRequest);
+
+                    /** ListRulesRequest parent. */
+                    public parent: string;
+
+                    /** ListRulesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListRulesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListRulesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRulesRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IListRulesRequest): google.devtools.artifactregistry.v1.ListRulesRequest;
+
+                    /**
+                     * Encodes the specified ListRulesRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRulesRequest.verify|verify} messages.
+                     * @param message ListRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IListRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRulesRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRulesRequest.verify|verify} messages.
+                     * @param message ListRulesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IListRulesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRulesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.ListRulesRequest;
+
+                    /**
+                     * Decodes a ListRulesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRulesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.ListRulesRequest;
+
+                    /**
+                     * Verifies a ListRulesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRulesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRulesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.ListRulesRequest;
+
+                    /**
+                     * Creates a plain object from a ListRulesRequest message. Also converts values to other types if specified.
+                     * @param message ListRulesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.ListRulesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRulesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRulesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListRulesResponse. */
+                interface IListRulesResponse {
+
+                    /** ListRulesResponse rules */
+                    rules?: (google.devtools.artifactregistry.v1.IRule[]|null);
+
+                    /** ListRulesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListRulesResponse. */
+                class ListRulesResponse implements IListRulesResponse {
+
+                    /**
+                     * Constructs a new ListRulesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IListRulesResponse);
+
+                    /** ListRulesResponse rules. */
+                    public rules: google.devtools.artifactregistry.v1.IRule[];
+
+                    /** ListRulesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListRulesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListRulesResponse instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IListRulesResponse): google.devtools.artifactregistry.v1.ListRulesResponse;
+
+                    /**
+                     * Encodes the specified ListRulesResponse message. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRulesResponse.verify|verify} messages.
+                     * @param message ListRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IListRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListRulesResponse message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.ListRulesResponse.verify|verify} messages.
+                     * @param message ListRulesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IListRulesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListRulesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.ListRulesResponse;
+
+                    /**
+                     * Decodes a ListRulesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListRulesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.ListRulesResponse;
+
+                    /**
+                     * Verifies a ListRulesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListRulesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListRulesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.ListRulesResponse;
+
+                    /**
+                     * Creates a plain object from a ListRulesResponse message. Also converts values to other types if specified.
+                     * @param message ListRulesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.ListRulesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListRulesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListRulesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetRuleRequest. */
+                interface IGetRuleRequest {
+
+                    /** GetRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetRuleRequest. */
+                class GetRuleRequest implements IGetRuleRequest {
+
+                    /**
+                     * Constructs a new GetRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IGetRuleRequest);
+
+                    /** GetRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetRuleRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IGetRuleRequest): google.devtools.artifactregistry.v1.GetRuleRequest;
+
+                    /**
+                     * Encodes the specified GetRuleRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.GetRuleRequest.verify|verify} messages.
+                     * @param message GetRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IGetRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetRuleRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.GetRuleRequest.verify|verify} messages.
+                     * @param message GetRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IGetRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.GetRuleRequest;
+
+                    /**
+                     * Decodes a GetRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.GetRuleRequest;
+
+                    /**
+                     * Verifies a GetRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.GetRuleRequest;
+
+                    /**
+                     * Creates a plain object from a GetRuleRequest message. Also converts values to other types if specified.
+                     * @param message GetRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.GetRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateRuleRequest. */
+                interface ICreateRuleRequest {
+
+                    /** CreateRuleRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateRuleRequest ruleId */
+                    ruleId?: (string|null);
+
+                    /** CreateRuleRequest rule */
+                    rule?: (google.devtools.artifactregistry.v1.IRule|null);
+                }
+
+                /** Represents a CreateRuleRequest. */
+                class CreateRuleRequest implements ICreateRuleRequest {
+
+                    /**
+                     * Constructs a new CreateRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.ICreateRuleRequest);
+
+                    /** CreateRuleRequest parent. */
+                    public parent: string;
+
+                    /** CreateRuleRequest ruleId. */
+                    public ruleId: string;
+
+                    /** CreateRuleRequest rule. */
+                    public rule?: (google.devtools.artifactregistry.v1.IRule|null);
+
+                    /**
+                     * Creates a new CreateRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateRuleRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.ICreateRuleRequest): google.devtools.artifactregistry.v1.CreateRuleRequest;
+
+                    /**
+                     * Encodes the specified CreateRuleRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateRuleRequest.verify|verify} messages.
+                     * @param message CreateRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.ICreateRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateRuleRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.CreateRuleRequest.verify|verify} messages.
+                     * @param message CreateRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.ICreateRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.CreateRuleRequest;
+
+                    /**
+                     * Decodes a CreateRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.CreateRuleRequest;
+
+                    /**
+                     * Verifies a CreateRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.CreateRuleRequest;
+
+                    /**
+                     * Creates a plain object from a CreateRuleRequest message. Also converts values to other types if specified.
+                     * @param message CreateRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.CreateRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateRuleRequest. */
+                interface IUpdateRuleRequest {
+
+                    /** UpdateRuleRequest rule */
+                    rule?: (google.devtools.artifactregistry.v1.IRule|null);
+
+                    /** UpdateRuleRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateRuleRequest. */
+                class UpdateRuleRequest implements IUpdateRuleRequest {
+
+                    /**
+                     * Constructs a new UpdateRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IUpdateRuleRequest);
+
+                    /** UpdateRuleRequest rule. */
+                    public rule?: (google.devtools.artifactregistry.v1.IRule|null);
+
+                    /** UpdateRuleRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateRuleRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IUpdateRuleRequest): google.devtools.artifactregistry.v1.UpdateRuleRequest;
+
+                    /**
+                     * Encodes the specified UpdateRuleRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateRuleRequest.verify|verify} messages.
+                     * @param message UpdateRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IUpdateRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateRuleRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateRuleRequest.verify|verify} messages.
+                     * @param message UpdateRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IUpdateRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.UpdateRuleRequest;
+
+                    /**
+                     * Decodes an UpdateRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.UpdateRuleRequest;
+
+                    /**
+                     * Verifies an UpdateRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.UpdateRuleRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateRuleRequest message. Also converts values to other types if specified.
+                     * @param message UpdateRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.UpdateRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteRuleRequest. */
+                interface IDeleteRuleRequest {
+
+                    /** DeleteRuleRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteRuleRequest. */
+                class DeleteRuleRequest implements IDeleteRuleRequest {
+
+                    /**
+                     * Constructs a new DeleteRuleRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IDeleteRuleRequest);
+
+                    /** DeleteRuleRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteRuleRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteRuleRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IDeleteRuleRequest): google.devtools.artifactregistry.v1.DeleteRuleRequest;
+
+                    /**
+                     * Encodes the specified DeleteRuleRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteRuleRequest.verify|verify} messages.
+                     * @param message DeleteRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IDeleteRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteRuleRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.DeleteRuleRequest.verify|verify} messages.
+                     * @param message DeleteRuleRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IDeleteRuleRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteRuleRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.DeleteRuleRequest;
+
+                    /**
+                     * Decodes a DeleteRuleRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteRuleRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.DeleteRuleRequest;
+
+                    /**
+                     * Verifies a DeleteRuleRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteRuleRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteRuleRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.DeleteRuleRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteRuleRequest message. Also converts values to other types if specified.
+                     * @param message DeleteRuleRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.DeleteRuleRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteRuleRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteRuleRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an ArtifactRegistry */
                 class ArtifactRegistry extends $protobuf.rpc.Service {
 
@@ -6712,6 +9467,20 @@ export namespace google {
                     public batchDeleteVersions(request: google.devtools.artifactregistry.v1.IBatchDeleteVersionsRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateVersion.
+                     * @param request UpdateVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Version
+                     */
+                    public updateVersion(request: google.devtools.artifactregistry.v1.IUpdateVersionRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateVersionCallback): void;
+
+                    /**
+                     * Calls UpdateVersion.
+                     * @param request UpdateVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateVersion(request: google.devtools.artifactregistry.v1.IUpdateVersionRequest): Promise<google.devtools.artifactregistry.v1.Version>;
+
+                    /**
                      * Calls ListFiles.
                      * @param request ListFilesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListFilesResponse
@@ -6738,6 +9507,34 @@ export namespace google {
                      * @returns Promise
                      */
                     public getFile(request: google.devtools.artifactregistry.v1.IGetFileRequest): Promise<google.devtools.artifactregistry.v1.File>;
+
+                    /**
+                     * Calls DeleteFile.
+                     * @param request DeleteFileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteFile(request: google.devtools.artifactregistry.v1.IDeleteFileRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteFileCallback): void;
+
+                    /**
+                     * Calls DeleteFile.
+                     * @param request DeleteFileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteFile(request: google.devtools.artifactregistry.v1.IDeleteFileRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateFile.
+                     * @param request UpdateFileRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and File
+                     */
+                    public updateFile(request: google.devtools.artifactregistry.v1.IUpdateFileRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateFileCallback): void;
+
+                    /**
+                     * Calls UpdateFile.
+                     * @param request UpdateFileRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateFile(request: google.devtools.artifactregistry.v1.IUpdateFileRequest): Promise<google.devtools.artifactregistry.v1.File>;
 
                     /**
                      * Calls ListTags.
@@ -6808,6 +9605,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteTag(request: google.devtools.artifactregistry.v1.IDeleteTagRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls CreateRule.
+                     * @param request CreateRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Rule
+                     */
+                    public createRule(request: google.devtools.artifactregistry.v1.ICreateRuleRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.CreateRuleCallback): void;
+
+                    /**
+                     * Calls CreateRule.
+                     * @param request CreateRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createRule(request: google.devtools.artifactregistry.v1.ICreateRuleRequest): Promise<google.devtools.artifactregistry.v1.Rule>;
+
+                    /**
+                     * Calls ListRules.
+                     * @param request ListRulesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListRulesResponse
+                     */
+                    public listRules(request: google.devtools.artifactregistry.v1.IListRulesRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.ListRulesCallback): void;
+
+                    /**
+                     * Calls ListRules.
+                     * @param request ListRulesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listRules(request: google.devtools.artifactregistry.v1.IListRulesRequest): Promise<google.devtools.artifactregistry.v1.ListRulesResponse>;
+
+                    /**
+                     * Calls GetRule.
+                     * @param request GetRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Rule
+                     */
+                    public getRule(request: google.devtools.artifactregistry.v1.IGetRuleRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.GetRuleCallback): void;
+
+                    /**
+                     * Calls GetRule.
+                     * @param request GetRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getRule(request: google.devtools.artifactregistry.v1.IGetRuleRequest): Promise<google.devtools.artifactregistry.v1.Rule>;
+
+                    /**
+                     * Calls UpdateRule.
+                     * @param request UpdateRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Rule
+                     */
+                    public updateRule(request: google.devtools.artifactregistry.v1.IUpdateRuleRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateRuleCallback): void;
+
+                    /**
+                     * Calls UpdateRule.
+                     * @param request UpdateRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateRule(request: google.devtools.artifactregistry.v1.IUpdateRuleRequest): Promise<google.devtools.artifactregistry.v1.Rule>;
+
+                    /**
+                     * Calls DeleteRule.
+                     * @param request DeleteRuleRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteRule(request: google.devtools.artifactregistry.v1.IDeleteRuleRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteRuleCallback): void;
+
+                    /**
+                     * Calls DeleteRule.
+                     * @param request DeleteRuleRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteRule(request: google.devtools.artifactregistry.v1.IDeleteRuleRequest): Promise<google.protobuf.Empty>;
 
                     /**
                      * Calls SetIamPolicy.
@@ -6906,6 +9773,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateVPCSCConfig(request: google.devtools.artifactregistry.v1.IUpdateVPCSCConfigRequest): Promise<google.devtools.artifactregistry.v1.VPCSCConfig>;
+
+                    /**
+                     * Calls UpdatePackage.
+                     * @param request UpdatePackageRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Package
+                     */
+                    public updatePackage(request: google.devtools.artifactregistry.v1.IUpdatePackageRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.UpdatePackageCallback): void;
+
+                    /**
+                     * Calls UpdatePackage.
+                     * @param request UpdatePackageRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updatePackage(request: google.devtools.artifactregistry.v1.IUpdatePackageRequest): Promise<google.devtools.artifactregistry.v1.Package>;
+
+                    /**
+                     * Calls ListAttachments.
+                     * @param request ListAttachmentsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAttachmentsResponse
+                     */
+                    public listAttachments(request: google.devtools.artifactregistry.v1.IListAttachmentsRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.ListAttachmentsCallback): void;
+
+                    /**
+                     * Calls ListAttachments.
+                     * @param request ListAttachmentsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAttachments(request: google.devtools.artifactregistry.v1.IListAttachmentsRequest): Promise<google.devtools.artifactregistry.v1.ListAttachmentsResponse>;
+
+                    /**
+                     * Calls GetAttachment.
+                     * @param request GetAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Attachment
+                     */
+                    public getAttachment(request: google.devtools.artifactregistry.v1.IGetAttachmentRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.GetAttachmentCallback): void;
+
+                    /**
+                     * Calls GetAttachment.
+                     * @param request GetAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAttachment(request: google.devtools.artifactregistry.v1.IGetAttachmentRequest): Promise<google.devtools.artifactregistry.v1.Attachment>;
+
+                    /**
+                     * Calls CreateAttachment.
+                     * @param request CreateAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createAttachment(request: google.devtools.artifactregistry.v1.ICreateAttachmentRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.CreateAttachmentCallback): void;
+
+                    /**
+                     * Calls CreateAttachment.
+                     * @param request CreateAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAttachment(request: google.devtools.artifactregistry.v1.ICreateAttachmentRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAttachment.
+                     * @param request DeleteAttachmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAttachment(request: google.devtools.artifactregistry.v1.IDeleteAttachmentRequest, callback: google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteAttachmentCallback): void;
+
+                    /**
+                     * Calls DeleteAttachment.
+                     * @param request DeleteAttachmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAttachment(request: google.devtools.artifactregistry.v1.IDeleteAttachmentRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace ArtifactRegistry {
@@ -7065,6 +10002,13 @@ export namespace google {
                     type BatchDeleteVersionsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|updateVersion}.
+                     * @param error Error, if any
+                     * @param [response] Version
+                     */
+                    type UpdateVersionCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.Version) => void;
+
+                    /**
                      * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|listFiles}.
                      * @param error Error, if any
                      * @param [response] ListFilesResponse
@@ -7077,6 +10021,20 @@ export namespace google {
                      * @param [response] File
                      */
                     type GetFileCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.File) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|deleteFile}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteFileCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|updateFile}.
+                     * @param error Error, if any
+                     * @param [response] File
+                     */
+                    type UpdateFileCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.File) => void;
 
                     /**
                      * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|listTags}.
@@ -7112,6 +10070,41 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteTagCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|createRule}.
+                     * @param error Error, if any
+                     * @param [response] Rule
+                     */
+                    type CreateRuleCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.Rule) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|listRules}.
+                     * @param error Error, if any
+                     * @param [response] ListRulesResponse
+                     */
+                    type ListRulesCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.ListRulesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|getRule}.
+                     * @param error Error, if any
+                     * @param [response] Rule
+                     */
+                    type GetRuleCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.Rule) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|updateRule}.
+                     * @param error Error, if any
+                     * @param [response] Rule
+                     */
+                    type UpdateRuleCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.Rule) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|deleteRule}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteRuleCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                     /**
                      * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|setIamPolicy}.
@@ -7161,6 +10154,41 @@ export namespace google {
                      * @param [response] VPCSCConfig
                      */
                     type UpdateVPCSCConfigCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.VPCSCConfig) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|updatePackage}.
+                     * @param error Error, if any
+                     * @param [response] Package
+                     */
+                    type UpdatePackageCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.Package) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|listAttachments}.
+                     * @param error Error, if any
+                     * @param [response] ListAttachmentsResponse
+                     */
+                    type ListAttachmentsCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.ListAttachmentsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|getAttachment}.
+                     * @param error Error, if any
+                     * @param [response] Attachment
+                     */
+                    type GetAttachmentCallback = (error: (Error|null), response?: google.devtools.artifactregistry.v1.Attachment) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|createAttachment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateAttachmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.artifactregistry.v1.ArtifactRegistry|deleteAttachment}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAttachmentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -7262,6 +10290,9 @@ export namespace google {
 
                     /** ProjectSettings legacyRedirectionState */
                     legacyRedirectionState?: (google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState|keyof typeof google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState|null);
+
+                    /** ProjectSettings pullPercent */
+                    pullPercent?: (number|null);
                 }
 
                 /** Represents a ProjectSettings. */
@@ -7278,6 +10309,9 @@ export namespace google {
 
                     /** ProjectSettings legacyRedirectionState. */
                     public legacyRedirectionState: (google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState|keyof typeof google.devtools.artifactregistry.v1.ProjectSettings.RedirectionState);
+
+                    /** ProjectSettings pullPercent. */
+                    public pullPercent: number;
 
                     /**
                      * Creates a new ProjectSettings instance using the specified properties.
@@ -7364,7 +10398,9 @@ export namespace google {
                         REDIRECTION_STATE_UNSPECIFIED = 0,
                         REDIRECTION_FROM_GCR_IO_DISABLED = 1,
                         REDIRECTION_FROM_GCR_IO_ENABLED = 2,
-                        REDIRECTION_FROM_GCR_IO_FINALIZED = 3
+                        REDIRECTION_FROM_GCR_IO_FINALIZED = 3,
+                        REDIRECTION_FROM_GCR_IO_ENABLED_AND_COPYING = 5,
+                        REDIRECTION_FROM_GCR_IO_PARTIAL_AND_COPYING = 6
                     }
                 }
 
@@ -8322,6 +11358,9 @@ export namespace google {
 
                     /** Version metadata */
                     metadata?: (google.protobuf.IStruct|null);
+
+                    /** Version annotations */
+                    annotations?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Version. */
@@ -8350,6 +11389,9 @@ export namespace google {
 
                     /** Version metadata. */
                     public metadata?: (google.protobuf.IStruct|null);
+
+                    /** Version annotations. */
+                    public annotations: { [k: string]: string };
 
                     /**
                      * Creates a new Version instance using the specified properties.
@@ -8446,6 +11488,9 @@ export namespace google {
 
                     /** ListVersionsRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListVersionsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListVersionsRequest. */
@@ -8471,6 +11516,9 @@ export namespace google {
 
                     /** ListVersionsRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListVersionsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListVersionsRequest instance using the specified properties.
@@ -9059,6 +12107,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for BatchDeleteVersionsMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateVersionRequest. */
+                interface IUpdateVersionRequest {
+
+                    /** UpdateVersionRequest version */
+                    version?: (google.devtools.artifactregistry.v1.IVersion|null);
+
+                    /** UpdateVersionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateVersionRequest. */
+                class UpdateVersionRequest implements IUpdateVersionRequest {
+
+                    /**
+                     * Constructs a new UpdateVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.artifactregistry.v1.IUpdateVersionRequest);
+
+                    /** UpdateVersionRequest version. */
+                    public version?: (google.devtools.artifactregistry.v1.IVersion|null);
+
+                    /** UpdateVersionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateVersionRequest instance
+                     */
+                    public static create(properties?: google.devtools.artifactregistry.v1.IUpdateVersionRequest): google.devtools.artifactregistry.v1.UpdateVersionRequest;
+
+                    /**
+                     * Encodes the specified UpdateVersionRequest message. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateVersionRequest.verify|verify} messages.
+                     * @param message UpdateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.artifactregistry.v1.IUpdateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateVersionRequest message, length delimited. Does not implicitly {@link google.devtools.artifactregistry.v1.UpdateVersionRequest.verify|verify} messages.
+                     * @param message UpdateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.artifactregistry.v1.IUpdateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.artifactregistry.v1.UpdateVersionRequest;
+
+                    /**
+                     * Decodes an UpdateVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.artifactregistry.v1.UpdateVersionRequest;
+
+                    /**
+                     * Verifies an UpdateVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.artifactregistry.v1.UpdateVersionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateVersionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.artifactregistry.v1.UpdateVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateVersionRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -21937,6 +25088,103 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -22034,103 +25282,6 @@ export namespace google {
 
             /**
              * Gets the default type url for Duration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldMask. */
-        interface IFieldMask {
-
-            /** FieldMask paths */
-            paths?: (string[]|null);
-        }
-
-        /** Represents a FieldMask. */
-        class FieldMask implements IFieldMask {
-
-            /**
-             * Constructs a new FieldMask.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IFieldMask);
-
-            /** FieldMask paths. */
-            public paths: string[];
-
-            /**
-             * Creates a new FieldMask instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldMask instance
-             */
-            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
-
-            /**
-             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
-             * @param message FieldMask message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
-
-            /**
-             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldMask
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
-
-            /**
-             * Verifies a FieldMask message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldMask
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
-
-            /**
-             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
-             * @param message FieldMask
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldMask
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -22664,6 +25815,125 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Expr. */
+        interface IExpr {
+
+            /** Expr expression */
+            expression?: (string|null);
+
+            /** Expr title */
+            title?: (string|null);
+
+            /** Expr description */
+            description?: (string|null);
+
+            /** Expr location */
+            location?: (string|null);
+        }
+
+        /** Represents an Expr. */
+        class Expr implements IExpr {
+
+            /**
+             * Constructs a new Expr.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IExpr);
+
+            /** Expr expression. */
+            public expression: string;
+
+            /** Expr title. */
+            public title: string;
+
+            /** Expr description. */
+            public description: string;
+
+            /** Expr location. */
+            public location: string;
+
+            /**
+             * Creates a new Expr instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Expr instance
+             */
+            public static create(properties?: google.type.IExpr): google.type.Expr;
+
+            /**
+             * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+             * @param message Expr message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+             * @param message Expr message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Expr message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Expr
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Expr;
+
+            /**
+             * Decodes an Expr message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Expr
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Expr;
+
+            /**
+             * Verifies an Expr message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Expr message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Expr
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Expr;
+
+            /**
+             * Creates a plain object from an Expr message. Also converts values to other types if specified.
+             * @param message Expr
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Expr, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Expr to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Expr
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -24066,125 +27336,6 @@ export namespace google {
                     REMOVE = 2
                 }
             }
-        }
-    }
-
-    /** Namespace type. */
-    namespace type {
-
-        /** Properties of an Expr. */
-        interface IExpr {
-
-            /** Expr expression */
-            expression?: (string|null);
-
-            /** Expr title */
-            title?: (string|null);
-
-            /** Expr description */
-            description?: (string|null);
-
-            /** Expr location */
-            location?: (string|null);
-        }
-
-        /** Represents an Expr. */
-        class Expr implements IExpr {
-
-            /**
-             * Constructs a new Expr.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.IExpr);
-
-            /** Expr expression. */
-            public expression: string;
-
-            /** Expr title. */
-            public title: string;
-
-            /** Expr description. */
-            public description: string;
-
-            /** Expr location. */
-            public location: string;
-
-            /**
-             * Creates a new Expr instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Expr instance
-             */
-            public static create(properties?: google.type.IExpr): google.type.Expr;
-
-            /**
-             * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
-             * @param message Expr message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
-             * @param message Expr message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Expr message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Expr
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Expr;
-
-            /**
-             * Decodes an Expr message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Expr
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Expr;
-
-            /**
-             * Verifies an Expr message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Expr message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Expr
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.Expr;
-
-            /**
-             * Creates a plain object from an Expr message. Also converts values to other types if specified.
-             * @param message Expr
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.Expr, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Expr to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Expr
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
