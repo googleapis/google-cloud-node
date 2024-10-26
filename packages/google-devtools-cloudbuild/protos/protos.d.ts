@@ -8120,6 +8120,9 @@ export namespace google {
 
                     /** PrivatePoolV1Config networkConfig */
                     networkConfig?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.INetworkConfig|null);
+
+                    /** PrivatePoolV1Config privateServiceConnect */
+                    privateServiceConnect?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect|null);
                 }
 
                 /** Represents a PrivatePoolV1Config. */
@@ -8136,6 +8139,9 @@ export namespace google {
 
                     /** PrivatePoolV1Config networkConfig. */
                     public networkConfig?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.INetworkConfig|null);
+
+                    /** PrivatePoolV1Config privateServiceConnect. */
+                    public privateServiceConnect?: (google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect|null);
 
                     /**
                      * Creates a new PrivatePoolV1Config instance using the specified properties.
@@ -8437,6 +8443,115 @@ export namespace google {
                             NO_PUBLIC_EGRESS = 1,
                             PUBLIC_EGRESS = 2
                         }
+                    }
+
+                    /** Properties of a PrivateServiceConnect. */
+                    interface IPrivateServiceConnect {
+
+                        /** PrivateServiceConnect networkAttachment */
+                        networkAttachment?: (string|null);
+
+                        /** PrivateServiceConnect publicIpAddressDisabled */
+                        publicIpAddressDisabled?: (boolean|null);
+
+                        /** PrivateServiceConnect routeAllTraffic */
+                        routeAllTraffic?: (boolean|null);
+                    }
+
+                    /** Represents a PrivateServiceConnect. */
+                    class PrivateServiceConnect implements IPrivateServiceConnect {
+
+                        /**
+                         * Constructs a new PrivateServiceConnect.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect);
+
+                        /** PrivateServiceConnect networkAttachment. */
+                        public networkAttachment: string;
+
+                        /** PrivateServiceConnect publicIpAddressDisabled. */
+                        public publicIpAddressDisabled: boolean;
+
+                        /** PrivateServiceConnect routeAllTraffic. */
+                        public routeAllTraffic: boolean;
+
+                        /**
+                         * Creates a new PrivateServiceConnect instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PrivateServiceConnect instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Encodes the specified PrivateServiceConnect message. Does not implicitly {@link google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify|verify} messages.
+                         * @param message PrivateServiceConnect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PrivateServiceConnect message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect.verify|verify} messages.
+                         * @param message PrivateServiceConnect message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.PrivatePoolV1Config.IPrivateServiceConnect, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PrivateServiceConnect message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PrivateServiceConnect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Decodes a PrivateServiceConnect message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PrivateServiceConnect
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Verifies a PrivateServiceConnect message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PrivateServiceConnect message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PrivateServiceConnect
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect;
+
+                        /**
+                         * Creates a plain object from a PrivateServiceConnect message. Also converts values to other types if specified.
+                         * @param message PrivateServiceConnect
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.PrivatePoolV1Config.PrivateServiceConnect, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PrivateServiceConnect to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PrivateServiceConnect
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
                 }
 

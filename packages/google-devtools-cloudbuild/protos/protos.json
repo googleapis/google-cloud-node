@@ -2746,6 +2746,13 @@
                         "networkConfig": {
                           "type": "NetworkConfig",
                           "id": 2
+                        },
+                        "privateServiceConnect": {
+                          "type": "PrivateServiceConnect",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       },
                       "nested": {
@@ -2789,6 +2796,32 @@
                                 "EGRESS_OPTION_UNSPECIFIED": 0,
                                 "NO_PUBLIC_EGRESS": 1,
                                 "PUBLIC_EGRESS": 2
+                              }
+                            }
+                          }
+                        },
+                        "PrivateServiceConnect": {
+                          "fields": {
+                            "networkAttachment": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/NetworkAttachment"
+                              }
+                            },
+                            "publicIpAddressDisabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "routeAllTraffic": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             }
                           }
