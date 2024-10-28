@@ -1,4 +1,7 @@
 {
+  "options": {
+    "syntax": "proto3"
+  },
   "nested": {
     "google": {
       "nested": {
@@ -24,6 +27,13 @@
                         "KMS_KEY_STATE_UNSPECIFIED": 0,
                         "KMS_KEY_STATE_KEY_AVAILABLE": 1,
                         "KMS_KEY_STATE_KEY_UNAVAILABLE": 2
+                      }
+                    },
+                    "ResourceState": {
+                      "values": {
+                        "RESOURCE_STATE_UNSPECIFIED": 0,
+                        "RESOURCE_STATE_LOCK_DOWN": 1,
+                        "RESOURCE_STATE_LOCK_DOWN_PENDING": 2
                       }
                     },
                     "Cluster": {
@@ -201,6 +211,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "connectionState": {
+                          "type": "ConnectionState",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -244,6 +261,13 @@
                                 "sharedDeploymentPolicy": {
                                   "type": "SharedDeploymentPolicy",
                                   "id": 4
+                                },
+                                "controlPlaneNodeStorageSchema": {
+                                  "type": "string",
+                                  "id": 5,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 }
                               }
                             },
@@ -261,6 +285,13 @@
                             "ingress": {
                               "type": "Ingress",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "vmServiceConfig": {
+                              "type": "VMServiceConfig",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -284,6 +315,17 @@
                                   }
                                 }
                               }
+                            },
+                            "VMServiceConfig": {
+                              "fields": {
+                                "vmmEnabled": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -293,7 +335,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                               }
                             },
@@ -315,6 +357,13 @@
                             "kmsStatus": {
                               "type": "google.rpc.Status",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "resourceState": {
+                              "type": "ResourceState",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -425,6 +474,34 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ConnectionState": {
+                          "fields": {
+                            "state": {
+                              "type": "State",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "DISCONNECTED": 1,
+                                "CONNECTED": 2,
+                                "CONNECTED_AND_SYNCING": 3
                               }
                             }
                           }
@@ -585,7 +662,7 @@
                               "type": "string",
                               "id": 1,
                               "options": {
-                                "(google.api.field_behavior)": "IMMUTABLE",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                               }
                             },
@@ -610,6 +687,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "resourceState": {
+                              "type": "ResourceState",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -619,6 +703,13 @@
                               "keyType": "string",
                               "type": "string",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "nodeStorageSchema": {
+                              "type": "string",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -858,6 +949,10 @@
                           "keyType": "string",
                           "type": "RackType",
                           "id": 2
+                        },
+                        "configData": {
+                          "type": "ConfigData",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -867,6 +962,20 @@
                             "BASE": 1,
                             "EXPANSION": 2
                           }
+                        }
+                      }
+                    },
+                    "ConfigData": {
+                      "fields": {
+                        "availableExternalLbPoolsIpv4": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "availableExternalLbPoolsIpv6": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
@@ -891,6 +1000,14 @@
                         "window": {
                           "type": "MaintenanceWindow",
                           "id": 1
+                        },
+                        "maintenanceExclusions": {
+                          "rule": "repeated",
+                          "type": "MaintenanceExclusionWindow",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -911,6 +1028,24 @@
                         "recurrence": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "MaintenanceExclusionWindow": {
+                      "fields": {
+                        "window": {
+                          "type": "TimeWindow",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1461,6 +1596,18 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 8
+                        },
+                        "statusReason": {
+                          "type": "StatusReason",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "StatusReason": {
+                          "values": {
+                            "STATUS_REASON_UNSPECIFIED": 0,
+                            "UPGRADE_PAUSED": 1
+                          }
                         }
                       }
                     },
