@@ -2722,6 +2722,9 @@ export namespace google {
 
                         /** GatewayServiceMesh podSelectorLabel */
                         podSelectorLabel?: (string|null);
+
+                        /** GatewayServiceMesh routeDestinations */
+                        routeDestinations?: (google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.IRouteDestinations|null);
                     }
 
                     /** Represents a GatewayServiceMesh. */
@@ -2750,6 +2753,9 @@ export namespace google {
 
                         /** GatewayServiceMesh podSelectorLabel. */
                         public podSelectorLabel: string;
+
+                        /** GatewayServiceMesh routeDestinations. */
+                        public routeDestinations?: (google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.IRouteDestinations|null);
 
                         /**
                          * Creates a new GatewayServiceMesh instance using the specified properties.
@@ -2827,6 +2833,112 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace GatewayServiceMesh {
+
+                        /** Properties of a RouteDestinations. */
+                        interface IRouteDestinations {
+
+                            /** RouteDestinations destinationIds */
+                            destinationIds?: (string[]|null);
+
+                            /** RouteDestinations propagateService */
+                            propagateService?: (boolean|null);
+                        }
+
+                        /** Represents a RouteDestinations. */
+                        class RouteDestinations implements IRouteDestinations {
+
+                            /**
+                             * Constructs a new RouteDestinations.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.IRouteDestinations);
+
+                            /** RouteDestinations destinationIds. */
+                            public destinationIds: string[];
+
+                            /** RouteDestinations propagateService. */
+                            public propagateService: boolean;
+
+                            /**
+                             * Creates a new RouteDestinations instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RouteDestinations instance
+                             */
+                            public static create(properties?: google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.IRouteDestinations): google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations;
+
+                            /**
+                             * Encodes the specified RouteDestinations message. Does not implicitly {@link google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations.verify|verify} messages.
+                             * @param message RouteDestinations message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.IRouteDestinations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RouteDestinations message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations.verify|verify} messages.
+                             * @param message RouteDestinations message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.IRouteDestinations, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RouteDestinations message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RouteDestinations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations;
+
+                            /**
+                             * Decodes a RouteDestinations message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RouteDestinations
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations;
+
+                            /**
+                             * Verifies a RouteDestinations message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RouteDestinations message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RouteDestinations
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations;
+
+                            /**
+                             * Creates a plain object from a RouteDestinations message. Also converts values to other types if specified.
+                             * @param message RouteDestinations
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.deploy.v1.KubernetesConfig.GatewayServiceMesh.RouteDestinations, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RouteDestinations to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for RouteDestinations
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a ServiceNetworking. */
@@ -4670,6 +4782,9 @@ export namespace google {
                     /** Target customTarget */
                     customTarget?: (google.cloud.deploy.v1.ICustomTarget|null);
 
+                    /** Target associatedEntities */
+                    associatedEntities?: ({ [k: string]: google.cloud.deploy.v1.IAssociatedEntities }|null);
+
                     /** Target etag */
                     etag?: (string|null);
 
@@ -4730,6 +4845,9 @@ export namespace google {
 
                     /** Target customTarget. */
                     public customTarget?: (google.cloud.deploy.v1.ICustomTarget|null);
+
+                    /** Target associatedEntities. */
+                    public associatedEntities: { [k: string]: google.cloud.deploy.v1.IAssociatedEntities };
 
                     /** Target etag. */
                     public etag: string;
@@ -5679,6 +5797,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CustomTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AssociatedEntities. */
+                interface IAssociatedEntities {
+
+                    /** AssociatedEntities gkeClusters */
+                    gkeClusters?: (google.cloud.deploy.v1.IGkeCluster[]|null);
+
+                    /** AssociatedEntities anthosClusters */
+                    anthosClusters?: (google.cloud.deploy.v1.IAnthosCluster[]|null);
+                }
+
+                /** Represents an AssociatedEntities. */
+                class AssociatedEntities implements IAssociatedEntities {
+
+                    /**
+                     * Constructs a new AssociatedEntities.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IAssociatedEntities);
+
+                    /** AssociatedEntities gkeClusters. */
+                    public gkeClusters: google.cloud.deploy.v1.IGkeCluster[];
+
+                    /** AssociatedEntities anthosClusters. */
+                    public anthosClusters: google.cloud.deploy.v1.IAnthosCluster[];
+
+                    /**
+                     * Creates a new AssociatedEntities instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AssociatedEntities instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IAssociatedEntities): google.cloud.deploy.v1.AssociatedEntities;
+
+                    /**
+                     * Encodes the specified AssociatedEntities message. Does not implicitly {@link google.cloud.deploy.v1.AssociatedEntities.verify|verify} messages.
+                     * @param message AssociatedEntities message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IAssociatedEntities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AssociatedEntities message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.AssociatedEntities.verify|verify} messages.
+                     * @param message AssociatedEntities message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IAssociatedEntities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AssociatedEntities message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AssociatedEntities
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.AssociatedEntities;
+
+                    /**
+                     * Decodes an AssociatedEntities message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AssociatedEntities
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.AssociatedEntities;
+
+                    /**
+                     * Verifies an AssociatedEntities message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AssociatedEntities message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AssociatedEntities
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.AssociatedEntities;
+
+                    /**
+                     * Creates a plain object from an AssociatedEntities message. Also converts values to other types if specified.
+                     * @param message AssociatedEntities
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.AssociatedEntities, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AssociatedEntities to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AssociatedEntities
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11557,6 +11778,9 @@ export namespace google {
 
                     /** Rollout rolledBackByRollouts */
                     rolledBackByRollouts?: (string[]|null);
+
+                    /** Rollout activeRepairAutomationRun */
+                    activeRepairAutomationRun?: (string|null);
                 }
 
                 /** Represents a Rollout. */
@@ -11633,6 +11857,9 @@ export namespace google {
 
                     /** Rollout rolledBackByRollouts. */
                     public rolledBackByRollouts: string[];
+
+                    /** Rollout activeRepairAutomationRun. */
+                    public activeRepairAutomationRun: string;
 
                     /**
                      * Creates a new Rollout instance using the specified properties.
@@ -17629,11 +17856,17 @@ export namespace google {
                     /** RepairRolloutRule id */
                     id?: (string|null);
 
+                    /** RepairRolloutRule phases */
+                    phases?: (string[]|null);
+
                     /** RepairRolloutRule jobs */
                     jobs?: (string[]|null);
 
                     /** RepairRolloutRule condition */
                     condition?: (google.cloud.deploy.v1.IAutomationRuleCondition|null);
+
+                    /** RepairRolloutRule repairPhases */
+                    repairPhases?: (google.cloud.deploy.v1.IRepairPhaseConfig[]|null);
                 }
 
                 /** Represents a RepairRolloutRule. */
@@ -17648,11 +17881,17 @@ export namespace google {
                     /** RepairRolloutRule id. */
                     public id: string;
 
+                    /** RepairRolloutRule phases. */
+                    public phases: string[];
+
                     /** RepairRolloutRule jobs. */
                     public jobs: string[];
 
                     /** RepairRolloutRule condition. */
                     public condition?: (google.cloud.deploy.v1.IAutomationRuleCondition|null);
+
+                    /** RepairRolloutRule repairPhases. */
+                    public repairPhases: google.cloud.deploy.v1.IRepairPhaseConfig[];
 
                     /**
                      * Creates a new RepairRolloutRule instance using the specified properties.
@@ -17726,6 +17965,324 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RepairRolloutRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RepairPhaseConfig. */
+                interface IRepairPhaseConfig {
+
+                    /** RepairPhaseConfig retry */
+                    retry?: (google.cloud.deploy.v1.IRetry|null);
+
+                    /** RepairPhaseConfig rollback */
+                    rollback?: (google.cloud.deploy.v1.IRollback|null);
+                }
+
+                /** Represents a RepairPhaseConfig. */
+                class RepairPhaseConfig implements IRepairPhaseConfig {
+
+                    /**
+                     * Constructs a new RepairPhaseConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRepairPhaseConfig);
+
+                    /** RepairPhaseConfig retry. */
+                    public retry?: (google.cloud.deploy.v1.IRetry|null);
+
+                    /** RepairPhaseConfig rollback. */
+                    public rollback?: (google.cloud.deploy.v1.IRollback|null);
+
+                    /** RepairPhaseConfig repairPhase. */
+                    public repairPhase?: ("retry"|"rollback");
+
+                    /**
+                     * Creates a new RepairPhaseConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RepairPhaseConfig instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRepairPhaseConfig): google.cloud.deploy.v1.RepairPhaseConfig;
+
+                    /**
+                     * Encodes the specified RepairPhaseConfig message. Does not implicitly {@link google.cloud.deploy.v1.RepairPhaseConfig.verify|verify} messages.
+                     * @param message RepairPhaseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRepairPhaseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RepairPhaseConfig message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.RepairPhaseConfig.verify|verify} messages.
+                     * @param message RepairPhaseConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRepairPhaseConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RepairPhaseConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RepairPhaseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.RepairPhaseConfig;
+
+                    /**
+                     * Decodes a RepairPhaseConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RepairPhaseConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.RepairPhaseConfig;
+
+                    /**
+                     * Verifies a RepairPhaseConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RepairPhaseConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RepairPhaseConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.RepairPhaseConfig;
+
+                    /**
+                     * Creates a plain object from a RepairPhaseConfig message. Also converts values to other types if specified.
+                     * @param message RepairPhaseConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.RepairPhaseConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RepairPhaseConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RepairPhaseConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Retry. */
+                interface IRetry {
+
+                    /** Retry attempts */
+                    attempts?: (number|Long|string|null);
+
+                    /** Retry wait */
+                    wait?: (google.protobuf.IDuration|null);
+
+                    /** Retry backoffMode */
+                    backoffMode?: (google.cloud.deploy.v1.BackoffMode|keyof typeof google.cloud.deploy.v1.BackoffMode|null);
+                }
+
+                /** Represents a Retry. */
+                class Retry implements IRetry {
+
+                    /**
+                     * Constructs a new Retry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRetry);
+
+                    /** Retry attempts. */
+                    public attempts: (number|Long|string);
+
+                    /** Retry wait. */
+                    public wait?: (google.protobuf.IDuration|null);
+
+                    /** Retry backoffMode. */
+                    public backoffMode: (google.cloud.deploy.v1.BackoffMode|keyof typeof google.cloud.deploy.v1.BackoffMode);
+
+                    /**
+                     * Creates a new Retry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Retry instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRetry): google.cloud.deploy.v1.Retry;
+
+                    /**
+                     * Encodes the specified Retry message. Does not implicitly {@link google.cloud.deploy.v1.Retry.verify|verify} messages.
+                     * @param message Retry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRetry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Retry message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Retry.verify|verify} messages.
+                     * @param message Retry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRetry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Retry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Retry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Retry;
+
+                    /**
+                     * Decodes a Retry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Retry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Retry;
+
+                    /**
+                     * Verifies a Retry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Retry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Retry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Retry;
+
+                    /**
+                     * Creates a plain object from a Retry message. Also converts values to other types if specified.
+                     * @param message Retry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Retry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Retry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Retry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Rollback. */
+                interface IRollback {
+
+                    /** Rollback destinationPhase */
+                    destinationPhase?: (string|null);
+
+                    /** Rollback disableRollbackIfRolloutPending */
+                    disableRollbackIfRolloutPending?: (boolean|null);
+                }
+
+                /** Represents a Rollback. */
+                class Rollback implements IRollback {
+
+                    /**
+                     * Constructs a new Rollback.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.deploy.v1.IRollback);
+
+                    /** Rollback destinationPhase. */
+                    public destinationPhase: string;
+
+                    /** Rollback disableRollbackIfRolloutPending. */
+                    public disableRollbackIfRolloutPending: boolean;
+
+                    /**
+                     * Creates a new Rollback instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Rollback instance
+                     */
+                    public static create(properties?: google.cloud.deploy.v1.IRollback): google.cloud.deploy.v1.Rollback;
+
+                    /**
+                     * Encodes the specified Rollback message. Does not implicitly {@link google.cloud.deploy.v1.Rollback.verify|verify} messages.
+                     * @param message Rollback message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.deploy.v1.IRollback, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Rollback message, length delimited. Does not implicitly {@link google.cloud.deploy.v1.Rollback.verify|verify} messages.
+                     * @param message Rollback message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.deploy.v1.IRollback, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Rollback message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Rollback
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.deploy.v1.Rollback;
+
+                    /**
+                     * Decodes a Rollback message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Rollback
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.deploy.v1.Rollback;
+
+                    /**
+                     * Verifies a Rollback message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Rollback message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Rollback
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.deploy.v1.Rollback;
+
+                    /**
+                     * Creates a plain object from a Rollback message. Also converts values to other types if specified.
+                     * @param message Rollback
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.deploy.v1.Rollback, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Rollback to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Rollback
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -18965,6 +19522,9 @@ export namespace google {
                     /** RepairRolloutOperation rollout */
                     rollout?: (string|null);
 
+                    /** RepairRolloutOperation currentRepairPhaseIndex */
+                    currentRepairPhaseIndex?: (number|Long|string|null);
+
                     /** RepairRolloutOperation repairPhases */
                     repairPhases?: (google.cloud.deploy.v1.IRepairPhase[]|null);
 
@@ -18986,6 +19546,9 @@ export namespace google {
 
                     /** RepairRolloutOperation rollout. */
                     public rollout: string;
+
+                    /** RepairRolloutOperation currentRepairPhaseIndex. */
+                    public currentRepairPhaseIndex: (number|Long|string);
 
                     /** RepairRolloutOperation repairPhases. */
                     public repairPhases: google.cloud.deploy.v1.IRepairPhase[];
@@ -19418,6 +19981,9 @@ export namespace google {
 
                     /** RollbackAttempt stateDesc */
                     stateDesc?: (string|null);
+
+                    /** RollbackAttempt disableRollbackIfRolloutPending */
+                    disableRollbackIfRolloutPending?: (boolean|null);
                 }
 
                 /** Represents a RollbackAttempt. */
@@ -19440,6 +20006,9 @@ export namespace google {
 
                     /** RollbackAttempt stateDesc. */
                     public stateDesc: string;
+
+                    /** RollbackAttempt disableRollbackIfRolloutPending. */
+                    public disableRollbackIfRolloutPending: boolean;
 
                     /**
                      * Creates a new RollbackAttempt instance using the specified properties.

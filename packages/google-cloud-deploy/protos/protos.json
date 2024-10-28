@@ -1459,6 +1459,34 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "routeDestinations": {
+                              "type": "RouteDestinations",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "RouteDestinations": {
+                              "fields": {
+                                "destinationIds": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "propagateService": {
+                                  "type": "bool",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -1998,6 +2026,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "associatedEntities": {
+                          "keyType": "string",
+                          "type": "AssociatedEntities",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "etag": {
                           "type": "string",
                           "id": 12,
@@ -2216,6 +2252,26 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "clouddeploy.googleapis.com/CustomTargetType"
+                          }
+                        }
+                      }
+                    },
+                    "AssociatedEntities": {
+                      "fields": {
+                        "gkeClusters": {
+                          "rule": "repeated",
+                          "type": "GkeCluster",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "anthosClusters": {
+                          "rule": "repeated",
+                          "type": "AnthosCluster",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -3948,6 +4004,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "activeRepairAutomationRun": {
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -5450,6 +5513,14 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "phases": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "jobs": {
                           "rule": "repeated",
                           "type": "string",
@@ -5463,6 +5534,83 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "repairPhases": {
+                          "rule": "repeated",
+                          "type": "RepairPhaseConfig",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RepairPhaseConfig": {
+                      "oneofs": {
+                        "repairPhase": {
+                          "oneof": [
+                            "retry",
+                            "rollback"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "retry": {
+                          "type": "Retry",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "rollback": {
+                          "type": "Rollback",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Retry": {
+                      "fields": {
+                        "attempts": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "wait": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "backoffMode": {
+                          "type": "BackoffMode",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Rollback": {
+                      "fields": {
+                        "destinationPhase": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "disableRollbackIfRolloutPending": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -5877,6 +6025,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "currentRepairPhaseIndex": {
+                          "type": "int64",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "repairPhases": {
                           "rule": "repeated",
                           "type": "RepairPhase",
@@ -6011,6 +6166,13 @@
                         "stateDesc": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "disableRollbackIfRolloutPending": {
+                          "type": "bool",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
