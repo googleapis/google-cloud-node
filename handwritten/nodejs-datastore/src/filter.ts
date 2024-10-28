@@ -33,10 +33,20 @@ enum CompositeOperator {
   OR = 'OR',
 }
 
+/**
+ * Returns an AND composite filter.
+ *
+ * @param {EntityFilter[]} filters The filters that make up the AND filter.
+ */
 export function and(filters: EntityFilter[]): CompositeFilter {
   return new CompositeFilter(filters, CompositeOperator.AND);
 }
 
+/**
+ * Returns an OR composite filter.
+ *
+ * @param {EntityFilter[]} filters The filters that make up the OR filter.
+ */
 export function or(filters: EntityFilter[]): CompositeFilter {
   return new CompositeFilter(filters, CompositeOperator.OR);
 }
@@ -75,9 +85,9 @@ export class PropertyFilter<T extends string>
   /**
    * Build a Property Filter object.
    *
-   * @param {string} Property
-   * @param {Operator} operator
-   * @param {any} val
+   * @param {string} Property The property name that the filter will be applied to.
+   * @param {Operator} operator The comparison operator that the filter applies.
+   * @param {any} val The value that the filter compares the property to.
    */
   constructor(
     public name: T,
@@ -120,7 +130,7 @@ class CompositeFilter extends EntityFilter {
   /**
    * Build a Composite Filter object.
    *
-   * @param {EntityFilter[]} filters
+   * @param {EntityFilter[]} filters The filters that make up the composite filter.
    */
   constructor(filters: EntityFilter[], op: CompositeOperator) {
     super();

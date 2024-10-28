@@ -1306,6 +1306,12 @@ class Datastore extends DatastoreRequest {
     return new entity.Double(value);
   }
 
+  /**
+   * Helper function to get a Datastore Double object.
+   *
+   * @param {number} value The double value.
+   * @returns {object}
+   */
   double(value: number) {
     return Datastore.double(value);
   }
@@ -1313,7 +1319,7 @@ class Datastore extends DatastoreRequest {
   /**
    * Helper function to check if something is a Datastore Double object.
    *
-   * @param {*} value
+   * @param {*} value The double value.
    * @returns {boolean}
    *
    * @example
@@ -1328,6 +1334,13 @@ class Datastore extends DatastoreRequest {
     return entity.isDsDouble(value);
   }
 
+  /**
+   * Helper function to check if something is a Datastore Double object.
+   *
+   * @param {*} value The double value.
+   * @returns {boolean}
+   *
+   */
   isDouble(value?: {}) {
     return Datastore.isDouble(value);
   }
@@ -1335,7 +1348,7 @@ class Datastore extends DatastoreRequest {
   /**
    * Helper function to get a Datastore Geo Point object.
    *
-   * @param {object} coordinates Coordinate value.
+   * @param {object} coordinates The coordinates value.
    * @param {number} coordinates.latitude Latitudinal value.
    * @param {number} coordinates.longitude Longitudinal value.
    * @returns {object}
@@ -1365,6 +1378,15 @@ class Datastore extends DatastoreRequest {
     return new entity.GeoPoint(coordinates);
   }
 
+  /**
+   * Helper function to get a Datastore Geo Point object.
+   *
+   * @param {object} coordinates The coordinates value.
+   * @param {number} coordinates.latitude Latitudinal value.
+   * @param {number} coordinates.longitude Longitudinal value.
+   * @returns {object}
+   *
+   */
   geoPoint(coordinates: entity.Coordinates) {
     return Datastore.geoPoint(coordinates);
   }
@@ -1372,7 +1394,7 @@ class Datastore extends DatastoreRequest {
   /**
    * Helper function to check if something is a Datastore Geo Point object.
    *
-   * @param {*} value
+   * @param {*} value The coordinates value.
    * @returns {boolean}
    *
    * @example
@@ -1392,6 +1414,13 @@ class Datastore extends DatastoreRequest {
     return entity.isDsGeoPoint(value);
   }
 
+  /**
+   * Helper function to check if something is a Datastore Geo Point object.
+   *
+   * @param {*} value The coordinates value.
+   * @returns {boolean}
+   *
+   */
   isGeoPoint(value?: {}) {
     return Datastore.isGeoPoint(value);
   }
@@ -1424,6 +1453,16 @@ class Datastore extends DatastoreRequest {
     return new entity.Int(value);
   }
 
+  /**
+   * Helper function to get a Datastore Integer object.
+   *
+   * This is also useful when using an ID outside the bounds of a JavaScript
+   * Number object.
+   *
+   * @param {number | int} value The integer value.
+   * @returns {object}
+   *
+   */
   int(value: number | string) {
     return Datastore.int(value);
   }
@@ -1431,7 +1470,7 @@ class Datastore extends DatastoreRequest {
   /**
    * Helper function to check if something is a Datastore Integer object.
    *
-   * @param {*} value
+   * @param {*} value The value to check
    * @returns {boolean}
    *
    * @example
@@ -1446,6 +1485,13 @@ class Datastore extends DatastoreRequest {
     return entity.isDsInt(value);
   }
 
+  /**
+   * Helper function to check if something is a Datastore Integer object.
+   *
+   * @param {*} value The value to check
+   * @returns {boolean}
+   *
+   */
   isInt(value?: {}) {
     return Datastore.isInt(value);
   }
@@ -1631,7 +1677,7 @@ class Datastore extends DatastoreRequest {
   /**
    * Helper function to check if something is a Datastore Key object.
    *
-   * @param {*} value
+   * @param {*} value Value to compare property to.
    * @returns {boolean}
    *
    * @example
