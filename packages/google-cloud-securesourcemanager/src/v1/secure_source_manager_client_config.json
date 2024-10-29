@@ -80,6 +80,26 @@
         "TestIamPermissionsRepo": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "CreateBranchRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListBranchRules": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetBranchRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateBranchRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteBranchRule": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }
