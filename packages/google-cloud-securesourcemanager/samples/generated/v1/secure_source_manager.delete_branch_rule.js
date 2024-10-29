@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_async]
+function main(name) {
+  // [START securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,32 +29,13 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value for ListRepositoriesRequest.
    */
-  // const parent = 'abc123'
+  // const name = 'abc123'
   /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. If unspecified, server will pick an appropriate default.
+   *  Optional. If set to true, and the branch rule is not found, the request
+   *  will succeed but no action will be taken on the server.
    */
-  // const pageSize = 1234
-  /**
-   *  A token identifying a page of results the server should return.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Filter results.
-   */
-  // const filter = 'abc123'
-  /**
-   *  Optional. The name of the instance in which the repository is hosted,
-   *  formatted as
-   *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
-   *  When listing repositories via
-   *  securesourcemanager.googleapis.com (Control Plane API), this field is
-   *  required. When listing repositories via *.sourcemanager.dev (Data Plane
-   *  API), this field is ignored.
-   */
-  // const instance = 'abc123'
+  // const allowMissing = true
 
   // Imports the Securesourcemanager library
   const {SecureSourceManagerClient} = require('@google-cloud/securesourcemanager').v1;
@@ -62,21 +43,20 @@ function main(parent) {
   // Instantiates a client
   const securesourcemanagerClient = new SecureSourceManagerClient();
 
-  async function callListRepositories() {
+  async function callDeleteBranchRule() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = securesourcemanagerClient.listRepositoriesAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const [operation] = await securesourcemanagerClient.deleteBranchRule(request);
+    const [response] = await operation.promise();
+    console.log(response);
   }
 
-  callListRepositories();
-  // [END securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_async]
+  callDeleteBranchRule();
+  // [END securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async]
 }
 
 process.on('unhandledRejection', err => {
