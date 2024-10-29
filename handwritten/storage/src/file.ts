@@ -178,6 +178,7 @@ export interface GetFileMetadataCallback {
 export interface GetFileOptions extends GetConfig {
   userProject?: string;
   generation?: number;
+  restoreToken?: string;
   softDeleted?: boolean;
 }
 
@@ -354,6 +355,7 @@ export interface FileOptions {
   crc32cGenerator?: CRC32CValidatorGenerator;
   encryptionKey?: string | Buffer;
   generation?: number | string;
+  restoreToken?: string;
   kmsKeyName?: string;
   preconditionOpts?: PreconditionOptions;
   userProject?: string;
@@ -450,6 +452,7 @@ export interface SetStorageClassCallback {
 
 export interface RestoreOptions extends PreconditionOptions {
   generation: number;
+  restoreToken?: string;
   projection?: 'full' | 'noAcl';
 }
 
@@ -471,6 +474,7 @@ export interface FileMetadata extends BaseMetadata {
   eventBasedHold?: boolean | null;
   readonly eventBasedHoldReleaseTime?: string;
   generation?: string | number;
+  restoreToken?: string;
   hardDeleteTime?: string;
   kmsKeyName?: string;
   md5Hash?: string;
@@ -547,6 +551,7 @@ class File extends ServiceObject<File, FileMetadata> {
   name: string;
 
   generation?: number;
+  restoreToken?: string;
   parent!: Bucket;
 
   private encryptionKey?: string | Buffer;
@@ -844,6 +849,8 @@ class File extends ServiceObject<File, FileMetadata> {
        * @param {string} [options.userProject] The ID of the project which will be
        *     billed for the request.
        * @param {number} [options.generation] The generation number to get
+       * @param {string} [options.restoreToken] If this is a soft-deleted object in an HNS-enabled bucket, returns the restore token which will
+       *    be necessary to restore it if there's a name conflict with another object.
        * @param {boolean} [options.softDeleted] If true, returns the soft-deleted object.
             Object `generation` is required if `softDeleted` is set to True.
        * @param {GetFileCallback} [callback] Callback function.
@@ -3707,6 +3714,8 @@ class File extends ServiceObject<File, FileMetadata> {
    * @param {string} [userProject] The ID of the project which will be
    *     billed for the request.
    * @param {number} [generation] If present, selects a specific revision of this object.
+   * @param {string} [restoreToken] Returns an option that must be specified when getting a soft-deleted object from an HNS-enabled
+   *  bucket that has a naming and generation conflict with another object in the same bucket.
    * @param {string} [projection] Specifies the set of properties to return. If used, must be 'full' or 'noAcl'.
    * @param {string | number} [ifGenerationMatch] Request proceeds if the generation of the target resource
    *  matches the value used in the precondition.

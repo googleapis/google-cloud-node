@@ -792,6 +792,7 @@ describe('storage', function () {
 
   describe('soft-delete', () => {
     let bucket: Bucket;
+    let hnsBucket: Bucket;
     const SOFT_DELETE_RETENTION_SECONDS = 7 * 24 * 60 * 60; //7 days in seconds;
 
     beforeEach(async () => {
@@ -802,11 +803,26 @@ describe('storage', function () {
           retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
         },
       });
+
+      hnsBucket = storage.bucket(generateName());
+      await storage.createBucket(hnsBucket.name, {
+        hierarchicalNamespace: {enabled: true},
+        iamConfiguration: {
+          uniformBucketLevelAccess: {
+            enabled: true,
+          },
+        },
+        softDeletePolicy: {
+          retentionDurationSeconds: SOFT_DELETE_RETENTION_SECONDS,
+        },
+      });
     });
 
     afterEach(async () => {
       await bucket.deleteFiles({force: true, versions: true});
       await bucket.delete();
+      await hnsBucket.deleteFiles({force: true, versions: true});
+      await hnsBucket.delete();
     });
 
     it('should set softDeletePolicy correctly', async () => {
@@ -860,6 +876,63 @@ describe('storage', function () {
       });
       assert(restoredFile);
       [files] = await bucket.getFiles();
+      assert.strictEqual(files.length, 1);
+    });
+
+    it('should LIST soft-deleted files with restore token', async () => {
+      const f1 = hnsBucket.file('file5a');
+      const f2 = hnsBucket.file('file5b');
+      await f1.save('file5a');
+      await f2.save('file5b');
+      await f1.delete();
+      await f2.delete();
+      const [notSoftDeletedFiles] = await hnsBucket.getFiles();
+      assert.strictEqual(notSoftDeletedFiles.length, 0);
+      const [softDeletedFiles] = await hnsBucket.getFiles({softDeleted: true});
+      assert.strictEqual(softDeletedFiles.length, 2);
+      assert.notStrictEqual(
+        softDeletedFiles![0].metadata.restoreToken,
+        undefined
+      );
+    });
+
+    it('should GET a soft-deleted file with restore token', async () => {
+      const f1 = hnsBucket.file('file6');
+      await f1.save('file6');
+      const [metadata] = await f1.getMetadata();
+      await f1.delete();
+      const [softDeletedFile] = await f1.get({
+        softDeleted: true,
+        generation: parseInt(metadata.generation?.toString() || '0'),
+      });
+      assert(softDeletedFile);
+      assert.strictEqual(
+        softDeletedFile.metadata.generation,
+        metadata.generation
+      );
+      assert.notStrictEqual(softDeletedFile.metadata.restoreToken, undefined);
+    });
+
+    it('should restore a soft-deleted file using restoreToken', async () => {
+      const f1 = hnsBucket.file('file7');
+      await f1.save('file7');
+      const [metadata] = await f1.getMetadata();
+      await f1.delete();
+      let [files] = await hnsBucket.getFiles();
+      assert.strictEqual(files.length, 0);
+      const [softDeletedFile] = await f1.get({
+        softDeleted: true,
+        generation: parseInt(metadata.generation?.toString() || '0'),
+      });
+      assert(softDeletedFile);
+      const restoredFile = await f1.restore({
+        generation: parseInt(
+          softDeletedFile.metadata.generation?.toString() || '0'
+        ),
+        restoreToken: softDeletedFile.metadata.restoreToken,
+      });
+      assert(restoredFile);
+      [files] = await hnsBucket.getFiles();
       assert.strictEqual(files.length, 1);
     });
   });

@@ -26,7 +26,6 @@ import {
   MultiPartUploadError,
   MultiPartUploadHelper,
   UploadOptions,
-  UploadManyFilesOptions,
   TransferManager,
   Storage,
   DownloadResponse,
