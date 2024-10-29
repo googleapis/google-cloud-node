@@ -215,6 +215,44 @@
                             }
                           ]
                         },
+                        "RemoveIpOverride": {
+                          "requestType": "RemoveIpOverrideRequest",
+                          "responseType": "RemoveIpOverrideResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/keys/*}:removeIpOverride",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,ip_override_data"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/keys/*}:removeIpOverride",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,ip_override_data"
+                            }
+                          ]
+                        },
+                        "ListIpOverrides": {
+                          "requestType": "ListIpOverridesRequest",
+                          "responseType": "ListIpOverridesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/keys/*}:listIpOverrides",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/keys/*}:listIpOverrides"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "GetMetrics": {
                           "requestType": "GetMetricsRequest",
                           "responseType": "Metrics",
@@ -2412,6 +2450,67 @@
                     "AddIpOverrideResponse": {
                       "fields": {}
                     },
+                    "RemoveIpOverrideRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        },
+                        "ipOverrideData": {
+                          "type": "IpOverrideData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveIpOverrideResponse": {
+                      "fields": {}
+                    },
+                    "ListIpOverridesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "recaptchaenterprise.googleapis.com/Key"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListIpOverridesResponse": {
+                      "fields": {
+                        "ipOverrides": {
+                          "rule": "repeated",
+                          "type": "IpOverrideData",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "RelatedAccountGroupMembership": {
                       "options": {
                         "(google.api.resource).type": "recaptchaenterprise.googleapis.com/RelatedAccountGroupMembership",
@@ -2489,7 +2588,8 @@
                             "WAF_SERVICE_UNSPECIFIED": 0,
                             "CA": 1,
                             "FASTLY": 3,
-                            "CLOUDFLARE": 4
+                            "CLOUDFLARE": 4,
+                            "AKAMAI": 5
                           }
                         }
                       }

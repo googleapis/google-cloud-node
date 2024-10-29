@@ -233,6 +233,11 @@ export class RecaptchaEnterpriseServiceClient {
         'nextPageToken',
         'keys'
       ),
+      listIpOverrides: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'ipOverrides'
+      ),
       listFirewallPolicies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -316,6 +321,8 @@ export class RecaptchaEnterpriseServiceClient {
       'deleteKey',
       'migrateKey',
       'addIpOverride',
+      'removeIpOverride',
+      'listIpOverrides',
       'getMetrics',
       'createFirewallPolicy',
       'listFirewallPolicies',
@@ -549,8 +556,8 @@ export class RecaptchaEnterpriseServiceClient {
    *   Required. The resource name of the Assessment, in the format
    *   `projects/{project}/assessments/{assessment}`.
    * @param {google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation} [request.annotation]
-   *   Optional. The annotation that is assigned to the Event. This field can
-   *   be left empty to provide reasons that apply to an event without concluding
+   *   Optional. The annotation that is assigned to the Event. This field can be
+   *   left empty to provide reasons that apply to an event without concluding
    *   whether the event is legitimate or fraudulent.
    * @param {number[]} [request.reasons]
    *   Optional. Reasons for the annotation that are assigned to the event.
@@ -1334,6 +1341,109 @@ export class RecaptchaEnterpriseServiceClient {
     return this.innerApiCalls.addIpOverride(request, options, callback);
   }
   /**
+   * Removes an IP override from a key. The following restrictions hold:
+   * * If the IP isn't found in an existing IP override, a `NOT_FOUND` error
+   * is returned.
+   * * If the IP is found in an existing IP override, but the
+   * override type does not match, a `NOT_FOUND` error is returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the key from which the IP override is removed, in the
+   *   format `projects/{project}/keys/{key}`.
+   * @param {google.cloud.recaptchaenterprise.v1.IpOverrideData} request.ipOverrideData
+   *   Required. IP override to be removed from the key.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse|RemoveIpOverrideResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.remove_ip_override.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RemoveIpOverride_async
+   */
+  removeIpOverride(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  removeIpOverride(
+    request: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeIpOverride(
+    request: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+    callback: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeIpOverride(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+          | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+      | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse,
+      (
+        | protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeIpOverride(request, options, callback);
+  }
+  /**
    * Get some aggregated metrics for a Key. This data can be used to build
    * dashboards.
    *
@@ -1433,7 +1543,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project this policy will apply to, in the format
+   *   Required. The name of the project this policy applies to, in the format
    *   `projects/{project}`.
    * @param {google.cloud.recaptchaenterprise.v1.FirewallPolicy} request.firewallPolicy
    *   Required. Information to create the policy.
@@ -1930,7 +2040,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that are
+   *   Required. The name of the project that contains the keys that is
    *   listed, in the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of keys to return. Default is 10. Max limit is
@@ -2030,7 +2140,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that are
+   *   Required. The name of the project that contains the keys that is
    *   listed, in the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of keys to return. Default is 10. Max limit is
@@ -2078,7 +2188,7 @@ export class RecaptchaEnterpriseServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project that contains the keys that are
+   *   Required. The name of the project that contains the keys that is
    *   listed, in the format `projects/{project}`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of keys to return. Default is 10. Max limit is
@@ -2118,6 +2228,207 @@ export class RecaptchaEnterpriseServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IKey>;
+  }
+  /**
+   * Lists all IP overrides for a key.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent key for which the IP overrides are listed, in the
+   *   format `projects/{project}/keys/{key}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of overrides to return. Default is 10. Max
+   *   limit is 100. If the number of overrides is less than the page_size, all
+   *   overrides are returned. If the page size is more than 100, it is coerced to
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous
+   *   ListIpOverridesRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIpOverridesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIpOverrides(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse,
+    ]
+  >;
+  listIpOverrides(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
+    >
+  ): void;
+  listIpOverrides(
+    request: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
+    >
+  ): void;
+  listIpOverrides(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+          | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+          | null
+          | undefined,
+          protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+      | protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse
+      | null
+      | undefined,
+      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData
+    >
+  ): Promise<
+    [
+      protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[],
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest | null,
+      protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listIpOverrides(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent key for which the IP overrides are listed, in the
+   *   format `projects/{project}/keys/{key}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of overrides to return. Default is 10. Max
+   *   limit is 100. If the number of overrides is less than the page_size, all
+   *   overrides are returned. If the page size is more than 100, it is coerced to
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous
+   *   ListIpOverridesRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIpOverridesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listIpOverridesStream(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listIpOverrides'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listIpOverrides.createStream(
+      this.innerApiCalls.listIpOverrides as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listIpOverrides`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent key for which the IP overrides are listed, in the
+   *   format `projects/{project}/keys/{key}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of overrides to return. Default is 10. Max
+   *   limit is 100. If the number of overrides is less than the page_size, all
+   *   overrides are returned. If the page size is more than 100, it is coerced to
+   *   100.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous
+   *   ListIpOverridesRequest, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.recaptchaenterprise.v1.IpOverrideData|IpOverrideData}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/recaptcha_enterprise_service.list_ip_overrides.js</caption>
+   * region_tag:recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListIpOverrides_async
+   */
+  listIpOverridesAsync(
+    request?: protos.google.cloud.recaptchaenterprise.v1.IListIpOverridesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listIpOverrides'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listIpOverrides.asyncIterate(
+      this.innerApiCalls['listIpOverrides'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData>;
   }
   /**
    * Returns the list of all firewall policies that belong to a project.

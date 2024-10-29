@@ -1614,6 +1614,148 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
     });
   });
 
+  describe('removeIpOverride', () => {
+    it('invokes removeIpOverride without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse()
+      );
+      client.innerApiCalls.removeIpOverride = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeIpOverride(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeIpOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeIpOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeIpOverride without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideResponse()
+      );
+      client.innerApiCalls.removeIpOverride =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeIpOverride(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.recaptchaenterprise.v1.IRemoveIpOverrideResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeIpOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeIpOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeIpOverride with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeIpOverride = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.removeIpOverride(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.removeIpOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeIpOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeIpOverride with closed client', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.RemoveIpOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.removeIpOverride(request), expectedError);
+    });
+  });
+
   describe('getMetrics', () => {
     it('invokes getMetrics without error', async () => {
       const client =
@@ -2817,6 +2959,362 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       );
       assert(
         (client.descriptors.page.listKeys.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+  });
+
+  describe('listIpOverrides', () => {
+    it('invokes listIpOverrides without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+      ];
+      client.innerApiCalls.listIpOverrides = stubSimpleCall(expectedResponse);
+      const [response] = await client.listIpOverrides(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listIpOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIpOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIpOverrides without error using callback', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+      ];
+      client.innerApiCalls.listIpOverrides =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listIpOverrides(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listIpOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIpOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIpOverrides with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listIpOverrides = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listIpOverrides(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listIpOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIpOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listIpOverridesStream without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+      ];
+      client.descriptors.page.listIpOverrides.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listIpOverridesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.IpOverrideData[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.IpOverrideData
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listIpOverrides.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listIpOverrides, request)
+      );
+      assert(
+        (client.descriptors.page.listIpOverrides.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('invokes listIpOverridesStream with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIpOverrides.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listIpOverridesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.IpOverrideData[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.recaptchaenterprise.v1.IpOverrideData
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listIpOverrides.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listIpOverrides, request)
+      );
+      assert(
+        (client.descriptors.page.listIpOverrides.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listIpOverrides without error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.recaptchaenterprise.v1.IpOverrideData()
+        ),
+      ];
+      client.descriptors.page.listIpOverrides.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[] =
+        [];
+      const iterable = client.listIpOverridesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listIpOverrides.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listIpOverrides.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers[
+            'x-goog-request-params'
+          ].includes(expectedHeaderRequestParams)
+      );
+    });
+
+    it('uses async iteration with listIpOverrides with error', async () => {
+      const client =
+        new recaptchaenterpriseserviceModule.v1.RecaptchaEnterpriseServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListIpOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listIpOverrides.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listIpOverridesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.recaptchaenterprise.v1.IIpOverrideData[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listIpOverrides.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (client.descriptors.page.listIpOverrides.asyncIterate as SinonStub)
           .getCall(0)
           .args[2].otherArgs.headers[
             'x-goog-request-params'
