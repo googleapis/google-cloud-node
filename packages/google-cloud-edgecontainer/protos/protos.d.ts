@@ -33,6 +33,13 @@ export namespace google {
                     KMS_KEY_STATE_KEY_UNAVAILABLE = 2
                 }
 
+                /** ResourceState enum. */
+                enum ResourceState {
+                    RESOURCE_STATE_UNSPECIFIED = 0,
+                    RESOURCE_STATE_LOCK_DOWN = 1,
+                    RESOURCE_STATE_LOCK_DOWN_PENDING = 2
+                }
+
                 /** Properties of a Cluster. */
                 interface ICluster {
 
@@ -107,6 +114,9 @@ export namespace google {
 
                     /** Cluster externalLoadBalancerIpv6AddressPools */
                     externalLoadBalancerIpv6AddressPools?: (string[]|null);
+
+                    /** Cluster connectionState */
+                    connectionState?: (google.cloud.edgecontainer.v1.Cluster.IConnectionState|null);
                 }
 
                 /** Represents a Cluster. */
@@ -189,6 +199,9 @@ export namespace google {
 
                     /** Cluster externalLoadBalancerIpv6AddressPools. */
                     public externalLoadBalancerIpv6AddressPools: string[];
+
+                    /** Cluster connectionState. */
+                    public connectionState?: (google.cloud.edgecontainer.v1.Cluster.IConnectionState|null);
 
                     /**
                      * Creates a new Cluster instance using the specified properties.
@@ -483,6 +496,9 @@ export namespace google {
 
                             /** Local sharedDeploymentPolicy */
                             sharedDeploymentPolicy?: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|keyof typeof google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|null);
+
+                            /** Local controlPlaneNodeStorageSchema */
+                            controlPlaneNodeStorageSchema?: (string|null);
                         }
 
                         /** Represents a Local. */
@@ -505,6 +521,9 @@ export namespace google {
 
                             /** Local sharedDeploymentPolicy. */
                             public sharedDeploymentPolicy: (google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy|keyof typeof google.cloud.edgecontainer.v1.Cluster.ControlPlane.SharedDeploymentPolicy);
+
+                            /** Local controlPlaneNodeStorageSchema. */
+                            public controlPlaneNodeStorageSchema: string;
 
                             /**
                              * Creates a new Local instance using the specified properties.
@@ -597,6 +616,9 @@ export namespace google {
 
                         /** SystemAddonsConfig ingress */
                         ingress?: (google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress|null);
+
+                        /** SystemAddonsConfig vmServiceConfig */
+                        vmServiceConfig?: (google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig|null);
                     }
 
                     /** Represents a SystemAddonsConfig. */
@@ -610,6 +632,9 @@ export namespace google {
 
                         /** SystemAddonsConfig ingress. */
                         public ingress?: (google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IIngress|null);
+
+                        /** SystemAddonsConfig vmServiceConfig. */
+                        public vmServiceConfig?: (google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig|null);
 
                         /**
                          * Creates a new SystemAddonsConfig instance using the specified properties.
@@ -793,6 +818,103 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+
+                        /** Properties of a VMServiceConfig. */
+                        interface IVMServiceConfig {
+
+                            /** VMServiceConfig vmmEnabled */
+                            vmmEnabled?: (boolean|null);
+                        }
+
+                        /** Represents a VMServiceConfig. */
+                        class VMServiceConfig implements IVMServiceConfig {
+
+                            /**
+                             * Constructs a new VMServiceConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig);
+
+                            /** VMServiceConfig vmmEnabled. */
+                            public vmmEnabled: boolean;
+
+                            /**
+                             * Creates a new VMServiceConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns VMServiceConfig instance
+                             */
+                            public static create(properties?: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig;
+
+                            /**
+                             * Encodes the specified VMServiceConfig message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.verify|verify} messages.
+                             * @param message VMServiceConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified VMServiceConfig message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig.verify|verify} messages.
+                             * @param message VMServiceConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.IVMServiceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a VMServiceConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns VMServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig;
+
+                            /**
+                             * Decodes a VMServiceConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns VMServiceConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig;
+
+                            /**
+                             * Verifies a VMServiceConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a VMServiceConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns VMServiceConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig;
+
+                            /**
+                             * Creates a plain object from a VMServiceConfig message. Also converts values to other types if specified.
+                             * @param message VMServiceConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.edgecontainer.v1.Cluster.SystemAddonsConfig.VMServiceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this VMServiceConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for VMServiceConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
                     }
 
                     /** Properties of a ControlPlaneEncryption. */
@@ -809,6 +931,9 @@ export namespace google {
 
                         /** ControlPlaneEncryption kmsStatus */
                         kmsStatus?: (google.rpc.IStatus|null);
+
+                        /** ControlPlaneEncryption resourceState */
+                        resourceState?: (google.cloud.edgecontainer.v1.ResourceState|keyof typeof google.cloud.edgecontainer.v1.ResourceState|null);
                     }
 
                     /** Represents a ControlPlaneEncryption. */
@@ -831,6 +956,9 @@ export namespace google {
 
                         /** ControlPlaneEncryption kmsStatus. */
                         public kmsStatus?: (google.rpc.IStatus|null);
+
+                        /** ControlPlaneEncryption resourceState. */
+                        public resourceState: (google.cloud.edgecontainer.v1.ResourceState|keyof typeof google.cloud.edgecontainer.v1.ResourceState);
 
                         /**
                          * Creates a new ControlPlaneEncryption instance using the specified properties.
@@ -1180,6 +1308,120 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConnectionState. */
+                    interface IConnectionState {
+
+                        /** ConnectionState state */
+                        state?: (google.cloud.edgecontainer.v1.Cluster.ConnectionState.State|keyof typeof google.cloud.edgecontainer.v1.Cluster.ConnectionState.State|null);
+
+                        /** ConnectionState updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ConnectionState. */
+                    class ConnectionState implements IConnectionState {
+
+                        /**
+                         * Constructs a new ConnectionState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.edgecontainer.v1.Cluster.IConnectionState);
+
+                        /** ConnectionState state. */
+                        public state: (google.cloud.edgecontainer.v1.Cluster.ConnectionState.State|keyof typeof google.cloud.edgecontainer.v1.Cluster.ConnectionState.State);
+
+                        /** ConnectionState updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ConnectionState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConnectionState instance
+                         */
+                        public static create(properties?: google.cloud.edgecontainer.v1.Cluster.IConnectionState): google.cloud.edgecontainer.v1.Cluster.ConnectionState;
+
+                        /**
+                         * Encodes the specified ConnectionState message. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ConnectionState.verify|verify} messages.
+                         * @param message ConnectionState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.edgecontainer.v1.Cluster.IConnectionState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConnectionState message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.Cluster.ConnectionState.verify|verify} messages.
+                         * @param message ConnectionState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.edgecontainer.v1.Cluster.IConnectionState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConnectionState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConnectionState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.Cluster.ConnectionState;
+
+                        /**
+                         * Decodes a ConnectionState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConnectionState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.Cluster.ConnectionState;
+
+                        /**
+                         * Verifies a ConnectionState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConnectionState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConnectionState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.Cluster.ConnectionState;
+
+                        /**
+                         * Creates a plain object from a ConnectionState message. Also converts values to other types if specified.
+                         * @param message ConnectionState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.edgecontainer.v1.Cluster.ConnectionState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConnectionState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConnectionState
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConnectionState {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            DISCONNECTED = 1,
+                            CONNECTED = 2,
+                            CONNECTED_AND_SYNCING = 3
+                        }
                     }
 
                     /** Status enum. */
@@ -1767,6 +2009,9 @@ export namespace google {
 
                         /** LocalDiskEncryption kmsStatus */
                         kmsStatus?: (google.rpc.IStatus|null);
+
+                        /** LocalDiskEncryption resourceState */
+                        resourceState?: (google.cloud.edgecontainer.v1.ResourceState|keyof typeof google.cloud.edgecontainer.v1.ResourceState|null);
                     }
 
                     /** Represents a LocalDiskEncryption. */
@@ -1789,6 +2034,9 @@ export namespace google {
 
                         /** LocalDiskEncryption kmsStatus. */
                         public kmsStatus?: (google.rpc.IStatus|null);
+
+                        /** LocalDiskEncryption resourceState. */
+                        public resourceState: (google.cloud.edgecontainer.v1.ResourceState|keyof typeof google.cloud.edgecontainer.v1.ResourceState);
 
                         /**
                          * Creates a new LocalDiskEncryption instance using the specified properties.
@@ -1873,6 +2121,9 @@ export namespace google {
 
                         /** NodeConfig labels */
                         labels?: ({ [k: string]: string }|null);
+
+                        /** NodeConfig nodeStorageSchema */
+                        nodeStorageSchema?: (string|null);
                     }
 
                     /** Represents a NodeConfig. */
@@ -1886,6 +2137,9 @@ export namespace google {
 
                         /** NodeConfig labels. */
                         public labels: { [k: string]: string };
+
+                        /** NodeConfig nodeStorageSchema. */
+                        public nodeStorageSchema: string;
 
                         /**
                          * Creates a new NodeConfig instance using the specified properties.
@@ -2806,6 +3060,9 @@ export namespace google {
 
                     /** ZoneMetadata rackTypes */
                     rackTypes?: ({ [k: string]: google.cloud.edgecontainer.v1.ZoneMetadata.RackType }|null);
+
+                    /** ZoneMetadata configData */
+                    configData?: (google.cloud.edgecontainer.v1.IConfigData|null);
                 }
 
                 /** Represents a ZoneMetadata. */
@@ -2822,6 +3079,9 @@ export namespace google {
 
                     /** ZoneMetadata rackTypes. */
                     public rackTypes: { [k: string]: google.cloud.edgecontainer.v1.ZoneMetadata.RackType };
+
+                    /** ZoneMetadata configData. */
+                    public configData?: (google.cloud.edgecontainer.v1.IConfigData|null);
 
                     /**
                      * Creates a new ZoneMetadata instance using the specified properties.
@@ -2909,6 +3169,109 @@ export namespace google {
                         BASE = 1,
                         EXPANSION = 2
                     }
+                }
+
+                /** Properties of a ConfigData. */
+                interface IConfigData {
+
+                    /** ConfigData availableExternalLbPoolsIpv4 */
+                    availableExternalLbPoolsIpv4?: (string[]|null);
+
+                    /** ConfigData availableExternalLbPoolsIpv6 */
+                    availableExternalLbPoolsIpv6?: (string[]|null);
+                }
+
+                /** Represents a ConfigData. */
+                class ConfigData implements IConfigData {
+
+                    /**
+                     * Constructs a new ConfigData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IConfigData);
+
+                    /** ConfigData availableExternalLbPoolsIpv4. */
+                    public availableExternalLbPoolsIpv4: string[];
+
+                    /** ConfigData availableExternalLbPoolsIpv6. */
+                    public availableExternalLbPoolsIpv6: string[];
+
+                    /**
+                     * Creates a new ConfigData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConfigData instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IConfigData): google.cloud.edgecontainer.v1.ConfigData;
+
+                    /**
+                     * Encodes the specified ConfigData message. Does not implicitly {@link google.cloud.edgecontainer.v1.ConfigData.verify|verify} messages.
+                     * @param message ConfigData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IConfigData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConfigData message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.ConfigData.verify|verify} messages.
+                     * @param message ConfigData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IConfigData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConfigData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConfigData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.ConfigData;
+
+                    /**
+                     * Decodes a ConfigData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConfigData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.ConfigData;
+
+                    /**
+                     * Verifies a ConfigData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConfigData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConfigData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.ConfigData;
+
+                    /**
+                     * Creates a plain object from a ConfigData message. Also converts values to other types if specified.
+                     * @param message ConfigData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.ConfigData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConfigData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ConfigData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a Quota. */
@@ -3025,6 +3388,9 @@ export namespace google {
 
                     /** MaintenancePolicy window */
                     window?: (google.cloud.edgecontainer.v1.IMaintenanceWindow|null);
+
+                    /** MaintenancePolicy maintenanceExclusions */
+                    maintenanceExclusions?: (google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow[]|null);
                 }
 
                 /** Represents a MaintenancePolicy. */
@@ -3038,6 +3404,9 @@ export namespace google {
 
                     /** MaintenancePolicy window. */
                     public window?: (google.cloud.edgecontainer.v1.IMaintenanceWindow|null);
+
+                    /** MaintenancePolicy maintenanceExclusions. */
+                    public maintenanceExclusions: google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow[];
 
                     /**
                      * Creates a new MaintenancePolicy instance using the specified properties.
@@ -3311,6 +3680,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RecurringTimeWindow
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a MaintenanceExclusionWindow. */
+                interface IMaintenanceExclusionWindow {
+
+                    /** MaintenanceExclusionWindow window */
+                    window?: (google.cloud.edgecontainer.v1.ITimeWindow|null);
+
+                    /** MaintenanceExclusionWindow id */
+                    id?: (string|null);
+                }
+
+                /** Represents a MaintenanceExclusionWindow. */
+                class MaintenanceExclusionWindow implements IMaintenanceExclusionWindow {
+
+                    /**
+                     * Constructs a new MaintenanceExclusionWindow.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow);
+
+                    /** MaintenanceExclusionWindow window. */
+                    public window?: (google.cloud.edgecontainer.v1.ITimeWindow|null);
+
+                    /** MaintenanceExclusionWindow id. */
+                    public id: string;
+
+                    /**
+                     * Creates a new MaintenanceExclusionWindow instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceExclusionWindow instance
+                     */
+                    public static create(properties?: google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow): google.cloud.edgecontainer.v1.MaintenanceExclusionWindow;
+
+                    /**
+                     * Encodes the specified MaintenanceExclusionWindow message. Does not implicitly {@link google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.verify|verify} messages.
+                     * @param message MaintenanceExclusionWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceExclusionWindow message, length delimited. Does not implicitly {@link google.cloud.edgecontainer.v1.MaintenanceExclusionWindow.verify|verify} messages.
+                     * @param message MaintenanceExclusionWindow message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.edgecontainer.v1.IMaintenanceExclusionWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceExclusionWindow message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceExclusionWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.edgecontainer.v1.MaintenanceExclusionWindow;
+
+                    /**
+                     * Decodes a MaintenanceExclusionWindow message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceExclusionWindow
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.edgecontainer.v1.MaintenanceExclusionWindow;
+
+                    /**
+                     * Verifies a MaintenanceExclusionWindow message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceExclusionWindow message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceExclusionWindow
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.edgecontainer.v1.MaintenanceExclusionWindow;
+
+                    /**
+                     * Creates a plain object from a MaintenanceExclusionWindow message. Also converts values to other types if specified.
+                     * @param message MaintenanceExclusionWindow
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.edgecontainer.v1.MaintenanceExclusionWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceExclusionWindow to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceExclusionWindow
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -4193,6 +4665,9 @@ export namespace google {
 
                     /** OperationMetadata warnings */
                     warnings?: (string[]|null);
+
+                    /** OperationMetadata statusReason */
+                    statusReason?: (google.cloud.edgecontainer.v1.OperationMetadata.StatusReason|keyof typeof google.cloud.edgecontainer.v1.OperationMetadata.StatusReason|null);
                 }
 
                 /** Represents an OperationMetadata. */
@@ -4227,6 +4702,9 @@ export namespace google {
 
                     /** OperationMetadata warnings. */
                     public warnings: string[];
+
+                    /** OperationMetadata statusReason. */
+                    public statusReason: (google.cloud.edgecontainer.v1.OperationMetadata.StatusReason|keyof typeof google.cloud.edgecontainer.v1.OperationMetadata.StatusReason);
 
                     /**
                      * Creates a new OperationMetadata instance using the specified properties.
@@ -4304,6 +4782,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OperationMetadata {
+
+                    /** StatusReason enum. */
+                    enum StatusReason {
+                        STATUS_REASON_UNSPECIFIED = 0,
+                        UPGRADE_PAUSED = 1
+                    }
                 }
 
                 /** Properties of a ListClustersRequest. */
