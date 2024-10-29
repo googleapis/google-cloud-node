@@ -45,6 +45,16 @@ function main(parent) {
    *  Optional. Filter results.
    */
   // const filter = 'abc123'
+  /**
+   *  Optional. The name of the instance in which the repository is hosted,
+   *  formatted as
+   *  `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+   *  When listing repositories via
+   *  securesourcemanager.googleapis.com (Control Plane API), this field is
+   *  required. When listing repositories via *.sourcemanager.dev (Data Plane
+   *  API), this field is ignored.
+   */
+  // const instance = 'abc123'
 
   // Imports the Securesourcemanager library
   const {SecureSourceManagerClient} = require('@google-cloud/securesourcemanager').v1;
